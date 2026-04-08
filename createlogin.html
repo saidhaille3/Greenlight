@@ -435,31 +435,52 @@ window.resetLeague = () => {
 window.processSignup = async () => {
     const email = document.getElementById('email').value;
     const pass = document.getElementById('password').value;
+    const confirmPass = document.getElementById('confirmPassword').value;
     const btn = document.getElementById('signupBtn');
     
+    // 1. Client-side Validation (Fixes potential silent failures)
     const totalSelections = Object.values(userPreferences).flat().length;
     if(totalSelections === 0) return showStatus("SELECT AT LEAST ONE TEAM");
+    if(pass !== confirmPass) return showStatus("PASSWORDS DO NOT MATCH");
+    if(pass.length < 6) return showStatus("PASSWORD TOO SHORT");
 
     btn.classList.add('btn-loading');
+
     try {
+        // 2. Create the User Auth
         const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
-        await updateProfile(userCredential.user, { displayName: document.getElementById('username').value });
         
+        // 3. Update Auth Profile
+        await updateProfile(userCredential.user, { 
+            displayName: document.getElementById('username').value 
+        });
+        
+        // 4. Save to Firestore (This is where the rules matter!)
         await setDoc(doc(db, "users", userCredential.user.uid), {
             firstName: document.getElementById('fname').value,
             lastName: document.getElementById('lname').value,
             username: document.getElementById('username').value,
-            // SAVING AS ARRAYS NOW
             preferences: userPreferences, 
             email: email,
+            uid: userCredential.user.uid,
             createdAt: new Date().toISOString()
         });
+
+        // SUCCESS!
         window.location.href = 'index.html';
+
     } catch (error) {
+        // 5. UNSTUCK THE BUTTON (This was your code's main weakness)
         btn.classList.remove('btn-loading');
-        showStatus(error.code.split('/')[1].replace(/-/g, ' ').toUpperCase());
+        
+        console.error("Signup failed:", error);
+        
+        // Display a human-readable error
+        let errorMsg = error.code ? error.code.split('/')[1].replace(/-/g, ' ').toUpperCase() : error.message;
+        showStatus(errorMsg);
     }
 };
+
 
     function showStatus(msg) {
         const s = document.getElementById('statusArea');
