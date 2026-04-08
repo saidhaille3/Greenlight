@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spaces – Greenlight Sports Network</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
+  <style>
+    :root {
+      --glass: rgba(0,0,0,0.03);
+      --glass-border: rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #111111;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    .dark body { background-color: #0a0a0a; color: #f4f4f4; }
+
+    .dark #darkModeToggle { display: none; }
+    #lightBulbToggle { display: none; }
+    .dark #lightBulbToggle {
+      display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;
+    }
+
+    /* Fire text */
+    .fire-text {
+      background: linear-gradient(135deg, #062c06 0%, #0a4d0a 35%, #d4af37 65%, #926f12 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      transition: all 0.4s ease;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+    }
+    .dark .fire-text {
+      background: url('/images/flame.mov') center center / cover no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: hue-rotate(75deg) brightness(1.3) saturate(1.4);
+    }
+
+    /* Embers */
+    .ember {
+      position: absolute; width: 4px; height: 4px;
+      background: radial-gradient(circle, #4ade80, #166534);
+      border-radius: 50%; pointer-events: none; z-index: 60;
+      box-shadow: 0 0 8px #22c55e;
+    }
+    .smoke {
+      position: absolute; width: 12px; height: 12px;
+      background: radial-gradient(circle, rgba(34,197,94,0.4) 0%, rgba(5,46,22,0) 70%);
+      border-radius: 50%; pointer-events: none; z-index: 59; filter: blur(2px);
+    }
+
+    /* Glass */
+    .ios-glass {
+      background: var(--glass);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid var(--glass-border);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    /* Nav */
+    .nav-scrolled {
+      background: linear-gradient(135deg, rgba(226,226,226,0.6) 0%, rgba(255,255,255,0.6) 50%, rgba(207,207,207,0.6) 100%) !important;
+      backdrop-filter: blur(12px);
+    }
+    .dark .nav-scrolled {
+      background: linear-gradient(135deg, rgba(20,20,20,0.7) 0%, rgba(10,10,10,0.7) 100%) !important;
+    }
+
+    .dark header, .dark .ios-glass {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.05), 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .dark .bg-white { background-color: #0a0a0a !important; }
+    .dark .text-black, .dark h2, .dark h3 { color: #ffffff !important; }
+    .dark .text-black\/50, .dark .text-black\/30 { color: rgba(255,255,255,0.4) !important; }
+    .dark .border-black\/5 { border-color: rgba(255,255,255,0.1) !important; }
+
+    /* Scrollbar */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Sidebar */
+    .hover-card {
+      transition: all 0.4s cubic-bezier(0.165,0.84,0.44,1);
+    }
+    .hover-card:hover {
+      transform: translateY(-5px);
+      background: rgba(0,0,0,0.05);
+      border-color: rgba(0,0,0,0.15);
+    }
+
+    /* ── SPACES-SPECIFIC STYLES ── */
+
+    .spaces-bg-glow::before {
+      content: '';
+      position: fixed; top: -200px; left: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(10,77,10,0.07) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .spaces-bg-glow::after {
+      content: '';
+      position: fixed; bottom: -150px; right: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* Page shell */
+    .page { max-width: 680px; margin: 0 auto; padding: 100px 16px 80px; position: relative; z-index: 1; }
+
+    /* Page header */
+    .page-eyebrow {
+      font-size: 9px; font-weight: 900; letter-spacing: 0.25em;
+      text-transform: uppercase; color: #e63b2e;
+      margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+    }
+    .page-eyebrow::before {
+      content: ''; width: 20px; height: 2px;
+      background: #e63b2e; border-radius: 99px;
+    }
+    .page-title {
+      font-size: clamp(32px,7vw,52px); font-weight: 900;
+      letter-spacing: -2px; line-height: 1; text-transform: uppercase;
+    }
+    .page-title span { opacity: 0.2; }
+    .page-sub { font-size: 13px; color: #666; margin-top: 8px; font-weight: 500; }
+    .dark .page-sub { color: rgba(255,255,255,0.38); }
+
+    /* Create card */
+    .create-card {
+      border-radius: 24px; padding: 22px; margin-bottom: 32px;
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, rgba(10,77,10,0.06), rgba(212,175,55,0.05));
+      border: 1px solid rgba(10,77,10,0.18);
+    }
+    .dark .create-card {
+      background: linear-gradient(135deg, rgba(10,77,10,0.12), rgba(212,175,55,0.07));
+      border-color: rgba(212,175,55,0.2);
+    }
+    .create-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
+    }
+    .create-label {
+      font-size: 9px; font-weight: 900; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(0,0,0,0.35); margin-bottom: 14px;
+    }
+    .dark .create-label { color: rgba(255,255,255,0.35); }
+
+    .create-row { display: flex; gap: 10px; }
+    @media(max-width:480px) { .create-row { flex-direction: column; } }
+
+    .create-input {
+      flex: 1; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 12px; padding: 12px 16px;
+      font-size: 14px; font-family: 'Inter', sans-serif; font-weight: 600;
+      color: #111; outline: none; transition: border-color 0.2s, background 0.2s;
+    }
+    .dark .create-input {
+      background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: #f4f4f4;
+    }
+    .create-input::placeholder { color: rgba(0,0,0,0.3); font-weight: 400; }
+    .dark .create-input::placeholder { color: rgba(255,255,255,0.25); }
+    .create-input:focus { border-color: rgba(10,77,10,0.5); background: rgba(0,0,0,0.06); }
+    .dark .create-input:focus { border-color: rgba(212,175,55,0.45); background: rgba(255,255,255,0.08); }
+
+    .btn-create {
+      padding: 12px 22px;
+      background: linear-gradient(135deg, #0a4d0a, #062c06);
+      color: #fff; border: none; border-radius: 12px;
+      font-size: 11px; font-weight: 900; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; white-space: nowrap; transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(10,77,10,0.3);
+    }
+    .dark .btn-create {
+      background: linear-gradient(135deg, #d4af37, #926f12);
+      color: #000; box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+    }
+    .btn-create:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(10,77,10,0.45); }
+    .dark .btn-create:hover { box-shadow: 0 6px 28px rgba(212,175,55,0.45); }
+    .btn-create:active { transform: translateY(0); }
+
+    /* Section label */
+    .section-label {
+      font-size: 9px; font-weight: 900; letter-spacing: 0.25em;
+      text-transform: uppercase; color: rgba(0,0,0,0.3);
+      margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+    }
+    .dark .section-label { color: rgba(255,255,255,0.3); }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(0,0,0,0.07); }
+    .dark .section-label::after { background: rgba(255,255,255,0.08); }
+
+    /* Space cards */
+    .space-card {
+      background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 24px; padding: 20px 22px; margin-bottom: 12px;
+      cursor: pointer; transition: all 0.35s cubic-bezier(0.165,0.84,0.44,1);
+      position: relative; overflow: hidden;
+    }
+    .dark .space-card {
+      background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08);
+    }
+    .space-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .space-card:hover {
+      background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.13);
+      transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+    .dark .space-card:hover {
+      background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .space-card:hover::before { opacity: 1; }
+
+    .space-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .space-name { font-size: 16px; font-weight: 800; letter-spacing: -0.4px; color: #111; }
+    .dark .space-name { color: #fff; }
+
+    .live-badge {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 9px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #e63b2e; background: rgba(230,59,46,0.1); border: 1px solid rgba(230,59,46,0.25);
+      padding: 4px 10px; border-radius: 99px; box-shadow: 0 0 14px rgba(230,59,46,0.12);
+    }
+    .live-dot {
+      width: 5px; height: 5px; border-radius: 50%; background: #e63b2e;
+      animation: gl-pulse 1.6s infinite;
+    }
+    @keyframes gl-pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.5; transform:scale(0.8); }
+    }
+
+    .space-meta { font-size: 11px; color: rgba(0,0,0,0.4); font-weight: 500; display: flex; align-items: center; gap: 10px; }
+    .dark .space-meta { color: rgba(255,255,255,0.38); }
+    .space-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(0,0,0,0.25); }
+    .dark .space-meta-dot { background: rgba(255,255,255,0.25); }
+
+    /* Empty state */
+    .empty-state { text-align: center; padding: 52px 20px; color: rgba(0,0,0,0.3); }
+    .dark .empty-state { color: rgba(255,255,255,0.25); }
+    .empty-icon {
+      width: 56px; height: 56px;
+      background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px; font-size: 22px;
+    }
+    .dark .empty-icon { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
+    .empty-state p { font-size: 13px; font-weight: 500; }
+
+    /* ── ROOM VIEW ── */
+    .room-view { display: none; }
+    .room-view.active { display: block; }
+    .spaces-list.hidden { display: none; }
+
+    .room-header { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+
+    .back-btn {
+      width: 42px; height: 42px;
+      background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: #111; transition: all 0.2s;
+    }
+    .dark .back-btn {
+      background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: #fff;
+    }
+    .back-btn:hover { background: rgba(0,0,0,0.07); border-color: rgba(0,0,0,0.14); }
+    .dark .back-btn:hover { background: rgba(255,255,255,0.09); }
+
+    .room-title {
+      font-size: clamp(20px,5vw,30px); font-weight: 900; letter-spacing: -1px;
+      text-transform: uppercase; line-height: 1;
+    }
+    .room-meta-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
+
+    .room-live-pill {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 9px; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase;
+      color: #e63b2e; background: rgba(230,59,46,0.1); border: 1px solid rgba(230,59,46,0.22);
+      padding: 3px 8px; border-radius: 99px;
+    }
+    .room-listeners { font-size: 11px; color: rgba(0,0,0,0.4); font-weight: 500; }
+    .dark .room-listeners { color: rgba(255,255,255,0.38); }
+
+    /* Request banner */
+    .request-banner {
+      background: rgba(10,77,10,0.07); border: 1px solid rgba(10,77,10,0.2);
+      border-radius: 20px; padding: 14px 18px; margin-bottom: 20px;
+      display: none; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .dark .request-banner {
+      background: rgba(212,175,55,0.07); border-color: rgba(212,175,55,0.2);
+    }
+    .request-banner.visible { display: flex; }
+    .request-text { font-size: 13px; font-weight: 700; }
+
+    .request-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+    .approve-btn {
+      padding: 7px 14px; border-radius: 9px; font-size: 11px; font-weight: 900;
+      font-family: 'Inter', sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+      cursor: pointer; border: none; transition: all 0.2s;
+      background: linear-gradient(135deg, #0a4d0a, #062c06); color: #fff;
+      box-shadow: 0 4px 14px rgba(10,77,10,0.3);
+    }
+    .dark .approve-btn {
+      background: linear-gradient(135deg, #d4af37, #926f12); color: #000;
+    }
+    .deny-btn {
+      padding: 7px 14px; border-radius: 9px; font-size: 11px; font-weight: 900;
+      font-family: 'Inter', sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+      cursor: pointer; background: rgba(0,0,0,0.04); color: rgba(0,0,0,0.4);
+      border: 1px solid rgba(0,0,0,0.08); transition: all 0.2s;
+    }
+    .dark .deny-btn { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.35); border-color: rgba(255,255,255,0.1); }
+    .deny-btn:hover { background: rgba(0,0,0,0.07); }
+    .dark .deny-btn:hover { background: rgba(255,255,255,0.08); }
+
+    /* Speakers */
+    .speakers-section, .listeners-section { margin-bottom: 28px; }
+    .speakers-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; }
+
+    .speaker-bubble { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 68px; }
+
+    .speaker-avatar {
+      width: 56px; height: 56px; border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 900; color: #fff; position: relative; transition: all 0.3s;
+    }
+    .speaker-avatar.speaking {
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.8), 0 0 0 4px #0a4d0a, 0 0 20px rgba(10,77,10,0.5);
+    }
+    .dark .speaker-avatar.speaking {
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.9), 0 0 0 4px #d4af37, 0 0 20px rgba(212,175,55,0.4);
+    }
+    .speaker-avatar .mic-off {
+      position: absolute; bottom: -4px; right: -4px;
+      width: 20px; height: 20px;
+      background: rgba(255,255,255,0.9); border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px;
+    }
+    .dark .speaker-avatar .mic-off { background: rgba(15,15,15,0.95); border-color: rgba(255,255,255,0.1); }
+
+    .speaker-name { font-size: 10px; font-weight: 700; text-align: center; line-height: 1.2; }
+    .speaker-role { font-size: 8px; color: rgba(0,0,0,0.35); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+    .dark .speaker-role { color: rgba(255,255,255,0.3); }
+
+    /* Listeners */
+    .listeners-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .listener-avatar {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; color: #fff; transition: transform 0.2s;
+    }
+    .listener-avatar:hover { transform: scale(1.1); }
+
+    /* Controls */
+    .room-controls {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 24px; padding: 16px; position: relative; overflow: hidden;
+    }
+    .dark .room-controls { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); }
+    .room-controls::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.2), transparent);
+    }
+
+    .control-btn {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px;
+      padding: 12px 8px; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px;
+      background: rgba(0,0,0,0.03); cursor: pointer;
+      font-size: 9px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(0,0,0,0.4); font-family: 'Inter', sans-serif; transition: all 0.2s;
+    }
+    .dark .control-btn { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.09); color: rgba(255,255,255,0.38); }
+    .control-btn:hover {
+      background: rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.13); color: #111;
+    }
+    .dark .control-btn:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); color: #fff; }
+
+    .control-btn.active {
+      background: rgba(10,77,10,0.1); border-color: rgba(10,77,10,0.3); color: #0a4d0a;
+    }
+    .dark .control-btn.active {
+      background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.3); color: #d4af37;
+    }
+    .control-btn.danger { border-color: rgba(230,59,46,0.2); color: rgba(230,59,46,0.6); }
+    .control-btn.danger:hover { background: rgba(230,59,46,0.08); color: #e63b2e; border-color: rgba(230,59,46,0.35); }
+
+    /* Modal */
+    .modal-bg {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(12px); display: flex; align-items: center;
+      justify-content: center; z-index: 100; padding: 20px;
+    }
+    .modal-bg.hidden { display: none; }
+
+    .modal {
+      background: #ffffff; border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 28px; padding: 32px; width: 100%; max-width: 360px;
+      position: relative; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.2);
+    }
+    .dark .modal { background: #111111; border-color: rgba(255,255,255,0.1); }
+    .modal::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
+    }
+
+    .modal-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(10,77,10,0.12), rgba(212,175,55,0.1));
+      border: 1px solid rgba(10,77,10,0.2);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 18px;
+    }
+    .modal h2 {
+      font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .modal p { font-size: 13px; color: rgba(0,0,0,0.45); margin-bottom: 22px; line-height: 1.5; font-weight: 400; }
+    .dark .modal p { color: rgba(255,255,255,0.38); }
+
+    .modal input {
+      width: 100%; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 12px; padding: 13px 16px;
+      font-size: 15px; font-weight: 600; font-family: 'Inter', sans-serif;
+      color: #111; outline: none; margin-bottom: 14px; transition: border-color 0.2s;
+    }
+    .dark .modal input { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); color: #f4f4f4; }
+    .modal input::placeholder { color: rgba(0,0,0,0.3); font-weight: 400; }
+    .dark .modal input::placeholder { color: rgba(255,255,255,0.2); }
+    .modal input:focus { border-color: rgba(10,77,10,0.5); }
+    .dark .modal input:focus { border-color: rgba(212,175,55,0.45); }
+
+    .modal-btn {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, #0a4d0a, #062c06);
+      color: #fff; border: none; border-radius: 12px;
+      font-size: 12px; font-weight: 900; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+      transition: all 0.2s; box-shadow: 0 6px 24px rgba(10,77,10,0.3);
+    }
+    .dark .modal-btn {
+      background: linear-gradient(135deg, #d4af37, #926f12);
+      color: #000; box-shadow: 0 6px 24px rgba(212,175,55,0.3);
+    }
+    .modal-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(10,77,10,0.45); }
+    .dark .modal-btn:hover { box-shadow: 0 8px 32px rgba(212,175,55,0.45); }
+
+    /* Coming soon */
+    .coming-soon { position: relative; overflow: hidden; }
+    .coming-soon::before {
+      content: "COMING SOON"; position: absolute; inset: 0;
+      background: #d4af37; color: black; display: flex; align-items: center;
+      justify-content: center; font-weight: 900; font-size: 10px;
+      letter-spacing: 0.2em; opacity: 0; transition: opacity 0.3s ease; z-index: 10; pointer-events: none;
+    }
+    .coming-soon:hover::before { opacity: 1; }
+    .dark .coming-soon::before { background: #10b981; color: white; }
+
+    @media(max-width:480px) {
+      .page { padding: 88px 14px 70px; }
+      .control-btn { font-size: 8px; padding: 10px 6px; }
+    }
+  </style>
+</head>
+
+<body class="antialiased overflow-x-hidden spaces-bg-glow">
+
+<!-- Username Modal -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal-icon">🎙️</div>
+    <h2>Enter your name</h2>
+    <p>Join a live room and be part of the conversation.</p>
+    <input type="text" id="nameInput" placeholder="Your name" maxlength="24" />
+    <button class="modal-btn" onclick="setUsername()">Jump In</button>
+  </div>
+</div>
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed top-0 w-full z-50 px-2 py-4 flex justify-between items-center">
+  <div class="flex items-center gap-4">
+    <div class="relative w-9 h-9">
+      <a href="index.html" class="flex items-center space-x-3 group shrink-0">
+        <img src="/images/logo.png" alt="The Greenlight Logo" class="transition-transform scale-150 origin-left translate-y-[4px]" />
+      </a>
+    </div>
+    <span class="fire-text text-[1rem] font-extrabold tracking-tight ml-1 py-1">Greenlight</span>
+  </div>
+
+  <div class="hidden md:flex gap-6 text-sm font-semibold tracking-widest uppercase opacity-70">
+    <a href="#" class="hover:text-amber-500 transition text-black dark:text-white">NFL</a>
+    <a href="#" class="hover:text-amber-500 transition text-black dark:text-white">NBA</a>
+    <a href="#" class="hover:text-amber-500 transition text-black dark:text-white">UFC</a>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <button id="darkModeToggle" onclick="toggleDarkMode()" class="p-1 hover:scale-110 transition-transform group" title="Toggle Dark Mode">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 rotate-[20deg]">
+        <defs>
+          <linearGradient id="gold-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#D4AF37"/>
+            <stop offset="50%" stop-color="#F9E2AF"/>
+            <stop offset="100%" stop-color="#B8860B"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#gold-metal)" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/>
+      </svg>
+    </button>
+
+    <div class="md:mr-3 relative group cursor-pointer" onclick="toggleUserDashboard()">
+      <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-200 p-[2px] transition-all duration-300">
+        <div class="w-full h-full rounded-full bg-white dark:bg-neutral-900 flex items-center justify-center overflow-hidden">
+          <i class="fa-solid fa-user text-xs text-black dark:text-white opacity-80"></i>
+        </div>
+      </div>
+      <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-neutral-900 rounded-full"></span>
+    </div>
+
+    <button onclick="toggleSidebar()" class="md:hidden text-2xl focus:outline-none text-black dark:text-white">
+      <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="url(#goldGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <defs>
+          <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFD700"/>
+            <stop offset="50%" stop-color="#FFC107"/>
+            <stop offset="100%" stop-color="#B8860B"/>
+          </linearGradient>
+        </defs>
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- User Dashboard -->
+<div id="userDashboard" class="fixed inset-y-0 right-0 w-[320px] bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-2xl z-[70] transform translate-x-full transition-transform duration-500 ease-in-out shadow-[-20px_0_80px_rgba(0,0,0,0.2)] border-l border-gray-200 dark:border-white/5 h-full overflow-y-auto no-scrollbar">
+  <div class="p-8 flex justify-between items-center border-b border-gray-100 dark:border-white/5">
+    <button onclick="toggleUserDashboard()" class="text-2xl text-black dark:text-white opacity-40 hover:opacity-100 transition-opacity">&times;</button>
+  </div>
+  <div class="p-8 text-center">
+    <div class="relative inline-block mb-4">
+      <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-500 to-yellow-200 p-[3px] mx-auto hover:rotate-0 transition-transform duration-500">
+        <div class="w-full h-full rounded-[1.25rem] bg-white dark:bg-neutral-900 flex items-center justify-center overflow-hidden">
+          <i class="fa-solid fa-user text-3xl text-black dark:text-white"></i>
+        </div>
+      </div>
+      <span class="absolute -top-2 -right-2 bg-red-600 text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest shadow-lg">Elite</span>
+    </div>
+    <h3 class="text-2xl font-black uppercase tracking-tighter dark:text-white">User_293</h3>
+    <p class="text-[10px] font-bold text-black/30 dark:text-white/30 uppercase tracking-widest mt-1">Member since 2024</p>
+  </div>
+  <div class="px-8 grid grid-cols-2 gap-3 mb-8">
+    <div class="bg-gray-50 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5">
+      <p class="text-[8px] font-black uppercase text-amber-500 tracking-widest mb-1">XP Points</p>
+      <p class="text-xl font-black dark:text-white">12,450</p>
+    </div>
+  </div>
+  <div class="px-8 mb-8">
+    <button class="w-full py-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all">
+      Join Elite Membership
+    </button>
+  </div>
+  <div class="px-6 space-y-2">
+    <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+      <i class="fa-solid fa-bolt-lightning text-amber-500"></i>
+      <span class="text-sm font-bold dark:text-white">Faves</span>
+    </a>
+    <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+      <i class="fa-solid fa-bookmark text-gray-400"></i>
+      <span class="text-sm font-bold dark:text-white">Saved Highlights</span>
+    </a>
+    <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+      <i class="fa-solid fa-shield-halved text-gray-400"></i>
+      <span class="text-sm font-bold dark:text-white">Privacy Settings</span>
+    </a>
+    <div class="pt-4 mt-4 border-t border-gray-100 dark:border-white/5 px-2">
+      <button class="w-full bg-black dark:bg-white text-white dark:text-black py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white transition-all active:scale-95">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar" class="fixed inset-y-0 right-0 w-[300px] bg-white/90 dark:bg-neutral-900/95 backdrop-blur-2xl z-[60] transform translate-x-full transition-transform duration-500 ease-in-out shadow-[-20px_0_50px_rgba(0,0,0,0.1)] border-l border-gray-200 dark:border-white/10">
+  <div class="flex justify-between items-center p-8 border-b border-gray-100 dark:border-white/10">
+    <button onclick="toggleSidebar()" class="text-2xl text-black dark:text-white hover:rotate-90 transition-transform duration-300">&times;</button>
+  </div>
+  <div class="flex flex-col gap-4 p-6">
+    <button id="lightBulbToggle" onclick="toggleDarkMode()" class="p-2 self-center hover:scale-110 transition-transform group mb-4" title="Switch to Light Mode">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-amber-400">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/>
+      </svg>
+    </button>
+    <a href="#" class="group flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100">
+      <div class="flex items-center gap-4">
+        <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png" class="w-10 h-10 object-contain" alt="NFL">
+        <span class="font-bold text-lg tracking-tight group-hover:translate-x-1 transition-transform dark:text-white">NFL</span>
+      </div>
+      <i class="fa-solid fa-chevron-right text-xs opacity-20 group-hover:opacity-100 transition-opacity dark:text-white"></i>
+    </a>
+    <a href="#" class="group flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100">
+      <div class="flex items-center gap-4">
+        <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nba.png" class="w-10 h-10 object-contain" alt="NBA">
+        <span class="font-bold text-lg tracking-tight group-hover:translate-x-1 transition-transform dark:text-white">NBA</span>
+      </div>
+      <i class="fa-solid fa-chevron-right text-xs opacity-20 group-hover:opacity-100 transition-opacity dark:text-white"></i>
+    </a>
+    <a href="#" class="group flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100">
+      <div class="flex items-center gap-4">
+        <img src="images/blogo.webp" class="w-10 h-10 object-contain" alt="UFC">
+        <span class="font-bold text-lg tracking-tight group-hover:translate-x-1 transition-transform dark:text-white">UFC</span>
+      </div>
+      <i class="fa-solid fa-chevron-right text-xs opacity-20 group-hover:opacity-100 transition-opacity dark:text-white"></i>
+    </a>
+    <div class="mt-4 pt-6 border-t border-gray-100 dark:border-white/10 px-2 space-y-4">
+      <a href="#" class="relative block w-full aspect-[3/1] overflow-hidden rounded-2xl shadow-lg group">
+        <img src="images/aw.png" class="absolute inset-0 w-full h-full object-cover object-[60%_50%] transition-transform duration-500 group-hover:scale-105" alt="Ball-Verse">
+        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+      </a>
+      <a href="#" class="relative block w-full aspect-[3/1] overflow-hidden rounded-2xl shadow-lg group">
+        <img src="images/store.jpeg" class="absolute inset-0 w-full h-full object-cover object-[center_40%] transition-transform duration-500 group-hover:scale-110" alt="Greenlight Store">
+        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Page -->
+<div class="page">
+
+  <!-- Spaces List -->
+  <div class="spaces-list" id="spacesList">
+
+    <div class="mb-8">
+      <h1 class="page-title text-black dark:text-white">Greenlight <span> Huddle</span></h1>
+      <p class="page-sub">Join a live audio room or start your own.</p>
+    </div>
+
+    <div class="create-card">
+      <div class="create-label">Start a New Huddle</div>
+      <div class="create-row">
+        <input class="create-input" type="text" id="spaceNameInput" placeholder="Name your Space…" maxlength="60"/>
+        <button class="btn-create" onclick="createSpace()">
+          <i class="fa-solid fa-microphone mr-1.5"></i> Start Room
+        </button>
+      </div>
+    </div>
+
+    <div class="section-label">Live Now</div>
+    <div id="spacesContainer">
+      <div class="empty-state">
+        <div class="empty-icon">🎙</div>
+        <p>No rooms live right now</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Room View -->
+  <div class="room-view" id="roomView">
+
+    <div class="room-header">
+      <button class="back-btn" onclick="leaveRoom()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+      </button>
+      <div class="flex-1">
+        <div class="room-title text-black dark:text-white" id="roomTitle">Space Name</div>
+        <div class="room-meta-row">
+          <div class="room-live-pill">
+            <span class="live-dot"></span> Live
+          </div>
+          <span class="room-listeners" id="roomMeta">0 listeners</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Request banner -->
+    <div class="request-banner" id="requestBanner">
+      <span class="request-text text-black dark:text-white" id="requestText">Someone wants to speak</span>
+      <div class="request-actions">
+        <button class="approve-btn" onclick="approveRequest()">Allow</button>
+        <button class="deny-btn" onclick="denyRequest()">Deny</button>
+      </div>
+    </div>
+
+    <!-- Speakers -->
+    <div class="speakers-section">
+      <div class="section-label">Speakers</div>
+      <div class="speakers-grid" id="speakersGrid"></div>
+    </div>
+
+    <!-- Listeners -->
+    <div class="listeners-section">
+      <div class="section-label">Listeners</div>
+      <div class="listeners-grid" id="listenersGrid"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="room-controls">
+      <button class="control-btn" id="micBtn" onclick="toggleMic()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+        Mic
+      </button>
+      <button class="control-btn" id="raiseBtn" onclick="raiseHand()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
+          <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
+          <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
+          <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+        </svg>
+        Raise Hand
+      </button>
+      <button class="control-btn danger" onclick="leaveRoom()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Leave
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="max-w-7xl mx-auto mb-5 px-6 mt-20 pt-8 border-t border-black/5 dark:border-white/10 flex justify-between items-center text-[10px] font-black text-black/20 dark:text-white/20 uppercase tracking-[0.5em]">
+  <span>© 2026 Greenlight Network LLC</span>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/livekit-client/dist/livekit-client.umd.min.js"></script>
+<script>
+  // ── GREENLIGHT NAV / DARK MODE ──────────────────────────────────────────────
+
+  function toggleDarkMode() {
+    const html = document.documentElement;
+    const sidebar = document.getElementById('sidebar');
+    if (html.classList.contains('dark')) {
+      html.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+      if (!sidebar.classList.contains('translate-x-full')) toggleSidebar();
+    } else {
+      html.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+      createSparks();
+    }
+  }
+
+  function createSparks() {
+    const logoText = document.querySelector('.fire-text');
+    const rect = logoText.getBoundingClientRect();
+    for (let i = 0; i < 30; i++) {
+      const isSmoke = i % 2 === 0;
+      const particle = document.createElement('div');
+      particle.className = isSmoke ? 'smoke' : 'ember';
+      particle.style.left = `${rect.left + rect.width / 2}px`;
+      particle.style.top = `${rect.top + rect.height / 2}px`;
+      document.body.appendChild(particle);
+      const adx = (Math.random() - 0.5) * 120;
+      const ady = isSmoke ? (Math.random() * -150) - 20 : (Math.random() - 0.5) * 150;
+      particle.animate([
+        { transform: `translate(0,0) scale(0.5)`, opacity: 1 },
+        { transform: `translate(${adx}px,${ady}px) scale(${isSmoke ? 3 : 0.2})`, opacity: 0 }
+      ], {
+        duration: isSmoke ? 1500 + Math.random() * 1000 : 800 + Math.random() * 500,
+        easing: 'ease-out', fill: 'forwards'
+      });
+      setTimeout(() => particle.remove(), 2500);
+    }
+  }
+
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('translate-x-full');
+  }
+
+  function toggleUserDashboard() {
+    document.getElementById('userDashboard').classList.toggle('translate-x-full');
+  }
+
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('nav-scrolled', window.scrollY > 50);
+  });
+
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+  }
+
+  // ── SPACES BACKEND LOGIC (UNTOUCHED) ────────────────────────────────────────
+
+  const BACKEND = 'https://sportsite-79ty.onrender.com';
+  const AVATAR_COLORS = [
+    '#0a4d0a','#d4af37','#3b82f6','#8b5cf6',
+    '#ec4899','#10b981','#06b6d4','#f97316'
+  ];
+
+  let username = '';
+  let currentRoom = null;
+  let livekitRoom = null;
+  let isSpeaker = false;
+  let micEnabled = false;
+  let handRaised = false;
+  let isHost = false;
+  let pendingRequest = null;
+  let pollInterval = null;
+
+  function colorFor(name) {
+    let h = 0;
+    for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+    return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length];
+  }
+
+  function setUsername() {
+    const val = document.getElementById('nameInput').value.trim();
+    if (!val) return;
+    username = val;
+    document.getElementById('modalBg').classList.add('hidden');
+    loadSpaces();
+  }
+
+  document.getElementById('nameInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') setUsername();
+  });
+
+  async function loadSpaces() {
+    try {
+      const res = await fetch(`${BACKEND}/api/spaces`);
+      const data = await res.json();
+      renderSpaces(data.spaces || []);
+    } catch {
+      renderSpaces([]);
+    }
+  }
+
+  function renderSpaces(spaces) {
+    const container = document.getElementById('spacesContainer');
+    if (!spaces.length) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">🎙</div>
+          <p>No rooms live right now</p>
+        </div>`;
+      return;
+    }
+    container.innerHTML = spaces.map(s => `
+      <div class="space-card" onclick="joinSpace('${s.id}', '${escHtml(s.name)}', false)">
+        <div class="space-top">
+          <span class="space-name">${escHtml(s.name)}</span>
+          <span class="live-badge"><span class="live-dot"></span>Live</span>
+        </div>
+        <div class="space-meta">
+          <span style="display:flex;align-items:center;gap:4px">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+            ${s.speakerCount} speaker${s.speakerCount !== 1 ? 's' : ''}
+          </span>
+          <span class="space-meta-dot"></span>
+          <span style="display:flex;align-items:center;gap:4px">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            ${s.listenerCount} listener${s.listenerCount !== 1 ? 's' : ''}
+          </span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function createSpace() {
+    const name = document.getElementById('spaceNameInput').value.trim();
+    if (!name || !username) return;
+    try {
+      const res = await fetch(`${BACKEND}/api/spaces/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, hostName: username })
+      });
+      const data = await res.json();
+      joinSpace(data.spaceId, name, true, data.token);
+    } catch (e) {
+      alert('Could not create space. Try again.');
+    }
+  }
+
+  async function joinSpace(spaceId, spaceName, asHost, existingToken) {
+    currentRoom = spaceId;
+    isHost = asHost;
+    isSpeaker = asHost;
+
+    document.getElementById('spacesList').classList.add('hidden');
+    document.getElementById('roomView').classList.add('active');
+    document.getElementById('roomTitle').textContent = spaceName;
+
+    let token = existingToken;
+    if (!token) {
+      try {
+        const res = await fetch(`${BACKEND}/api/spaces/join`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ spaceId, username, asSpeaker: false })
+        });
+        const data = await res.json();
+        token = data.token;
+      } catch {
+        alert('Could not join space.');
+        return;
+      }
+    }
+
+    livekitRoom = new LivekitClient.Room();
+    await livekitRoom.connect('wss://sports-spaces-8zg8sbky.livekit.cloud', token);
+
+    livekitRoom.on(LivekitClient.RoomEvent.ParticipantConnected, updateParticipants);
+    livekitRoom.on(LivekitClient.RoomEvent.ParticipantDisconnected, updateParticipants);
+    livekitRoom.on(LivekitClient.RoomEvent.TrackMuted, updateParticipants);
+    livekitRoom.on(LivekitClient.RoomEvent.TrackUnmuted, updateParticipants);
+    livekitRoom.on(LivekitClient.RoomEvent.DataReceived, handleData);
+
+    if (asHost) {
+      await livekitRoom.localParticipant.setMicrophoneEnabled(true);
+      micEnabled = true;
+      document.getElementById('micBtn').classList.add('active');
+    }
+
+    updateParticipants();
+    updateControls();
+    pollInterval = setInterval(pollRoom, 4000);
+  }
+
+  function updateParticipants() {
+    if (!livekitRoom) return;
+    const speakers = [];
+    const listeners = [];
+    const local = livekitRoom.localParticipant;
+    const localHasMic = local.audioTrackPublications.size > 0;
+    if (localHasMic || isHost) {
+      speakers.push({ name: username + ' (you)', isSpeaking: local.isSpeaking, micOff: !micEnabled, isYou: true });
+    } else {
+      listeners.push({ name: username });
+    }
+    livekitRoom.remoteParticipants.forEach(p => {
+      const hasMic = p.audioTrackPublications.size > 0;
+      if (hasMic) {
+        speakers.push({ name: p.identity, isSpeaking: p.isSpeaking, micOff: false });
+      } else {
+        listeners.push({ name: p.identity });
+      }
+    });
+    renderSpeakers(speakers);
+    renderListeners(listeners);
+    document.getElementById('roomMeta').textContent = `${listeners.length} listener${listeners.length !== 1 ? 's' : ''}`;
+  }
+
+  function renderSpeakers(speakers) {
+    document.getElementById('speakersGrid').innerHTML = speakers.map(s => `
+      <div class="speaker-bubble">
+        <div class="speaker-avatar ${s.isSpeaking ? 'speaking' : ''}" style="background:${colorFor(s.name)}">
+          ${s.name[0].toUpperCase()}
+          ${s.micOff ? '<span class="mic-off">🔇</span>' : ''}
+        </div>
+        <div class="speaker-name">${escHtml(s.name)}</div>
+        <div class="speaker-role">${s.isYou && isHost ? 'host' : 'speaker'}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderListeners(listeners) {
+    document.getElementById('listenersGrid').innerHTML = listeners.map(l => `
+      <div class="listener-avatar" style="background:${colorFor(l.name)}" title="${escHtml(l.name)}">
+        ${l.name[0].toUpperCase()}
+      </div>
+    `).join('');
+  }
+
+  async function toggleMic() {
+    if (!livekitRoom || !isSpeaker) return;
+    micEnabled = !micEnabled;
+    await livekitRoom.localParticipant.setMicrophoneEnabled(micEnabled);
+    document.getElementById('micBtn').classList.toggle('active', micEnabled);
+    updateParticipants();
+  }
+
+  async function raiseHand() {
+    if (isSpeaker || !livekitRoom) return;
+    handRaised = !handRaised;
+    document.getElementById('raiseBtn').classList.toggle('active', handRaised);
+    const msg = JSON.stringify({ type: 'raise_hand', username, raised: handRaised });
+    await livekitRoom.localParticipant.publishData(new TextEncoder().encode(msg), { reliable: true });
+  }
+
+  function handleData(payload) {
+    const msg = JSON.parse(new TextDecoder().decode(payload));
+    if (msg.type === 'raise_hand' && isHost) {
+      if (msg.raised) {
+        pendingRequest = msg.username;
+        document.getElementById('requestText').textContent = `${msg.username} wants to speak`;
+        document.getElementById('requestBanner').classList.add('visible');
+      }
+    }
+    if (msg.type === 'promote' && msg.username === username) {
+      becomeSpeaker();
+    }
+  }
+
+  async function approveRequest() {
+    if (!pendingRequest || !livekitRoom) return;
+    document.getElementById('requestBanner').classList.remove('visible');
+    const msg = JSON.stringify({ type: 'promote', username: pendingRequest });
+    await livekitRoom.localParticipant.publishData(new TextEncoder().encode(msg), { reliable: true });
+    await fetch(`${BACKEND}/api/spaces/promote`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ spaceId: currentRoom, username: pendingRequest })
+    });
+    pendingRequest = null;
+  }
+
+  function denyRequest() {
+    pendingRequest = null;
+    document.getElementById('requestBanner').classList.remove('visible');
+  }
+
+  async function becomeSpeaker() {
+    isSpeaker = true;
+    handRaised = false;
+    document.getElementById('raiseBtn').classList.remove('active');
+    const res = await fetch(`${BACKEND}/api/spaces/join`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ spaceId: currentRoom, username, asSpeaker: true })
+    });
+    const data = await res.json();
+    await livekitRoom.disconnect();
+    await livekitRoom.connect('wss://sports-spaces-8zg8sbky.livekit.cloud', data.token);
+    await livekitRoom.localParticipant.setMicrophoneEnabled(true);
+    micEnabled = true;
+    document.getElementById('micBtn').classList.add('active');
+    updateParticipants();
+    updateControls();
+  }
+
+  function updateControls() {
+    document.getElementById('micBtn').style.display = isSpeaker ? 'flex' : 'none';
+    document.getElementById('raiseBtn').style.display = isSpeaker ? 'none' : 'flex';
+  }
+
+  async function leaveRoom() {
+    if (livekitRoom) {
+      await livekitRoom.disconnect();
+      livekitRoom = null;
+    }
+    if (pollInterval) clearInterval(pollInterval);
+    currentRoom = null; isHost = false; isSpeaker = false; micEnabled = false; handRaised = false;
+    document.getElementById('roomView').classList.remove('active');
+    document.getElementById('spacesList').classList.remove('hidden');
+    loadSpaces();
+  }
+
+  async function pollRoom() {
+    if (!currentRoom) return;
+    try {
+      const res = await fetch(`${BACKEND}/api/spaces/${currentRoom}`);
+      const data = await res.json();
+      document.getElementById('roomMeta').textContent = `${data.listenerCount} listener${data.listenerCount !== 1 ? 's' : ''}`;
+    } catch {}
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  loadSpaces();
+</script>
+</body>
+</html>

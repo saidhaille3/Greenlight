@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Signup | Greenlight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            background-image: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(212, 175, 55, 0.08), transparent 40%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        .ios-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(30px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7);
+        }
+        button:disabled {
+    opacity: 0.2;
+    filter: grayscale(1);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+
+        .fire-text {
+            background: linear-gradient(135deg, #10b981 0%, #059669 35%, #fbbf24 65%, #d97706 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            filter: brightness(1.2);
+        }
+
+        .auth-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .auth-input:focus { border-color: #10b981; background: rgba(255, 255, 255, 0.07); }
+
+        .team-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .team-card.selected {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: #10b981;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        .btn-loading { pointer-events: none; opacity: 0.6; position: relative; color: transparent !important; }
+        .btn-loading::after {
+            content: ""; position: absolute; width: 20px; height: 20px;
+            top: 50%; left: 50%; margin: -10px 0 0 -10px;
+            border: 2px solid rgba(255,255,255,0.3); border-top-color: #10b981;
+            border-radius: 50%; animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .step-transition { animation: slideIn 0.4s ease-out forwards; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div id="authCard" class="w-full max-w-[500px] ios-glass rounded-[3.5rem] p-8 md:p-12 overflow-y-auto no-scrollbar max-h-[90vh]">
+        
+<div class="text-center mb-8">
+    <div class="inline-block mb-4">
+        <img src="/images/logo.png" alt="Logo" class="h-12 w-auto mx-auto scale-110">
+    </div>
+    <h1 class="fire-text text-4xl font-black uppercase tracking-tighter leading-none">Greenlight</h1>
+    <p id="mainSubtitle" class="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] mt-3">Sports Network</p>
+</div>
+
+<div id="step1" class="step-transition space-y-6">
+    <div class="grid grid-cols-2 gap-4">
+        <input type="text" id="fname" oninput="validateStep1()" placeholder="First Name" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-widest">
+        <input type="text" id="lname" oninput="validateStep1()" placeholder="Last Name" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-widest">
+    </div>
+    <input type="text" id="username" oninput="validateStep1()" placeholder="Username" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-widest">
+    
+    <button id="prefBtn" disabled onclick="goToStep(2)" class="w-full py-4 bg-white text-black rounded-xl font-black uppercase text-[10px] tracking-[0.2em] shadow-2xl hover:bg-emerald-500 hover:text-white transition-all">
+        Content Preference
+    </button>
+</div>
+
+<div id="step2" class="hidden step-transition space-y-0">
+ <div id="selectionSummary" class="flex flex-wrap justify-center gap-2 mb-6 min-h-[20px]">
+    </div>
+   
+    <div id="leaguePicker" class="space-y-10">
+        <div class="text-center space-y-2">
+            <p class="text-[12px] font-black text-white uppercase tracking-[0.5em]">Preference</p>
+            <p class="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em]">Select Sport</p>
+        </div>
+        
+        <div class="flex justify-center items-center gap-4 px-2">
+            <button onclick="pickLeague('nba')" class="auth-input group w-24 h-40 rounded-[3rem] flex items-center justify-center hover:border-emerald-500 transition-all duration-500 relative overflow-hidden">
+                <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nba.png" class="h-14 w-auto opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-10">
+                <div class="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </button>
+
+            <button onclick="pickLeague('nfl')" class="auth-input group w-24 h-40 rounded-[3rem] flex items-center justify-center hover:border-emerald-500 transition-all duration-500 relative overflow-hidden">
+                <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png" class="h-14 w-auto opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-10">
+                <div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </button>
+
+            <button onclick="pickLeague('ufc')" class="auth-input group w-24 h-40 rounded-[3rem] flex items-center justify-center hover:border-emerald-500 transition-all duration-500 relative overflow-hidden">
+                <img src="https://a.espncdn.com/i/teamlogos/leagues/500/ufc.png" class="h-10 w-auto opacity-40 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 z-10">
+                <div class="absolute inset-0 bg-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </button>
+        </div>
+
+        <div class="pt-8 text-center">
+<div class="pt-8 text-center flex flex-col items-center gap-4">
+    <button id="masterContinueBtn" onclick="goToStep(3)" class="hidden w-full max-w-[180px] py-3 bg-white text-black rounded-xl font-black uppercase text-[10px] tracking-[0.3em] shadow-2xl transition-all active:scale-95">
+        Continue
+    </button>
+    
+    <button onclick="goToStep(1)" class="text-[9px] font-black text-white/20 uppercase tracking-[0.5em] hover:text-white transition-colors">Back</button>
+</div>
+
+        </div>
+    </div>
+
+    <div id="teamPicker" class="hidden space-y-6">
+        <div class="text-center space-y-2">
+            <p id="activeLeagueLabel" class="text-[12px] font-black text-emerald-500 uppercase tracking-[0.5em]"></p>
+            <p class="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em]">Select Team</p>
+        </div>
+        
+        <input type="text" id="teamSearch" oninput="filterTeams(this.value)" placeholder="SEARCH..." class="auth-input w-full p-4 rounded-2xl text-[9px] font-black tracking-[0.2em] outline-none border-white/5 text-center">
+        
+        <div id="teamGrid" class="grid grid-cols-3 gap-3 max-h-[300px] overflow-y-auto no-scrollbar p-1"></div>
+
+<div class="pt-6 flex flex-col gap-4 items-center">
+    <button id="step2Continue" onclick="goToStep(3)" class="w-full max-w-[180px] py-3 bg-white text-black rounded-xl font-black uppercase text-[10px] tracking-[0.3em] shadow-2xl transition-all active:scale-95">
+        Continue
+    </button>
+    <button id="toggleLeagueBtn" onclick="resetLeague()" class="text-[9px] font-black text-white/20 uppercase tracking-[0.4em] hover:text-white transition-colors">Change League</button>
+</div>
+    </div>
+</div>
+
+        <div id="step3" class="hidden step-transition space-y-6">
+            <input type="email" id="email" placeholder="Email" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-widest">
+            <input type="password" id="password" placeholder="Password" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-[0.3em]">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-[0.3em]">
+            
+            <div id="statusArea" class="hidden text-[10px] font-black uppercase tracking-widest text-center py-3 rounded-xl border border-red-500/20 bg-red-500/10 text-red-500"></div>
+
+            <button id="signupBtn" onclick="processSignup()" class="w-full py-4 bg-emerald-600 text-white rounded-xl font-black uppercase text-[10px] tracking-[0.2em] shadow-2xl hover:bg-emerald-500 transition-all active:scale-95">
+                Complete Registration
+            </button>
+            <button onclick="goToStep(2)" class="w-full text-[9px] font-black text-white/30 uppercase tracking-widest text-center">Edit Preference</button>
+        </div>
+        <div class="mt-8 pt-6 border-t border-white/5 flex flex-col items-center gap-3">
+    <div class="flex items-center gap-2 opacity-50">
+        <p class="text-[8px] font-black uppercase tracking-[0.3em] text-white">Data Security</p>
+    </div>
+
+    <div class="flex items-center gap-2 transition-all duration-500 cursor-default opacity-80 hover:opacity-100">
+        <span class="text-[7px] font-bold uppercase tracking-widest text-white/70">Powered by</span>
+        <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" 
+             class="h-4 w-auto" 
+             alt="Firebase">
+        <span class="text-[8px] font-black tracking-tighter uppercase text-white/70">Google Infrastructure</span>
+    </div>
+</div>
+
+    </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyfaBrLbjIjgWaJb7DHf50zv7cn6lISi0",
+      authDomain: "greenlight-a8e86.firebaseapp.com",
+      projectId: "greenlight-a8e86",
+      storageBucket: "greenlight-a8e86.firebasestorage.app",
+      messagingSenderId: "367667201164",
+      appId: "1:367667201164:web:b2b6cfbf54c5d47255e7a9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+window.validateStep1 = () => {
+    const f = document.getElementById('fname').value.trim();
+    const l = document.getElementById('lname').value.trim();
+    const u = document.getElementById('username').value.trim();
+    const btn = document.getElementById('prefBtn');
+
+    // If all fields have text, enable the button
+    if (f && l && u) {
+        btn.disabled = false;
+    } else {
+        btn.disabled = true;
+    }
+};
+
+const leagues = {
+    // Utah must be "UTAH", New Orleans must be "NO"
+    nba: ["ATL", "BOS", "BKN", "CHA", "CHI", "CLE", "DAL", "DEN", "DET", "GSW", "HOU", "IND", "LAC", "LAL", "MEM", "MIA", "MIL", "MIN", "NO", "NYK", "OKC", "ORL", "PHI", "PHX", "POR", "SAC", "SAS", "TOR", "UTAH", "WAS"],
+    nfl: ["ARI", "ATL", "BAL", "BUF", "CAR", "CHI", "CIN", "CLE", "DAL", "DEN", "DET", "GB", "HOU", "IND", "JAX", "KC", "LV", "LAC", "LAR", "MIA", "MIN", "NE", "NO", "NYG", "NYJ", "PHI", "PIT", "SF", "SEA", "TB", "TEN", "WAS"],
+    ufc: ["POIRIER", "MCGREGOR", "JONES", "ADESANYA", "MAKHACHEV", "O'MALLEY"]
+};
+
+    let selectedSport = '';
+    let selectedTeam = '';
+
+window.goToStep = (step) => {
+    // Toggle the step containers
+    ['step1', 'step2', 'step3'].forEach(s => document.getElementById(s).classList.add('hidden'));
+    document.getElementById(`step${step}`).classList.remove('hidden');
+    
+    // Logic to hide/show "Sports Network"
+    const mainSubtitle = document.getElementById('mainSubtitle');
+    if (step === 1) {
+        mainSubtitle.classList.remove('hidden');
+    } else {
+        mainSubtitle.classList.add('hidden');
+    }
+
+    // Optional: Keep this if you want to track step labels for debugging, 
+    // otherwise you can remove the next two lines since you removed the stepLabel ID from HTML
+    // const labels = ["Identity", "Team Selection", "Security"];
+    // console.log(`Step ${step}: ${labels[step-1]}`);
+};
+
+
+// --- NEW MULTI-SELECTION ENGINE ---
+// --- SMART ENGINE: SEARCH & MULTI-SELECT ---
+let userPreferences = { NBA: [], NFL: [], UFC: [] };
+
+window.pickLeague = (league) => {
+    selectedSport = league.toUpperCase();
+
+    if (selectedSport === 'UFC') {
+        // --- UFC BYPASS LOGIC ---
+        // Toggles UFC as a whole league on the main screen
+        if (userPreferences.UFC.length === 0) {
+            userPreferences.UFC = ["UFC"]; 
+        } else {
+            userPreferences.UFC = []; 
+        }
+        updateUI(); // Refresh glows and "Add More" text
+    } else {
+        // --- NBA/NFL DEEP DIVE ---
+        document.getElementById('leaguePicker').classList.add('hidden');
+        document.getElementById('teamPicker').classList.remove('hidden');
+        document.getElementById('activeLeagueLabel').innerText = selectedSport;
+        renderTeams(leagues[league]);
+        updateUI();
+    }
+};
+
+window.filterTeams = (query) => {
+    const q = query.toUpperCase();
+    const filtered = leagues[selectedSport.toLowerCase()].filter(team => 
+        team.toUpperCase().includes(q)
+    );
+    renderTeams(filtered);
+};
+
+function updateUI() {
+    const totalSelected = Object.values(userPreferences).flat().length;
+    const continueBtn = document.getElementById('step2Continue'); // Button inside team grid
+    const masterContinueBtn = document.getElementById('masterContinueBtn'); // Button on league picker
+    const toggleBtn = document.getElementById('toggleLeagueBtn');
+    const summary = document.getElementById('selectionSummary');
+    
+    // Update Button Texts
+    const btnText = totalSelected > 0 ? `CONTINUE (${totalSelected} SELECTED)` : "CONTINUE";
+    continueBtn.innerText = btnText;
+    if(masterContinueBtn) masterContinueBtn.innerText = btnText;
+
+    // SHOW/HIDE Master Continue on the Sport Selection screen
+    if (totalSelected > 0) {
+        masterContinueBtn.classList.remove('hidden');
+        toggleBtn.innerText = "Add More";
+    } else {
+        masterContinueBtn.classList.add('hidden');
+        toggleBtn.innerText = "Change League";
+    }
+
+    // Update League Capsule Glows
+    ['nba', 'nfl', 'ufc'].forEach(lg => {
+        const caps = lg.toUpperCase();
+        const btn = document.querySelector(`button[onclick="pickLeague('${lg}')"]`);
+        if (userPreferences[caps].length > 0) {
+            btn.style.borderColor = "#10b981";
+            btn.style.background = "rgba(16, 185, 129, 0.05)";
+            btn.querySelector('img').style.opacity = "1";
+        } else {
+            btn.style.borderColor = "";
+            btn.style.background = "";
+            btn.querySelector('img').style.opacity = "0.4";
+        }
+    });
+
+    // Update the visual "Bag"
+    summary.innerHTML = '';
+    Object.keys(userPreferences).forEach(sport => {
+        userPreferences[sport].forEach(team => {
+            const img = document.createElement('img');
+            img.src = sport === 'UFC' 
+                ? `https://a.espncdn.com/i/teamlogos/leagues/500/ufc.png` 
+                : `https://a.espncdn.com/i/teamlogos/${sport.toLowerCase()}/500/${team.toLowerCase()}.png`;
+            img.className = "w-6 h-6 object-contain opacity-80";
+            summary.appendChild(img);
+        });
+    });
+}
+
+function renderTeams(list) {
+    const grid = document.getElementById('teamGrid');
+    grid.innerHTML = '';
+    
+    list.forEach(team => {
+        const isSelected = userPreferences[selectedSport].includes(team);
+        const card = document.createElement('div');
+        card.className = `team-card ios-glass p-4 rounded-2xl flex flex-col items-center justify-center gap-2 text-[8px] font-black transition-all ${isSelected ? 'selected' : ''}`;
+        
+        // NBA Fixes for Utah and New Orleans
+        let logoKey = team;
+        if (team === 'UTAH') logoKey = 'utah';
+        if (team === 'NO') logoKey = 'no';
+
+        let logoUrl = `https://a.espncdn.com/i/teamlogos/${selectedSport.toLowerCase()}/500/${logoKey.toLowerCase()}.png`;
+
+        card.innerHTML = `<img src="${logoUrl}" class="w-10 h-10 object-contain"><span>${team === 'NO' ? 'NOP' : team}</span>`;
+        
+        card.onclick = () => {
+            const index = userPreferences[selectedSport].indexOf(team);
+            if (index > -1) {
+                userPreferences[selectedSport].splice(index, 1);
+            } else {
+                userPreferences[selectedSport].push(team);
+            }
+            updateUI();
+            renderTeams(list); // Re-render to show selected state
+        };
+        grid.appendChild(card);
+    });
+}
+
+window.resetLeague = () => {
+    document.getElementById('leaguePicker').classList.remove('hidden');
+    document.getElementById('teamPicker').classList.add('hidden');
+    document.getElementById('teamSearch').value = '';
+};
+
+
+window.processSignup = async () => {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+    const btn = document.getElementById('signupBtn');
+    
+    const totalSelections = Object.values(userPreferences).flat().length;
+    if(totalSelections === 0) return showStatus("SELECT AT LEAST ONE TEAM");
+
+    btn.classList.add('btn-loading');
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+        await updateProfile(userCredential.user, { displayName: document.getElementById('username').value });
+        
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+            firstName: document.getElementById('fname').value,
+            lastName: document.getElementById('lname').value,
+            username: document.getElementById('username').value,
+            // SAVING AS ARRAYS NOW
+            preferences: userPreferences, 
+            email: email,
+            createdAt: new Date().toISOString()
+        });
+        window.location.href = 'index.html';
+    } catch (error) {
+        btn.classList.remove('btn-loading');
+        showStatus(error.code.split('/')[1].replace(/-/g, ' ').toUpperCase());
+    }
+};
+
+    function showStatus(msg) {
+        const s = document.getElementById('statusArea');
+        s.innerText = msg; s.classList.remove('hidden');
+    }
+</script>
+</body>
+</html>

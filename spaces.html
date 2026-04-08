@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spaces – Lithouse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: rgba(255,255,255,0.04);
+      --surface-hover: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.14);
+      --text: #f4f4f4;
+      --muted: rgba(255,255,255,0.38);
+      --live-red: #e63b2e;
+      --live-red-glow: rgba(230,59,46,0.35);
+      --gold: #f59e0b;
+      --gold-soft: rgba(245,158,11,0.15);
+      --radius: 20px;
+      --radius-lg: 28px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -200px;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(230,59,46,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -150px;
+      right: -150px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glass mixin */
+    .glass {
+      background: var(--surface);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--border);
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: rgba(10,10,10,0.8);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #e63b2e, #f59e0b);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .logo-text {
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to bottom, #fff 20%, #ff9900 50%, #ff3c00 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .header-badge {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    /* Page layout */
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 16px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Page header */
+    .page-header {
+      margin-bottom: 28px;
+    }
+
+    .page-eyebrow {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--live-red);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .page-eyebrow::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--live-red);
+      border-radius: 99px;
+    }
+
+    .page-title {
+      font-size: clamp(28px, 6vw, 40px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .page-title span {
+      color: rgba(255,255,255,0.2);
+    }
+
+    .page-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* Create card */
+    .create-card {
+      background: linear-gradient(135deg, rgba(230,59,46,0.08), rgba(245,158,11,0.05));
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(230,59,46,0.2);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .create-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.4), transparent);
+    }
+
+    .create-label {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .create-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .create-input {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .create-input::placeholder {
+      color: rgba(255,255,255,0.25);
+      font-weight: 400;
+    }
+
+    .create-input:focus {
+      border-color: rgba(230,59,46,0.5);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .btn-create {
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #e63b2e, #c0281d);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 900;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(230,59,46,0.3);
+    }
+
+    .btn-create:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(230,59,46,0.45);
+    }
+
+    .btn-create:active {
+      transform: translateY(0);
+    }
+
+    /* Section label */
+    .section-label {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Space cards */
+    .space-card {
+      background: var(--surface);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .space-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .space-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .space-card:hover::before {
+      opacity: 1;
+    }
+
+    .space-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .space-name {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: #fff;
+    }
+
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--live-red);
+      background: rgba(230,59,46,0.12);
+      border: 1px solid rgba(230,59,46,0.3);
+      padding: 4px 10px;
+      border-radius: 99px;
+      box-shadow: 0 0 16px rgba(230,59,46,0.15);
+    }
+
+    .live-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--live-red);
+      animation: pulse 1.6s infinite;
+      box-shadow: 0 0 6px var(--live-red);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .space-meta {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .space-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .space-meta-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--muted);
+    }
+
+    .empty-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 22px;
+    }
+
+    .empty-state p {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ── ROOM VIEW ── */
+    .room-view { display: none; }
+    .room-view.active { display: block; }
+    .spaces-list.hidden { display: none; }
+
+    .room-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .back-btn {
+      width: 40px;
+      height: 40px;
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-strong);
+    }
+
+    .room-name-block { flex: 1; }
+
+    .room-title {
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .room-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .room-live-pill {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--live-red);
+      background: rgba(230,59,46,0.1);
+      border: 1px solid rgba(230,59,46,0.25);
+      padding: 3px 8px;
+      border-radius: 99px;
+    }
+
+    .room-listeners {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Request banner */
+    .request-banner {
+      background: rgba(230,59,46,0.08);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(230,59,46,0.25);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .request-banner.visible { display: flex; }
+
+    .request-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .request-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .approve-btn, .deny-btn {
+      padding: 7px 14px;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 900;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .approve-btn {
+      background: linear-gradient(135deg, #e63b2e, #c0281d);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(230,59,46,0.3);
+    }
+
+    .deny-btn {
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .deny-btn:hover { background: var(--surface-hover); }
+
+    /* Speakers */
+    .speakers-section, .listeners-section {
+      margin-bottom: 28px;
+    }
+
+    .speakers-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .speaker-bubble {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      width: 68px;
+    }
+
+    .speaker-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .speaker-avatar.speaking {
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.8), 0 0 0 4px var(--live-red), 0 0 20px var(--live-red-glow);
+    }
+
+    .speaker-avatar .mic-off {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      width: 20px;
+      height: 20px;
+      background: rgba(10,10,10,0.9);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .speaker-name {
+      font-size: 10px;
+      font-weight: 700;
+      text-align: center;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.2;
+    }
+
+    .speaker-role {
+      font-size: 8px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Listeners */
+    .listeners-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .listener-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      transition: transform 0.2s;
+    }
+
+    .listener-avatar:hover {
+      transform: scale(1.1);
+    }
+
+    /* Controls */
+    .room-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .room-controls::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    }
+
+    .control-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 12px 8px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      cursor: pointer;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .control-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--border-strong);
+      color: var(--text);
+    }
+
+    .control-btn.active {
+      background: rgba(245,158,11,0.12);
+      border-color: rgba(245,158,11,0.35);
+      color: var(--gold);
+    }
+
+    .control-btn.danger {
+      border-color: rgba(230,59,46,0.25);
+      color: rgba(230,59,46,0.7);
+    }
+
+    .control-btn.danger:hover {
+      background: rgba(230,59,46,0.1);
+      color: var(--live-red);
+      border-color: rgba(230,59,46,0.4);
+    }
+
+    /* Modal */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-bg.hidden { display: none; }
+
+    .modal {
+      background: rgba(18,18,18,0.95);
+      backdrop-filter: blur(40px);
+      border: 1px solid var(--border-strong);
+      border-radius: 28px;
+      padding: 32px;
+      width: 100%;
+      max-width: 360px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    }
+
+    .modal-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, rgba(230,59,46,0.2), rgba(245,158,11,0.15));
+      border: 1px solid rgba(230,59,46,0.25);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    .modal h2 {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .modal p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 22px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .modal input {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      outline: none;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .modal input::placeholder {
+      color: rgba(255,255,255,0.2);
+      font-weight: 400;
+    }
+
+    .modal input:focus {
+      border-color: rgba(230,59,46,0.5);
+    }
+
+    .modal-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #e63b2e, #c0281d);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 900;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 6px 24px rgba(230,59,46,0.35);
+    }
+
+    .modal-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 32px rgba(230,59,46,0.5);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      header { padding: 14px 16px; }
+      .page { padding: 20px 14px 60px; }
+      .create-row { flex-direction: column; }
+      .btn-create { width: 100%; justify-content: center; }
+      .control-btn { font-size: 8px; padding: 10px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Username Modal -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal-icon">🔥</div>
+    <h2>Enter your name</h2>
+    <p>Join a live Space and be part of the conversation.</p>
+    <input type="text" id="nameInput" placeholder="Your name" maxlength="24" />
+    <button class="modal-btn" onclick="setUsername()">Jump In</button>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <a class="logo-wrap" href="#">
+    <div class="logo-icon">🔥</div>
+    <span class="logo-text">Lithouse</span>
+  </a>
+  <span class="header-badge">Spaces</span>
+</header>
+
+<div class="page">
+
+  <!-- Spaces List -->
+  <div class="spaces-list" id="spacesList">
+
+    <div class="page-header">
+      <div class="page-eyebrow">Live Audio</div>
+      <h1 class="page-title">Spaces <span>/ Rooms</span></h1>
+      <p class="page-sub">Join a live audio room or start your own.</p>
+    </div>
+
+    <div class="create-card">
+      <div class="create-label">Start a New Space</div>
+      <div class="create-row">
+        <input class="create-input" type="text" id="spaceNameInput" placeholder="Name your Space…" maxlength="60" />
+        <button class="btn-create" onclick="createSpace()">Start Space</button>
+      </div>
+    </div>
+
+    <div class="section-label">Live Now</div>
+    <div id="spacesContainer">
+      <div class="empty-state">
+        <div class="empty-icon">🎙</div>
+        <p>No spaces live right now</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Room View -->
+  <div class="room-view" id="roomView">
+
+    <div class="room-header">
+      <button class="back-btn" onclick="leaveRoom()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+      </button>
+      <div class="room-name-block">
+        <div class="room-title" id="roomTitle">Space Name</div>
+        <div class="room-meta-row">
+          <div class="room-live-pill">
+            <span class="live-dot"></span>
+            Live
+          </div>
+          <span class="room-listeners" id="roomMeta">0 listeners</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Request banner -->
+    <div class="request-banner" id="requestBanner">
+      <span class="request-text" id="requestText">Someone wants to speak</span>
+      <div class="request-actions">
+        <button class="approve-btn" onclick="approveRequest()">Allow</button>
+        <button class="deny-btn" onclick="denyRequest()">Deny</button>
+      </div>
+    </div>
+
+    <!-- Speakers -->
+    <div class="speakers-section">
+      <div class="section-label">Speakers</div>
+      <div class="speakers-grid" id="speakersGrid"></div>
+    </div>
+
+    <!-- Listeners -->
+    <div class="listeners-section">
+      <div class="section-label">Listeners</div>
+      <div class="listeners-grid" id="listenersGrid"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="room-controls">
+      <button class="control-btn" id="micBtn" onclick="toggleMic()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+        Mic
+      </button>
+
+      <button class="control-btn" id="raiseBtn" onclick="raiseHand()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
+          <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
+          <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
+          <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+        </svg>
+        Raise Hand
+      </button>
+
+      <button class="control-btn danger" onclick="leaveRoom()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Leave
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/livekit-client/dist/livekit-client.umd.min.js"></script>
+<script>
+  const BACKEND = 'https://sportsite-79ty.onrender.com';
+  const AVATAR_COLORS = [
+    '#e63b2e','#f59e0b','#3b82f6','#8b5cf6',
+    '#ec4899','#10b981','#06b6d4','#f97316'
+  ];
+
+  let username = '';
+  let currentRoom = null;
+  let livekitRoom = null;
+  let isSpeaker = false;
+  let micEnabled = false;
+  let handRaised = false;
+  let isHost = false;
+  let pendingRequest = null;
+  let pollInterval = null;
+
+  function colorFor(name) {
+    let h = 0;
+    for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+    return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length];
+  }
+
+  function setUsername() {
+    const val = document.getElementById('nameInput').value.trim();
+    if (!val) return;
+    username = val;
+    document.getElementById('modalBg').classList.add('hidden');
+    loadSpaces();
+  }
+
+  document.getElementById('nameInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') setUsername();
+  });
+
+  async function loadSpaces() {
+    try {
+      const res = await fetch(`${BACKEND}/api/spaces`);
+      const data = await res.json();
+      renderSpaces(data.spaces || []);
+    } catch {
+      renderSpaces([]);
+    }
+  }
+
+  function renderSpaces(spaces) {
+    const container = document.getElementById('spacesContainer');
+    if (!spaces.length) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">🎙</div>
+          <p>No spaces live right now</p>
+        </div>`;
+      return;
+    }
+    container.innerHTML = spaces.map(s => `
+      <div class="space-card" onclick="joinSpace('${s.id}', '${escHtml(s.name)}', false)">
+        <div class="space-top">
+          <span class="space-name">${escHtml(s.name)}</span>
+          <span class="live-badge"><span class="live-dot"></span>Live</span>
+        </div>
+        <div class="space-meta">
+          <span class="space-meta-item">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+            ${s.speakerCount} speaker${s.speakerCount !== 1 ? 's' : ''}
+          </span>
+          <span class="space-meta-dot"></span>
+          <span class="space-meta-item">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            ${s.listenerCount} listener${s.listenerCount !== 1 ? 's' : ''}
+          </span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function createSpace() {
+    const name = document.getElementById('spaceNameInput').value.trim();
+    if (!name || !username) return;
+    try {
+      const res = await fetch(`${BACKEND}/api/spaces/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, hostName: username })
+      });
+      const data = await res.json();
+      joinSpace(data.spaceId, name, true, data.token);
+    } catch (e) {
+      alert('Could not create space. Try again.');
+    }
+  }
+
+  async function joinSpace(spaceId, spaceName, asHost, existingToken) {
+    currentRoom = spaceId;
+    isHost = asHost;
+    isSpeaker = asHost;
+
+    document.getElementById('spacesList').classList.add('hidden');
+    document.getElementById('roomView').classList.add('active');
+    document.getElementById('roomTitle').textContent = spaceName;
+
+    let token = existingToken;
+    if (!token) {
+      try {
+        const res = await fetch(`${BACKEND}/api/spaces/join`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ spaceId, username, asSpeaker: false })
+        });
+        const data = await res.json();
+        token = data.token;
+      } catch {
+        alert('Could not join space.');
+        return;
+      }
+    }
+
+    livekitRoom = new LivekitClient.Room();
+    await livekitRoom.connect('wss://sports-spaces-8zg8sbky.livekit.cloud', token);
+
+    livekitRoom.on(LivekitClient.RoomEvent.ParticipantConnected, updateParticipants);
+    livekitRoom.on(LivekitClient.RoomEvent.ParticipantDisconnected, updateParticipants);
+    livekitRoom.on(LivekitClient.RoomEvent.TrackMuted, updateParticipants);
+    livekitRoom.on(LivekitClient.RoomEvent.TrackUnmuted, updateParticipants);
+    livekitRoom.on(LivekitClient.RoomEvent.DataReceived, handleData);
+
+    if (asHost) {
+      await livekitRoom.localParticipant.setMicrophoneEnabled(true);
+      micEnabled = true;
+      document.getElementById('micBtn').classList.add('active');
+    }
+
+    updateParticipants();
+    updateControls();
+    pollInterval = setInterval(pollRoom, 4000);
+  }
+
+  function updateParticipants() {
+    if (!livekitRoom) return;
+
+    const speakers = [];
+    const listeners = [];
+
+    const local = livekitRoom.localParticipant;
+    const localHasMic = local.audioTrackPublications.size > 0;
+    if (localHasMic || isHost) {
+      speakers.push({ name: username + ' (you)', isSpeaking: local.isSpeaking, micOff: !micEnabled, isYou: true });
+    } else {
+      listeners.push({ name: username });
+    }
+
+    livekitRoom.remoteParticipants.forEach(p => {
+      const hasMic = p.audioTrackPublications.size > 0;
+      if (hasMic) {
+        speakers.push({ name: p.identity, isSpeaking: p.isSpeaking, micOff: false });
+      } else {
+        listeners.push({ name: p.identity });
+      }
+    });
+
+    renderSpeakers(speakers);
+    renderListeners(listeners);
+    document.getElementById('roomMeta').textContent = `${listeners.length} listener${listeners.length !== 1 ? 's' : ''}`;
+  }
+
+  function renderSpeakers(speakers) {
+    document.getElementById('speakersGrid').innerHTML = speakers.map(s => `
+      <div class="speaker-bubble">
+        <div class="speaker-avatar ${s.isSpeaking ? 'speaking' : ''}" style="background:${colorFor(s.name)}">
+          ${s.name[0].toUpperCase()}
+          ${s.micOff ? '<span class="mic-off">🔇</span>' : ''}
+        </div>
+        <div class="speaker-name">${escHtml(s.name)}</div>
+        <div class="speaker-role">${s.isYou && isHost ? 'host' : 'speaker'}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderListeners(listeners) {
+    document.getElementById('listenersGrid').innerHTML = listeners.map(l => `
+      <div class="listener-avatar" style="background:${colorFor(l.name)}" title="${escHtml(l.name)}">
+        ${l.name[0].toUpperCase()}
+      </div>
+    `).join('');
+  }
+
+  async function toggleMic() {
+    if (!livekitRoom || !isSpeaker) return;
+    micEnabled = !micEnabled;
+    await livekitRoom.localParticipant.setMicrophoneEnabled(micEnabled);
+    document.getElementById('micBtn').classList.toggle('active', micEnabled);
+    updateParticipants();
+  }
+
+  async function raiseHand() {
+    if (isSpeaker || !livekitRoom) return;
+    handRaised = !handRaised;
+    document.getElementById('raiseBtn').classList.toggle('active', handRaised);
+    const msg = JSON.stringify({ type: 'raise_hand', username, raised: handRaised });
+    await livekitRoom.localParticipant.publishData(new TextEncoder().encode(msg), { reliable: true });
+  }
+
+  function handleData(payload) {
+    const msg = JSON.parse(new TextDecoder().decode(payload));
+    if (msg.type === 'raise_hand' && isHost) {
+      if (msg.raised) {
+        pendingRequest = msg.username;
+        document.getElementById('requestText').textContent = `${msg.username} wants to speak`;
+        document.getElementById('requestBanner').classList.add('visible');
+      }
+    }
+    if (msg.type === 'promote' && msg.username === username) {
+      becomeSpeaker();
+    }
+  }
+
+  async function approveRequest() {
+    if (!pendingRequest || !livekitRoom) return;
+    document.getElementById('requestBanner').classList.remove('visible');
+    const msg = JSON.stringify({ type: 'promote', username: pendingRequest });
+    await livekitRoom.localParticipant.publishData(new TextEncoder().encode(msg), { reliable: true });
+    await fetch(`${BACKEND}/api/spaces/promote`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ spaceId: currentRoom, username: pendingRequest })
+    });
+    pendingRequest = null;
+  }
+
+  function denyRequest() {
+    pendingRequest = null;
+    document.getElementById('requestBanner').classList.remove('visible');
+  }
+
+  async function becomeSpeaker() {
+    isSpeaker = true;
+    handRaised = false;
+    document.getElementById('raiseBtn').classList.remove('active');
+    const res = await fetch(`${BACKEND}/api/spaces/join`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ spaceId: currentRoom, username, asSpeaker: true })
+    });
+    const data = await res.json();
+    await livekitRoom.disconnect();
+    await livekitRoom.connect('wss://sports-spaces-8zg8sbky.livekit.cloud', data.token);
+    await livekitRoom.localParticipant.setMicrophoneEnabled(true);
+    micEnabled = true;
+    document.getElementById('micBtn').classList.add('active');
+    updateParticipants();
+    updateControls();
+  }
+
+  function updateControls() {
+    document.getElementById('micBtn').style.display = isSpeaker ? 'flex' : 'none';
+    document.getElementById('raiseBtn').style.display = isSpeaker ? 'none' : 'flex';
+  }
+
+  async function leaveRoom() {
+    if (livekitRoom) {
+      await livekitRoom.disconnect();
+      livekitRoom = null;
+    }
+    if (pollInterval) clearInterval(pollInterval);
+    currentRoom = null;
+    isHost = false;
+    isSpeaker = false;
+    micEnabled = false;
+    handRaised = false;
+
+    document.getElementById('roomView').classList.remove('active');
+    document.getElementById('spacesList').classList.remove('hidden');
+    loadSpaces();
+  }
+
+  async function pollRoom() {
+    if (!currentRoom) return;
+    try {
+      const res = await fetch(`${BACKEND}/api/spaces/${currentRoom}`);
+      const data = await res.json();
+      document.getElementById('roomMeta').textContent = `${data.listenerCount} listener${data.listenerCount !== 1 ? 's' : ''}`;
+    } catch {}
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  loadSpaces();
+</script>
+</body>
+</html>
