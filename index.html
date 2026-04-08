@@ -1039,7 +1039,7 @@ function openVideoModal(videoSrc, title, subtitle) {
     video.pause();
     video.src = '';
 
-    // Force inline + muted — REQUIRED to prevent iOS fullscreen takeover
+    // Force inline + muted -- REQUIRED to prevent iOS fullscreen takeover
     video.muted = true;
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
@@ -1923,7 +1923,7 @@ const articleEngineData = {
         time: "8 MIN READ",
         title: "The Case For Youngest NBA MVP Ever",
         content: `
-            <p>Dethroning Derrick Rose as the youngest MVP in league history isn't just a statistical goal—it's the official inauguration of the Wembanyama era.</p>
+            <p>Dethroning Derrick Rose as the youngest MVP in league history isn't just a statistical goal--it's the official inauguration of the Wembanyama era.</p>
             <div class="my-10 p-8 border-l-4 border-amber-500 bg-black/5 dark:bg-white/5 rounded-r-2xl">
                 <p class="text-2xl font-black italic tracking-tight">"We aren't watching a player develop; we're watching the sport's physics being rewritten in real-time."</p>
             </div>
@@ -1956,7 +1956,7 @@ function openReader(id) {
     void reader.offsetWidth;
     reader.classList.add('active');
     
-    // Lock body without jumping — use top offset trick
+    // Lock body without jumping -- use top offset trick
     document.body.style.top = `-${window._savedScrollY}px`;
     document.body.style.position = 'fixed';
     document.body.style.width = '100%';
@@ -1966,7 +1966,7 @@ function closeReader() {
     const reader = document.getElementById('greenlightReader');
     reader.classList.remove('active');
 
-    // Restore body scroll IMMEDIATELY — don't wait for reader to finish sliding out
+    // Restore body scroll IMMEDIATELY -- don't wait for reader to finish sliding out
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
@@ -2119,10 +2119,10 @@ function closeVideoModal() {
         <div class="w-full lg:w-[70%] flex flex-col scale-95 transition-all duration-700" id="videoContainer">
 <!-- In your #videoModal, replace the video wrapper div with this -->
 <div class="group relative aspect-video rounded-[3rem] overflow-hidden shadow-[0_0_120px_rgba(34,197,94,0.15)] border border-white/10 bg-black">
-    <!-- Hidden video — never shown, just used as data source -->
+    <!-- Hidden video -- never shown, just used as data source -->
 <video id="popupVideo" class="hidden" playsinline webkit-playsinline muted></video>
     
-    <!-- Canvas renders the video frames — no native controls ever appear -->
+    <!-- Canvas renders the video frames -- no native controls ever appear -->
     <canvas id="videoCanvas" class="w-full h-full object-contain"></canvas>
 
     <!-- Your custom controls -->
@@ -2180,6 +2180,53 @@ function closeVideoModal() {
         </div>
     </div>
 </div>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyfaBrLbjIjgWaJb7DHf50zv7cn6lISi0",
+      authDomain: "greenlight-a8e86.firebaseapp.com",
+      projectId: "greenlight-a8e86",
+      storageBucket: "greenlight-a8e86.firebasestorage.app",
+      messagingSenderId: "367667201164",
+      appId: "1:367667201164:web:b2b6cfbf54c5d47255e7a9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // --- SECURE ROUTE PROTECTION ---
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            // User is fully set up
+            document.getElementById('userDisplayName').innerText = docSnap.data().username;
+        } else {
+            // NEW: Social Login detected with no Firestore profile
+            // Redirect to setup with a 'mode' flag in the URL
+            window.location.href = 'createlogin.html?mode=social';
+        }
+    } else {
+        window.location.href = 'login.html';
+    }
+});
+
+    // --- LOGOUT ENGINE ---
+    window.handleLogout = async () => {
+        try {
+            await signOut(auth);
+            window.location.href = 'login.html';
+        } catch (error) {
+            console.error("Logout Error:", error);
+        }
+    };
+</script>
 
 
 </html>

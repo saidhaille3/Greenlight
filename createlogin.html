@@ -94,6 +94,13 @@
 </div>
 
 <div id="step1" class="step-transition space-y-6">
+  <div id="socialBadge" class="hidden flex justify-center mb-6">
+    <div class="px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-2.5">
+        <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+        <span class="text-[9px] font-black text-emerald-500 uppercase tracking-[0.2em]">Authenticating via Secure Provider</span>
+    </div>
+</div>
+
     <div class="grid grid-cols-2 gap-4">
         <input type="text" id="fname" oninput="validateStep1()" placeholder="First Name" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-widest">
         <input type="text" id="lname" oninput="validateStep1()" placeholder="Last Name" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-widest">
@@ -213,12 +220,62 @@ window.validateStep1 = () => {
     const l = document.getElementById('lname').value.trim();
     const u = document.getElementById('username').value.trim();
     const btn = document.getElementById('prefBtn');
+    
+    // Check if we are in social mode
+    const isSocial = new URLSearchParams(window.location.search).get('mode') === 'social';
 
-    // If all fields have text, enable the button
     if (f && l && u) {
         btn.disabled = false;
+        // If social, make the badge look "Confirmed"
+        if (isSocial) {
+            const badge = document.getElementById('socialBadge');
+            badge.querySelector('span').innerText = "Identity Verified";
+            badge.querySelector('div').classList.remove('animate-pulse');
+        }
     } else {
         btn.disabled = true;
+    }
+};
+
+// Run this once when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const isSocial = new URLSearchParams(window.location.search).get('mode') === 'social';
+    
+    if (isSocial) {
+        document.getElementById('socialBadge').classList.remove('hidden');
+        
+        // REWIRE buttons to save directly instead of going to Step 3
+        const saveAction = () => updateSocialProfile();
+        document.getElementById('masterContinueBtn').onclick = saveAction;
+        document.getElementById('step2Continue').onclick = saveAction;
+    }
+});
+
+
+
+// --- THE UPDATE ENGINE (For Google/Apple Users) ---
+window.updateSocialProfile = async () => {
+    const user = auth.currentUser;
+    if(!user) return window.location.href = 'login.html';
+
+    const btn = document.getElementById('step2Continue');
+    btn.classList.add('btn-loading');
+
+    try {
+        await setDoc(doc(db, "users", user.uid), {
+            firstName: document.getElementById('fname').value,
+            lastName: document.getElementById('lname').value,
+            username: document.getElementById('username').value.toLowerCase(),
+            preferences: userPreferences, 
+            email: user.email, // Grab email directly from Google/Apple
+            uid: user.uid,
+            createdAt: new Date().toISOString(),
+            accountType: 'Social'
+        });
+        window.location.href = 'index.html';
+    } catch (error) {
+        btn.classList.remove('btn-loading');
+        console.error(error);
     }
 };
 
