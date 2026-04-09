@@ -1046,18 +1046,31 @@
   }
 
   async function createSpace() {
+    const btn = document.querySelector('.btn-create');
     const name = document.getElementById('spaceNameInput').value.trim();
     if (!name || !username) return;
+
+    // Show loading state
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-2"></i> Waking Up...';
+    btn.disabled = true;
+
     try {
       const res = await fetch(`${BACKEND}/api/spaces/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, hostName: username })
       });
+      
+      if (!res.ok) throw new Error('Server starting up');
+      
       const data = await res.json();
       joinSpace(data.spaceId, name, true, data.token);
     } catch (e) {
-      alert('Could not create space. Try again.');
+      alert('The Huddle server is taking a moment to wake up. Please wait 30 seconds and try again!');
+    } finally {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
     }
   }
 
