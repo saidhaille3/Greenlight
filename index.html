@@ -349,6 +349,27 @@ filter: invert(1) brightness(2);
     background: #10b981; /* Emerald green for dark mode */
     color: white;
 }
+/* Custom Greenlight Glass */
+.greenlight-glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(16, 185, 129, 0.2); /* Emerald border */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.dark .greenlight-glass {
+    background: rgba(5, 25, 15, 0.8); /* Deep Emerald/Black blend */
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Sophisticated Chat Scrollbar */
+#message-container::-webkit-scrollbar { width: 4px; }
+#message-container::-webkit-scrollbar-thumb { 
+    background: rgba(16, 185, 129, 0.5); 
+    border-radius: 10px; 
+}
 
 </style>
 
@@ -431,6 +452,23 @@ filter: invert(1) brightness(2);
         </div>
         <h3 id="userDisplayName" class="text-2xl font-black uppercase tracking-tighter dark:text-white">User_293</h3>
     </div>
+<div class="px-8 mb-6 border-t border-gray-100 dark:border-white/5 pt-6">
+    <p class="text-[9px] font-black uppercase tracking-widest opacity-40 mb-4 dark:text-white">Chat Appearance</p>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold dark:text-white">Name Color</span>
+            <input type="color" id="nameColorPicker" class="w-8 h-8 rounded-lg bg-transparent border-none cursor-pointer" value="#fbbf24">
+        </div>
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold dark:text-white">Text Color</span>
+            <input type="color" id="textColorPicker" class="w-8 h-8 rounded-lg bg-transparent border-none cursor-pointer" value="#ffffff">
+        </div>
+<button id="updateColorsBtn" onclick="saveChatColors()" class="w-full py-2 bg-black dark:bg-white text-white dark:text-black text-[8px] font-black uppercase tracking-widest rounded-lg hover:bg-green-600 transition-all flex items-center justify-center gap-2">
+    <span id="btnText">Update Colors</span>
+</button>
+
+    </div>
+</div>
 
     <div class="px-8 mb-8">
     <button class="w-full py-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all">
@@ -1703,50 +1741,38 @@ setInterval(loadGames, 30000); // 30s refresh is better for live data
 <button onclick="toggleChat()" class="fixed bottom-6 right-6 z-[100] w-10 h-10 bg-green-600 rounded-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group">
     <i class="fa-solid fa-comments text-white text-xl group-hover:rotate-12 transition-transform"></i>
     
-    <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-600 border-2 border-white dark:border-black rounded-full animate-pulse"></span>
+    <span id="dm-notification-badge" class="absolute -top-1 -right-1 w-4 h-4 bg-red-600 border-2 border-white dark:border-black rounded-full animate-pulse hidden"></span>
 </button>
 
-<div id="chatWindow" class="fixed bottom-24 right-6 z-[100] w-[350px] h-[500px] ios-glass rounded-[2.5rem] flex flex-col shadow-2xl translate-y-[120%] opacity-0 pointer-events-none transition-all duration-500 ease-in-out border border-white/20">
-    <div class="p-5 border-b border-black/5 dark:border-white/10 flex items-center justify-between">
+
+<div id="chatWindow" class="fixed bottom-24 right-6 z-[100] w-[350px] h-[550px] greenlight-glass rounded-[2.5rem] flex flex-col shadow-2xl translate-y-[120%] opacity-0 pointer-events-none transition-all duration-500 ease-in-out">
+    
+    <div class="p-6 border-b border-green-500/10 flex items-center justify-between bg-white/10 dark:bg-black/10">
         <div>
             <div class="flex items-center gap-1.5 mt-1">
-                <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-<span class="text-[9px] font-bold opacity-40 uppercase dark:text-white"></span>
-
-<span id="online-user-count" class="text-[9px] font-bold opacity-40 uppercase dark:text-white">0 Online</span>
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                <span id="online-user-count" class="text-[9px] font-bold opacity-50 uppercase dark:text-white">0 Online</span>
             </div>
         </div>
-        <button onclick="toggleChat()" class="text-black dark:text-white opacity-40 hover:opacity-100 transition-opacity text-xl">&times;</button>
+        <button onclick="toggleChat()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+            <i class="fa-solid fa-xmark text-black dark:text-white opacity-40"></i>
+        </button>
     </div>
 
-    <div class="flex p-2 gap-2 overflow-x-auto no-scrollbar border-b border-black/5 dark:border-white/5">
-        <button class="px-4 py-1.5 rounded-full bg-black dark:bg-white text-white dark:text-black text-[9px] font-black uppercase tracking-widest">Lobby</button>
-        <button class="px-4 py-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-[9px] font-black uppercase tracking-widest dark:text-white/40">Gifts</button>
-        <button class="px-4 py-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-[9px] font-black uppercase tracking-widest dark:text-white/40">NBA</button>
+    <div class="flex p-3 gap-2 overflow-x-auto no-scrollbar border-b border-green-500/5">
+        <button class="px-5 py-2 rounded-full bg-green-600 text-white text-[9px] font-black uppercase tracking-widest shadow-lg shadow-green-500/20">All Games</button>
+        <button class="px-5 py-2 rounded-full hover:bg-green-500/10 text-[9px] font-black uppercase tracking-widest dark:text-white/40 border border-transparent hover:border-green-500/20">Elite Only</button>
+        <button class="px-5 py-2 rounded-full hover:bg-green-500/10 text-[9px] font-black uppercase tracking-widest dark:text-white/40 border border-transparent hover:border-green-500/20">DMs</button>
     </div>
 
-    <div id="message-container"
- class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
-        <div class="flex gap-3">
-            <div class="w-8 h-8 rounded-full bg-amber-500 flex-shrink-0 flex items-center justify-center text-[10px] font-black">JD</div>
-            <div class="space-y-1">
-                <p class="text-[9px] font-black opacity-30 uppercase dark:text-white">J_4092<span class="text-red-500 ml-2">GIFTED 💎</span></p>
-                <div class="bg-black/5 dark:bg-white/10 p-3 rounded-2xl rounded-tl-none text-xs font-medium dark:text-gray-200">
-🔥🔥🔥🔥🔥🔥🔥                </div>
-            </div>
+    <div id="message-container" class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
         </div>
-        
-        <div class="text-center py-2">
-            <p class="text-[8px] font-black uppercase tracking-[0.2em] text-amber-500 bg-amber-500/10 inline-block px-3 py-1 rounded-full">User_92 sent a [Golden Hoop] to______</p>
-        </div>
-    </div>
 
-    <div class="p-4 border-t border-black/5 dark:border-white/10 bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem]">
-        <div class="relative">
-<input id="chat-input"
- type="text" placeholder="" class="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-base font-medium tracking-widest outline-none focus:border-red-600 transition-colors dark:text-white">
-            <button id="send-btn"
- class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-red-600">
+    <div class="p-5 bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem] border-t border-green-500/10">
+        <div class="relative group">
+            <input id="chat-input" type="text" placeholder="Drop a take..." 
+                   class="w-full bg-white/50 dark:bg-white/5 border border-green-500/10 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-sm font-medium outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/10 transition-all dark:text-white placeholder-black/30 dark:placeholder-white/20">
+            <button id="send-btn" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-green-600 hover:scale-110 active:scale-90 transition-transform">
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
         </div>
@@ -2122,6 +2148,93 @@ function closeVideoModal() {
 </script>
 
 </body>
+<div id="userProfileExpanded" class="fixed inset-0 z-[1000] hidden items-center justify-center p-4 backdrop-blur-md">
+    <div class="absolute inset-0 bg-black/60" onclick="closeProfile()"></div>
+    <div id="profileContainer" class="relative w-full max-w-sm bg-white dark:bg-[#0f0f0f] rounded-[3rem] overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 transform scale-95 opacity-0 transition-all duration-300">
+        
+        <div class="h-24 bg-gradient-to-r from-green-600 to-amber-500"></div>
+        
+        <div class="px-8 pb-8">
+            <div class="relative -mt-12 mb-4">
+                <div id="profileCircle" class="w-24 h-24 rounded-full bg-white dark:bg-[#0f0f0f] p-1 shadow-xl">
+                    <div class="w-full h-full rounded-full bg-amber-500 flex items-center justify-center text-2xl font-black text-white" id="profileInitials">--</div>
+                </div>
+                <span class="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white dark:border-[#0f0f0f] rounded-full"></span>
+            </div>
+
+            <h3 id="profileName" class="text-2xl font-black uppercase tracking-tighter dark:text-white">Loading...</h3>
+            <p class="text-[10px] font-bold text-amber-500 uppercase tracking-[0.2em] mb-6">Greenlight Elite Member</p>
+
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-black/5 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5">
+                        <p class="text-[9px] font-black opacity-40 uppercase mb-1">Reputation</p>
+                        <p class="text-xl font-black dark:text-white">9.8k</p>
+                    </div>
+                    <div class="bg-black/5 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5">
+                        <p class="text-[9px] font-black opacity-40 uppercase mb-1">Badges</p>
+                        <p class="text-xl font-black dark:text-white">12</p>
+                    </div>
+                </div>
+                
+                <button class="w-full py-4 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white transition-all">
+                    Send Message
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+/**
+ * 2. THE FUNCTIONAL LOGIC
+ * This patches your listenForMessages function to make the avatar clickable.
+ */
+
+// Function to open the real-life profile
+window.openUserProfile = (username) => {
+    const modal = document.getElementById('userProfileExpanded');
+    const container = document.getElementById('profileContainer');
+    const nameEl = document.getElementById('profileName');
+    const initialEl = document.getElementById('profileInitials');
+    
+    // Set UI
+    nameEl.innerText = username;
+    initialEl.innerText = username.substring(0, 2).toUpperCase();
+    
+    // Show Modal
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+        container.classList.remove('scale-95', 'opacity-0');
+        container.classList.add('scale-100', 'opacity-100');
+    }, 10);
+};
+
+window.closeProfile = () => {
+    const container = document.getElementById('profileContainer');
+    container.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+        document.getElementById('userProfileExpanded').classList.add('hidden');
+    }, 300);
+};
+
+
+</script>
+
+<style>
+/* 3. ADD THIS CSS FOR THE "TAP ME" FEEDBACK */
+.message-avatar-pulse {
+    animation: avatar-pulse 2s infinite;
+}
+
+@keyframes avatar-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+</style>
+
 <div id="greenlightReader" class="fixed inset-0 z-[300] bg-white dark:bg-[#0a0a0a] translate-x-full reader-transition overflow-y-auto hidden">
     <button onclick="closeReader()" class="fixed top-6 right-6 z-[310] w-12 h-12 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/5 backdrop-blur-xl text-black dark:text-white hover:scale-110 transition-all">
         <i class="fa-solid fa-xmark text-xl"></i>
@@ -2215,7 +2328,6 @@ function closeVideoModal() {
             <div class="mt-12 space-y-4">
                 <div class="flex items-center gap-3">
                     <span id="videoPopupSub" class="bg-amber-500 text-black text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-[0.3em]"></span>
-                    <span class="text-white/20 text-[10px] font-black uppercase tracking-widest">Original Programming</span>
                 </div>
                 <h2 id="videoPopupTitle" class="text-5xl md:text-8xl font-black uppercase tracking-tighter text-white leading-[0.85]"></h2>
             </div>
@@ -2224,29 +2336,12 @@ function closeVideoModal() {
         <div class="w-full lg:w-[30%] space-y-10 self-start lg:mt-12">
             <div class="p-8 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl">
                 <h4 class="text-amber-500 text-[11px] font-black uppercase tracking-[0.4em] mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info"></i> Inside the Play
                 </h4>
                 <div id="videoExtraContent" class="text-white/60 text-lg leading-relaxed font-medium space-y-6">
                     <p>This sequence captures the raw physical dominance required to compete at the highest level. Notice the shift in defensive rotation just before the break.</p>
-                    <ul class="space-y-4">
-                        <li class="flex gap-3 text-sm font-bold text-white uppercase tracking-widest">
-                            <span class="text-amber-500">01</span> Breakneck Transition
-                        </li>
-                        <li class="flex gap-3 text-sm font-bold text-white uppercase tracking-widest">
-                            <span class="text-amber-500">02</span> Aerial Supremacy
-                        </li>
-                    </ul>
                 </div>
             </div>
 
-            <div class="flex flex-col gap-4">
-                <button class="w-full py-5 bg-white text-black rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-red-600 hover:text-white transition-all shadow-2xl">
-                    Save to My Highlights
-                </button>
-                <button class="w-full py-5 bg-white/5 border border-white/10 text-white rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-white/10 transition-all">
-                    View Match Stats
-                </button>
-            </div>
         </div>
     </div>
 </div>
@@ -2257,7 +2352,7 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
 import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, getDoc, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // ADD THESE TWO NEW IMPORTS BELOW THE OTHERS
-import { getDatabase, ref, onValue, set, onDisconnect, serverTimestamp as rtdbTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { getDatabase, ref, , set, onDisconnect, serverTimestamp as rtdbTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 import { 
     updateDoc, arrayUnion, arrayRemove, increment, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
@@ -2282,57 +2377,242 @@ const rtdb = getDatabase(app);
     let currentUsername = "Guest";
     const reactions = ['😂', '😯', '❔', '🤔', '❤️', '💯', '🔥', '🧢', '👍', '👎'];
 
-    // ── 4. FUNCTIONS ─────────────────────────────────────────────────────────────
-    function listenForMessages() {
-        const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+// --- PRIVATE MESSAGING & NOTIFICATION ENGINE ---
 
-        onSnapshot(q, (snapshot) => {
-            const container = document.getElementById('message-container');
-            container.innerHTML = "";
+function listenForDirectMessages(userId) {
+    const badge = document.getElementById('dm-notification-badge');
+    
+    // We query a hypothetical 'private_messages' collection
+    // where the 'recipientId' matches the current logged-in user
+    // and 'status' is 'unread'
+    const dmQuery = query(
+        collection(db, "private_messages"), 
+        where("recipientId", "==", userId),
+        where("status", "==", "unread")
+    );
 
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                const isRepost = data.repostEmoji ? true : false;
+    onSnapshot(dmQuery, (snapshot) => {
+        if (!snapshot.empty) {
+            // SHOW the red dot if there are unread DMs
+            badge.classList.remove('hidden');
+            badge.classList.add('flex'); 
+        } else {
+            // HIDE the red dot if no unread DMs
+            badge.classList.add('hidden');
+            badge.classList.remove('flex');
+        }
+    });
+}
 
-                const messageHtml = `
-                    <div class="flex gap-3 mb-4 group relative">
-                        <div class="w-8 h-8 rounded-full bg-amber-500 flex-shrink-0 flex items-center justify-center text-[10px] font-black">
-                            ${data.username.substring(0,2).toUpperCase()}
-                        </div>
-                        <div class="relative space-y-1 max-w-[80%]">
-                            <p class="text-[9px] font-black opacity-30 uppercase dark:text-white flex items-center gap-2">
-                                ${data.username}
-                                ${isRepost ? `<span class="text-green-500">reacted ${data.repostEmoji}</span>` : ''}
-                            </p>
-                            <div onclick="showReactions(event, '${doc.id}', '${data.text.replace(/'/g, "\\'")}')"
-                                 class="message-bubble bg-black/5 dark:bg-white/10 p-3 rounded-2xl rounded-tl-none text-xs font-medium dark:text-gray-200 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-                                ${data.text}
-                            </div>
-                        </div>
-                    </div>`;
-                container.innerHTML += messageHtml;
-            });
-            container.scrollTop = container.scrollHeight;
-        });
+// Update your onAuthStateChanged to trigger this
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        // ... existing profile logic ...
+        
+        // Start listening for Private Messages for the badge
+        listenForDirectMessages(user.uid);
+        
+        // ... existing presence logic ...
+    } else {
+        window.location.href = 'login.html';
     }
+});
 
-    async function sendMessage() {
-        const input = document.getElementById('chat-input');
-        const message = input.value.trim();
-        if (message !== "") {
-            try {
-                await addDoc(collection(db, "messages"), {
-                    text: message,
-                    username: currentUsername,
-                    timestamp: serverTimestamp(),
-                    uid: auth.currentUser.uid
-                });
-                input.value = "";
-            } catch (e) {
-                console.error("Error sending message: ", e);
-            }
+// Function to simulate receiving a DM (For testing purposes)
+window.simulateIncomingDM = async (senderName) => {
+    if (!auth.currentUser) return;
+    
+    await addDoc(collection(db, "private_messages"), {
+        senderName: senderName,
+        recipientId: auth.currentUser.uid,
+        text: "Yo, did you see that play?",
+        status: "unread",
+        timestamp: serverTimestamp()
+    });
+};
+
+// Function to clear notifications when chat is opened
+const originalToggleChat = window.toggleChat;
+window.toggleChat = async () => {
+    const chatWindow = document.getElementById('chatWindow');
+    const isOpening = chatWindow.classList.contains('opacity-0');
+    
+    if (isOpening && auth.currentUser) {
+        // Optional: Mark DMs as read in Firebase when they open the chat
+        // This is where the red dot actually becomes "functional"
+        const badge = document.getElementById('dm-notification-badge');
+        badge.classList.add('hidden');
+    }
+    
+    // Trigger the actual UI toggle
+    originalToggleChat();
+};
+// --- FIXED MESSAGE LISTENER ---
+function listenForMessages() {
+    const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+
+    onSnapshot(q, (snapshot) => {
+        const container = document.getElementById('message-container');
+        container.innerHTML = "";
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            const isRepost = data.repostEmoji ? true : false;
+            
+            const nameColor = data.nameColor || '#fbbf24'; 
+            const textColor = data.textColor || (document.documentElement.classList.contains('dark') ? '#e5e5e5' : '#111111');
+let formattedText = data.text;
+// Regex finds @ followed by alphanumeric chars
+const mentionRegex = /@(\w+)/g;
+
+formattedText = formattedText.replace(mentionRegex, (match, username) => {
+    // Check if this user is in our online list to get their color
+    const mentionedUser = onlineUsers.find(u => u.username.toLowerCase() === username.toLowerCase());
+    const highlightColor = mentionedUser ? mentionedUser.color : nameColor;
+    
+    return `<span class="font-black px-1 rounded" style="color: ${highlightColor}; background: ${highlightColor}15;">@${username}</span>`;
+});
+            const messageHtml = `
+                <div class="flex gap-3 mb-4 group relative items-start">
+                    <div onclick="openUserProfile('${data.username}')" 
+                         style="background-color: ${nameColor}"
+                         class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-black text-white cursor-pointer hover:scale-110 transition-transform shadow-lg">
+                        ${data.username.substring(0,2).toUpperCase()}
+                    </div>
+                    
+                    <div class="relative space-y-1 max-w-[80%]">
+                        <p class="text-[9px] font-black uppercase flex items-center gap-2" style="color: ${nameColor}">
+                            ${data.username}
+                            ${isRepost ? `<span class="text-green-500 lowercase opacity-80">reacted ${data.repostEmoji}</span>` : ''}
+                        </p>
+                        
+                        <div onclick="showReactions(event, '${doc.id}', '${data.text.replace(/'/g, "\\'")}')"
+                             class="message-bubble bg-black/5 dark:bg-white/10 p-3 rounded-2xl rounded-tl-none text-xs font-medium transition-all cursor-pointer hover:bg-black/10 dark:hover:bg-white/20 active:scale-[0.98]"
+                             style="color: ${textColor}">
+                            ${data.text}
+                        </div>
+                    </div>
+                </div>`;
+            container.innerHTML += messageHtml;
+        });
+        container.scrollTop = container.scrollHeight;
+    });
+}
+
+// --- FIXED REACTION POPOVER ENGINE ---
+window.showReactions = (event, msgId, originalText) => {
+    // Prevent event bubbling so it doesn't instantly close
+    event.stopPropagation();
+
+    const existing = document.querySelector('.reaction-popover');
+    if (existing) existing.remove();
+
+    const popover = document.createElement('div');
+    popover.className = 'reaction-popover';
+    
+    // Position fix: Place it above the bubble that was clicked
+    popover.style.position = 'absolute';
+    popover.style.bottom = '110%';
+    popover.style.left = '0';
+
+    reactions.forEach(emoji => {
+        const span = document.createElement('span');
+        span.className = 'reaction-emoji';
+        span.innerText = emoji;
+        span.onclick = (e) => {
+            e.stopPropagation();
+            handleRepost(emoji, originalText);
+            popover.remove();
+        };
+        popover.appendChild(span);
+    });
+
+    // Attach to the current target (the message bubble)
+    event.currentTarget.appendChild(popover);
+
+    // Global click listener to close popover when clicking away
+    const closeListener = () => {
+        popover.remove();
+        document.removeEventListener('click', closeListener);
+    };
+    setTimeout(() => {
+        document.addEventListener('click', closeListener);
+    }, 10);
+};
+
+// --- COLOR CUSTOMIZATION ENGINE ---
+
+window.saveChatColors = async () => {
+    if (!auth.currentUser) return;
+
+    const btn = document.getElementById('updateColorsBtn');
+    const btnText = document.getElementById('btnText');
+    const btnIcon = document.getElementById('btnIcon');
+    const nameColor = document.getElementById('nameColorPicker').value;
+    const textColor = document.getElementById('textColorPicker').value;
+
+    // 1. Loading State
+    btn.disabled = true;
+    btnText.innerText = "Saving...";
+    btn.classList.add('opacity-50');
+
+    try {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        await updateDoc(userRef, {
+            chatNameColor: nameColor,
+            chatTextColor: textColor
+        });
+
+        // 2. Success Feedback
+        btn.classList.remove('opacity-50', 'bg-black', 'dark:bg-white');
+        btn.classList.add('bg-green-600', 'text-white');
+        btnText.innerText = "Updated!";
+        btnIcon.className = "fa-solid fa-check";
+
+        // 3. Reset after 2 seconds
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.classList.remove('bg-green-600', 'text-white');
+            btn.classList.add('bg-black', 'dark:bg-white');
+            btnText.innerText = "Update Colors";
+            btnIcon.className = "fa-solid fa-paintbrush";
+        }, 2000);
+
+    } catch (e) {
+        console.error("Error saving colors:", e);
+        btnText.innerText = "Error!";
+        btn.classList.add('bg-red-600');
+        btn.disabled = false;
+    }
+};
+
+
+// Update your sendMessage function to include the chosen colors
+async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    
+    if (message !== "" && auth.currentUser) {
+        // Fetch current user colors from the DOM pickers 
+        // (or you can cache them from the user doc on load)
+        const nameColor = document.getElementById('nameColorPicker').value;
+        const textColor = document.getElementById('textColorPicker').value;
+
+        try {
+            await addDoc(collection(db, "messages"), {
+                text: message,
+                username: currentUsername,
+                timestamp: serverTimestamp(),
+                uid: auth.currentUser.uid,
+                nameColor: nameColor, // Save preference with message
+                textColor: textColor  // Save preference with message
+            });
+            input.value = "";
+        } catch (e) {
+            console.error("Error sending message: ", e);
         }
     }
+}
     // --- ARTICLE LIKES & METRICS LOGIC ---
 window.shareStory = async () => {
     const title = document.getElementById('rtitle').innerText;
@@ -2790,6 +3070,80 @@ if (myButton) {
         }
     });
 }
+// --- AUTOCOMPLETE & MENTION SYSTEM ---
+let onlineUsers = []; // Stores {uid, username, color}
+
+// Listen for online users to populate the autocomplete
+function listenForOnlineUsers() {
+    const onlineCountRef = ref(rtdb, '/status');
+    onValue(onlineCountRef, (snapshot) => {
+        onlineUsers = [];
+        snapshot.forEach((child) => {
+            const val = child.val();
+            if (val.state === 'online') {
+                onlineUsers.push({
+                    uid: child.key,
+                    username: val.username,
+                    // We'll fetch the color from their message history or user doc
+                    color: val.chatNameColor || '#10b981' 
+                });
+            }
+        });
+    });
+}
+
+const chatInput = document.getElementById('chat-input');
+const autocompleteList = document.createElement('div');
+autocompleteList.id = 'mention-autocomplete';
+autocompleteList.className = 'fixed hidden bg-white dark:bg-neutral-900 border border-green-500/20 rounded-xl shadow-2xl z-[110] overflow-hidden min-w-[150px]';
+document.body.appendChild(autocompleteList);
+
+chatInput.addEventListener('input', (e) => {
+    const value = e.target.value;
+    const cursorPosition = e.target.selectionStart;
+    const lastAt = value.lastIndexOf('@', cursorPosition - 1);
+
+    if (lastAt !== -1) {
+        const query = value.substring(lastAt + 1, cursorPosition).toLowerCase();
+        const matches = onlineUsers.filter(u => u.username.toLowerCase().startsWith(query));
+
+        if (matches.length > 0) {
+            showAutocomplete(matches, lastAt);
+        } else {
+            autocompleteList.classList.add('hidden');
+        }
+    } else {
+        autocompleteList.classList.add('hidden');
+    }
+});
+
+function showAutocomplete(matches, atIndex) {
+    const rect = chatInput.getBoundingClientRect();
+    autocompleteList.style.left = `${rect.left}px`;
+    autocompleteList.style.bottom = `${window.innerHeight - rect.top + 10}px`;
+    autocompleteList.innerHTML = '';
+
+    matches.forEach(user => {
+        const item = document.createElement('div');
+        item.className = 'px-4 py-3 hover:bg-green-500/10 cursor-pointer text-xs font-black uppercase tracking-widest dark:text-white flex items-center gap-2';
+        item.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:${user.color}"></span> ${user.username}`;
+        item.onclick = () => {
+            const before = chatInput.value.substring(0, atIndex);
+            const after = chatInput.value.substring(chatInput.selectionStart);
+            chatInput.value = `${before}@${user.username} ${after}`;
+            autocompleteList.classList.add('hidden');
+            chatInput.focus();
+        };
+        autocompleteList.appendChild(item);
+    });
+    autocompleteList.classList.remove('hidden');
+}
+
+// Close autocomplete when clicking away
+document.addEventListener('click', (e) => {
+    if (e.target !== chatInput) autocompleteList.classList.add('hidden');
+});
+
 
 </script>
 
