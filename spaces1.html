@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -966,6 +967,8 @@
 <script src="https://cdn.jsdelivr.net/npm/livekit-client/dist/livekit-client.umd.min.js"></script>
 <script>
   // ── GREENLIGHT NAV / DARK MODE ──────────────────────────────────────────────
+// Ping backend on load to wake Render's free instance
+fetch(`${BACKEND}/api/spaces`).catch(() => {});
 
 
   // ── SPACES BACKEND LOGIC (UNTOUCHED) ────────────────────────────────────────
@@ -1045,34 +1048,37 @@
     `).join('');
   }
 
-  async function createSpace() {
-    const btn = document.querySelector('.btn-create');
+async function createSpace() {
     const name = document.getElementById('spaceNameInput').value.trim();
-    if (!name || !username) return;
+    if (!name) return alert('Please name your space.');
+    
+    // Ensure username exists before trying
+    if (!username) {
+        document.getElementById('modalBg').classList.remove('hidden');
+        return;
+    }
 
-    // Show loading state
-    const originalText = btn.innerHTML;
-    btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin mr-2"></i> Waking Up...';
+    const btn = document.querySelector('.btn-create');
+    btn.textContent = 'Starting...';
     btn.disabled = true;
 
     try {
-      const res = await fetch(`${BACKEND}/api/spaces/create`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, hostName: username })
-      });
-      
-      if (!res.ok) throw new Error('Server starting up');
-      
-      const data = await res.json();
-      joinSpace(data.spaceId, name, true, data.token);
+        const res = await fetch(`${BACKEND}/api/spaces/create`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, hostName: username })
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        joinSpace(data.spaceId, name, true, data.token);
     } catch (e) {
-      alert('The Huddle server is taking a moment to wake up. Please wait 30 seconds and try again!');
+        console.error(e);
+        alert('Could not create space -- the server may be waking up. Wait 30s and try again.');
     } finally {
-      btn.innerHTML = originalText;
-      btn.disabled = false;
+        btn.textContent = '🎙 Start Room';
+        btn.disabled = false;
     }
-  }
+}
 
   async function joinSpace(spaceId, spaceName, asHost, existingToken) {
     currentRoom = spaceId;
@@ -3124,21 +3130,3 @@ document.addEventListener('click', (e) => {
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
