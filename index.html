@@ -13,6 +13,57 @@
         }
     </script>
     <style>
+    .gold-comment {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%) !important;
+    border: 2px solid #d4af37 !important;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+}
+
+.gold-comment .user-name { color: #b8860b !important; }
+
+.star-btn.active { color: #fbbf24 !important; transform: scale(1.2); }
+.thumb-btn.active { color: #ef4444 !important; }
+
+    /* Reaction Popover Styling */
+.reaction-popover {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 20px;
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 50;
+    animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dark .reaction-popover {
+    background: rgba(30, 30, 30, 0.95);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.reaction-emoji {
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.reaction-emoji:hover { transform: scale(1.3); }
+
+/* Repost UI Styling */
+.repost-badge {
+    font-size: 10px;
+    font-weight: 900;
+    color: #10b981; /* Emerald */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
+}
+
     /* Kill ALL native iOS video controls */
 video::-webkit-media-controls { display: none !important; }
 video::-webkit-media-controls-enclosure { display: none !important; }
@@ -1649,7 +1700,9 @@ setInterval(loadGames, 30000); // 30s refresh is better for live data
         <div>
             <div class="flex items-center gap-1.5 mt-1">
                 <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                <span class="text-[9px] font-bold opacity-40 uppercase dark:text-white">1,240 Online</span>
+<span class="text-[9px] font-bold opacity-40 uppercase dark:text-white"></span>
+
+<span id="online-user-count" class="text-[9px] font-bold opacity-40 uppercase dark:text-white">0 Online</span>
             </div>
         </div>
         <button onclick="toggleChat()" class="text-black dark:text-white opacity-40 hover:opacity-100 transition-opacity text-xl">&times;</button>
@@ -1661,7 +1714,8 @@ setInterval(loadGames, 30000); // 30s refresh is better for live data
         <button class="px-4 py-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-[9px] font-black uppercase tracking-widest dark:text-white/40">NBA</button>
     </div>
 
-    <div class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
+    <div id="message-container"
+ class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
         <div class="flex gap-3">
             <div class="w-8 h-8 rounded-full bg-amber-500 flex-shrink-0 flex items-center justify-center text-[10px] font-black">JD</div>
             <div class="space-y-1">
@@ -1678,8 +1732,10 @@ setInterval(loadGames, 30000); // 30s refresh is better for live data
 
     <div class="p-4 border-t border-black/5 dark:border-white/10 bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem]">
         <div class="relative">
-<input type="text" placeholder="" class="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-base font-medium tracking-widest outline-none focus:border-red-600 transition-colors dark:text-white">
-            <button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-red-600">
+<input id="chat-input"
+ type="text" placeholder="" class="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-base font-medium tracking-widest outline-none focus:border-red-600 transition-colors dark:text-white">
+            <button id="send-btn"
+ class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-red-600">
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
         </div>
@@ -1940,27 +1996,6 @@ const articleEngineData = {
         `
     }
 };
-function openReader(id) {
-    const data = articleEngineData[id];
-    if(!data) return;
-
-    // Save current scroll position
-    window._savedScrollY = window.scrollY;
-
-    const reader = document.getElementById('greenlightReader');
-    document.getElementById('rtitle').innerText = data.title;
-    document.getElementById('rtag').innerText = data.tag;
-    document.getElementById('rbody').innerHTML = data.content;
-
-    reader.classList.remove('hidden');
-    void reader.offsetWidth;
-    reader.classList.add('active');
-    
-    // Lock body without jumping -- use top offset trick
-    document.body.style.top = `-${window._savedScrollY}px`;
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
-}
 
 function closeReader() {
     const reader = document.getElementById('greenlightReader');
@@ -2106,6 +2141,26 @@ function closeVideoModal() {
 
         <div id="rbody" class="prose prose-lg dark:prose-invert max-w-none text-black/80 dark:text-white/80 text-lg md:text-xl leading-relaxed space-y-8 font-medium">
             </div>
+            <div class="mt-20 pt-10 border-t border-black/5 dark:border-white/10">
+    <h3 class="text-2xl font-black uppercase tracking-tighter mb-8 dark:text-white">
+        Comments <span id="commentCount" class="text-amber-500 ml-2">0</span>
+    </h3>
+
+    <div class="mb-12 bg-black/5 dark:bg-white/5 p-6 rounded-[2rem] border border-black/5 dark:border-white/5">
+        <textarea id="articleCommentInput" placeholder="Add to the conversation..." 
+            class="w-full bg-transparent border-none outline-none text-lg font-medium placeholder-black/30 dark:placeholder-white/30 resize-none h-24 dark:text-white"></textarea>
+        <div class="flex justify-end mt-4">
+<button id="submitArticleComment" class="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-600 transition-all">
+    Post Comment
+</button>
+
+        </div>
+    </div>
+
+    <div id="commentsFeed" class="space-y-8">
+        </div>
+</div>
+
     </div>
 </div>
 <div id="videoModal" class="fixed inset-0 z-[400] bg-black/98 backdrop-blur-3xl flex flex-col opacity-0 pointer-events-none transition-all duration-700 overflow-y-auto no-scrollbar">
@@ -2181,9 +2236,19 @@ function closeVideoModal() {
     </div>
 </div>
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    // ── 1. IMPORTS ──────────────────────────────────────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// ADD THESE TWO NEW IMPORTS BELOW THE OTHERS
+import { getDatabase, ref, onValue, set, onDisconnect, serverTimestamp as rtdbTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { 
+    updateDoc, arrayUnion, arrayRemove, increment 
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+
+
 
     const firebaseConfig = {
         apiKey: "AIzaSyDyfaBrLbjIjgWaJb7DHf50zv7cn6lISi0",
@@ -2197,8 +2262,108 @@ function closeVideoModal() {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+const rtdb = getDatabase(app);
 
-    // ✅ THIS is what was missing -- reads real Firestore data
+    // ── 3. STATE ─────────────────────────────────────────────────────────────────
+    let currentUsername = "Guest";
+    const reactions = ['😂', '😯', '❔', '🤔', '❤️', '💯', '🔥', '🧢', '👍', '👎'];
+
+    // ── 4. FUNCTIONS ─────────────────────────────────────────────────────────────
+    function listenForMessages() {
+        const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+
+        onSnapshot(q, (snapshot) => {
+            const container = document.getElementById('message-container');
+            container.innerHTML = "";
+
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const isRepost = data.repostEmoji ? true : false;
+
+                const messageHtml = `
+                    <div class="flex gap-3 mb-4 group relative">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 flex-shrink-0 flex items-center justify-center text-[10px] font-black">
+                            ${data.username.substring(0,2).toUpperCase()}
+                        </div>
+                        <div class="relative space-y-1 max-w-[80%]">
+                            <p class="text-[9px] font-black opacity-30 uppercase dark:text-white flex items-center gap-2">
+                                ${data.username}
+                                ${isRepost ? `<span class="text-green-500">reacted ${data.repostEmoji}</span>` : ''}
+                            </p>
+                            <div onclick="showReactions(event, '${doc.id}', '${data.text.replace(/'/g, "\\'")}')"
+                                 class="message-bubble bg-black/5 dark:bg-white/10 p-3 rounded-2xl rounded-tl-none text-xs font-medium dark:text-gray-200 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
+                                ${data.text}
+                            </div>
+                        </div>
+                    </div>`;
+                container.innerHTML += messageHtml;
+            });
+            container.scrollTop = container.scrollHeight;
+        });
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById('chat-input');
+        const message = input.value.trim();
+        if (message !== "") {
+            try {
+                await addDoc(collection(db, "messages"), {
+                    text: message,
+                    username: currentUsername,
+                    timestamp: serverTimestamp(),
+                    uid: auth.currentUser.uid
+                });
+                input.value = "";
+            } catch (e) {
+                console.error("Error sending message: ", e);
+            }
+        }
+    }
+
+    async function handleRepost(emoji, text) {
+        try {
+            await addDoc(collection(db, "messages"), {
+                text: text,
+                username: currentUsername,
+                repostEmoji: emoji,
+                timestamp: serverTimestamp(),
+                uid: auth.currentUser.uid,
+                type: "repost"
+            });
+        } catch (e) {
+            console.error("Repost failed", e);
+        }
+    }
+
+    window.showReactions = (event, msgId, originalText) => {
+        const existing = document.querySelector('.reaction-popover');
+        if (existing) existing.remove();
+
+        const popover = document.createElement('div');
+        popover.className = 'reaction-popover';
+
+        reactions.forEach(emoji => {
+            const span = document.createElement('span');
+            span.className = 'reaction-emoji';
+            span.innerText = emoji;
+            span.onclick = () => handleRepost(emoji, originalText);
+            popover.appendChild(span);
+        });
+
+        event.currentTarget.parentElement.appendChild(popover);
+
+        setTimeout(() => {
+            document.addEventListener('click', () => popover.remove(), { once: true });
+        }, 10);
+    };
+
+    // ── 5. EVENT LISTENERS ───────────────────────────────────────────────────────
+    document.getElementById('send-btn').addEventListener('click', sendMessage);
+    document.getElementById('chat-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    // ── 6. AUTH STATE ────────────────────────────────────────────────────────────
     onAuthStateChanged(auth, async (user) => {
         if (!user) {
             window.location.href = 'login.html';
@@ -2211,10 +2376,42 @@ function closeVideoModal() {
                 const data = snap.data();
                 const displayName = data.username || data.firstName || user.email;
                 document.getElementById('userDisplayName').innerText = displayName;
+                currentUsername = displayName;
+                        // --- REAL-TIME PRESENCE LOGIC START ---
+        const userStatusRef = ref(rtdb, '/status/' + user.uid);
+        const connectedRef = ref(rtdb, '.info/connected');
+
+        onValue(connectedRef, (snap) => {
+            if (snap.val() === true) {
+                // Remove record when user closes tab/disconnects
+                onDisconnect(userStatusRef).remove();
+                
+                // Set user as online
+                set(userStatusRef, {
+                    state: 'online',
+                    last_changed: rtdbTimestamp(),
+                    username: currentUsername
+                });
+            }
+        });
+
+        // Listen for the total count and update UI
+        const onlineCountRef = ref(rtdb, '/status');
+        onValue(onlineCountRef, (snapshot) => {
+            const onlineCount = snapshot.size || 0;
+            const countDisplay = document.getElementById('online-user-count');
+            if (countDisplay) {
+                countDisplay.innerText = `${onlineCount.toLocaleString()} Online`;
+            }
+        });
+        // --- REAL-TIME PRESENCE LOGIC END ---
+
             }
         } catch (err) {
             console.error("Failed to load user profile:", err);
         }
+
+        listenForMessages();
     });
 
     window.handleLogout = async () => {
@@ -2225,6 +2422,135 @@ function closeVideoModal() {
             console.error("Logout Error:", error);
         }
     };
+    let currentArticleId = null;
+
+// Initialization for Reader Comments
+window.openReader = async function(id) {
+currentArticleId = id;
+const data = articleEngineData[id];
+if(!data) return;
+
+window._savedScrollY = window.scrollY;
+document.getElementById('rtitle').innerText = data.title;
+document.getElementById('rtag').innerText = data.tag;
+document.getElementById('rbody').innerHTML = data.content;
+
+document.getElementById('greenlightReader').classList.remove('hidden');
+document.getElementById('greenlightReader').classList.add('active');
+
+document.body.style.top = `-${window._savedScrollY}px`;
+document.body.style.position = 'fixed';
+document.body.style.width = '100%';
+
+loadArticleComments(id);
+};
+
+async function loadArticleComments(articleId) {
+const q = query(collection(db, `articles/${articleId}/comments`), orderBy("timestamp", "desc"));
+
+onSnapshot(q, (snapshot) => {
+const feed = document.getElementById('commentsFeed');
+document.getElementById('commentCount').innerText = snapshot.size;
+feed.innerHTML = "";
+
+snapshot.forEach((commentDoc) => {
+const c = commentDoc.data();
+const cid = commentDoc.id;
+const starCount = c.stars ? c.stars.length : 0;
+const isGold = starCount >= 5;
+const userStarred = c.stars?.includes(auth.currentUser.uid);
+
+const commentHtml = `
+<div class="p-6 rounded-[2rem] transition-all duration-500 ${isGold ? 'gold-comment' : 'bg-black/5 dark:bg-white/5'} border border-black/5 dark:border-white/5">
+    <div class="flex justify-between items-start mb-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center text-white font-black text-xs">
+                ${c.username.substring(0,2).toUpperCase()}
+            </div>
+            <div>
+                <h4 class="user-name font-black text-sm uppercase dark:text-white">${c.username}</h4>
+                <p class="text-[9px] opacity-40 font-bold uppercase tracking-widest">Just Now</p>
+            </div>
+        </div>
+        ${isGold ? '<span class="text-amber-500 text-[10px] font-black tracking-widest uppercase">✨ Elite Take</span>' : ''}
+    </div>
+    <p class="text-lg font-medium dark:text-gray-200 mb-6">${c.text}</p>
+    
+    <div class="flex gap-6 border-t border-black/5 dark:border-white/5 pt-4">
+        <button onclick="reactToComment('${cid}', 'up')" class="thumb-btn flex items-center gap-2 text-xs font-black dark:text-white opacity-60 hover:opacity-100 transition">
+            <i class="fa-solid fa-thumbs-up"></i> ${c.upvotes || 0}
+        </button>
+        <button onclick="reactToComment('${cid}', 'down')" class="thumb-btn flex items-center gap-2 text-xs font-black dark:text-white opacity-60 hover:opacity-100 transition">
+            <i class="fa-solid fa-thumbs-down"></i>
+        </button>
+        <button onclick="toggleStar('${cid}', ${userStarred})" class="star-btn ${userStarred ? 'active' : ''} flex items-center gap-2 text-xs font-black dark:text-white opacity-60 hover:opacity-100 transition">
+            <i class="fa-solid fa-star"></i> ${starCount}
+        </button>
+    </div>
+</div>`;
+feed.innerHTML += commentHtml;
+});
+});
+}
+
+window.postArticleComment = async () => {
+const input = document.getElementById('articleCommentInput');
+const text = input.value.trim();
+if(!text || !currentArticleId) return;
+
+await addDoc(collection(db, `articles/${currentArticleId}/comments`), {
+text: text,
+username: currentUsername,
+uid: auth.currentUser.uid,
+timestamp: serverTimestamp(),
+upvotes: 0,
+stars: []
+});
+input.value = "";
+};
+
+window.toggleStar = async (commentId, alreadyStarred) => {
+const ref = doc(db, `articles/${currentArticleId}/comments`, commentId);
+await updateDoc(ref, {
+stars: alreadyStarred ? arrayRemove(auth.currentUser.uid) : arrayUnion(auth.currentUser.uid)
+});
+};
+
+window.reactToComment = async (commentId, type) => {
+const ref = doc(db, `articles/${currentArticleId}/comments`, commentId);
+if(type === 'up') {
+await updateDoc(ref, { upvotes: increment(1) });
+}
+};
+// Match the ID from your HTML button
+const myButton = document.getElementById('submitArticleComment');
+
+if (myButton) {
+    myButton.addEventListener('click', async () => {
+        const input = document.getElementById('articleCommentInput');
+        const text = input.value.trim();
+
+        // Check if there is text and a logged-in user
+        if (text && auth.currentUser && currentArticleId) {
+            try {
+                await addDoc(collection(db, `articles/${currentArticleId}/comments`), {
+                    text: text,
+                    username: currentUsername,
+                    uid: auth.currentUser.uid,
+                    timestamp: serverTimestamp(),
+                    upvotes: 0,
+                    stars: []
+                });
+                input.value = ""; // Clear the box
+            } catch (e) {
+                console.error("Error posting comment:", e);
+            }
+        } else if (!auth.currentUser) {
+            alert("Sign in to join the conversation!");
+        }
+    });
+}
+
 </script>
 
 
