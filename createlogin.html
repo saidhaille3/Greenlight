@@ -110,6 +110,17 @@
     <button id="prefBtn" disabled onclick="goToStep(2)" class="w-full py-4 bg-white text-black rounded-xl font-black uppercase text-[10px] tracking-[0.2em] shadow-2xl hover:bg-emerald-500 hover:text-white transition-all">
         Content Preference
     </button>
+        <div id="socialSignupWrapper" class="flex flex-col items-center gap-4 pt-20 ">
+        <p class="text-[8px] font-black text-white/20 uppercase tracking-[0.4em]">Sign Up With:</p>
+        <div class="flex gap-4">
+            <button onclick="handleGoogleSignup()" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all active:scale-90">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="w-5 h-5">
+            </button>
+            <button onclick="handleAppleSignup()" class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all active:scale-90">
+                <i class="fa-brands fa-apple text-xl text-white"></i>
+            </button>
+        </div>
+    </div>
 </div>
 
 <div id="step2" class="hidden step-transition space-y-0">
@@ -200,7 +211,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, OAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -251,6 +262,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+window.handleGoogleSignup = async () => {
+    try {
+        const result = await signInWithPopup(auth, new GoogleAuthProvider());
+        window.location.href = 'createlogin.html?mode=social';
+    } catch(e) { showStatus("GOOGLE FAILED"); }
+};
+
+window.handleAppleSignup = async () => {
+    try {
+        const result = await signInWithPopup(auth, new OAuthProvider('apple.com'));
+        window.location.href = 'createlogin.html?mode=social';
+    } catch(e) { showStatus("APPLE FAILED"); }
+};
 
 
 // --- THE UPDATE ENGINE (For Google/Apple Users) ---
@@ -440,19 +464,19 @@ window.processSignup = async () => {
     
     // 1. Client-side Validation (Fixes potential silent failures)
     const totalSelections = Object.values(userPreferences).flat().length;
-    if(totalSelections === 0) return showStatus("SELECT AT LEAST ONE TEAM");
-    if(pass !== confirmPass) return showStatus("PASSWORDS DO NOT MATCH");
-    if(pass.length < 6) return showStatus("PASSWORD TOO SHORT");
-
+    if (totalSelections === 0) return showStatus("SELECT AT LEAST ONE TEAM");
+    if (pass !== confirmPass) return showStatus("PASSWORDS DO NOT MATCH");
+    if (pass.length < 6) return showStatus("PASSWORD TOO SHORT");
+    
     btn.classList.add('btn-loading');
-
+    
     try {
         // 2. Create the User Auth
         const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
         
         // 3. Update Auth Profile
-        await updateProfile(userCredential.user, { 
-            displayName: document.getElementById('username').value 
+        await updateProfile(userCredential.user, {
+            displayName: document.getElementById('username').value
         });
         
         // 4. Save to Firestore (This is where the rules matter!)
@@ -460,15 +484,15 @@ window.processSignup = async () => {
             firstName: document.getElementById('fname').value,
             lastName: document.getElementById('lname').value,
             username: document.getElementById('username').value,
-            preferences: userPreferences, 
+            preferences: userPreferences,
             email: email,
             uid: userCredential.user.uid,
             createdAt: new Date().toISOString()
         });
-
+        
         // SUCCESS!
         window.location.href = 'index.html';
-
+        
     } catch (error) {
         // 5. UNSTUCK THE BUTTON (This was your code's main weakness)
         btn.classList.remove('btn-loading');
@@ -480,8 +504,6 @@ window.processSignup = async () => {
         showStatus(errorMsg);
     }
 };
-
-
     function showStatus(msg) {
         const s = document.getElementById('statusArea');
         s.innerText = msg; s.classList.remove('hidden');
