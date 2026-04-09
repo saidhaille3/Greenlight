@@ -2182,14 +2182,9 @@ function closeVideoModal() {
 </div>
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { 
-        getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, 
-        GoogleAuthProvider, OAuthProvider, signInWithRedirect, getRedirectResult,
-        onAuthStateChanged, signOut
-    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // ✅ Config FIRST, before anything uses it
     const firebaseConfig = {
         apiKey: "AIzaSyDyfaBrLbjIjgWaJb7DHf50zv7cn6lISi0",
         authDomain: "greenlight-a8e86.firebaseapp.com",
@@ -2203,55 +2198,25 @@ function closeVideoModal() {
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    // ✅ Handle redirect result on page load
-    getRedirectResult(auth).then((result) => {
-        if (result?.user) {
-            window.location.href = 'index.html';
+    // ✅ THIS is what was missing -- reads real Firestore data
+    onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+            window.location.href = 'login.html';
+            return;
         }
-    }).catch((e) => showStatus("AUTH FAILED", "error"));
 
-    // ✅ Google Login
-    window.handleGoogleLogin = async () => {
         try {
-            await signInWithRedirect(auth, new GoogleAuthProvider());
-        } catch (e) { showStatus("GOOGLE FAILED", "error"); }
-    };
-
-    // ✅ Apple Login
-    window.handleAppleLogin = async () => {
-        try {
-            await signInWithRedirect(auth, new OAuthProvider('apple.com'));
-        } catch (e) { showStatus("APPLE FAILED", "error"); }
-    };
-
-    // ✅ Email Login
-    window.processLogin = async () => {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const btn = document.getElementById('loginBtn');
-        if (!email || !password) return showStatus("Credentials Required", "error");
-
-        btn.classList.add('btn-loading');
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            window.location.href = 'index.html';
-        } catch (error) {
-            btn.classList.remove('btn-loading');
-            showStatus("INVALID ACCESS", "error");
+            const snap = await getDoc(doc(db, "users", user.uid));
+            if (snap.exists()) {
+                const data = snap.data();
+                const displayName = data.username || data.firstName || user.email;
+                document.getElementById('userDisplayName').innerText = displayName;
+            }
+        } catch (err) {
+            console.error("Failed to load user profile:", err);
         }
-    };
+    });
 
-    // ✅ Password Reset
-    window.handleResetRequest = async () => {
-        const email = document.getElementById('email').value;
-        if (!email) return showStatus("EMAIL REQUIRED", "error");
-        try {
-            await sendPasswordResetEmail(auth, email);
-            showStatus("LINK SENT", "success");
-        } catch (e) { showStatus("FAILED", "error"); }
-    };
-
-    // ✅ Logout
     window.handleLogout = async () => {
         try {
             await signOut(auth);
@@ -2259,37 +2224,6 @@ function closeVideoModal() {
         } catch (error) {
             console.error("Logout Error:", error);
         }
-    };
-
-    function showStatus(msg, type) {
-        const status = document.getElementById('statusArea');
-        status.innerText = msg;
-        status.classList.remove('hidden');
-        status.className = `text-[10px] font-black uppercase tracking-widest text-center py-3 rounded-xl border ${type === 'error' ? 'border-red-500/20 bg-red-500/10 text-red-500' : 'border-emerald-500/20 bg-emerald-500/10 text-emerald-500'}`;
-    }
-    function hideStatus() { document.getElementById('statusArea').classList.add('hidden'); }
-
-    window.toggleResetMode = (isResetting) => {
-        const passWrapper = document.getElementById('passWrapper');
-        const loginBtn = document.getElementById('loginBtn');
-        const socialWrapper = document.getElementById('socialWrapper');
-        const subtitle = document.getElementById('authSubtitle');
-        const authTitle = document.getElementById('authTitle');
-
-        if (isResetting) {
-            passWrapper.classList.add('hidden');
-            loginBtn.classList.add('hidden');
-            socialWrapper.classList.add('hidden');
-            subtitle.innerText = "Account Recovery";
-            if (authTitle) authTitle.classList.add('hidden');
-        } else {
-            passWrapper.classList.remove('hidden');
-            loginBtn.classList.remove('hidden');
-            socialWrapper.classList.remove('hidden');
-            subtitle.innerText = "Sports Network";
-            if (authTitle) authTitle.classList.remove('hidden');
-        }
-        hideStatus();
     };
 </script>
 
