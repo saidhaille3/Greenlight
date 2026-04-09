@@ -1045,6 +1045,8 @@
       </div>
     `).join('');
   }
+// Ping backend on load to wake Render's free instance
+fetch(`${BACKEND}/api/spaces`).catch(() => {});
 
 async function createSpace() {
     const name = document.getElementById('spaceNameInput').value.trim();
