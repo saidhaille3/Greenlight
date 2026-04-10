@@ -11,4 +11,9 @@ services:
         sync: false
       - key: MUX_LIVE_STREAM_ID
         sync: false
-
+      - key: LIVEKIT_API_KEY
+        sync: false
+      - key: LIVEKIT_API_SECRET
+        sync: false
+      - key: LIVEKIT_URL
+        sync: false
