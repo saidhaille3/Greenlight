@@ -1121,7 +1121,7 @@ async function createSpace() {
     }
 
     livekitRoom = new LivekitClient.Room();
-    await livekitRoom.connect('wss://sports-spaces-8zg8sbky.livekit.cloud', token);
+await livekitRoom.connect('wss://lithouse-spaces-2m7xhytt.livekit.cloud', token);
 
     livekitRoom.on(LivekitClient.RoomEvent.ParticipantConnected, updateParticipants);
     livekitRoom.on(LivekitClient.RoomEvent.ParticipantDisconnected, updateParticipants);
@@ -1244,7 +1244,7 @@ async function createSpace() {
     });
     const data = await res.json();
     await livekitRoom.disconnect();
-    await livekitRoom.connect('wss://sports-spaces-8zg8sbky.livekit.cloud', data.token);
+await livekitRoom.connect('wss://lithouse-spaces-2m7xhytt.livekit.cloud', token);
     await livekitRoom.localParticipant.setMicrophoneEnabled(true);
     micEnabled = true;
     document.getElementById('micBtn').classList.add('active');
