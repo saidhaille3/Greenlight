@@ -1244,7 +1244,8 @@ await livekitRoom.connect('wss://lithouse-spaces-2m7xhytt.livekit.cloud', token)
     });
     const data = await res.json();
     await livekitRoom.disconnect();
-await livekitRoom.connect('wss://lithouse-spaces-2m7xhytt.livekit.cloud', token);
+await livekitRoom.disconnect();
+await livekitRoom.connect('wss://lithouse-spaces-2m7xhytt.livekit.cloud', data.token); // ✅ use data.token
     await livekitRoom.localParticipant.setMicrophoneEnabled(true);
     micEnabled = true;
     document.getElementById('micBtn').classList.add('active');
