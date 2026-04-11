@@ -940,6 +940,23 @@
         </svg>
         Mic
       </button>
+      <div class="control-btn" id="micBtn" onclick="toggleMic()">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+    <line x1="12" y1="19" x2="12" y2="23"/>
+    <line x1="8" y1="23" x2="16" y2="23"/>
+  </svg>
+  Mic
+</div>
+
+<div id="vuMeterContainer" class="hidden flex-col items-center justify-center px-2 border-l border-black/10 dark:border-white/10 ml-2 h-full">
+  <div class="w-1.5 h-10 bg-black/10 dark:bg-white/10 rounded-full relative overflow-hidden">
+    <div id="vuMeterFill" class="absolute bottom-0 left-0 w-full bg-green-500 transition-all duration-75" style="height: 0%"></div>
+  </div>
+  <span class="text-[7px] font-black mt-1 opacity-40">LIVE</span>
+</div>
+
       <button class="control-btn" id="raiseBtn" onclick="raiseHand()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
@@ -3141,6 +3158,77 @@ document.addEventListener('click', (e) => {
     if (e.target !== chatInput) autocompleteList.classList.add('hidden');
 });
 
+
+</script>
+<script>
+    
+    let audioContext, analyser, dataArray, animationId;
+
+async function startVUMeter() {
+  const vuContainer = document.getElementById('vuMeterContainer');
+  const vuFill = document.getElementById('vuMeterFill');
+  
+  // Only start if we have a local audio track
+  const localTrack = livekitRoom.localParticipant.getTrack(LivekitClient.Track.Source.Microphone);
+  if (!localTrack || !micEnabled) {
+    vuContainer.classList.add('hidden');
+    return;
+  }
+
+  vuContainer.classList.remove('hidden');
+
+  // Setup Web Audio API
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+  }
+
+  const stream = new MediaStream([localTrack.track.mediaStreamTrack]);
+  const source = audioContext.createMediaStreamSource(stream);
+  source.connect(analyser);
+
+  dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+  function draw() {
+    animationId = requestAnimationFrame(draw);
+    analyser.getByteFrequencyData(dataArray);
+
+    // Calculate volume level
+    let values = 0;
+    for (let i = 0; i < dataArray.length; i++) {
+      values += dataArray[i];
+    }
+    const average = values / dataArray.length;
+    
+    // Update the UI height (scale to make it reactive)
+    const level = Math.min(100, (average / 128) * 100);
+    vuFill.style.height = level + "%";
+    
+    // Dynamic color: Green to Yellow to Red
+    if (level > 80) vuFill.style.backgroundColor = '#ef4444'; // Red
+    else if (level > 50) vuFill.style.backgroundColor = '#fbbf24'; // Amber
+    else vuFill.style.backgroundColor = '#22c55e'; // Green
+  }
+  
+  draw();
+}
+
+function stopVUMeter() {
+  if (animationId) cancelAnimationFrame(animationId);
+  document.getElementById('vuMeterContainer').classList.add('hidden');
+}
+
+// Hook into your existing toggleMic function
+const originalToggleMic = toggleMic;
+window.toggleMic = async function() {
+  await originalToggleMic();
+  if (micEnabled) {
+    startVUMeter();
+  } else {
+    stopVUMeter();
+  }
+};
 
 </script>
 
