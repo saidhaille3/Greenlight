@@ -2763,8 +2763,7 @@ async function updateArticleCommentCount(articleId) {
         if (e.key === 'Enter') sendMessage();
     });
 
-    // ── 6. AUTH STATE ────────────────────────────────────────────────────────────
-    onAuthStateChanged(auth, async (user) => {
+/* TEMPORARILY DISABLED LOGIN REDIRECT    onAuthStateChanged(auth, async (user) => {
         if (!user) {
             window.location.href = 'login.html';
             return;
@@ -2772,6 +2771,7 @@ async function updateArticleCommentCount(articleId) {
 
         try {
             const snap = await getDoc(doc(db, "users", user.uid));
+            //
             if (snap.exists()) {
                 const data = snap.data();
                 const displayName = data.username || data.firstName || user.email;
