@@ -411,13 +411,13 @@ filter: invert(1) brightness(2);
             </svg>
         </button>
 
-<div class="md:mr-3 relative group cursor-pointer" onclick="toggleUserDashboard()">
+<div class="md:mr-3 relative group cursor-pointer" onclick="handleUserIconClick()">
     <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-200 p-[2px] transition-all duration-300">
         <div class="w-full h-full rounded-full bg-white dark:bg-neutral-900 flex items-center justify-center overflow-hidden">
             <i class="fa-solid fa-user text-xs text-black dark:text-white opacity-80"></i>
         </div>
     </div>
-    <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-neutral-900 rounded-full"></span>
+<span id="navbar-online-dot" class="hidden absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-neutral-900 rounded-full"></span>
 </div>
 
         
@@ -471,7 +471,7 @@ filter: invert(1) brightness(2);
 </div>
 
     <div class="px-8 mb-8">
-    <button class="w-full py-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all">
+    <button class="hidden w-full py-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all">
         Join Elite Membership
     </button>
 </div>
@@ -676,7 +676,7 @@ filter: invert(1) brightness(2);
 <section id="heroSection" class="relative overflow-hidden bg-black" style="height: 60vh; min-height: 620px; max-height: 620px;">
 
   <!-- Background Slides -->
-  <div id="hs-slide-a" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-100" style="background-image: url('images/finch.png');"></div>
+  <div id="hs-slide-a" class="absolute inset-0 bg-cover bg-right transition-opacity duration-1000 opacity-100" style="background-image: url('images/finch.png');"></div>
   <div id="hs-slide-b" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0"></div>
 
   <!-- Cinematic Overlays -->
@@ -707,22 +707,16 @@ filter: invert(1) brightness(2);
 
       <!-- Main Headline -->
       <h1 id="hs-headline" class="text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[6rem] font-black uppercase tracking-tighter leading-[0.88] max-w-4xl text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)] mb-5 md:mb-6">
-        Chris Finch Should Be<br/><span class="text-white/25">On The Hot Seat</span>
-      </h1>
+Good Enough is The Enemy<br /><span class='text-white/25'>Great</span>  </h1>
 
       <!-- Subhead -->
       <p id="hs-subhead" class="text-sm sm:text-base md:text-lg text-white/70 font-semibold max-w-xl leading-snug mb-8 md:mb-10 drop-shadow-md">
-        Minnesota finds itself in the same spot Denver was in last year. Will a coaching change salvage a sinking season?
-      </p>
+
+Might Be Time For a Coaching Change In Minnesota      </p>
 
       <!-- CTA Row -->
       <div class="flex flex-wrap items-center gap-3 md:gap-4 mb-10 md:mb-12">
-        <a href="#" class="inline-flex items-center gap-2.5 bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] px-7 py-4 rounded-xl shadow-2xl hover:bg-red-600 hover:text-white transition-all duration-300 group active:scale-95">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 group-hover:scale-110 transition-transform">
-            <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
-          </svg>
-          Watch Now
-        </a>
+
         <a id="hs-read-btn" href="#" class="inline-flex items-center gap-2.5 bg-white/8 backdrop-blur-2xl border border-white/15 text-white text-[10px] font-black uppercase tracking-[0.2em] px-7 py-4 rounded-xl hover:bg-white hover:text-black transition-all duration-300 active:scale-95 shadow-xl">
           Read Full Story
         </a>
@@ -737,10 +731,10 @@ filter: invert(1) brightness(2);
       <div id="hs-indicators" class="flex gap-2 items-center"></div>
 
       <!-- Slide Counter Glass Pill -->
-      <div class="flex items-center gap-2 bg-white/8 backdrop-blur-xl border border-white/10 px-4 py-2 rounded-full">
-        <span id="hs-counter-current" class="text-white font-black text-[11px]">01</span>
+      <div class="hidden flex items-center gap-2 bg-white/8 backdrop-blur-xl border border-white/10 px-4 py-2 rounded-full">
+        <span id="hs-counter-current" class="text-white font-black text-[11px]">1</span>
         <span class="text-white/20 text-[10px] font-black">/</span>
-        <span id="hs-counter-total" class="text-white/40 font-black text-[11px]">03</span>
+        <span id="hs-counter-total" class="text-white/40 font-black text-[11px]">3</span>
       </div>
 
     </div>
@@ -761,8 +755,8 @@ filter: invert(1) brightness(2);
     {
       label: "BREAKING",
       labelStyle: "bg-red-600 shadow-[0_8px_30px_rgba(220,38,38,0.5)]",
-      headline: "Chris Finch Should Be<br/><span class='text-white/25'>On The Hot Seat</span>",
-      subhead: "Minnesota finds itself in the same spot Denver was in last year. Will a coaching change salvage a sinking season?",
+      headline: "Good Enough is The Enemy<br/><span class='text-white/25'>Of Great</span>",
+      subhead: "Might Be Time For a Coaching Change In Minnesota",
       image: "images/finch.png",
       series: false,
       watchHref: "#",
@@ -772,23 +766,15 @@ filter: invert(1) brightness(2);
     {
       label: "NFL",
       labelStyle: "bg-amber-500 shadow-[0_8px_30px_rgba(245,158,11,0.5)]",
-      headline: "2026 NBA Draft<br/><span class='text-white/25'>Deep Dive</span>",
-      subhead: "Risers, dark horses, blue chip talent -- ranking this year's class from top to bottom.",
+      headline: "MY VERY EARLY NBA Draft<br/><span class='text-white/25'>TAKES</span>",
+      subhead: "Who I like, Dislike, Mixed Opinions etc",
       image: "images/fa.jpeg",
       series: false,
       watchHref: "#",
-      readHref: "#"
-    },
-    {
-      label: "ORIGINAL",
-      labelStyle: "bg-emerald-600 shadow-[0_8px_30px_rgba(5,150,105,0.5)]",
-      headline: "Key To<br/><span class='text-white/25'>Longevity</span>",
-      subhead: "Is it all in the ankles? A deep look at what keeps elite athletes at the top for over a decade.",
-      image: "images/rev.webp",
-      series: true,
-      watchHref: "#",
-      readHref: "#"
+      readHref: "#",
+      articleId: "boba-nba-draft"
     }
+    
   ];
 
   const SLIDE_DURATION = 5500;
@@ -851,15 +837,13 @@ filter: invert(1) brightness(2);
       bar.style.width = i < hsIndex ? '100%' : '0%';
     });
     // Animate current
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const current = bars[hsIndex];
-        if (current) {
-          current.style.transition = `width ${SLIDE_DURATION}ms linear`;
-          current.style.width = '100%';
-        }
-      });
-    });
+setTimeout(() => {
+  const current = bars[hsIndex];
+  if (current) {
+    current.style.transition = `width ${SLIDE_DURATION}ms linear`;
+    current.style.width = '100%';
+  }
+}, 50);
   }
 
   function goToSlide(nextIndex) {
@@ -888,17 +872,42 @@ filter: invert(1) brightness(2);
 
 
       // Update headline & subhead
+      // Update headline & subhead
       hsHeadline.innerHTML = slide.headline;
       hsSubhead.innerText = slide.subhead;
 
+      // Wire up the read button for this slide
+      const readBtn = document.getElementById('hs-read-btn');
+      if (readBtn) {
+        readBtn.onclick = null;
+        if (slide.articleId) {
+          readBtn.href = '#';
+          readBtn.onclick = (e) => {
+            e.preventDefault();
+            openReader(slide.articleId);
+          };
+        } else if (slide.readHref && slide.readHref !== '#') {
+          readBtn.href = slide.readHref;
+        }
+      }
 
-const readBtn = document.getElementById('hs-read-btn');
-if (readBtn && slide.articleId) {
-    readBtn.onclick = (e) => {
-        e.preventDefault();
-        openReader(slide.articleId);
-    };
+function updateReadBtn(slide) {
+
+    const readBtn = document.getElementById('hs-read-btn');
+    if (!readBtn) return;
+    readBtn.onclick = null; // clear old handler
+    if (slide.readHref && slide.readHref !== '#') {
+        readBtn.href = slide.readHref;
+        readBtn.onclick = null;
+    } else if (slide.articleId) {
+        readBtn.href = '#';
+        readBtn.onclick = (e) => {
+            e.preventDefault();
+            openReader(slide.articleId);
+        };
+    }
 }
+
       // Series badge
       if (slide.series) {
         hsSeries.classList.remove('hidden');
@@ -928,9 +937,20 @@ if (readBtn && slide.articleId) {
   }
 
   // Init
+  // Init
   hsContent.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   startProgressBar();
   scheduleNext();
+
+  // Wire up slide 0's button on load (goToSlide never runs for the first slide)
+  const initBtn = document.getElementById('hs-read-btn');
+  if (initBtn && HS_SLIDES[0].articleId) {
+    initBtn.href = '#';
+    initBtn.onclick = (e) => {
+      e.preventDefault();
+      openReader(HS_SLIDES[0].articleId);
+    };
+  }
 
   // Swipe support for mobile
   let touchStartX = 0;
@@ -950,20 +970,29 @@ if (readBtn && slide.articleId) {
 </script>
 
 
-<!-- Featured Coverage --><section class="max-w-[1400px] mx-auto px-6 py-20">
+<!-- Featured Coverage -->
+<section class="max-w-[1400px] mx-auto px-6 py-20">
 <h2 class="text-[11px] md:text-center font-black uppercase tracking-[0.4em] text-black/30 dark:text-white/30 mb-10">Featured Coverage</h2>
 <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-    <div class="md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 h-[500px] ios-glass rounded-[2.5rem] overflow-hidden relative group cursor-pointer">
+    <div onclick="openReader('jett-return')" class="md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 h-[500px] ios-glass rounded-[2.5rem] overflow-hidden relative group cursor-pointer">
+      
+      <img src="images/jj.jpeg" class="absolute inset-0 w-full h-full object-cover object-top transition duration-700 group-hover:scale-105">
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+      
 
-      <img src="images/rev2.webp" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-      <div class="absolute bottom-10 left-10">
-        <h3 class="text-4xl font-black uppercase  tracking-tighter leading-none mb-4 text-white">Art vs. Algorithm: <br/>The Soul of the Game</h3>
-        <button class="text-xs font-black uppercase tracking-widest border-b border-white/20 pb-1 text-white">Watch Episode</button>
+
+      <div class="absolute bottom-10 left-10 right-10">
+        <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-4 text-white">
+            Return of <br/> The Jetta
+        </h3>
+        <p class="text-white/70 text-sm font-medium max-w-md mb-6 uppercase tracking-wide">Reclaiming WR1: The blueprint for Justin Jefferson's 2026 redemption.</p>
+        <button class="text-xs font-black uppercase tracking-widest border-b-2 border-blue-500 pb-1 text-white hover:text-blue-500 transition-all">Open Full Feature</button>
       </div>
     </div>
   </div>
-</section><!-- Live & Upcoming --><section class="bg-white dark:bg-black py-24 text-black dark:text-white border-t border-black/5 dark:border-white/10">
+</section>
+
+<!-- Live & Upcoming --><section class="bg-white dark:bg-black py-24 text-black dark:text-white border-t border-black/5 dark:border-white/10">
   <div class="max-w-[1400px] mx-auto px-6">
 
 <div class="flex items-center justify-between mb-16">
@@ -980,10 +1009,9 @@ if (readBtn && slide.articleId) {
   <div class="relative w-full overflow-hidden" style="aspect-ratio: 16/9;">
     <img src="images/game.png" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
     
-    <div id="streamBadge" class="absolute top-6 left-6 flex items-center gap-2 bg-black text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl">
-      <span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-      Live Now
-    </div>
+      <div class="absolute top-6 left-6 bg-slate-600 text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl">
+          Coming Up
+      </div>
 
     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300 backdrop-blur-[2px]">
       <a id="streamActionButton" href="live2.html" class="inline-block bg-white text-black font-black uppercase tracking-widest px-8 py-4 rounded-xl shadow-2xl text-[10px] transform translate-y-4 group-hover:translate-y-0 transition-all hover:bg-red-600 hover:text-white">
@@ -993,8 +1021,8 @@ if (readBtn && slide.articleId) {
   </div>
 
   <div class="p-8">
-    <h3 class="text-2xl font-black uppercase tracking-tighter leading-none mb-2">Hornets vs Bucks</h3>
-    <p id="streamSubtext" class="text-[10px] font-bold text-black/30 dark:text-white/30 uppercase tracking-[0.2em]">NBA Regular Season • 7:30 PM ET</p>
+    <h3 class="text-2xl font-black uppercase tracking-tighter leading-none mb-2">Timberwolves vs Nuggets</h3>
+      <p class="text-[10px] font-bold text-black/30 dark:text-white/30 uppercase tracking-[0.2em]"> Stream Starts April 17 • 7:00 PM ET</p>
   </div>
 </div>
 
@@ -1007,7 +1035,7 @@ if (readBtn && slide.articleId) {
     </div>
     <div class="p-8">
       <h3 class="text-2xl font-black uppercase  tracking-tighter leading-none mb-2">2026 NBA Playoffs Watch Party</h3>
-      <p class="text-[10px] font-bold text-black/30 dark:text-white/30 uppercase tracking-[0.2em]">Starts April 18 • 1:00 PM ET</p>
+      <p class="text-[10px] font-bold text-black/30 dark:text-white/30 uppercase tracking-[0.2em]"> Stream Starts April 18 • 1:00 PM ET</p>
     </div>
   </div>
 
@@ -1033,7 +1061,7 @@ if (readBtn && slide.articleId) {
   <div class="max-w-[1400px] mx-auto px-6">
 
 <div class="flex items-center justify-between mb-10">
-<h2 class="text-[11px] font-black uppercase tracking-[0.4em] text-black/30 dark:text-white/30">Highlights</h2>
+<h2 class="text-[11px] font-black uppercase tracking-[0.4em] text-black/30 dark:text-white/30">Greenlight Deep Dive</h2>
   <div class="flex gap-2">
     <span class="w-8 h-1 bg-black dark:bg-white rounded-full"></span>
     <span class="w-8 h-1 bg-black/10 dark:bg-white/10 rounded-full"></span>
@@ -1060,11 +1088,11 @@ if (readBtn && slide.articleId) {
   </div>
 </div>
 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/40 to-transparent p-8">
-    <h3 class="text-white font-black text-2xl uppercase tracking-tighter mb-1">Top 10 Dunks – This Year</h3>
-    <p class="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">Insane dunks from across the leagues.</p>
-    <button onclick="openVideoModal('images/dunk.mov', 'Top 10 Dunks', 'NBA Season Highlights')" 
+    <h3 class="text-white font-black text-2xl uppercase tracking-tighter mb-1">Sports Science Behind Movements</h3>
+    <p class="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">From Kinetic Chain to movement science <br> A deeper dive. </p>
+    <button onclick="openVideoModal('images/dunk.mov', 'Greenlight Deep-Dive', 'Analytics')" 
             class="bg-yellow-400 hover:bg-white text-black px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
-        Watch Full Highlights
+        Coming Soon
     </button>
 </div>        </div>
 
@@ -1086,41 +1114,17 @@ if (readBtn && slide.articleId) {
   </div>
 </div>
 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/40 to-transparent p-8">
-    <h3 class="text-white font-black text-2xl uppercase tracking-tighter mb-1">Game-Winning Beaters</h3>
-    <p class="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">The clutchest moments.</p>
+    <p class="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">Analytics, Breakdowns and More</p>
     <button onclick="openVideoModal('videos/clutch.mp4', 'Game-Winning Beaters', 'Clutch Moments 2026')" 
             class="bg-yellow-400 hover:bg-white text-black px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
-        Full Replay
+        Coming Soon
     </button>
 </div>
         </div>
 
-    <div class="w-[350px] md:w-[450px] group rounded-[2.5rem] overflow-hidden relative ios-glass border border-black/5 dark:border-white/10 flex-shrink-0 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
 
 
-<div class="relative h-72 md:h-80 w-full overflow-hidden">
-  <video 
-    class="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" 
-    autoplay 
-    muted 
-    loop 
-    playsinline
-    poster="images/mic.jpeg"> <source src="videos/top10.mp4" type="video/mp4">
-  </video><div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div><div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-     <div class="w-16 h-16 play-btn-blur rounded-full flex items-center justify-center pl-1 shadow-2xl scale-75 group-hover:scale-100 transition-transform duration-500">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" class="w-6 h-6"><path d="M8 5v14l11-7z"/></svg>
-     </div>
-  </div>
-</div>
-          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/40 to-transparent p-8">
-            <h3 class="text-white font-black text-2xl uppercase  tracking-tighter mb-1 drop-shadow-lg">Mic'd Up: Trash Talk</h3>
-            <p class="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">Raw Unfiltered Audio.</p>
-            <button class="bg-yellow-400 hover:bg-white text-black px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Play Episode</button>
-          </div>
-        </div>
 
-  </div>
-</div>
 
 
 </div>
@@ -1168,7 +1172,6 @@ Why not? The Wemby Era is inevitable, this is the start. </p>
       <div class="absolute inset-0"></div>
     </div>
     <div class="p-8">
-      <span class="text-[10px] font-black uppercase tracking-[0.3em] text-blue-600 mb-3 block">NFL Offseason</span>
       <h3 class="text-2xl font-black uppercase  tracking-tighter leading-none mb-4 group-hover:text-cyan-600 transition-colors">
         Return Of <br/>The Jetta
       </h3>
@@ -1409,8 +1412,12 @@ function closeVideoModal() {
 
 // Toggle User Dashboard
 function toggleUserDashboard() {
+    window.toggleUserDashboard = () => {
     const dashboard = document.getElementById('userDashboard');
     dashboard.classList.toggle('translate-x-full');
+};
+
+
 }
 
 
@@ -1890,18 +1897,24 @@ setInterval(loadGames, 30000); // 30s refresh is better for live data
         </button>
     </div>
 
-    <div class="flex p-3 gap-2 overflow-x-auto no-scrollbar border-b border-green-500/5">
-        <button class="px-5 py-2 rounded-full bg-green-600 text-white text-[9px] font-black uppercase tracking-widest shadow-lg shadow-green-500/20">All Games</button>
-        <button class="px-5 py-2 rounded-full hover:bg-green-500/10 text-[9px] font-black uppercase tracking-widest dark:text-white/40 border border-transparent hover:border-green-500/20">Elite Only</button>
-        <button class="px-5 py-2 rounded-full hover:bg-green-500/10 text-[9px] font-black uppercase tracking-widest dark:text-white/40 border border-transparent hover:border-green-500/20">DMs</button>
-    </div>
+<div class="flex p-4 gap-3 overflow-x-auto no-scrollbar border-b border-green-500/10 items-center min-h-[70px]">
+    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-green-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-green-500/20 whitespace-nowrap">
+        Lobby
+    </button>
+    <button class="flex-shrink-0 px-6 py-2.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
+        NBA
+    </button>
+    <button class="flex-shrink-0 px-6 py-2.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
+        NFL
+    </button>
+</div>
 
     <div id="message-container" class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
         </div>
 
     <div class="p-5 bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem] border-t border-green-500/10">
         <div class="relative group">
-            <input id="chat-input" type="text" placeholder="Drop a take..." 
+            <input id="chat-input" type="text" placeholder="" 
                    class="w-full bg-white/50 dark:bg-white/5 border border-green-500/10 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-sm font-medium outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/10 transition-all dark:text-white placeholder-black/30 dark:placeholder-white/20">
             <button id="send-btn" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-green-600 hover:scale-110 active:scale-90 transition-transform">
                 <i class="fa-solid fa-paper-plane"></i>
@@ -2291,9 +2304,54 @@ const articleEngineData = {
       }
       .wemby-article strong { font-weight: 700; opacity: 1; }
       .wemby-article em { font-style: italic; }
+      .wemby-article .wemby-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+}
+
+.wemby-article .wemby-byline img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(212,175,55,0.3);
+    flex-shrink: 0;
+}
+
+.wemby-article .wemby-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+}
+
+.wemby-article .wemby-byline-text a {
+    color: #d4af37;
+    text-decoration: none;
+    opacity: 1;
+}
+
     </style>
 
     <div class="wemby-article">
+<div class="wemby-article">
+
+  <div class="wemby-byline" style="display:flex; align-items:center; gap:0.75rem; margin-bottom:2.5rem; padding-bottom:2rem; border-bottom:1px solid rgba(128,128,128,0.12);">
+    <img src="images/me.png" style="width:2.5rem; height:2.5rem; border-radius:50%; object-fit:cover; border:2px solid rgba(212,175,55,0.3); flex-shrink:0;" />
+    <div style="font-family:'Inter',sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; opacity:0.5; line-height:1.6;">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none; opacity:1;">@Qb_vision</a> <br>
+      April 12, 2026 
+    </div>
+  </div>
+
+      <p class="lede">There is a moment
 
       <p class="lede">There is a moment -- it doesn't happen often in sports, maybe once in a generation if you're lucky -- where you stop comparing and start witnessing.</p>
 
@@ -2664,7 +2722,6 @@ const articleEngineData = {
     color: #dc2626;
     margin-bottom: 0.3rem;
   }
-  .finch-article .fa-stat-box .fa-sv-gold { color: #d4af37 !important; }
   .finch-article .fa-stat-box .fa-sl {
     display: block;
     font-family: 'Inter', sans-serif;
@@ -2733,10 +2790,6 @@ const articleEngineData = {
     text-align: center;
     color: #dc2626;
   }
-  .finch-article .fa-coda {
-    font-style: italic;
-    opacity: 0.7 !important;
-  }
   .finch-article .fa-finale {
     font-size: clamp(1.05rem, 2.6vw, 1.3rem) !important;
     font-weight: 700 !important;
@@ -2745,8 +2798,6 @@ const articleEngineData = {
   }
   .finch-article .fa-finale .fa-red { color: #dc2626; font-style: italic; }
   .finch-article .fa-finale .fa-gold { color: #d4af37; }
-  .finch-article strong { font-weight: 700; opacity: 1; }
-  .finch-article em { font-style: italic; }
   .finch-article .fa-kicker {
     display: block;
     font-family: 'Inter', sans-serif;
@@ -2757,33 +2808,35 @@ const articleEngineData = {
     color: #dc2626;
     margin-bottom: 0.5rem;
   }
+  .finch-article strong { font-weight: 700; opacity: 1; }
+  .finch-article em { font-style: italic; }
 </style>
 
 <div class="finch-article">
 
-  <span class="fa-kicker">NBA · Minnesota Timberwolves · April 12, 2026</span>
 
   <div class="fa-byline">
-    <div class="fa-byline-dot"></div>
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
     <div class="fa-byline-text">
-      Greenlight Sports Desk &nbsp;·&nbsp; April 12, 2026<br>
-      15 min read &nbsp;·&nbsp; Minnesota Timberwolves
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a> <br>
+      April 12, 2026
     </div>
   </div>
 
+
   <p class="fa-deck">
-    The Definitive Case for Why Chris Finch Is Not a Championship Coach -- And Why Minnesota Is Burning Its Window Finding That Out Too Late
+    The Definitive Case for Why Chris Finch Is Not a Championship Coach And Why Minnesota Is Burning Its Window Finding That Out Too Late
   </p>
 
-  <p class="fa-lede">There is a sentence that should haunt every person connected to the Minnesota Timberwolves organization when they lie awake at three in the morning with the playoffs six days away.</p>
+  <p class="fa-lede">There is a sentence that should haunt every die hard Timberwolves fan.</p>
 
-  <p>It was spoken by the head coach himself, at a press conference, after his team -- loaded with talent, armed with arguably the deepest roster in franchise history, playing in what should be their most promising season yet -- lost at home to the Charlotte Hornets. The Charlotte Hornets. A team that started the year 16-28.</p>
+  <p>It was spoken by the head coach himself, at a press conference, after his team -- armed with arguably the deepest roster in franchise history, playing in what should be their most promising season yet -- lost at home to the Charlotte Hornets.</p>
 
   <div class="fa-isolated">"It feels like we're a million miles away from the team that we can be and that we are."</div>
 
   <p>A million miles. Six days before the playoffs.</p>
 
-  <p>Read that sentence and hold it. Sit in its weight. Because it is not the statement of a man who has lost control of a game. It is the statement of a man who has lost the thread of an entire season -- and who has been losing it, in patches and fragments, for years -- and who does not fully understand that the thread itself is part of his job to hold.</p>
+  <p>Read that sentence and hold it. That statement sounds like it's coming from a man who has lost the thread of an entire season -- and who has been losing it, in patches and fragments, for years -- and who does not fully understand that the thread itself is part of his job to hold.</p>
 
   <p>This is the Chris Finch problem. Not that he is a bad coach. He is not. Not that he has failed this franchise. He has not, by most conventional measures.</p>
 
@@ -2791,29 +2844,26 @@ const articleEngineData = {
 
   <div class="fa-pull-red"><p>The problem is that Chris Finch is precisely good enough to keep this team from demanding better.</p></div>
 
-  <div class="fa-break"><span>§</span></div>
 
   <div class="fa-part">
-    <span class="fa-part-label">Prologue</span>
     <h2 class="fa-part-title">The Gift That Became the Trap</h2>
     <span class="fa-part-rule"></span>
   </div>
 
-  <p>To understand the argument, you must first understand the context it lives inside. Because the argument is not that Chris Finch should never have been here. It is that the version of Finch that was right for this franchise in 2021 may not be the version this franchise needs in 2026.</p>
+  <p>To understand the argument, you must first understand the context it lives inside. Because the argument is not that Chris Finch should never have been here.</p>
 
-  <p>When Finch arrived, the Timberwolves hadn't been relevant in years. He rebuilt the culture. He built a defensive identity. He took a team that was going nowhere and turned it into a program that reached the Western Conference Finals in back-to-back seasons -- the second-longest playoff streak in franchise history since the Kevin Garnett era. He holds the highest winning percentage in franchise history.</p>
+  <p>When Finch arrived, the Timberwolves hadn't been relevant in years. He rebuilt the culture. He built a defensive identity. He took an irrelevant team to two Western Conference Finals in back-to-back seasons. The second-longest playoff streak in franchise history since the Kevin Garnett era. He holds the highest winning percentage in franchise history.</p>
 
-  <p>These accomplishments are real. They deserve genuine respect. The man did something.</p>
+  <p>These accomplishments are real. They deserve genuine respect. But there is a particular cruelty in professional sports that rewards builders and then demands conquerors and acts surprised when the two are not the same person. The NBA is littered with coaches who were exactly the right man for the moment they entered and exactly the wrong man for the moment the franchise needed to ascend. Men who built programs but couldn't win championships. Men who were great architects but poor generals.</p>
 
-  <p>But there is a particular cruelty in professional sports that rewards builders and then demands conquerors -- and acts surprised when the two are not the same person. The NBA is littered with coaches who were exactly the right man for the moment they entered and exactly the wrong man for the moment the franchise needed to ascend. Men who built programs but couldn't win championships. Men who were great architects but poor generals.</p>
+  <p>Chris Finch built the house. The question: the urgent, time-sensitive, Anthony-Edwards'-prime and what comes with it.</p>
 
-  <p>Chris Finch built the house. The question -- the urgent, time-sensitive, Anthony-Edwards'-prime-is-not-renewable question -- is whether he can lead what lives inside it to a championship.</p>
+  <p>Can Chris Finch lead what lives inside it to a championship.?</p>
 
   <p>The evidence, accumulated honestly across six years and two conference finals exits and one season of documented, statistically verified, head-coach-acknowledged dysfunction, says no.</p>
 
   <p>Here is why.</p>
 
-  <div class="fa-break"><span>§</span></div>
 
   <div class="fa-part">
     <span class="fa-part-label">I</span>
@@ -2825,25 +2875,26 @@ const articleEngineData = {
 
   <p>It is edge. Controlled, weaponized, cold-eyed edge.</p>
 
-  <p>It is the quality that made Pat Riley's teams fear him more than they feared any opponent. It is what Gregg Popovich cultivated in San Antonio -- not warmth, not comfort, but a standard so absolute that players regulated themselves because they understood the consequence of falling short of it. It is what Erik Spoelstra brings to Miami: a relentlessness that makes players operate at their ceiling because anything less is simply not permitted.</p>
+  <p>It is the quality that made Pat Riley's teams fear him more than they feared any opponent. It is what Gregg Popovich cultivated in San Antonio. Not warmth, not comfort, but a standard so absolute that players regulated themselves because they understood the consequence of falling short of it.</p>
+
+  <p>It is what Erik Spoelstra brings to Miami: a relentlessness that makes players operate at their ceiling because anything less is simply not permitted.</p>
 
   <div class="fa-pull"><p>Championship coaches don't manage their rosters. They impose standards on them. There is a fundamental difference.</p></div>
 
-  <p>One of the most penetrating observations made about Finch this season came from a local basketball writer who noted that the late-game failures that Finch himself once described as "baked into our DNA" have not only continued -- they have become this team's calling card. It's hard to be called an elite team when you're only elite for about six to eight minutes a game and coast for the other 40.</p>
+  <p>One of the most penetrating observations made about Finch this season came from a local basketball writer who noted that the late-game failures that Finch himself once described as "baked into our DNA" have not only continued, they have become this team's calling card.</p>
 
   <div class="fa-isolated">Baked into our DNA.</div>
 
   <p>A head coach said that. About late-game failures. And then continued coaching the same team, with the same structure, and watched it happen again. And again. And again.</p>
 
-  <p>That is not edge. That is acceptance disguised as analysis. And in the NBA -- in the specific, brutal, truth-telling environment of a seven-game playoff series against Mike Malone and Nikola Jokic -- acceptance is not a strategy. It is a surrender.</p>
+  <p>That is not edge. That is acceptance disguised as analysis.</p>
 
   <p>This Wolves team, alongside the two that came before it under Finch, tends to come out with an energy level that corresponds to the level of the opponent and the time of year. Their effort scales to the perceived importance of the moment rather than operating at a fixed, non-negotiable standard regardless of circumstance.</p>
 
-  <p>That is a coaching fingerprint. Championship teams do not take nights off because the opponent feels beneath them. Championship coaches do not permit nights off. They have built cultures where the standard is not situational. It is permanent. It is structural. It is -- and this word is chosen deliberately -- non-negotiable.</p>
+  <p>That is a coaching fingerprint. Championship teams do not take nights off because the opponent feels beneath them. Championship coaches do not permit nights off. They have built cultures where the standard is not situational. It is permanent. It is structural. It is, and this word is chosen deliberately, non-negotiable.</p>
 
   <p>Finch's culture is negotiable. And everyone in that locker room, at some level, knows it.</p>
 
-  <div class="fa-break"><span>§</span></div>
 
   <div class="fa-part">
     <span class="fa-part-label">II</span>
@@ -2851,9 +2902,9 @@ const articleEngineData = {
     <span class="fa-part-rule"></span>
   </div>
 
-  <p>Here is where your instinct as an observer lands squarely on something real, and where the data confirms what the eye already saw.</p>
+  <p>Finch's so-called "young core" -- Rob Dillingham, Terrence Shannon Jr., and Jaylen Clark, second-year pros all acquired with development in mind -- has been, by the season's own accounting, a collective disappointment.</p>
 
-  <p>Finch's so-called "young core" -- Rob Dillingham, Terrence Shannon Jr., and Jaylen Clark, second-year pros all acquired with development in mind -- has been, by the season's own accounting, a collective disappointment. Dillingham, the most expensive of the group in terms of draft capital spent, has cratered on shots inside the arc. Shannon's promised offensive development largely stagnated. Clark remains an offensive ghost who earns his minutes entirely on defense.</p>
+  <p>Dillingham, the former Timberwolf was the most expensive of the group in terms of draft capital spent. During his time here, his shot inside the arc plummeted every year. Shannon's promised offensive development largely stagnated. Clark remains an offensive ghost who earns his minutes entirely on defense.</p>
 
   <p>This is not a personnel evaluation failure alone. The roster construction is the front office's domain. But the development of young players once they are on the roster -- their growth, their confidence, their integration into a system that makes their strengths legible -- that is the coach's domain.</p>
 
@@ -2862,23 +2913,17 @@ const articleEngineData = {
       <span class="fa-sv">27th</span>
       <span class="fa-sl">Bench Scoring</span>
     </div>
-    <div class="fa-stat-box">
-      <span class="fa-sv" style="color:#d4af37;">–</span>
-      <span class="fa-sl">Every Bench Net Rating</span>
-    </div>
+
     <div class="fa-stat-box">
       <span class="fa-sv">25th</span>
       <span class="fa-sl">Bench Minutes</span>
     </div>
-    <div class="fa-stat-box">
-      <span class="fa-sv">19</span>
-      <span class="fa-sl">Beringer's Age</span>
-    </div>
+
   </div>
 
-  <p>For most of the season, the Timberwolves ranked 27th in the NBA in bench scoring. Every regular bench player had a negative on/off net rating. The team ranked 25th in bench minutes -- lower than the two previous seasons, lower than when they had less talent, lower than a team with genuine championship aspirations should ever be.</p>
+  <p>For most of the season, the Timberwolves ranked 27th in the NBA in bench scoring. Every regular bench player had a negative on/off net rating. The team ranked 25th in bench minutes. That is lower than the two previous seasons, lower than when they had less talent, lower than a team with genuine championship aspirations should ever be.</p>
 
-  <p>And yet buried inside that dysfunction was something Finch consistently refused to pull: Joan Beringer -- a 19-year-old French rookie big with legitimate rim-running athleticism, elite timing instincts, and a fearlessness around the rim that his teammates openly lacked -- was repeatedly cycled back to the G League rather than given the sustained NBA minutes that could accelerate his development.</p>
+  <p>And yet buried inside that dysfunction was something Finch consistently refused to pull: Joan Beringer. A 19-year-old French rookie big with legitimate rim-running athleticism, elite timing instincts, and a fearlessness around the rim that his teammates openly lacked. He was repeatedly cycled back to the G League rather than given the sustained NBA minutes that could accelerate his development.</p>
 
   <p>When Beringer had a breakout game and the question arose about his role going forward, Finch's answer was essentially: he probably isn't done going back to Iowa. The stated rationale was finding him minutes alongside three established bigs who don't miss games.</p>
 
@@ -2888,11 +2933,10 @@ const articleEngineData = {
 
   <div class="fa-isolated">"A difficult ask."</div>
 
-  <p>A coach who designs a system where one of his best athletes in transition is asked to stand in a corner because the system cannot accommodate his real skill set is not developing that player. He is containing him. And contained players do not grow. They atrophy. They become exactly what the system permits rather than what their talent could produce.</p>
+  <p>A coach who designs a system where one of his best athletes in transition is asked to stand in a corner because the system cannot accommodate his real skill set is not developing that player. He is containing him. And contained players do not grow.</p>
 
   <p>Championship coaches do not contain players. They design around them. They find ways to make the system elastic enough to amplify what their roster actually has rather than forcing their roster into the shape of what they prefer to run.</p>
 
-  <div class="fa-break"><span>§</span></div>
 
   <div class="fa-part">
     <span class="fa-part-label">III</span>
@@ -2906,7 +2950,7 @@ const articleEngineData = {
 
   <p>But conviction and stubbornness are the same quality at different temperatures. At the right temperature, it's leadership. Too hot, it becomes rigidity -- the inability to read what the game is telling you and respond to it rather than insisting on what the game should be.</p>
 
-  <p>In Game 1 of last year's Western Conference Finals against Oklahoma City, the Wolves led 48-44 at halftime. They then collapsed in the second half, committing 17 turnovers, recording just 18 assists, and shooting 29.4 percent from three on 51 attempts. After Julius Randle had a hot start, OKC adjusted to collapse on his threes in the second half and his production cratered. The Wolves had no offensive answer -- no second-half adjustment that created a new problem for OKC to solve.</p>
+  <p>In Game 1 of last year's Western Conference Finals against Oklahoma City, the Wolves led 48-44 at halftime. They then collapsed in the second half, committing 17 turnovers, recording just 18 assists, and shooting 29.4 percent from three on 51 attempts. After Julius Randle had a hot start, OKC adjusted to collapse on his threes in the second half and his production cratered. The Wolves had no offensive answer, no second-half adjustment that created a new problem for OKC to solve.</p>
 
   <div class="fa-pull-red"><p>Halftime lead. Second-half collapse. No adjustment.</p></div>
 
@@ -2916,15 +2960,14 @@ const articleEngineData = {
 
   <p>The Hornets made halftime adjustments. Minnesota did not. Or more precisely -- Minnesota came out of halftime playing the same way they played in the first half, against a team that had watched that first half and built a response to it.</p>
 
-  <p>This is the halftime adjustment problem you identified. It is real. And it is chronic. A team that enters halftime with a lead and exits the third quarter in a hole is not being outplayed by superior talent in those 12 minutes. It is being out-coached. The opponent's staff identified something, communicated it clearly, and the players executed it. The other staff either didn't identify it, didn't communicate it clearly, or communicated it and the players didn't execute -- which circles back to the edge problem and the locker room authority problem.</p>
+  <p>This deficiency is real and chronic. And it points to a team who is being out-coached. The opponent's staff identified something, communicated it clearly, and the players executed it. The Timberwolves staff either didn't identify it, didn't communicate it clearly, or communicated it and the players didn't execute which circles back to the edge problem and the locker room authority problem.</p>
 
-  <p>The Wolves' late-game offensive structure devolves into the same pattern repeatedly: heavy isolation, little variety, no fallback architecture when the isolation isn't working. Finch has acknowledged this publicly -- "We can't rely solely on Edwards. We've got to get out of the mentality of just trying to hit a home run every single time" -- and then the team comes out in the next clutch situation and runs the same isolations.</p>
+  <p>The Wolves' late-game offensive structure devolves into the same pattern repeatedly: heavy isolation, little variety, no fallback architecture when the isolation isn't working.</p>
 
-  <p>When a coach knows the problem and the problem keeps happening, there are only two explanations. Either he cannot solve it -- meaning the fix is beyond his tactical capability -- or he believes that the next time will be different because the talent will execute better. The first is a hard ceiling. The second is faith dressed as strategy.</p>
+  <p>Finch has acknowledged this publicly -- "We can't rely solely on Edwards. We've got to get out of the mentality of just trying to hit a home run every single time" -- and then the team comes out in the next clutch situation and runs the same isolations.</p>
 
-  <p>Neither belongs on the sideline of a team trying to win a championship.</p>
+  <p>When a coach knows the problem and the problem keeps happening, there are only two explanations. Either he cannot solve it, meaning the fix is beyond his tactical capability or he believes that the next time will be different because the talent will execute better. The first is a hard ceiling. The second is faith dressed as strategy. Neither should be the head coach of a team trying to win a championship.</p>
 
-  <div class="fa-break"><span>§</span></div>
 
   <div class="fa-part">
     <span class="fa-part-label">IV</span>
@@ -2932,45 +2975,16 @@ const articleEngineData = {
     <span class="fa-part-rule"></span>
   </div>
 
-  <p>Championship coaches are improvisational artists working within structure. They have a system. They trust it. And then the game tells them something and they respond -- they pull a lever, swap a lineup, call a timeout that changes momentum, make a substitution that reframes the game's entire narrative.</p>
+  <p>Championship coaches are improvisational artists working within structure. They have a system. They trust it. And then the game tells them something and they respond. They pull a lever, swap a lineup, call a timeout that changes momentum, make a substitution that reframes the game's entire narrative.</p>
 
-  <p>Think of the coaches whose in-game adjustments became legend. Pop calling a timeout with 47 seconds left to diagram a play that didn't exist before that moment. Spoelstra turning a defensive switch into an offensive strategy in the middle of a quarter. Doc Rivers rewriting his team's closing lineup in a playoff series when the original lineup was getting exposed.</p>
+  <p>Adaptive intelligence -- never so committed to what is planned that you cannot see what is actually happening.</p>
 
-  <p>These are not accidents. They are the product of coaches who watch the game with adaptive intelligence -- who are never so committed to what they planned that they cannot see what is actually happening.</p>
-
-  <p>Finch's deepest flaw as a coach is not the individual decisions he makes -- it is his philosophical relationship with adaptation. He trusts his formula. When it works, the trust looks like mastery. When it doesn't work, it looks like stubbornness dressed in conviction. And the failure to adjust during the Wolves' two conference finals exits -- both times holding a lead at some point, both times being systematically dismantled in the second half -- reveals a coach whose formula has a ceiling and who is reluctant to break the glass that could push past it.</p>
+  <p>Finch's deepest flaw as a coach is not the individual decisions he makes. It is his philosophical relationship with adaptation. He trusts his formula. When it works, the trust looks like mastery. When it doesn't work, it looks like stubbornness dressed in conviction. And the failure to adjust during the Wolves' two conference finals exits -- both times holding a lead at some point, both times being systematically dismantled in the second half -- reveals a coach whose formula has a ceiling and who is reluctant to break the glass that could push past it.</p>
 
   <p>The Jazz loss in January is the clearest surgical illustration: facing a depleted Utah team missing its best player, Finch played Mike Conley through 15 scoreless minutes and a -5 plus/minus across two consecutive games -- while Bones Hyland, who had a breakout performance the week before, played one four-minute stint. The coaching consensus after that game was that it was Finch's worst performance of the season. Not a player's. The coach's.</p>
 
-  <div class="fa-pull"><p>The coach who cannot read in real time that his 38-year-old veteran has nothing left and his energized young guard needs the floor -- that coach, in the fourth quarter of a playoff elimination game, will make the same kind of read failure. The context changes. The underlying pattern does not.</p></div>
+  <p>The coach who cannot read in real time that his 38-year-old veteran has nothing left that night and his energized young guard needs the floor. That coach..in the fourth quarter of a playoff elimination game, will make the same kind of read failure. The context changes. The underlying pattern does not.</p>
 
-  <div class="fa-break"><span>§</span></div>
-
-  <div class="fa-part">
-    <span class="fa-part-label">V</span>
-    <h2 class="fa-part-title">The Double Standard and the Locker Room Decay</h2>
-    <span class="fa-part-rule"></span>
-  </div>
-
-  <p>You said his dynamic with young guys seems off. You said you couldn't fully articulate it. Boba can articulate it.</p>
-
-  <p>It is the double standard. And it is corroding this locker room from the inside out.</p>
-
-  <p>Throughout this season, Finch has been openly critical of Rudy Gobert after games, called out Jaden McDaniels in the media, and applied visible accountability to several veterans. Yet when Julius Randle's defensive effort has been the most visible problem on the floor -- when Randle has posted 3 defensive rebounds in consecutive games, when Randle has turned it over in critical late-game possessions -- the criticism has been softer, the benching has not come.</p>
-
-  <p>Local media noticed it and named it directly: Finch can't fully confront Randle because Randle is important to the team, and his desire to stay must be protected. Similarly, Finch does not directly confront Edwards with punitive bench time because Edwards is the most important person in the organization.</p>
-
-  <p>So the coach publicly challenges Gobert. The coach publicly challenges McDaniels. The coach says nothing publicly about the people who most need accountability.</p>
-
-  <p>In a locker room, everything is visible. Players are not naive. They know who gets held to what standard. And a locker room where the accountability structure is stratified -- where being more important earns you softer standards -- is a locker room that cannot fully trust its own coach.</p>
-
-  <p>When Rudy Gobert -- a four-time Defensive Player of the Year, a man who has built an entire career on the singular principle of standards -- goes public after a loss to call out teammates for effort, and the head coach's response is to tell him he should have kept those comments in-house -- something fundamental has broken.</p>
-
-  <p>Gobert didn't go to the media because he wanted drama. He went because the internal mechanism wasn't working. He went because the coach had not made it clear, beyond any doubt, that the standard was real and the consequences were real and the locker room was not a place where effort was optional regardless of your contract or your role.</p>
-
-  <div class="fa-pull-red"><p>Gobert was right. Finch managed the optics instead of the substance. That is not championship coaching.</p></div>
-
-  <div class="fa-break"><span>§</span></div>
 
   <div class="fa-part">
     <span class="fa-part-label">VI</span>
@@ -2980,22 +2994,22 @@ const articleEngineData = {
 
   <p>Here is the number that clarifies everything.</p>
 
-  <p>No team in the NBA played more clutch-time games this season than the Timberwolves -- games within five points in the final five minutes. Their record: 20-26. A 43% win rate in the moments that decide contests.</p>
+  <p>No team in the NBA played more clutch-time games this season than the Timberwolves. Their record: 20-26. A 43% win rate in the moments that decide contests.</p>
 
   <div class="fa-number">
     <span class="fa-big">20–26</span>
     <span class="fa-caption">Clutch record · Most clutch games in the NBA · 43% win rate</span>
   </div>
 
-  <p>Twenty. And twenty-six.</p>
-
-  <p>For a team with Anthony Edwards. With Rudy Gobert. With Julius Randle. With a roster that its own front office has called arguably the deepest in franchise history. Winning less than half of the close games when the game is on the line.</p>
+  <p>For a team with Anthony Edwards. With Rudy Gobert. With Julius Randle. With a roster that its own front office has called arguably the deepest in franchise history.</p>
 
   <p>Earlier this season they held a 99% win probability against Phoenix in the fourth quarter and lost. Days later they held a 98% win probability against Sacramento in the fourth quarter and lost.</p>
 
-  <p>The mathematics of those collapses -- the probability converted to near-certainty and then squandered not once but twice in four days -- are not bad luck. They are a system failure. They are the product of offensive designs that break down without structure, late-game rotations that deploy the wrong people, and a coaching staff that cannot stabilize the moment when the game tells them everything they planned is no longer working.</p>
+  <p>The mathematics of those collapses, the probability converted to near-certainty and then squandered not once but twice in four days -- are not bad luck. They are a system failure.</p>
 
-  <p>And here is the cost that nobody is accounting for publicly:</p>
+  <p>They are the product of offensive designs that break down without structure, late-game rotations that deploy the wrong players, and a coaching staff that cannot stabilize the moment when the game tells them everything they planned is no longer working.</p>
+
+  <p>And one more cost that nobody is accounting for publicly:</p>
 
   <div class="fa-stat">
     <div class="fa-stat-box">
@@ -3003,7 +3017,7 @@ const articleEngineData = {
       <span class="fa-sl">Edwards' Age</span>
     </div>
     <div class="fa-stat-box">
-      <span class="fa-sv fa-sv-gold">28%</span>
+      <span class="fa-sv" style="color:#d4af37;">28%</span>
       <span class="fa-sl">Team FGs He Carries</span>
     </div>
     <div class="fa-stat-box">
@@ -3011,20 +3025,15 @@ const articleEngineData = {
       <span class="fa-sl">Offensive Rating Drop</span>
     </div>
     <div class="fa-stat-box">
-      <span class="fa-sv fa-sv-gold">10+</span>
+      <span class="fa-sv" style="color:#d4af37;">10+</span>
       <span class="fa-sl">Games Missed (Knee)</span>
     </div>
   </div>
 
   <p>Anthony Edwards has already missed double-digit games this season with knee inflammation at 24 years old. He carries approximately 28% of his team's made field goals. Without him, the offensive rating drops by 6.4 points.</p>
 
-  <p>A 24-year-old franchise cornerstone with a documented knee issue is carrying unsustainable load because the offense has no fallback architecture when he is absent or struggling. That is mileage that accumulates. That is a knee that absorbs wear it shouldn't have to absorb because the system doesn't distribute the burden effectively.</p>
+  <p>A 24-year-old franchise cornerstone with a documented knee issue is carrying unsustainable load because the offense has no fallback architecture when he is absent or struggling.</p>
 
-  <p>Every wasted season inside Edwards' prime window is a season that cannot be recovered. The window that is open right now -- wide open, the kind of window a franchise gets once -- will begin to narrow. The roster will age. The contracts will compress. The front office's flexibility will diminish.</p>
-
-  <p>And all of that will happen while the team's head coach continues to describe his team as a million miles away from what they can be.</p>
-
-  <div class="fa-break"><span>§</span></div>
 
   <div class="fa-part">
     <span class="fa-part-label">VII</span>
@@ -3032,9 +3041,7 @@ const articleEngineData = {
     <span class="fa-part-rule"></span>
   </div>
 
-  <p>Here is the test that matters. Not win totals. Not conference finals appearances. Not playoff streaks.</p>
-
-  <p>The championship coach test asks one question: when this team is playing the best basketball in the Western Conference in a seven-game series and the opponent has made halftime adjustments that are working -- what does Chris Finch do?</p>
+  <p>The championship coach test asks one question: when this team is playing a tough Western Conference matchup in a seven-game series and the opponent has made halftime adjustments that are working…what does Chris Finch do?</p>
 
   <p>The evidence, across six seasons and two conference finals exits and one season of the most consistent late-game dysfunction in the league, answers that question.</p>
 
@@ -3042,9 +3049,11 @@ const articleEngineData = {
 
   <p>And the team that was a million miles away in April is still a million miles away when the series ends.</p>
 
-  <p>The most likely outcome of this playoff run, as noted by multiple observers entering it, is a first-round exit at the hands of the Denver Nuggets. A team Minnesota had championship aspirations against. A team they should, on paper, compete with.</p>
+  <p>The most likely outcome of this playoff run, as noted by multiple observers entering it, is a first-round exit at the hands of the Denver Nuggets.</p>
 
-  <p>If that happens -- if Nikola Jokic and Mike Malone spend a week dissecting and systematically exploiting every structural flaw documented in this piece, every late-game collapse pattern, every rotation inflexibility, every second-half adjustment vacuum -- then the conversation Minnesota must have will no longer be uncomfortable.</p>
+  <p>A team Minnesota had championship aspirations against. A team they should, on paper, compete with.</p>
+
+  <p>If that happens, if Nikola Jokic and Dave Adeleman spend a week dissecting and systematically exploiting every structural flaw documented in this piece, every late-game collapse pattern, every rotation inflexibility, every second-half adjustment vacuum -- then the conversation Minnesota must have will no longer be uncomfortable.</p>
 
   <p>It will be urgent.</p>
 
@@ -3054,9 +3063,11 @@ const articleEngineData = {
 
   <p>The question is whether good is good enough for what Anthony Edwards deserves.</p>
 
-  <p>And what Anthony Edwards deserves is a coach whose edge matches his talent. Who develops young players instead of containing them. Who makes halftime adjustments that opponent coaches haven't already scripted responses to. Who holds every player to the same standard regardless of contract size or star power. Who, when a 99% win probability is in his hands, does not let it slip through a structureless final minute.</p>
+  <p>And what Anthony Edwards deserves is a coach whose edge matches his talent. Who develops young players instead of containing them. Who makes halftime adjustments that opponent coaches haven't already scripted responses to. Who, when a high win probability is in his hands, does not let it slip through a structureless final minute.</p>
 
-  <div class="fa-pull"><p>What Anthony Edwards deserves is a championship coach. The question -- on April 12, 2026, six days before the playoffs begin -- is whether he has one.</p></div>
+  <p>What Anthony Edwards deserves is a championship coach.</p>
+
+  <p>The question -- on April 12, 2026, six days before the playoffs begin -- is whether he has one.</p>
 
   <p class="fa-finale">
     The seat is hot.<br>
@@ -3064,12 +3075,702 @@ const articleEngineData = {
     <span class="fa-gold">And the clock, which does not negotiate, does not wait.</span>
   </p>
 
-  <div class="fa-break"><span>§</span></div>
+</div>
+`
+},
+"boba-nba-draft": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/fa.jpeg",
+    time: "12 MIN READ",
+    title: "My Early 2026 NBA Draft Jumbled Takes",
+    content: `
+<style>
+  /* ── BASE ───────────────────────────────────────────────── */
+  .draft-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .draft-article p {
+    font-size: clamp(.95rem, 2.4vw, 1.15rem);
+    line-height: 1.88;
+    margin-bottom: 1.6rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
 
-  <p class="fa-finale" style="text-align:center;">
-    <span class="fa-red">The games begin April 18.</span><br>
-    What happens next will answer the question this piece only asks.
-  </p>
+  /* ── INTRO NOTE ─────────────────────────────────────────── */
+  .draft-article .da-note {
+    font-size: clamp(.88rem, 2vw, 1rem);
+    font-style: italic;
+    line-height: 1.75;
+    opacity: 0.6;
+    margin-bottom: 2.5rem;
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid rgba(212,175,55,0.35);
+    border-radius: 0 .75rem .75rem 0;
+    background: rgba(212,175,55,0.04);
+  }
+
+  /* ── SECTION BANNERS ────────────────────────────────────── */
+  .draft-article .da-section-banner {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin: 4rem 0 2.5rem;
+  }
+  .draft-article .da-section-banner .da-banner-rule {
+    flex: 1;
+    height: 1px;
+    background: currentColor;
+    opacity: .1;
+  }
+  .draft-article .da-section-banner .da-banner-label {
+    font-family: 'Inter', sans-serif;
+    font-size: .62rem;
+    font-weight: 900;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    padding: .55rem 1.35rem;
+    border-radius: 2rem;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .da-banner-label.high,
+  .da-banner-label.monitor,
+  .da-banner-label.low {
+    background: transparent;
+    color: inherit;
+    border: none;
+    opacity: 0.35;
+    letter-spacing: .45em;
+    font-size: .58rem;
+  }
+
+
+  /* ── PLAYER CARDS ───────────────────────────────────────── */
+  .draft-article .da-player-card {
+    border: 1px solid rgba(0,0,0,.07);
+    border-radius: 2rem;
+    padding: 2rem 2rem 1.75rem;
+    margin-bottom: 2rem;
+    background: rgba(0,0,0,.015);
+    transition: box-shadow .35s ease, transform .35s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .draft-article .da-player-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.3), transparent);
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  .draft-article .da-player-card:hover::before {
+    opacity: 1;
+  }
+  .dark .draft-article .da-player-card {
+    border-color: rgba(255,255,255,.07);
+    background: rgba(255,255,255,.025);
+  }
+  .draft-article .da-player-card:hover {
+    box-shadow: 0 20px 60px rgba(0,0,0,.1);
+    transform: translateY(-2px);
+  }
+  .dark .draft-article .da-player-card:hover {
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  }
+
+  /* ── PLAYER HEADER ──────────────────────────────────────── */
+  .draft-article .da-player-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .dark .draft-article .da-player-header {
+    border-bottom-color: rgba(255,255,255,.07);
+  }
+  .draft-article .da-player-name {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    font-weight: 900;
+    letter-spacing: -.03em;
+    line-height: .95;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0 0 .5rem;
+  }
+  .draft-article .da-player-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    opacity: .4;
+    line-height: 1.6;
+  }
+
+  /* ── GRADE PILLS ────────────────────────────────────────── */
+  .draft-article .da-grade-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: 'Inter', sans-serif;
+    font-size: .62rem;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .55rem 1.1rem;
+    border-radius: 2rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .da-grade-pill.tier-1 {
+    background: rgba(16,185,129,.12);
+    color: #10b981;
+    border: 1px solid rgba(16,185,129,.25);
+    box-shadow: 0 4px 16px rgba(16,185,129,.12);
+  }
+  .da-grade-pill.tier-2 {
+    background: rgba(212,175,55,.12);
+    color: #b8960a;
+    border: 1px solid rgba(212,175,55,.25);
+    box-shadow: 0 4px 16px rgba(212,175,55,.1);
+  }
+  .dark .da-grade-pill.tier-2 { color: #d4af37; }
+  .da-grade-pill.tier-3 {
+    background: rgba(245,158,11,.12);
+    color: #d97706;
+    border: 1px solid rgba(245,158,11,.2);
+    box-shadow: 0 4px 16px rgba(245,158,11,.08);
+  }
+  .da-grade-pill.tier-4 {
+    background: rgba(220,38,38,.08);
+    color: #dc2626;
+    border: 1px solid rgba(220,38,38,.2);
+    box-shadow: 0 4px 16px rgba(220,38,38,.06);
+  }
+
+  /* ── PULL QUOTES ────────────────────────────────────────── */
+  .draft-article .da-pull {
+    margin: 1.75rem 0 1.5rem;
+    padding: 1.5rem 1.75rem 1.5rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+    box-shadow: inset 0 0 0 1px rgba(212,175,55,.06);
+  }
+  .draft-article .da-pull p {
+    font-size: clamp(.95rem, 2.4vw, 1.15rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .draft-article .da-pull p { color: #d4af37; }
+
+  /* ── TAGS ───────────────────────────────────────────────── */
+  .draft-article .da-tag {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: .58rem;
+    font-weight: 900;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    padding: .32rem .85rem;
+    border-radius: 1rem;
+    margin-bottom: .65rem;
+  }
+  .da-tag.hot {
+    background: rgba(16,185,129,.1);
+    color: #10b981;
+    border: 1px solid rgba(16,185,129,.2);
+  }
+  .da-tag.watch {
+    background: rgba(245,158,11,.1);
+    color: #d97706;
+    border: 1px solid rgba(245,158,11,.2);
+  }
+  .da-tag.cold {
+    background: rgba(220,38,38,.08);
+    color: #dc2626;
+    border: 1px solid rgba(220,38,38,.18);
+  }
+
+  /* ── CONSENSUS ROW ──────────────────────────────────────── */
+  .draft-article .da-consensus-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .55rem;
+    align-items: center;
+    margin-top: .85rem;
+    margin-bottom: .25rem;
+  }
+  .draft-article .da-consensus-row span {
+    font-family: 'Inter', sans-serif;
+    font-size: .6rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    opacity: .4;
+  }
+  .draft-article .da-consensus-row .da-boba {
+    background: rgba(212,175,55,.1);
+    color: #b8960a;
+    border: 1px solid rgba(212,175,55,.25);
+    padding: .32rem .9rem;
+    border-radius: 1rem;
+    font-size: .62rem;
+    font-weight: 900;
+    opacity: 1;
+    box-shadow: 0 2px 8px rgba(212,175,55,.1);
+  }
+  .dark .draft-article .da-consensus-row .da-boba { color: #d4af37; }
+  .draft-article .da-consensus-row .da-consensus {
+    background: rgba(0,0,0,.05);
+    padding: .32rem .9rem;
+    border-radius: 1rem;
+    font-size: .62rem;
+    font-weight: 900;
+    opacity: 1;
+    border: 1px solid rgba(0,0,0,.06);
+  }
+  .dark .draft-article .da-consensus-row .da-consensus {
+    background: rgba(255,255,255,.07);
+    color: rgba(255,255,255,.55);
+    border-color: rgba(255,255,255,.08);
+  }
+
+  /* ── RANKINGS TABLE ─────────────────────────────────────── */
+  .da-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 1.75rem;
+    border: 1px solid rgba(0,0,0,.07);
+    margin: 2.5rem 0;
+    box-shadow: 0 8px 40px rgba(0,0,0,.06);
+  }
+  .dark .da-table-wrap {
+    border-color: rgba(255,255,255,.07);
+    box-shadow: 0 8px 40px rgba(0,0,0,.3);
+  }
+  .da-table-wrap table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+  }
+  .da-table-wrap thead tr {
+    background: rgba(0,0,0,.04);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .dark .da-table-wrap thead tr {
+    background: rgba(255,255,255,.04);
+    border-bottom-color: rgba(255,255,255,.07);
+  }
+  .da-table-wrap th {
+    font-size: .58rem;
+    font-weight: 900;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    opacity: .4;
+    white-space: nowrap;
+    color: inherit;
+  }
+  .da-table-wrap td {
+    font-size: .8rem;
+    font-weight: 600;
+    padding: .9rem 1.25rem;
+    border-bottom: 1px solid rgba(0,0,0,.04);
+    color: inherit;
+    vertical-align: middle;
+  }
+  .dark .da-table-wrap td { border-bottom-color: rgba(255,255,255,.04); }
+  .da-table-wrap tr:last-child td { border-bottom: none; }
+  .da-table-wrap tbody tr:hover td {
+    background: rgba(212,175,55,.04);
+  }
+  .dark .da-table-wrap tbody tr:hover td {
+    background: rgba(212,175,55,.06);
+  }
+  .da-table-wrap .da-grade-cell {
+    font-weight: 900;
+    font-size: .78rem;
+    white-space: nowrap;
+    letter-spacing: -.01em;
+  }
+  .da-table-wrap .da-grade-cell.g1 { color: #10b981; }
+  .da-table-wrap .da-grade-cell.g2 { color: #d4af37; }
+  .da-table-wrap .da-grade-cell.g3 { color: #d97706; }
+  .da-table-wrap .da-grade-cell.g4 { color: #dc2626; }
+  .da-table-wrap .da-consensus-cell {
+    font-size: .73rem;
+    opacity: .5;
+    font-weight: 600;
+  }
+  .da-table-wrap tbody tr:first-child td {
+    padding-top: 1.1rem;
+  }
+</style>
+
+<div class="draft-article">
+  <div class="qf-byline">
+      <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+      <div class="qf-byline-text">
+          <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a> <br>
+          April 12, 2026
+      </div>
+  </div>
+
+  <p class="pt-20 da-note">A note before we start: These are early-cycle, film-room gut takes. Not consensus. Not mock draft gospel. Just eyes on the tape before the predraft machine tells everyone what to think. </p>
+
+  <!-- ── GUYS I'M HIGH ON ──────────────────────────────── -->
+  <div class="da-section-banner">
+    <span class="da-banner-rule"></span>
+    <span class="da-banner-label high">Guys I'm High On</span>
+    <span class="da-banner-rule"></span>
+  </div>
+
+  <!-- WAGLER -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+   
+        <h2 class="da-player-name">Keaton Wagler</h2>
+        <p class="da-player-meta">Illinois &nbsp;·&nbsp; G &nbsp;·&nbsp; 6'6" &nbsp;·&nbsp; Freshman</p>
+        <div class="da-consensus-row">
+          <span>My Early Grade:</span>
+          <span class="da-boba">Top 12 Pick</span>
+          <span>Consensus:</span>
+          <span class="da-consensus">Top 6–8</span>
+        </div>
+      </div>
+
+    </div>
+    <p>Wagler averaged 17.9 points, 5.1 rebounds and 4.2 assists per game on 44.5 percent shooting and 39.7 percent from three during his lone season at Illinois, helping the Illini reach the Final Four. </p>
+    <p>Here's what the tape shows that the stat sheet doesn't fully capture.</p>
+    <p>This kid has a triple threat that most guys in this class simply don't own. He sets his feet, reads the defense, and attacks from position. His footwork is Steph-adjacent in one specific way: the cross-step, one-motion release where the shot comes off the catch before the defense can even process the moment. He doesn't need separation because his process removes the need for it.</p>
+    <p>His jab-cross is his signature. He lives there. And it works because his footwork is so natural He's not an explosive athlete, but he's super fluid. there's a real artistry to the way his fluid movement flows into dribble moves, which glides into footwork.  That's exactly right. He's smooth. Not fast. Smooth. There's a difference, and in the modern NBA the difference matters less than it used to.</p>
+    <p>His step-back is elite. Full stop. He's calm under contact in a way that 19-year-olds almost never are. He seems like a fast processor.</p>
+    <p>He doesn't waste motion. He's always in a position to score, pass, or drive.</p>
+    <p>His weakness seems to be a lack of above-the-rim play. His post-up is underrated. He loves that spin fade. For his frame, he shows surprising composure and balance when bumped  and in staying in his shot and recalibrating off physical contact.</p>
+    <p>He's a creative shot-maker who thrives off movement and pull-ups. Very very good handles. </p>
+    <div class="da-pull"><p>Where I think he fits: Top 12 pick.</p></div>
+  </div>
+
+  <!-- McNEIL JR. -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+        <span class="da-tag hot">High</span>
+        <h2 class="da-player-name">Paul McNeil Jr.</h2>
+        <p class="da-player-meta">NC State &nbsp;·&nbsp; G &nbsp;·&nbsp; Sophomore</p>
+        <div class="da-consensus-row">
+          <span>My Early Grade:</span>
+          <span class="da-boba">Mid-to-Late First Round (Picks 20–30)</span>
+          <span>ESPN Board:</span>
+          <span class="da-consensus">53rd Overall</span>
+        </div>
+      </div>
+    </div>
+    <p>McNeil Jr. is ranked 53rd overall on ESPN's current big board. </p>
+    <p>The public grade on McNeil is low. The eye test argues for more.</p>
+    <p>He has a nice shot mechanic,  good arc, soft touch. He's a glider ..moves without telegraphing, drifts into catch-and-fade situations. The moving corner fade on a somewhat contested look is his calling card.</p>
+    <p>The hands are excellent. This doesn't get talked about enough with perimeter players -- the ability to catch anything, in any position, and immediately be in a shooting or driving posture. McNeil has it.
+The concern is the frame. He's very thin. </p>
+    <p>I think his ceiling is higher than where he's being projected. I see a really solid  NBA rotation player. Could be more.</p>
+  </div>
+
+  <!-- ── GUYS I'M MONITORING ──────────────────────────── -->
+  <div class="da-section-banner">
+    <span class="da-banner-rule"></span>
+    <span class="da-banner-label monitor">Guys I'm Monitoring (Mixed Grades)</span>
+    <span class="da-banner-rule"></span>
+  </div>
+
+  <!-- DYBANTSA -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+        <h2 class="da-player-name">AJ Dybantsa</h2>
+        <p class="da-player-meta">BYU &nbsp;·&nbsp; F &nbsp;·&nbsp; 6'9" &nbsp;·&nbsp; Freshman</p>
+        <div class="da-consensus-row">
+          <span>Consensus Grade:</span>
+          <span class="da-consensus">Top 3 Pick</span>
+          <span>My Honest Take:</span>
+          <span class="da-boba">Top 3 But With an Asterisk</span>
+        </div>
+      </div>
+    </div>
+    <p>Dybantsa averaged 25.5 points on 51% shooting with 6.8 rebounds and 3.7 assists per game for a top-25 BYU program.  The scoring is real. The athleticism off screens is legitimately frightening. He gets to his spots fast, and the combination of strength and length makes him genuinely hard to contain in the post setup.</p>
+    <p>But here's what the tape shows that the consensus is glossing over.</p>
+    <p>He runs from double teams. This is not a minor flaw for a guy projected to be the No. 1 pick. When the double comes, he reads it slowly. He looks oblivious at times which leads to turnovers. </p>
+    <p>He's a ball-hog, just a style observation. There's a lot of fleshing out to be done with his general decision-making, which can bleed into other areas. His transition get-back is slow. </p>
+    <p>His defensive motor runs in bursts rather than continuously. When he's engaged defensively, it looks great. When he's not, he coasts.</p>
+    <p>That said, the physical tools are outrageous. The strength on the post setup, the screener's mentality, bursts of truly impressive half-court defense when he locks in. He's very strong and has a good frame to build on.</p>
+    <p>His production is backed up by a 60 % true shooting percentage and plenty of second-half highlights and sequences that highlight the ability to carry a team and take over a game. </p>
+    <div class="da-pull"><p>He's a top-3 pick. But the "franchise cornerstone no questions asked" framing requires more than what the tape currently shows on defensive consistency.</p></div>
+  </div>
+
+  <!-- PETERSON -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+        <h2 class="da-player-name">Darryn Peterson</h2>
+        <p class="da-player-meta">Kansas &nbsp;·&nbsp; G &nbsp;·&nbsp; Freshman</p>
+        <div class="da-consensus-row">
+          <span>My Early Grade:</span>
+          <span class="da-boba">15–27 Range</span>
+          <span>Consensus:</span>
+          <span class="da-consensus">Top 4</span>
+        </div>
+      </div>
+    </div>
+    <p>This might be the most controversial take in the piece, so sit with it.</p>
+    <p>Peterson is smooth. His defensive movement is elite. He's a defensive communicator, vocal, present, engaged. His give-and-go passing is awesome. Off screens, he's one of the fastest processors in the class.</p>
+    <p>But here's what the tape shows at the moment: the handle under pressure is tighter than his reputation suggests. He can be thrown off on dribble penetration by physical guards. The shot mechanics look awkward, functional but not natural.</p>
+    <p>Peterson dealt with a full-body cramp during preseason bootcamp, and the physical and mental effects lingered all season. He averaged 19.9 points per game -- the first freshman in Kansas history to average 20 -- but played just 20 games. </p>
+    <p>Durabiity is a concern. </p>
+  </div>
+
+  <!-- LOPEZ -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+        <h2 class="da-player-name">Karim Lopez</h2>
+        <p class="da-player-meta">New Zealand Breakers (NBL) &nbsp;·&nbsp; F &nbsp;·&nbsp; 6'9" &nbsp;·&nbsp; Mexico</p>
+        <div class="da-consensus-row">
+          <span>My Early Grade:</span>
+          <span class="da-boba">Top 8 Pick</span>
+          <span>Consensus:</span>
+          <span class="da-consensus">10–12</span>
+        </div>
+      </div>
+    </div>
+    <p>He moves different and he looks like he has the body to be a force. Despite his size, he moves with a fluidity of a smaller forward. Fluid. Loose. Not explosive, but fluid in a way that covers ground easily.</p>
+    <p>The loose passes are a compliment here, I mean that genuinely. They're confident passes. Not sloppy, just unbothered. </p>
+    <p>He reads the catch quickly from the post and gets to his spin move fast. His pivot-and-turnaround jumper is an NBA weapon right now, not a project.</p>
+    <p>The NBA values role versatility and high-end physical tools. That combined with the flashes Lopez has shown put him on clear NBA radars.  </p>
+    <p>He's a big who processes at guard speed and knows instinctively when to leave his man on help rotations. That instinct might get him in trouble in the NBA, but it also signals IQ that you can't teach.</p>
+    <p>The genuine concerns: the defensive anchor role against 2s and 3s will be brutal early. He's not going to hold up on the perimeter against NBA wings in year one. </p>
+    <p>The help defense is poor, he leaves his man and doesn't actually protect the rim consistently. His perimeter shooting at 32% on three attempts per game are decent returns, but the shot process is the prevailing factor in determining his eventual ceiling. </p>
+    <p>His hands are excellent. The short-range passing off the catch -- the jump-catch-and-drop to a cutter -- is already an NBA skill. He's going to give you good rotation minutes 12-15 as and his ceiling is legitimately exciting.</p>
+  </div>
+
+  <!-- BOOZER -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+        <h2 class="da-player-name">Cameron Boozer</h2>
+        <p class="da-player-meta">Duke &nbsp;·&nbsp; PF &nbsp;·&nbsp; Freshman</p>
+        <div class="da-consensus-row">
+          <span>Consensus Grade:</span>
+          <span class="da-consensus">Top 3 Pick</span>
+          <span>My Early Grade:</span>
+          <span class="da-boba">4–10</span>
+        </div>
+      </div>
+    </div>
+    <p>The passing is genuinely impressive. The bullet pass is crisp, he leads the receiver, he sees cutters. That's the best thing on his tape right now.</p>
+    <p>The transition vision is real. He's the most physically imposing player in this draft as far as raw strength. He loves the tip-in put-back and he's good at it. He graded in Synergy Sports' 90th percentile or better in ball screen and isolation possessions. </p>
+    <p>But here's the honest tape reading: He is not a natural shooter. He's a catch-and-drive player, predominantly left-handed, and when he goes right it's slow and stiff. Scouts still wonder how much he can dominate at the next level without plus positional size, elite burst, or the kind of defensive tools and traits teams usually look for in a big. </p>
+    <p>The post game is the core problem. His body doesn't bend into favorable post-scoring angles naturally. The post spin is slow. When fast, physical NBA bigs attack his lower half on the post, his angles break down. That's a body limitation, not a skill limitation -- which means it's harder to develop away.</p>
+    <p>The shot looks functional but stiff.
+There's lingering fear around his lack of quickness, vertical pop and defensive projection.  I share some of that fear after watching some of his tape. 
+Hes a great teammate, I like his mentality, he's an excellent passer, and will win you games in specific situations. But some of the limitations at this stage of his development put him outside the top 3 in this particular class. In my humble opinion. </p>
+  </div>
+
+  <!-- WILSON -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+        <h2 class="da-player-name">Caleb Wilson</h2>
+        <p class="da-player-meta">UNC &nbsp;·&nbsp; F &nbsp;·&nbsp; Freshman</p>
+        <div class="da-consensus-row">
+          <span>Consensus Grade:</span>
+          <span class="da-consensus">Top 4 Pick</span>
+          <span>My Early Grade:</span>
+          <span class="da-boba">4–10</span>
+        </div>
+      </div>
+    </div>
+    <p>Wilson produced 19.8 points, 9.4 boards, 2.7 assists, 1.5 steals and 1.4 blocks before a season-ending thumb injury. 
+His frame has room to build into something special. He has a crazy fast twitch..elite. He's a a leaper, explosive.</p>
+    <p>The fadeaway is clean and he finds his spots well in the midrange.
+But the honest tape reading: this is a tall body with a small-guy mentality right now. He fades from physical confrontations rather than through them. The upper body and mid-back strength isn't there yet to bully smaller opponents. He doesn't shoot threes, which is a major concern in today's league for a forward who also can't force his way inside.</p>
+    <p>The left-hand aversion is stark. He has a good jab and he seems to play at his own pace at times but experienced defenders will take away his right hand and make him use his left.</p>
+    <p>His elite athleticism and activity level screams future All-Defense candidacy. He is really long and covers so much ground. His defensive upside is legitimate. Offensively, he needs a full year of NBA strength development before we know how real his ceiling is.</p>
+  </div>
+
+  <!-- ACUFF -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+        <h2 class="da-player-name">Darius Acuff Jr.</h2>
+        <p class="da-player-meta">Arkansas &nbsp;·&nbsp; G &nbsp;·&nbsp; Freshman</p>
+        <div class="da-consensus-row">
+          <span>My Early Grade:</span>
+          <span class="da-boba">26–38</span>
+          <span>Consensus:</span>
+          <span class="da-consensus">Top 8</span>
+        </div>
+      </div>
+    </div>
+    <p>His three-point shot is the whole ticket here. He shows range, and shot 44% from three on significant volume while limiting turnovers to 2.2 per game on a 29.5% usage rate.  That's a legitimate shooting floor at the NBA level.
+But the tape raises honest questions. He's a straight-line guy. His hips are tight, his ankles are stiff. There's not a lot of bend in his drives. He'll get his layups sent into the stands at the NBA level. Small guards who rely on straight-line drives to the rim don't survive that physics equation against real shot-blockers. Scouts acknowledge Acuff does not project favorably defensively. </p>
+    <p>His vision on drives is decent. His no-look passes flash real playmaking IQ in isolated moments. But "moments" and "sustainable NBA skill" live in different zip codes.
+His shot mechanics aren't pretty. It's functional, very functional, but not naturally fluid. Think Kenyon Martin Jr.</p>
+    <p>He's more NBA-ready than most players in this class from a feel standpoint. He has a comfortable floor. But the ceiling questions around athleticism and defensive projection put him outside the lottery.</p>
+  </div>
+
+  <!-- LENDEBORG -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+        <h2 class="da-player-name">Yaxel Lendeborg</h2>
+        <p class="da-player-meta">Michigan &nbsp;·&nbsp; PF</p>
+        <div class="da-consensus-row">
+          <span>Projection:</span>
+          <span class="da-boba">20–30</span>
+          <span>Consensus:</span>
+          <span class="da-consensus">Mid-Late 1st</span>
+        </div>
+      </div>
+    </div>
+    <p>Age is the downside here. He's a damn near finished product walking into the league. The frame is great even if initial eye test reads him as unathletic but if you watch him in movement, it shifts. He's a glider, not a sprinter, which at 6'8" reads odd until you realize he's covering ground efficiently without looking like he's working.</p>
+    <p>He's a guy who always seems to be where the ball is going without appearing to chase it.</p>
+    <p>The post bag has some depth. His spin moves on the drive are functional. Excellent layup finisher. Strong offensive rebounding instincts. His triple threat shows discipline.</p>
+    <p>But the lack of explosive athleticism is real, and the defensive questions against quicker players in the NBA are legitimate. He's a role player on a good team. High-value role player, but a role player.</p>
+  </div>
+
+  <!-- MULLINS -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+        <h2 class="da-player-name">Braylon Mullins</h2>
+        <p class="da-player-meta">G/F &nbsp;·&nbsp; 6'6"</p>
+        <div class="da-consensus-row">
+          <span>My Early Grade:</span>
+          <span class="da-boba">31–40</span>
+          <span>Consensus:</span>
+          <span class="da-consensus">Second Round</span>
+        </div>
+      </div>
+    </div>
+    <p>The shot mechanics are genuinely interesting. Good base, solid release with an arc that suggests it translates. He's a turn-three specialist who actually surprises you with his ability to drive once you've given him room on the perimeter. </p>
+    <p>Uses the body bump intelligently on drives.
+Very skinny frame. And his hands are a concern. His range is good but shot consistency needs work before you trust it.
+Early second-round value. A bet on the shooting mechanics holding up at the next level.</p>
+  </div>
+
+  <!-- ── GUYS I'M LOW ON ──────────────────────────────── -->
+  <div class="da-section-banner">
+    <span class="da-banner-rule"></span>
+    <span class="da-banner-label low">Guys I'm Low On</span>
+    <span class="da-banner-rule"></span>
+  </div>
+
+  <!-- PHILON -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+
+        <h2 class="da-player-name">LaBaron Philon</h2>
+        <p class="da-player-meta">Alabama &nbsp;·&nbsp; G</p>
+        <div class="da-consensus-row">
+          <span>My Early Grade:</span>
+          <span class="da-boba">Late 2nd / Undrafted</span>
+          <span>Consensus:</span>
+          <span class="da-consensus">Late 1st</span>
+        </div>
+      </div>
+    </div>
+    <p>He seems stiff in movement. Looks slow in the half-court. He comes off to me as a player built for a college game that doesn't fully translate -- like a Dillingham body type (and game somewhat) without Dillingham's burst.</p>
+  </div>
+
+  <!-- FAYE -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+
+        <h2 class="da-player-name">Mouhamed Faye</h2>
+        <p class="da-player-meta"></p>
+        <div class="da-consensus-row">
+          <span>My Early Grade:</span>
+          <span class="da-boba">Undrafted</span>
+          <span>Consensus:</span>
+          <span class="da-consensus">Second Round</span>
+        </div>
+      </div>
+    </div>
+    <p>Amazing physical frame. But the finishing at the rim is poor, the hands are bad for a player his size, and the foul rate is alarming. He's a hacker who hasn't developed the feel to translate physical tools into basketball outcomes. Strong picker but you can't build an NBA career on screening alone.</p>
+  </div>
+
+  <!-- EVANS -->
+  <div class="da-player-card">
+    <div class="da-player-header">
+      <div>
+
+        <h2 class="da-player-name">Isaiah Evans</h2>
+        <p class="da-player-meta">Duke &nbsp;·&nbsp; G</p>
+        <div class="da-consensus-row">
+          <span>Boba:</span>
+          <span class="da-boba">Undrafted</span>
+          <span>Consensus:</span>
+          <span class="da-consensus">Late First</span>
+        </div>
+      </div>
+    </div>
+    <p>The body type raises red flags on first film watch, seems to play with an anterior tilt affecting his athleticism output. The vision on drives is poor. Slow processing in traffic. His defensive tools exist on paper , but the overall package on tape doesn't justify a guaranteed first-round commitment from a value standpoint.</p>
+  </div>
+
+  <!-- ── RANKINGS TABLE ──────────────────────────────── -->
+  <div class="da-section-banner">
+    <span class="da-banner-rule"></span>
+    <span class="da-banner-label monitor">The Ranking At A Glance</span>
+    <span class="da-banner-rule"></span>
+  </div>
+
+  <div class="da-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>My Early Grade</th>
+          <th>Consensus</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Keaton Wagler</td><td class="da-grade-cell g1">Top 12 Pick</td><td class="da-consensus-cell">Top 6–8</td></tr>
+        <tr><td>AJ Dybantsa</td><td class="da-grade-cell g2">Top 3 (with flags)</td><td class="da-consensus-cell">Top 3</td></tr>
+        <tr><td>Karim Lopez</td><td class="da-grade-cell g1">Top 8</td><td class="da-consensus-cell">10–12</td></tr>
+        <tr><td>Darryn Peterson</td><td class="da-grade-cell g3">Picks 15–27</td><td class="da-consensus-cell">Top 4</td></tr>
+        <tr><td>Cameron Boozer</td><td class="da-grade-cell g3">Mid-Lottery</td><td class="da-consensus-cell">Top 3</td></tr>
+        <tr><td>Caleb Wilson</td><td class="da-grade-cell g3">Mid-Lottery</td><td class="da-consensus-cell">Top 4</td></tr>
+        <tr><td>Paul McNeil Jr.</td><td class="da-grade-cell g2">Late First</td><td class="da-consensus-cell">Late 1st/2nd</td></tr>
+        <tr><td>Yaxel Lendeborg</td><td class="da-grade-cell g2">Late First</td><td class="da-consensus-cell">Mid-Late 1st</td></tr>
+        <tr><td>Darius Acuff</td><td class="da-grade-cell g3">Late First/Early 2nd</td><td class="da-consensus-cell">Top 8</td></tr>
+        <tr><td>Braylon Mullins</td><td class="da-grade-cell g4">Early Second</td><td class="da-consensus-cell">Second Round</td></tr>
+        <tr><td>LaBaron Philon</td><td class="da-grade-cell g4">Late 2nd/Undrafted</td><td class="da-consensus-cell">Late 1st</td></tr>
+        <tr><td>Mouhamed Faye</td><td class="da-grade-cell g4">Undrafted</td><td class="da-consensus-cell">Second Round</td></tr>
+        <tr><td>Isaiah Evans</td><td class="da-grade-cell g4">Undrafted</td><td class="da-consensus-cell">Late First</td></tr>
+      </tbody>
+    </table>
+  </div>
+
 
 </div>
 `
@@ -3079,15 +3780,13 @@ const articleEngineData = {
     tag: "NFL Offseason",
     hero: "images/jj.jpeg",
     time: "12 MIN READ",
-    title: "The Quiet Fire",
+    title: "The Return Of The Jetta",
     content: `
 <style>
   .qf {
     font-family: 'Georgia', serif;
     color: inherit;
   }
-
-  /* ── KICKER ── */
   .qf-kicker {
     display: block;
     font-family: 'Inter', sans-serif;
@@ -3098,8 +3797,6 @@ const articleEngineData = {
     color: #2563eb;
     margin-bottom: 0.5rem;
   }
-
-  /* ── DECK ── */
   .qf-deck {
     font-size: clamp(1.05rem, 2.8vw, 1.35rem);
     font-weight: 400;
@@ -3111,8 +3808,6 @@ const articleEngineData = {
     padding-bottom: 2.5rem;
     border-bottom: 1px solid rgba(128,128,128,0.15);
   }
-
-  /* ── BODY COPY ── */
   .qf p {
     font-size: clamp(1rem, 2.4vw, 1.175rem);
     line-height: 1.9;
@@ -3121,8 +3816,6 @@ const articleEngineData = {
     opacity: 0.88;
     color: inherit;
   }
-
-  /* ── LEDE ── */
   .qf .qf-lede {
     font-size: clamp(1.2rem, 3.2vw, 1.55rem);
     font-weight: 700;
@@ -3140,8 +3833,6 @@ const articleEngineData = {
     margin-top: 0.08em;
     color: #2563eb;
   }
-
-  /* ── PART HEADERS ── */
   .qf-part {
     margin: 3.5rem 0 1.5rem;
   }
@@ -3170,12 +3861,10 @@ const articleEngineData = {
     display: block;
     height: 3px;
     width: 2.5rem;
-    background: #2563eb;
+    background: #00000;
     margin-top: 0.85rem;
     border-radius: 2px;
   }
-
-  /* ── PULL QUOTE ── */
   .qf-pull {
     position: relative;
     margin: 2.75rem 0;
@@ -3194,8 +3883,6 @@ const articleEngineData = {
     color: #b8960a;
   }
   .dark .qf-pull p { color: #d4af37; }
-
-  /* ── STAT CALLOUT ── */
   .qf-stat {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -3235,8 +3922,6 @@ const articleEngineData = {
     letter-spacing: 0.1em;
     opacity: 0.45;
   }
-
-  /* ── SINGLE BIG NUMBER ── */
   .qf-number {
     text-align: center;
     margin: 2.75rem 0;
@@ -3263,8 +3948,6 @@ const articleEngineData = {
     letter-spacing: 0.2em;
     opacity: 0.45;
   }
-
-  /* ── SECTION BREAK ── */
   .qf-break {
     display: flex;
     align-items: center;
@@ -3285,14 +3968,23 @@ const articleEngineData = {
     letter-spacing: 0.3em;
     text-transform: uppercase;
   }
-
-  /* ── CODA ── */
+  .qf-isolated {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(37,99,235,0.2);
+    border-bottom: 1px solid rgba(37,99,235,0.2);
+    text-align: center;
+    color: #2563eb;
+  }
   .qf-coda {
     font-style: italic;
     opacity: 0.7 !important;
   }
-
-  /* ── FINAL LINES ── */
   .qf-finale {
     font-size: clamp(1.05rem, 2.6vw, 1.3rem) !important;
     font-weight: 700 !important;
@@ -3301,8 +3993,6 @@ const articleEngineData = {
   }
   .qf-finale .qf-blue { color: #2563eb; font-style: italic; }
   .qf-finale .qf-gold { color: #d4af37; }
-
-  /* ── BYLINE BLOCK ── */
   .qf-byline {
     display: flex;
     align-items: center;
@@ -3327,243 +4017,174 @@ const articleEngineData = {
     opacity: 0.5;
     line-height: 1.6;
   }
+  .qf strong { font-weight: 700; opacity: 1; }
+  .qf em { font-style: italic; }
 </style>
 
 <div class="qf">
 
-  <span class="qf-kicker">NFL Offseason · Analysis</span>
-
   <div class="qf-byline">
-    <div class="qf-byline-dot"></div>
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
     <div class="qf-byline-text">
-      By Bofa Sports Desk &nbsp;·&nbsp; April 2026<br>
-      12 min read &nbsp;·&nbsp; Minnesota Vikings
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a> <br>
+      April 10, 2026
     </div>
   </div>
 
-  <p class="qf-deck">
-    Justin Jefferson, the Weight of Greatness, and the Resurrection That's Coming
-  </p>
-
-  <!-- PART ONE -->
+  <!-- HUMBLE BEGINNINGS -->
   <div class="qf-part">
-    <span class="qf-part-label">Part One</span>
-    <h2 class="qf-part-title">The Architecture of a Dynasty</h2>
+    <h2 class="qf-part-title">Humble Beginnings</h2>
     <span class="qf-part-rule"></span>
   </div>
 
-  <p class="qf-lede">Before you can understand what happened to Justin Jefferson in 2025, you have to understand what he built. Not what was given to him. What he built.</p>
+  <p>Born June 16, 1999, in St. Rose, Louisiana  -- a small town that sits between New Orleans and Baton Rouge. There was no five-star recruiting circus.. Jefferson was a late bloomer at LSU, a slot receiver who had to learn his craft. A true student of the game. He took a quarterback approach to his studies, breaking the game down from a prospective of a DB.</p>
 
-  <p>He was born June 16, 1999, in St. Rose, Louisiana -- a small town that sits between New Orleans and Baton Rouge, the kind of place that either swallows you or sharpens you. It sharpened him. There was no five-star recruiting circus. No Chosen One mythology. Jefferson was a late bloomer at LSU, a slot receiver who learned his craft the unglamorous way -- through repetition, through film, through the radical act of studying defensive backs the way a scientist studies specimens. He dissected them. He catalogued their tendencies like a man who understood that every step he took in a route was a sentence in an argument he was making against the corner, and he intended to win every debate.</p>
+  <p>When the Vikings drafted him 22nd overall in 2020, he wasn't a household name. He was a smooth slot receiver from a high-powered college offense, and the skeptics wondered whether his production at LSU could translate.</p>
 
-  <p>When the Vikings drafted him 22nd overall in 2020, the world shrugged. He wasn't Jalen Reagor, who went four spots earlier to Philadelphia. He wasn't a household name. He was a smooth slot receiver from a high-powered college offense, and the skeptics wondered aloud whether his production at LSU was real or was Joe Burrow.</p>
-
-  <p>What followed was one of the most breathtaking debut acts in the history of the position.</p>
+  <p>What followed was a historical rookie season. 
+In his first three seasons, Jefferson averaged 96.5 receiving yards per game, the most of any player in NFL history across a player's first three seasons.</p>
 
   <div class="qf-number">
     <span class="qf-big">96.5</span>
     <span class="qf-caption">Receiving yards per game -- first three seasons. Most in NFL history.</span>
   </div>
 
-  <p>In his first three seasons, Jefferson averaged 96.5 receiving yards per game -- the most of any player in NFL history across a player's first three seasons. That is not a fantasy football number. That is not a product of scheme or era or offensive system inflation. That is a number that says: this man is different. Defenses knew where he was lined up. They knew his routes. They game-planned for him specifically -- bracketing him, rotating safeties over the top, designing entire coverage trees around eliminating one human being from the passing equation. And he still produced like gravity.</p>
-
-  <p>He ran the Hitch-and-Go with the patience of a chess grandmaster. His double-moves were not athletic tricks -- they were psychological operations, exploiting the micro-flinch that every cornerback has, the half-second of doubt when a receiver's hips lie and his feet betray where his eyes pointed. Jefferson understood the gap between stimulus and response in a defensive back's nervous system, and he lived in that gap.</p>
-
-  <p>He ran the crossing route like it was designed specifically for his body -- that impossibly smooth deceleration, the way he could sink his hips into a break and accelerate out of it without a visible transition point, making the catch look like it happened in slow motion while the film showed it happened faster than almost any receiver alive could manage.</p>
+  <p>His hard work had paid off. NFL defenses started scheming to stop him well into his rookie year,  and he still produced like no other WR who came before him.</p>
 
   <div class="qf-stat">
     <div class="qf-stat-box">
       <span class="qf-sv">6</span>
-      <span class="qf-sl">Straight 1K seasons</span>
+      <span class="qf-sl">Straight 1K Seasons</span>
     </div>
     <div class="qf-stat-box">
       <span class="qf-sv">500</span>
-      <span class="qf-sl">Receptions -- youngest ever</span>
+      <span class="qf-sl">Receptions -- Youngest Ever</span>
     </div>
     <div class="qf-stat-box">
       <span class="qf-sv">8,480</span>
-      <span class="qf-sl">Career yards at 26</span>
+      <span class="qf-sl">Career Yards at 26</span>
     </div>
     <div class="qf-stat-box">
       <span class="qf-sv">22nd</span>
-      <span class="qf-sl">Draft pick, 2020</span>
+      <span class="qf-sl">Draft Pick, 2020</span>
     </div>
   </div>
 
-  <p>He joined Mike Evans and Randy Moss as the only NFL players to open their career with six consecutive 1,000-yard seasons. He tied Larry Fitzgerald as the youngest player in history to reach 500 career receptions. He entered 2025 with 8,480 career receiving yards at 26 years old, and on his current trajectory, he was supposed to be breaking the all-time records comfortably by the time he was 30.</p>
+  <p>He joined Mike Evans and Randy Moss as the only NFL players to open their career with six consecutive 1,000-yard seasons.  He tied Larry Fitzgerald as the youngest player in history to reach 500 career receptions. He entered 2025 with 8,480 career receiving yards at 26 years old, and on his current trajectory, he was supposed to be breaking all-time records comfortably by the time he was 30.
+Then 2025 happened.</p>
 
-  <p>Then 2025 happened.</p>
 
-  <div class="qf-break"><span>§</span></div>
-
-  <!-- PART TWO -->
+  <!-- ANATOMY OF A DOWN YEAR -->
   <div class="qf-part">
-    <span class="qf-part-label">Part Two</span>
-    <h2 class="qf-part-title">The Anatomy of a Down Year</h2>
+    <h2 class="qf-part-title">Anatomy Of A Down Year</h2>
     <span class="qf-part-rule"></span>
   </div>
 
-  <p>Let's be precise here, because precision matters when we're talking about a player whose reputation is on the line.</p>
+  <p>Justin Jefferson posted career lows in every metric last year. He had 84 receptions on 140 targets for 1,048 receiving yards and 2 touchdowns in 2025, earning a PFF grade of 80.5 -- 14th among qualified wide receivers.</p>
 
-  <p>Justin Jefferson posted 84 receptions on 140 targets for 1,048 receiving yards and 2 touchdowns in 2025, earning a PFF grade of 80.5 -- 14th among qualified wide receivers.</p>
+  <p>The best receiver in the game finished the season as the 25th ranked WR…WR.. in half-PPR fantasy scoring</p>
 
-  <p><strong>Stop. Read that again.</strong></p>
-
-  <p>In what was described widely as his worst season -- a "nightmare year," a "fall-off," a "disappointment" -- the man still produced 1,048 yards, still ran elite routes, still commanded a 31% target share from some of the worst quarterback play in the league. His two touchdowns and 1,048 receiving yards were both career lows, and he finished as only the WR25 in half-PPR fantasy scoring.</p>
-
-  <p>But here is what the film buries that the box score can't hold:</p>
+  <p>He had a particular issue with drops last year, on the surface. That's what Vikings fans willl tell you but that contextually misread. He was charged with 3 drops on the year.  3 drops over 140 targets. That's a 2.13% drop rate. Not bad.</p>
 
   <div class="qf-pull">
-    <p>The drops people talked about were real but contextually misread. He was charged with 5 drops on the year. Five drops over 140 targets. That's a 3.6% drop rate. That is not a receiver falling apart.</p>
+    <p>The discourse manufactured a crisis from five dropped footballs and a quarterback who couldn't consistently get him the ball with anticipation. What actually happened in 2025 was not Justin Jefferson declining. It was Justin Jefferson being trapped inside a broken offensive ecosystem with a young quarterback who had no training camp with him.</p>
   </div>
 
-  <p>That is a receiver catching the attention of a media apparatus that had spent five years building him up and needed a narrative to match the diminished statistics. Every drop became a symbol. Every incompletion targeting him became evidence of decay. The discourse manufactured a crisis from five dropped footballs and a quarterback who couldn't consistently get him the ball with anticipation.</p>
+  <p>Jefferson missed training camp due to a hamstring injury, which set back his rapport with first-year starter J.J. McCarthy. McCarthy's lack of touch on certain throws, particularly, the deep crossing pattern.</p>
 
-  <p>What actually happened in 2025 was not Justin Jefferson declining. It was Justin Jefferson being trapped inside a broken offensive ecosystem with a young quarterback who had no training camp with him.</p>
+  <div class="qf-isolated">18% of Jefferson's targets in 2025 were deemed 'uncatchable' due to ball placement--the highest mark of his career.</div>
 
-  <p>Jefferson missed training camp due to a hamstring injury, which set back his rapport with first-year starter J.J. McCarthy. McCarthy's lack of touch on certain throws -- the "Jets" route, the deep crossing pattern where timing is everything -- left yards on the field before Jefferson even had a chance to catch the ball.</p>
+  <p>Defenses continued their tradition of building specific coverage schemes to eliminate Jefferson from games such as brackets and safety rotation over the top. To counter these defensive schemes, it requires a quarterback with the experience and processing speed to quickly identify the coverage, find the pre-snap tell, and deliver the ball to the second read.</p>
 
-  <p>This is the thing that doesn't show up in catch rates: the near-misses. The balls that were either under-thrown or overthrown before Jefferson could even extend his hands. The plays that became incompletions on the stat sheet but were, in reality, quarterback misses -- incompletions that get attributed to no one because no one records the ball that never arrives at the right time.</p>
+  <p>McCarthy was learning to do this in real time.</p>
 
-  <p>Here is what that looked like in practice: Jefferson runs a slant-and-go from the boundary. The corner plays soft, anticipating the slant. Jefferson takes three steps, sells the break, and releases vertical. The safety who was supposed to rotate over is a beat late -- Jefferson has a step. A step against an elite receiver is a 15-yard gain, maybe more. But the quarterback, still processing, still calibrating his eyes and feet to the speed of an NFL defense, holds the ball a half-second too long. The window closes. The incompletion that follows looks like a blown coverage, looks like nothing happened, and Jefferson trots back to the huddle. It doesn't register anywhere except in the memory of those who watched every snap.</p>
+  <p><strong>A revolving door of QB:</strong><br>
+The Vikings cycled through McCarthy, Carson Wentz, and Max Brosmer at quarterback in 2025. For the lack of a better term, Jefferson catching footballs thrown by a committee of "broken" quarterbacks.</p>
 
-  <div class="qf-stat">
-    <div class="qf-stat-box">
-      <span class="qf-sv">84</span>
-      <span class="qf-sl">Receptions</span>
-    </div>
-    <div class="qf-stat-box">
-      <span class="qf-sv">140</span>
-      <span class="qf-sl">Targets</span>
-    </div>
-    <div class="qf-stat-box">
-      <span class="qf-sv">1,048</span>
-      <span class="qf-sl">Yards</span>
-    </div>
-    <div class="qf-stat-box">
-      <span class="qf-sv">435</span>
-      <span class="qf-sl">YAC -- still elite</span>
-    </div>
-  </div>
+  <p>From a 22 year old QB whose confidence was being tested in real-time with viral memes. Beyond his off field struggles, Mccarthy's locker room pep talks and press conference answers got clipped and mocked and recycled.</p>
 
-  <p>The Vikings cycled through McCarthy, Carson Wentz, and Max Brosmer at quarterback in 2025. Jefferson caught just 19 passes for 227 yards across McCarthy's last five starts alone. That's not Jefferson declining. That's Jefferson catching footballs thrown by a committee of broken quarterbacks.</p>
+  <p>Then Wentz came in, and went…and all you remembered were a lot of yards, a lot of interceptions , a lot of losses and one terrible pr nightmare for Kevin Oconell. Then Max Brosmer's lone start in Seattle, One of the worst quarterback performances ever televised.</p>
 
-  <p>And through all of it -- through the drops that weren't drops and the touchdowns that never came and the Madden rating that dropped and the Pro Bowl snub -- Jefferson remained a solid teammate, a team captain, a professional. No leaked frustrations. No passive-aggressive post-game quotes. No anonymous sources whispering trade demands into the ears of beat reporters.</p>
+  <p>And through all of it ..through the career low numbers, missed pro bowl, lowered madden ratings… Jefferson remained a solid teammate, a team captain, and a professional. That's what makes Jefferson so unique in this era.</p>
 
-  <p>He carried the weight quietly. Which tells you everything about who he is.</p>
 
-  <div class="qf-break"><span>§</span></div>
-
-  <!-- PART THREE -->
+  <!-- THE CHARACTER OF SILENCE -->
   <div class="qf-part">
-    <span class="qf-part-label">Part Three</span>
-    <h2 class="qf-part-title">The Character of Silence</h2>
+    <h2 class="qf-part-title">The Character Of Silence</h2>
     <span class="qf-part-rule"></span>
   </div>
 
-  <p>There is a type of athlete who, when things go wrong, makes sure you know it isn't their fault. They point. They grumble. They let the machine of sports media do the work of reputation management while they go through the motions of professionalism.</p>
+  <p>Throughout his down season, Jefferson didn't sulk away or throw shade at his QBs like some other WR1s ..There was no "anonymous sources whisperings" none of the usual theatrics that follow the stereotypical "Diva WR" labels .
+He carried the weight quietly. Which tells you everything about who he is.</p>
 
-  <p>Justin Jefferson is not that athlete.</p>
+  <p>Jefferson's composure never wavered. He was arguably the best receiver in football being fed by a quarterback combination that would have made Randy Moss average. The offense could not manufacture the space and timing his routes demanded. His historical statistical ascent was being interrupted in its prime. And his peers -- Puka Nacua and Jaxon Smith-Njigba amongst others, seemingly surpassed him.</p>
 
-  <p>He spent 2025 in a situation that would have destroyed lesser men's composure. He was arguably the best receiver in football being fed by a quarterback combination that would have made Randy Moss average. The offense could not manufacture the space and timing his routes demanded. His historical statistical ascent was being interrupted in its prime. And his peers -- Puka Nacua, Jaxon Smith-Njigba, Amon-Ra St. Brown -- were posting the kind of numbers that were getting them Pro Bowl invitations while he scraped toward 1,000 yards.</p>
+  <p>Jefferson maintained publicly that he was confident McCarthy could be the Vikings' No. 1 quarterback. He showed up to every week's press conference with the same measured dignity.</p>
 
-  <p>Jefferson maintained publicly that he was confident McCarthy could be the Vikings' No. 1 quarterback. He showed up to every week's press conference with the same measured dignity. He stayed competitive in games that were going sideways. He brought the same preparation to a Week 13 blowout loss to Seattle that he brought to a Week 18 division-clinching win over Green Bay.</p>
+  <p>That tells you something that the statistics don't: Jefferson's internal compass didn't move. 
+His identity is not contingent on the stat line. He knows what he is. He knows how good he is. And he knows the difference between a down year that reflects him and a down year that reflects everything around him.</p>
 
   <div class="qf-pull">
-    <p>That distinction -- knowing the difference between a down year that reflects you and one that reflects everything around you -- is rarer than talent. Most great players can't hold onto it.</p>
+    <p>That distinction …knowing the difference, is a talent in itself. A lot of athletes can't hold onto it. They either deflect all blame outward or collapse inward. Jefferson found a third path: accountability without self-deprecation, patience without passivity.</p>
   </div>
 
-  <p>They either deflect all blame outward or collapse inward. Jefferson found a third path: accountability without self-destruction, patience without passivity.</p>
+  <p>He kept his throne in his mind. That matters for what comes next.</p>
 
-  <p>He kept his throne in his mind. That matters enormously for what comes next.</p>
 
-  <div class="qf-break"><span>§</span></div>
-
-  <!-- PART FOUR -->
+  <!-- PART FOUR: THE OFFSEASON OF REDEMPTION -->
   <div class="qf-part">
     <span class="qf-part-label">Part Four</span>
-    <h2 class="qf-part-title">The Offseason of Reckoning</h2>
+    <h2 class="qf-part-title">The Offseason Of Reckoning</h2>
     <span class="qf-part-rule"></span>
   </div>
 
   <p>On March 12, 2026, the Minnesota Vikings signed quarterback Kyler Murray to a one-year contract worth $1.3 million, with the Arizona Cardinals covering the remaining $35+ million of his guaranteed salary.</p>
 
-  <p>In a business filled with complicated transactions, this one had a clarifying simplicity: the Vikings got one of the more talented quarterbacks of his generation for essentially nothing, and Justin Jefferson got a lifeline.</p>
+  <p>In a business filled with complicated transactions, this one had a clarifying simplicity: the Vikings got one of the more talented quarterbacks in the league for essentially nothing, and Justin Jefferson got a lifeline.</p>
 
-  <p>But calling it a lifeline undersells what Kyler Murray actually represents for Jefferson's game. This isn't desperation. This is architecture.</p>
+  <p>But calling it a lifeline undersells what Kyler Murray actually represents for Jefferson's game. This isn't desperation. This is architecture.
+Murray will work with Kevin O'Connell and a WR tandem of Jetta and Jordan Addison. That is arguably the best supporting cast of his NFL career.</p>
 
-  <p>Murray will work with coach and play-caller Kevin O'Connell, tight end T.J. Hockenson, and receivers Justin Jefferson and Jordan Addison -- arguably the best supporting cast of his NFL career.</p>
+  <p>Consider what Murray brings to this offense mechanically. He is a rhythm passer with genuine touch, which should bring relief from McCarthy's one speed arm.</p>
 
-  <p>Consider what Murray brings to this offense mechanically. He is a rhythm passer with genuine touch -- the kind of quarterback who can drop the ball into the hip of a receiver on a crossing route rather than throwing it through the receiver's body, the kind of arm talent that can place a back-shoulder fade at 30 yards without the receiver having to slow down and accommodate a bad throw. He processes defenses quickly in the shotgun and pistol. He reads leverage and can punish bracket coverages by pulling the ball down and creating with his legs, which immediately forces safeties to honor the run threat and collapses the double-coverage architecture that defenses have been deploying against Jefferson for three straight years.</p>
+  <p>Murray offers an upgrade at processing, particularly in the shotgun and pistol. While McCarthy is a decent run threat himself, Murray offers a far superior run threat. This will make it easier to punish bracket coverages and relief some double-coverages that defenses have been deploying against Jefferson for most of his career.</p>
 
-  <div class="qf-pull">
-    <p>The most important thing Murray does for Jefferson isn't the big play. It's the intermediate throw. The 12-yard dig on third and eight. The slant against man coverage where the quarterback has to throw with anticipation -- hitting Jefferson in stride before he's even out of his break.</p>
-  </div>
+  <p>The most important thing Murray does for Jefferson is the intermediate digs, slants etc. . McCarthy couldn't consistently make those throws with the required timing. Murray has shown to be very solid in this area.</p>
 
-  <p>McCarthy couldn't consistently make those throws with the required timing. Murray, in his best form, can.</p>
+  <p>O'Connell is expected to remake the offense around Murray's strengths, moving toward more shotgun and pistol formations that suit a quick-process quarterback with dual-threat capability. 
+That shift fundamentally changes Jefferson's operating environment. Under-center play-action concepts -- the backbone of the O'Connell system with Cousins and Darnold -- require the receiver to be patient.</p>
 
-  <p>In 2020, Murray's second season, DeAndre Hopkins had 1,400 yards on 115 catches as his WR1. And with all due respect to Hopkins, he isn't Jefferson.</p>
+  <p>In the shotgun, routes develop faster, the quarterback's eyes are pre-snap rather than post-snap, and this boosts Justin's play style -- his elite ability to create separation in his first three steps.</p>
 
-  <p>O'Connell is expected to remake the offense around Murray's strengths, moving toward more shotgun and pistol formations that suit a quick-process quarterback with dual-threat capability. That shift fundamentally changes Jefferson's operating environment. Under-center play-action concepts -- the backbone of the O'Connell system with Cousins and Darnold -- require the receiver to be patient, to win off the line, to earn separation against defenders who are reading the same run fake they've studied all week. In the shotgun, routes develop faster, the quarterback's eyes are pre-snap rather than post-snap, and a receiver with Jefferson's ability to create separation in his first three steps becomes a weapon instead of a survivor.</p>
 
-  <p>The contract restructures also tell a story. Minnesota moved money around on contracts with cornerstones like Justin Jefferson and Christian Darrisaw through simple restructures, signaling organizational commitment. This is not a team preparing to move on from its best player. This is a team buying time and space -- and then filling that space with Kyler Murray.</p>
-
-  <div class="qf-break"><span>§</span></div>
-
-  <!-- PART FIVE -->
+  <!-- PART FIVE: HE'S STILL HERE -->
   <div class="qf-part">
     <span class="qf-part-label">Part Five</span>
-    <h2 class="qf-part-title">The Revival</h2>
+    <h2 class="qf-part-title">He's Still Here</h2>
     <span class="qf-part-rule"></span>
   </div>
 
-  <p>Here is what the projection looks like for 2026. Not speculation -- projection based on observable patterns, biomechanical reality, and the history of what happens when elite receivers get competent quarterback play after a drought.</p>
+  <p>Justin Jefferson is 26 years old. His athleticism is intact. His route running has not declined , if anything, his technical mastery of the position has continued to develop even when the production numbers didn't reflect it.</p>
 
-  <p>Justin Jefferson is 26 years old. His athleticism is intact. His route running has not declined -- if anything, his technical mastery of the position has continued to develop even when the production numbers didn't reflect it. The hamstring issue that cost him training camp in 2025 was a one-time disruption, not a structural vulnerability. His yards after catch were 435 in what was supposed to be his worst season -- an elite number that speaks to the fact that when the ball found him, he still made people miss, still finished plays, still created.</p>
+  <p>One part of his game that remained elite last year was his YAC.  He racked up 435 YAC yards, which speaks to the fact that when the ball found him, he still made people miss, still finished plays, still created.</p>
 
-  <p>The muscle memory of greatness doesn't atrophy in one bad season. Jerry Rice had down years. Randy Moss had down years. Calvin Johnson was miserable inside a broken Detroit offense for most of his career. The receiver is only as good as the infrastructure around him allows him to appear, and what 2025 proved is that Justin Jefferson requires at minimum a quarterback who can process defenses and throw with anticipation.</p>
+  <p>The muscle memory of greatness doesn't atrophy in one bad season. We might have seen a Raider Randy Moss season. The receiver is only as good as the infrastructure around him allows him to appear, and what 2025 proved is that Justin Jefferson requires at minimum a quarterback who can process defenses and throw with anticipation.</p>
 
-  <p>Kyler Murray, healthy and motivated and pitching his case for a long-term contract in 2027, has every incentive in the world to make this work. Murray will help Jefferson return to his 2020–2024 form, and there's a better chance of Jefferson staying in Minnesota long-term with Murray in the house.</p>
+  <p>Kyler Murray, healthy and motivated and pitching his case for a long-term contract in 2027, has every incentive in the world to make this work.</p>
 
-  <p>What does the revival look like? It looks like Jefferson settling back into a rhythm he hasn't had since his peak years with Cousins -- pre-snap communication, hot routes that actually get executed, a quarterback who can see the post-snap coverage rotation and identify when Jefferson has beaten the bracket before the linebacker can recover. It looks like a target share that was already among the league's best at 31% actually converting into production instead of incompletions. It looks like touchdowns -- real red zone targets, not the afterthought opportunities that came in a season where the offense was too dysfunctional to even reach the red zone consistently.</p>
+  <p>What does the revival look like? It looks like Jefferson settling back into a rhythm he hasn't had since his peak years with Cousins -- pre-snap communication, hot routes that actually get executed, a quarterback who can see the post-snap coverage rotation and identify when Jefferson has beaten the bracket before the linebacker can recover.</p>
 
-  <p>Voters and analysts already listed Jefferson as a top-20 player heading into 2026 despite his down year, recognizing that the skill set was never in question -- only the ecosystem.</p>
+  <p>It looks like a target share that was already among the league's best at 31% actually converting into production instead of incompletions.</p>
 
-  <div class="qf-pull">
-    <p>The ecosystem has been fixed. The rest is almost inevitable.</p>
-  </div>
+  <p>It looks like touchdowns. Real red zone targets, not the afterthought opportunities that came in a season where the offense was too dysfunctional to even reach the red zone consistently.</p>
 
-  <div class="qf-break"><span>§</span></div>
+  <p>Voters and analysts already listed Jefferson as a top-20 player heading into 2026 despite his down year, recognizing that the skill set was never in question.</p>
 
-  <!-- EPILOGUE -->
-  <div class="qf-part">
-    <span class="qf-part-label">Epilogue</span>
-    <h2 class="qf-part-title">The Throne Remains His</h2>
-    <span class="qf-part-rule"></span>
-  </div>
-
-  <p class="qf-coda">There is a version of this story that gets told as a fall-from-grace narrative. The superstar who slipped. The receiver who couldn't overcome the chaos around him. The heir to Jerry Rice who showed his mortality.</p>
-
-  <p class="qf-coda">But that version requires ignoring the evidence. Jefferson pushed through an uneven offense to imprint his name in the record books -- six consecutive 1,000-yard seasons to start a career, joining Mike Evans and Randy Moss. He did this through bad quarterback play, through missed training camp, through bracket coverages that would have turned most receivers invisible.</p>
-
-  <p class="qf-coda">He didn't disappear. He survived.</p>
-
-  <p class="qf-coda">And there is a version of a great athlete that is more impressive than the one who succeeds effortlessly -- it's the one who keeps showing up when the infrastructure fails, who refuses to let the chaos become his identity, who protects his internal standard even when the external numbers can't reflect it.</p>
-
-  <p class="qf-coda">Justin Jefferson spent 2025 in a crucible. He came out of it with his character intact, his body healthy, his throne unchallenged in the rooms that matter.</p>
-
-  <p>Kyler Murray is coming. The shotgun sets are coming. The timing throws and the quick slants and the back-shoulder fades on third down are coming. And when they arrive, the rest of the NFL is going to be reminded of something they briefly forgot:</p>
-
-  <p class="qf-finale">
-    There is no fall-off.<br>
-    There was only a storm.<br><br>
-    <span class="qf-blue">The storm has passed.</span><br><br>
-    <span class="qf-gold">Jetta is back.</span>
-  </p>
+  <p class="qf-finale"><span class="qf-gold">The ecosystem has been fixed (hopefully). The rest is almost inevitable.</span></p>
 
 </div>
 `
-}
+},
 };
 
 function closeReader() {
@@ -3773,8 +4394,8 @@ window.closeProfile = () => {
     </button>
 
     <div class="max-w-4xl mx-auto px-6 pt-32 pb-20 reader-content-fade">
-<div class="flex items-center gap-4 mb-8">
-    <span id="rtag" class="text-red-600 text-[10px] font-black uppercase tracking-[0.3em] px-3 py-1 bg-red-600/10 rounded-full">NFL Analysis</span>
+<div class="hidden">
+    <span id="rtag"></span>
 </div>
 
 <img id="rHeroImage" src="" alt="" class="w-full rounded-[2rem] object-cover mb-8 hidden" style="max-height:340px;" />
@@ -3872,7 +4493,7 @@ window.closeProfile = () => {
                 <h4 class="text-amber-500 text-[11px] font-black uppercase tracking-[0.4em] mb-6 flex items-center gap-2">
                 </h4>
                 <div id="videoExtraContent" class="text-white/60 text-lg leading-relaxed font-medium space-y-6">
-                    <p>This sequence captures the raw physical dominance required to compete at the highest level. Notice the shift in defensive rotation just before the break.</p>
+                    <p>    <h3 class="text-white font-black text-2xl uppercase tracking-tighter mb-1">Sports science behind movement, from Kinetic Chain to movement science, a deeper dive. </p></p>
                 </div>
             </div>
 
@@ -3911,7 +4532,17 @@ const rtdb = getDatabase(app);
     let currentUsername = "Guest";
     const reactions = ['😂', '😯', '❔', '🤔', '❤️', '💯', '🔥', '🧢', '👍', '👎'];
 
-// --- PRIVATE MESSAGING & NOTIFICATION ENGINE ---
+window.handleUserIconClick = () => {
+    const user = auth.currentUser;
+    
+    if (user) {
+        // User is signed in, show the dashboard
+        toggleUserDashboard();
+    } else {
+        // User is NOT signed in, send them to login
+        window.location.href = 'login.html';
+    }
+};
 
 function listenForDirectMessages(userId) {
     const badge = document.getElementById('dm-notification-badge');
@@ -4330,14 +4961,28 @@ async function updateArticleCommentCount(articleId) {
         });
 
         // Listen for the total count and update UI
-        const onlineCountRef = ref(rtdb, '/status');
-        onValue(onlineCountRef, (snapshot) => {
-            const onlineCount = snapshot.size || 0;
-            const countDisplay = document.getElementById('online-user-count');
-            if (countDisplay) {
-                countDisplay.innerText = `${onlineCount.toLocaleString()} Online`;
-            }
-        });
+// Listen for the total count and update UI
+const onlineCountRef = ref(rtdb, '/status');
+onValue(onlineCountRef, (snapshot) => {
+    const onlineCount = snapshot.size || 0;
+    
+    // 1. Update the Text in the Chat Window
+    const countDisplay = document.getElementById('online-user-count');
+    if (countDisplay) {
+        countDisplay.innerText = `${onlineCount.toLocaleString()} Online`;
+    }
+
+    // 2. Update the Green Ping in the Navbar
+    const navDot = document.getElementById('navbar-online-dot');
+    if (navDot) {
+        if (onlineCount > 0) {
+            navDot.classList.remove('hidden'); // Show if 1 or more people are on
+        } else {
+            navDot.classList.add('hidden');    // Hide if 0 people are on
+        }
+    }
+});
+
         // --- REAL-TIME PRESENCE LOGIC END ---
 
             }
