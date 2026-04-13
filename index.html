@@ -4538,10 +4538,7 @@ window.handleUserIconClick = () => {
     if (user) {
         // User is signed in, show the dashboard
         toggleUserDashboard();
-    } else {
-        // User is NOT signed in, send them to login
-        window.location.href = 'login.html';
-    }
+
 };
 
 function listenForDirectMessages(userId) {
