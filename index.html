@@ -4058,7 +4058,7 @@ In his first three seasons, Jefferson averaged 96.5 receiving yards per game, th
     </div>
     <div class="qf-stat-box">
       <span class="qf-sv">500</span>
-      <span class="qf-sl">Youngest Ever to 500 Receptions</span>
+      <span class="qf-sl">Receptions -- Youngest Ever</span>
     </div>
     <div class="qf-stat-box">
       <span class="qf-sv">8,480</span>
@@ -4928,11 +4928,14 @@ async function updateArticleCommentCount(articleId) {
         if (e.key === 'Enter') sendMessage();
     });
 
- onAuthStateChanged(auth, async (user) => {
-        if (!user) {
-            window.location.href = 'login.html';
-            return;
-        }
+onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+        // login disabled temporarily
+        listenForMessages();
+        updateCommentCount();
+        return;
+    }
+
 
         try {
             const snap = await getDoc(doc(db, "users", user.uid));

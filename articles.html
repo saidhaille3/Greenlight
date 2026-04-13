@@ -1,713 +1,2589 @@
 
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ja’Marr Chase Traded to Eagles in Stunning Swap for A.J. Brown</title>
-  <meta name="description" content="The Lithouse brings real-time sports, deep stories, live streams, and hot takes together in one world-class experience.">
-  <meta property="og:image" content="/images/og-image.jpg" />
-  <link rel="icon" href="/favicon.ico" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenlight Sports Network </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink: '#0B0F14',
-            steel: '#6B7280',
-            accent: '#F97316'
-          },
-          fontFamily: {
-            body: ['Inter', 'sans-serif'],
-            headline: ['Playfair Display', 'serif']
-          }
+        tailwind.config = {
+            darkMode: 'class',
         }
-      }
-    }
-  </script>
-
-  <!-- iOS METALLIC / GLASS POLISH (ADDITIVE ONLY) -->
-  <style>
-#heroHeadline {
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.6),
-    0 8px 16px rgba(0, 0, 0, 0.85);
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 0.5rem 1rem;
-  border-radius: 0.75rem;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  display: inline-block;
-  /* 🚫 REMOVE THIS */
-  border: none;
-  box-shadow: none;
+    </script>
+    <style>
+    
+    .gold-comment {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%) !important;
+    border: 2px solid #d4af37 !important;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
 }
 
-#heroSubhead {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color: rgba(0, 0, 0, 0.25);
-  padding: 0.3rem 0.75rem;
-  border-radius: 0.5rem;
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
-  display: inline-block;
-  /* 🚫 REMOVE THIS */
-  border: none;
-  box-shadow: none;
+.gold-comment .user-name { color: #b8860b !important; }
+
+.star-btn.active { color: #fbbf24 !important; transform: scale(1.2); }
+.thumb-btn.active { color: #ef4444 !important; }
+
+    /* Reaction Popover Styling */
+.reaction-popover {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 20px;
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 50;
+    animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-
-  #heroSection,
-#heroBg, .fade-hero {
-  min-height: inherit;
-  max-height: inherit;
+.dark .reaction-popover {
+    background: rgba(30, 30, 30, 0.95);
+    border-color: rgba(255,255,255,0.1);
 }
 
-@media (min-width: 640px) {
-  #heroSection,
-  #heroBg,
-  .fade-hero {
-    min-height: 700px;
-  }
+.reaction-emoji {
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
-@media (min-width: 768px) {
-  #heroSection,
-  #heroBg,
-  .fade-hero {
-    min-height: 800px;
-  }
+
+.reaction-emoji:hover { transform: scale(1.3); }
+
+/* Repost UI Styling */
+.repost-badge {
+    font-size: 10px;
+    font-weight: 900;
+    color: #10b981; /* Emerald */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2px;
 }
-@media (min-width: 1024px) {
-  #heroSection,
-  #heroBg,
-  .fade-hero {
-    min-height: 900px;
-  }
+
+    /* Kill ALL native iOS video controls */
+video::-webkit-media-controls { display: none !important; }
+video::-webkit-media-controls-enclosure { display: none !important; }
+video::-webkit-media-controls-panel { display: none !important; }
+video::-webkit-media-controls-play-button { display: none !important; }
+video::-webkit-media-controls-timeline { display: none !important; }
+video::-webkit-media-controls-current-time-display { display: none !important; }
+video::-webkit-media-controls-time-remaining-display { display: none !important; }
+video::-webkit-media-controls-mute-button { display: none !important; }
+video::-webkit-media-controls-volume-slider { display: none !important; }
+video::-webkit-media-controls-fullscreen-button { display: none !important; }
+
+    /* Executive Reader Engine Styles */
+.reader-transition { 
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
 }
-    html { scroll-behavior: smooth; }
 
-    /* iOS glass base */
-    .ios-glass {
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(14px) saturate(160%);
-      -webkit-backdrop-filter: blur(14px) saturate(160%);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow:
-        0 10px 30px rgba(0,0,0,0.35),
-        inset 0 1px 0 rgba(255,255,255,0.15);
-    }
+#greenlightReader.active {
+    transform: translateX(0);
+    display: block;
+}
 
-    /* metallic cards */
-    .ios-card {
-      background: linear-gradient(
-        180deg,
-        rgba(255,255,255,0.08),
-        rgba(255,255,255,0.02)
-      );
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow:
-        0 12px 28px rgba(0,0,0,0.45),
-        inset 0 1px 0 rgba(255,255,255,0.15);
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
+/* Custom Scrollbar for Reader */
+#greenlightReader::-webkit-scrollbar { width: 4px; }
+#greenlightReader::-webkit-scrollbar-track { background: transparent; }
+#greenlightReader::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
 
-    .ios-card:hover {
-      transform: translateY(-3px);
-      box-shadow:
-        0 18px 40px rgba(0,0,0,0.55),
-        inset 0 1px 0 rgba(255,255,255,0.18);
-    }
+.reader-content-fade {
+    animation: readerFadeUp 0.8s ease forwards;
+}
 
-    /* polished buttons */
-    .ios-button {
-      background: linear-gradient(135deg, #ff3c00, #ff9900);
-      box-shadow:
-        0 8px 20px rgba(255,80,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.25);
-    }
+@keyframes readerFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-    /* dark shell */
-    body {
-      background:
-        radial-gradient(1200px at top, #1c1c1c, #0f0f0f);
-      color: #eaeaea;
+    /* Clean, static gradient specifically for the Lounge title */
+.lounge-title-gradient {
+    background: linear-gradient(135deg, #062c06 0%, #0a4d0a 35%, #d4af37 65%, #926f12 100%);
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    color: transparent !important;
+    display: inline-block;
+}
+
+/* Brightens it for Dark Mode so it pops without using the video */
+.dark .lounge-title-gradient {
+    background: linear-gradient(135deg, #10b981 0%, #059669 35%, #fbbf24 65%, #d97706 100%);
+    filter: brightness(1.1) saturate(1.2);
+}
+
+        :root {
+            --glass: rgba(0, 0, 0, 0.03);
+            --glass-border: rgba(0, 0, 0, 0.08);
+        }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+    
+    body { 
+        font-family: 'Inter', sans-serif; 
+        background-color: #ffffff; 
+        color: #111111; 
+        transition: background-color 0.4s ease, color 0.4s ease;
+        overflow-x: hidden;
     }
     
-    
-    
-    /* Make room for both fixed bars */
-.score-strip {
-  height: 56px;
-}
-header {
-  height: 64px;
-}
-  </style>
-  <style>
-  .fade-hero {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
+    .dark body { 
+        background-color: #0a0a0a; 
+        color: #f4f4f4; 
+    }
 
-.fade-hero.active {
-  opacity: 1;
-}
-    
-  </style>
-  <style>
-  .fire-text {
-    background: url('/images/flame.mov') center center / cover no-repeat;
+    /* Hide Moon in Dark Mode */
+    .dark #darkModeToggle {
+        display: none;
+    }
+
+    /* Light Bulb styling for Sidebar */
+    #lightBulbToggle {
+        display: none;
+    }
+
+    .dark #lightBulbToggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+/* Static version: Matches the nav's gradient but blocks the video effect */
+.fire-text-lounge {
+    background: linear-gradient(135deg, #062c06 0%, #0a4d0a 35%, #d4af37 65%, #926f12 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-  }
-  #mobileMenu {
-  border: 4px solid red;
+    display: inline-block;
+    transition: all 0.4s ease;
 }
+
+/* In Dark Mode: We just boost the colors/brightness instead of using the .mov */
+.dark .fire-text-lounge {
+    background: linear-gradient(135deg, #10b981 0%, #059669 35%, #fbbf24 65%, #d97706 100%);
+    filter: brightness(1.2) saturate(1.4);
+}
+
+    /* Fire text effect */
+    /* Green and Gold Gradient Effect */
+    /* Polished Dark Green and Gold Gradient */
+    .fire-text {
+        background: linear-gradient(135deg, #062c06 0%, #0a4d0a 35%, #d4af37 65%, #926f12 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+        transition: all 0.4s ease;
+        /* Adds a subtle "pop" to the metallic look */
+        filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+    }
+
+    /* Dark Mode: Fixed Hue-Rotate for a richer Gold/Green fire */
+    .dark .fire-text {
+        background: url('/images/flame.mov') center center / cover no-repeat;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        /* Hue shift 65-75deg hits the Green/Gold sweet spot better than 80deg */
+        filter: hue-rotate(75deg) brightness(1.3) saturate(1.4);
+    }
+@keyframes heartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+.heart-active {
+    animation: heartPop 0.3s ease-out;
+    color: #ef4444 !important; /* Tailwind red-500 */
+}
+
+    /* Fire text on light backgrounds */
+    .fire-text-dark {
+        background: linear-gradient(to bottom, #cc6600 0%, #ff9900 40%, #ff3c00 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 8px rgba(255, 60, 0, 0.2));
+    }
+
+    /* Glowing Embers */
+    /* Green Glowing Embers */
+    .ember {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        /* Changed to Green Gradient */
+        background: radial-gradient(circle, #4ade80, #166534); 
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 60;
+        /* Changed to Green Glow */
+        box-shadow: 0 0 8px #22c55e;
+    }
+
+    /* Rising Green Smoke/Mist */
+    .smoke {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        /* Changed to subtle Green-tinted Smoke */
+        background: radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, rgba(5, 46, 22, 0) 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 59;
+        filter: blur(2px);
+    }
+
+
+    /* Glass adapted for white bg */
+    .ios-glass {
+        background: var(--glass);
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
+        border: 1px solid var(--glass-border);
+        box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .-gradient {
+        background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 30%, transparent 100%);
+    }
+    /* Invert logos like TNT in Dark Mode */
+
+
+.dark img[alt="TNT"] {
+filter: invert(1) brightness(2);
+}
+
+    /* Smooth Scroller */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .hover-card {
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .hover-card:hover {
+        transform: translateY(-5px);
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.15);
+    }
+
+    /* Play Button Utility */
+    .play-btn-blur {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Nav scroll effect */
+    .nav-scrolled {
+        background: linear-gradient(135deg, rgba(226, 226, 226, 0.6) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(207, 207, 207, 0.6) 100%) !important;
+        backdrop-filter: blur(12px);
+    }
+
+    .dark .nav-scrolled {
+        background: linear-gradient(135deg, rgba(20, 20, 20, 0.7) 0%, rgba(10, 10, 10, 0.7) 100%) !important;
+    }
+
+    /* Dark Mode adjustments */
+    .dark {
+        background: #0a0a0a;
+        color: #ffffff;
+    }
+
+    .dark header, .dark .ios-glass {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0 1px 1px rgba(255,255,255,0.05), 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .dark .bg-white {
+        background-color: #0a0a0a !important;
+    }
+
+    .dark .text-black, .dark h2, .dark h3 {
+        color: #ffffff !important;
+    }
+
+    .dark .text-black\/50, .dark .text-black\/30 {
+        color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    .dark .border-black\/5 {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+.coming-soon {
+    position: relative;
+    overflow: hidden;
+}
+
+/* 2. Create the hidden overlay */
+.coming-soon::before {
+    content: "COMING SOON";
+    position: absolute;
+    inset: 0; /* Covers the whole button */
+    background: #d4af37; /* Use your gold theme color */
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    pointer-events: none; /* Prevents the overlay from blocking the click if you still want it to work */
+}
+
+/* 3. Show the overlay on hover */
+.coming-soon:hover::before {
+    opacity: 1;
+}
+
+/* Dark mode adjustment */
+.dark .coming-soon::before {
+    background: #10b981; /* Emerald green for dark mode */
+    color: white;
+}
+/* Custom Greenlight Glass */
+.greenlight-glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(16, 185, 129, 0.2); /* Emerald border */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.dark .greenlight-glass {
+    background: rgba(5, 25, 15, 0.8); /* Deep Emerald/Black blend */
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Sophisticated Chat Scrollbar */
+#message-container::-webkit-scrollbar { width: 4px; }
+#message-container::-webkit-scrollbar-thumb { 
+    background: rgba(16, 185, 129, 0.5); 
+    border-radius: 10px; 
+}
+
 </style>
 
 
-  
 </head>
+<body class="antialiased overflow-x-hidden"><!-- Navigation -->
+<nav id="navbar" class="fixed top-0 w-full z-50 silver-nav px-2 py-4 flex justify-between items-center">
+<div class="flex items-center gap-4">
+    <div class="relative w-9 h-9"> 
+    <a href="index.html" class="flex items-center space-x-3 group shrink-0">
+        <img src="/images/logo.png" alt="The Greenlight Logo" class="transition-transform scale-150 origin-left translate-y-[4px] " />
+        </a>
+    </div>
+    
+    
+<span class="fire-text text-[1rem] font-extrabold tracking-tight ml-1 py-1">
+    Greenlight
+</span>
 
-<body class="bg-gray-100 text-gray-900 font-sans">
-
-<header class="bg-black text-white sticky top-0 z-50 w-full border-b border-white/10 shadow-md backdrop-blur-md">
-  <div class="max-w-7xl mx-auto flex items-center justify-between py-4">
-
-<div class="flex items-center gap-0.5 h-9 relative">
-  <img src="/images/logo1.png" alt="The Lithouse Logo"
-       class="h-9 w-auto" />
-
-  <div class="flex items-start">
-    <span class="fire-text text-[1.325rem] font-extrabold tracking-tight leading-[1] relative -top-[2.2px] -ml-[2px]">
-      Lithouse
-    </span>
-  </div>
 </div>
-    <!-- Desktop Nav -->
-    <nav class="hidden lg:flex items-center gap-8 text-sm font-semibold tracking-wide">
-<a href="#" class="flex items-center gap-2 hover:text-yellow-400 transition">
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Wikiproject_NFL_logo.svg" alt="NFL" class="w-5 h-5" />  <span>NFL</span>
-</a>      <a href="#" class="hover:text-red-500 transition">NBA</a>
-      <a href="#" class="hover:text-red-500 transition">MMA</a>
-      <a href="#" class="hover:text-red-500 transition">Fantasy</a>
-      <a href="#" class="hover:text-red-500 transition">Podcasts</a>
-      <a href="#" class="hover:text-red-500 transition">Live</a>
-    </nav>
 
-    <!-- Search + Icons -->
-    <div class="hidden lg:flex items-center gap-4">
-      <!-- Search -->
-      <div class="relative">
-        <input
-          type="text"
-          placeholder="Search..."
-          class="bg-white/10 text-white placeholder-gray-400 px-3 py-1.5 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-black transition"
-        />
-        <svg class="absolute right-2 top-2.5 h-4 w-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2"
-             viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-        </svg>
-      </div>
-
-      <!-- Cart / Notification -->
-      <a href="#" class="relative">
-        <svg class="h-6 w-6 text-white hover:text-red-500 transition" fill="none" stroke="currentColor" stroke-width="2"
-             viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6h11.1M7 13l-4-8m13 8v2a2 2 0 11-4 0v-2m0 0H7" />
-        </svg>
-        <span class="absolute -top-1 -right-1 bg-red-600 text-xs text-white font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
-      </a>
+    <div class="hidden md:flex gap-6 text-sm font-semibold tracking-widest uppercase opacity-70">
+        <a href="#" class="hover:text-amber-500 transition text-black dark:text-white">NFL</a>
+        <a href="#" class="hover:text-amber-500 transition text-black dark:text-white">NBA</a>
+        <a href="#" class="hover:text-amber-500 transition text-black dark:text-white">UFC</a>
     </div>
 
-    <!-- Mobile Menu Icon -->
-<button id="mobile-toggle" class="lg:hidden focus:outline-none px-2">
-  <svg class="w-6 h-6" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="metalGold" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:#FFD700; stop-opacity:1" />
-        <stop offset="40%" style="stop-color:#FFA500; stop-opacity:1" />
-        <stop offset="100%" style="stop-color:#FFCC00; stop-opacity:1" />
-      </linearGradient>
-    </defs>
-    <rect width="100" height="10" rx="6" fill="url(#metalGold)" />
-    <rect y="30" width="100" height="10" rx="6" fill="url(#metalGold)" />
-    <rect y="60" width="100" height="10" rx="6" fill="url(#metalGold)" />
-  </svg>
+    <div class="flex items-center gap-4">
+        <button id="darkModeToggle" onclick="toggleDarkMode()" class="p-1 hover:scale-110 transition-transform group" title="Toggle Dark Mode">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 rotate-[20deg]">
+                <defs>
+                    <linearGradient id="gold-metal" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#D4AF37" />
+                        <stop offset="50%" stop-color="#F9E2AF" />
+                        <stop offset="100%" stop-color="#B8860B" />
+                    </linearGradient>
+                </defs>
+                <path fill="url(#gold-metal)" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
+        </button>
+
+<div class="md:mr-3 relative group cursor-pointer" onclick="toggleUserDashboard()">
+    <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-200 p-[2px] transition-all duration-300">
+        <div class="w-full h-full rounded-full bg-white dark:bg-neutral-900 flex items-center justify-center overflow-hidden">
+            <i class="fa-solid fa-user text-xs text-black dark:text-white opacity-80"></i>
+        </div>
+    </div>
+    <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-neutral-900 rounded-full"></span>
+</div>
+
+        
+        <button onclick="toggleSidebar()" class="md:hidden text-2xl focus:outline-none text-black dark:text-white"
+>
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="url(#goldGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <defs>
+                    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#FFD700" />
+                        <stop offset="50%" stop-color="#FFC107" />
+                        <stop offset="100%" stop-color="#B8860B" />
+                    </linearGradient>
+                </defs>
+                <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>        
+        </button>
+    </div>
+</nav>
+<div id="userDashboard" class="fixed inset-y-0 right-0 w-[320px] bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-2xl z-[70] transform translate-x-full transition-transform duration-500 ease-in-out shadow-[-20px_0_80px_rgba(0,0,0,0.2)] border-l border-gray-200 dark:border-white/5 h-full overflow-y-auto no-scrollbar">
+    <div class="p-8 flex justify-between items-center border-b border-gray-100 dark:border-white/5">
+        <button onclick="toggleUserDashboard()" class="text-2xl text-black dark:text-white opacity-40 hover:opacity-100 transition-opacity">&times;</button>
+    </div>
+
+    <div class="p-8 text-center">
+        <div class="relative inline-block mb-4">
+            <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-500 to-yellow-200 p-[3px] mx-auto  hover:rotate-0 transition-transform duration-500">
+                <div class="w-full h-full rounded-[1.25rem] bg-white dark:bg-neutral-900 flex items-center justify-center overflow-hidden">
+                    <i class="fa-solid fa-user text-3xl text-black dark:text-white"></i>
+                </div>
+            </div>
+            <span class="absolute -top-2 -right-2 bg-red-600 text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest shadow-lg">Elite</span>
+        </div>
+        <h3 id="userDisplayName" class="text-2xl font-black uppercase tracking-tighter dark:text-white">User_293</h3>
+    </div>
+<div class="px-8 mb-6 border-t border-gray-100 dark:border-white/5 pt-6">
+    <p class="text-[9px] font-black uppercase tracking-widest opacity-40 mb-4 dark:text-white">Chat Appearance</p>
+    <div class="space-y-4">
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold dark:text-white">Name Color</span>
+            <input type="color" id="nameColorPicker" class="w-8 h-8 rounded-lg bg-transparent border-none cursor-pointer" value="#fbbf24">
+        </div>
+        <div class="flex items-center justify-between">
+            <span class="text-xs font-bold dark:text-white">Text Color</span>
+            <input type="color" id="textColorPicker" class="w-8 h-8 rounded-lg bg-transparent border-none cursor-pointer" value="#ffffff">
+        </div>
+<button id="updateColorsBtn" onclick="saveChatColors()" class="w-full py-2 bg-black dark:bg-white text-white dark:text-black text-[8px] font-black uppercase tracking-widest rounded-lg hover:bg-green-600 transition-all flex items-center justify-center gap-2">
+    <span id="btnText">Update Colors</span>
 </button>
-  </div>
 
-  <!-- Mobile Nav -->
-
-</header>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const mobileToggle = document.getElementById("mobile-toggle");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const closeMenu = document.getElementById("closeMenu");
-    
-    if (mobileToggle && mobileMenu) {
-      mobileToggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-      });
-    }
-    
-    if (closeMenu && mobileMenu) {
-      closeMenu.addEventListener("click", () => {
-        mobileMenu.classList.add("hidden");
-      });
-    }
-  });
-  mobileToggle.addEventListener("click", () => {
-  mobileMenu.classList.toggle("hidden");
-  document.body.classList.toggle("overflow-hidden");
-});
-
-closeMenu.addEventListener("click", () => {
-  mobileMenu.classList.add("hidden");
-  document.body.classList.remove("overflow-hidden");
-});
-  
-</script>
-
-<!-- ================== MOBILE MENU ================== -->
-<div id="mobileMenu" class="hidden fixed top-[112px] left-0 w-full bg-black text-white z-[9999] ios-glass px-6 py-6 space-y-4 transition-all duration-300"><a href="#" class="flex items-center gap-3 text-white/90 text-base font-semibold tracking-tight hover:text-yellow-400 transition">
-  <img src="images/nfl.png" alt="NFL" class="w-5 h-5" />
-  <span>NFL</span>
-</a>
-<a href="#" class="flex items-center gap-3 text-white/90 text-base font-semibold tracking-tight hover:text-yellow-400 transition">
-  <img src="images/nba.png" alt="NBA" class="w-5 h-5" />
-  <span>NBA</span>
-</a>  
-<a href="#" class="flex items-center gap-3 text-white/90 text-base font-semibold tracking-tight hover:text-yellow-400 transition">
-  <img src="images/bv.png" alt="NBA" class="w-5 h-5" />
-  <span></span>
-</a>
-
-
-  <button id="closeMenu" class="w-full bg-gray-700 hover:bg-gray-600 py-2 rounded font-semibold">Close</button>
-</div>
-
-<section class="bg-black text-white font-body">
-  <article class="max-w-3xl mx-auto px-6 pt-10 pb-32">
-  
-  <!-- Breaking Tag -->
-  <div class="mb-6">
-    <span class="inline-block bg-red-600 text-white text-xs font-semibold tracking-wide px-4 py-1 rounded-full">
-      BREAKING
-    </span>
-  </div>
-  
-  <!-- Headline -->
-  <h1 class="font-headline text-4xl md:text-5xl leading-tight font-bold mb-6">
-    Ja’Marr Chase Traded to Eagles in Stunning Swap for A.J. Brown
-  </h1>
-  
-  <!-- Subhead -->
-  <p class="text-lg text-gray-300 mb-8 max-w-2xl">
-    A rare wide‑receiver‑for‑wide‑receiver blockbuster sends shockwaves through the league -- and signals a deeper philosophical shift for both franchises.
-  </p>
-  
-  <!-- Meta -->
-  <div class="flex items-center text-sm text-steel mb-12 space-x-4">
-    <span>NFL</span>
-    <span>•</span>
-    <span>3 hours ago</span>
-    <span>•</span>
-    <span>By Lithouse Editorial</span>
-  </div>
-<!-- Reaction + Share Toolbar -->
-<!-- Toolbar Row (Fixes Position) -->
-<div class="flex items-center space-x-6 mt-6 mb-8">
-
-  <!-- SHARE BUTTON -->
-<!-- SHARE BUTTON -->
-<!-- SHARE BUTTON -->
-<div class="relative">
-  <button id="shareToggle" class="flex items-center gap-1 hover:text-yellow-400 transition duration-200">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-    </svg>
-    <span class="text-sm font-medium">Share</span>
-  </button>
-  
-  <!-- Share Menu -->
-  <div id="shareMenu" class="absolute top-full mt-2 left-0 bg-black/90 border border-white/10 backdrop-blur-md px-4 py-3 rounded-lg shadow-lg space-x-4 flex items-center hidden z-50">
-    <!-- X -->
-    <a id="shareX" href="#" target="_blank" rel="noopener" title="Share on X">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X" class="h-5 w-5 hover:scale-110 transition" />
-    </a>
-    <!-- Facebook -->
-    <a id="shareFB" href="#" target="_blank" rel="noopener" title="Share on Facebook">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" class="h-5 w-5 hover:scale-110 transition" />
-    </a>
-    <!-- Reddit -->
-    <a id="shareReddit" href="#" target="_blank" rel="noopener" title="Share on Reddit">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/reddit.svg" alt="Reddit" class="h-5 w-5 hover:scale-110 transition" />
-    </a>
-    <!-- SMS -->
-    <a id="shareSMS" href="#" title="Share via SMS">
-      <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/signal.svg" alt="SMS" class="h-5 w-5 hover:scale-110 transition" />
-    </a>
-    <!-- Copy Link -->
-    <button onclick="copyPermalink()" class="text-blue-400 text-xs hover:underline">Copy</button>
-  </div>
-</div>
-
-
-  <!-- REACT BUTTON -->
-  <div class="relative flex items-center space-x-1">
-    <button id="reactToggle" class="focus:outline-none">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8"
-           viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round"
-              d="M3 8a6 6 0 0112 0l1.5 1.5L18 8a6 6 0 0112 0c0 7.5-12 13.5-12 13.5S3 15.5 3 8z" />
-      </svg>
-    </button>
-    <span id="reactionCount" class="text-xs text-gray-400">1.2K</span>
-    <div id="reactMenu" class="absolute top-6 right-0 flex items-center space-x-2 bg-black px-3 py-2 rounded-lg shadow-lg border border-white/10 hidden z-20">
-      <button onclick="addReaction('❤️')">❤️</button>
-      <button onclick="addReaction('😲')">😲</button>
-      <button onclick="addReaction('😂')">😂</button>
     </div>
-  </div>
+</div>
+
+    <div class="px-8 mb-8">
+    <button class="w-full py-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all">
+        Join Elite Membership
+    </button>
+</div>
+
+
+    <div class="px-6 space-y-2">
+        <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+            <i class="fa-solid fa-bolt-lightning text-amber-500"></i>
+            <span class="text-sm font-bold dark:text-white">Faves</span>
+        </a>
+        <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+            <i class="fa-solid fa-bookmark text-gray-400"></i>
+            <span class="text-sm font-bold dark:text-white">Saved Highlights</span>
+        </a>
+        <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
+            <i class="fa-solid fa-shield-halved text-gray-400"></i>
+            <span class="text-sm font-bold dark:text-white">Privacy Settings</span>
+        </a>
+        
+        <div class="pt-4 mt-4 border-t border-gray-100 dark:border-white/5 px-2">
+            <button onclick="handleLogout()" class="w-full bg-black dark:bg-white text-white dark:text-black py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white transition-all active:scale-95">
+                Sign Out
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Sidebar --><div id="sidebar" class="fixed inset-y-0 right-0 w-[300px] bg-white/90 dark:bg-neutral-900/95 backdrop-blur-2xl z-[60] transform translate-x-full transition-transform duration-500 ease-in-out shadow-[-20px_0_50px_rgba(0,0,0,0.1)] border-l border-gray-200 dark:border-white/10">
+    <div class="flex justify-between items-center p-8 border-b border-gray-100 dark:border-white/10">
+        <button onclick="toggleSidebar()" class="text-2xl text-black dark:text-white hover:rotate-90 transition-transform duration-300">&times;</button>
+    </div>
+
+<div class="flex flex-col gap-4 p-6">
+    <button id="lightBulbToggle" onclick="toggleDarkMode()" class="p-2 self-center hover:scale-110 transition-transform group mb-4" title="Switch to Light Mode">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-amber-400">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+        </svg>
+    </button>
+    <a href="#" class="group flex items-center justify-center p-3 rounded-2xl bg-gray-50 dark:bg-white/5 hover:bg-amber-500/10 border border-transparent hover:border-amber-500/20 transition-all duration-300">
+        <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png" class="w-10 h-10 object-contain group-hover:scale-110 transition-transform" alt="NFL">
+    </a>
+    
+    <a href="#" class="group flex items-center justify-center p-3 rounded-2xl bg-gray-50 dark:bg-white/5 hover:bg-blue-500/10 border border-transparent hover:border-blue-500/20 transition-all duration-300">
+        <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nba.png" class="w-10 h-10 object-contain group-hover:scale-110 transition-transform" alt="NBA">
+    </a>
+    
+    <a href="#" class="group flex items-center justify-center p-3 rounded-2xl bg-gray-50 dark:bg-white/5 hover:bg-red-500/10 border border-transparent hover:border-red-500/20 transition-all duration-300">
+        <img src="images/ufc.png" class="w-10 h-10 object-contain group-hover:scale-110 transition-transform" alt="UFC">
+    </a>
+
+<div class="mt-4 pt-6 border-t border-gray-100 dark:border-white/10 px-2 space-y-4">
+    <a href="#" class="relative block w-full aspect-[3/1] overflow-hidden rounded-2xl shadow-lg group bg-black">
+        <img src="images/aw.png" 
+             class="absolute inset-0 w-full h-full object-contain p-1 transition-transform duration-500 group-hover:scale-105" 
+             alt="Ball-Verse">
+        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300"></div>
+    </a>
+
+    <a href="spaces1.html" class="relative block w-full aspect-[3/1] overflow-hidden rounded-2xl shadow-lg group bg-black">
+        <img src="images/gh.png" 
+             class="absolute inset-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" 
+             alt="Greenlight Huddle">
+        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300"></div>
+    </a>
+</div>
 
 </div>
 
-<script>
-  // Set social links on load
-document.addEventListener("DOMContentLoaded", () => {
-  const url = encodeURIComponent(window.location.href);
-  const title = encodeURIComponent(document.title);
-  
-  document.getElementById("shareX").href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
-  document.getElementById("shareFB").href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-  document.getElementById("shareReddit").href = `https://www.reddit.com/submit?url=${url}&title=${title}`;
-  document.getElementById("shareSMS").href = `sms:&body=${title}%20${url}`;
-  
-  // Toggle menu
-  document.getElementById("shareToggle").addEventListener("click", (e) => {
-    e.stopPropagation();
-    const menu = document.getElementById("shareMenu");
-    menu.classList.toggle("hidden");
-  });
-  
-  // Hide if click outside
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest("#shareToggle") && !e.target.closest("#shareMenu")) {
-      document.getElementById("shareMenu").classList.add("hidden");
-    }
-  });
-});
 
-function copyPermalink() {
-  navigator.clipboard.writeText(window.location.href).then(() => {
-    alert("🔗 Link copied to clipboard!");
-  });
-}
+</div><!-- Score Scroller -->
 
-  // Add reaction logic
-  let totalReactions = 1200;
-  function addReaction(emoji) {
-    totalReactions++;
-    document.getElementById("reactionCount").textContent = formatCount(totalReactions);
-    document.getElementById("reactMenu").classList.add("hidden");
-  }
+<div class="mt-16 z-40 overflow-x-auto whitespace-nowrap py-5 px-4 bg-white/70 dark:bg-black/70 backdrop-blur-xl border-b border-gray-200/50 dark:border-white/10 no-scrollbar shadow-sm">
+    <div id="scoreScroller" class="inline-flex space-x-4">
 
-  function formatCount(n) {
-    return n >= 1000 ? (n / 1000).toFixed(1) + "K" : n;
-  }
+    <div class="min-w-[240px] bg-white dark:bg-neutral-900 border border-gray-200/60 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
+        <div class="flex items-center justify-between mb-4">      
+            <div class="flex items-center gap-1.5">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+                </span>
+                <span class="uppercase text-[10px] font-black tracking-widest text-red-600">Live • 4Q 2:14</span>
+            </div>
+            <img src="images/nbatv.jpeg" alt="NBA TV" class="h-4 w-auto object-contain" />
+        </div>
+        <div class="space-y-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/gs.png" class="w-6 h-6">
+                    <span class="text-sm font-bold text-gray-800 dark:text-white">Warriors</span>
+                </div>
+                <span class="text-sm font-black text-gray-900 dark:text-white">102</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/hou.png" class="w-6 h-6">
+                    <span class="text-sm font-bold text-gray-800 dark:text-white">Rockets</span>
+                </div>
+                <span class="text-sm font-black text-gray-900 dark:text-white">98</span>
+            </div>
+        </div>
+    </div>
 
-  // Close menus if clicked outside
-  document.addEventListener("click", (e) => {
-    const insideShare = e.target.closest("#shareToggle") || e.target.closest("#shareMenu");
-    const insideReact = e.target.closest("#reactToggle") || e.target.closest("#reactMenu");
-    if (!insideShare && !insideReact) {
-      document.getElementById("shareMenu").classList.add("hidden");
-      document.getElementById("reactMenu").classList.add("hidden");
-    }
-  });
-</script>
-  <!-- Article Body -->
-  <div class="space-y-8 text-gray-200 leading-relaxed text-[17px]">
+    <div class="min-w-[240px] bg-gray-50/50 dark:bg-neutral-900/50 border border-gray-200/50 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
+        <div class="flex items-center justify-between mb-4">      
+            <div class="flex items-center gap-1.5">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                </span>
+                <span class="uppercase text-[10px] font-bold tracking-widest text-gray-400 dark:text-gray-300">Pregame • 6:00 PM</span>
+            </div>
+
+
+<img src="images/tnt.png" alt="TNT" class="h-4 w-auto object-contain" />
+
+        </div>
+        <div class="space-y-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/cha.png" class="w-6 h-6">
+                    <span class="text-sm font-bold text-gray-800 dark:text-white">Hornets</span>
+                </div>
+                <span class="text-xs font-medium text-gray-400 dark:text-gray-300">11–21</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/mil.png" class="w-6 h-6">
+                    <span class="text-sm font-bold text-gray-800 dark:text-white">Bucks</span>
+                </div>
+                <span class="text-xs font-medium text-gray-400 dark:text-gray-300">24–10</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="min-w-[240px] bg-white dark:bg-neutral-900 border border-gray-200/60 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
+        <div class="flex items-center justify-between mb-4">      
+            <div class="flex items-center gap-1.5">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+                </span>
+                <span class="uppercase text-[10px] font-black tracking-widest text-red-600">Live • 2Q 8:45</span>
+            </div>
+            <img src="images/espn.png" alt="ESPN" class="h-3 w-auto object-contain" />
+        </div>
+        <div class="space-y-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/min.png" class="w-6 h-6">
+                    <span class="text-sm font-bold text-gray-800 dark:text-white">Wolves</span>
+                </div>
+                <span class="text-sm font-black text-gray-900 dark:text-white">42</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/dal.png" class="w-6 h-6">
+                    <span class="text-sm font-bold text-gray-800 dark:text-white">Mavs</span>
+                </div>
+                <span class="text-sm font-black text-gray-900 dark:text-white">45</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="min-w-[240px] bg-gray-50/50 dark:bg-neutral-900/50 border border-gray-200/50 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
+        <div class="flex items-center justify-between mb-4">      
+            <div class="flex items-center gap-1.5">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                </span>
+                <span class="uppercase text-[10px] font-bold tracking-widest text-gray-400 dark:text-gray-300">Pregame • 10:00 PM</span>
+            </div>
+            <img src="images/tnt.png" alt="TNT" class="h-4 w-auto object-contain" />
+        </div>
+        <div class="space-y-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/lal.png" class="w-6 h-6">
+                    <span class="text-sm font-bold text-gray-800 dark:text-white">Lakers</span>
+                </div>
+                <span class="text-xs font-medium text-gray-400 dark:text-gray-300">18–17</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/phx.png" class="w-6 h-6">
+                    <span class="text-sm font-bold text-gray-800 dark:text-white">Suns</span>
+                </div>
+                <span class="text-xs font-medium text-gray-400 dark:text-gray-300">20–15</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</div><!-- Hero Section -->
+
+
+<section class="max-w-7xl mx-auto px-6 py-12">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div>
+            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter dark:text-white">Latest <span class="opacity-20">Stories</span></h1>
+        </div>
+        
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+    <button onclick="filterStories('all')" id="filter-all" class="filter-btn px-6 py-2 rounded-full bg-black dark:bg-white text-white dark:text-black text-[10px] font-black uppercase tracking-widest transition-all">All</button>
+    <button onclick="filterStories('nfl')" id="filter-nfl" class="filter-btn px-6 py-2 rounded-full border border-black/10 dark:border-white/10 dark:text-white text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all">NFL</button>
+    <button onclick="filterStories('nba')" id="filter-nba" class="filter-btn px-6 py-2 rounded-full border border-black/10 dark:border-white/10 dark:text-white text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all">NBA</button>
+</div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+        
+        <article data-league="nba"
+ onclick="openReader('finch-seat')" class="md:col-span-2 lg:col-span-2 group cursor-pointer">
+            <div class="relative aspect-[16/9] md:aspect-[21/9] rounded-[2.5rem] overflow-hidden mb-6">
+                <img src="images/finch.png" alt="Chris Finch" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute top-6 left-6">
+                </div>
+            </div>
+            <div class="max-w-3xl">
+                <h3 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] dark:text-white group-hover:text-amber-500 transition-colors">Chris Finch Should Be On The Hot Seat</h3>
+                <div class="flex items-center gap-4 mt-6">
+                    <span class="text-[10px] font-black uppercase tracking-widest opacity-30 dark:text-white">15 Min Read</span>
+                </div>
+            </div>
+        </article>
+
+        <article data-league="nba"
+ onclick="openReader('wemby-mvp')" class="group cursor-pointer">
+            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
+                <img src="images/wemby.jpeg" alt="Wemby" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div class="absolute top-6 left-6">
+                </div>
+            </div>
+            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors">The Case For Youngest NBA MVP Ever</h3>
+            <div class="mt-4 text-[10px] font-black uppercase tracking-widest opacity-30 dark:text-white">8 Min Read</div>
+        </article>
+
+        <article data-league="nfl"
+ onclick="openReader('jett-return')" class="group cursor-pointer">
+            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
+                <img src="images/jj.jpeg" alt="Justin Jefferson" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
+            </div>
+            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors">Return Of The Jetta</h3>
+            <div class="mt-4 text-[10px] font-black uppercase tracking-widest opacity-30 dark:text-white">12 Min Read</div>
+        </article>
+
+
+    </div>
     
-    <p>
-      In a move that few saw coming and even fewer believed possible, the Philadelphia Eagles and Cincinnati Bengals completed a straight‑up wide receiver swap late Tuesday night, sending Ja’Marr Chase to Philadelphia in exchange for A.J. Brown.
-    </p>
-    
-    <p>
-      The deal, confirmed by league sources shortly after midnight, instantly reshapes the offensive identities of both teams -- and challenges long‑held assumptions about roster building in the modern NFL.
-    </p>
-    
-    <h2 class="font-headline text-2xl font-bold text-white mt-12">
-      Why This Trade Is Different
-    </h2>
-    
-    <p>
-      Wide receiver trades are common. Elite wide receiver trades are not. And elite‑for‑elite swaps -- without draft compensation -- are almost unheard of.
-    </p>
-    
-    <p>
-      Chase, 24, represents youth, vertical explosion, and a deep connection to quarterback Joe Burrow dating back to LSU. Brown, 27, offers physical dominance, route precision, and postseason‑tested reliability.
-    </p>
-    
-    <p>
-      This was not about talent. It was about direction.
-    </p>
-    
-    <h2 class="font-headline text-2xl font-bold text-white mt-12">
-      Philadelphia’s Bet on Ceiling
-    </h2>
-    
-    <p>
-      For the Eagles, acquiring Chase signals an aggressive pivot toward maximum offensive volatility. Chase is a stress test for defenses -- someone who changes coverage structures before the ball is snapped.
-    </p>
-    
-    <p>
-      Pairing him with Jalen Hurts gives Philadelphia a receiver who can win isolated matchups without scheme assistance, opening the field for RPOs, quarterback draws, and vertical shot plays.
-    </p>
-    
-    <p>
-      The message is clear: the Eagles want fear, not balance.
-    </p>
-    
-    <h2 class="font-headline text-2xl font-bold text-white mt-12">
-      Cincinnati’s Shift Toward Control
-    </h2>
-    
-    <p>
-      For Cincinnati, this trade reflects a quieter but equally significant recalibration. Brown’s physicality and reliability over the middle of the field reduce Burrow’s exposure and stabilize an offense that has leaned heavily on timing and precision.
-    </p>
-    
-    <p>
-      The Bengals gain a receiver who thrives on contested catches and sustained drives -- a natural fit for playoff football and late‑season conditions.
-    </p>
-    
-    <p>
-      It’s less explosive. It’s more survivable.
-    </p>
-    
-    <h2 class="font-headline text-2xl font-bold text-white mt-12">
-      The League Is Watching
-    </h2>
-    
-    <p>
-      Around the league, executives are already dissecting the implications. This trade challenges the idea that elite receivers are untouchable -- and raises new questions about age curves, contract timing, and offensive philosophy.
-    </p>
-    
-    <p>
-      If this works, it won’t just change two franchises. It will change how front offices think about star power itself.
-    </p>
-    
-    <p class="text-gray-400 italic mt-12">
-      One thing is certain: Sunday just got louder.
-    </p>
-    
-  </div>
-  
-</article>
-  
-  
 </section>
 
 
 
-<footer class="bg-gradient-to-t from-[#0b0b0b] via-[#101010] to-[#1a1a1a] text-white pt-12 pb-6 border-t border-white/10 shadow-inner shadow-black/50">  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10 text-sm">
-    <!-- Newsletter -->
-    <div>
-      <h3 class="text-lg font-semibold mb-3">📬 Newsletter</h3>
-      <p class="mb-3 text-gray-400">Get the hottest sports news, fresh takes, and live alerts -- straight to your inbox.</p>
-      <input type="email" placeholder="Enter email" class="w-full px-3 py-2 rounded text-black text-sm mb-2">
-      <button class="bg-red-600 hover:bg-red-700 w-full py-2 rounded font-semibold">Subscribe</button>
-    </div>
-    
-    <!-- Quick Links -->
-    <div>
-      <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
-      <ul class="space-y-2 text-gray-400">
-        <li><a href="#" class="hover:text-white">About Us</a></li>
-        <li><a href="#" class="hover:text-white">Careers</a></li>
-        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
-        <li><a href="#" class="hover:text-white">Contact</a></li>
-      </ul>
-    </div>
-    
-    <!-- Social & App Links -->
-    <div>
-      <h3 class="text-lg font-semibold mb-3">Follow Us</h3>
-<div class="flex space-x-4 mt-2 items-center">
-  <!-- X / Custom SVG -->
-  <a href="https://x.com/revlithouse?s=21" target="_blank"
-     class="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-all duration-200 shadow-md flex items-center justify-center h-12 w-12">
-    <svg viewBox="0 0 1200 1227" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="white">
-      <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z" />
-    </svg>
-  </a>
+<footer class="bg-white dark:bg-black border-t border-black/5 dark:border-white/10 py-10">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            <div class="flex flex-col items-center md:items-start gap-2">
+                <span class="fire-text text-sm font-black uppercase tracking-[0.3em]">Greenlight</span>
+                <span class="text-[9px] font-bold opacity-30 uppercase tracking-widest text-black dark:text-white">
+                    © 2026 Greenlight Network LLC
+                </span>
+            </div>
 
-  <!-- YouTube -->
-  <a href="https://youtube.com/@lithouse?si=PMl23RNNSM5D1iA7" target="_blank"
-     class="bg-white/10 hover:bg-white/20 p-2 rounded-full transition-all duration-200 shadow-md flex items-center justify-center h-12 w-12">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-         alt="YouTube" class="h-6 w-6 object-contain">
-  </a>
-</div>
-      <h3 class="text-lg font-semibold mt-6 mb-3">Get the App</h3>
-<div class="flex flex-col space-y-2">
-  <!-- App Store Button with Logo -->
-  <a href="https://apps.apple.com/" target="_blank" class="bg-white px-3 py-2 rounded text-sm font-semibold text-center hover:bg-gray-200 flex items-center justify-center">
-    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" class="h-8">
-  </a>
-  
-  <!-- Google Play Button with Logo -->
-  <a href="https://play.google.com/store" target="_blank" class="bg-white px-3 py-2 rounded text-sm font-semibold text-center hover:bg-gray-200 flex items-center justify-center">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="h-8">
-  </a>
-</div>
-    </div>
-    
-    
-    
-    <div class="border-t border-gray-800 mt-8 pt-4 text-center text-xs text-gray-500">
-      &copy; 2025 The Lithouse Media Network. All rights reserved.
+
+            <div class="flex items-center gap-3">
+                <div class="coming-soon px-4 py-2 bg-black dark:bg-white/5 rounded-xl border border-white/10 flex items-center gap-2 cursor-pointer transition-all">
+                    <i class="fa-brands fa-apple text-white text-xs"></i>
+                    <span class="text-[8px] font-black text-white uppercase tracking-widest">App Store</span>
+                </div>
+                <div class="coming-soon px-4 py-2 bg-black dark:bg-white/5 rounded-xl border border-white/10 flex items-center gap-2 cursor-pointer transition-all">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" class="h-3 w-3" />
+                    <span class="text-[8px] font-black text-white uppercase tracking-widest">Play Store</span>
+                </div>
+            </div>
+
+        </div>
     </div>
 </footer>
+<script>
+function filterStories(league) {
+    const articles = document.querySelectorAll('article[data-league]');
+    const buttons = document.querySelectorAll('.filter-btn');
+
+    // 1. Update Button Styles
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-black', 'dark:bg-white', 'text-white', 'dark:text-black');
+        btn.classList.add('border', 'border-black/10', 'dark:border-white/10', 'dark:text-white');
+    });
+    
+    // Highlight active button
+    const activeBtn = document.getElementById(`filter-${league}`);
+    activeBtn.classList.remove('border', 'border-black/10', 'dark:border-white/10', 'dark:text-white');
+    activeBtn.classList.add('bg-black', 'dark:bg-white', 'text-white', 'dark:text-black');
+
+    // 2. Filter Articles with animation
+    articles.forEach(article => {
+        if (league === 'all' || article.getAttribute('data-league') === league) {
+            article.style.display = 'block';
+            setTimeout(() => { article.style.opacity = '1'; }, 10);
+        } else {
+            article.style.opacity = '0';
+            setTimeout(() => { article.style.display = 'none'; }, 300);
+        }
+    });
+}
+
+async function checkStreamStatus() {
+    const playbackId = "TewjpLNLyv802huM3gVvXv4Nzs8XAUgdZXQ502NYQusmk";
+    const badge = document.getElementById('streamBadge');
+    const btn = document.getElementById('streamActionButton');
+    const subtext = document.getElementById('streamSubtext');
+    const replayVideoUrl = 'videos/hornets_bucks_replay.mp4'; // URL to your recorded file
+
+    try {
+        // We fetch the public Mux "Data" for this playback ID
+        const response = await fetch(`https://stream.mux.com/${playbackId}.json`);
+        const data = await response.json();
+        
+        // Mux returns "live" if a stream is actively being pushed to them
+        const isActuallyLive = data.type === 'live' && data.status === 'active';
+
+        if (isActuallyLive) {
+            // --- LIVE STATE ---
+            badge.innerHTML = `<span class="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span> Live Now`;
+            badge.className = "absolute top-6 left-6 flex items-center gap-2 bg-black text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl";
+            
+            btn.innerText = 'Watch Stream';
+            btn.href = 'live2.html';
+            btn.onclick = null; // Regular link behavior
+            
+            subtext.innerText = 'NBA Regular Season • Live Now';
+        } else {
+            // --- REPLAY STATE (Stream is Idle/Ended) ---
+            badge.innerHTML = `<i class="fa-solid fa-clock-rotate-left mr-1"></i> Full Replay`;
+            badge.className = "absolute top-6 left-6 flex items-center gap-2 bg-slate-700 text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl";
+            
+            btn.innerText = 'Play Replay';
+            btn.href = 'javascript:void(0)';
+            btn.onclick = () => {
+                openVideoModal(replayVideoUrl, 'Hornets vs Bucks', 'Full Game Replay');
+            };
+
+            subtext.innerText = 'Stream Ended • Watch the Replay';
+            // Optional: Dim the card image
+            badge.closest('.group').querySelector('img').style.opacity = "0.7";
+        }
+    } catch (error) {
+        console.error("Mux Status Check Failed:", error);
+        // Fallback to Replay if the check fails
+    }
+}
+
+// Run the check when the page loads
+window.addEventListener('DOMContentLoaded', checkStreamStatus);
+
+</script>
+<script>
 
 
 
+// Toggle User Dashboard
+function toggleUserDashboard() {
+    const dashboard = document.getElementById('userDashboard');
+    dashboard.classList.toggle('translate-x-full');
+}
+
+
+
+
+    // Dark mode toggle with fire effect
+    function toggleDarkMode() {
+        const html = document.documentElement;
+        const sidebar = document.getElementById('sidebar');
+
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            
+            if (!sidebar.classList.contains('translate-x-full')) {
+                toggleSidebar();
+            }
+        } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            createSparks();
+        }
+    }
+
+    // Fire/spark effect on dark mode toggle
+    function createSparks() {
+        const logoText = document.querySelector('.fire-text');
+        const rect = logoText.getBoundingClientRect();
+        
+        for (let i = 0; i < 30; i++) {
+            const isSmoke = i % 2 === 0;
+            const particle = document.createElement('div');
+            particle.className = isSmoke ? 'smoke' : 'ember';
+            
+            const startX = rect.left + rect.width / 2;
+            const startY = rect.top + rect.height / 2;
+            
+            particle.style.left = `${startX}px`;
+            particle.style.top = `${startY}px`;
+            
+            document.body.appendChild(particle);
+            
+            const adx = (Math.random() - 0.5) * 120;
+            const ady = isSmoke ? (Math.random() * -150) - 20 : (Math.random() - 0.5) * 150;
+            
+            particle.animate([
+                { transform: `translate(0, 0) scale(0.5)`, opacity: 1 },
+                { transform: `translate(${adx}px, ${ady}px) scale(${isSmoke ? 3 : 0.2})`, opacity: 0 }
+            ], {
+                duration: isSmoke ? 1500 + Math.random() * 1000 : 800 + Math.random() * 500,
+                easing: 'ease-out',
+                fill: 'forwards'
+            });
+            
+            setTimeout(() => particle.remove(), 2500);
+        }
+    }
+
+    // Sidebar toggle
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('translate-x-full');
+    }
+
+    // Nav scroll effect
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            nav.classList.add('nav-scrolled');
+        } else {
+            nav.classList.remove('nav-scrolled');
+        }
+    });
+
+    // Load saved theme preference
+    if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+    }
+</script><div id="gameModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-6 transition-all duration-300">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-xl" onclick="closeGameModal()"></div>
+
+<div class="relative w-full max-w-5xl bg-white dark:bg-[#0f0f0f] rounded-[2.5rem] overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.5)] border border-black/10 dark:border-white/10 max-h-[90vh] flex flex-col scale-95 opacity-0 transition-all duration-300" id="modalContainer">
+    
+    <div class="p-4 md:p-8 border-b border-black/5 dark:border-white/5 bg-gray-50/50 dark:bg-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
+    
+    <div class="flex items-center gap-3 md:gap-4 flex-1 md:justify-end text-center md:text-right w-full min-w-0">
+        <div class="order-2 md:order-1 min-w-0">
+            <h2 id="modalTeam1Name" class="text-lg md:text-3xl font-black uppercase tracking-tighter dark:text-white leading-none truncate">---</h2>
+            <p id="modalTeam1Record" class="text-[10px] font-bold opacity-40 uppercase tracking-widest mt-1 dark:text-white">0-0</p>
+        </div>
+        <img id="modalTeam1Logo" src="" class="w-10 h-10 md:w-16 md:h-16 object-contain flex-shrink-0 order-1 md:order-2" alt="">
+    </div>
+
+    <div class="text-center px-3 md:px-8 md:border-x border-black/5 dark:border-white/10 flex-shrink-0">
+        <span id="modalGameStatus" class="bg-gray-500 text-white text-[9px] md:text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest mb-3 inline-block shadow-lg">PREGAME</span>
+        <div class="flex items-center justify-center gap-3 md:gap-6">
+            <span id="modalTeam1Score" class="text-3xl md:text-6xl font-black tracking-tighter dark:text-white">0</span>
+            <span class="text-lg md:text-2xl font-black opacity-20">-</span>
+            <span id="modalTeam2Score" class="text-3xl md:text-6xl font-black tracking-tighter dark:text-white">0</span>
+        </div>
+    </div>
+
+    <div class="flex items-center gap-3 md:gap-4 flex-1 md:justify-start text-center md:text-left w-full min-w-0">
+        <img id="modalTeam2Logo" src="" class="w-10 h-10 md:w-16 md:h-16 object-contain flex-shrink-0" alt="">
+        <div class="min-w-0">
+            <h2 id="modalTeam2Name" class="text-lg md:text-3xl font-black uppercase tracking-tighter dark:text-white leading-none truncate">---</h2>
+            <p id="modalTeam2Record" class="text-[10px] font-bold opacity-40 uppercase tracking-widest mt-1 dark:text-white">0-0</p>
+        </div>
+    </div>
+</div>
+
+<button onclick="closeGameModal()" class="absolute top-4 right-6 text-3xl font-light hover:rotate-90 transition-transform dark:text-white opacity-50 hover:opacity-100">&times;</button>
+
+
+</div>
+
+    <div class="flex-grow overflow-y-auto no-scrollbar p-6 md:p-10">
+        <div class="grid lg:grid-cols-3 gap-10">
+            <div class="lg:col-span-2 space-y-8">
+                <h4 class="text-[11px] font-black uppercase tracking-[0.4em] text-amber-500 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-simple"></i> Box Score
+                </h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="text-[9px] font-black uppercase tracking-widest opacity-40 dark:text-white border-b border-black/5 dark:border-white/5">
+                                <th class="pb-4">Player</th>
+                                <th class="pb-4">Team</th>
+                                <th class="pb-4">PTS</th>
+                                <th class="pb-4">REB</th>
+                                <th class="pb-4">AST</th>
+                                <th class="pb-4">MIN</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalBoxScoreBody" class="text-sm font-bold dark:text-white"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-gray-50/50 dark:bg-white/5 rounded-[2rem] p-6 border border-black/5 dark:border-white/5">
+                <h4 class="text-[11px] font-black uppercase tracking-[0.4em] text-red-600 mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-fire-pulse"></i> Play by Play
+                </h4>
+                <div id="modalPlayByPlay" class="space-y-6"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div><script>
+
+// Cache for standings seeds -- keyed by ESPN team ID
+let standingsSeedMap = {};
+
+async function loadStandings() {
+    try {
+        const res = await fetch('https://site.api.espn.com/apis/v2/sports/basketball/nba/standings');
+        const data = await res.json();
+        const newMap = {};
+
+        data.children?.forEach(conference => {
+            const entries = conference.standings?.entries || [];
+
+            // Each entry has a 'stats' array -- find wins and losses and compute win pct
+            const ranked = entries.map(entry => {
+                const wins = entry.stats?.find(s => s.name === 'wins')?.value ?? 0;
+                const losses = entry.stats?.find(s => s.name === 'losses')?.value ?? 0;
+                const total = wins + losses;
+                const winPct = total > 0 ? wins / total : 0;
+                return { id: entry.team.id, winPct, wins, losses };
+            });
+
+            // Sort descending by win pct -- ties broken by raw wins
+            ranked.sort((a, b) => b.winPct - a.winPct || b.wins - a.wins);
+
+            // Assign seed 1–15 per conference based on that real sorted order
+            ranked.forEach((team, idx) => {
+                newMap[team.id] = idx + 1;
+            });
+        });
+
+        standingsSeedMap = newMap;
+    } catch (err) {
+        console.warn("Standings fetch failed:", err);
+    }
+}
+
+async function loadGames() {
+    try {
+        const scroller = document.getElementById('scoreScroller');
+        
+        const getESPNFormatDate = (date) => {
+            return date.toISOString().split('T')[0].replace(/-/g, '');
+        };
+
+        const today = new Date();
+        const yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+
+        const dateToday = getESPNFormatDate(today);
+        const dateYesterday = getESPNFormatDate(yesterday);
+
+        const [resToday, resYesterday] = await Promise.all([
+            fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=${dateToday}`),
+            fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=${dateYesterday}`)
+        ]);
+
+        const dataToday = await resToday.json();
+        const dataYesterday = await resYesterday.json();
+
+        let allEvents = [...(dataToday.events || []), ...(dataYesterday.events || [])];
+
+        if (allEvents.length === 0) {
+            scroller.innerHTML = '<div class="min-w-[240px] p-8 text-center text-sm text-gray-400 dark:text-gray-500">No games found</div>';
+            return;
+        }
+
+        allEvents.sort((a, b) => {
+            const stateOrder = { 'in': 0, 'pre': 1, 'post': 2 };
+            return stateOrder[a.status.type.state] - stateOrder[b.status.type.state];
+        });
+
+        scroller.innerHTML = '';
+        
+        allEvents.forEach(event => {
+            const comp = event.competitions[0];
+            const away = comp.competitors.find(c => c.homeAway === 'away');
+            const home = comp.competitors.find(c => c.homeAway === 'home');
+            const status = event.status.type;
+            const isLive = status.state === 'in';
+            
+            // Seed lookup -- falls back silently if not found
+            const awaySeed = standingsSeedMap[away.team.id];
+            const homeSeed = standingsSeedMap[home.team.id];
+            const seedBadge = (seed) => seed
+                ? `<span class="text-[9px] font-black text-black/30 dark:text-white/30 leading-none">${seed}</span>`
+                : '';
+
+            let cardBg = isLive ? 'bg-white dark:bg-neutral-900' : 'bg-gray-50/50 dark:bg-neutral-900/50';
+            let dotColor = isLive ? 'bg-red-600' : (status.state === 'pre' ? 'bg-amber-500' : 'bg-gray-500');
+            let textColor = isLive ? 'text-red-600' : 'text-gray-400 dark:text-gray-300';
+            let fontWeight = isLive ? 'font-black' : 'font-bold';
+            let ping = isLive
+                ? '<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>'
+                : (status.state === 'pre' ? '<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>' : '');
+            
+            let label = isLive
+                ? `Live • ${status.shortDetail}`
+                : (status.state === 'pre'
+                    ? `Pregame • ${status.shortDetail}`
+                    : (event.date.includes(today.toISOString().split('T')[0]) ? 'Final' : 'Final • Yesterday'));
+
+            const card = document.createElement('div');
+            card.className = `min-w-[240px] ${cardBg} border border-gray-200/60 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer`;
+            card.onclick = () => openGameModal(event.id);
+            
+            card.innerHTML = `
+                <div class="flex items-center justify-between mb-4">      
+                    <div class="flex items-center gap-1.5">
+                        <span class="relative flex h-2 w-2">
+                            ${ping}
+                            <span class="relative inline-flex rounded-full h-2 w-2 ${dotColor}"></span>
+                        </span>
+                        <span class="uppercase text-[10px] ${fontWeight} tracking-widest ${textColor}">${label}</span>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <img src="${away.team.logo}" class="w-6 h-6 object-contain">
+                            <span class="text-sm font-bold text-gray-800 dark:text-white">${away.team.abbreviation}</span>
+                            ${seedBadge(awaySeed)}
+                        </div>
+                        ${status.state === 'pre'
+                            ? `<span class="text-xs font-medium text-gray-400 dark:text-gray-300">${away.records?.[0]?.summary || '0-0'}</span>`
+                            : `<span class="text-sm font-black text-gray-900 dark:text-white">${away.score || '0'}</span>`
+                        }
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <img src="${home.team.logo}" class="w-6 h-6 object-contain">
+                            <span class="text-sm font-bold text-gray-800 dark:text-white">${home.team.abbreviation}</span>
+                            ${seedBadge(homeSeed)}
+                        </div>
+                        ${status.state === 'pre'
+                            ? `<span class="text-xs font-medium text-gray-400 dark:text-gray-300">${home.records?.[0]?.summary || '0-0'}</span>`
+                            : `<span class="text-sm font-black text-gray-900 dark:text-white">${home.score || '0'}</span>`
+                        }
+                    </div>
+                </div>
+            `;
+            scroller.appendChild(card);
+        });
+    } catch (err) {
+        console.error("Scorecard fetch error:", err);
+    }
+}
+
+// Load standings first, then games -- refresh standings every 10 min, games every 30s
+loadStandings().then(loadGames);
+setInterval(loadGames, 30000);
+setInterval(loadStandings, 600000);
+
+
+// --- REPLACE YOUR EXISTING openGameModal FUNCTION WITH THIS UPDATED VERSION ---
+
+// --- SMART TEAM COLORS MAP ---
+const teamColorMap = {
+    'ATL': '#E03A3E', 'BOS': '#007A33', 'BKN': '#000000', 'CHA': '#1D1160', 'CHI': '#CE1141',
+    'CLE': '#860038', 'DAL': '#00538C', 'DEN': '#0E2240', 'DET': '#C8102E', 'GS': '#1D428A',
+    'HOU': '#CE1141', 'IND': '#FDB927', 'LAC': '#C8102E', 'LAL': '#552583', 'MEM': '#5D76A9',
+    'MIA': '#98002E', 'MIL': '#00471B', 'MIN': '#0C2340', 'NOP': '#0C2340', 'NY': '#006BB6',
+    'OKC': '#007AC1', 'ORL': '#0077C0', 'PHI': '#006BB6', 'PHX': '#1D1160', 'POR': '#E03A3E',
+    'SAC': '#5A2D81', 'SAS': '#C4CED4', 'TOR': '#CE1141', 'UTA': '#002B5C', 'WAS': '#002B5C'
+};
+
+// Helper to ensure contrast based on current theme
+function getSafeTeamColor(abbr) {
+    const rawColor = teamColorMap[abbr] || '#f59e0b';
+    const isDark = document.documentElement.classList.contains('dark');
+    
+    // Manual adjustments for legibility
+    if (isDark) {
+        if (abbr === 'BKN' || abbr === 'DEN' || abbr === 'MIN') return '#94a3b8'; // Lighten dark teams
+    } else {
+        if (abbr === 'SAS') return '#64748b'; // Darken light teams
+    }
+    return rawColor;
+}
+
+async function openGameModal(gameId) {
+    const modal = document.getElementById('gameModal');
+    const container = document.getElementById('modalContainer');
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+        container.classList.remove('scale-95', 'opacity-0');
+        container.classList.add('scale-100', 'opacity-100');
+    }, 10);
+    document.body.style.overflow = 'hidden';
+
+    try {
+        const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=${gameId}`);
+        const data = await res.json();
+
+        const comp = data.header.competitions[0];
+        const away = comp.competitors.find(c => c.homeAway === 'away');
+        const home = comp.competitors.find(c => c.homeAway === 'home');
+        const isPregame = comp.status.type.state === 'pre';
+
+        // Set Headers
+        document.getElementById('modalGameStatus').innerText = comp.status.type.detail;
+        document.getElementById('modalTeam1Name').innerText = away.team.abbreviation;
+        document.getElementById('modalTeam1Score').innerText = away.score || '0';
+document.getElementById('modalTeam1Logo').src = away.team.logo || `https://a.espncdn.com/i/teamlogos/nba/500/${away.team.abbreviation.toLowerCase()}.png`;
+        document.getElementById('modalTeam1Record').innerText = away.record?.[0]?.displayValue || '0-0';
+
+        document.getElementById('modalTeam2Name').innerText = home.team.abbreviation;
+        document.getElementById('modalTeam2Score').innerText = home.score || '0';
+document.getElementById('modalTeam2Logo').src = home.team.logo || `https://a.espncdn.com/i/teamlogos/nba/500/${home.team.abbreviation.toLowerCase()}.png`;
+        document.getElementById('modalTeam2Record').innerText = home.record?.[0]?.displayValue || '0-0';
+
+        if (isPregame) {
+            let leadersHtml = `<div class="space-y-6">`;
+            if (data.leaders) {
+                data.leaders.forEach(teamLeader => {
+                    const color = getSafeTeamColor(teamLeader.team.abbreviation);
+                    leadersHtml += `
+                        <div class="mb-4">
+                            <h5 class="text-[10px] font-black uppercase tracking-widest mb-3" style="color: ${color}">${teamLeader.team.displayName} Leaders</h5>
+                            <div class="grid grid-cols-3 gap-2">
+                                ${teamLeader.leaders.map(l => `
+                                    <div class="bg-black/5 dark:bg-white/5 p-3 rounded-xl border-l-2" style="border-color: ${color}">
+                                        <p class="text-[8px] opacity-50 uppercase font-black">${l.displayName}</p>
+                                        <p class="text-xs font-bold truncate">${l.leaders[0].athlete.shortName}</p>
+                                        <p class="text-sm font-black" style="color: ${color}">${l.leaders[0].displayValue}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>`;
+                });
+            }
+            leadersHtml += `</div>`;
+
+            let injuryHtml = `<div class="space-y-4">`;
+            if (data.injuries && data.injuries.length > 0) {
+                data.injuries.forEach(teamInj => {
+                    const color = getSafeTeamColor(teamInj.team.abbreviation);
+                    injuryHtml += `<div class="mb-4">
+                        <h5 class="text-[10px] font-black uppercase tracking-widest mb-2" style="color: ${color}">${teamInj.team.displayName} Injuries</h5>
+                        <div class="space-y-2">
+                            ${teamInj.injuries.map(i => `
+                                <div class="flex justify-between items-center text-xs border-b border-black/5 dark:border-white/5 pb-2">
+                                    <span class="font-bold dark:text-white">${i.athlete.displayName}</span>
+                                    <span class="font-black uppercase text-[9px] px-2 py-0.5 rounded" style="background-color: ${color}20; color: ${color}">${i.status}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>`;
+                });
+            } else { injuryHtml += `<p class="text-xs opacity-40 italic">No significant injuries reported.</p>`; }
+            injuryHtml += `</div>`;
+
+            document.getElementById('modalBoxScoreBody').innerHTML = `<tr><td colspan="6" class="p-0"><div class="grid md:grid-cols-2 gap-8 py-4"><div>${leadersHtml}</div><div>${injuryHtml}</div></div></td></tr>`;
+                
+        } else {
+            let statsHtml = '';
+            data.boxscore?.players?.forEach(teamGroup => {
+                const color = getSafeTeamColor(teamGroup.team.abbreviation);
+                statsHtml += `<tr class="bg-black/5 dark:bg-white/5"><td colspan="6" class="py-3 px-4 font-black text-[10px] uppercase" style="color: ${color}">${teamGroup.team.displayName}</td></tr>`;
+                teamGroup.statistics.forEach(statSet => {
+                    statSet.athletes.forEach(p => {
+                        if (p.stats) {
+                            statsHtml += `
+                                <tr class="border-b border-black/5 dark:border-white/5 text-sm">
+                                    <td class="py-3 font-bold pl-4 dark:text-white">${p.athlete.displayName}</td>
+                                    <td class="opacity-40 text-[10px]">${teamGroup.team.abbreviation}</td>
+                                    <td class="font-black text-center" style="color: ${color}">${p.stats[statSet.labels.indexOf('PTS')] || '0'}</td>
+                                    <td class="text-center">${p.stats[statSet.labels.indexOf('REB')] || '0'}</td>
+                                    <td class="text-center">${p.stats[statSet.labels.indexOf('AST')] || '0'}</td>
+                                    <td class="text-right pr-4 font-black text-[10px] opacity-60">${p.stats[statSet.labels.indexOf('MIN')] || '0'}</td>
+                                </tr>`;
+                        }
+                    });
+                });
+            });
+            document.getElementById('modalBoxScoreBody').innerHTML = statsHtml;
+        }
+
+        const plays = data.plays || [];
+        document.getElementById('modalPlayByPlay').innerHTML = plays.slice(-8).reverse().map(play => {
+            const color = play.team ? getSafeTeamColor(play.team.abbreviation) : '#f59e0b';
+            return `
+            <div class="relative pl-6 mb-4">
+                <div class="absolute left-0 top-1.5 w-1.5 h-1.5 rounded-full" style="background-color: ${color}"></div>
+                <p class="text-[9px] font-black uppercase opacity-40 dark:text-white">${play.clock?.displayValue || 'LIVE'}</p>
+                <p class="text-[11px] font-bold leading-tight dark:text-gray-300">${play.text}</p>
+            </div>`;
+        }).join('') || `<p class="text-center opacity-20 py-10 dark:text-white">Waiting for tip-off...</p>`;
+
+    } catch (err) { console.error("Modal Data Error:", err); }
+}
+
+function closeGameModal() {
+    const container = document.getElementById('modalContainer');
+    container.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+        document.getElementById('gameModal').classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }, 300);
+}
+
+loadGames();
+setInterval(loadGames, 30000); // 30s refresh is better for live data
+</script>
+<button onclick="toggleChat()" class="fixed bottom-6 right-6 z-[100] w-10 h-10 bg-green-600 rounded-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group">
+    <i class="fa-solid fa-comments text-white text-xl group-hover:rotate-12 transition-transform"></i>
+    
+    <span id="dm-notification-badge" class="absolute -top-1 -right-1 w-4 h-4 bg-red-600 border-2 border-white dark:border-black rounded-full animate-pulse hidden"></span>
+</button>
+
+
+<div id="chatWindow" class="fixed bottom-24 right-6 z-[100] w-[350px] h-[550px] greenlight-glass rounded-[2.5rem] flex flex-col shadow-2xl translate-y-[120%] opacity-0 pointer-events-none transition-all duration-500 ease-in-out">
+    
+    <div class="p-6 border-b border-green-500/10 flex items-center justify-between bg-white/10 dark:bg-black/10">
+        <div>
+            <div class="flex items-center gap-1.5 mt-1">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                <span id="online-user-count" class="text-[9px] font-bold opacity-50 uppercase dark:text-white">0 Online</span>
+            </div>
+        </div>
+        <button onclick="toggleChat()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+            <i class="fa-solid fa-xmark text-black dark:text-white opacity-40"></i>
+        </button>
+    </div>
+
+    <div class="flex p-3 gap-2 overflow-x-auto no-scrollbar border-b border-green-500/5">
+        <button class="px-5 py-2 rounded-full bg-green-600 text-white text-[9px] font-black uppercase tracking-widest shadow-lg shadow-green-500/20">All Games</button>
+        <button class="px-5 py-2 rounded-full hover:bg-green-500/10 text-[9px] font-black uppercase tracking-widest dark:text-white/40 border border-transparent hover:border-green-500/20">Elite Only</button>
+        <button class="px-5 py-2 rounded-full hover:bg-green-500/10 text-[9px] font-black uppercase tracking-widest dark:text-white/40 border border-transparent hover:border-green-500/20">DMs</button>
+    </div>
+
+    <div id="message-container" class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
+        </div>
+
+    <div class="p-5 bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem] border-t border-green-500/10">
+        <div class="relative group">
+            <input id="chat-input" type="text" placeholder="Drop a take..." 
+                   class="w-full bg-white/50 dark:bg-white/5 border border-green-500/10 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-sm font-medium outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/10 transition-all dark:text-white placeholder-black/30 dark:placeholder-white/20">
+            <button id="send-btn" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-green-600 hover:scale-110 active:scale-90 transition-transform">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+function toggleChat() {
+    const chatWindow = document.getElementById('chatWindow');
+    chatWindow.classList.toggle('translate-y-[120%]');
+    chatWindow.classList.toggle('opacity-0');
+    chatWindow.classList.toggle('pointer-events-none');
+}
+
+// ── PLAYER STATS MODAL ──────────────────────────────────────────────────────
+
+const playerStatsModal = document.createElement('div');
+playerStatsModal.id = 'playerStatsModal';
+playerStatsModal.className = 'fixed inset-0 z-[200] hidden items-center justify-center p-4';
+playerStatsModal.innerHTML = `
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-xl" onclick="closePlayerModal()"></div>
+    <div id="playerModalContainer" class="relative w-full max-w-md bg-white dark:bg-[#0f0f0f] rounded-[2.5rem] overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.5)] border border-black/10 dark:border-white/10 scale-95 opacity-0 transition-all duration-300">
+        
+        <button onclick="closePlayerModal()" class="absolute top-5 right-6 text-3xl font-light hover:rotate-90 transition-transform dark:text-white opacity-40 hover:opacity-100 z-10">&times;</button>
+
+        <div id="playerModalHeader" class="p-8 pb-6 border-b border-black/5 dark:border-white/5">
+            <div class="flex items-center gap-5">
+                <div class="relative">
+                    <img id="playerModalHeadshot" src="" alt="" class="w-20 h-20 rounded-2xl object-cover object-top bg-gray-100 dark:bg-neutral-800">
+                    <div id="playerModalTeamBadge" class="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center border-2 border-white dark:border-[#0f0f0f] overflow-hidden bg-gray-100">
+                        <img id="playerModalTeamLogo" src="" class="w-6 h-6 object-contain">
+                    </div>
+                </div>
+                <div>
+                    <h3 id="playerModalName" class="text-2xl font-black uppercase tracking-tighter leading-none dark:text-white"></h3>
+                    <p id="playerModalMeta" class="text-[10px] font-bold opacity-40 uppercase tracking-widest mt-1.5 dark:text-white"></p>
+                    <div id="playerModalStatus" class="mt-2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="playerModalBody" class="p-8">
+            <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-amber-500 mb-6">2024–25 Season Averages</h4>
+            <div id="playerStatsGrid" class="grid grid-cols-3 gap-3"></div>
+            <div id="playerModalLoader" class="text-center py-12 text-sm opacity-40 dark:text-white">Loading stats...</div>
+        </div>
+    </div>
+`;
+document.body.appendChild(playerStatsModal);
+
+function openPlayerModal(athleteId, teamAbbr) {
+    const modal = document.getElementById('playerStatsModal');
+    const container = document.getElementById('playerModalContainer');
+
+    // Reset
+    document.getElementById('playerStatsGrid').innerHTML = '';
+    document.getElementById('playerModalLoader').style.display = 'block';
+    document.getElementById('playerModalLoader').innerText = 'Loading stats...';
+    document.getElementById('playerModalName').innerText = '';
+    document.getElementById('playerModalMeta').innerText = '';
+    document.getElementById('playerModalStatus').innerHTML = '';
+    document.getElementById('playerModalHeadshot').src = '';
+    document.getElementById('playerModalTeamLogo').src = '';
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+        container.classList.remove('scale-95', 'opacity-0');
+        container.classList.add('scale-100', 'opacity-100');
+    }, 10);
+    document.body.style.overflow = 'hidden';
+
+    fetchPlayerSeasonStats(athleteId, teamAbbr);
+}
+
+function closePlayerModal() {
+    const container = document.getElementById('playerModalContainer');
+    container.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+        document.getElementById('playerStatsModal').classList.add('hidden');
+        document.getElementById('playerStatsModal').classList.remove('flex');
+        document.body.style.overflow = 'auto';
+    }, 300);
+}
+
+async function fetchPlayerSeasonStats(athleteId, teamAbbr) {
+    const color = getSafeTeamColor(teamAbbr);
+    try {
+        const res = await fetch(`https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/${athleteId}/overview`);
+        const data = await res.json();
+
+        const athlete = data.athlete;
+        const displayName = athlete.displayName || athlete.fullName || 'Unknown';
+        const position = athlete.position?.abbreviation || '';
+        const jersey = athlete.jersey ? `#${athlete.jersey}` : '';
+        const teamName = athlete.team?.displayName || teamAbbr;
+        const headshotUrl = athlete.headshot?.href || `https://a.espncdn.com/i/headshots/nba/players/full/${athleteId}.png`;
+        const teamLogoUrl = athlete.team?.logos?.[0]?.href || `https://a.espncdn.com/i/teamlogos/nba/500/${teamAbbr.toLowerCase()}.png`;
+        const injuryStatus = athlete.injuries?.[0];
+
+        document.getElementById('playerModalName').innerText = displayName;
+        document.getElementById('playerModalMeta').innerText = `${position} · ${jersey} · ${teamName}`;
+        document.getElementById('playerModalHeadshot').src = headshotUrl;
+        document.getElementById('playerModalTeamLogo').src = teamLogoUrl;
+
+        if (injuryStatus) {
+            document.getElementById('playerModalStatus').innerHTML = `
+                <span class="text-[9px] font-black uppercase px-2 py-1 rounded-full" style="background:${color}20; color:${color}">
+                    ⚠ ${injuryStatus.status} – ${injuryStatus.shortComment || injuryStatus.type}
+                </span>`;
+        }
+
+        // Pull season stats from the stats array
+        const statsCategory = data.stats?.find(s => s.type === 'total' || s.type === 'average');
+        const statLabels = data.stats?.[0]?.labels || [];
+        const statValues = data.stats?.[0]?.stats || [];
+
+        // Build a lookup map
+        const statsMap = {};
+        statLabels.forEach((label, i) => { statsMap[label] = statValues[i]; });
+
+        // Prefer averages endpoint as fallback
+        const statDisplays = [
+            { key: 'avgPoints',       label: 'PTS',  fallback: 'points' },
+            { key: 'avgRebounds',     label: 'REB',  fallback: 'rebounds' },
+            { key: 'avgAssists',      label: 'AST',  fallback: 'assists' },
+            { key: 'avgSteals',       label: 'STL',  fallback: 'steals' },
+            { key: 'avgBlocks',       label: 'BLK',  fallback: 'blocks' },
+            { key: 'avgTurnovers',    label: 'TOV',  fallback: 'turnovers' },
+            { key: 'fieldGoalPct',    label: 'FG%',  fallback: 'fieldGoalPct' },
+            { key: 'threePointPct',   label: '3P%',  fallback: 'threePointPct' },
+            { key: 'freeThrowPct',    label: 'FT%',  fallback: 'freeThrowPct' },
+        ];
+
+        // ESPN's athlete overview embeds season stats under data.splits or data.athlete.stats
+        const splits = data.splits?.categories || [];
+        const avgCategory = splits.find(c => c.type === 'perGame' || c.name === 'perGame') || splits[0];
+        const avgStats = avgCategory?.stats || [];
+        const avgMap = {};
+        avgStats.forEach(s => { avgMap[s.name] = s.displayValue ?? s.value; });
+
+        document.getElementById('playerModalLoader').style.display = 'none';
+
+        const grid = document.getElementById('playerStatsGrid');
+        grid.innerHTML = '';
+
+        const featured = [
+            { name: 'points',       label: 'PTS' },
+            { name: 'rebounds',     label: 'REB' },
+            { name: 'assists',      label: 'AST' },
+            { name: 'steals',       label: 'STL' },
+            { name: 'blocks',       label: 'BLK' },
+            { name: 'turnovers',    label: 'TO'  },
+            { name: 'fieldGoalPct', label: 'FG%' },
+            { name: 'threePointPct',label: '3P%' },
+            { name: 'freeThrowPct', label: 'FT%' },
+        ];
+
+        let hasStats = false;
+        featured.forEach(stat => {
+            const val = avgMap[stat.name];
+            if (val !== undefined && val !== null) {
+                hasStats = true;
+                const isPrimary = ['points','rebounds','assists'].includes(stat.name);
+                grid.innerHTML += `
+                    <div class="bg-black/[0.03] dark:bg-white/5 rounded-2xl p-4 border border-black/5 dark:border-white/5 text-center ${isPrimary ? 'col-span-1' : ''}">
+                        <p class="text-[9px] font-black uppercase tracking-widest opacity-40 dark:text-white mb-1">${stat.label}</p>
+                        <p class="text-2xl font-black tracking-tighter" style="color:${isPrimary ? color : 'inherit'}">${parseFloat(val).toFixed(isPrimary ? 1 : (stat.label.includes('%') ? 1 : 1))}</p>
+                    </div>`;
+            }
+        });
+
+        if (!hasStats) {
+            grid.innerHTML = `<div class="col-span-3 text-center py-6 opacity-40 text-sm dark:text-white">No season stats available</div>`;
+        }
+
+    } catch (err) {
+        console.error('Player stats error:', err);
+        document.getElementById('playerModalLoader').innerText = 'Could not load stats. ESPN API may be unavailable.';
+    }
+}
+
+// ── PATCH BOX SCORE TO MAKE PLAYER NAMES CLICKABLE ──────────────────────────
+
+// Override the box score renderer to inject clickable names
+const _origOpenGameModal = openGameModal;
+window.openGameModal = async function(gameId) {
+    await _origOpenGameModal(gameId);
+    // After modal data loads, patch player names
+    setTimeout(patchPlayerNames, 800);
+};
+
+function patchPlayerNames() {
+    const tbody = document.getElementById('modalBoxScoreBody');
+    if (!tbody) return;
+    const rows = tbody.querySelectorAll('tr');
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length < 3) return;
+        const nameCell = cells[0];
+        const teamCell = cells[1];
+        const name = nameCell.innerText.trim();
+        const teamAbbr = teamCell.innerText.trim();
+        if (!name || name.length < 2 || !teamAbbr) return;
+        // Look up athlete ID from our cached game data
+        const athleteId = window._athleteIdMap?.[name];
+        if (athleteId) {
+            nameCell.innerHTML = `<button onclick="openPlayerModal('${athleteId}','${teamAbbr}')" class="font-bold hover:underline text-left transition-colors hover:text-amber-500 dark:text-white">${name}</button>`;
+        }
+    });
+}
+
+// ── PATCH openGameModal TO BUILD ATHLETE ID MAP ───────────────────────────────
+
+const __origFetch = window.openGameModal;
+window._athleteIdMap = {};
+
+// We intercept the summary data to harvest athlete IDs
+const _origOpen = openGameModal;
+window.openGameModal = async function(gameId) {
+    window._athleteIdMap = {};
+    try {
+        const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=${gameId}`);
+        const data = await res.json();
+        // Build athlete ID map from boxscore
+        data.boxscore?.players?.forEach(teamGroup => {
+            teamGroup.statistics?.forEach(statSet => {
+                statSet.athletes?.forEach(p => {
+                    if (p.athlete?.displayName && p.athlete?.id) {
+                        window._athleteIdMap[p.athlete.displayName] = p.athlete.id;
+                    }
+                });
+            });
+        });
+    } catch(e) {}
+    await _origOpenGameModal(gameId);
+    setTimeout(patchPlayerNames, 900);
+};
+
+
+</script>
+
+</body>
+<div id="userProfileExpanded" class="fixed inset-0 z-[1000] hidden items-center justify-center p-4 backdrop-blur-md">
+    <div class="absolute inset-0 bg-black/60" onclick="closeProfile()"></div>
+    <div id="profileContainer" class="relative w-full max-w-sm bg-white dark:bg-[#0f0f0f] rounded-[3rem] overflow-hidden shadow-2xl border border-black/10 dark:border-white/10 transform scale-95 opacity-0 transition-all duration-300">
+        
+        <div class="h-24 bg-gradient-to-r from-green-600 to-amber-500"></div>
+        
+        <div class="px-8 pb-8">
+            <div class="relative -mt-12 mb-4">
+                <div id="profileCircle" class="w-24 h-24 rounded-full bg-white dark:bg-[#0f0f0f] p-1 shadow-xl">
+                    <div class="w-full h-full rounded-full bg-amber-500 flex items-center justify-center text-2xl font-black text-white" id="profileInitials">--</div>
+                </div>
+                <span class="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-4 border-white dark:border-[#0f0f0f] rounded-full"></span>
+            </div>
+
+            <h3 id="profileName" class="text-2xl font-black uppercase tracking-tighter dark:text-white">Loading...</h3>
+            <p class="text-[10px] font-bold text-amber-500 uppercase tracking-[0.2em] mb-6">Greenlight Elite Member</p>
+
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-black/5 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5">
+                        <p class="text-[9px] font-black opacity-40 uppercase mb-1">Reputation</p>
+                        <p class="text-xl font-black dark:text-white">9.8k</p>
+                    </div>
+                    <div class="bg-black/5 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5">
+                        <p class="text-[9px] font-black opacity-40 uppercase mb-1">Badges</p>
+                        <p class="text-xl font-black dark:text-white">12</p>
+                    </div>
+                </div>
+                
+                <button class="w-full py-4 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white transition-all">
+                    Send Message
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-  // Mobile toggle logic
-  const mobileToggle = document.getElementById("mobile-toggle");
-  const mobileMenu = document.getElementById("mobileMenu");
-  const closeMenu = document.getElementById("closeMenu");
+/**
+ * 2. THE FUNCTIONAL LOGIC
+ * This patches your listenForMessages function to make the avatar clickable.
+ */
 
-  mobileToggle.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
-
-  if (closeMenu) {
-    closeMenu.addEventListener("click", () => {
-      mobileMenu.classList.add("hidden");
-    });
-  }
-
-  const lameloApiKey = "pub_577be9bf68e94299b5efd55a3c80b232";
-  let lameloIndex = 0;
-  let lameloArticles = [];
-  
-  function renderLameloSlide(index) {
-    if (!lameloArticles.length) return;
-    const a = lameloArticles[index];
-    document.getElementById('lameloHeroContainer').innerHTML = `
-      <a href="${a.link}" target="_blank" class="block text-white hover:text-gray-300 transition-all duration-300">
-        <h2 class="text-2xl md:text-4xl font-bold leading-tight max-w-3xl">${a.title}</h2>
-      </a>
-    `;
-  }
-  
-  function nextLamelo() {
-    if (!lameloArticles.length) return;
-    lameloIndex = (lameloIndex + 1) % lameloArticles.length;
-    renderLameloSlide(lameloIndex);
-  }
-  
-  function prevLamelo() {
-    if (!lameloArticles.length) return;
-    lameloIndex = (lameloIndex - 1 + lameloArticles.length) % lameloArticles.length;
-    renderLameloSlide(lameloIndex);
-  }
-  
-  async function loadLameloNews() {
-    try {
-      const response = await fetch(`https://newsdata.io/api/1/latest?apikey=${lameloApiKey}&qInTitle=Lamelo%20ball&language=en`);
-      const data = await response.json();
-      lameloArticles = data.results.filter(article => article.title && article.link);
-      if (lameloArticles.length === 0) {
-        document.getElementById('lameloHeroContainer').innerHTML = `<div class="text-center text-white py-16">No LaMelo Ball news found.</div>`;
-        return;
-      }
-      renderLameloSlide(lameloIndex);
-    } catch (err) {
-      document.getElementById('lameloHeroContainer').innerHTML = `<div class="text-center text-red-400 py-16">⚠️ Could not load news. Try again later.</div>`;
-      console.error("Error loading LaMelo Ball news:", err);
-    }
-  }
-  
-  loadLameloNews();
-  setInterval(nextLamelo, 7000);
-  
-const heroStories = [
-  {
-    title: "LaMelo Drops 48 -- With a Smile",
-    category: "NBA • 3h ago",
-    ctaText: "▶ Watch Highlights",
-    ctaLink: "#",
-    videoSrc: "/videos/lamelo-hero.mp4"
-  },
-  {
-    title: "Mahomes Silences Doubters with 4-TD Masterclass",
-    category: "NFL • 2h ago",
-    ctaText: "▶ Watch Breakdown",
-    ctaLink: "#",
-    videoSrc: "/videos/mahomes.mp4"
-  },
-  {
-    title: "UFC 300 Ends in Chaos -- Here's What Happened",
-    category: "MMA • 5h ago",
-    ctaText: "▶ See Full Recap",
-    ctaLink: "#",
-    videoSrc: "/videos/ufc-chaos.mp4"
-  }
-];
-
-let heroIndex = 0;
-
-function renderHero(index) {
-  const story = heroStories[index];
-  titleEl.textContent = story.title;
-  catEl.textContent = story.category;
-  ctaEl.textContent = story.ctaText;
-  ctaEl.href = story.ctaLink;
-  videoEl.src = story.videoSrc;
-}
-
-function nextHero() {
-  heroIndex = (heroIndex + 1) % heroStories.length;
-  renderHero(heroIndex);
-}
-
-function prevHero() {
-  heroIndex = (heroIndex - 1 + heroStories.length) % heroStories.length;
-  renderHero(heroIndex);
-}
-
-renderHero(heroIndex);
-setInterval(nextHero, 8000);
-  // Initial load
-  renderHero(heroIndex);
-    const updateScore = (team, newScore) => {
-    document.querySelector(`#score-${team}`).textContent = newScore;
-  };
-  
-  // Animate score change (e.g., when using live feed)
-  const animateScore = (element, newScore) => {
-    element.classList.add('text-green-400');
+// Function to open the real-life profile
+window.openUserProfile = (username) => {
+    const modal = document.getElementById('userProfileExpanded');
+    const container = document.getElementById('profileContainer');
+    const nameEl = document.getElementById('profileName');
+    const initialEl = document.getElementById('profileInitials');
+    
+    // Set UI
+    nameEl.innerText = username;
+    initialEl.innerText = username.substring(0, 2).toUpperCase();
+    
+    // Show Modal
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
     setTimeout(() => {
-      element.textContent = newScore;
-      element.classList.remove('text-green-400');
-    }, 500);
-  };
+        container.classList.remove('scale-95', 'opacity-0');
+        container.classList.add('scale-100', 'opacity-100');
+    }, 10);
+};
+
+window.closeProfile = () => {
+    const container = document.getElementById('profileContainer');
+    container.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+        document.getElementById('userProfileExpanded').classList.add('hidden');
+    }, 300);
+};
+
+
+</script>
+
+<style>
+/* 3. ADD THIS CSS FOR THE "TAP ME" FEEDBACK */
+.message-avatar-pulse {
+    animation: avatar-pulse 2s infinite;
+}
+
+@keyframes avatar-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+</style>
+
+<div id="greenlightReader" class="fixed inset-0 z-[300] bg-white dark:bg-[#0a0a0a] translate-x-full reader-transition overflow-y-auto hidden">
+    <button onclick="closeReader()" class="fixed top-6 right-6 z-[310] w-12 h-12 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/5 backdrop-blur-xl text-black dark:text-white hover:scale-110 transition-all">
+        <i class="fa-solid fa-xmark text-xl"></i>
+    </button>
+
+    <div class="max-w-4xl mx-auto px-6 pt-32 pb-20 reader-content-fade">
+<div class="flex items-center gap-4 mb-8">
+    <span id="rtag" class="text-red-600 text-[10px] font-black uppercase tracking-[0.3em] px-3 py-1 bg-red-600/10 rounded-full">NFL Analysis</span>
+</div>
+
+<img id="rHeroImage" src="" alt="" class="w-full rounded-[2rem] object-cover mb-8 hidden" style="max-height:340px;" />
+
+<h1 id="rtitle" class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-10 dark:text-white"></h1>
+
+        <div class="flex items-center justify-between py-6 border-y border-black/5 dark:border-white/10 mb-12">
+<div class="flex gap-6">
+<button id="articleHeartBtn" onclick="toggleArticleLike()" class="flex items-center gap-3 group text-black dark:text-white transition-all active:scale-90">
+        <div class="relative flex items-center justify-center">
+            <i id="articleHeartIcon" class="fa-regular fa-heart text-xl group-hover:text-red-500 transition-colors"></i>
+            </div>
+        <span id="real-like-count" class="text-sm font-black tabular-nums">0</span>
+    </button>
+
+    <button onclick="document.getElementById('articleCommentInput').scrollIntoView({behavior:'smooth'})" class="flex items-center gap-3 group text-black dark:text-white">
+        <i class="fa-regular fa-comment text-xl group-hover:text-amber-500 transition-colors"></i> 
+        <span id="real-comment-count" class="text-sm font-black tabular-nums">0</span>
+    </button>
+</div>
+<button onclick="shareStory()" class="text-[10px] font-black uppercase tracking-widest text-black dark:text-white hover:text-red-600 transition-colors">
+    <i class="fa-solid fa-share-nodes mr-2"></i> Share Story
+</button>
+
+        </div>
+
+        <div id="rbody" class="prose prose-lg dark:prose-invert max-w-none text-black/80 dark:text-white/80 text-lg md:text-xl leading-relaxed space-y-8 font-medium">
+            </div>
+            <div class="mt-20 pt-10 border-t border-black/5 dark:border-white/10">
+    <h3 class="text-2xl font-black uppercase tracking-tighter mb-8 dark:text-white">
+        Comments <span id="commentCount" class="text-amber-500 ml-2">0</span>
+    </h3>
+
+    <div class="mb-12 bg-black/5 dark:bg-white/5 p-6 rounded-[2rem] border border-black/5 dark:border-white/5">
+        <textarea id="articleCommentInput" placeholder="Add to the conversation..." 
+            class="w-full bg-transparent border-none outline-none text-lg font-medium placeholder-black/30 dark:placeholder-white/30 resize-none h-24 dark:text-white"></textarea>
+        <div class="flex justify-end mt-4">
+<button id="submitArticleComment" class="bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-600 transition-all">
+    Post Comment
+</button>
+
+        </div>
+    </div>
+
+    <div id="commentsFeed" class="space-y-8">
+        </div>
+</div>
+
+    </div>
+</div>
+<div id="videoModal" class="fixed inset-0 z-[400] bg-black/98 backdrop-blur-3xl flex flex-col opacity-0 pointer-events-none transition-all duration-700 overflow-y-auto no-scrollbar">
+    
+    <button onclick="closeVideoModal()" class="fixed top-8 right-8 z-[450] w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-red-600 hover:scale-110 transition-all duration-300">
+        <i class="fa-solid fa-xmark text-xl"></i>
+    </button>
+
+    <div class="w-full max-w-[1600px] mx-auto px-6 py-20 flex flex-col lg:flex-row gap-12 min-h-screen items-center">
+        
+        <div class="w-full lg:w-[70%] flex flex-col scale-95 transition-all duration-700" id="videoContainer">
+<!-- In your #videoModal, replace the video wrapper div with this -->
+<div class="group relative aspect-video rounded-[3rem] overflow-hidden shadow-[0_0_120px_rgba(34,197,94,0.15)] border border-white/10 bg-black">
+    <!-- Hidden video -- never shown, just used as data source -->
+<video id="popupVideo" class="hidden" playsinline webkit-playsinline muted></video>
+    
+    <!-- Canvas renders the video frames -- no native controls ever appear -->
+    <canvas id="videoCanvas" class="w-full h-full object-contain"></canvas>
+
+    <!-- Your custom controls -->
+    <div class="absolute bottom-5 left-5 right-5 flex items-center gap-4 px-4 py-3 rounded-2xl bg-black/50 backdrop-blur-md border border-white/10">
+        <button onclick="toggleVideoPlay()" id="playPauseBtn" class="text-white hover:text-amber-400 transition-colors flex-shrink-0">
+            <i class="fa-solid fa-play text-sm"></i>
+        </button>
+        <span id="videoCurrentTime" class="text-white text-[11px] font-black tabular-nums">0:00</span>
+        <div class="flex-1 h-1 bg-white/20 rounded-full overflow-hidden cursor-pointer" onclick="seekVideo(event, this)">
+            <div id="videoProgressBar" class="h-full bg-amber-400 w-0 rounded-full pointer-events-none"></div>
+        </div>
+        <span id="videoDuration" class="text-white/50 text-[11px] font-black tabular-nums">0:00</span>
+        <button onclick="toggleVideoMute()" id="muteBtn" class="text-white hover:text-amber-400 transition-colors flex-shrink-0">
+            <i class="fa-solid fa-volume-high text-sm"></i>
+        </button>
+    </div>
+</div>
+
+
+            <div class="mt-12 space-y-4">
+                <div class="flex items-center gap-3">
+                    <span id="videoPopupSub" class="bg-amber-500 text-black text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-[0.3em]"></span>
+                </div>
+                <h2 id="videoPopupTitle" class="text-5xl md:text-8xl font-black uppercase tracking-tighter text-white leading-[0.85]"></h2>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-[30%] space-y-10 self-start lg:mt-12">
+            <div class="p-8 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl">
+                <h4 class="text-amber-500 text-[11px] font-black uppercase tracking-[0.4em] mb-6 flex items-center gap-2">
+                </h4>
+                <div id="videoExtraContent" class="text-white/60 text-lg leading-relaxed font-medium space-y-6">
+                    <p>This sequence captures the raw physical dominance required to compete at the highest level. Notice the shift in defensive rotation just before the break.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="module">
+    // ── 1. IMPORTS ──────────────────────────────────────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, getDoc, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// ADD THESE TWO NEW IMPORTS BELOW THE OTHERS
+import { getDatabase, ref, onValue, set, onDisconnect, serverTimestamp as rtdbTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+import { 
+    updateDoc, arrayUnion, arrayRemove, increment, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDyfaBrLbjIjgWaJb7DHf50zv7cn6lISi0",
+        authDomain: "greenlight-a8e86.firebaseapp.com",
+        projectId: "greenlight-a8e86",
+        storageBucket: "greenlight-a8e86.firebasestorage.app",
+        messagingSenderId: "367667201164",
+        appId: "1:367667201164:web:b2b6cfbf54c5d47255e7a9"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+const rtdb = getDatabase(app);
+
+    // ── 3. STATE ─────────────────────────────────────────────────────────────────
+    let currentUsername = "Guest";
+    const reactions = ['😂', '😯', '❔', '🤔', '❤️', '💯', '🔥', '🧢', '👍', '👎'];
+
+// --- PRIVATE MESSAGING & NOTIFICATION ENGINE ---
+
+function listenForDirectMessages(userId) {
+    const badge = document.getElementById('dm-notification-badge');
+    
+    // We query a hypothetical 'private_messages' collection
+    // where the 'recipientId' matches the current logged-in user
+    // and 'status' is 'unread'
+    const dmQuery = query(
+        collection(db, "private_messages"), 
+        where("recipientId", "==", userId),
+        where("status", "==", "unread")
+    );
+
+    onSnapshot(dmQuery, (snapshot) => {
+        if (!snapshot.empty) {
+            // SHOW the red dot if there are unread DMs
+            badge.classList.remove('hidden');
+            badge.classList.add('flex'); 
+        } else {
+            // HIDE the red dot if no unread DMs
+            badge.classList.add('hidden');
+            badge.classList.remove('flex');
+        }
+    });
+}
+
+// Update your onAuthStateChanged to trigger this
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        // ... existing profile logic ...
+        
+        // Start listening for Private Messages for the badge
+        listenForDirectMessages(user.uid);
+        
+        // ... existing presence logic ...
+    } else {
+        window.location.href = 'login.html';
+    }
+});
+
+// Function to simulate receiving a DM (For testing purposes)
+window.simulateIncomingDM = async (senderName) => {
+    if (!auth.currentUser) return;
+    
+    await addDoc(collection(db, "private_messages"), {
+        senderName: senderName,
+        recipientId: auth.currentUser.uid,
+        text: "Yo, did you see that play?",
+        status: "unread",
+        timestamp: serverTimestamp()
+    });
+};
+
+// Function to clear notifications when chat is opened
+const originalToggleChat = window.toggleChat;
+window.toggleChat = async () => {
+    const chatWindow = document.getElementById('chatWindow');
+    const isOpening = chatWindow.classList.contains('opacity-0');
+    
+    if (isOpening && auth.currentUser) {
+        // Optional: Mark DMs as read in Firebase when they open the chat
+        // This is where the red dot actually becomes "functional"
+        const badge = document.getElementById('dm-notification-badge');
+        badge.classList.add('hidden');
+    }
+    
+    // Trigger the actual UI toggle
+    originalToggleChat();
+};
+// --- FIXED MESSAGE LISTENER ---
+function listenForMessages() {
+    const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+
+    onSnapshot(q, (snapshot) => {
+        const container = document.getElementById('message-container');
+        container.innerHTML = "";
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            const isRepost = data.repostEmoji ? true : false;
+            
+            const nameColor = data.nameColor || '#fbbf24'; 
+            const textColor = data.textColor || (document.documentElement.classList.contains('dark') ? '#e5e5e5' : '#111111');
+let formattedText = data.text;
+// Regex finds @ followed by alphanumeric chars
+const mentionRegex = /@(\w+)/g;
+
+formattedText = formattedText.replace(mentionRegex, (match, username) => {
+    // Check if this user is in our online list to get their color
+    const mentionedUser = onlineUsers.find(u => u.username.toLowerCase() === username.toLowerCase());
+    const highlightColor = mentionedUser ? mentionedUser.color : nameColor;
+    
+    return `<span class="font-black px-1 rounded" style="color: ${highlightColor}; background: ${highlightColor}15;">@${username}</span>`;
+});
+            const messageHtml = `
+                <div class="flex gap-3 mb-4 group relative items-start">
+                    <div onclick="openUserProfile('${data.username}')" 
+                         style="background-color: ${nameColor}"
+                         class="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-black text-white cursor-pointer hover:scale-110 transition-transform shadow-lg">
+                        ${data.username.substring(0,2).toUpperCase()}
+                    </div>
+                    
+                    <div class="relative space-y-1 max-w-[80%]">
+                        <p class="text-[9px] font-black uppercase flex items-center gap-2" style="color: ${nameColor}">
+                            ${data.username}
+                            ${isRepost ? `<span class="text-green-500 lowercase opacity-80">reacted ${data.repostEmoji}</span>` : ''}
+                        </p>
+                        
+                        <div onclick="showReactions(event, '${doc.id}', '${data.text.replace(/'/g, "\\'")}')"
+                             class="message-bubble bg-black/5 dark:bg-white/10 p-3 rounded-2xl rounded-tl-none text-xs font-medium transition-all cursor-pointer hover:bg-black/10 dark:hover:bg-white/20 active:scale-[0.98]"
+                             style="color: ${textColor}">
+                            ${data.text}
+                        </div>
+                    </div>
+                </div>`;
+            container.innerHTML += messageHtml;
+        });
+        container.scrollTop = container.scrollHeight;
+    });
+}
+
+// --- FIXED REACTION POPOVER ENGINE ---
+window.showReactions = (event, msgId, originalText) => {
+    // Prevent event bubbling so it doesn't instantly close
+    event.stopPropagation();
+
+    const existing = document.querySelector('.reaction-popover');
+    if (existing) existing.remove();
+
+    const popover = document.createElement('div');
+    popover.className = 'reaction-popover';
+    
+    // Position fix: Place it above the bubble that was clicked
+    popover.style.position = 'absolute';
+    popover.style.bottom = '110%';
+    popover.style.left = '0';
+
+    reactions.forEach(emoji => {
+        const span = document.createElement('span');
+        span.className = 'reaction-emoji';
+        span.innerText = emoji;
+        span.onclick = (e) => {
+            e.stopPropagation();
+            handleRepost(emoji, originalText);
+            popover.remove();
+        };
+        popover.appendChild(span);
+    });
+
+    // Attach to the current target (the message bubble)
+    event.currentTarget.appendChild(popover);
+
+    // Global click listener to close popover when clicking away
+    const closeListener = () => {
+        popover.remove();
+        document.removeEventListener('click', closeListener);
+    };
+    setTimeout(() => {
+        document.addEventListener('click', closeListener);
+    }, 10);
+};
+
+// --- COLOR CUSTOMIZATION ENGINE ---
+
+window.saveChatColors = async () => {
+    if (!auth.currentUser) return;
+
+    const btn = document.getElementById('updateColorsBtn');
+    const btnText = document.getElementById('btnText');
+    const btnIcon = document.getElementById('btnIcon');
+    const nameColor = document.getElementById('nameColorPicker').value;
+    const textColor = document.getElementById('textColorPicker').value;
+
+    // 1. Loading State
+    btn.disabled = true;
+    btnText.innerText = "Saving...";
+    btn.classList.add('opacity-50');
+
+    try {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        await updateDoc(userRef, {
+            chatNameColor: nameColor,
+            chatTextColor: textColor
+        });
+
+        // 2. Success Feedback
+        btn.classList.remove('opacity-50', 'bg-black', 'dark:bg-white');
+        btn.classList.add('bg-green-600', 'text-white');
+        btnText.innerText = "Updated!";
+        btnIcon.className = "fa-solid fa-check";
+
+        // 3. Reset after 2 seconds
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.classList.remove('bg-green-600', 'text-white');
+            btn.classList.add('bg-black', 'dark:bg-white');
+            btnText.innerText = "Update Colors";
+            btnIcon.className = "fa-solid fa-paintbrush";
+        }, 2000);
+
+    } catch (e) {
+        console.error("Error saving colors:", e);
+        btnText.innerText = "Error!";
+        btn.classList.add('bg-red-600');
+        btn.disabled = false;
+    }
+};
+
+
+// Update your sendMessage function to include the chosen colors
+async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    
+    if (message !== "" && auth.currentUser) {
+        // Fetch current user colors from the DOM pickers 
+        // (or you can cache them from the user doc on load)
+        const nameColor = document.getElementById('nameColorPicker').value;
+        const textColor = document.getElementById('textColorPicker').value;
+
+        try {
+            await addDoc(collection(db, "messages"), {
+                text: message,
+                username: currentUsername,
+                timestamp: serverTimestamp(),
+                uid: auth.currentUser.uid,
+                nameColor: nameColor, // Save preference with message
+                textColor: textColor  // Save preference with message
+            });
+            input.value = "";
+        } catch (e) {
+            console.error("Error sending message: ", e);
+        }
+    }
+}
+    // --- ARTICLE LIKES & METRICS LOGIC ---
+window.shareStory = async () => {
+    const title = document.getElementById('rtitle').innerText;
+    const text = "Check out this story on Greenlight Sports Network";
+    const url = window.location.href;
+
+    if (navigator.share) {
+        try {
+            await navigator.share({ title, text, url });
+        } catch (err) {
+            console.log("Share failed:", err);
+        }
+    } else {
+        // Fallback: Copy to clipboard
+        navigator.clipboard.writeText(url);
+        alert("Link copied to clipboard!");
+    }
+};
+
+
+
+
+window.toggleArticleLike = async function() {
+    if (!auth.currentUser || !currentArticleId) {
+        alert("Sign in to like this story!");
+        return;
+    }
+
+    const articleRef = doc(db, "articles", currentArticleId);
+    const userId = auth.currentUser.uid;
+
+    try {
+        const docSnap = await getDoc(articleRef);
+        
+        // If the article doc doesn't exist yet, create it
+        if (!docSnap.exists()) {
+            await setDoc(articleRef, {
+                likes: [userId],
+                viewCount: 1
+            });
+            return;
+        }
+
+        const data = docSnap.data();
+        const hasLiked = data.likes?.includes(userId);
+
+        if (hasLiked) {
+            // Unlike
+            await updateDoc(articleRef, {
+                likes: arrayRemove(userId)
+            });
+        } else {
+            // Like
+            await updateDoc(articleRef, {
+                likes: arrayUnion(userId)
+            });
+        }
+    } catch (e) {
+        console.error("Error toggling like:", e);
+    }
+}
+
+function listenToArticleMetrics(articleId) {
+    const articleRef = doc(db, "articles", articleId);
+    const heartIcon = document.getElementById('articleHeartIcon');
+    const likeDisplay = document.getElementById('real-like-count');
+
+    // Real-time listener for the article doc (Likes)
+    onSnapshot(articleRef, (doc) => {
+        if (doc.exists()) {
+            const data = doc.data();
+            const likes = data.likes || [];
+            likeDisplay.innerText = likes.length.toLocaleString();
+
+            // Change icon if current user liked it
+            if (auth.currentUser && likes.includes(auth.currentUser.uid)) {
+                heartIcon.classList.remove('fa-regular');
+                heartIcon.classList.add('fa-solid', 'text-red-500');
+            } else {
+                heartIcon.classList.remove('fa-solid', 'text-red-500');
+                heartIcon.classList.add('fa-regular');
+            }
+        } else {
+            likeDisplay.innerText = "0";
+        }
+    });
+}
+
+// Attach listener to the heart button
+document.getElementById('articleHeartBtn').addEventListener('click', toggleArticleLike);
+
+async function updateArticleCommentCount(articleId) {
+    const articleCommentsColl = collection(db, `articles/${articleId}/comments`);
+    
+    // Listen to the specific sub-collection for this article
+    onSnapshot(articleCommentsColl, (snapshot) => {
+        const totalComments = snapshot.size; // Get the count of docs in this sub-collection
+        
+        // Update the reader's UI counter
+        const display = document.getElementById('real-comment-count');
+        if (display) {
+            display.innerText = totalComments.toLocaleString();
+        }
+    });
+}
+
+
+    async function handleRepost(emoji, text) {
+        try {
+            await addDoc(collection(db, "messages"), {
+                text: text,
+                username: currentUsername,
+                repostEmoji: emoji,
+                timestamp: serverTimestamp(),
+                uid: auth.currentUser.uid,
+                type: "repost"
+            });
+        } catch (e) {
+            console.error("Repost failed", e);
+        }
+    }
+
+    window.showReactions = (event, msgId, originalText) => {
+        const existing = document.querySelector('.reaction-popover');
+        if (existing) existing.remove();
+
+        const popover = document.createElement('div');
+        popover.className = 'reaction-popover';
+
+        reactions.forEach(emoji => {
+            const span = document.createElement('span');
+            span.className = 'reaction-emoji';
+            span.innerText = emoji;
+            span.onclick = () => handleRepost(emoji, originalText);
+            popover.appendChild(span);
+        });
+
+        event.currentTarget.parentElement.appendChild(popover);
+
+        setTimeout(() => {
+            document.addEventListener('click', () => popover.remove(), { once: true });
+        }, 10);
+    };
+
+    // ── 5. EVENT LISTENERS ───────────────────────────────────────────────────────
+    document.getElementById('send-btn').addEventListener('click', sendMessage);
+    document.getElementById('chat-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+ onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        try {
+            const snap = await getDoc(doc(db, "users", user.uid));
+            //
+            if (snap.exists()) {
+                const data = snap.data();
+                const displayName = data.username || data.firstName || user.email;
+                document.getElementById('userDisplayName').innerText = displayName;
+                currentUsername = displayName;
+                        // --- REAL-TIME PRESENCE LOGIC START ---
+        const userStatusRef = ref(rtdb, '/status/' + user.uid);
+        const connectedRef = ref(rtdb, '.info/connected');
+
+        onValue(connectedRef, (snap) => {
+            if (snap.val() === true) {
+                // Remove record when user closes tab/disconnects
+                onDisconnect(userStatusRef).remove();
+                
+                // Set user as online
+                set(userStatusRef, {
+                    state: 'online',
+                    last_changed: rtdbTimestamp(),
+                    username: currentUsername
+                });
+            }
+        });
+
+        // Listen for the total count and update UI
+        const onlineCountRef = ref(rtdb, '/status');
+        onValue(onlineCountRef, (snapshot) => {
+            const onlineCount = snapshot.size || 0;
+            const countDisplay = document.getElementById('online-user-count');
+            if (countDisplay) {
+                countDisplay.innerText = `${onlineCount.toLocaleString()} Online`;
+            }
+        });
+        // --- REAL-TIME PRESENCE LOGIC END ---
+
+            }
+            
+        } catch (err) {
+            console.error("Failed to load user profile:", err);
+        }
+
+listenForMessages();
+    updateCommentCount(); // <--- Initialize the counter here
+});
+
+    window.handleLogout = async () => {
+        try {
+            await signOut(auth);
+            window.location.href = 'login.html';
+        } catch (error) {
+            console.error("Logout Error:", error);
+        }
+    };
+    let currentArticleId = null;
+
+// Initialization for Reader Comments
+window.openReader = async function(id) {
+currentArticleId = id;
+const data = articleEngineData[id];
+if(!data) return;
+
+window._savedScrollY = window.scrollY;
+document.getElementById('rtitle').innerText = data.title;
+document.getElementById('rtag').innerText = data.tag;
+document.getElementById('rbody').innerHTML = data.content;
+const heroImg = document.getElementById('rHeroImage');
+if (data.hero) {
+    heroImg.src = data.hero;
+    heroImg.classList.remove('hidden');
+} else {
+    heroImg.classList.add('hidden');
+}
+
+    listenToArticleMetrics(id); 
+document.getElementById('greenlightReader').classList.remove('hidden');
+document.getElementById('greenlightReader').classList.add('active');
+
+document.body.style.top = `-${window._savedScrollY}px`;
+document.body.style.position = 'fixed';
+document.body.style.width = '100%';
+    updateArticleCommentCount(id);
+    loadArticleComments(id);
+    };
+
+// --- UPDATED COMMENT LOADING ---
+// --- UPDATED COMMENT LOADING (WITH ICONS) ---
+async function loadArticleComments(articleId) {
+    const q = query(collection(db, `articles/${articleId}/comments`), orderBy("timestamp", "desc"));
+
+    onSnapshot(q, (snapshot) => {
+        const feed = document.getElementById('commentsFeed');
+        document.getElementById('commentCount').innerText = snapshot.size;
+        feed.innerHTML = "";
+
+        snapshot.forEach((commentDoc) => {
+            const c = commentDoc.data();
+            const cid = commentDoc.id;
+            const starCount = c.stars ? c.stars.length : 0;
+            const isGold = starCount >= 5;
+            const userStarred = c.stars?.includes(auth.currentUser?.uid);
+            const isOwner = auth.currentUser && c.uid === auth.currentUser.uid;
+
+            const commentHtml = `
+            <div id="comment-${cid}" class="p-6 rounded-[2rem] transition-all duration-500 ${isGold ? 'gold-comment' : 'bg-black/5 dark:bg-white/5'} border border-black/5 dark:border-white/5">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-neutral-800 flex items-center justify-center text-white font-black text-xs">
+                            ${c.username.substring(0,2).toUpperCase()}
+                        </div>
+                        <div>
+                            <h4 class="user-name font-black text-sm uppercase dark:text-white">${c.username}</h4>
+                            <div class="flex items-center gap-2">
+                                <p class="text-[9px] opacity-40 font-bold uppercase tracking-widest">Just Now</p>
+                                ${c.isEdited ? `<span class="text-[8px] font-black text-amber-600 dark:text-amber-400 bg-amber-500/10 px-1.5 rounded cursor-help" title="Original: ${c.originalText}">EDITED</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${isOwner ? `
+                    <div class="flex gap-3">
+                        <button onclick="editCommentUI('${cid}', '${c.text.replace(/'/g, "\\'")}')" 
+                                class="text-sm opacity-30 hover:opacity-100 hover:text-amber-500 transition-all dark:text-white">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+                        <button onclick="deleteComment('${cid}')" 
+                                class="text-sm opacity-30 hover:opacity-100 hover:text-red-600 transition-all dark:text-white">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                    ` : ''}
+                </div>
+
+                <div id="text-container-${cid}">
+                    <p class="text-lg font-medium dark:text-gray-200 mb-6">${c.text}</p>
+                </div>
+                
+                <div class="flex gap-6 border-t border-black/5 dark:border-white/5 pt-4">
+                    <button onclick="reactToComment('${cid}', 'up')" class="thumb-btn flex items-center gap-2 text-xs font-black dark:text-white opacity-60 hover:opacity-100 transition">
+                        <i class=" fa-solid fa-thumbs-up"></i> ${c.upvotes || 0}
+                    </button>
+                    <button onclick="toggleStar('${cid}', ${userStarred})" class="star-btn ${userStarred ? 'active' : ''} flex items-center gap-2 text-xs font-black dark:text-white opacity-60 hover:opacity-100 transition">
+                        <i class="fa-solid fa-star"></i> ${starCount}
+                    </button>
+                </div>
+            </div>`;
+            feed.innerHTML += commentHtml;
+        });
+    });
+}
+
+// --- UPDATED EDIT UI TRIGGER ---
+window.editCommentUI = (cid, currentText) => {
+    const container = document.getElementById(`text-container-${cid}`);
+    
+    // Store the original HTML in a data attribute so we can restore it exactly
+    const originalHTML = `<p class="text-lg font-medium dark:text-gray-200 mb-6">${currentText}</p>`;
+    
+    container.innerHTML = `
+        <textarea id="edit-input-${cid}" class="w-full bg-black/10 dark:bg-white/10 rounded-xl p-4 text-lg font-medium outline-none focus:ring-1 ring-amber-500 dark:text-white mb-2">${currentText}</textarea>
+        <div class="flex gap-2 mb-4">
+            <button onclick="saveEdit('${cid}', '${currentText.replace(/'/g, "\\'")}')" class="bg-green-600 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest">Save Change</button>
+            <button onclick="cancelEdit('${cid}', '${currentText.replace(/'/g, "\\'")}')" class="bg-black/10 dark:bg-white/10 dark:text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest">Cancel</button>
+        </div>
+    `;
+};
+
+// --- NEW CANCEL FUNCTION ---
+window.cancelEdit = (cid, originalText) => {
+    const container = document.getElementById(`text-container-${cid}`);
+    // Simply put the text back the way it was
+    container.innerHTML = `<p class="text-lg font-medium dark:text-gray-200 mb-6">${originalText}</p>`;
+};
+
+
+// --- SAVE EDIT TO FIREBASE ---
+window.saveEdit = async (cid, oldText) => {
+    const newText = document.getElementById(`edit-input-${cid}`).value.trim();
+    if (!newText || newText === oldText) return;
+
+    const ref = doc(db, `articles/${currentArticleId}/comments`, cid);
+    await updateDoc(ref, {
+        text: newText,
+        isEdited: true,
+        originalText: oldText // Stores the first version
+    });
+};
+
+// --- DELETE FROM FIREBASE ---
+window.deleteComment = async (cid) => {
+    // 1. Double check we have the Article ID
+    if (!currentArticleId) {
+        console.error("Article ID missing");
+        return;
+    }
+
+    // 2. Confirmation prompt
+    if (!confirm("Are you sure you want to delete this take?")) return;
+
+    try {
+        // 3. Create the reference to the specific comment
+        const commentRef = doc(db, `articles/${currentArticleId}/comments`, cid);
+        
+        // 4. Execute delete
+        await deleteDoc(commentRef);
+        
+        console.log("Comment deleted successfully");
+    } catch (e) {
+        console.error("Error deleting comment: ", e);
+        alert("Delete failed. Check your Firebase Rules.");
+    }
+};
+
+
+window.postArticleComment = async () => {
+const input = document.getElementById('articleCommentInput');
+const text = input.value.trim();
+if(!text || !currentArticleId) return;
+
+await addDoc(collection(db, `articles/${currentArticleId}/comments`), {
+text: text,
+username: currentUsername,
+uid: auth.currentUser.uid,
+timestamp: serverTimestamp(),
+upvotes: 0,
+stars: []
+});
+input.value = "";
+};
+
+window.toggleStar = async (commentId, alreadyStarred) => {
+    if (!auth.currentUser) return;
+
+    const ref = doc(db, `articles/${currentArticleId}/comments`, commentId);
+    
+    try {
+        const commentSnap = await getDoc(ref);
+        if (commentSnap.exists()) {
+            const commentData = commentSnap.data();
+            
+            // BLOCK SELF-STARRING
+            if (commentData.uid === auth.currentUser.uid) {
+                alert("You can't star your own elite takes!");
+                return;
+            }
+
+            await updateDoc(ref, {
+                stars: alreadyStarred ? arrayRemove(auth.currentUser.uid) : arrayUnion(auth.currentUser.uid)
+            });
+        }
+    } catch (e) {
+        console.error("Star toggle failed:", e);
+    }
+};
+
+window.reactToComment = async (commentId, type) => {
+    if (!auth.currentUser) return;
+    
+    const ref = doc(db, `articles/${currentArticleId}/comments`, commentId);
+    
+    try {
+        const commentSnap = await getDoc(ref);
+        if (commentSnap.exists()) {
+            const commentData = commentSnap.data();
+
+            // BLOCK SELF-UPVOTING
+            if (commentData.uid === auth.currentUser.uid) {
+                alert("You can't upvote your own comment!");
+                return;
+            }
+
+            if (type === 'up') {
+                await updateDoc(ref, { upvotes: increment(1) });
+            }
+            // Add 'down' logic here if you want to implement downvotes
+        }
+    } catch (e) {
+        console.error("Reaction failed:", e);
+    }
+};
+// Match the ID from your HTML button
+const myButton = document.getElementById('submitArticleComment');
+
+if (myButton) {
+    myButton.addEventListener('click', async () => {
+        const input = document.getElementById('articleCommentInput');
+        const text = input.value.trim();
+
+        // Check if there is text and a logged-in user
+        if (text && auth.currentUser && currentArticleId) {
+            try {
+                await addDoc(collection(db, `articles/${currentArticleId}/comments`), {
+                    text: text,
+                    username: currentUsername,
+                    uid: auth.currentUser.uid,
+                    timestamp: serverTimestamp(),
+                    upvotes: 0,
+                    stars: []
+                });
+                input.value = ""; // Clear the box
+            } catch (e) {
+                console.error("Error posting comment:", e);
+            }
+        } else if (!auth.currentUser) {
+            alert("Sign in to join the conversation!");
+        }
+    });
+}
+// --- AUTOCOMPLETE & MENTION SYSTEM ---
+let onlineUsers = []; // Stores {uid, username, color}
+
+// Listen for online users to populate the autocomplete
+function listenForOnlineUsers() {
+    const onlineCountRef = ref(rtdb, '/status');
+    onValue(onlineCountRef, (snapshot) => {
+        onlineUsers = [];
+        snapshot.forEach((child) => {
+            const val = child.val();
+            if (val.state === 'online') {
+                onlineUsers.push({
+                    uid: child.key,
+                    username: val.username,
+                    // We'll fetch the color from their message history or user doc
+                    color: val.chatNameColor || '#10b981' 
+                });
+            }
+        });
+    });
+}
+
+const chatInput = document.getElementById('chat-input');
+const autocompleteList = document.createElement('div');
+autocompleteList.id = 'mention-autocomplete';
+autocompleteList.className = 'fixed hidden bg-white dark:bg-neutral-900 border border-green-500/20 rounded-xl shadow-2xl z-[110] overflow-hidden min-w-[150px]';
+document.body.appendChild(autocompleteList);
+
+chatInput.addEventListener('input', (e) => {
+    const value = e.target.value;
+    const cursorPosition = e.target.selectionStart;
+    const lastAt = value.lastIndexOf('@', cursorPosition - 1);
+
+    if (lastAt !== -1) {
+        const query = value.substring(lastAt + 1, cursorPosition).toLowerCase();
+        const matches = onlineUsers.filter(u => u.username.toLowerCase().startsWith(query));
+
+        if (matches.length > 0) {
+            showAutocomplete(matches, lastAt);
+        } else {
+            autocompleteList.classList.add('hidden');
+        }
+    } else {
+        autocompleteList.classList.add('hidden');
+    }
+});
+
+function showAutocomplete(matches, atIndex) {
+    const rect = chatInput.getBoundingClientRect();
+    autocompleteList.style.left = `${rect.left}px`;
+    autocompleteList.style.bottom = `${window.innerHeight - rect.top + 10}px`;
+    autocompleteList.innerHTML = '';
+
+    matches.forEach(user => {
+        const item = document.createElement('div');
+        item.className = 'px-4 py-3 hover:bg-green-500/10 cursor-pointer text-xs font-black uppercase tracking-widest dark:text-white flex items-center gap-2';
+        item.innerHTML = `<span class="w-2 h-2 rounded-full" style="background:${user.color}"></span> ${user.username}`;
+        item.onclick = () => {
+            const before = chatInput.value.substring(0, atIndex);
+            const after = chatInput.value.substring(chatInput.selectionStart);
+            chatInput.value = `${before}@${user.username} ${after}`;
+            autocompleteList.classList.add('hidden');
+            chatInput.focus();
+        };
+        autocompleteList.appendChild(item);
+    });
+    autocompleteList.classList.remove('hidden');
+}
+
+// Close autocomplete when clicking away
+document.addEventListener('click', (e) => {
+    if (e.target !== chatInput) autocompleteList.classList.add('hidden');
+});
 
 
 </script>
 
 
-
-</body>
 </html>
