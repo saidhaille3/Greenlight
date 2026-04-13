@@ -105,7 +105,13 @@
         <input type="text" id="lname" oninput="validateStep1()" placeholder="Last Name" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-widest">
     </div>
     <input type="text" id="username" oninput="validateStep1()" placeholder="Username" class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-widest">
-    
+    <div class="space-y-2">
+    <p class="text-[9px] font-black text-white/30 uppercase tracking-[0.2em] ml-2">Date of Birth</p>
+    <input type="date" id="dob" oninput="validateStep1()" 
+        class="auth-input w-full p-4 rounded-2xl text-xs font-bold outline-none text-white tracking-widest uppercase appearance-none"
+        style="color-scheme: dark;">
+</div>
+
     <button id="prefBtn" disabled onclick="goToStep(2)" class="w-full py-4 bg-white text-black rounded-xl font-black uppercase text-[10px] tracking-[0.2em] shadow-2xl hover:bg-emerald-500 hover:text-white transition-all">
         Content Preference
     </button>
@@ -233,18 +239,25 @@ window.validateStep1 = () => {
     const f = document.getElementById('fname').value.trim();
     const l = document.getElementById('lname').value.trim();
     const u = document.getElementById('username').value.trim();
+    const dob = document.getElementById('dob').value; // Get the date
     const btn = document.getElementById('prefBtn');
     
-    // Check if we are in social mode
     const isSocial = new URLSearchParams(window.location.search).get('mode') === 'social';
 
-    if (f && l && u) {
-        btn.disabled = false;
-        // If social, make the badge look "Confirmed"
-        if (isSocial) {
-            const badge = document.getElementById('socialBadge');
-            badge.querySelector('span').innerText = "Identity Verified";
-            badge.querySelector('div').classList.remove('animate-pulse');
+    // NEW LOGIC: Check if fields are full AND user is 18
+    if (f && l && u && dob) {
+        if (isEighteen(dob)) {
+            btn.disabled = false;
+            btn.innerText = "Content Preference"; // Reset text if they fixed the age
+            
+            if (isSocial) {
+                const badge = document.getElementById('socialBadge');
+                badge.querySelector('span').innerText = "Identity Verified";
+            }
+        } else {
+            // IF UNDER 18: Keep button disabled and show error
+            btn.disabled = true;
+            btn.innerText = "MUST BE AT LEAST 18";
         }
     } else {
         btn.disabled = true;
@@ -511,6 +524,22 @@ window.processSignup = async () => {
         const s = document.getElementById('statusArea');
         s.innerText = msg; s.classList.remove('hidden');
     }
+</script>
+<script>
+    // Function to check if user is 18
+const isEighteen = (birthday) => {
+    const birthDate = new Date(birthday);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    
+    // Adjust age if birthday hasn't happened yet this year
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age >= 18;
+};
+
 </script>
 </body>
 </html>
