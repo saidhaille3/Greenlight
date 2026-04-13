@@ -106,6 +106,14 @@
     <button id="loginBtn" onclick="processLogin()" class="w-full max-w-[180px] py-2.5 bg-white text-black rounded-xl font-black uppercase text-[10px] tracking-[0.2em] shadow-2xl hover:bg-emerald-500 hover:text-white transition-all active:scale-95 flex items-center justify-center gap-3">
         <span id="btnText">Sign In</span>
     </button>
+<div id="resetActions" class="hidden w-full flex flex-col items-center gap-3">
+    <button onclick="handleResetRequest()" class="w-full max-w-[180px] py-2.5 bg-emerald-500 text-white rounded-xl font-black uppercase text-[10px] tracking-[0.2em] shadow-lg hover:bg-emerald-600 transition-all active:scale-95">
+        Send Reset Link
+    </button>
+    <button onclick="toggleResetMode(false)" class="text-[9px] font-black text-white/40 uppercase tracking-widest hover:text-white transition-colors">
+        Back to Login
+    </button>
+</div>
 
     <a href="createlogin.html" class="w-full max-w-[180px] py-2.5 bg-white/5 border border-white/10 text-white/40 rounded-xl font-black uppercase text-[9px] tracking-[0.2em] text-center hover:bg-white/10 hover:text-white transition-all active:scale-95">
         Create Account
@@ -122,7 +130,16 @@
             </button>
         </div>
     </div>
+        <div class="flex pt-5 items-center gap-2 transition-all duration-500 cursor-default opacity-80 hover:opacity-100">
+        <span class="text-[7px] font-bold uppercase tracking-widest text-white/70">Powered by</span>
+        <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" 
+             class="h-4 w-auto" 
+             alt="Firebase">
+        <span class="text-[8px] font-black tracking-tighter uppercase text-white/70">Google Infrastructure</span>
+    </div>
+
 </div>
+
         </div>
     </div>
 
@@ -150,31 +167,30 @@
     const auth = getAuth(app);
 
     // --- UI TOGGLE ENGINE ---
-    window.toggleResetMode = (isResetting) => {
-        const passWrapper = document.getElementById('passWrapper');
-        const loginBtn = document.getElementById('loginBtn');
-        const socialWrapper = document.getElementById('socialWrapper');
-        const resetActions = document.getElementById('resetActions');
-        const subtitle = document.getElementById('authSubtitle');
-        const authTitle = document.getElementById('authTitle');
-        
-        if (isResetting) {
-            passWrapper.classList.add('hidden');
-            loginBtn.classList.add('hidden');
-            socialWrapper.classList.add('hidden');
-            resetActions.classList.remove('hidden');
-            subtitle.innerText = "Account Recovery";
-            if(authTitle) authTitle.classList.add('hidden');
-        } else {
-            passWrapper.classList.remove('hidden');
-            loginBtn.classList.remove('hidden');
-            socialWrapper.classList.remove('hidden');
-            resetActions.classList.add('hidden');
-            subtitle.innerText = "Sports Network";
-            if(authTitle) authTitle.classList.remove('hidden');
-        }
-        hideStatus();
-    };
+window.toggleResetMode = (isResetting) => {
+    const passWrapper = document.getElementById('passWrapper');
+    const loginBtn = document.getElementById('loginBtn');
+    const socialWrapper = document.getElementById('socialWrapper');
+    const resetActions = document.getElementById('resetActions');
+    
+    // Target the 'Create Account' link specifically
+    const createLink = document.querySelector('a[href="createlogin.html"]');
+    
+    if (isResetting) {
+        passWrapper.classList.add('hidden');
+        loginBtn.classList.add('hidden');
+        socialWrapper.classList.add('hidden');
+        if(createLink) createLink.classList.add('hidden'); // Create disappears
+        resetActions.classList.remove('hidden');           // Send link appears
+    } else {
+        passWrapper.classList.remove('hidden');
+        loginBtn.classList.remove('hidden');
+        socialWrapper.classList.remove('hidden');
+        if(createLink) createLink.classList.remove('hidden');
+        resetActions.classList.add('hidden');
+    }
+    hideStatus();
+};
 
     // --- EMAIL LOGIN ---
     window.processLogin = async () => {
