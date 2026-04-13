@@ -4500,6 +4500,32 @@ window.closeProfile = () => {
         </div>
     </div>
 </div>
+<script>
+window.openReader = function(id) {
+  const data = articleEngineData[id];
+  if (!data) return;
+  
+  window._savedScrollY = window.scrollY;
+  document.getElementById('rtitle').innerText = data.title;
+  document.getElementById('rbody').innerHTML = data.content;
+  
+  const heroImg = document.getElementById('rHeroImage');
+  if (data.hero) {
+    heroImg.src = data.hero;
+    heroImg.classList.remove('hidden');
+  } else {
+    heroImg.classList.add('hidden');
+  }
+  
+  const reader = document.getElementById('greenlightReader');
+  reader.classList.remove('hidden');
+  reader.classList.add('active');
+  document.body.style.top = `-${window._savedScrollY}px`;
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
+}
+</script>
+
 <script type="module">
     // ── 1. IMPORTS ──────────────────────────────────────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -5007,23 +5033,7 @@ listenForMessages();
 
 // Initialization for Reader Comments
 // Ensure openReader is globally accessible before module scripts run
-window.openReader = async function(id) {
-    currentArticleId = id;
-    const data = articleEngineData[id];
-    if (!data) return;
-window._savedScrollY = window.scrollY;
-document.getElementById('rtitle').innerText = data.title;
-document.getElementById('rtag').innerText = data.tag;
-document.getElementById('rbody').innerHTML = data.content;
-const heroImg = document.getElementById('rHeroImage');
-if (data.hero) {
-    heroImg.src = data.hero;
-    heroImg.classList.remove('hidden');
-} else {
-    heroImg.classList.add('hidden');
-}
 
-    listenToArticleMetrics(id); 
 document.getElementById('greenlightReader').classList.remove('hidden');
 document.getElementById('greenlightReader').classList.add('active');
 
