@@ -5006,11 +5006,11 @@ listenForMessages();
     let currentArticleId = null;
 
 // Initialization for Reader Comments
+// Ensure openReader is globally accessible before module scripts run
 window.openReader = async function(id) {
-currentArticleId = id;
-const data = articleEngineData[id];
-if(!data) return;
-
+    currentArticleId = id;
+    const data = articleEngineData[id];
+    if (!data) return;
 window._savedScrollY = window.scrollY;
 document.getElementById('rtitle').innerText = data.title;
 document.getElementById('rtag').innerText = data.tag;
