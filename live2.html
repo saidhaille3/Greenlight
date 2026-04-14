@@ -964,7 +964,6 @@ mux-player::part(center-controls) {
     if (!val) return;
     username = val;
     document.getElementById('modalBg').style.display = 'none';
-    addSystemMsg(`${username} joined the stream`);
   }
 
   document.getElementById('nameInput').addEventListener('keydown', e => {
@@ -1057,7 +1056,7 @@ function addChatMsg(name, text) {
       // OFFLINE / VOD STATE
       pill.className = 'flex items-center gap-2 px-4 py-2.5 rounded-full border text-[10px] font-black uppercase tracking-widest transition-all duration-300 offline-state';
       dot.className = 'w-2 h-2 rounded-full bg-current';
-      label.textContent = 'Replay Available';
+      label.textContent = 'Offline';
       
       // Instead of hiding the player, we keep it visible for VOD playback
       player.style.display = 'block'; 
@@ -1088,13 +1087,6 @@ function addChatMsg(name, text) {
   // ─────────────────────────────────────────────
   //  Demo Messages
   // ─────────────────────────────────────────────
-  const demoMessages = [
-    ['Alex', 'this is 🔥'],
-    ['Jordan', 'been waiting for this one'],
-    ['Sam', 'great quality!'],
-    ['Riley', 'where can I find the link to join?'],
-    ['Morgan', 'love the setup'],
-  ];
   let demoIdx = 0;
   function demoChat() {
     if (demoIdx < demoMessages.length) {
@@ -1114,11 +1106,6 @@ function addChatMsg(name, text) {
 </script>
 
 
-<style>
-    .footer-text {
-    font-family: 'Inter', sans-serif;
-    letter-spacing: -0.01em;
-</style>
 
 
 
@@ -1635,43 +1622,40 @@ setInterval(loadGames, 30000); // 30s refresh is better for live data
     <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-600 border-2 border-white dark:border-black rounded-full animate-pulse"></span>
 </button>
 
-<div id="chatWindow" class="fixed bottom-24 right-6 z-[100] w-[350px] h-[500px] ios-glass rounded-[2.5rem] flex flex-col shadow-2xl translate-y-[120%] opacity-0 pointer-events-none transition-all duration-500 ease-in-out border border-white/20">
-    <div class="p-5 border-b border-black/5 dark:border-white/10 flex items-center justify-between">
+<div id="chatWindow" class="fixed bottom-24 right-6 z-[100] w-[350px] h-[550px] greenlight-glass rounded-[2.5rem] flex flex-col shadow-2xl translate-y-[120%] opacity-0 pointer-events-none transition-all duration-500 ease-in-out">
+    
+    <div class="p-6 border-b border-green-500/10 flex items-center justify-between bg-white/10 dark:bg-black/10">
         <div>
             <div class="flex items-center gap-1.5 mt-1">
-                <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                <span class="text-[9px] font-bold opacity-40 uppercase dark:text-white">1,240 Online</span>
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+                <span id="online-user-count" class="text-[9px] font-bold opacity-50 uppercase dark:text-white">0 Online</span>
             </div>
         </div>
-        <button onclick="toggleChat()" class="text-black dark:text-white opacity-40 hover:opacity-100 transition-opacity text-xl">&times;</button>
+        <button onclick="toggleChat()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+            <i class="fa-solid fa-xmark text-black dark:text-white opacity-40"></i>
+        </button>
     </div>
 
-    <div class="flex p-2 gap-2 overflow-x-auto no-scrollbar border-b border-black/5 dark:border-white/5">
-        <button class="px-4 py-1.5 rounded-full bg-black dark:bg-white text-white dark:text-black text-[9px] font-black uppercase tracking-widest">Lobby</button>
-        <button class="px-4 py-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-[9px] font-black uppercase tracking-widest dark:text-white/40">Gifts</button>
-        <button class="px-4 py-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-[9px] font-black uppercase tracking-widest dark:text-white/40">NBA</button>
-    </div>
+<div class="flex p-4 gap-3 overflow-x-auto no-scrollbar border-b border-green-500/10 items-center min-h-[70px]">
+    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-green-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-green-500/20 whitespace-nowrap">
+        Lobby
+    </button>
+    <button class="flex-shrink-0 px-6 py-2.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
+        NBA
+    </button>
+    <button class="flex-shrink-0 px-6 py-2.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
+        NFL
+    </button>
+</div>
 
-<div id="chatMessages" class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
-        <div class="flex gap-3">
-            <div class="w-8 h-8 rounded-full bg-amber-500 flex-shrink-0 flex items-center justify-center text-[10px] font-black">JD</div>
-            <div class="space-y-1">
-                <p class="text-[9px] font-black opacity-30 uppercase dark:text-white">J_4092<span class="text-red-500 ml-2">GIFTED 💎</span></p>
-                <div class="bg-black/5 dark:bg-white/10 p-3 rounded-2xl rounded-tl-none text-xs font-medium dark:text-gray-200">
-🔥🔥🔥🔥🔥🔥🔥                </div>
-            </div>
+    <div id="message-container" class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
         </div>
-        
-        <div class="text-center py-2">
-            <p class="text-[8px] font-black uppercase tracking-[0.2em] text-amber-500 bg-amber-500/10 inline-block px-3 py-1 rounded-full">User_92 sent a [Golden Hoop] to______</p>
-        </div>
-    </div>
 
-    <div class="p-4 border-t border-black/5 dark:border-white/10 bg-white/50 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem]">
-        <div class="relative">
-<input id="chatInput" type="text" placeholder="" class="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-base font-medium tracking-widest outline-none focus:border-red-600 transition-colors dark:text-white">
-<!-- Change the send button inside #chatWindow -->
-<button onclick="sendMsg()" class="absolute right-2 top-1/2 translate-y-1/2 w-8 h-8 flex items-center justify-center text-red-600">
+    <div class="p-5 bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem] border-t border-green-500/10">
+        <div class="relative group">
+            <input id="chat-input" type="text" placeholder="" 
+                   class="w-full bg-white/50 dark:bg-white/5 border border-green-500/10 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-sm font-medium outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/10 transition-all dark:text-white placeholder-black/30 dark:placeholder-white/20">
+            <button id="send-btn" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-green-600 hover:scale-110 active:scale-90 transition-transform">
                 <i class="fa-solid fa-paper-plane"></i>
             </button>
         </div>
