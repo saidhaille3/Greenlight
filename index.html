@@ -350,19 +350,34 @@ filter: invert(1) brightness(2);
     color: white;
 }
 /* Custom Greenlight Glass */
+/* Custom Greenlight Glass */
 .greenlight-glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(25px) saturate(180%);
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
-    border: 1px solid rgba(16, 185, 129, 0.2); /* Emerald border */
+    /* Lower the opacity of the background to let the blur show through */
+    background: rgba(255, 255, 255, 0.4); 
+    
+    /* THE FIX: Increase blur and add saturation */
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    
+    /* Keep your existing emerald border and shadows */
+    border: 1px solid rgba(16, 185, 129, 0.2);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 1);
 }
 
 .dark .greenlight-glass {
-    background: rgba(5, 25, 15, 0.8); /* Deep Emerald/Black blend */
+    /* Dark mode needs a much lower opacity for the blur to look "deep" */
+    background: rgba(5, 25, 15, 0.6); 
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    
     border: 1px solid rgba(16, 185, 129, 0.3);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    .message-bubble {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
+
+}
+
 
 /* Sophisticated Chat Scrollbar */
 #message-container::-webkit-scrollbar { width: 4px; }
@@ -1319,7 +1334,7 @@ async function checkStreamStatus() {
             badge.className = "absolute top-6 left-6 flex items-center gap-2 bg-black text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl";
             
             btn.innerText = 'Watch Stream';
-            btn.href = 'live2.html';
+            btn.href = '/stream/';
             btn.onclick = null; // Regular link behavior
             
             subtext.innerText = 'NBA Regular Season • Live Now';
@@ -2508,9 +2523,11 @@ const articleEngineData = {
       <div class="divider"></div>
 
       <span class="chapter-label">The Weight of Witnessing</span>
-      <h2 class="section-hed">Here Is The Thing About Victor Wembanyama That Statistics Can't Measure And Award Votes Can't Account For.</h2>
+      <h2 class="section-hed">Here Is The Thing About Victor Wembanyama That Statistics Can't Hold And Award Votes Can't Contain.</h2>
 
-      <p class="coda">He is playing basketball with a kind of serene authority that only emerges when a player has found complete alignment between what they are capable of and what they have been asked to do. He is neither straining nor forcing. He is not grinding against the limits of his physical gifts. He is operating within them so fluidly, so completely, that watching him sometimes feels less like watching an athlete and more like watching a law of nature being demonstrated.</p>
+      <p class="coda">He is playing basketball with a kind of serene, sovereign authority that only emerges when a player has found complete alignment between what they are capable of and what they have been called to do. He is not straining. He is not forcing. He is not grinding against the limits of his physical gifts. He is operating within them so fluidly, so completely, that watching him sometimes feels less like watching an athlete and more like watching a law of nature being demonstrated.</p>
+
+      <p class="coda">His own coach said he was "in awe sometimes of the levels that Victor goes to" and added, "I know I wasn't thinking like that at that age." The head coach of an NBA team. In awe. Of his own player.</p>
 
       <p class="coda">When Wembanyama was asked before the season what sparked his leap, he said: "I feel like it's a mix of knowledge of the game, of recognition, of patterns on the court, and, obviously, physical development." Then he paused and added: "There are some things that just take time, and I'm able to do it now. The proof is there, so there's no reason not to do it."</p>
 
@@ -3408,7 +3425,7 @@ const articleEngineData = {
       </div>
   </div>
 
-  <p class="pt-20 mt-10 mb-6 da-note">A note: These are early-cycle, film-room gut takes. Not final takes. </p>
+  <p class="pt-20 mt-10 mb-6 da-note">A note before we start: These are early-cycle, film-room gut takes. Not consensus. Not mock draft gospel. Just eyes on the tape before the predraft machine tells everyone what to think. </p>
 
   <!-- ── GUYS I'M HIGH ON ──────────────────────────────── -->
   <div class="da-section-banner">
@@ -3951,8 +3968,7 @@ Early second-round value. A bet on the shooting mechanics holding up at the next
     border-top: 1px solid rgba(37,99,235,0.2);
     border-bottom: 1px solid rgba(37,99,235,0.2);
     text-align: center;
-    color: purple;
-;
+    color: #2563eb;
   }
   .qf-coda {
     font-style: italic;
@@ -4031,7 +4047,7 @@ In his first three seasons, Jefferson averaged 96.5 receiving yards per game, th
     </div>
     <div class="qf-stat-box">
       <span class="qf-sv">500</span>
-      <span class="qf-sl">Youngest Ever To 500 Receptions</span>
+      <span class="qf-sl">Receptions -- Youngest Ever</span>
     </div>
     <div class="qf-stat-box">
       <span class="qf-sv">8,480</span>
@@ -4106,8 +4122,8 @@ His identity is not contingent on the stat line. He knows what he is. He knows h
 
   <!-- PART FOUR: THE OFFSEASON OF REDEMPTION -->
   <div class="qf-part">
- 
-    <h2 class="qf-part-title">The Offseason Of Redemption</h2>
+    <span class="qf-part-label">Part Four</span>
+    <h2 class="qf-part-title">The Offseason Of Reckoning</h2>
     <span class="qf-part-rule"></span>
   </div>
 
@@ -4132,7 +4148,7 @@ That shift fundamentally changes Jefferson's operating environment. Under-center
 
   <!-- PART FIVE: HE'S STILL HERE -->
   <div class="qf-part">
-
+    <span class="qf-part-label">Part Five</span>
     <h2 class="qf-part-title">He's Still Here</h2>
     <span class="qf-part-rule"></span>
   </div>
