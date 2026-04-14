@@ -4576,7 +4576,7 @@ onAuthStateChanged(auth, async (user) => {
         
         // ... existing presence logic ...
     } else {
-        window.location.href = 'login.html';
+        window.location.href = '/login/';
     }
 });
 
@@ -4998,7 +4998,7 @@ listenForMessages();
     window.handleLogout = async () => {
         try {
             await signOut(auth);
-            window.location.href = 'login.html';
+            window.location.href = '/login/';
         } catch (error) {
             console.error("Logout Error:", error);
         }
