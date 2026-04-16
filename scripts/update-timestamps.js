@@ -17,20 +17,18 @@ try {
 }
 
 const changedArticles = articleIds.filter(id => {
-  // Only flag it if the content block for this article changed
-  // not just the updated field itself
-  const articleSection = diff.match(
-    new RegExp(`"${id}":[\\s\\S]*?(?="[a-z-]+":|$)`, 'g')
-  );
-  if (!articleSection) return false;
+  const idx = diff.indexOf(`"${id}"`);
+  if (idx === -1) return false;
   
-  // Ignore if only the updated line changed (prevent infinite loop)
-  const lines = articleSection[0].split('\n')
+  const section = diff.substring(idx, idx + 3000);
+  const lines = section.split('\n')
     .filter(l => l.startsWith('+') || l.startsWith('-'))
     .filter(l => !l.includes('updated:'));
   
   return lines.length > 0;
 });
+
+console.log('Changed articles detected:', changedArticles);
 
 if (changedArticles.length === 0) {
   console.log('No article content changed. Skipping.');
@@ -52,16 +50,11 @@ let html = fs.readFileSync('index.html', 'utf8');
 
 changedArticles.forEach(id => {
   console.log(`Stamping: ${id} → ${timestamp}`);
-
-  // Replace existing updated field (null or string)
-  const hasField = html.includes(`updated:`);
   
-  if (hasField) {
-    html = html.replace(
-      new RegExp(`(["']${id}["']\\s*:\\s*\\{[\\s\\S]*?published\\s*:[^,\\n]+,?)\\s*\\n(\\s*)updated\\s*:\\s*(?:null|"[^"]*")`),
-      `$1\n$2updated: "${timestamp}"`
-    );
-  }
+  html = html.replace(
+    new RegExp(`("${id}"[\\s\\S]*?updated\\s*:\\s*)(null|"[^"]*")`),
+    `$1"${timestamp}"`
+  );
 });
 
 fs.writeFileSync('index.html', html);
