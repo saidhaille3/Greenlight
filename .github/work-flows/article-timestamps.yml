@@ -1,0 +1,31 @@
+name: Auto Article Timestamps
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+
+jobs:
+  timestamp:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run timestamp updater
+        run: node scripts/update-timestamps.js
+
+      - name: Commit updated timestamps
+        run: |
+          git config user.name "Greenlight Bot"
+          git config user.email "bot@greenlight.local"
+          git diff --quiet || (git add index.html && git commit -m "auto: update article timestamps [skip ci]")
+          git push

@@ -2246,6 +2246,8 @@ const articleEngineData = {
     tag: "NBA Awards",
     hero: "images/wemby.jpeg",
     time: "8 MIN READ",
+    published: "April 12, 2026",
+    updated: null,
     title: "The Case For Youngest NBA MVP Ever",
     content: `
     <style>
@@ -2623,6 +2625,8 @@ const articleEngineData = {
     tag: "NBA · Hot Seat",
     hero: "images/finch.png",
     time: "15 MIN READ",
+    published: "April 12, 2026",
+    updated: null,
     title: "Good Enough Is the Enemy of Great",
     content: `
 <style>
@@ -3146,6 +3150,8 @@ const articleEngineData = {
     tag: "NBA Draft · Film Room",
     hero: "images/fa.jpeg",
     time: "12 MIN READ",
+     published: "April 12, 2026",
+     updated: null,
     title: "My Early 2026 NBA Draft Jumbled Takes",
     content: `
 <style>
@@ -3841,6 +3847,8 @@ Early second-round value. A bet on the shooting mechanics holding up at the next
     tag: "NFL Offseason",
     hero: "images/jj.jpeg",
     time: "12 MIN READ",
+    published: "April 12, 2026",
+    updated: null,
     title: "Return Of The Jettas",
     content: `
 <style>
@@ -4459,7 +4467,9 @@ window.closeProfile = () => {
 
 <img id="rHeroImage" src="" alt="" class="w-full rounded-[2rem] object-cover mb-8 hidden" style="max-height:340px;" />
 
-<h1 id="rtitle" class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-10 dark:text-white"></h1>
+<h1 id="rtitle" class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-4 dark:text-white"></h1>
+
+<div id="reader-updated-stamp" style="display:none; align-items:center; gap:0.5rem; margin-bottom:2rem;"></div>
 
         <div class="flex items-center justify-between py-6 border-y border-black/5 dark:border-white/10 mb-12">
 <div class="flex gap-6">
@@ -4567,6 +4577,27 @@ window.openReader = function(id) {
   window._savedScrollY = window.scrollY;
   document.getElementById('rtitle').innerText = data.title;
   document.getElementById('rbody').innerHTML = data.content;
+
+  // Updated stamp
+  const stamp = document.getElementById('reader-updated-stamp');
+  if (stamp) {
+    if (data.updated) {
+      stamp.innerHTML = `
+        <span style="font-family:'Inter',sans-serif;font-size:0.58rem;font-weight:900;
+                     letter-spacing:0.25em;text-transform:uppercase;color:#d4af37;
+                     background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);
+                     padding:0.3rem 0.75rem;border-radius:2rem;">Updated</span>
+        <span style="font-family:'Inter',sans-serif;font-size:0.68rem;font-weight:700;
+                     text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;
+                     color:inherit;">
+          ${data.updated}
+        </span>`;
+      stamp.style.display = 'flex';
+    } else {
+      stamp.style.display = 'none';
+    }
+  }
+
   
   const heroImg = document.getElementById('rHeroImage');
   if (data.hero) {
