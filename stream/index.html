@@ -1,1885 +1,1623 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Greenlight -- Live</title>
+<script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greenlight Sports Network </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        }
-    </script>
-    <style>
-
-
-
-.coming-soon {
-    position: relative;
-    overflow: hidden;
+:root {
+  --g: #0EE577;
+  --gold: #D4AF37;
+  --red: #FF3B3B;
+  --bg: #060608;
+  --s1: rgba(255,255,255,0.04);
+  --s2: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --border2: rgba(255,255,255,0.12);
+  --mono: 'JetBrains Mono', monospace;
+  --display: 'Bebas Neue', sans-serif;
+  --body: 'Syne', sans-serif;
 }
 
-/* 2. Create the hidden overlay */
-.coming-soon::before {
-    content: "COMING SOON";
-    position: absolute;
-    inset: 0; /* Covers the whole button */
-    background: #d4af37; /* Use your gold theme color */
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 10;
-    pointer-events: none; /* Prevents the overlay from blocking the click if you still want it to work */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  background: var(--bg);
+  color: #E4E4F0;
+  overflow-x: hidden;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* 3. Show the overlay on hover */
-.coming-soon:hover::before {
-    opacity: 1;
+/* ── AMBIENT ── */
+.ambient {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse 90% 60% at 15% 0%, rgba(14,229,119,0.055) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 100%, rgba(212,175,55,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(6,6,8,0) 0%, var(--bg) 100%);
 }
 
-/* Dark mode adjustment */
-.dark .coming-soon::before {
-    background: #10b981; /* Emerald green for dark mode */
-    color: white;
+/* grain */
+.grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
-    input[type="text"] {
-    font-size: 16px !important;
-    transform: scale(0.75);
-    transform-origin: left center;
-    width: 133%;
-    /* compensate for scale */
-}
-    /* Kill ALL native iOS video controls */
-video::-webkit-media-controls { display: none !important; }
-video::-webkit-media-controls-enclosure { display: none !important; }
-video::-webkit-media-controls-panel { display: none !important; }
-video::-webkit-media-controls-play-button { display: none !important; }
-video::-webkit-media-controls-timeline { display: none !important; }
-video::-webkit-media-controls-current-time-display { display: none !important; }
-video::-webkit-media-controls-time-remaining-display { display: none !important; }
-video::-webkit-media-controls-mute-button { display: none !important; }
-video::-webkit-media-controls-volume-slider { display: none !important; }
-video::-webkit-media-controls-fullscreen-button { display: none !important; }
-
-    /* Executive Reader Engine Styles */
-.reader-transition { 
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+/* ── NAV ── */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 58px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(6,6,8,0.82);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-bottom: 1px solid var(--border);
 }
 
-#greenlightReader.active {
-    transform: translateX(0);
-    display: block;
+.nav-brand {
+  display: flex; align-items: center; gap: 10px; text-decoration: none;
+}
+.nav-logo { height: 26px; width: auto; object-fit: contain; }
+.nav-name {
+  font-family: var(--display);
+  font-size: 1.25rem; letter-spacing: 0.15em;
+  background: linear-gradient(120deg, var(--g) 0%, var(--gold) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
-/* Custom Scrollbar for Reader */
-#greenlightReader::-webkit-scrollbar { width: 4px; }
-#greenlightReader::-webkit-scrollbar-track { background: transparent; }
-#greenlightReader::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+.nav-links {
+  display: none;
+  gap: 28px;
+}
+@media (min-width: 768px) { .nav-links { display: flex; } }
+.nav-links a {
+  font-family: var(--mono); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--gold); }
 
-.reader-content-fade {
-    animation: readerFadeUp 0.8s ease forwards;
+.nav-right { display: flex; align-items: center; gap: 10px; }
+
+.nav-btn {
+  background: none; border: none; cursor: pointer; padding: 6px;
+  color: rgba(255,255,255,0.5); display: flex; align-items: center; justify-content: center;
+  transition: color 0.2s; border-radius: 8px;
+}
+.nav-btn:hover { color: #fff; background: var(--s1); }
+
+.nav-avatar {
+  width: 32px; height: 32px; border-radius: 10px;
+  background: linear-gradient(135deg, rgba(14,229,119,0.2), rgba(212,175,55,0.15));
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; position: relative;
+  transition: border-color 0.2s;
+}
+.nav-avatar:hover { border-color: rgba(14,229,119,0.4); }
+.nav-avatar i { font-size: 11px; color: rgba(255,255,255,0.6); }
+.nav-avatar .online-dot {
+  position: absolute; top: -3px; right: -3px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--g); border: 2px solid var(--bg);
 }
 
-@keyframes readerFadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* ── SCORE TICKER ── */
+#scoreTicker {
+  position: relative; z-index: 50;
+  margin-top: 58px;
+  overflow-x: auto; white-space: nowrap;
+  padding: 10px 16px;
+  background: rgba(6,6,8,0.9);
+  border-bottom: 1px solid var(--border);
+  -ms-overflow-style: none; scrollbar-width: none;
+}
+#scoreTicker::-webkit-scrollbar { display: none; }
+
+.score-card {
+  display: inline-flex; flex-direction: column; gap: 7px;
+  min-width: 210px; padding: 10px 13px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 14px; cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+  vertical-align: top;
+}
+.score-card + .score-card { margin-left: 8px; }
+.score-card:hover { border-color: rgba(212,175,55,0.25); background: rgba(255,255,255,0.05); }
+.score-card.is-live { border-color: rgba(255,59,59,0.25); }
+
+/* ══════════════════════════════════════
+   PLAYER -- THE WHOLE THING
+══════════════════════════════════════ */
+#playerSection {
+  position: relative; z-index: 10;
+  width: 100%;
 }
 
-    /* Clean, static gradient specifically for the Lounge title */
-.lounge-title-gradient {
-    background: linear-gradient(135deg, #062c06 0%, #0a4d0a 35%, #d4af37 65%, #926f12 100%);
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    color: transparent !important;
-    display: inline-block;
+#playerShell {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  overflow: hidden;
 }
 
-/* Brightens it for Dark Mode so it pops without using the video */
-.dark .lounge-title-gradient {
-    background: linear-gradient(135deg, #10b981 0%, #059669 35%, #fbbf24 65%, #d97706 100%);
-    filter: brightness(1.1) saturate(1.2);
+/* NUKE all default Mux / browser controls */
+mux-player {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+  --controls: none !important;
+  --media-control-display: none !important;
+  --media-background-color: #000;
+}
+mux-player::part(controls)           { display: none !important; }
+mux-player::part(center-controls)    { display: none !important; }
+mux-player::part(controls-container) { display: none !important; }
+mux-player::part(bottom-controls)    { display: none !important; }
+mux-player::part(top-controls)       { display: none !important; }
+video { pointer-events: none; }
+video::-webkit-media-controls,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-panel  { display: none !important; }
+
+/* Top vignette */
+#playerShell::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 100px; z-index: 2;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.65), transparent);
+  pointer-events: none;
 }
 
-        :root {
-            --glass: rgba(0, 0, 0, 0.03);
-            --glass-border: rgba(0, 0, 0, 0.08);
-        }
-
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
-    
-    body { 
-        font-family: 'Inter', sans-serif; 
-        background-color: #ffffff; 
-        color: #111111; 
-        transition: background-color 0.4s ease, color 0.4s ease;
-        overflow-x: hidden;
-    }
-    
-    .dark body { 
-        background-color: #0a0a0a; 
-        color: #f4f4f4; 
-    }
-
-    /* Hide Moon in Dark Mode */
-    .dark #darkModeToggle {
-        display: none;
-    }
-
-    /* Light Bulb styling for Sidebar */
-    #lightBulbToggle {
-        display: none;
-    }
-
-    .dark #lightBulbToggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 2rem;
-    }
-/* Static version: Matches the nav's gradient but blocks the video effect */
-.fire-text-lounge {
-    background: linear-gradient(135deg, #062c06 0%, #0a4d0a 35%, #d4af37 65%, #926f12 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    display: inline-block;
-    transition: all 0.4s ease;
+/* Bottom vignette */
+#playerShell::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 160px; z-index: 2;
+  background: linear-gradient(to top, rgba(0,0,0,0.92), transparent);
+  pointer-events: none;
 }
 
-/* In Dark Mode: We just boost the colors/brightness instead of using the .mov */
-.dark .fire-text-lounge {
-    background: linear-gradient(135deg, #10b981 0%, #059669 35%, #fbbf24 65%, #d97706 100%);
-    filter: brightness(1.2) saturate(1.4);
+/* ── TOP ROW inside player ── */
+#playerTopRow {
+  position: absolute; top: 0; left: 0; right: 0;
+  z-index: 10; padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between;
 }
 
-    /* Fire text effect */
-    /* Green and Gold Gradient Effect */
-    /* Polished Dark Green and Gold Gradient */
-    .fire-text {
-        background: linear-gradient(135deg, #062c06 0%, #0a4d0a 35%, #d4af37 65%, #926f12 100%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        display: inline-block;
-        transition: all 0.4s ease;
-        /* Adds a subtle "pop" to the metallic look */
-        filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
-    }
+.live-pill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 12px; border-radius: 999px;
+  background: var(--red);
+  font-family: var(--mono); font-size: 9px; font-weight: 700;
+  letter-spacing: 0.2em; color: #fff;
+  box-shadow: 0 0 18px rgba(255,59,59,0.55);
+}
+.live-pill .dot {
+  width: 5px; height: 5px; border-radius: 50%; background: #fff;
+  animation: blink 1.3s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.7)} }
 
-    /* Dark Mode: Fixed Hue-Rotate for a richer Gold/Green fire */
-    .dark .fire-text {
-        background: url('/images/flame.mov') center center / cover no-repeat;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        /* Hue shift 65-75deg hits the Green/Gold sweet spot better than 80deg */
-        filter: hue-rotate(75deg) brightness(1.3) saturate(1.4);
-    }
-
-    /* Fire text on light backgrounds */
-    .fire-text-dark {
-        background: linear-gradient(to bottom, #cc6600 0%, #ff9900 40%, #ff3c00 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 0 8px rgba(255, 60, 0, 0.2));
-    }
-
-    /* Glowing Embers */
-    /* Green Glowing Embers */
-    .ember {
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        /* Changed to Green Gradient */
-        background: radial-gradient(circle, #4ade80, #166534); 
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 60;
-        /* Changed to Green Glow */
-        box-shadow: 0 0 8px #22c55e;
-    }
-
-    /* Rising Green Smoke/Mist */
-    .smoke {
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        /* Changed to subtle Green-tinted Smoke */
-        background: radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, rgba(5, 46, 22, 0) 70%);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 59;
-        filter: blur(2px);
-    }
-
-
-    /* Glass adapted for white bg */
-    .ios-glass {
-        background: var(--glass);
-        backdrop-filter: blur(20px) saturate(160%);
-        -webkit-backdrop-filter: blur(20px) saturate(160%);
-        border: 1px solid var(--glass-border);
-        box-shadow: inset 0 1px 1px rgba(255,255,255,0.8), 0 1px 3px rgba(0,0,0,0.06);
-    }
-
-    .hero-gradient {
-        background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 30%, transparent 100%);
-    }
-    /* Invert logos like TNT in Dark Mode */
-
-
-.dark img[alt="TNT"] {
-filter: invert(1) brightness(2);
+.viewer-pill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 10px; border-radius: 999px;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-family: var(--mono); font-size: 9px; color: rgba(255,255,255,0.6);
 }
 
-    /* Smooth Scroller */
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+/* ── IN-PLAYER CHAT ── */
+#inPlayerChat {
+  position: absolute; bottom: 70px; right: 0;
+  width: min(52%, 200px); z-index: 5;
+  padding: 0 12px;
+  display: flex; flex-direction: column; gap: 4px; justify-content: flex-end;
+  pointer-events: none;
+  max-height: 42%;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, black 30%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%);
+}
 
-    .hover-card {
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-    .hover-card:hover {
-        transform: translateY(-5px);
-        background: rgba(0, 0, 0, 0.05);
-        border-color: rgba(0, 0, 0, 0.15);
-    }
+.ipc-msg {
+  display: flex; flex-direction: column; align-items: flex-end;
+  animation: slideIn 0.32s cubic-bezier(.23,1,.32,1) both;
+}
+@keyframes slideIn {
+  from { opacity:0; transform: translateX(14px); }
+  to   { opacity:1; transform: translateX(0); }
+}
+.ipc-name { font-family: var(--mono); font-size: 8px; font-weight: 700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:1px; }
+.ipc-text { font-size: 11.5px; font-weight: 500; color:#fff; text-align:right; line-height:1.35; text-shadow: 0 1px 8px rgba(0,0,0,1), 0 0 24px rgba(0,0,0,.9); }
 
-    /* Play Button Utility */
-    .play-btn-blur {
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
+/* ── CUSTOM CONTROLS ── */
+#customControls {
+  position: absolute; inset: 0; z-index: 6; cursor: pointer;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
 
-    /* Nav scroll effect */
-    .nav-scrolled {
-        background: linear-gradient(135deg, rgba(226, 226, 226, 0.6) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(207, 207, 207, 0.6) 100%) !important;
-        backdrop-filter: blur(12px);
-    }
+#ctrlBar {
+  position: relative; z-index: 7;
+  padding: 0 14px 16px;
+  display: flex; flex-direction: column; gap: 9px;
+  opacity: 0; transform: translateY(5px);
+  transition: opacity .3s, transform .3s;
+  pointer-events: none;
+}
+#customControls.show #ctrlBar {
+  opacity: 1; transform: translateY(0); pointer-events: all;
+}
 
-    .dark .nav-scrolled {
-        background: linear-gradient(135deg, rgba(20, 20, 20, 0.7) 0%, rgba(10, 10, 10, 0.7) 100%) !important;
-    }
+/* progress */
+#progWrap {
+  width: 100%; height: 3px; background: rgba(255,255,255,0.15);
+  border-radius: 99px; position: relative; cursor: pointer;
+  padding: 9px 0; margin: -9px 0;
+}
+#progFill {
+  height: 3px; border-radius: 99px; width: 0%;
+  background: linear-gradient(90deg, var(--g), var(--gold));
+  pointer-events: none; transition: width .1s linear;
+}
+#progThumb {
+  position: absolute; top: 50%; transform: translate(-50%,-50%);
+  width: 11px; height: 11px; border-radius: 50%; background: #fff;
+  left: 0%; box-shadow: 0 0 10px rgba(14,229,119,.7);
+  pointer-events: none; opacity: 0; transition: opacity .2s;
+}
+#customControls.show #progThumb { opacity: 1; }
 
-    /* Dark Mode adjustments */
-    .dark {
-        background: #0a0a0a;
-        color: #ffffff;
-    }
+/* bottom row */
+#ctrlRow {
+  display: flex; align-items: center; gap: 8px;
+}
 
-    .dark header, .dark .ios-glass {
-        background: rgba(255, 255, 255, 0.03);
-        border-color: rgba(255, 255, 255, 0.1);
-        box-shadow: inset 0 1px 1px rgba(255,255,255,0.05), 0 1px 3px rgba(0,0,0,0.3);
-    }
+.cbtn {
+  background: none; border: none; cursor: pointer; padding: 5px;
+  color: rgba(255,255,255,0.85); display: flex; align-items: center; justify-content: center;
+  transition: color .15s, transform .15s; flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.cbtn svg { width: 20px; height: 20px; display: block; }
+.cbtn:hover { color: #fff; transform: scale(1.1); }
+.cbtn:active { transform: scale(0.88); }
 
-    .dark .bg-white {
-        background-color: #0a0a0a !important;
-    }
+#timeLbl {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  color: rgba(255,255,255,0.6); flex: 1; white-space: nowrap;
+  letter-spacing: .05em;
+}
 
-    .dark .text-black, .dark h2, .dark h3 {
-        color: #ffffff !important;
-    }
+/* center big play */
+#bigPlay {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%) scale(.85);
+  width: 60px; height: 60px; border-radius: 18px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.18);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 8;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+#bigPlay.vis { opacity: 1; pointer-events: all; transform: translate(-50%,-50%) scale(1); }
+#bigPlay svg { width: 24px; height: 24px; color: #fff; margin-left: 3px; }
+#bigPlay:active { transform: translate(-50%,-50%) scale(.92); }
 
-    .dark .text-black\/50, .dark .text-black\/30 {
-        color: rgba(255, 255, 255, 0.4) !important;
-    }
+/* tap ripple */
+.ripple {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  width: 72px; height: 72px;
+  margin-left: -36px; margin-top: -36px;
+  pointer-events: none; z-index: 9;
+  animation: rpl .55s ease-out forwards;
+}
+@keyframes rpl { from{transform:scale(.4);opacity:1} to{transform:scale(2.2);opacity:0} }
 
-    .dark .border-black\/5 {
-        border-color: rgba(255, 255, 255, 0.1) !important;
-    }
+/* ── OFFLINE ── */
+#offlineOverlay {
+  position: absolute; inset: 0; z-index: 12;
+  background: #060608;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+}
+.offline-icon {
+  width: 58px; height: 58px; border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ══════════════════════════════════════
+   META BAR (below player)
+══════════════════════════════════════ */
+#metaBar {
+  position: relative; z-index: 10;
+  padding: 14px 18px;
+  background: rgba(6,6,8,0.95);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+
+.stream-label {
+  font-family: var(--mono); font-size: 8px; font-weight: 700;
+  letter-spacing: .25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 4px;
+}
+.stream-title {
+  font-family: var(--display); font-size: clamp(1rem,4vw,1.4rem);
+  letter-spacing: .08em; color: #fff; line-height: 1;
+}
+
+.status-tag {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 999px;
+  font-family: var(--mono); font-size: 9px; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  transition: all .4s;
+}
+.status-tag.live {
+  background: rgba(255,59,59,0.1); border: 1px solid rgba(255,59,59,0.35);
+  color: var(--red); box-shadow: 0 0 20px rgba(255,59,59,.12);
+}
+.status-tag.offline {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,.3);
+}
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.status-tag.live .status-dot { animation: blink 1.4s infinite; }
+
+/* ══════════════════════════════════════
+   CHAT FAB + PANEL
+══════════════════════════════════════ */
+#chatFab {
+  position: fixed;
+  bottom: calc(22px + env(safe-area-inset-bottom));
+  right: 20px; z-index: 200;
+  width: 50px; height: 50px; border-radius: 15px;
+  background: linear-gradient(135deg, var(--g), #08B856);
+  border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 30px rgba(14,229,119,0.35), 0 2px 8px rgba(0,0,0,.5);
+  transition: transform .2s, box-shadow .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+#chatFab:hover { transform: scale(1.07); }
+#chatFab:active { transform: scale(.94); }
+#chatFab i { color:#000; font-size:17px; }
+#chatFab .fbadge {
+  position: absolute; top: -4px; right: -4px;
+  width: 13px; height: 13px; border-radius: 50%;
+  background: var(--red); border: 2px solid var(--bg);
+  animation: blink 2s infinite;
+}
+
+#chatPanel {
+  position: fixed; bottom: 0; right: 0;
+  width: 100%; max-width: 390px;
+  height: 68dvh; max-height: 580px;
+  z-index: 190;
+  border-radius: 26px 26px 0 0;
+  display: flex; flex-direction: column; overflow: hidden;
+  transform: translateY(110%);
+  transition: transform .48s cubic-bezier(.16,1,.3,1);
+  background: rgba(9,9,13,0.97);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid var(--border); border-bottom: none;
+  box-shadow: 0 -24px 80px rgba(0,0,0,.7);
+}
+@media(min-width:768px) {
+  #chatPanel { bottom:82px; right:20px; border-radius:22px; height:500px; border-bottom:1px solid var(--border); }
+}
+#chatPanel.open { transform: translateY(0); }
+
+.chat-pill { width:34px;height:4px;border-radius:2px;background:rgba(255,255,255,.13);margin:12px auto 0;flex-shrink:0; }
+
+.chat-hdr {
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.chat-hdr-title { font-family: var(--display); font-size: 1.1rem; letter-spacing:.1em; color:#fff; }
+.chat-online { display:flex;align-items:center;gap:5px;margin-top:2px; }
+.chat-online-dot { width:5px;height:5px;border-radius:50%;background:var(--g);animation:blink 2.2s infinite; }
+.chat-online span { font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.1em; }
+
+.chat-close {
+  background: rgba(255,255,255,.06); border: none; width:30px; height:30px;
+  border-radius:9px; cursor:pointer; color:rgba(255,255,255,.4); font-size:14px;
+  display:flex;align-items:center;justify-content:center; transition:background .2s;
+}
+.chat-close:hover { background:rgba(255,255,255,.1); }
+
+.chat-tabs {
+  padding: 8px 14px; border-bottom: 1px solid var(--border);
+  display: flex; gap: 6px; overflow-x: auto; flex-shrink: 0;
+  -ms-overflow-style:none; scrollbar-width:none;
+}
+.chat-tabs::-webkit-scrollbar { display:none; }
+.ctab {
+  padding: 5px 14px; border-radius:999px; cursor:pointer;
+  font-family:var(--mono); font-size:9px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; white-space:nowrap;
+  border: 1px solid transparent; color:rgba(255,255,255,.3); background:none;
+  transition: all .2s;
+}
+.ctab.on { background:rgba(14,229,119,.1); border-color:rgba(14,229,119,.28); color:var(--g); }
+
+#message-container {
+  flex:1; overflow-y:auto; padding:12px 14px;
+  display:flex; flex-direction:column; gap:11px;
+  -ms-overflow-style:none; scrollbar-width:none;
+}
+#message-container::-webkit-scrollbar { display:none; }
+
+.cmsg { display:flex; gap:9px; align-items:flex-start; animation: msgup .26s ease both; }
+@keyframes msgup { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.cmsg-av {
+  width:30px; height:30px; border-radius:9px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:9px; font-weight:700; color:#000;
+  cursor:pointer;
+}
+.cmsg-body { flex:1; min-width:0; }
+.cmsg-name { font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px; }
+.cmsg-bubble {
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.07);
+  border-radius:3px 12px 12px 12px; padding:7px 11px;
+  font-size:12.5px; line-height:1.45; color:rgba(255,255,255,.82); word-break:break-word;
+  cursor:pointer; transition:background .15s;
+}
+.cmsg-bubble:hover { background:rgba(255,255,255,.09); }
+
+.chat-input-row {
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,.25); flex-shrink:0;
+  display:flex; gap:9px; align-items:center;
+}
+#chat-input {
+  flex:1; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+  border-radius:11px; padding:10px 13px;
+  font-family:var(--body); font-size:max(16px,.875rem); color:#fff; outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+#chat-input::placeholder { color:rgba(255,255,255,.2); }
+#chat-input:focus { border-color:rgba(14,229,119,.4); box-shadow:0 0 0 3px rgba(14,229,119,.07); }
+#send-btn {
+  width:38px; height:38px; border-radius:11px; background:var(--g);
+  border:none; cursor:pointer; flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:#000;font-size:13px;
+  transition:transform .15s, opacity .15s;
+}
+#send-btn:hover { transform:scale(1.07); }
+#send-btn:active { transform:scale(.91); opacity:.8; }
+
+/* ══════════════════════════════════════
+   SCRIM + SIDEBARS
+══════════════════════════════════════ */
+#scrim {
+  position:fixed;inset:0;z-index:270;
+  background:rgba(0,0,0,.62); backdrop-filter:blur(4px);
+  opacity:0; pointer-events:none; transition:opacity .3s;
+}
+#scrim.on { opacity:1; pointer-events:all; }
+
+#sidebar {
+  position:fixed;top:0;right:0;width:min(290px,85vw);height:100dvh;
+  z-index:280; background:rgba(6,6,9,.97);
+  backdrop-filter:blur(40px); -webkit-backdrop-filter:blur(40px);
+  border-left:1px solid var(--border);
+  transform:translateX(100%); transition:transform .45s cubic-bezier(.16,1,.3,1);
+  overflow-y:auto; -ms-overflow-style:none; scrollbar-width:none;
+}
+#sidebar::-webkit-scrollbar { display:none; }
+#sidebar.on { transform:translateX(0); }
+
+#userDashboard {
+  position:fixed;top:0;right:0;width:min(330px,100vw);height:100dvh;
+  z-index:290; background:rgba(6,6,9,.98);
+  backdrop-filter:blur(40px); -webkit-backdrop-filter:blur(40px);
+  border-left:1px solid var(--border);
+  transform:translateX(100%); transition:transform .45s cubic-bezier(.16,1,.3,1);
+  overflow-y:auto; -ms-overflow-style:none; scrollbar-width:none;
+}
+#userDashboard::-webkit-scrollbar { display:none; }
+#userDashboard.on { transform:translateX(0); }
+
+/* ══════════════════════════════════════
+   USERNAME MODAL
+══════════════════════════════════════ */
+#modalBg {
+  position:fixed;inset:0;z-index:400;
+  background:rgba(0,0,0,.8); backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px);
+  display:flex; align-items:center; justify-content:center; padding:20px;
+}
+.modal-box {
+  width:100%; max-width:340px;
+  background:rgba(11,11,16,.97); border:1px solid rgba(255,255,255,.1);
+  border-radius:26px; padding:34px 28px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.05);
+  animation: mup .45s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes mup { from{opacity:0;transform:scale(.92) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+
+.modal-eyebrow {
+  font-family:var(--mono); font-size:8px; font-weight:700;
+  letter-spacing:.28em; text-transform:uppercase; color:var(--red);
+  margin-bottom:10px;
+}
+.modal-title {
+  font-family:var(--display); font-size:2.3rem; letter-spacing:.07em;
+  color:#fff; line-height:.95; margin-bottom:10px;
+}
+.modal-sub {
+  font-size:11px; color:rgba(255,255,255,.32); line-height:1.65; margin-bottom:24px;
+}
+
+.modal-input {
+  width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+  border-radius:12px; padding:13px 15px; margin-bottom:12px;
+  font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; color:#fff; outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+.modal-input::placeholder { color:rgba(255,255,255,.2); }
+.modal-input:focus { border-color:rgba(14,229,119,.45); box-shadow:0 0 0 3px rgba(14,229,119,.07); }
+
+.modal-btn {
+  width:100%; padding:14px; border-radius:12px;
+  background:linear-gradient(135deg, var(--g), #08B856);
+  border:none; color:#000;
+  font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+  cursor:pointer; box-shadow:0 8px 24px rgba(14,229,119,.28);
+  transition:transform .15s, box-shadow .15s;
+}
+.modal-btn:hover { transform:scale(1.015); box-shadow:0 10px 30px rgba(14,229,119,.38); }
+.modal-btn:active { transform:scale(.97); }
+
+/* ══════════════════════════════════════
+   GAME MODAL
+══════════════════════════════════════ */
+#gameModal {
+  position:fixed;inset:0;z-index:350;
+  background:rgba(0,0,0,.88); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  display:none; align-items:center; justify-content:center; padding:14px;
+}
+#gameModal.on { display:flex; }
+
+#modalContainer {
+  width:100%; max-width:860px; max-height:88dvh;
+  border-radius:26px; background:rgba(10,10,15,.98);
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:0 40px 100px rgba(0,0,0,.85);
+  overflow:hidden; display:flex; flex-direction:column;
+  transform:scale(.94); opacity:0;
+  transition:transform .32s cubic-bezier(.16,1,.3,1), opacity .32s;
+}
+#modalContainer.vis { transform:scale(1); opacity:1; }
+
+/* ══════════════════════════════════════
+   PLAYER STATS MODAL
+══════════════════════════════════════ */
+#playerStatsModal {
+  position:fixed;inset:0;z-index:360;
+  background:rgba(0,0,0,.82); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  display:none; align-items:center; justify-content:center; padding:20px;
+}
+#playerStatsModal.on { display:flex; }
+#playerModalContainer {
+  width:100%; max-width:400px;
+  background:rgba(10,10,15,.98); border:1px solid rgba(255,255,255,.09);
+  border-radius:26px; overflow:hidden;
+  box-shadow:0 40px 100px rgba(0,0,0,.85);
+  transform:scale(.94); opacity:0;
+  transition:transform .3s cubic-bezier(.16,1,.3,1), opacity .3s;
+}
+#playerModalContainer.vis { transform:scale(1); opacity:1; }
+
+/* ══════════════════════════════════════
+   REACTION POPOVER
+══════════════════════════════════════ */
+.rxn-pop {
+  position:absolute; bottom:calc(100% + 7px); left:0;
+  background:rgba(12,12,18,.98); border:1px solid rgba(255,255,255,.12);
+  border-radius:14px; padding:7px 9px;
+  display:flex; flex-wrap:wrap; gap:3px; max-width:210px;
+  box-shadow:0 12px 36px rgba(0,0,0,.65); z-index:50;
+  backdrop-filter:blur(20px);
+}
+.rxn-em {
+  font-size:19px; cursor:pointer; padding:4px; border-radius:8px;
+  transition:transform .14s, background .14s;
+}
+.rxn-em:hover { transform:scale(1.35); background:rgba(255,255,255,.08); }
+
+/* ══════════════════════════════════════
+   MENTION AUTOCOMPLETE
+══════════════════════════════════════ */
+#mention-ac {
+  position:fixed; background:rgba(9,9,14,.98);
+  border:1px solid rgba(14,229,119,.22); border-radius:12px;
+  box-shadow:0 14px 44px rgba(0,0,0,.72);
+  backdrop-filter:blur(20px); z-index:350; min-width:150px; overflow:hidden;
+  display:none;
+}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  position:relative; z-index:10;
+  padding:36px 20px 54px; text-align:center;
+  border-top:1px solid var(--border);
+}
+
+/* ══════════════════════════════════════
+   UTILS
+══════════════════════════════════════ */
+.no-scroll { -ms-overflow-style:none; scrollbar-width:none; }
+.no-scroll::-webkit-scrollbar { display:none; }
+
+.gold-sep {
+  height:1px; margin:0;
+  background:linear-gradient(to right, transparent, rgba(212,175,55,.2), transparent);
+}
+
+.panel-close {
+  background:rgba(255,255,255,.05); border:none; width:32px;height:32px;
+  border-radius:9px; cursor:pointer; color:rgba(255,255,255,.4); font-size:15px;
+  display:flex;align-items:center;justify-content:center; transition:background .2s;
+}
+.panel-close:hover { background:rgba(255,255,255,.1); color:#fff; }
+
+.fade-up { animation: fup .6s cubic-bezier(.16,1,.3,1) both; }
+.d1 { animation-delay:.06s; }
+.d2 { animation-delay:.12s; }
+@keyframes fup { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 </style>
-
-
 </head>
-<body class="antialiased overflow-x-hidden"><!-- Navigation -->
-<nav id="navbar" class="fixed top-0 w-full z-50 silver-nav px-2 py-4 flex justify-between items-center">
-<div class="flex items-center gap-4">
-    <div class="relative w-9 h-9"> 
-    <a href="index.html" class="flex items-center space-x-3 group shrink-0">
-        <img src="/images/logo.png" alt="The Greenlight Logo" class="transition-transform scale-150 origin-left translate-y-[4px] " />
-    </a>    </div>
-    
-    
-<span class="fire-text text-[1rem] font-extrabold tracking-tight ml-1 py-1">
-    Greenlight
-</span>
 
-</div>
+<body>
+<div class="ambient"></div>
+<div class="grain"></div>
 
-    <div class="hidden md:flex gap-6 text-sm font-semibold tracking-widest uppercase opacity-70">
-        <a href="#" class="hover:text-amber-500 transition text-black dark:text-white">NFL</a>
-        <a href="#" class="hover:text-amber-500 transition text-black dark:text-white">NBA</a>
-        <a href="#" class="hover:text-amber-500 transition text-black dark:text-white">UFC</a>
-    </div>
+<!-- ════════════════════════════════
+     SCRIM
+════════════════════════════════ -->
+<div id="scrim" onclick="closeAll()"></div>
 
-    <div class="flex items-center gap-4">
-        <button id="darkModeToggle" onclick="toggleDarkMode()" class="p-1 hover:scale-110 transition-transform group" title="Toggle Dark Mode">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-7 h-7 rotate-[20deg]">
-                <defs>
-                    <linearGradient id="gold-metal" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#D4AF37" />
-                        <stop offset="50%" stop-color="#F9E2AF" />
-                        <stop offset="100%" stop-color="#B8860B" />
-                    </linearGradient>
-                </defs>
-                <path fill="url(#gold-metal)" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
-            </svg>
-        </button>
+<!-- ════════════════════════════════
+     NAV
+════════════════════════════════ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="/images/logo.png" class="nav-logo" alt="GL">
+    <span class="nav-name">Greenlight</span>
+  </a>
 
-<div class="md:mr-3 relative group cursor-pointer" onclick="toggleUserDashboard()">
-    <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-200 p-[2px] transition-all duration-300">
-        <div class="w-full h-full rounded-full bg-white dark:bg-neutral-900 flex items-center justify-center overflow-hidden">
-            <i class="fa-solid fa-user text-xs text-black dark:text-white opacity-80"></i>
-        </div>
-    </div>
-    <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white dark:border-neutral-900 rounded-full"></span>
-</div>
 
-        
-        <button onclick="toggleSidebar()" class="md:hidden text-2xl focus:outline-none text-black dark:text-white"
->
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="url(#goldGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <defs>
-                    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#FFD700" />
-                        <stop offset="50%" stop-color="#FFC107" />
-                        <stop offset="100%" stop-color="#B8860B" />
-                    </linearGradient>
-                </defs>
-                <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>        
-        </button>
-    </div>
 </nav>
-<div id="userDashboard" class="fixed inset-y-0 right-0 w-[320px] bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-2xl z-[70] transform translate-x-full transition-transform duration-500 ease-in-out shadow-[-20px_0_80px_rgba(0,0,0,0.2)] border-l border-gray-200 dark:border-white/5 h-full overflow-y-auto no-scrollbar">
-    <div class="p-8 flex justify-between items-center border-b border-gray-100 dark:border-white/5">
-        <button onclick="toggleUserDashboard()" class="text-2xl text-black dark:text-white opacity-40 hover:opacity-100 transition-opacity">&times;</button>
-    </div>
 
-    <div class="p-8 text-center">
-        <div class="relative inline-block mb-4">
-            <div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-amber-500 to-yellow-200 p-[3px] mx-auto  hover:rotate-0 transition-transform duration-500">
-                <div class="w-full h-full rounded-[1.25rem] bg-white dark:bg-neutral-900 flex items-center justify-center overflow-hidden">
-                    <i class="fa-solid fa-user text-3xl text-black dark:text-white"></i>
-                </div>
-            </div>
-            <span class="absolute -top-2 -right-2 bg-red-600 text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest shadow-lg">Elite</span>
-        </div>
-        <h3 class="text-2xl font-black uppercase tracking-tighter dark:text-white">User_293</h3>
-        <p class="text-[10px] font-bold text-black/30 dark:text-white/30 uppercase tracking-widest mt-1">Member since 2024</p>
-    </div>
-
-    <div class="px-8 grid grid-cols-2 gap-3 mb-8">
-        <div class="bg-gray-50 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5">
-            <p class="text-[8px] font-black uppercase text-amber-500 tracking-widest mb-1">XP Points</p>
-            <p class="text-xl font-black dark:text-white">12,450</p>
-        </div>
-
-    </div>
-    <div class="px-8 mb-8">
-    <button class="w-full py-4 bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-black uppercase text-[10px] tracking-[0.2em] rounded-2xl shadow-lg shadow-amber-500/20 hover:scale-[1.02] active:scale-95 transition-all">
-        Join Elite Membership
-    </button>
+<!-- ════════════════════════════════
+     SCORE TICKER
+════════════════════════════════ -->
+<div id="scoreTicker">
+  <div id="scoreScroller"></div>
 </div>
 
+<!-- ════════════════════════════════
+     PLAYER
+════════════════════════════════ -->
+<section id="playerSection">
+  <div id="playerShell">
 
-    <div class="px-6 space-y-2">
-        <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
-            <i class="fa-solid fa-bolt-lightning text-amber-500"></i>
-            <span class="text-sm font-bold dark:text-white">Faves</span>
-        </a>
-        <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
-            <i class="fa-solid fa-bookmark text-gray-400"></i>
-            <span class="text-sm font-bold dark:text-white">Saved Highlights</span>
-        </a>
-        <a href="#" class="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all group">
-            <i class="fa-solid fa-shield-halved text-gray-400"></i>
-            <span class="text-sm font-bold dark:text-white">Privacy Settings</span>
-        </a>
-        
-        <div class="pt-4 mt-4 border-t border-gray-100 dark:border-white/5 px-2">
-            <button class="w-full bg-black dark:bg-white text-white dark:text-black py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white transition-all active:scale-95">
-                Sign Out
-            </button>
+    <!-- Video -->
+    <mux-player
+      id="muxPlayer"
+      playback-id="TewjpLNLyv802huM3gVvXv4Nzs8XAUgdZXQ502NYQusmk"
+      stream-type="live"
+      autoplay="muted"
+      muted
+      nohotkeys
+    ></mux-player>
+
+    <!-- Top row -->
+    <div id="playerTopRow">
+      <div id="liveBadgeWrap" style="display:none;">
+        <div class="live-pill"><span class="dot"></span>LIVE</div>
+      </div>
+      <div style="flex:1;"></div>
+      <div id="viewerWrap" style="display:none;">
+        <div class="viewer-pill">
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span id="viewerCount">0</span>
         </div>
-    </div>
-</div>
-
-
-<!-- Sidebar --><div id="sidebar" class="fixed inset-y-0 right-0 w-[300px] bg-white/90 dark:bg-neutral-900/95 backdrop-blur-2xl z-[60] transform translate-x-full transition-transform duration-500 ease-in-out shadow-[-20px_0_50px_rgba(0,0,0,0.1)] border-l border-gray-200 dark:border-white/10">
-    <div class="flex justify-between items-center p-8 border-b border-gray-100 dark:border-white/10">
-        <button onclick="toggleSidebar()" class="text-2xl text-black dark:text-white hover:rotate-90 transition-transform duration-300">&times;</button>
+      </div>
     </div>
 
-<div class="flex flex-col gap-4 p-6">
-    <button id="lightBulbToggle" onclick="toggleDarkMode()" class="p-2 self-center hover:scale-110 transition-transform group mb-4" title="Switch to Light Mode">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-amber-400">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+    <!-- In-player chat -->
+    <div id="inPlayerChat">
+      <div id="playerChatMessages"></div>
+    </div>
+
+    <!-- Big center play -->
+    <div id="bigPlay" onclick="togglePlay(event)">
+      <svg id="bigPlayIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </div>
+
+    <!-- Custom controls -->
+    <div id="customControls" onclick="handleTap(event)">
+      <div id="ctrlBar">
+        <div id="progWrap"
+          onclick="seekVideo(event)"
+          onmousedown="startScrub(event)"
+          ontouchstart="startScrubT(event)">
+          <div id="progFill"></div>
+          <div id="progThumb"></div>
+        </div>
+        <div id="ctrlRow">
+          <button class="cbtn" onclick="togglePlay(event)">
+            <svg id="icPlay"  viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="icPause" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <span id="timeLbl">LIVE</span>
+          <button class="cbtn" onclick="toggleMute(event)">
+            <svg id="icSound" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            <svg id="icMute"  viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+          </button>
+          <button class="cbtn" onclick="toggleFS(event)">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offline overlay -->
+    <div id="offlineOverlay">
+      <div class="offline-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.5">
+          <path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/>
+          <line x1="3" y1="3" x2="21" y2="21" stroke="rgba(255,255,255,.1)" stroke-width="1.5"/>
         </svg>
-    </button>
-
-    <a href="#" class="group flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100">
-        <div class="flex items-center gap-4">
-            <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png" class="w-10 h-10 object-contain" alt="NFL">
-            <span class="font-bold text-lg tracking-tight group-hover:translate-x-1 transition-transform dark:text-white">NFL</span>
-        </div>
-        <i class="fa-solid fa-chevron-right text-xs opacity-20 group-hover:opacity-100 transition-opacity dark:text-white"></i>
-    </a>
-
-    <a href="#" class="group flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100">
-        <div class="flex items-center gap-4">
-            <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nba.png" class="w-10 h-10 object-contain" alt="NBA">
-            <span class="font-bold text-lg tracking-tight group-hover:translate-x-1 transition-transform dark:text-white">NBA</span>
-        </div>
-        <i class="fa-solid fa-chevron-right text-xs opacity-20 group-hover:opacity-100 transition-opacity dark:text-white"></i>
-    </a>
-
-    <a href="#" class="group flex items-center justify-between p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all border border-transparent hover:border-gray-100">
-        <div class="flex items-center gap-4">
-            <img src="images/blogo.webp" class="w-10 h-10 object-contain" alt="UFC">
-            <span class="font-bold text-lg tracking-tight group-hover:translate-x-1 transition-transform dark:text-white">UFC</span>
-        </div>
-        <i class="fa-solid fa-chevron-right text-xs opacity-20 group-hover:opacity-100 transition-opacity dark:text-white"></i>
-    </a>
-
-<div class="mt-4 pt-6 border-t border-gray-100 dark:border-white/10 px-2 space-y-4">
-    <a href="#" class="relative block w-full aspect-[3/1] overflow-hidden rounded-2xl shadow-lg group">
-        <img src="images/aw.png" class="absolute inset-0 w-full h-full object-cover object-[60%_50%] transition-transform duration-500 group-hover:scale-105" alt="Ball-Verse">
-        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-    </a>
-
-<a href="#" class="relative block w-full aspect-[3/1] overflow-hidden rounded-2xl shadow-lg group">
-    <img src="images/store.jpeg" 
-         class="absolute inset-0 w-full h-full object-cover object-[center_40%]
- transition-transform duration-500 group-hover:scale-110" 
-         alt="Greenlight Store">
-    
-    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300"></div>
-</a>
-
-
-</div>
-
-</div>
-
-
-</div><!-- Score Scroller -->
-
-
-<!-- Score Scroller --><div class="mt-16 z-40 overflow-x-auto whitespace-nowrap py-5 px-4 bg-white/70 dark:bg-black/70 backdrop-blur-xl border-b border-gray-200/50 dark:border-white/10 no-scrollbar shadow-sm">
-    <div id="scoreScroller" class="inline-flex space-x-4">
-
-    <div class="min-w-[240px] bg-white dark:bg-neutral-900 border border-gray-200/60 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
-        <div class="flex items-center justify-between mb-4">      
-            <div class="flex items-center gap-1.5">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-                </span>
-                <span class="uppercase text-[10px] font-black tracking-widest text-red-600">Live • 4Q 2:14</span>
-            </div>
-            <img src="images/nbatv.jpeg" alt="NBA TV" class="h-4 w-auto object-contain" />
-        </div>
-        <div class="space-y-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/gs.png" class="w-6 h-6">
-                    <span class="text-sm font-bold text-gray-800 dark:text-white">Warriors</span>
-                </div>
-                <span class="text-sm font-black text-gray-900 dark:text-white">102</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/hou.png" class="w-6 h-6">
-                    <span class="text-sm font-bold text-gray-800 dark:text-white">Rockets</span>
-                </div>
-                <span class="text-sm font-black text-gray-900 dark:text-white">98</span>
-            </div>
-        </div>
+      </div>
+      <p style="font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.2);">STREAM OFFLINE</p>
+      <p style="font-size:11px;color:rgba(255,255,255,.1);">Waiting for broadcast…</p>
     </div>
 
-    <div class="min-w-[240px] bg-gray-50/50 dark:bg-neutral-900/50 border border-gray-200/50 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
-        <div class="flex items-center justify-between mb-4">      
-            <div class="flex items-center gap-1.5">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                </span>
-                <span class="uppercase text-[10px] font-bold tracking-widest text-gray-400 dark:text-gray-300">Pregame • 6:00 PM</span>
-            </div>
+  </div><!-- /playerShell -->
 
-
-<img src="images/tnt.png" alt="TNT" class="h-4 w-auto object-contain" />
-
-        </div>
-        <div class="space-y-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/cha.png" class="w-6 h-6">
-                    <span class="text-sm font-bold text-gray-800 dark:text-white">Hornets</span>
-                </div>
-                <span class="text-xs font-medium text-gray-400 dark:text-gray-300">11–21</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/mil.png" class="w-6 h-6">
-                    <span class="text-sm font-bold text-gray-800 dark:text-white">Bucks</span>
-                </div>
-                <span class="text-xs font-medium text-gray-400 dark:text-gray-300">24–10</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="min-w-[240px] bg-white dark:bg-neutral-900 border border-gray-200/60 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
-        <div class="flex items-center justify-between mb-4">      
-            <div class="flex items-center gap-1.5">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-                </span>
-                <span class="uppercase text-[10px] font-black tracking-widest text-red-600">Live • 2Q 8:45</span>
-            </div>
-            <img src="images/espn.png" alt="ESPN" class="h-3 w-auto object-contain" />
-        </div>
-        <div class="space-y-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/min.png" class="w-6 h-6">
-                    <span class="text-sm font-bold text-gray-800 dark:text-white">Wolves</span>
-                </div>
-                <span class="text-sm font-black text-gray-900 dark:text-white">42</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/dal.png" class="w-6 h-6">
-                    <span class="text-sm font-bold text-gray-800 dark:text-white">Mavs</span>
-                </div>
-                <span class="text-sm font-black text-gray-900 dark:text-white">45</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="min-w-[240px] bg-gray-50/50 dark:bg-neutral-900/50 border border-gray-200/50 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all">
-        <div class="flex items-center justify-between mb-4">      
-            <div class="flex items-center gap-1.5">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                </span>
-                <span class="uppercase text-[10px] font-bold tracking-widest text-gray-400 dark:text-gray-300">Pregame • 10:00 PM</span>
-            </div>
-            <img src="images/tnt.png" alt="TNT" class="h-4 w-auto object-contain" />
-        </div>
-        <div class="space-y-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/lal.png" class="w-6 h-6">
-                    <span class="text-sm font-bold text-gray-800 dark:text-white">Lakers</span>
-                </div>
-                <span class="text-xs font-medium text-gray-400 dark:text-gray-300">18–17</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <img src="https://a.espncdn.com/i/teamlogos/nba/500/phx.png" class="w-6 h-6">
-                    <span class="text-sm font-bold text-gray-800 dark:text-white">Suns</span>
-                </div>
-                <span class="text-xs font-medium text-gray-400 dark:text-gray-300">20–15</span>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-</div>
-  <style>
-
-    /* Mux player fills container */
-    mux-player {
-      width: 100%;
-      height: 100%;
-      display: block;
-      --media-background-color: #000;
-    }
-
-    /* Pulse dot */
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-    .pulse-dot { animation: pulse-dot 1.6s infinite; }
-
-    /* Chat scroll */
-    .chat-scroll::-webkit-scrollbar { width: 3px; }
-    .chat-scroll::-webkit-scrollbar-track { background: transparent; }
-    .chat-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 99px; }
-    html.dark .chat-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
-
-    /* Message animation */
-    @keyframes msgIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .msg-in { animation: msgIn 0.25s ease forwards; }
-
-    /* Modal backdrop blur */
-    .modal-backdrop {
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-
-    /* No scrollbar utility */
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-
-    /* Glow on live pill */
-    .live-glow {
-      box-shadow: 0 0 16px rgba(230,59,46,0.35), 0 0 32px rgba(230,59,46,0.15);
-    }
-
-    /* Player container */
-    .player-ratio {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-    }
-    .player-ratio > * {
-      position: absolute;
-      inset: 0;
-    }
-
-    /* Sidebar */
-    #sidebar { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-
-    /* Chat input focus ring */
-    .chat-input:focus {
-      outline: none;
-      border-color: rgba(230,59,46,0.5);
-      box-shadow: 0 0 0 3px rgba(230,59,46,0.1);
-    }
-
-    html.dark .chat-input {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.1);
-      color: #f4f4f4;
-    }
-    html.dark .chat-input::placeholder { color: rgba(255,255,255,0.25); }
-    html.dark .chat-input:focus {
-      border-color: rgba(230,59,46,0.6);
-      box-shadow: 0 0 0 3px rgba(230,59,46,0.12);
-    }
-
-    /* Viewer badge */
-    @keyframes viewers-pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
-    }
-    .viewers-pulse { animation: viewers-pulse 2.5s infinite; }
-  </style>
-<!-- ── Username Modal ── -->
-<div id="modalBg" class="fixed inset-0 z-[200] flex items-center justify-center p-5 modal-backdrop bg-black/40">
-  <div class="ios-glass w-full max-w-sm rounded-[2rem] p-8 shadow-2xl">
-    <div class="mb-6">
-      <span class="text-[9px] font-black uppercase tracking-[0.35em] text-red-600 block mb-3">Live Stream</span>
-      <h2 class="text-3xl font-black uppercase tracking-tighter leading-none dark:text-white">Join the<br/>Stream</h2>
-      <p class="text-xs font-bold text-black/40 dark:text-white/40 uppercase tracking-widest mt-3 leading-relaxed">Enter a name to chat with everyone watching live.</p>
-    </div>
-    <input
-      type="text"
-      id="nameInput"
-      placeholder="YOUR NAME"
-      maxlength="24"
-      class="chat-input w-full bg-black/[0.04] border border-black/10 rounded-xl px-5 py-4 text-[11px] font-black tracking-widest uppercase outline-none transition-all mb-4 dark:bg-white/5 dark:border-white/10 dark:text-white dark:placeholder:text-white/30"
-    />
-    <button
-      onclick="setUsername()"
-      class="w-full bg-black dark:bg-white dark:text-black text-white py-4 rounded-xl text-[10px] font-black uppercase tracking-[0.25em] shadow-lg hover:bg-red-600 dark:hover:bg-red-600 dark:hover:text-white transition-all active:scale-95"
-    >
-      Join Chat →
-    </button>
-  </div>
-</div>
-
-<!-- ── Navigation ── -->
-
-<!-- ── Sidebar ── -->
-
-
-<!-- ── Page Body ── -->
-<main class="pt-0 pb-16 px-4 md:px-6 max-w-[1400px] mx-auto">
-
-  <!-- Page Title Row -->
-  <div class="flex items-center justify-between mb-6 mt-4">
+  <!-- Meta bar -->
+  <div id="metaBar" class="fade-up d1">
     <div>
-
+      <p class="stream-label">Greenlight Network</p>
+      <p class="stream-title" id="streamTitleText">Live Stream</p>
     </div>
-
-    <!-- Live Status Pill -->
-    <div id="statusPill" class="flex items-center gap-2 px-4 py-2.5 rounded-full border text-[10px] font-black uppercase tracking-widest transition-all duration-300 offline-state">
-      <span id="statusDot" class="w-2 h-2 rounded-full bg-current"></span>
+    <div id="statusTag" class="status-tag offline">
+      <span class="status-dot"></span>
       <span id="statusText">Offline</span>
     </div>
   </div>
+</section>
 
-  <!-- Grid: Player + Chat -->
-<div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-5 items-start">
+<!-- ════════════════════════════════
+     CHAT FAB
+════════════════════════════════ -->
 
-    <!-- ── Player Column ── -->
-    <div class="space-y-5">
 
-      <!-- Player Card -->
-      <div class="ios-glass rounded-[2rem] overflow-hidden shadow-xl">
-        <!-- Video -->
-<div class="player-ratio bg-black rounded-t-[2rem] overflow-hidden relative">
-  <mux-player
-    id="muxPlayer"
-    playback-id="TewjpLNLyv802huM3gVvXv4Nzs8XAUgdZXQ502NYQusmk"
-    stream-type="live"
-    autoplay="muted"
-    muted
-    style="--controls:auto;"
-  ></mux-player>
-
-  <div id="inPlayerChat" class="absolute inset-y-0 right-0 w-full md:w-1/3 z-50 pointer-events-none flex flex-col justify-end p-4 overflow-hidden">
-      <div id="playerChatMessages" class="flex flex-col gap-2 overflow-y-auto no-scrollbar max-h-[70%] mask-linear-gradient">
-          </div>
+<!-- ════════════════════════════════
+     CHAT PANEL
+════════════════════════════════ -->
+<div id="chatPanel">
+  <div class="chat-pill"></div>
+  <div class="chat-hdr">
+    <div>
+      <p class="chat-hdr-title">Live Chat</p>
+      <div class="chat-online">
+        <span class="chat-online-dot"></span>
+        <span id="online-user-count">0 Online</span>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">✕</button>
   </div>
-
-  <div id="offlineOverlay" class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-black/90 to-black">
-    <div class="w-16 h-16 rounded-2xl border border-white/10 flex items-center justify-center bg-white/5">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5">
-        <path d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/>
-        <line x1="3" y1="3" x2="21" y2="21" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
-      </svg>
-    </div>
-    <div class="text-center">
-      <p class="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Stream Offline</p>
-      <p class="text-[9px] font-bold text-white/15 uppercase tracking-widest mt-1">Waiting for broadcast…</p>
-    </div>
+  <div class="chat-tabs">
+    <button class="ctab on">Lobby</button>
+    <button class="ctab">NBA</button>
+    <button class="ctab">NFL</button>
+  </div>
+  <div id="message-container" class="no-scroll"></div>
+  <div class="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Say something…" autocomplete="off">
+    <button id="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
   </div>
 </div>
-<style>
-    #playerChatMessages {
-    mask-image: linear-gradient(to bottom, transparent, black 20%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%);
-}
-/* --- CUSTOM PLAYER CONTROLS FIX --- */
-mux-player {
-    /* Hide the giant center play button for a cleaner look */
-    --media-button-icon-width: 20px;
-    --media-range-track-height: 4px;
-    --media-range-thumb-width: 12px;
-    --media-range-thumb-height: 12px;
-    --media-control-background: rgba(0, 0, 0, 0.6);
-    --media-control-hover-background: rgba(0, 0, 0, 0.8);
-    border-radius: 2rem;
-}
 
-/* Force controls to be a single horizontal bar at the bottom */
-mux-player::part(controls-container) {
-    display: flex;
-    flex-direction: row !important;
-    /* Forces horizontal layout */
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 12px;
-    bottom: 10px;
-    width: 94%;
-    left: 3%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1.5rem;
-    height: 48px;
-}
+<!-- ════════════════════════════════
+     USERNAME MODAL
+════════════════════════════════ -->
+<div id="modalBg">
+  <div class="modal-box">
+    <p class="modal-eyebrow">Live Stream</p>
+    <h2 class="modal-title">Join the<br>Stream</h2>
+    <p class="modal-sub">Enter a name to chat with everyone watching live.</p>
+    <input type="text" id="nameInput" class="modal-input" placeholder="YOUR NAME" maxlength="24"
+      onfocus="this.style.borderColor='rgba(14,229,119,.45)'"
+      onblur="this.style.borderColor='rgba(255,255,255,.1)'">
+    <button class="modal-btn" onclick="setUsername()">Join Chat →</button>
+  </div>
+</div>
 
-/* Slim down the seek bar/progress bar */
-mux-player::part(seek-live) {
-    margin: 0 10px;
-}
-
-/* Remove the "Vertical" stacking behavior on mobile */
-mux-player::part(center-controls) {
-    display: none !important;
-}
-
-/* Ensure chat messages don't overlap the new control bar */
-#inPlayerChat {
-    padding-bottom: 70px !important;
-}
-.player-msg-anim {
-    animation: slideInRight 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-}
-
-@keyframes slideInRight {
-    from { opacity: 0; transform: translateX(30px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-/* Hide the old chat column on desktop since it's now in-player */
-@media (min-width: 1024px) {
-    .lg\:grid-cols-\[1fr_360px\] {
-        grid-template-columns: 1fr !important;
-    }
-    aside, .chat-column-class-if-exists { 
-        display: none !important; 
-    }
-}
-
-</style>
-          <div id="viewerWrap" class="hidden items-center gap-2 bg-black/5 dark:bg-white/5 px-3 py-2 rounded-full">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-black/40 dark:text-white/40 viewers-pulse">
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-            <span id="viewerCount" class="text-[10px] font-black text-black/50 dark:text-white/50">0</span>
+<!-- ════════════════════════════════
+     GAME MODAL
+════════════════════════════════ -->
+<div id="gameModal">
+  <div style="position:absolute;inset:0;" onclick="closeGameModal()"></div>
+  <div id="modalContainer">
+    <div style="padding:22px 24px;border-bottom:1px solid var(--border);position:relative;flex-shrink:0;">
+      <button class="panel-close" onclick="closeGameModal()"
+        style="position:absolute;top:18px;right:20px;">✕</button>
+      <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:10px;flex:1;justify-content:flex-end;min-width:110px;">
+          <div style="text-align:right;">
+            <h2 id="modalTeam1Name" style="font-family:var(--display);font-size:1.5rem;letter-spacing:.08em;color:#fff;">--</h2>
+            <p id="modalTeam1Record" style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.28);margin-top:2px;">0-0</p>
+          </div>
+          <img id="modalTeam1Logo" src="" style="width:44px;height:44px;object-fit:contain;">
+        </div>
+        <div style="text-align:center;flex-shrink:0;">
+          <span id="modalGameStatus"
+            style="display:inline-block;padding:3px 11px;border-radius:999px;background:rgba(255,255,255,.07);font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.18em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:8px;">PREGAME</span>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span id="modalTeam1Score" style="font-family:var(--display);font-size:2.8rem;color:#fff;">0</span>
+            <span style="font-family:var(--display);font-size:1.4rem;color:rgba(255,255,255,.12);">--</span>
+            <span id="modalTeam2Score" style="font-family:var(--display);font-size:2.8rem;color:#fff;">0</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:110px;">
+          <img id="modalTeam2Logo" src="" style="width:44px;height:44px;object-fit:contain;">
+          <div>
+            <h2 id="modalTeam2Name" style="font-family:var(--display);font-size:1.5rem;letter-spacing:.08em;color:#fff;">--</h2>
+            <p id="modalTeam2Record" style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.28);margin-top:2px;">0-0</p>
           </div>
         </div>
       </div>
-
-      <!-- Info Strip (mobile: shows below player) -->
     </div>
-
-    <!-- ── Chat Column ── -->
-
+    <div style="flex:1;overflow-y:auto;padding:22px 24px;" class="no-scroll">
+      <div style="display:grid;gap:20px;">
+        <div>
+          <p style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">
+            <i class="fa-solid fa-chart-simple" style="margin-right:6px;"></i>Box Score
+          </p>
+          <div style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;">
+              <thead>
+                <tr style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.22);border-bottom:1px solid rgba(255,255,255,.06);">
+                  <th style="padding:0 0 10px;text-align:left;">Player</th>
+                  <th style="padding:0 0 10px;text-align:left;">TM</th>
+                  <th style="padding:0 0 10px;text-align:center;">PTS</th>
+                  <th style="padding:0 0 10px;text-align:center;">REB</th>
+                  <th style="padding:0 0 10px;text-align:center;">AST</th>
+                  <th style="padding:0 0 10px;text-align:right;">MIN</th>
+                </tr>
+              </thead>
+              <tbody id="modalBoxScoreBody" style="color:#fff;font-size:12px;"></tbody>
+            </table>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.025);border-radius:16px;padding:18px;border:1px solid rgba(255,255,255,.05);">
+          <p style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:14px;">
+            <i class="fa-solid fa-fire-pulse" style="margin-right:6px;"></i>Play by Play
+          </p>
+          <div id="modalPlayByPlay" style="display:flex;flex-direction:column;gap:12px;"></div>
+        </div>
+      </div>
+    </div>
   </div>
-</main>
+</div>
 
-<style>
+<!-- ════════════════════════════════
+     PLAYER STATS MODAL
+════════════════════════════════ -->
+<div id="playerStatsModal">
+  <div style="position:absolute;inset:0;" onclick="closePlayerModal()"></div>
+  <div id="playerModalContainer">
+    <button class="panel-close" onclick="closePlayerModal()"
+      style="position:absolute;top:16px;right:18px;z-index:5;">✕</button>
+    <div id="playerModalHeader" style="padding:26px 24px 20px;border-bottom:1px solid var(--border);">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="position:relative;">
+          <img id="playerModalHeadshot" src="" style="width:72px;height:72px;border-radius:16px;object-fit:cover;object-position:top;background:rgba(255,255,255,.05);">
+          <div style="position:absolute;bottom:-7px;right:-7px;width:26px;height:26px;border-radius:50%;background:rgba(9,9,14,.9);border:2px solid rgba(9,9,14,1);overflow:hidden;display:flex;align-items:center;justify-content:center;">
+            <img id="playerModalTeamLogo" src="" style="width:20px;height:20px;object-fit:contain;">
+          </div>
+        </div>
+        <div>
+          <h3 id="playerModalName" style="font-family:var(--display);font-size:1.4rem;letter-spacing:.07em;color:#fff;line-height:1;"></h3>
+          <p id="playerModalMeta" style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.28);margin-top:5px;letter-spacing:.12em;"></p>
+          <div id="playerModalStatus" style="margin-top:7px;"></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:20px 24px;">
+      <p style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">2024–25 Averages</p>
+      <div id="playerStatsGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;"></div>
+      <div id="playerModalLoader" style="text-align:center;padding:28px 0;font-size:12px;color:rgba(255,255,255,.25);">Loading…</div>
+    </div>
+  </div>
+</div>
 
-/* Custom Greenlight Glass - Identical to Homepage */
-.greenlight-glass {
-    background: rgba(255, 255, 255, 0.4); 
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 1);
-}
+<!-- ════════════════════════════════
+     SIDEBAR
+════════════════════════════════ -->
+<div id="sidebar">
+  <div style="padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:flex-end;">
+    <button class="panel-close" onclick="closeSidebar()">✕</button>
+  </div>
+  <div style="padding:16px 14px;display:flex;flex-direction:column;gap:6px;">
+    <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid transparent;text-decoration:none;transition:all .2s;"
+      onmouseover="this.style.borderColor='rgba(212,175,55,.2)';this.style.background='rgba(255,255,255,.05)'"
+      onmouseout="this.style.borderColor='transparent';this.style.background='rgba(255,255,255,.025)'">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png" style="width:32px;height:32px;object-fit:contain;">
+        <span style="font-family:var(--display);font-size:1.15rem;letter-spacing:.1em;color:#fff;">NFL</span>
+      </div>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px;color:rgba(255,255,255,.2);"></i>
+    </a>
+    <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid transparent;text-decoration:none;transition:all .2s;"
+      onmouseover="this.style.borderColor='rgba(212,175,55,.2)';this.style.background='rgba(255,255,255,.05)'"
+      onmouseout="this.style.borderColor='transparent';this.style.background='rgba(255,255,255,.025)'">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nba.png" style="width:32px;height:32px;object-fit:contain;">
+        <span style="font-family:var(--display);font-size:1.15rem;letter-spacing:.1em;color:#fff;">NBA</span>
+      </div>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px;color:rgba(255,255,255,.2);"></i>
+    </a>
+    <a href="#" style="display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid transparent;text-decoration:none;transition:all .2s;"
+      onmouseover="this.style.borderColor='rgba(212,175,55,.2)';this.style.background='rgba(255,255,255,.05)'"
+      onmouseout="this.style.borderColor='transparent';this.style.background='rgba(255,255,255,.025)'">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <img src="images/blogo.webp" style="width:32px;height:32px;object-fit:contain;">
+        <span style="font-family:var(--display);font-size:1.15rem;letter-spacing:.1em;color:#fff;">UFC</span>
+      </div>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px;color:rgba(255,255,255,.2);"></i>
+    </a>
+  </div>
+  <div class="gold-sep" style="margin:6px 16px;"></div>
+  <div style="padding:14px;">
+    <a href="#" style="display:block;border-radius:14px;overflow:hidden;margin-bottom:8px;">
+      <img src="images/aw.png" style="width:100%;height:82px;object-fit:cover;object-position:60% 50%;display:block;">
+    </a>
+    <a href="#" style="display:block;border-radius:14px;overflow:hidden;">
+      <img src="images/store.jpeg" style="width:100%;height:82px;object-fit:cover;object-position:center 40%;display:block;">
+    </a>
+  </div>
+</div>
 
-/* Dark Mode Adjustments */
-.dark .greenlight-glass {
-    background: rgba(5, 25, 15, 0.6); 
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.05);
-}
+<!-- ════════════════════════════════
+     USER DASHBOARD
+════════════════════════════════ -->
+<div id="userDashboard">
+  <div style="padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:flex-end;">
+    <button class="panel-close" onclick="closeUserDashboard()">✕</button>
+  </div>
+  <div style="padding:28px 22px;text-align:center;">
+    <div style="position:relative;display:inline-block;margin-bottom:14px;">
+      <div style="width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,rgba(212,175,55,.25),rgba(14,229,119,.18));border:1px solid rgba(212,175,55,.25);display:flex;align-items:center;justify-content:center;margin:0 auto;">
+        <i class="fa-solid fa-user" style="font-size:24px;color:rgba(255,255,255,.6);"></i>
+      </div>
+      <span style="position:absolute;top:-7px;right:-7px;background:var(--red);color:#fff;font-family:var(--mono);font-size:7px;font-weight:700;letter-spacing:.14em;padding:3px 7px;border-radius:999px;">ELITE</span>
+    </div>
+    <h3 id="userDisplayName" style="font-family:var(--display);font-size:1.4rem;letter-spacing:.1em;color:#fff;">User_293</h3>
+    <p style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.22);margin-top:4px;letter-spacing:.14em;">MEMBER SINCE 2024</p>
+  </div>
+  <div style="padding:0 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;padding:14px;">
+      <p style="font-family:var(--mono);font-size:7px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:5px;">XP Points</p>
+      <p style="font-family:var(--display);font-size:1.3rem;color:#fff;">12,450</p>
+    </div>
+    <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;padding:14px;">
+      <p style="font-family:var(--mono);font-size:7px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--g);margin-bottom:5px;">Status</p>
+      <p style="font-family:var(--display);font-size:1.3rem;color:#fff;">Elite</p>
+    </div>
+  </div>
+  <div style="padding:0 18px 18px;">
+    <button style="width:100%;padding:14px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#B8860B);border:none;color:#000;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 22px rgba(212,175,55,.2);">
+      Upgrade Membership
+    </button>
+  </div>
+  <div class="gold-sep" style="margin:0 18px;"></div>
+  <div style="padding:12px 10px;display:flex;flex-direction:column;gap:2px;">
+    <a href="#" style="display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:12px;text-decoration:none;color:rgba(255,255,255,.65);font-size:13px;transition:background .2s;"
+      onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background='transparent'">
+      <i class="fa-solid fa-bolt-lightning" style="color:var(--gold);width:14px;"></i> Faves
+    </a>
+    <a href="#" style="display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:12px;text-decoration:none;color:rgba(255,255,255,.65);font-size:13px;transition:background .2s;"
+      onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background='transparent'">
+      <i class="fa-solid fa-bookmark" style="color:rgba(255,255,255,.28);width:14px;"></i> Saved
+    </a>
+    <a href="#" style="display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:12px;text-decoration:none;color:rgba(255,255,255,.65);font-size:13px;transition:background .2s;"
+      onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background='transparent'">
+      <i class="fa-solid fa-shield-halved" style="color:rgba(255,255,255,.28);width:14px;"></i> Privacy
+    </a>
+  </div>
+  <div style="padding:14px 18px 40px;">
+    <button onclick="window.handleLogout && handleLogout()"
+      style="width:100%;padding:13px;border-radius:13px;background:rgba(255,59,59,.08);border:1px solid rgba(255,59,59,.18);color:var(--red);font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:background .2s;"
+      onmouseover="this.style.background='rgba(255,59,59,.15)'" onmouseout="this.style.background='rgba(255,59,59,.08)'">
+      Sign Out
+    </button>
+  </div>
+</div>
 
+<!-- ════════════════════════════════
+     MENTION AUTOCOMPLETE
+════════════════════════════════ -->
+<div id="mention-ac"></div>
 
-  #statusPill.live-state {
-    background: rgba(230,59,46,0.08);
-    border-color: rgba(230,59,46,0.3);
-    color: #e63b2e;
-  }
-  html.dark #statusPill.live-state {
-    background: rgba(230,59,46,0.15);
-    border-color: rgba(230,59,46,0.4);
-    color: #ff5a4e;
-  }
-  #statusPill.offline-state {
-    background: rgba(0,0,0,0.04);
-    border-color: rgba(0,0,0,0.1);
-    color: rgba(0,0,0,0.35);
-  }
-  html.dark #statusPill.offline-state {
-    background: rgba(255,255,255,0.04);
-    border-color: rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.3);
-  }
-  /* Live glow on pill */
-  #statusPill.live-state {
-    box-shadow: 0 0 20px rgba(230,59,46,0.2);
-  }
-</style>
+<!-- ════════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer>
+  <p style="font-family:var(--display);font-size:.95rem;letter-spacing:.28em;background:linear-gradient(120deg,var(--g),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px;">Greenlight</p>
+  <p style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.14);letter-spacing:.16em;">© 2026 GREENLIGHT SPORTS NETWORK LLC</p>
+</footer>
 
+<!-- ════════════════════════════════
+     CORE SCRIPTS
+════════════════════════════════ -->
 <script>
-    function toggleDarkMode() {
-        const html = document.documentElement;
-        const sidebar = document.getElementById('sidebar');
+// ── HELPERS ──────────────────────────────────────────────────────
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+const COLORS=['#FF3B3B','#F59E0B','#3B82F6','#8B5CF6','#0EE577','#EC4899','#06B6D4','#F97316'];
+function colorFor(n){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return COLORS[Math.abs(h)%COLORS.length];}
 
-        if (html.classList.contains('dark')) {
-            html.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-            
-            if (!sidebar.classList.contains('translate-x-full')) {
-                toggleSidebar();
-            }
-        } else {
-            html.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-            createSparks();
-        }
-    }
+// ── PANELS ───────────────────────────────────────────────────────
+function showScrim(){document.getElementById('scrim').classList.add('on');}
+function hideScrim(){document.getElementById('scrim').classList.remove('on');}
+function closeAll(){closeSidebar();closeUserDashboard();hideScrim();}
+function toggleSidebar(){const el=document.getElementById('sidebar');el.classList.toggle('on');el.classList.contains('on')?showScrim():hideScrim();}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('on');}
+function toggleUserDashboard(){const el=document.getElementById('userDashboard');el.classList.toggle('on');el.classList.contains('on')?showScrim():hideScrim();}
+function closeUserDashboard(){document.getElementById('userDashboard').classList.remove('on');}
+function toggleDarkMode(){/* no-op placeholder */}
 
-// Sound Assets Map
+// ── CHAT ─────────────────────────────────────────────────────────
+function toggleChat(){document.getElementById('chatPanel').classList.toggle('open');}
 
-
-
-  const CONFIG = {
-    playbackId: 'TewjpLNLyv802huM3gVvXv4Nzs8XAUgdZXQ502NYQusmk',
-    streamTitle: 'Live Stream',
-    pollInterval: 8000,
-    statusEndpoint: 'https://sportsite-79ty.onrender.com/api/stream-status',
-  };
-
-  const WS_URL = 'wss://sportsite-79ty.onrender.com';
-  let socket;
-
-  function connectWebSocket() {
-    socket = new WebSocket(WS_URL);
-    socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.type === 'chat') addChatMsg(data.username, data.text);
-      if (data.type === 'sound') {
-  const sfx = new Audio(`https://your-site.com/sounds/${data.file}.mp3`);
-  sfx.play().catch(e => console.log("User hasn't interacted yet, sound blocked"));
+// ── USERNAME MODAL ───────────────────────────────────────────────
+let username='', isLive=false;
+function setUsername(){
+  const v=document.getElementById('nameInput').value.trim();
+  if(!v)return; username=v;
+  document.getElementById('modalBg').style.display='none';
 }
-      if (data.type === 'history') data.messages.forEach(m => addChatMsg(m.username, m.text));
-      if (data.type === 'viewers') document.getElementById('viewerCount').textContent = data.count.toLocaleString();
-    };
-    socket.onclose = () => setTimeout(connectWebSocket, 3000);
+document.getElementById('nameInput').addEventListener('keydown',e=>{if(e.key==='Enter')setUsername();});
+
+// ── WEBSOCKET ────────────────────────────────────────────────────
+const WS_URL='wss://sportsite-79ty.onrender.com';
+let socket;
+function connectWS(){
+  socket=new WebSocket(WS_URL);
+  socket.onmessage=e=>{
+    const d=JSON.parse(e.data);
+    if(d.type==='chat') addChatMsg(d.username,d.text);
+    if(d.type==='history') d.messages.forEach(m=>addChatMsg(m.username,m.text));
+    if(d.type==='viewers') document.getElementById('viewerCount').textContent=d.count.toLocaleString();
+  };
+  socket.onclose=()=>setTimeout(connectWS,3000);
+}
+connectWS();
+
+// ── STREAM STATUS ────────────────────────────────────────────────
+const CONFIG={
+  playbackId:'TewjpLNLyv802huM3gVvXv4Nzs8XAUgdZXQ502NYQusmk',
+  pollInterval:8000,
+  statusEndpoint:'https://sportsite-79ty.onrender.com/api/stream-status'
+};
+
+function updateStreamUI(live,viewers){
+  const tag=document.getElementById('statusTag');
+  const txt=document.getElementById('statusText');
+  const player=document.getElementById('muxPlayer');
+  const offline=document.getElementById('offlineOverlay');
+  const vw=document.getElementById('viewerWrap');
+  const lb=document.getElementById('liveBadgeWrap');
+  const vc=document.getElementById('viewerCount');
+
+  if(live&&!isLive) addSystemMsg('Stream started');
+  else if(!live&&isLive) addSystemMsg('Stream ended');
+  isLive=live;
+
+  if(live){
+    tag.className='status-tag live'; txt.textContent='Live';
+    player.style.display='block'; offline.style.display='none';
+    vw.style.display='flex'; lb.style.display='flex';
+    player.streamType='live';
+  } else {
+    tag.className='status-tag offline'; txt.textContent='Offline';
+    player.style.display='block'; offline.style.display='none';
+    vw.style.display='none'; lb.style.display='none';
+    player.streamType='on-demand';
   }
-  connectWebSocket();
+  vc.textContent=(viewers||0).toLocaleString();
+}
+async function pollStatus(){
+  try{const r=await fetch(CONFIG.statusEndpoint);if(!r.ok)throw 0;const d=await r.json();updateStreamUI(d.live,d.viewers||0);}
+  catch{updateStreamUI(false,0);}
+}
+updateStreamUI(false,0);pollStatus();setInterval(pollStatus,CONFIG.pollInterval);
 
-  // ─────────────────────────────────────────────
-  //  State
-  // ─────────────────────────────────────────────
-  let username = '';
-  let isLive = false;
-
-  const AVATAR_COLORS = [
-    '#e63b2e','#f59e0b','#3b82f6','#8b5cf6',
-    '#10b981','#ec4899','#06b6d4','#f97316'
-  ];
-
-  function colorFor(name) {
-    let h = 0;
-    for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
-    return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length];
+// ── CHAT MESSAGES ────────────────────────────────────────────────
+function addChatMsg(name,text){
+  // main panel
+  const c=document.getElementById('message-container');
+  if(c){
+    const row=document.createElement('div');row.className='cmsg';
+    const col=colorFor(name);
+    row.innerHTML=`
+      <div class="cmsg-av" style="background:${col};" onclick="openUserProfile('${esc(name)}')">${esc(name.substring(0,2).toUpperCase())}</div>
+      <div class="cmsg-body">
+        <p class="cmsg-name" style="color:${col};">${esc(name)}</p>
+        <div class="cmsg-bubble" onclick="showRxn(event,'${esc(text).replace(/'/g,"\\'")}')"><span style="position:relative;">${esc(text)}</span></div>
+      </div>`;
+    c.appendChild(row);c.scrollTop=c.scrollHeight;
   }
-
-  // ─────────────────────────────────────────────
-  //  Username Modal
-  // ─────────────────────────────────────────────
-  function setUsername() {
-    const val = document.getElementById('nameInput').value.trim();
-    if (!val) return;
-    username = val;
-    document.getElementById('modalBg').style.display = 'none';
+  // in-player
+  const pw=document.getElementById('playerChatMessages');
+  if(pw){
+    const m=document.createElement('div');m.className='ipc-msg';
+    const col=colorFor(name);
+    m.innerHTML=`<span class="ipc-name" style="color:${col};">${esc(name)}</span><span class="ipc-text">${esc(text)}</span>`;
+    pw.appendChild(m);pw.scrollTop=pw.scrollHeight;
+    if(pw.children.length>8)pw.removeChild(pw.children[0]);
   }
+}
+function addSystemMsg(t){
+  const c=document.getElementById('message-container');if(!c)return;
+  const d=document.createElement('div');
+  d.style.cssText='text-align:center;padding:6px 0;';
+  d.innerHTML=`<span style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.18);background:rgba(255,255,255,.04);padding:4px 12px;border-radius:999px;">${esc(t)}</span>`;
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
 
-  document.getElementById('nameInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') setUsername();
+function sendMsg(){
+  const inp=document.getElementById('chat-input');
+  const txt=(inp.value||'').trim();
+  if(!txt||!username)return;
+  inp.value='';
+  fetch('https://sportsite-79ty.onrender.com/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,text:txt})}).catch(()=>{});
+}
+document.getElementById('send-btn').addEventListener('click',sendMsg);
+document.getElementById('chat-input').addEventListener('keypress',e=>{if(e.key==='Enter')sendMsg();});
+
+// ── REACTIONS ────────────────────────────────────────────────────
+const RXNS=['😂','😯','❔','🤔','❤️','💯','🔥','🧢','👍','👎'];
+window.showRxn=(event,originalText)=>{
+  event.stopPropagation();
+  document.querySelectorAll('.rxn-pop').forEach(p=>p.remove());
+  const pop=document.createElement('div');pop.className='rxn-pop';
+  RXNS.forEach(em=>{
+    const s=document.createElement('span');s.className='rxn-em';s.innerText=em;
+    s.onclick=e=>{e.stopPropagation();if(window._handleRepost)window._handleRepost(em,originalText);pop.remove();};
+    pop.appendChild(s);
+  });
+  event.currentTarget.style.position='relative';
+  event.currentTarget.appendChild(pop);
+  setTimeout(()=>document.addEventListener('click',()=>pop.remove(),{once:true}),10);
+};
+
+// ── USER PROFILE ─────────────────────────────────────────────────
+window.openUserProfile=(name)=>addSystemMsg(`Viewing: ${name}`);
+
+// ── SCORES ───────────────────────────────────────────────────────
+let seedMap={};
+async function loadStandings(){
+  try{
+    const r=await fetch('https://site.api.espn.com/apis/v2/sports/basketball/nba/standings');
+    const d=await r.json(); const m={};
+    d.children?.forEach(conf=>{
+      const ranked=((conf.standings?.entries)||[]).map(e=>{
+        const w=e.stats?.find(s=>s.name==='wins')?.value??0;
+        const l=e.stats?.find(s=>s.name==='losses')?.value??0;
+        return{id:e.team.id,wp:w/(w+l||1),w,l};
+      }).sort((a,b)=>b.wp-a.wp||b.w-a.w);
+      ranked.forEach((t,i)=>{m[t.id]=i+1;});
+    });
+    seedMap=m;
+  }catch(e){console.warn('Standings fail',e);}
+}
+async function loadGames(){
+  try{
+    const scroller=document.getElementById('scoreScroller');
+    const fmt=d=>d.toISOString().split('T')[0].replace(/-/g,'');
+    const today=new Date(),yday=new Date();yday.setDate(today.getDate()-1);
+    const [r1,r2]=await Promise.all([
+      fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=${fmt(today)}`),
+      fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=${fmt(yday)}`)
+    ]);
+    const [d1,d2]=await Promise.all([r1.json(),r2.json()]);
+    const events=[...(d1.events||[]),...(d2.events||[])];
+    if(!events.length){scroller.innerHTML='<div style="padding:18px;font-size:11px;color:rgba(255,255,255,.3);">No games</div>';return;}
+    const ord={in:0,pre:1,post:2};
+    events.sort((a,b)=>ord[a.status.type.state]-ord[b.status.type.state]);
+    scroller.innerHTML='';
+    events.forEach(ev=>{
+      const comp=ev.competitions[0];
+      const away=comp.competitors.find(c=>c.homeAway==='away');
+      const home=comp.competitors.find(c=>c.homeAway==='home');
+      const st=ev.status.type; const live=st.state==='in'; const pre=st.state==='pre';
+      const dotC=live?'#FF3B3B':pre?'#F59E0B':'#555';
+      const ping=live?`<span style="position:absolute;inset:0;border-radius:50%;background:rgba(255,59,59,.65);animation:blink 1.3s infinite;"></span>`
+        :pre?`<span style="position:absolute;inset:0;border-radius:50%;background:rgba(245,158,11,.6);animation:blink 1.8s infinite;"></span>`:'';
+      const lbl=live?`Live · ${st.shortDetail}`:pre?`Pregame · ${st.shortDetail}`
+        :ev.date.includes(today.toISOString().split('T')[0])?'Final':'Final · Yesterday';
+      const lblC=live?'#FF3B3B':pre?'rgba(255,255,255,.4)':'rgba(255,255,255,.28)';
+      const seed=id=>{const s=seedMap[id];return s?`<span style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.22);">${s}</span>`:'';}
+      const card=document.createElement('div');
+      card.className=`score-card${live?' is-live':''}`;
+      card.onclick=()=>openGameModal(ev.id);
+      card.innerHTML=`
+        <div style="display:flex;align-items:center;gap:5px;">
+          <span style="position:relative;width:7px;height:7px;border-radius:50%;background:${dotC};display:inline-block;flex-shrink:0;">${ping}</span>
+          <span style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:${lblC};">${lbl}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:7px;">
+              <img src="${away.team.logo}" style="width:20px;height:20px;object-fit:contain;">
+              <span style="font-size:11px;font-weight:600;color:#fff;">${away.team.abbreviation}</span>
+              ${seed(away.team.id)}
+            </div>
+            ${pre?`<span style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.28);">${away.records?.[0]?.summary||'0-0'}</span>`
+               :`<span style="font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;">${away.score||'0'}</span>`}
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="display:flex;align-items:center;gap:7px;">
+              <img src="${home.team.logo}" style="width:20px;height:20px;object-fit:contain;">
+              <span style="font-size:11px;font-weight:600;color:#fff;">${home.team.abbreviation}</span>
+              ${seed(home.team.id)}
+            </div>
+            ${pre?`<span style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.28);">${home.records?.[0]?.summary||'0-0'}</span>`
+               :`<span style="font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;">${home.score||'0'}</span>`}
+          </div>
+        </div>`;
+      scroller.appendChild(card);
+    });
+  }catch(e){console.error('Scores error',e);}
+}
+loadStandings().then(loadGames);
+setInterval(loadGames,30000);setInterval(loadStandings,600000);
+
+// ── TEAM COLORS ──────────────────────────────────────────────────
+const TM={ATL:'#E03A3E',BOS:'#007A33',BKN:'#666',CHA:'#1D1160',CHI:'#CE1141',CLE:'#860038',DAL:'#00538C',DEN:'#0E2240',DET:'#C8102E',GS:'#1D428A',HOU:'#CE1141',IND:'#FDB927',LAC:'#C8102E',LAL:'#552583',MEM:'#5D76A9',MIA:'#98002E',MIL:'#00471B',MIN:'#0C2340',NOP:'#0C2340',NY:'#006BB6',OKC:'#007AC1',ORL:'#0077C0',PHI:'#006BB6',PHX:'#1D1160',POR:'#E03A3E',SAC:'#5A2D81',SAS:'#94a3b8',TOR:'#CE1141',UTA:'#002B5C',WAS:'#002B5C'};
+function tc(abbr){return TM[abbr]||'#D4AF37';}
+
+// ── GAME MODAL ───────────────────────────────────────────────────
+window._aid={};
+async function openGameModal(gameId){
+  window._aid={};
+  const modal=document.getElementById('gameModal');
+  const cont=document.getElementById('modalContainer');
+  modal.classList.add('on');document.body.style.overflow='hidden';
+  setTimeout(()=>cont.classList.add('vis'),10);
+  try{
+    const r=await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=${gameId}`);
+    const data=await r.json();
+    const comp=data.header.competitions[0];
+    const away=comp.competitors.find(c=>c.homeAway==='away');
+    const home=comp.competitors.find(c=>c.homeAway==='home');
+    const isPre=comp.status.type.state==='pre';
+    document.getElementById('modalGameStatus').innerText=comp.status.type.detail;
+    document.getElementById('modalTeam1Name').innerText=away.team.abbreviation;
+    document.getElementById('modalTeam1Score').innerText=away.score||'0';
+    document.getElementById('modalTeam1Logo').src=away.team.logo||`https://a.espncdn.com/i/teamlogos/nba/500/${away.team.abbreviation.toLowerCase()}.png`;
+    document.getElementById('modalTeam1Record').innerText=away.record?.[0]?.displayValue||'0-0';
+    document.getElementById('modalTeam2Name').innerText=home.team.abbreviation;
+    document.getElementById('modalTeam2Score').innerText=home.score||'0';
+    document.getElementById('modalTeam2Logo').src=home.team.logo||`https://a.espncdn.com/i/teamlogos/nba/500/${home.team.abbreviation.toLowerCase()}.png`;
+    document.getElementById('modalTeam2Record').innerText=home.record?.[0]?.displayValue||'0-0';
+
+    if(isPre){
+      let h='';
+      if(data.leaders){data.leaders.forEach(tl=>{
+        const c=tc(tl.team.abbreviation);
+        h+=`<tr><td colspan="6" style="padding:14px 0 8px;"><p style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:${c};">${tl.team.displayName}</p></td></tr><tr><td colspan="6"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding-bottom:14px;">`;
+        tl.leaders.forEach(l=>{h+=`<div style="background:rgba(255,255,255,.03);border-left:2px solid ${c};border-radius:0 9px 9px 0;padding:9px 10px;"><p style="font-family:var(--mono);font-size:7px;color:rgba(255,255,255,.28);margin-bottom:3px;">${l.displayName}</p><p style="font-size:10px;font-weight:600;color:#fff;margin-bottom:1px;">${l.leaders[0].athlete.shortName}</p><p style="font-family:var(--mono);font-size:12px;font-weight:700;color:${c};">${l.leaders[0].displayValue}</p></div>`;});
+        h+=`</div></td></tr>`;
+      });}
+      document.getElementById('modalBoxScoreBody').innerHTML=h;
+    } else {
+      let h='';
+      data.boxscore?.players?.forEach(tg=>{
+        const c=tc(tg.team.abbreviation);
+        h+=`<tr style="background:rgba(255,255,255,.025);"><td colspan="6" style="padding:9px 0 9px 6px;font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:${c};">${tg.team.displayName}</td></tr>`;
+        tg.statistics?.forEach(ss=>{ss.athletes?.forEach(p=>{
+          if(!p.stats)return;
+          window._aid[p.athlete.displayName]=p.athlete.id;
+          const pts=p.stats[ss.labels.indexOf('PTS')]||'0';
+          const reb=p.stats[ss.labels.indexOf('REB')]||'0';
+          const ast=p.stats[ss.labels.indexOf('AST')]||'0';
+          const min=p.stats[ss.labels.indexOf('MIN')]||'0';
+          h+=`<tr style="border-bottom:1px solid rgba(255,255,255,.04);">
+            <td style="padding:9px 0;font-size:11px;font-weight:600;color:#fff;">
+              <button onclick="openPlayerModal('${p.athlete.id}','${tg.team.abbreviation}')"
+                style="background:none;border:none;cursor:pointer;font-size:11px;font-weight:600;color:#fff;padding:0;text-align:left;transition:color .18s;"
+                onmouseover="this.style.color='${c}'" onmouseout="this.style.color='#fff'">${esc(p.athlete.displayName)}</button>
+            </td>
+            <td style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.25);padding:0 6px;">${tg.team.abbreviation}</td>
+            <td style="font-family:var(--mono);font-size:12px;font-weight:700;text-align:center;color:${c};">${pts}</td>
+            <td style="text-align:center;font-size:11px;color:rgba(255,255,255,.55);">${reb}</td>
+            <td style="text-align:center;font-size:11px;color:rgba(255,255,255,.55);">${ast}</td>
+            <td style="text-align:right;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.25);">${min}</td>
+          </tr>`;
+        });});
+      });
+      document.getElementById('modalBoxScoreBody').innerHTML=h;
+    }
+    const plays=data.plays||[];
+    document.getElementById('modalPlayByPlay').innerHTML=plays.slice(-8).reverse().map(p=>{
+      const c=p.team?tc(p.team.abbreviation):'#D4AF37';
+      return`<div style="position:relative;padding-left:14px;">
+        <span style="position:absolute;left:0;top:4px;width:5px;height:5px;border-radius:50%;background:${c};"></span>
+        <p style="font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.28);margin-bottom:2px;">${p.clock?.displayValue||'LIVE'}</p>
+        <p style="font-size:11px;color:rgba(255,255,255,.68);line-height:1.4;">${esc(p.text)}</p>
+      </div>`;
+    }).join('')||`<p style="text-align:center;font-size:11px;color:rgba(255,255,255,.18);padding:18px 0;">Waiting for tip-off…</p>`;
+  }catch(e){console.error('Modal error',e);}
+}
+function closeGameModal(){
+  const c=document.getElementById('modalContainer');c.classList.remove('vis');
+  setTimeout(()=>{document.getElementById('gameModal').classList.remove('on');document.body.style.overflow='';},300);
+}
+
+// ── PLAYER STATS MODAL ───────────────────────────────────────────
+function openPlayerModal(athleteId,teamAbbr){
+  const modal=document.getElementById('playerStatsModal');
+  const cont=document.getElementById('playerModalContainer');
+  ['playerStatsGrid','playerModalName','playerModalMeta','playerModalStatus'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML='';});
+  document.getElementById('playerModalLoader').style.display='block';
+  document.getElementById('playerModalLoader').innerText='Loading…';
+  document.getElementById('playerModalHeadshot').src='';
+  document.getElementById('playerModalTeamLogo').src='';
+  modal.classList.add('on');document.body.style.overflow='hidden';
+  setTimeout(()=>cont.classList.add('vis'),10);
+  fetchPlayerStats(athleteId,teamAbbr);
+}
+function closePlayerModal(){
+  const c=document.getElementById('playerModalContainer');c.classList.remove('vis');
+  setTimeout(()=>{document.getElementById('playerStatsModal').classList.remove('on');document.body.style.overflow='';},300);
+}
+async function fetchPlayerStats(id,abbr){
+  const color=tc(abbr);
+  try{
+    const r=await fetch(`https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/${id}/overview`);
+    const data=await r.json();
+    const a=data.athlete;
+    document.getElementById('playerModalName').innerText=a.displayName||'Unknown';
+    document.getElementById('playerModalMeta').innerText=`${a.position?.abbreviation||''} · ${a.jersey?'#'+a.jersey:''} · ${a.team?.displayName||abbr}`;
+    document.getElementById('playerModalHeadshot').src=a.headshot?.href||`https://a.espncdn.com/i/headshots/nba/players/full/${id}.png`;
+    document.getElementById('playerModalTeamLogo').src=a.team?.logos?.[0]?.href||`https://a.espncdn.com/i/teamlogos/nba/500/${abbr.toLowerCase()}.png`;
+    if(a.injuries?.[0]){const inj=a.injuries[0];document.getElementById('playerModalStatus').innerHTML=`<span style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:${color}18;color:${color};">⚠ ${inj.status} – ${inj.shortComment||inj.type}</span>`;}
+    const splits=data.splits?.categories||[];
+    const avg=splits.find(c=>c.type==='perGame'||c.name==='perGame')||splits[0];
+    const avgMap={};(avg?.stats||[]).forEach(s=>{avgMap[s.name]=s.displayValue??s.value;});
+    document.getElementById('playerModalLoader').style.display='none';
+    const grid=document.getElementById('playerStatsGrid');grid.innerHTML='';
+    const stats=[{n:'points',l:'PTS',p:true},{n:'rebounds',l:'REB',p:true},{n:'assists',l:'AST',p:true},{n:'steals',l:'STL'},{n:'blocks',l:'BLK'},{n:'turnovers',l:'TO'},{n:'fieldGoalPct',l:'FG%'},{n:'threePointPct',l:'3P%'},{n:'freeThrowPct',l:'FT%'}];
+    let has=false;
+    stats.forEach(s=>{
+      const v=avgMap[s.n];if(v===undefined||v===null)return;has=true;
+      const el=document.createElement('div');
+      el.style.cssText='background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:13px 8px;text-align:center;';
+      el.innerHTML=`<p style="font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:5px;">${s.l}</p><p style="font-family:var(--display);font-size:1.5rem;letter-spacing:.04em;color:${s.p?color:'#fff'};">${parseFloat(v).toFixed(1)}</p>`;
+      grid.appendChild(el);
+    });
+    if(!has)grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:18px;font-size:11px;color:rgba(255,255,255,.22);">No stats available</div>`;
+  }catch(e){console.error('Player stats error',e);document.getElementById('playerModalLoader').innerText='Could not load stats.';}
+}
+
+// ── CUSTOM PLAYER CONTROLS ───────────────────────────────────────
+const muxEl=document.getElementById('muxPlayer');
+const ctrlWrap=document.getElementById('customControls');
+let ctrlTimer=null, scrubbing=false;
+
+function showCtrls(){
+  ctrlWrap.classList.add('show');
+  clearTimeout(ctrlTimer);
+  ctrlTimer=setTimeout(()=>ctrlWrap.classList.remove('show'),3200);
+}
+
+function handleTap(e){
+  if(e.target.closest('.cbtn')||e.target.closest('#progWrap'))return;
+  ctrlWrap.classList.contains('show')?ctrlWrap.classList.remove('show'):showCtrls();
+  // ripple
+  const shell=document.getElementById('playerShell');
+  const rpl=document.createElement('div');rpl.className='ripple';
+  const rect=shell.getBoundingClientRect();
+  rpl.style.left=(e.clientX-rect.left)+'px';
+  rpl.style.top=(e.clientY-rect.top)+'px';
+  shell.appendChild(rpl);setTimeout(()=>rpl.remove(),600);
+}
+
+function getVideo(){return muxEl.querySelector('video')||muxEl;}
+
+function togglePlay(e){if(e)e.stopPropagation();const v=getVideo();v.paused?v.play():v.pause();showCtrls();}
+window.togglePlay=togglePlay;
+
+function syncPlay(){
+  const v=getVideo();const p=v.paused;
+  document.getElementById('icPlay').style.display=p?'block':'none';
+  document.getElementById('icPause').style.display=p?'none':'block';
+  document.getElementById('bigPlayIcon').innerHTML=p?'<path d="M8 5v14l11-7z"/>':'<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+  const bp=document.getElementById('bigPlay');
+  p?bp.classList.add('vis'):bp.classList.remove('vis');
+}
+
+function toggleMute(e){if(e)e.stopPropagation();const v=getVideo();v.muted=!v.muted;document.getElementById('icSound').style.display=v.muted?'none':'block';document.getElementById('icMute').style.display=v.muted?'block':'none';showCtrls();}
+window.toggleMute=toggleMute;
+
+function toggleFS(e){if(e)e.stopPropagation();const sh=document.getElementById('playerShell');document.fullscreenElement?(document.exitFullscreen&&document.exitFullscreen()):(sh.requestFullscreen&&sh.requestFullscreen());}
+
+function fmtT(s){const m=Math.floor(s/60);return m+':'+String(Math.floor(s%60)).padStart(2,'0');}
+
+function updateProg(){
+  if(scrubbing)return;
+  const v=getVideo();
+  if(!v||!v.duration||!isFinite(v.duration)){document.getElementById('timeLbl').textContent='LIVE';document.getElementById('progFill').style.width='100%';document.getElementById('progThumb').style.left='100%';return;}
+  const pct=(v.currentTime/v.duration)*100;
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progThumb').style.left=pct+'%';
+  document.getElementById('timeLbl').textContent=fmtT(v.currentTime)+' / '+fmtT(v.duration);
+}
+
+function seekVideo(e){e.stopPropagation();const v=getVideo();if(!v.duration||!isFinite(v.duration))return;const rect=e.currentTarget.getBoundingClientRect();const pct=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));v.currentTime=pct*v.duration;showCtrls();}
+
+function startScrub(e){e.stopPropagation();scrubbing=true;doScrub(e.clientX);document.addEventListener('mousemove',onScrubMove);document.addEventListener('mouseup',stopScrub);}
+function startScrubT(e){e.stopPropagation();scrubbing=true;document.addEventListener('touchmove',onScrubT,{passive:true});document.addEventListener('touchend',stopScrub);}
+function onScrubMove(e){doScrub(e.clientX);}
+function onScrubT(e){if(e.touches[0])doScrub(e.touches[0].clientX);}
+function doScrub(cx){
+  const v=getVideo();if(!v.duration||!isFinite(v.duration))return;
+  const rect=document.getElementById('progWrap').getBoundingClientRect();
+  const pct=Math.max(0,Math.min(1,(cx-rect.left)/rect.width));
+  document.getElementById('progFill').style.width=(pct*100)+'%';
+  document.getElementById('progThumb').style.left=(pct*100)+'%';
+  v.currentTime=pct*v.duration;
+}
+function stopScrub(){scrubbing=false;document.removeEventListener('mousemove',onScrubMove);document.removeEventListener('mouseup',stopScrub);document.removeEventListener('touchmove',onScrubT);document.removeEventListener('touchend',stopScrub);}
+
+function wireVideo(){
+  const v=getVideo();if(!v){setTimeout(wireVideo,400);return;}
+  v.addEventListener('play',syncPlay);v.addEventListener('pause',syncPlay);
+  v.addEventListener('timeupdate',updateProg);v.addEventListener('durationchange',updateProg);
+  syncPlay();updateProg();
+}
+muxEl.addEventListener('play',syncPlay);muxEl.addEventListener('pause',syncPlay);muxEl.addEventListener('timeupdate',updateProg);
+setTimeout(wireVideo,600);
+
+// ── NAV SCROLL ───────────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  nav.style.background=window.scrollY>30?'rgba(6,6,8,.96)':'rgba(6,6,8,.82)';
+},{passive:true});
+</script>
+
+<!-- ════════════════════════════════
+     FIREBASE MODULE
+════════════════════════════════ -->
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import{getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,doc,getDoc,updateDoc,arrayUnion,arrayRemove,increment,setDoc,deleteDoc}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import{getDatabase,ref,onValue,set,onDisconnect,serverTimestamp as rts}from"https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+const app=initializeApp({apiKey:"AIzaSyDyfaBrLbjIjgWaJb7DHf50zv7cn6lISi0",authDomain:"greenlight-a8e86.firebaseapp.com",projectId:"greenlight-a8e86",storageBucket:"greenlight-a8e86.firebasestorage.app",messagingSenderId:"367667201164",appId:"1:367667201164:web:b2b6cfbf54c5d47255e7a9"});
+const auth=getAuth(app),db=getFirestore(app),rtdb=getDatabase(app);
+
+let currentUsername="Guest",onlineUsers=[];
+
+function colorFor(n){const C=['#FF3B3B','#F59E0B','#3B82F6','#8B5CF6','#0EE577','#EC4899','#06B6D4','#F97316'];let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return C[Math.abs(h)%C.length];}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+// messages
+function listenMsgs(){
+  onSnapshot(query(collection(db,'messages'),orderBy('timestamp','asc')),(snap)=>{
+    const c=document.getElementById('message-container');c.innerHTML='';
+    snap.forEach(ds=>{
+      const d=ds.data(),nc=d.nameColor||colorFor(d.username),tc=d.textColor||'rgba(255,255,255,.82)';
+      let ft=esc(d.text).replace(/@(\w+)/g,(m,u)=>{
+        const mu=onlineUsers.find(x=>x.username.toLowerCase()===u.toLowerCase());
+        const hc=mu?mu.color:nc;
+        return`<span style="font-weight:700;padding:0 3px;border-radius:3px;color:${hc};background:${hc}18;">@${u}</span>`;
+      });
+      const row=document.createElement('div');row.className='cmsg';
+      row.innerHTML=`<div class="cmsg-av" style="background:${nc};border-radius:9px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;font-weight:700;color:#000;cursor:pointer;flex-shrink:0;" onclick="openUserProfile('${esc(d.username)}')">${esc(d.username.substring(0,2).toUpperCase())}</div><div class="cmsg-body"><p class="cmsg-name" style="color:${nc};">${esc(d.username)}${d.repostEmoji?` <span style="font-size:10px;color:rgba(255,255,255,.3);">reacted ${d.repostEmoji}</span>`:''}</p><div class="cmsg-bubble" onclick="showRxn(event,'${esc(d.text).replace(/'/g,"\\'")}')"><span style="position:relative;">${ft}</span></div></div>`;
+      c.appendChild(row);
+    });
+    c.scrollTop=c.scrollHeight;
+  });
+}
+
+async function sendMessage(){
+  const inp=document.getElementById('chat-input');
+  const msg=(inp.value||'').trim();
+  if(!msg||!auth.currentUser)return;
+  await addDoc(collection(db,'messages'),{text:msg,username:currentUsername,timestamp:serverTimestamp(),uid:auth.currentUser.uid,nameColor:colorFor(currentUsername),textColor:'rgba(255,255,255,.82)'});
+  inp.value='';
+}
+
+document.getElementById('send-btn').onclick=sendMessage;
+document.getElementById('chat-input').addEventListener('keypress',e=>{if(e.key==='Enter')sendMessage();});
+
+window._handleRepost=async(emoji,text)=>{
+  if(!auth.currentUser)return;
+  await addDoc(collection(db,'messages'),{text,username:currentUsername,repostEmoji:emoji,timestamp:serverTimestamp(),uid:auth.currentUser.uid,type:'repost'});
+};
+
+onAuthStateChanged(auth,async user=>{
+  if(!user){listenMsgs();return;}
+  try{
+    const s=await getDoc(doc(db,'users',user.uid));
+    if(s.exists()){const d=s.data();const name=d.username||d.firstName||user.email;document.getElementById('userDisplayName').innerText=name;currentUsername=name;}
+  }catch(e){console.error('Profile err',e);}
+
+  // presence
+  const uRef=ref(rtdb,'/status/'+user.uid);
+  onValue(ref(rtdb,'.info/connected'),sn=>{
+    if(sn.val()===true){onDisconnect(uRef).remove();set(uRef,{state:'online',last_changed:rts(),username:currentUsername});}
+  });
+  onValue(ref(rtdb,'/status'),sn=>{
+    const cnt=sn.size||0;
+    const el=document.getElementById('online-user-count');if(el)el.innerText=cnt.toLocaleString()+' Online';
+    onlineUsers=[];
+    sn.forEach(ch=>{const v=ch.val();if(v.state==='online')onlineUsers.push({uid:ch.key,username:v.username,color:colorFor(v.username||'')});});
   });
 
-  // ─────────────────────────────────────────────
-  //  Chat
-  // ─────────────────────────────────────────────
-  function sendMsg() {
-    const input = document.getElementById('chatInput');
-    const text = input.value.trim();
-    if (!text || !username) return;
-    input.value = '';
-    fetch('https://sportsite-79ty.onrender.com/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, text })
-    });
-  }
-
-
-function addChatMsg(name, text) {
-    // Current existing logic for the bottom drawer/hidden chat
-    const wrap = document.getElementById('chatMessages');
-    const msg = document.createElement('div');
-    msg.className = 'flex gap-3 msg-in';
-    msg.innerHTML = `
-      <div style="background:${colorFor(name)}" class="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center text-[10px] font-black text-white mt-0.5 shadow-sm">${escHtml(name[0].toUpperCase())}</div>
-      <div class="flex-1 min-w-0">
-        <p class="text-[9px] font-black uppercase tracking-widest mb-1 dark:text-white" style="color:${colorFor(name)}">${escHtml(name)}</p>
-        <p class="text-[12px] font-medium text-black/70 dark:text-white/70 leading-snug break-words">${escHtml(text)}</p>
-      </div>`;
-    if(wrap) {
-        wrap.appendChild(msg);
-        wrap.scrollTop = wrap.scrollHeight;
-    }
-
-    // NEW: Logic for the transparent in-player overlay
-    const playerWrap = document.getElementById('playerChatMessages');
-    const playerMsg = document.createElement('div');
-    playerMsg.className = 'player-msg-anim flex flex-col items-end mb-1 pr-2';
-    playerMsg.innerHTML = `
-        <span class="text-[10px] font-black uppercase tracking-tighter" style="color:${colorFor(name)}">${escHtml(name)}</span>
-        <span class="text-white text-sm font-semibold text-right leading-tight drop-shadow-lg">${escHtml(text)}</span>
-    `;
-    playerWrap.appendChild(playerMsg);
-    playerWrap.scrollTop = playerWrap.scrollHeight;
-    
-    // Auto-remove old messages from player to keep it clean
-    if(playerWrap.children.length > 10) {
-        playerWrap.removeChild(playerWrap.children[0]);
-    }
-}
-
-  function escHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  // ─────────────────────────────────────────────
-  //  Stream Status
-  // ─────────────────────────────────────────────
-  function updateStreamUI(live, viewers, title) {
-    const pill    = document.getElementById('statusPill');
-    const dot     = document.getElementById('statusDot');
-    const label   = document.getElementById('statusText');
-    const player  = document.getElementById('muxPlayer');
-    const overlay = document.getElementById('offlineOverlay');
-    const vWrap   = document.getElementById('viewerWrap');
-    const vCount  = document.getElementById('viewerCount');
-
-    // Detect transition for system messages
-    if (live && !isLive) addSystemMsg('Stream started');
-    else if (!live && isLive) addSystemMsg('Stream ended. Watch the replay below.');
-
-    isLive = live;
-
-    if (live) {
-      // LIVE STATE
-      pill.className = 'flex items-center gap-2 px-4 py-2.5 rounded-full border text-[10px] font-black uppercase tracking-widest transition-all duration-300 live-state';
-      dot.className = 'w-2 h-2 rounded-full bg-current pulse-dot';
-      label.textContent = 'Live';
-      
-      player.style.display = 'block';
-      overlay.style.display = 'none';
-      vWrap.style.display = 'flex';
-      
-      player.streamType = 'live'; // Tells Mux to look for the live edge
-    } else {
-      // OFFLINE / VOD STATE
-      pill.className = 'flex items-center gap-2 px-4 py-2.5 rounded-full border text-[10px] font-black uppercase tracking-widest transition-all duration-300 offline-state';
-      dot.className = 'w-2 h-2 rounded-full bg-current';
-      label.textContent = 'Offline';
-      
-      // Instead of hiding the player, we keep it visible for VOD playback
-      player.style.display = 'block'; 
-      overlay.style.display = 'none'; // Hide the "Waiting for broadcast" overlay
-      vWrap.style.display = 'none';
-      
-      player.streamType = 'on-demand'; // Tells Mux to play the recorded version
-    }
-
-    vCount.textContent = (viewers || 0).toLocaleString();
-  }
-
-  async function pollStatus() {
-    try {
-      const res = await fetch(CONFIG.statusEndpoint);
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      updateStreamUI(data.live, data.viewers || 0, data.title);
-    } catch {
-      updateStreamUI(false, 0, 'Waiting for stream…');
-    }
-  }
-
-  updateStreamUI(false, 0, 'Waiting for stream…');
-  pollStatus();
-  setInterval(pollStatus, CONFIG.pollInterval);
-
-  // ─────────────────────────────────────────────
-  //  Demo Messages
-  // ─────────────────────────────────────────────
-  let demoIdx = 0;
-  function demoChat() {
-    if (demoIdx < demoMessages.length) {
-      const [n, t] = demoMessages[demoIdx++];
-      addChatMsg(n, t);
-      setTimeout(demoChat, 2200 + Math.random() * 2000);
-    }
-  }
-  setTimeout(demoChat, 1500);
-
-  // ─────────────────────────────────────────────
-  //  Nav / Sidebar / Dark Mode
-  // ─────────────────────────────────────────────
-  
-
-
-</script>
-
-
-
-
-
-<footer class="w-full bg-white dark:bg-black border-t border-black/5 dark:border-white/10 pb-16 pt-20">
-    <div class="flex flex-col items-center justify-center w-full">
-        
-        <div class="flex flex-col items-center text-center gap-2.5">
-            <span class="fire-text text-[13px] font-black uppercase tracking-[0.35em] leading-none">
-                Greenlight
-            </span>
-            
-            <span class="text-[9px] font-bold opacity-25 uppercase tracking-[0.2em] text-black dark:text-white">
-                © 2026 Greenlight Network LLC
-            </span>
-        </div>
-
-    </div>
-</footer>
-<script>
-
-
-// Toggle User Dashboard
-function toggleUserDashboard() {
-    const dashboard = document.getElementById('userDashboard');
-    dashboard.classList.toggle('translate-x-full');
-}
-
-
-
-    // Fire/spark effect on dark mode toggle
-    function createSparks() {
-        const logoText = document.querySelector('.fire-text');
-        const rect = logoText.getBoundingClientRect();
-        
-        for (let i = 0; i < 30; i++) {
-            const isSmoke = i % 2 === 0;
-            const particle = document.createElement('div');
-            particle.className = isSmoke ? 'smoke' : 'ember';
-            
-            const startX = rect.left + rect.width / 2;
-            const startY = rect.top + rect.height / 2;
-            
-            particle.style.left = `${startX}px`;
-            particle.style.top = `${startY}px`;
-            
-            document.body.appendChild(particle);
-            
-            const adx = (Math.random() - 0.5) * 120;
-            const ady = isSmoke ? (Math.random() * -150) - 20 : (Math.random() - 0.5) * 150;
-            
-            particle.animate([
-                { transform: `translate(0, 0) scale(0.5)`, opacity: 1 },
-                { transform: `translate(${adx}px, ${ady}px) scale(${isSmoke ? 3 : 0.2})`, opacity: 0 }
-            ], {
-                duration: isSmoke ? 1500 + Math.random() * 1000 : 800 + Math.random() * 500,
-                easing: 'ease-out',
-                fill: 'forwards'
-            });
-            
-            setTimeout(() => particle.remove(), 2500);
-        }
-    }
-function addSystemMsg(text) {
-    addChatMsg('SYSTEM', text);
-}
-
-    // Sidebar toggle
-function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('translate-x-full');
-    document.getElementById('sidebarOverlay').classList.toggle('hidden');
-}
-
-    // Nav scroll effect
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.classList.add('nav-scrolled');
-        } else {
-            nav.classList.remove('nav-scrolled');
-        }
-    });
-
-    // Load saved theme preference
-    if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.classList.add('dark');
-    }
-</script>
-<div id="gameModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-6 transition-all duration-300">
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-xl" onclick="closeGameModal()"></div>
-
-<div class="relative w-full max-w-5xl bg-white dark:bg-[#0f0f0f] rounded-[2.5rem] overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.5)] border border-black/10 dark:border-white/10 max-h-[90vh] flex flex-col scale-95 opacity-0 transition-all duration-300" id="modalContainer">
-    
-    <div class="p-4 md:p-8 border-b border-black/5 dark:border-white/5 bg-gray-50/50 dark:bg-white/5">
-<div class="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8">
-    
-    <div class="flex items-center gap-3 md:gap-4 flex-1 md:justify-end text-center md:text-right w-full min-w-0">
-        <div class="order-2 md:order-1 min-w-0">
-            <h2 id="modalTeam1Name" class="text-lg md:text-3xl font-black uppercase tracking-tighter dark:text-white leading-none truncate">---</h2>
-            <p id="modalTeam1Record" class="text-[10px] font-bold opacity-40 uppercase tracking-widest mt-1 dark:text-white">0-0</p>
-        </div>
-        <img id="modalTeam1Logo" src="" class="w-10 h-10 md:w-16 md:h-16 object-contain flex-shrink-0 order-1 md:order-2" alt="">
-    </div>
-
-    <div class="text-center px-3 md:px-8 md:border-x border-black/5 dark:border-white/10 flex-shrink-0">
-        <span id="modalGameStatus" class="bg-gray-500 text-white text-[9px] md:text-[10px] font-black px-3 py-1.5 rounded-full uppercase tracking-widest mb-3 inline-block shadow-lg">PREGAME</span>
-        <div class="flex items-center justify-center gap-3 md:gap-6">
-            <span id="modalTeam1Score" class="text-3xl md:text-6xl font-black tracking-tighter dark:text-white">0</span>
-            <span class="text-lg md:text-2xl font-black opacity-20">-</span>
-            <span id="modalTeam2Score" class="text-3xl md:text-6xl font-black tracking-tighter dark:text-white">0</span>
-        </div>
-    </div>
-
-    <div class="flex items-center gap-3 md:gap-4 flex-1 md:justify-start text-center md:text-left w-full min-w-0">
-        <img id="modalTeam2Logo" src="" class="w-10 h-10 md:w-16 md:h-16 object-contain flex-shrink-0" alt="">
-        <div class="min-w-0">
-            <h2 id="modalTeam2Name" class="text-lg md:text-3xl font-black uppercase tracking-tighter dark:text-white leading-none truncate">---</h2>
-            <p id="modalTeam2Record" class="text-[10px] font-bold opacity-40 uppercase tracking-widest mt-1 dark:text-white">0-0</p>
-        </div>
-    </div>
-</div>
-
-<button onclick="closeGameModal()" class="absolute top-4 right-6 text-3xl font-light hover:rotate-90 transition-transform dark:text-white opacity-50 hover:opacity-100">&times;</button>
-
-
-</div>
-
-    <div class="flex-grow overflow-y-auto no-scrollbar p-6 md:p-10">
-        <div class="grid lg:grid-cols-3 gap-10">
-            <div class="lg:col-span-2 space-y-8">
-                <h4 class="text-[11px] font-black uppercase tracking-[0.4em] text-amber-500 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-simple"></i> Box Score
-                </h4>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="text-[9px] font-black uppercase tracking-widest opacity-40 dark:text-white border-b border-black/5 dark:border-white/5">
-                                <th class="pb-4">Player</th>
-                                <th class="pb-4">Team</th>
-                                <th class="pb-4">PTS</th>
-                                <th class="pb-4">REB</th>
-                                <th class="pb-4">AST</th>
-                                <th class="pb-4">MIN</th>
-                            </tr>
-                        </thead>
-                        <tbody id="modalBoxScoreBody" class="text-sm font-bold dark:text-white"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="bg-gray-50/50 dark:bg-white/5 rounded-[2rem] p-6 border border-black/5 dark:border-white/5">
-                <h4 class="text-[11px] font-black uppercase tracking-[0.4em] text-red-600 mb-6 flex items-center gap-2">
-                    <i class="fa-solid fa-fire-pulse"></i> Play by Play
-                </h4>
-                <div id="modalPlayByPlay" class="space-y-6"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-</div>
-<script>
-
-// Cache for standings seeds -- keyed by ESPN team ID
-let standingsSeedMap = {};
-
-async function loadStandings() {
-    try {
-        const res = await fetch('https://site.api.espn.com/apis/v2/sports/basketball/nba/standings');
-        const data = await res.json();
-        const newMap = {};
-
-        data.children?.forEach(conference => {
-            const entries = conference.standings?.entries || [];
-
-            // Each entry has a 'stats' array -- find wins and losses and compute win pct
-            const ranked = entries.map(entry => {
-                const wins = entry.stats?.find(s => s.name === 'wins')?.value ?? 0;
-                const losses = entry.stats?.find(s => s.name === 'losses')?.value ?? 0;
-                const total = wins + losses;
-                const winPct = total > 0 ? wins / total : 0;
-                return { id: entry.team.id, winPct, wins, losses };
-            });
-
-            // Sort descending by win pct -- ties broken by raw wins
-            ranked.sort((a, b) => b.winPct - a.winPct || b.wins - a.wins);
-
-            // Assign seed 1–15 per conference based on that real sorted order
-            ranked.forEach((team, idx) => {
-                newMap[team.id] = idx + 1;
-            });
-        });
-
-        standingsSeedMap = newMap;
-    } catch (err) {
-        console.warn("Standings fetch failed:", err);
-    }
-}
-
-async function loadGames() {
-    try {
-        const scroller = document.getElementById('scoreScroller');
-        
-        const getESPNFormatDate = (date) => {
-            return date.toISOString().split('T')[0].replace(/-/g, '');
-        };
-
-        const today = new Date();
-        const yesterday = new Date();
-        yesterday.setDate(today.getDate() - 1);
-
-        const dateToday = getESPNFormatDate(today);
-        const dateYesterday = getESPNFormatDate(yesterday);
-
-        const [resToday, resYesterday] = await Promise.all([
-            fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=${dateToday}`),
-            fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=${dateYesterday}`)
-        ]);
-
-        const dataToday = await resToday.json();
-        const dataYesterday = await resYesterday.json();
-
-        let allEvents = [...(dataToday.events || []), ...(dataYesterday.events || [])];
-
-        if (allEvents.length === 0) {
-            scroller.innerHTML = '<div class="min-w-[240px] p-8 text-center text-sm text-gray-400 dark:text-gray-500">No games found</div>';
-            return;
-        }
-
-        allEvents.sort((a, b) => {
-            const stateOrder = { 'in': 0, 'pre': 1, 'post': 2 };
-            return stateOrder[a.status.type.state] - stateOrder[b.status.type.state];
-        });
-
-        scroller.innerHTML = '';
-        
-        allEvents.forEach(event => {
-            const comp = event.competitions[0];
-            const away = comp.competitors.find(c => c.homeAway === 'away');
-            const home = comp.competitors.find(c => c.homeAway === 'home');
-            const status = event.status.type;
-            const isLive = status.state === 'in';
-            
-            // Seed lookup -- falls back silently if not found
-            const awaySeed = standingsSeedMap[away.team.id];
-            const homeSeed = standingsSeedMap[home.team.id];
-            const seedBadge = (seed) => seed
-                ? `<span class="text-[9px] font-black text-black/30 dark:text-white/30 leading-none">${seed}</span>`
-                : '';
-
-            let cardBg = isLive ? 'bg-white dark:bg-neutral-900' : 'bg-gray-50/50 dark:bg-neutral-900/50';
-            let dotColor = isLive ? 'bg-red-600' : (status.state === 'pre' ? 'bg-amber-500' : 'bg-gray-500');
-            let textColor = isLive ? 'text-red-600' : 'text-gray-400 dark:text-gray-300';
-            let fontWeight = isLive ? 'font-black' : 'font-bold';
-            let ping = isLive
-                ? '<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>'
-                : (status.state === 'pre' ? '<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>' : '');
-            
-            let label = isLive
-                ? `Live • ${status.shortDetail}`
-                : (status.state === 'pre'
-                    ? `Pregame • ${status.shortDetail}`
-                    : (event.date.includes(today.toISOString().split('T')[0]) ? 'Final' : 'Final • Yesterday'));
-
-            const card = document.createElement('div');
-            card.className = `min-w-[240px] ${cardBg} border border-gray-200/60 dark:border-white/10 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer`;
-            card.onclick = () => openGameModal(event.id);
-            
-            card.innerHTML = `
-                <div class="flex items-center justify-between mb-4">      
-                    <div class="flex items-center gap-1.5">
-                        <span class="relative flex h-2 w-2">
-                            ${ping}
-                            <span class="relative inline-flex rounded-full h-2 w-2 ${dotColor}"></span>
-                        </span>
-                        <span class="uppercase text-[10px] ${fontWeight} tracking-widest ${textColor}">${label}</span>
-                    </div>
-                </div>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-2">
-                            <img src="${away.team.logo}" class="w-6 h-6 object-contain">
-                            <span class="text-sm font-bold text-gray-800 dark:text-white">${away.team.abbreviation}</span>
-                            ${seedBadge(awaySeed)}
-                        </div>
-                        ${status.state === 'pre'
-                            ? `<span class="text-xs font-medium text-gray-400 dark:text-gray-300">${away.records?.[0]?.summary || '0-0'}</span>`
-                            : `<span class="text-sm font-black text-gray-900 dark:text-white">${away.score || '0'}</span>`
-                        }
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-2">
-                            <img src="${home.team.logo}" class="w-6 h-6 object-contain">
-                            <span class="text-sm font-bold text-gray-800 dark:text-white">${home.team.abbreviation}</span>
-                            ${seedBadge(homeSeed)}
-                        </div>
-                        ${status.state === 'pre'
-                            ? `<span class="text-xs font-medium text-gray-400 dark:text-gray-300">${home.records?.[0]?.summary || '0-0'}</span>`
-                            : `<span class="text-sm font-black text-gray-900 dark:text-white">${home.score || '0'}</span>`
-                        }
-                    </div>
-                </div>
-            `;
-            scroller.appendChild(card);
-        });
-    } catch (err) {
-        console.error("Scorecard fetch error:", err);
-    }
-}
-
-// Load standings first, then games -- refresh standings every 10 min, games every 30s
-loadStandings().then(loadGames);
-setInterval(loadGames, 30000);
-setInterval(loadStandings, 600000);
-
-
-// --- REPLACE YOUR EXISTING openGameModal FUNCTION WITH THIS UPDATED VERSION ---
-
-// --- SMART TEAM COLORS MAP ---
-const teamColorMap = {
-    'ATL': '#E03A3E', 'BOS': '#007A33', 'BKN': '#000000', 'CHA': '#1D1160', 'CHI': '#CE1141',
-    'CLE': '#860038', 'DAL': '#00538C', 'DEN': '#0E2240', 'DET': '#C8102E', 'GS': '#1D428A',
-    'HOU': '#CE1141', 'IND': '#FDB927', 'LAC': '#C8102E', 'LAL': '#552583', 'MEM': '#5D76A9',
-    'MIA': '#98002E', 'MIL': '#00471B', 'MIN': '#0C2340', 'NOP': '#0C2340', 'NY': '#006BB6',
-    'OKC': '#007AC1', 'ORL': '#0077C0', 'PHI': '#006BB6', 'PHX': '#1D1160', 'POR': '#E03A3E',
-    'SAC': '#5A2D81', 'SAS': '#C4CED4', 'TOR': '#CE1141', 'UTA': '#002B5C', 'WAS': '#002B5C'
-};
-
-// Helper to ensure contrast based on current theme
-function getSafeTeamColor(abbr) {
-    const rawColor = teamColorMap[abbr] || '#f59e0b';
-    const isDark = document.documentElement.classList.contains('dark');
-    
-    // Manual adjustments for legibility
-    if (isDark) {
-        if (abbr === 'BKN' || abbr === 'DEN' || abbr === 'MIN') return '#94a3b8'; // Lighten dark teams
-    } else {
-        if (abbr === 'SAS') return '#64748b'; // Darken light teams
-    }
-    return rawColor;
-}
-
-async function openGameModal(gameId) {
-    const modal = document.getElementById('gameModal');
-    const container = document.getElementById('modalContainer');
-    
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    setTimeout(() => {
-        container.classList.remove('scale-95', 'opacity-0');
-        container.classList.add('scale-100', 'opacity-100');
-    }, 10);
-    document.body.style.overflow = 'hidden';
-
-    try {
-        const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=${gameId}`);
-        const data = await res.json();
-
-        const comp = data.header.competitions[0];
-        const away = comp.competitors.find(c => c.homeAway === 'away');
-        const home = comp.competitors.find(c => c.homeAway === 'home');
-        const isPregame = comp.status.type.state === 'pre';
-
-        // Set Headers
-        document.getElementById('modalGameStatus').innerText = comp.status.type.detail;
-        document.getElementById('modalTeam1Name').innerText = away.team.abbreviation;
-        document.getElementById('modalTeam1Score').innerText = away.score || '0';
-document.getElementById('modalTeam1Logo').src = away.team.logo || `https://a.espncdn.com/i/teamlogos/nba/500/${away.team.abbreviation.toLowerCase()}.png`;
-        document.getElementById('modalTeam1Record').innerText = away.record?.[0]?.displayValue || '0-0';
-
-        document.getElementById('modalTeam2Name').innerText = home.team.abbreviation;
-        document.getElementById('modalTeam2Score').innerText = home.score || '0';
-document.getElementById('modalTeam2Logo').src = home.team.logo || `https://a.espncdn.com/i/teamlogos/nba/500/${home.team.abbreviation.toLowerCase()}.png`;
-        document.getElementById('modalTeam2Record').innerText = home.record?.[0]?.displayValue || '0-0';
-
-        if (isPregame) {
-            let leadersHtml = `<div class="space-y-6">`;
-            if (data.leaders) {
-                data.leaders.forEach(teamLeader => {
-                    const color = getSafeTeamColor(teamLeader.team.abbreviation);
-                    leadersHtml += `
-                        <div class="mb-4">
-                            <h5 class="text-[10px] font-black uppercase tracking-widest mb-3" style="color: ${color}">${teamLeader.team.displayName} Leaders</h5>
-                            <div class="grid grid-cols-3 gap-2">
-                                ${teamLeader.leaders.map(l => `
-                                    <div class="bg-black/5 dark:bg-white/5 p-3 rounded-xl border-l-2" style="border-color: ${color}">
-                                        <p class="text-[8px] opacity-50 uppercase font-black">${l.displayName}</p>
-                                        <p class="text-xs font-bold truncate">${l.leaders[0].athlete.shortName}</p>
-                                        <p class="text-sm font-black" style="color: ${color}">${l.leaders[0].displayValue}</p>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>`;
-                });
-            }
-            leadersHtml += `</div>`;
-
-            let injuryHtml = `<div class="space-y-4">`;
-            if (data.injuries && data.injuries.length > 0) {
-                data.injuries.forEach(teamInj => {
-                    const color = getSafeTeamColor(teamInj.team.abbreviation);
-                    injuryHtml += `<div class="mb-4">
-                        <h5 class="text-[10px] font-black uppercase tracking-widest mb-2" style="color: ${color}">${teamInj.team.displayName} Injuries</h5>
-                        <div class="space-y-2">
-                            ${teamInj.injuries.map(i => `
-                                <div class="flex justify-between items-center text-xs border-b border-black/5 dark:border-white/5 pb-2">
-                                    <span class="font-bold dark:text-white">${i.athlete.displayName}</span>
-                                    <span class="font-black uppercase text-[9px] px-2 py-0.5 rounded" style="background-color: ${color}20; color: ${color}">${i.status}</span>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>`;
-                });
-            } else { injuryHtml += `<p class="text-xs opacity-40 italic">No significant injuries reported.</p>`; }
-            injuryHtml += `</div>`;
-
-            document.getElementById('modalBoxScoreBody').innerHTML = `<tr><td colspan="6" class="p-0"><div class="grid md:grid-cols-2 gap-8 py-4"><div>${leadersHtml}</div><div>${injuryHtml}</div></div></td></tr>`;
-                
-        } else {
-            let statsHtml = '';
-            data.boxscore?.players?.forEach(teamGroup => {
-                const color = getSafeTeamColor(teamGroup.team.abbreviation);
-                statsHtml += `<tr class="bg-black/5 dark:bg-white/5"><td colspan="6" class="py-3 px-4 font-black text-[10px] uppercase" style="color: ${color}">${teamGroup.team.displayName}</td></tr>`;
-                teamGroup.statistics.forEach(statSet => {
-                    statSet.athletes.forEach(p => {
-                        if (p.stats) {
-                            statsHtml += `
-                                <tr class="border-b border-black/5 dark:border-white/5 text-sm">
-                                    <td class="py-3 font-bold pl-4 dark:text-white">${p.athlete.displayName}</td>
-                                    <td class="opacity-40 text-[10px]">${teamGroup.team.abbreviation}</td>
-                                    <td class="font-black text-center" style="color: ${color}">${p.stats[statSet.labels.indexOf('PTS')] || '0'}</td>
-                                    <td class="text-center">${p.stats[statSet.labels.indexOf('REB')] || '0'}</td>
-                                    <td class="text-center">${p.stats[statSet.labels.indexOf('AST')] || '0'}</td>
-                                    <td class="text-right pr-4 font-black text-[10px] opacity-60">${p.stats[statSet.labels.indexOf('MIN')] || '0'}</td>
-                                </tr>`;
-                        }
-                    });
-                });
-            });
-            document.getElementById('modalBoxScoreBody').innerHTML = statsHtml;
-        }
-
-        const plays = data.plays || [];
-        document.getElementById('modalPlayByPlay').innerHTML = plays.slice(-8).reverse().map(play => {
-            const color = play.team ? getSafeTeamColor(play.team.abbreviation) : '#f59e0b';
-            return `
-            <div class="relative pl-6 mb-4">
-                <div class="absolute left-0 top-1.5 w-1.5 h-1.5 rounded-full" style="background-color: ${color}"></div>
-                <p class="text-[9px] font-black uppercase opacity-40 dark:text-white">${play.clock?.displayValue || 'LIVE'}</p>
-                <p class="text-[11px] font-bold leading-tight dark:text-gray-300">${play.text}</p>
-            </div>`;
-        }).join('') || `<p class="text-center opacity-20 py-10 dark:text-white">Waiting for tip-off...</p>`;
-
-    } catch (err) { console.error("Modal Data Error:", err); }
-}
-
-function closeGameModal() {
-    const container = document.getElementById('modalContainer');
-    container.classList.add('scale-95', 'opacity-0');
-    setTimeout(() => {
-        document.getElementById('gameModal').classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }, 300);
-}
-
-loadGames();
-setInterval(loadGames, 30000); // 30s refresh is better for live data
-</script>
-<button onclick="toggleChat()" class="fixed bottom-6 right-6 z-[100] w-10 h-10 bg-green-600 rounded-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all group">
-    <i class="fa-solid fa-comments text-white text-xl group-hover:rotate-12 transition-transform"></i>
-    
-    <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-600 border-2 border-white dark:border-black rounded-full animate-pulse"></span>
-</button>
-
-<div id="chatWindow" class="fixed bottom-24 right-6 z-[100] w-[350px] h-[550px] greenlight-glass rounded-[2.5rem] flex flex-col shadow-2xl translate-y-[120%] opacity-0 pointer-events-none transition-all duration-500 ease-in-out">
-    
-    <div class="p-6 border-b border-green-500/10 flex items-center justify-between bg-white/10 dark:bg-black/10">
-        <div>
-            <div class="flex items-center gap-1.5 mt-1">
-                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                <span id="online-user-count" class="text-[9px] font-bold opacity-50 uppercase dark:text-white">0 Online</span>
-            </div>
-        </div>
-        <button onclick="toggleChat()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-            <i class="fa-solid fa-xmark text-black dark:text-white opacity-40"></i>
-        </button>
-    </div>
-
-<div class="flex p-4 gap-3 overflow-x-auto no-scrollbar border-b border-green-500/10 items-center min-h-[70px]">
-    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-green-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-green-500/20 whitespace-nowrap">
-        Lobby
-    </button>
-    <button class="flex-shrink-0 px-6 py-2.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
-        NBA
-    </button>
-    <button class="flex-shrink-0 px-6 py-2.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
-        NFL
-    </button>
-</div>
-
-    <div id="message-container" class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
-        </div>
-
-    <div class="p-5 bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem] border-t border-green-500/10">
-        <div class="relative group">
-            <input id="chat-input" type="text" placeholder="" 
-                   class="w-full bg-white/50 dark:bg-white/5 border border-green-500/10 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-sm font-medium outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/10 transition-all dark:text-white placeholder-black/30 dark:placeholder-white/20">
-            <button id="send-btn" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-green-600 hover:scale-110 active:scale-90 transition-transform">
-                <i class="fa-solid fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
-</div>
-<script>
-function toggleChat() {
-    const chatWindow = document.getElementById('chatWindow');
-    chatWindow.classList.toggle('translate-y-[120%]');
-    chatWindow.classList.toggle('opacity-0');
-    chatWindow.classList.toggle('pointer-events-none');
-}
-
-// ── PLAYER STATS MODAL ──────────────────────────────────────────────────────
-
-const playerStatsModal = document.createElement('div');
-playerStatsModal.id = 'playerStatsModal';
-playerStatsModal.className = 'fixed inset-0 z-[200] hidden items-center justify-center p-4';
-playerStatsModal.innerHTML = `
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-xl" onclick="closePlayerModal()"></div>
-    <div id="playerModalContainer" class="relative w-full max-w-md bg-white dark:bg-[#0f0f0f] rounded-[2.5rem] overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.5)] border border-black/10 dark:border-white/10 scale-95 opacity-0 transition-all duration-300">
-        
-        <button onclick="closePlayerModal()" class="absolute top-5 right-6 text-3xl font-light hover:rotate-90 transition-transform dark:text-white opacity-40 hover:opacity-100 z-10">&times;</button>
-
-        <div id="playerModalHeader" class="p-8 pb-6 border-b border-black/5 dark:border-white/5">
-            <div class="flex items-center gap-5">
-                <div class="relative">
-                    <img id="playerModalHeadshot" src="" alt="" class="w-20 h-20 rounded-2xl object-cover object-top bg-gray-100 dark:bg-neutral-800">
-                    <div id="playerModalTeamBadge" class="absolute -bottom-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center border-2 border-white dark:border-[#0f0f0f] overflow-hidden bg-gray-100">
-                        <img id="playerModalTeamLogo" src="" class="w-6 h-6 object-contain">
-                    </div>
-                </div>
-                <div>
-                    <h3 id="playerModalName" class="text-2xl font-black uppercase tracking-tighter leading-none dark:text-white"></h3>
-                    <p id="playerModalMeta" class="text-[10px] font-bold opacity-40 uppercase tracking-widest mt-1.5 dark:text-white"></p>
-                    <div id="playerModalStatus" class="mt-2"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="playerModalBody" class="p-8">
-            <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-amber-500 mb-6">2024–25 Season Averages</h4>
-            <div id="playerStatsGrid" class="grid grid-cols-3 gap-3"></div>
-            <div id="playerModalLoader" class="text-center py-12 text-sm opacity-40 dark:text-white">Loading stats...</div>
-        </div>
-    </div>
-`;
-document.body.appendChild(playerStatsModal);
-
-function openPlayerModal(athleteId, teamAbbr) {
-    const modal = document.getElementById('playerStatsModal');
-    const container = document.getElementById('playerModalContainer');
-
-    // Reset
-    document.getElementById('playerStatsGrid').innerHTML = '';
-    document.getElementById('playerModalLoader').style.display = 'block';
-    document.getElementById('playerModalLoader').innerText = 'Loading stats...';
-    document.getElementById('playerModalName').innerText = '';
-    document.getElementById('playerModalMeta').innerText = '';
-    document.getElementById('playerModalStatus').innerHTML = '';
-    document.getElementById('playerModalHeadshot').src = '';
-    document.getElementById('playerModalTeamLogo').src = '';
-
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    setTimeout(() => {
-        container.classList.remove('scale-95', 'opacity-0');
-        container.classList.add('scale-100', 'opacity-100');
-    }, 10);
-    document.body.style.overflow = 'hidden';
-
-    fetchPlayerSeasonStats(athleteId, teamAbbr);
-}
-
-function closePlayerModal() {
-    const container = document.getElementById('playerModalContainer');
-    container.classList.add('scale-95', 'opacity-0');
-    setTimeout(() => {
-        document.getElementById('playerStatsModal').classList.add('hidden');
-        document.getElementById('playerStatsModal').classList.remove('flex');
-        document.body.style.overflow = 'auto';
-    }, 300);
-}
-
-async function fetchPlayerSeasonStats(athleteId, teamAbbr) {
-    const color = getSafeTeamColor(teamAbbr);
-    try {
-        const res = await fetch(`https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/${athleteId}/overview`);
-        const data = await res.json();
-
-        const athlete = data.athlete;
-        const displayName = athlete.displayName || athlete.fullName || 'Unknown';
-        const position = athlete.position?.abbreviation || '';
-        const jersey = athlete.jersey ? `#${athlete.jersey}` : '';
-        const teamName = athlete.team?.displayName || teamAbbr;
-        const headshotUrl = athlete.headshot?.href || `https://a.espncdn.com/i/headshots/nba/players/full/${athleteId}.png`;
-        const teamLogoUrl = athlete.team?.logos?.[0]?.href || `https://a.espncdn.com/i/teamlogos/nba/500/${teamAbbr.toLowerCase()}.png`;
-        const injuryStatus = athlete.injuries?.[0];
-
-        document.getElementById('playerModalName').innerText = displayName;
-        document.getElementById('playerModalMeta').innerText = `${position} · ${jersey} · ${teamName}`;
-        document.getElementById('playerModalHeadshot').src = headshotUrl;
-        document.getElementById('playerModalTeamLogo').src = teamLogoUrl;
-
-        if (injuryStatus) {
-            document.getElementById('playerModalStatus').innerHTML = `
-                <span class="text-[9px] font-black uppercase px-2 py-1 rounded-full" style="background:${color}20; color:${color}">
-                    ⚠ ${injuryStatus.status} – ${injuryStatus.shortComment || injuryStatus.type}
-                </span>`;
-        }
-
-        // Pull season stats from the stats array
-        const statsCategory = data.stats?.find(s => s.type === 'total' || s.type === 'average');
-        const statLabels = data.stats?.[0]?.labels || [];
-        const statValues = data.stats?.[0]?.stats || [];
-
-        // Build a lookup map
-        const statsMap = {};
-        statLabels.forEach((label, i) => { statsMap[label] = statValues[i]; });
-
-        // Prefer averages endpoint as fallback
-        const statDisplays = [
-            { key: 'avgPoints',       label: 'PTS',  fallback: 'points' },
-            { key: 'avgRebounds',     label: 'REB',  fallback: 'rebounds' },
-            { key: 'avgAssists',      label: 'AST',  fallback: 'assists' },
-            { key: 'avgSteals',       label: 'STL',  fallback: 'steals' },
-            { key: 'avgBlocks',       label: 'BLK',  fallback: 'blocks' },
-            { key: 'avgTurnovers',    label: 'TOV',  fallback: 'turnovers' },
-            { key: 'fieldGoalPct',    label: 'FG%',  fallback: 'fieldGoalPct' },
-            { key: 'threePointPct',   label: '3P%',  fallback: 'threePointPct' },
-            { key: 'freeThrowPct',    label: 'FT%',  fallback: 'freeThrowPct' },
-        ];
-
-        // ESPN's athlete overview embeds season stats under data.splits or data.athlete.stats
-        const splits = data.splits?.categories || [];
-        const avgCategory = splits.find(c => c.type === 'perGame' || c.name === 'perGame') || splits[0];
-        const avgStats = avgCategory?.stats || [];
-        const avgMap = {};
-        avgStats.forEach(s => { avgMap[s.name] = s.displayValue ?? s.value; });
-
-        document.getElementById('playerModalLoader').style.display = 'none';
-
-        const grid = document.getElementById('playerStatsGrid');
-        grid.innerHTML = '';
-
-        const featured = [
-            { name: 'points',       label: 'PTS' },
-            { name: 'rebounds',     label: 'REB' },
-            { name: 'assists',      label: 'AST' },
-            { name: 'steals',       label: 'STL' },
-            { name: 'blocks',       label: 'BLK' },
-            { name: 'turnovers',    label: 'TO'  },
-            { name: 'fieldGoalPct', label: 'FG%' },
-            { name: 'threePointPct',label: '3P%' },
-            { name: 'freeThrowPct', label: 'FT%' },
-        ];
-
-        let hasStats = false;
-        featured.forEach(stat => {
-            const val = avgMap[stat.name];
-            if (val !== undefined && val !== null) {
-                hasStats = true;
-                const isPrimary = ['points','rebounds','assists'].includes(stat.name);
-                grid.innerHTML += `
-                    <div class="bg-black/[0.03] dark:bg-white/5 rounded-2xl p-4 border border-black/5 dark:border-white/5 text-center ${isPrimary ? 'col-span-1' : ''}">
-                        <p class="text-[9px] font-black uppercase tracking-widest opacity-40 dark:text-white mb-1">${stat.label}</p>
-                        <p class="text-2xl font-black tracking-tighter" style="color:${isPrimary ? color : 'inherit'}">${parseFloat(val).toFixed(isPrimary ? 1 : (stat.label.includes('%') ? 1 : 1))}</p>
-                    </div>`;
-            }
-        });
-
-        if (!hasStats) {
-            grid.innerHTML = `<div class="col-span-3 text-center py-6 opacity-40 text-sm dark:text-white">No season stats available</div>`;
-        }
-
-    } catch (err) {
-        console.error('Player stats error:', err);
-        document.getElementById('playerModalLoader').innerText = 'Could not load stats. ESPN API may be unavailable.';
-    }
-}
-
-// ── PATCH BOX SCORE TO MAKE PLAYER NAMES CLICKABLE ──────────────────────────
-
-// Override the box score renderer to inject clickable names
-const _origOpenGameModal = openGameModal;
-window.openGameModal = async function(gameId) {
-    await _origOpenGameModal(gameId);
-    // After modal data loads, patch player names
-    setTimeout(patchPlayerNames, 800);
-};
-
-function patchPlayerNames() {
-    const tbody = document.getElementById('modalBoxScoreBody');
-    if (!tbody) return;
-    const rows = tbody.querySelectorAll('tr');
-    rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        if (cells.length < 3) return;
-        const nameCell = cells[0];
-        const teamCell = cells[1];
-        const name = nameCell.innerText.trim();
-        const teamAbbr = teamCell.innerText.trim();
-        if (!name || name.length < 2 || !teamAbbr) return;
-        // Look up athlete ID from our cached game data
-        const athleteId = window._athleteIdMap?.[name];
-        if (athleteId) {
-            nameCell.innerHTML = `<button onclick="openPlayerModal('${athleteId}','${teamAbbr}')" class="font-bold hover:underline text-left transition-colors hover:text-amber-500 dark:text-white">${name}</button>`;
-        }
-    });
-}
-
-// ── PATCH openGameModal TO BUILD ATHLETE ID MAP ───────────────────────────────
-
-const __origFetch = window.openGameModal;
-window._athleteIdMap = {};
-
-// We intercept the summary data to harvest athlete IDs
-const _origOpen = openGameModal;
-window.openGameModal = async function(gameId) {
-    window._athleteIdMap = {};
-    try {
-        const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event=${gameId}`);
-        const data = await res.json();
-        // Build athlete ID map from boxscore
-        data.boxscore?.players?.forEach(teamGroup => {
-            teamGroup.statistics?.forEach(statSet => {
-                statSet.athletes?.forEach(p => {
-                    if (p.athlete?.displayName && p.athlete?.id) {
-                        window._athleteIdMap[p.athlete.displayName] = p.athlete.id;
-                    }
-                });
-            });
-        });
-    } catch(e) {}
-    await _origOpenGameModal(gameId);
-    setTimeout(patchPlayerNames, 900);
-};
-
-
-
+  listenMsgs();
+});
+
+window.handleLogout=async()=>{try{await signOut(auth);window.location.href='/login/';}catch(e){console.error(e);}};
+
+// mention autocomplete
+const ci=document.getElementById('chat-input');
+const ac=document.getElementById('mention-ac');
+ci.addEventListener('input',e=>{
+  const v=e.target.value,cur=e.target.selectionStart,at=v.lastIndexOf('@',cur-1);
+  if(at!==-1){
+    const q=v.substring(at+1,cur).toLowerCase();
+    const m=onlineUsers.filter(u=>u.username.toLowerCase().startsWith(q));
+    if(m.length){
+      const rect=ci.getBoundingClientRect();
+      ac.style.left=rect.left+'px';ac.style.bottom=(window.innerHeight-rect.top+8)+'px';
+      ac.style.display='block';ac.innerHTML='';
+      m.forEach(u=>{
+        const item=document.createElement('div');
+        item.style.cssText='padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#fff;transition:background .15s;';
+        item.onmouseover=()=>item.style.background='rgba(14,229,119,.08)';
+        item.onmouseout=()=>item.style.background='transparent';
+        item.innerHTML=`<span style="width:7px;height:7px;border-radius:50%;background:${u.color};display:inline-block;"></span>${u.username}`;
+        item.onclick=()=>{const b=ci.value.substring(0,at);const a=ci.value.substring(ci.selectionStart);ci.value=`${b}@${u.username} ${a}`;ac.style.display='none';ci.focus();};
+        ac.appendChild(item);
+      });
+    } else ac.style.display='none';
+  } else ac.style.display='none';
+});
+document.addEventListener('click',e=>{if(e.target!==ci)ac.style.display='none';});
 </script>
 
 </body>
-
-
-
 </html>
-
