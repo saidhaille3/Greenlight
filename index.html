@@ -722,7 +722,7 @@ filter: invert(1) brightness(2);
 
       <!-- Main Headline -->
       <h1 id="hs-headline" class="text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[6rem] font-black uppercase tracking-tighter leading-[0.88] max-w-4xl text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)] mb-5 md:mb-6">
-Good Enough is The Enemy<br /><span class='text-white/25'>Of Great</span>  </h1>
+Good Enough is The Enemy<br /><span class='text-white/25'>Great</span>  </h1>
 
       <!-- Subhead -->
       <p id="hs-subhead" class="text-sm sm:text-base md:text-lg text-white/70 font-semibold max-w-xl leading-snug mb-8 md:mb-10 drop-shadow-md">
@@ -1499,10 +1499,11 @@ function closeVideoModal() {
 
 // Toggle User Dashboard
 function toggleUserDashboard() {
-    window.toggleUserDashboard = () => {
+window.toggleUserDashboard = () => {
     const dashboard = document.getElementById('userDashboard');
     dashboard.classList.toggle('translate-x-full');
 };
+
 
 
 }
@@ -4647,12 +4648,13 @@ const rtdb = getDatabase(app);
 
 window.handleUserIconClick = () => {
     const user = auth.currentUser;
-    
     if (user) {
-        // User is signed in, show the dashboard
         toggleUserDashboard();
-
+    } else {
+        window.location.href = 'login.html';
+    }
 };
+
 
 function listenForDirectMessages(userId) {
     const badge = document.getElementById('dm-notification-badge');
@@ -4689,7 +4691,7 @@ onAuthStateChanged(auth, async (user) => {
         
         // ... existing presence logic ...
     } else {
-        window.location.href = '/login/';
+        window.location.href = 'login.html';
     }
 });
 
@@ -5111,7 +5113,7 @@ listenForMessages();
     window.handleLogout = async () => {
         try {
             await signOut(auth);
-            window.location.href = '/login/';
+            window.location.href = 'login.html';
         } catch (error) {
             console.error("Logout Error:", error);
         }
@@ -5121,15 +5123,6 @@ listenForMessages();
 // Initialization for Reader Comments
 // Ensure openReader is globally accessible before module scripts run
 
-document.getElementById('greenlightReader').classList.remove('hidden');
-document.getElementById('greenlightReader').classList.add('active');
-
-document.body.style.top = `-${window._savedScrollY}px`;
-document.body.style.position = 'fixed';
-document.body.style.width = '100%';
-    updateArticleCommentCount(id);
-    loadArticleComments(id);
-    };
 
 // --- UPDATED COMMENT LOADING ---
 // --- UPDATED COMMENT LOADING (WITH ICONS) ---
