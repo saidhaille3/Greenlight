@@ -4681,18 +4681,12 @@ function listenForDirectMessages(userId) {
     });
 }
 
-// Update your onAuthStateChanged to trigger this
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        // ... existing profile logic ...
-        
-        // Start listening for Private Messages for the badge
         listenForDirectMessages(user.uid);
-        
-        // ... existing presence logic ...
-    } else {
-        window.location.href = 'login.html';
     }
+    // no redirect -- let guests browse freely
+    listenForMessages();
 });
 
 // Function to simulate receiving a DM (For testing purposes)
