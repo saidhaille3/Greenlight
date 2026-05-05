@@ -1,4 +1,7 @@
 
+
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +16,22 @@
         }
     </script>
     <style>
+        #authPromptContainer {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(40px) saturate(200%);
+        -webkit-backdrop-filter: blur(40px) saturate(200%);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        box-shadow:
+            0 40px 100px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
     
+    .dark #authPromptContainer {
+        background: rgba(10, 10, 10, 0.7);
+        box-shadow:
+            0 40px 100px rgba(0, 0, 0, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
     .gold-comment {
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%) !important;
     border: 2px solid #d4af37 !important;
@@ -4002,9 +4020,67 @@ window.closeProfile = () => {
         </div>
     </div>
 </div>
+<script>// Auto-open article from URL param
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const articleId = params.get('article');
+  if (articleId && articleEngineData[articleId]) {
+    setTimeout(() => openReader(articleId), 400);
+  }
+})();
+</script>
+<script>window.openAuthPrompt = () => {
+    const modal = document.getElementById('authPromptModal');
+    const container = document.getElementById('authPromptContainer');
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
+    // Trigger animations
+    setTimeout(() => {
+        container.classList.remove('scale-95', 'opacity-0');
+        container.classList.add('scale-100', 'opacity-100');
+    }, 10);
+};
+
+window.closeAuthPrompt = () => {
+    const modal = document.getElementById('authPromptModal');
+    const container = document.getElementById('authPromptContainer');
+    
+    container.classList.add('scale-95', 'opacity-0');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }, 300);
+};
+
+// --- UPDATED CLICK HANDLERS ---
+
+// Update your toggleArticleLike function:
+window.toggleArticleLike = async function() {
+    if (!auth.currentUser) {
+        openAuthPrompt(); // Replaced alert
+        return;
+    }
+    // ... rest of your code
+};
+
+// Update your submitArticleComment listener:
+const myButton = document.getElementById('submitArticleComment');
+if (myButton) {
+    myButton.addEventListener('click', async () => {
+        if (!auth.currentUser) {
+            openAuthPrompt(); // Replaced alert
+            return;
+        }
+        // ... rest of your code
+    });
+}
+</script>
 <script>
 window.openReader = function(id) {
     window._currentArticleId = id;
+
   const data = articleEngineData[id];
   if (!data) return;
 
@@ -4021,6 +4097,7 @@ window.openReader = function(id) {
   setMeta('og:url', 'https://glsnetwork.com/index.html#' + id);
   document.title = data.title + ' · Greenlight';
 
+  // ... rest of your existing openReader code
 
   
   window._savedScrollY = window.scrollY;
@@ -4063,16 +4140,9 @@ window.openReader = function(id) {
   document.body.style.position = 'fixed';
   document.body.style.width = '100%';
 }
+
 </script>
-<script>// Auto-open article from URL param
-(function() {
-  const params = new URLSearchParams(window.location.search);
-  const articleId = params.get('article');
-  if (articleId && articleEngineData[articleId]) {
-    setTimeout(() => openReader(articleId), 400);
-  }
-})();
-</script>
+
 <script type="module">
     // ── 1. IMPORTS ──────────────────────────────────────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -4366,10 +4436,12 @@ window.shareStory = async () => {
 
 
 window.toggleArticleLike = async function() {
-    if (!auth.currentUser || !currentArticleId) {
-        alert("Sign in to like this story!");
-        return;
+    if (!auth.currentUser) {
+    openAuthPrompt();
+    return;
     }
+if (!currentArticleId) return; // Silent safety check
+
 
     const articleRef = doc(db, "articles", currentArticleId);
     const userId = auth.currentUser.uid;
@@ -4796,7 +4868,7 @@ if (myButton) {
                 console.error("Error posting comment:", e);
             }
         } else if (!auth.currentUser) {
-            alert("Sign in to join the conversation!");
+openAuthPrompt();
         }
     });
 }
@@ -4877,5 +4949,28 @@ document.addEventListener('click', (e) => {
 
 </script>
 
+<div id="authPromptModal" class="fixed inset-0 z-[600] hidden items-center justify-center p-4 transition-all duration-500">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-md" onclick="closeAuthPrompt()"></div>
+    
+    <div id="authPromptContainer" class="relative w-full max-w-sm greenlight-glass rounded-[2.5rem] p-8 text-center transform scale-95 opacity-0 transition-all duration-300">
+        
+        <div class="w-16 h-16 bg-gradient-to-tr from-green-600 to-emerald-400 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.3)]">
+            <i class="fa-solid fa-lock text-white text-2xl"></i>
+        </div>
+
+        <p class="text-sm font-medium text-black/50 dark:text-white/40 mb-8 leading-relaxed">
+            Join the conversation. Sign in to like and comment on stories, and access Greenlight Lounge where you can live chat with other users.
+        </p>
+
+        <div class="space-y-3">
+            <a href="login.html" class="block w-full py-4 bg-black dark:bg-white text-white dark:text-black rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] shadow-xl hover:bg-green-600 dark:hover:bg-green-600 dark:hover:text-white transition-all active:scale-95">
+                Sign In Now
+            </a>
+            <button onclick="closeAuthPrompt()" class="block w-full py-4 bg-transparent text-black/30 dark:text-white/30 rounded-2xl font-black uppercase text-[9px] tracking-widest hover:text-black dark:hover:text-white transition-all">
+                Maybe Later
+            </button>
+        </div>
+    </div>
+</div>
 
 </html>
