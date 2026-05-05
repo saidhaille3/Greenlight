@@ -722,7 +722,7 @@ filter: invert(1) brightness(2);
 
       <!-- Main Headline -->
       <h1 id="hs-headline" class="text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[6rem] font-black uppercase tracking-tighter leading-[0.88] max-w-4xl text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)] mb-5 md:mb-6">
-Good Enough is The Enemy<br /><span class='text-white/25'>Great</span>  </h1>
+Good Enough is The Enemy<br/><span class='text-white/25'>Of Great</span>  </h1>
 
       <!-- Subhead -->
       <p id="hs-subhead" class="text-sm sm:text-base md:text-lg text-white/70 font-semibold max-w-xl leading-snug mb-8 md:mb-10 drop-shadow-md">
@@ -4567,10 +4567,37 @@ window.closeProfile = () => {
         </div>
     </div>
 </div>
+<script>// Auto-open article from URL param
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const articleId = params.get('article');
+  if (articleId && articleEngineData[articleId]) {
+    setTimeout(() => openReader(articleId), 400);
+  }
+})();
+</script>
 <script>
 window.openReader = function(id) {
+    window._currentArticleId = id;
+
   const data = articleEngineData[id];
   if (!data) return;
+
+  // Update OG meta tags for sharing
+  const setMeta = (property, content) => {
+    let el = document.querySelector(`meta[property="${property}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute('property', property); document.head.appendChild(el); }
+    el.setAttribute('content', content);
+  };
+
+  setMeta('og:title', data.title);
+  setMeta('og:description', data.tag + ' · Greenlight Sports Network');
+  setMeta('og:image', 'https://glsnetwork.com/' + data.hero);
+  setMeta('og:url', 'https://glsnetwork.com/index.html#' + id);
+  document.title = data.title + ' · Greenlight';
+
+  // ... rest of your existing openReader code
+
   
   window._savedScrollY = window.scrollY;
   document.getElementById('rtitle').innerText = data.title;
@@ -4612,6 +4639,7 @@ window.openReader = function(id) {
   document.body.style.position = 'fixed';
   document.body.style.width = '100%';
 }
+
 </script>
 
 <script type="module">
@@ -4681,6 +4709,7 @@ function listenForDirectMessages(userId) {
     });
 }
 
+// Update your onAuthStateChanged to trigger this
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         listenForDirectMessages(user.uid);
@@ -4886,21 +4915,20 @@ async function sendMessage() {
 }
     // --- ARTICLE LIKES & METRICS LOGIC ---
 window.shareStory = async () => {
-    const title = document.getElementById('rtitle').innerText;
-    const text = "Check out this story on Greenlight Sports Network";
-    const url = window.location.href;
-
-    if (navigator.share) {
-        try {
-            await navigator.share({ title, text, url });
-        } catch (err) {
-            console.log("Share failed:", err);
-        }
-    } else {
-        // Fallback: Copy to clipboard
-        navigator.clipboard.writeText(url);
-        alert("Link copied to clipboard!");
-    }
+  const id = window._currentArticleId;
+  const data = articleEngineData[id];
+  if (!id || !data) return;
+  
+  const url = `https://glsnetwork.com/?article=${id}`;
+  
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: data.title + ' · Greenlight', text: data.title, url });
+    } catch(e) {}
+  } else {
+    navigator.clipboard.writeText(url);
+    alert("Link copied!");
+  }
 };
 
 
