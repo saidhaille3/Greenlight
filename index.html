@@ -797,13 +797,13 @@ Might Be Time For a Coaching Change In Minnesota      </p>
     {
       label: "NFL",
       labelStyle: "bg-amber-500 shadow-[0_8px_30px_rgba(245,158,11,0.5)]",
-      headline: "MY VERY EARLY NBA Draft<br/><span class='text-white/25'>TAKES</span>",
-      subhead: "Who I like, Dislike, Mixed Opinions etc",
-      image: "images/fa.jpeg",
+      headline: "Darren Peterson Scouting Report",
+      subhead: "The Safest Player In This Draft",
+      image: "images/pete.jpeg",
       series: false,
       watchHref: "#",
       readHref: "#",
-      articleId: "boba-nba-draft"
+      articleId: "peterson-scouting-report"
     }
     
   ];
@@ -2639,6 +2639,366 @@ const articleEngineData = {
     </div>
     `
 },
+"peterson-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/pete.jpeg",
+    time: "10 MIN READ",
+    published: "May 18, 2026",
+    updated: null,
+    title: "Darryn Peterson Scouting Report",
+    content: `
+<style>
+  .ps-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .ps-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .ps-article .ps-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .ps-article .ps-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .ps-article .ps-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .ps-article .ps-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .ps-article .ps-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .ps-article .ps-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .ps-article .ps-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .ps-article .ps-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .ps-article .ps-pull p { color: #d4af37; }
+  .ps-article .ps-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .ps-article .ps-stat-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .ps-article .ps-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .ps-article .ps-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .ps-article .ps-stat-box .ps-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .ps-article .ps-stat-box .ps-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .ps-article .ps-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .ps-article .ps-weakness-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .ps-article .ps-weakness-card .ps-w-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .ps-article .ps-weakness-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.82 !important;
+  }
+  .ps-article .ps-weakness-card p:last-child { margin-bottom: 0 !important; }
+  .ps-article .ps-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .ps-article .ps-projection .ps-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .ps-article .ps-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .ps-article .ps-projection p:last-child { margin-bottom: 0 !important; }
+  .ps-article .ps-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .ps-article .ps-grade-banner .ps-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .ps-article .ps-grade-banner .ps-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .ps-article strong { font-weight: 700; opacity: 1; }
+  .ps-article em { font-style: italic; }
+</style>
+
+<div class="ps-article">
+
+  <div class="ps-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="ps-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      May 18, 2026
+    </div>
+  </div>
+
+  <div class="ps-section">
+    <span class="ps-section-label">Physical</span>
+    <h2 class="ps-section-title">Movement Profile &amp; Athleticism</h2>
+    <span class="ps-rule"></span>
+  </div>
+
+  <p>Peterson's locomotion pattern is distinctive. He moves with a compact, loaded gait, storing energy in each step. There's a coiled spring quality to his movement mechanics. His footwork shines defensively off-ball: when navigating through screens or defending rollers.</p>
+
+  <p>He has quick feet, active hands and great awareness. He processes help rotations naturally, rarely loses his man even when his eyes drift ball-ward momentarily.</p>
+
+  <p>On offense, it seemed at times this year he didn't trust his burst. There were moments where a defender was caught in a poor closeout and the lane was there -- and he still hesitated. Could've been the cramping episode still in his head. But we do know he is explosive. Some of his dunks display legitimate power at the point of contact and a real ability to finish through contact.</p>
+
+
+  <div class="ps-divider"></div>
+
+  <div class="ps-section">
+    <span class="ps-section-label">Bag</span>
+    <h2 class="ps-section-title">Offensive Toolkit</h2>
+    <span class="ps-rule"></span>
+  </div>
+
+  <p>As far as systems go, Kansas's offensive structure didn't do a great job of emphasizing his advantages. From what I observed, it seems Bill Self ran a post-centric, inside-out offense -- heavy on guard-to-post entry, letting the big man work from the high post and elbow while perimeter players essentially waited for the ball to come back out. That was not an environment built for a guard whose value is attacking off movement, playing downhill off the catch.</p>
+
+  <p>When allowed to create, Peterson shows legitimate deep range from above the break. The pull-up three off the left wing is a weapon.</p>
+
+  <p>His off-the-dribble game has almost veteran like nuance.</p>
+
+  <p>There's craft there: hesitations, subtle footwork adjustments, false spins that freeze defenders, floaters etc..</p>
+
+  <div class="ps-divider"></div>
+
+  <div class="ps-section">
+    <span class="ps-section-label">Ceiling</span>
+    <h2 class="ps-section-title">All-Star Upside</h2>
+    <span class="ps-rule"></span>
+  </div>
+
+  <p>The skills are already present. Peterson has legitimate two-way impact tools that translate to All-Star frameworks. The defensive instincts, the shot creation off the dribble, the craft -- these aren't developmental hopes, he already has it.</p>
+
+  <div class="ps-pull"><p>Put him in proper offensive structure that emphasizes his strengths and you're looking at a 20+ point per game scorer who defends multiple positions. The blueprint is there.</p></div>
+
+  <div class="ps-divider"></div>
+
+  <div class="ps-section">
+    <span class="ps-section-label">Build &amp; Movement</span>
+    <h2 class="ps-section-title">Movement Style</h2>
+    <span class="ps-rule"></span>
+  </div>
+
+  <p>He's not an elastic, stretchy athlete. He has compact burst -- bouncy and contained. He generates explosiveness from a small runway. Think late 90s Jordan. It's a similar movement pattern.</p>
+
+  <p>That compactness serves him in short-space battles: he wins hand-checks and stride-for-stride positioning through leverage.</p>
+
+  <p>When clean separation isn't there he has a subtle hitch. A mid-drive body manipulation that gets defenders to commit early and puts him on the line. Whether that translates consistently at the NBA level remains to be seen.</p>
+
+  <div class="ps-divider"></div>
+
+  <div class="ps-section">
+    <span class="ps-section-label">Fast Break &amp; IQ</span>
+    <h2 class="ps-section-title">Transition &amp; Opportunism</h2>
+    <span class="ps-rule"></span>
+  </div>
+
+  <p>Reads turnovers quickly and rotates into transition in one motion. When that happens, he's usually the first player on the court to react, which creates easy fast break opportunities before the defense can set.</p>
+
+  <div class="ps-divider"></div>
+
+  <div class="ps-section">
+    <span class="ps-section-label">Health</span>
+    <h2 class="ps-section-title">Medical &amp; Recovery Context</h2>
+    <span class="ps-rule"></span>
+  </div>
+
+  <p>The full-body cramping incident appears resolved post-creatine cessation. All signs suggest it was isolated and situational rather than systemic. Movement patterns show no residual effects. The kid's telling the truth -- people need to stop being cynical about it.</p>
+
+  <div class="ps-divider"></div>
+
+  <div class="ps-section">
+    <span class="ps-section-label">The Concern</span>
+    <h2 class="ps-section-title">Weakness</h2>
+    <span class="ps-rule"></span>
+  </div>
+
+  <div class="ps-weakness-card">
+    <span class="ps-w-label">Film Room Concern</span>
+    <p>1.6 assists per contest across 24 appearances. For a player posting a 25.4 PER with substantial usage, that output is alarmingly deficient.</p>
+    <p>The creation-to-giveaway balance tells an even bleaker story -- essentially one-to-one, meaning he surrendered possession as frequently as he generated scoring chances for others.</p>
+    <p>Before their tournament clash, Rick Pitino referenced Peterson's assist metrics with a knowing smirk, noting the negative creation ratio. His game plan followed accordingly: force the pass, live with the result.</p>
+    <p>Peterson responded with a zero-assist, three-turnover performance.</p>
+    <p>The team impact data compounds the concern. Kansas posted a 9-2 mark in his absence versus 15-9 with him available, and their offensive efficiency actually improved when he sat -- 113.2 points per 100 possessions compared to 109.8 with him on the floor.</p>
+    <p>The chemistry struggles and limited creation ability directly contributed to Kansas's offensive dysfunction.</p>
+  </div>
+
+  <div class="ps-stat-grid">
+    <div class="ps-stat-box">
+      <span class="ps-sv">25.4</span>
+      <span class="ps-sl">PER</span>
+    </div>
+    <div class="ps-stat-box">
+      <span class="ps-sv">1.6</span>
+      <span class="ps-sl">APG</span>
+    </div>
+    <div class="ps-stat-box">
+      <span class="ps-sv">1:1</span>
+      <span class="ps-sl">Ast/TO Ratio</span>
+    </div>
+    <div class="ps-stat-box">
+      <span class="ps-sv">9-2</span>
+      <span class="ps-sl">Kansas W/L Without Him</span>
+    </div>
+    <div class="ps-stat-box">
+      <span class="ps-sv">113.2</span>
+      <span class="ps-sl">OffRtg Without Him</span>
+    </div>
+    <div class="ps-stat-box">
+      <span class="ps-sv">109.8</span>
+      <span class="ps-sl">OffRtg With Him</span>
+    </div>
+  </div>
+
+  <div class="ps-divider"></div>
+
+  <div class="ps-section">
+    <span class="ps-section-label">Final Take</span>
+    <h2 class="ps-section-title">My Projection</h2>
+    <span class="ps-rule"></span>
+  </div>
+
+  <div class="ps-projection">
+    <span class="ps-proj-label">Boba's Verdict</span>
+    <p>He has a high floor and a high ceiling. Probably the safest player in the draft floor wise.</p>
+    <p>He can score. That's settled. The rest is about better passing reads and playing with the certainty his talent warrants.</p>
+    <p>I see a Future All-star talent. A secondary creator with defensive versatility who could become a primary option in the right system.</p>
+    <p>He is my #2 overall ranked prospect.</p>
+  </div>
+
+  <div class="ps-grade-banner">
+    <span class="ps-grade-num">#2</span>
+    <span class="ps-grade-caption">Overall Prospect · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
+
 "finch-seat": {
     tag: "NBA · Hot Seat",
     hero: "images/finch.png",
@@ -3160,9 +3520,9 @@ const articleEngineData = {
 </div>
 `
 },
-"boba-nba-draft": {
+"peterson-scouting": {
     tag: "NBA Draft · Film Room",
-    hero: "images/fa.jpeg",
+    hero: "images/pete.jpeg",
     time: "12 MIN READ",
      published: "April 12, 2026",
      updated: null,
@@ -4707,7 +5067,8 @@ window.openReader = function(id) {
 </script>
 
 <script type="module">
-    // ── 1. IMPORTS ──────────────────────────────────────────────────────────────
+
+import { addDoc, collection, serverTimestamp, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, getDoc, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -4744,6 +5105,65 @@ window.handleUserIconClick = () => {
         toggleUserDashboard();
     } else {
         window.location.href = 'login.html';
+    }
+};
+window.subscribeNewsletter = async () => {
+    const input = document.querySelector('input[type="email"][placeholder="EMAIL ADDRESS"]');
+    const btn = input.nextElementSibling;
+    const email = input.value.trim().toLowerCase();
+
+    // Validation
+    if (!email || !email.includes('@') || email.length < 5) {
+        alert('Please enter a valid email address');
+        return;
+    }
+
+    // Check if already subscribed
+    const existingQuery = query(
+        collection(db, "newsletter_subscribers"),
+        where("email", "==", email)
+    );
+    const existingDocs = await getDocs(existingQuery);
+    
+    if (!existingDocs.empty) {
+        alert('This email is already subscribed!');
+        return;
+    }
+
+    // Loading state
+    const originalText = btn.innerText;
+    btn.disabled = true;
+    btn.innerText = '...';
+    btn.style.opacity = '0.5';
+
+    try {
+        await addDoc(collection(db, "newsletter_subscribers"), {
+            email: email,
+            subscribedAt: serverTimestamp(),
+            status: 'active',
+            source: 'website_footer'
+        });
+
+        // Success state
+        btn.innerText = '✓ Subscribed';
+        btn.classList.add('text-green-600');
+        input.value = '';
+        input.placeholder = 'CHECK YOUR EMAIL';
+
+        setTimeout(() => {
+            btn.innerText = originalText;
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.classList.remove('text-green-600');
+            input.placeholder = 'EMAIL ADDRESS';
+        }, 3000);
+
+    } catch (e) {
+        console.error("Newsletter signup failed:", e);
+        alert('Something went wrong. Please try again.');
+        btn.innerText = originalText;
+        btn.disabled = false;
+        btn.style.opacity = '1';
     }
 };
 

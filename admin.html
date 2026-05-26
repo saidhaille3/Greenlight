@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#0a0a0a; color:white; font-family:Inter,sans-serif; padding:40px;">
+
+  <h1 style="color:#d4af37;">Send Newsletter</h1>
+
+  <div style="display:flex; flex-direction:column; gap:12px; max-width:400px;">
+    
+    <input id="secret" type="password" placeholder="Secret Key"
+           style="padding:12px; border-radius:8px; border:none; background:#1a1a1a; color:white;">
+    
+    <input id="title" placeholder="Article Title"
+           style="padding:12px; border-radius:8px; border:none; background:#1a1a1a; color:white;">
+    
+    <input id="tag" placeholder="Tag (e.g. NBA · Hot Seat)"
+           style="padding:12px; border-radius:8px; border:none; background:#1a1a1a; color:white;">
+    
+    <input id="summary" placeholder="One line summary"
+           style="padding:12px; border-radius:8px; border:none; background:#1a1a1a; color:white;">
+    
+    <input id="articleId" placeholder="Article ID (e.g. finch-seat)"
+           style="padding:12px; border-radius:8px; border:none; background:#1a1a1a; color:white;">
+    
+    <input id="heroImage" placeholder="Full image URL"
+           style="padding:12px; border-radius:8px; border:none; background:#1a1a1a; color:white;">
+
+    <button onclick="sendNewsletter()"
+            style="padding:16px; background:#d4af37; color:black; font-weight:900; 
+                   border:none; border-radius:8px; cursor:pointer; font-size:14px;">
+      SEND TO ALL SUBSCRIBERS
+    </button>
+
+    <p id="status" style="color:#10b981; font-weight:700;"></p>
+
+  </div>
+
+  <script>
+    async function sendNewsletter() {
+      const status = document.getElementById('status');
+      status.innerText = 'Sending...';
+
+      const res = await fetch('https://your-render-server.onrender.com/api/send-newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          secretKey: document.getElementById('secret').value,
+          title: document.getElementById('title').value,
+          tag: document.getElementById('tag').value,
+          summary: document.getElementById('summary').value,
+          articleId: document.getElementById('articleId').value,
+          heroImage: document.getElementById('heroImage').value,
+        })
+      });
+
+      const data = await res.json();
+      
+      if (data.ok) {
+        status.innerText = `Done! Sent to ${data.sent} subscribers.`;
+      } else {
+        status.style.color = '#ef4444';
+        status.innerText = `Error: ${data.error}`;
+      }
+    }
+  </script>
+
+</body>
+</html>
