@@ -2857,6 +2857,14 @@ const articleEngineData = {
     </div>
   </div>
 
+
+<div style="display:inline-flex; align-items:center; gap:0.35rem; margin-bottom:1.5rem; opacity:0.45;">
+  <span style="font-family:'Inter',sans-serif;font-size:0.52rem;font-weight:300;
+               letter-spacing:0.2em;text-transform:uppercase;color:#FF0000;">Updated</span>
+  <span style="font-family:'Inter',sans-serif;font-size:0.52rem;font-weight:600;
+               text-transform:uppercase;letter-spacing:0.1em;color:inherit;">· June 4, 2026</span>
+</div>
+
   <div class="ps-section">
     <span class="ps-section-label">Physical</span>
     <h2 class="ps-section-title">Movement Profile &amp; Athleticism</h2>
@@ -5030,25 +5038,7 @@ window.openReader = function(id) {
   document.getElementById('rtitle').innerText = data.title;
   document.getElementById('rbody').innerHTML = data.content;
 
-  // Updated stamp
-  const stamp = document.getElementById('reader-updated-stamp');
-  if (stamp) {
-    if (data.updated) {
-      stamp.innerHTML = `
-        <span style="font-family:'Inter',sans-serif;font-size:0.58rem;font-weight:900;
-                     letter-spacing:0.25em;text-transform:uppercase;color:#d4af37;
-                     background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);
-                     padding:0.3rem 0.75rem;border-radius:2rem;">Updated</span>
-        <span style="font-family:'Inter',sans-serif;font-size:0.68rem;font-weight:700;
-                     text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;
-                     color:inherit;">
-          ${data.updated}
-        </span>`;
-      stamp.style.display = 'flex';
-    } else {
-      stamp.style.display = 'none';
-    }
-  }
+
 
   
   const heroImg = document.getElementById('rHeroImage');
