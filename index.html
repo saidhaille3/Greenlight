@@ -1270,7 +1270,7 @@ function updateReadBtn(slide) {
 .new-pod-badge .badge-dot {
   width: 6px;
   height: 6px;
-  background: #000;
+  background: FF0000;
   border-radius: 50%;
   animation: softPulse 1.2s ease-in-out infinite;
   flex-shrink: 0;
@@ -1417,11 +1417,16 @@ function formatPodcastTime(seconds) {
 <div>
   <h3 class="footer-text text-[10px] font-black tracking-[0.4em] mb-6 text-black/30 uppercase dark:text-white/30">📬 Newsletter</h3>
   <p class="footer-text mb-6 text-xs text-black/40 dark:text-white/40 leading-relaxed tracking-widest">Get the hottest sports news, fresh takes, and live alerts.</p>
-  <div class="flex border-b-2 border-black dark:border-white pb-2">
-    <input type="email" placeholder="EMAIL ADDRESS" class="bg-transparent w-full text-[10px] font-black outline-none uppercase tracking-widest text-black dark:text-white placeholder-black/40 dark:placeholder-white/40">
-    <button class="text-[10px] font-black uppercase tracking-widest hover:text-red-600 transition text-black dark:text-white">Join</button>
+  
+  <div class="coming-soon flex border-b-2 border-black dark:border-white pb-2 pt-2">
+    
+    <input disabled type="email" placeholder="EMAIL ADDRESS" class="bg-transparent w-full text-[10px] font-black outline-none uppercase tracking-widest text-black dark:text-white placeholder-black/40 dark:placeholder-white/40 cursor-not-allowed">
+    
+    <button disabled class="text-[10px] font-black uppercase tracking-widest transition text-black dark:text-white cursor-not-allowed">Join</button>
+  
   </div>
 </div>
+
 
 
 <div>
