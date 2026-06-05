@@ -5081,7 +5081,7 @@ if (myButton) {
 <script>
 window.openReader = function(id) {
     window._currentArticleId = id;
-    currentArticleId = id;
+    
 
   const data = articleEngineData[id];
   if (!data) return;
@@ -5123,7 +5123,7 @@ window.openReader = function(id) {
   document.body.style.top = `-${window._savedScrollY}px`;
   document.body.style.position = 'fixed';
   document.body.style.width = '100%';
-  loadArticleComments(id);
+
   
 }
 
