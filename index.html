@@ -707,7 +707,8 @@ filter: invert(1) brightness(2);
 <section id="heroSection" class="relative overflow-hidden bg-black" style="height: 60vh; min-height: 620px; max-height: 620px;">
 
   <!-- Background Slides -->
-  <div id="hs-slide-a" class="absolute inset-0 bg-cover bg-right transition-opacity duration-1000 opacity-100" style="background-image: url('images/finch.png');"></div>
+<div id="hs-slide-a" class="absolute inset-0 bg-cover bg-right transition-opacity duration-1000 opacity-100" style="background-image: url('images/pete.jpeg');"></div>
+
   <div id="hs-slide-b" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0"></div>
 
   <!-- Cinematic Overlays -->
@@ -784,17 +785,6 @@ Might Be Time For a Coaching Change In Minnesota      </p>
 
   const HS_SLIDES = [
     {
-      label: "BREAKING",
-      labelStyle: "bg-red-600 shadow-[0_8px_30px_rgba(220,38,38,0.5)]",
-      headline: "Good Enough is The Enemy<br/><span class='text-white/25'>Of Great</span>",
-      subhead: "Might Be Time For a Coaching Change In Minnesota",
-      image: "images/finch.png",
-      series: false,
-      watchHref: "#",
-      readHref: "#",
-      articleId: "finch-seat"
-    },
-    {
       label: "NFL",
       labelStyle: "bg-amber-500 shadow-[0_8px_30px_rgba(245,158,11,0.5)]",
       headline: "Darren Peterson Scouting Report",
@@ -804,9 +794,20 @@ Might Be Time For a Coaching Change In Minnesota      </p>
       watchHref: "#",
       readHref: "#",
       articleId: "peterson-scouting-report"
+    },
+    {
+      label: "BREAKING",
+      labelStyle: "bg-red-600 shadow-[0_8px_30px_rgba(220,38,38,0.5)]",
+      headline: "Good Enough is The Enemy<br/><span class='text-white/25'>Of Great</span>",
+      subhead: "Might Be Time For a Coaching Change In Minnesota",
+      image: "images/finch.png",
+      series: false,
+      watchHref: "#",
+      readHref: "#",
+      articleId: "finch-seat"
     }
-    
   ];
+
 
   const SLIDE_DURATION = 5500;
   let hsIndex = 0;
@@ -1230,6 +1231,59 @@ function updateReadBtn(slide) {
 </div>
 </section>
 
+<style>
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes softPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(212,175,55,0); }
+}
+.new-pod-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(
+    90deg,
+    #926f12 0%, #d4af37 30%, #f9e2af 50%, #d4af37 70%, #926f12 100%
+  );
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite, softPulse 2s ease-in-out infinite;
+  color: #000;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: 2rem;
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+.new-pod-badge .badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #000;
+  border-radius: 50%;
+  animation: softPulse 1.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.pod-episode-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.72rem, 1.8vw, 0.82rem);
+  font-weight: 700;
+  color: inherit;
+  opacity: 0.55;
+  line-height: 1.55;
+  max-width: 480px;
+  margin-bottom: 1.75rem;
+  letter-spacing: 0.01em;
+}
+.dark .pod-episode-title {
+  opacity: 0.45;
+}
+</style>
 
 <!-- Flagship Show -->
 
@@ -1241,7 +1295,14 @@ function updateReadBtn(slide) {
         <span class="lounge-title-gradient">Greenlight</span> <br/>
         <span class="text-black/20 dark:text-white/20">Pod</span>
       </h2>
-      <p class="text-xl text-black/50 dark:text-white/50 mb-8 font-medium max-w-xl">
+<div class="new-pod-badge">
+  <span class="badge-dot"></span>
+  New Episode
+</div>
+<p class="pod-episode-title">
+  Ep.2: Kat will probably bring the Wemby train to a screeching halt (for now) + Formula for the future NBA in combatting wemby's dominance
+</p>
+
 
       </p>
       
