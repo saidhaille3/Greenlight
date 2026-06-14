@@ -2899,41 +2899,48 @@ setInterval(loadGames, 30000); // 30s refresh is better for live data
 </button>
 
 
-<div id="chatWindow" class="fixed bottom-24 right-6 z-[100] w-[350px] h-[550px] greenlight-glass rounded-[2.5rem] flex flex-col shadow-2xl translate-y-[120%] opacity-0 pointer-events-none transition-all duration-500 ease-in-out">
+<div id="chatWindow" class="fixed z-[100] flex flex-col greenlight-glass transition-all duration-500 ease-in-out opacity-0 pointer-events-none
+     /* Mobile/Vertical Baseline Layout */
+     bottom-24 right-6 w-[calc(100vw-3rem)] sm:w-[360px] h-[520px] rounded-[2.5rem] translate-y-[120%]
+     /* Wide Screens & Landscape Overrides: Prevents vertical blowing out */
+     md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 
+     md:w-[90vw] md:max-w-[540px] md:h-[80vh] md:max-h-[580px] md:rounded-[2.5rem]
+     md:scale-95 [&.active-chat]:md:scale-100 [&.active-chat]:md:-translate-y-1/2">
     
-    <div class="p-6 border-b border-green-500/10 flex items-center justify-between bg-white/10 dark:bg-black/10">
+    <div class="p-5 pb-4 border-b border-green-500/10 flex items-center justify-between bg-white/10 dark:bg-black/10 flex-shrink-0">
         <div>
-            <div class="flex items-center gap-1.5 mt-1">
+            <h3 class="text-base font-black uppercase tracking-tighter dark:text-white md:text-xl">Greenlight Lounge</h3>
+            <div class="flex items-center gap-1.5 mt-0.5">
                 <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
                 <span id="online-user-count" class="text-[9px] font-bold opacity-50 uppercase dark:text-white">0 Online</span>
             </div>
         </div>
-        <button onclick="toggleChat()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-            <i class="fa-solid fa-xmark text-black dark:text-white opacity-40"></i>
+        <button onclick="toggleChat()" class="w-8 h-8 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/5 dark:hover:bg-white/10 transition-colors">
+            <i class="fa-solid fa-xmark text-black dark:text-white opacity-60 text-xs md:text-sm"></i>
         </button>
     </div>
 
-<div class="flex p-4 gap-3 overflow-x-auto no-scrollbar border-b border-green-500/10 items-center min-h-[70px]">
-    <button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-green-600 text-white text-[10px] font-black uppercase tracking-widest shadow-lg shadow-green-500/20 whitespace-nowrap">
-        Lobby
-    </button>
-    <button class="flex-shrink-0 px-6 py-2.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
-        NBA
-    </button>
-    <button class="flex-shrink-0 px-6 py-2.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
-        NFL
-    </button>
-</div>
+    <div class="flex p-3.5 gap-2 overflow-x-auto no-scrollbar border-b border-green-500/10 items-center min-h-[56px] flex-shrink-0">
+        <button class="flex-shrink-0 px-5 py-1.5 rounded-full bg-green-600 text-white text-[10px] font-black uppercase tracking-widest shadow-md shadow-green-500/20 whitespace-nowrap">
+            Lobby
+        </button>
+        <button class="flex-shrink-0 px-5 py-1.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
+            NBA
+        </button>
+        <button class="flex-shrink-0 px-5 py-1.5 rounded-full hover:bg-green-500/10 text-[10px] font-black uppercase tracking-widest text-black/40 dark:text-white/40 border border-transparent hover:border-green-500/20 transition-all whitespace-nowrap">
+            NFL
+        </button>
+    </div>
 
-    <div id="message-container" class="flex-grow overflow-y-auto p-5 space-y-4 no-scrollbar">
-        </div>
+    <div id="message-container" class="flex-grow overflow-y-auto p-4 space-y-3 no-scrollbar min-h-0">
+    </div>
 
-    <div class="p-5 bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem] border-t border-green-500/10">
-        <div class="relative group">
-            <input id="chat-input" type="text" placeholder="" 
-                   class="w-full bg-white/50 dark:bg-white/5 border border-green-500/10 dark:border-white/10 rounded-2xl py-4 pl-5 pr-12 text-sm font-medium outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/10 transition-all dark:text-white placeholder-black/30 dark:placeholder-white/20">
-            <button id="send-btn" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-green-600 hover:scale-110 active:scale-90 transition-transform">
-                <i class="fa-solid fa-paper-plane"></i>
+    <div class="p-4 bg-white/20 dark:bg-black/20 backdrop-blur-md rounded-b-[2.5rem] border-t border-green-500/10 flex-shrink-0">
+        <div class="relative w-full flex items-center">
+            <input id="chat-input" type="text" placeholder="Type a message..." 
+                   class="w-full bg-white/60 dark:bg-neutral-900/40 border border-green-500/10 dark:border-white/10 rounded-xl py-3 pl-4 pr-12 text-xs font-medium outline-none focus:border-green-500 focus:ring-4 focus:ring-green-500/10 transition-all dark:text-white placeholder-black/30 dark:placeholder-white/30">
+            <button id="send-btn" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-green-600 hover:scale-110 active:scale-90 transition-transform z-10">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
             </button>
         </div>
     </div>
@@ -2944,7 +2951,9 @@ function toggleChat() {
     chatWindow.classList.toggle('translate-y-[120%]');
     chatWindow.classList.toggle('opacity-0');
     chatWindow.classList.toggle('pointer-events-none');
+    chatWindow.classList.toggle('active-chat'); // Smooth transitions selector flag
 }
+
 
 // ── PLAYER STATS MODAL ──────────────────────────────────────────────────────
 
