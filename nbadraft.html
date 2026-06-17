@@ -1921,16 +1921,18 @@ function updateReadBtn(slide) {
     
     <div class="max-w-[1600px] mx-auto px-4 md:px-8 relative group cursor-pointer" onclick="toggleWarRoom()">
         
-        <div class="absolute inset-0 bg-[#83d636]/10 blur-[100px] rounded-[3rem] pointer-events-none group-hover:bg-[#83d636]/25 transition-colors duration-700"></div>
+        <div class="absolute inset-0 bg-[#83d636]/10 blur-[100px] rounded-[3rem] pointer-events-none group-hover:bg-[#83d636]/20 transition-colors duration-700"></div>
 
         <img src="images/war-room-map.png" alt="NBA Draft War Room" class="w-full h-auto object-cover rounded-[2rem] drop-shadow-[0_30px_80px_rgba(0,0,0,0.5)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.01]" />
 
-        <div class="absolute inset-0 flex flex-col items-center justify-end pb-8 md:pb-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/90 via-black/20 to-transparent rounded-[2rem]">
-            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center transform group-hover:-translate-y-2 transition-transform duration-500 shadow-[0_0_30px_rgba(131,214,54,0.3)]">
-                <i id="wr-chevron" class="fa-solid fa-chevron-down text-white text-xl md:text-2xl transition-transform duration-500"></i>
-            </div>
-            <span class="mt-4 text-[10px] md:text-xs font-black uppercase tracking-[0.4em] text-[#83d636] drop-shadow-md">Access Database</span>
+        <div class="absolute top-6 right-8 md:top-10 md:right-12 z-20 flex items-center gap-2 bg-black/80 backdrop-blur-xl border border-white/10 px-4 py-2 md:px-5 md:py-2.5 rounded-full shadow-2xl">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+            </span>
+            <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-red-500 pt-[1px]">Live</span>
         </div>
+
 
         <div class="absolute top-6 right-8 md:top-10 md:right-12 z-20 flex items-center gap-2 bg-black/80 backdrop-blur-xl border border-white/10 px-4 py-2 md:px-5 md:py-2.5 rounded-full shadow-2xl">
             <span class="relative flex h-2 w-2">
