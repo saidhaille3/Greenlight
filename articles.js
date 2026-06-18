@@ -1,6 +1,291 @@
 
     
 const articleEngineData = {
+"boozer-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/boozer.jpeg",
+    time: "13 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "Cameron Boozer Scouting Report",
+    content: `
+<style>
+  .cb-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .cb-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .cb-article .cb-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .cb-article .cb-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .cb-article .cb-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .cb-article .cb-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .cb-article .cb-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .cb-article .cb-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .cb-article .cb-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .cb-article .cb-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .cb-article .cb-pull p { color: #d4af37; }
+  .cb-article .cb-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .cb-article .cb-tension-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .cb-article .cb-tension-card .cb-t-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .cb-article .cb-tension-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .cb-article .cb-tension-card p:last-child { margin-bottom: 0 !important; }
+  .cb-article .cb-makeup-card {
+    background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(212,175,55,0.04) 100%);
+    border: 1px solid rgba(16,185,129,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .cb-article .cb-makeup-card .cb-m-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #10b981;
+    margin-bottom: 1.25rem;
+  }
+  .cb-article .cb-makeup-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .cb-article .cb-makeup-card p:last-child { margin-bottom: 0 !important; }
+  .cb-article .cb-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .cb-article .cb-projection .cb-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .cb-article .cb-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .cb-article .cb-projection p:last-child { margin-bottom: 0 !important; }
+  .cb-article .cb-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .cb-article .cb-grade-banner .cb-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(2.2rem, 8vw, 3.8rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .cb-article .cb-grade-banner .cb-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .cb-article strong { font-weight: 700; opacity: 1; }
+  .cb-article em { font-style: italic; }
+</style>
+
+<div class="cb-article">
+
+  <div class="cb-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="cb-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="cb-section">
+    <span class="cb-section-label">Bag</span>
+    <h2 class="cb-section-title">Bag</h2>
+    <span class="cb-rule"></span>
+  </div>
+
+  <p>Boozer is an excellent transition passer, reading the floor in motion rather than just running lanes. The strength shows up everywhere, but nowhere more obviously than on screens -- he's a load-bearing presence that defenders feel before they see.</p>
+
+  <p>He is not a shooter right now in the way modern NBA spacing demands. What he is, consistently, is a catch-and-drive threat, and almost exclusively going left. Faster, stronger defenders should be able to negate that one-directional tendency at the next level if he doesn't develop real ambidextrous comfort. He can technically counter to his right, but the move is visibly slower and stiffer -- a clear processing and mechanical gap between his strong and weak sides.</p>
+
+  <p>He loves to impose himself on the offensive glass through tip-ins and put-backs, and he's a strong, instinctive offensive rebounder. There's a surprising wrinkle in his handle too -- a between-the-legs dribble with real, unexpected quickness in the footwork -- but it's an isolated party trick rather than a functional tool, since the move went nowhere on tape and he even picked up his dribble illegally (a carry) attempting it. No real separation came from it. He also showed a surprising pull-up jumper through contact, which speaks to underrated touch.</p>
+
+  <div class="cb-pull"><p>The passing is the most translatable, highest-grade skill in his profile right now. He puts real velocity on his outlet and skip passes -- the kind of bullet delivery that demands real trust from a coaching staff.</p></div>
+
+  <p>And he consistently leads his receiver into space rather than passing to where they currently are, which is the actual mark of advanced floor vision. Boozer's passing is what separates him from every other big in this class, reading the floor like a point guard, and that observation lines up with what shows up on film.</p>
+
+  <p>His jump shot looks functionally sound but visually a little awkward -- a quick enough release without a perfectly fluid load, occasionally reading as stiff. He's currently shooting 39.6% from three this season, which is a number that should genuinely surprise anyone watching the mechanics in isolation rather than the box score.</p>
+
+  <p>His true weakness offensively is post scoring against length and physicality, despite the high overall efficiency number. He's converting 62.8% of his shots off post-ups, but the eye test reveals why that number could be fragile against bigger, longer NBA frontcourts: his body simply doesn't open up the angles a true post scorer needs. The turns and spins are slow, and there's a visible mechanical ceiling on how much footwork alone can manufacture separation when the frame underneath isn't fluid in that specific motion.</p>
+
+  <p>What's genuinely underrated about his offensive game is the composure. When doubles arrive on the post or in the short roll, he doesn't panic or force anything -- he calmly resets, relocates with the ball, and finds the extra read, often skipping it across the floor to an open man on the weak-side wing. That single trait -- staying organized under duress -- is one of the hardest things to teach and one of the clearest signs of a translatable basketball IQ.</p>
+
+  <p>The offensive rebounding has subtlety to it beyond pure box-out strength. There are small, almost imperceptible touches -- a nudge, a bump at the right moment -- that get a positioned defensive rebounder off his spot just enough to steal the carom. That's veteran subtlety from a teenager.</p>
+
+  <div class="cb-divider"></div>
+
+  <div class="cb-section">
+    <span class="cb-section-label">The Other End</span>
+    <h2 class="cb-section-title">Defensive Profile</h2>
+    <span class="cb-rule"></span>
+  </div>
+
+  <p>Defensively, Boozer is disciplined and intelligent. He understands positioning, communicates well, and is effective at switching onto different matchups. What shows up specifically on film is a genuinely strange tendency in zone coverage: he'll lock in mentally on guarding the perimeter actions even while his body is correctly anchored in his assigned interior zone. It's not indiscipline exactly -- it almost looks like he felt he had to compensate for teammates who weren't holding their own zone responsibilities, so he split his attention trying to do more than what was schematically required of him.</p>
+
+  <p>The hands are violent in the literal, useful sense -- when he can't secure a defensive rebound clean, he'll bat it away rather than let it go uncontested, which is the kind of competitive habit that shows up in deflection numbers more than highlight reels. He gets a lot of deflections and steals due to his anticipation, and his 17.8 box plus-minus is the highest mark since Zion Williamson's freshman season -- an absurd all-in-one number that captures just how much winning value he generates even without elite physical tools.</p>
+
+  <div class="cb-divider"></div>
+
+  <div class="cb-section">
+    <span class="cb-section-label">The Tension</span>
+    <h2 class="cb-section-title">The Projection Problem</h2>
+    <span class="cb-rule"></span>
+  </div>
+
+  <div class="cb-tension-card">
+    <span class="cb-t-label">My Honest Take</span>
+    <p>Here's where I have to be honest about the central tension in this evaluation. For a player being discussed in the same breath as the first overall pick, there's almost no recent precedent of a player in his exact athletic mold becoming a true superstar. My bar for a non-center forward to justify a top-3 selection is a 20-plus point per game NBA scorer -- and it's genuinely difficult to find a comparable body type that's hit that mark recently. Jayson Tatum is the instinctive comp people reach for, but Tatum entered the league a notably slimmer, longer-limbed athlete. Luka Dončić doesn't fit the mold either. Nikola Jokić is a center playing an entirely different defensive role. His natural athleticism is a major concern for analysts -- he doesn't play above the rim as much as the prototypical NBA power forward does, and he's looked sluggish switching onto smaller guards.</p>
+    <p>And yet the body itself is genuinely unique. He's not stiff -- there's an unexpected bounce to his game, almost a glide at times, layered underneath what otherwise reads as heavy-footedness. The stride length is long, which is a real positive marker for a player his size, and that combination -- mass without true rigidity -- is rare enough that I can't immediately think of a recent top-3 selection built quite like this who developed into a perennial 20-point scorer or a true superstar at his position.</p>
+    <p>That matters enormously in the current era. The league is increasingly defined by the Wembanyama standard at the four and five -- to win a championship, you generally need a frontcourt piece in the mold of a Karl-Anthony Towns: someone with the length and switchable skill set to combat that specific archetype. Boozer, as currently built, doesn't profile as that length-and-skill combination at either forward spot.</p>
+    <p>His box plus-minus, statistical profile, and overall production make him an extremely safe bet to avoid being a bust and become a multiple-time All-Star -- but safety and a true top-3, franchise-altering ceiling are different conversations.</p>
+  </div>
+
+  <div class="cb-divider"></div>
+
+  <div class="cb-section">
+    <span class="cb-section-label">Context</span>
+    <h2 class="cb-section-title">Age, Makeup, and the Safe Pick Case</h2>
+    <span class="cb-rule"></span>
+  </div>
+
+  <div class="cb-makeup-card">
+    <span class="cb-m-label">The Intangibles</span>
+    <p>The age context genuinely changes the analysis. He only turns 19 on July 18, meaning he'll spend his entire rookie season at 19 years old, having been 18 at the time of the draft itself. That's an outlier age for a player with this level of physical maturity and on-court polish already -- there's real swelling room left in the developmental curve, even if the frame itself looks close to finished now.</p>
+    <p>Boozer is the son of two-time NBA All-Star and 2001 Duke national champion Carlos Boozer, and that pedigree shows up in the makeup. The family is basketball-saturated in a way that should ground him through the inevitable adjustment bumps of a rookie season, and that competitive backbone, paired with a winning résumé that includes National Player of the Year honors as just the fifth freshman ever to win the award, makes him feel like a genuinely safe selection at three, for the moment.</p>
+  </div>
+
+  <div class="cb-divider"></div>
+
+  <div class="cb-section">
+    <span class="cb-section-label">Final Take</span>
+    <h2 class="cb-section-title">My Projection</h2>
+    <span class="cb-rule"></span>
+  </div>
+
+  <div class="cb-projection">
+    <p>I see a long-time, high-level NBA player if health holds -- a likely starter, possibly a long-tenured one, and a real building block for any franchise. The strength, the passing, the offensive composure under duress, and the rare combination of mass and mobility are more than enough to justify a top-5 selection on talent and translatable skill alone.</p>
+    <p>But I'm not seeing a top-3, true-superstar ceiling. The body type lacks recent precedent at that tier, the post game has a real mechanical ceiling against length, and the league's current championship math increasingly demands a frontcourt archetype he doesn't currently resemble. He's special and he's safe -- those two things just aren't the same as superstar.</p>
+  </div>
+
+  <div class="cb-grade-banner">
+    <span class="cb-grade-num">Top 5</span>
+    <span class="cb-grade-caption">Not Top 3 · My Grade · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
+
 "wemby-mvp": {
     tag: "NBA Awards",
     hero: "images/wemby.jpeg",
