@@ -2116,6 +2116,358 @@ const articleEngineData = {
 </div>
 `
 },
+"acuff-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/acuff.jpeg",
+    time: "10 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "Darius Acuff Jr. Scouting Report",
+    content: `
+<style>
+  .da-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .da-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .da-article .da-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .da-article .da-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .da-article .da-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .da-article .da-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .da-article .da-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .da-article .da-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .da-article .da-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .da-article .da-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .da-article .da-pull p { color: #d4af37; }
+  .da-article .da-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .da-article .da-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .da-article .da-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .da-article .da-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .da-article .da-stat-box .da-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .da-article .da-stat-box .da-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .da-article .da-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .da-article .da-weakness-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .da-article .da-weakness-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .da-article .da-weakness-card .da-w-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .da-article .da-weakness-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .da-article .da-weakness-card p:last-child { margin-bottom: 0 !important; }
+  .da-article .da-disconnect-card {
+    background: rgba(139,92,246,0.04);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .da-article .da-disconnect-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .da-article .da-disconnect-card .da-dc-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .da-article .da-disconnect-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .da-article .da-disconnect-card p:last-child { margin-bottom: 0 !important; }
+  .da-article .da-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .da-article .da-projection .da-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .da-article .da-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .da-article .da-projection p:last-child { margin-bottom: 0 !important; }
+  .da-article .da-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .da-article .da-grade-banner .da-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .da-article .da-grade-banner .da-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .da-article strong { font-weight: 700; opacity: 1; }
+  .da-article em { font-style: italic; }
+</style>
+
+<div class="da-article">
+
+  <div class="da-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="da-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="da-section">
+    <span class="da-section-label">Mechanics</span>
+    <h2 class="da-section-title">Movement Profile</h2>
+    <span class="da-rule"></span>
+  </div>
+
+  <p>He is a straight-line player without much bend in his frame -- limited hip flexibility shows up directly in how he navigates contact. When a defender gets into his body on a drive, he doesn't have the rotational give to slide around it, so he either bulldozes through or gets stood up. His ankles read stiff rather than springy, which kills his ability to decelerate and re-accelerate at a different angle. Compact, short strides rather than long ones, which limits how much ground he covers per move and forces him into more dribbles to manufacture the same separation a longer-strided guard gets in one or two touches.</p>
+
+  <p>Offensively, this is the root of why clean separation is such a fight for him. He's not generating space through deception of the hips or a shifty plant-and-go -- he's generating it almost entirely through pace manipulation and handle craft, which is a much harder way to live against NBA length and quickness.</p>
+
+  <div class="da-divider"></div>
+
+  <div class="da-section">
+    <span class="da-section-label">Bag</span>
+    <h2 class="da-section-title">Offensive Toolkit</h2>
+    <span class="da-rule"></span>
+  </div>
+
+  <p>Off the ball, he's a decent mover -- relocating with real purpose on set plays, showing good chemistry in close-quarters actions. His give-and-go reads are sharp: he'll juke his defender with a quick fake one direction, slip backdoor or curl into open space, and catch in rhythm. He's comfortable functioning as a catch-and-shoot weapon within structure rather than needing to create everything himself.</p>
+
+  <p>His shot mechanic isn't pretty. There's a hitch and a funkiness to the release as well -- unconventional and a little stiff through the load phase -- but the results are there regardless of how it looks. He wasn't expected to be an elite shooter coming into the season, and that was one of the bigger pre-draft question marks on him, but he completely flipped that narrative. His range is the headline trait. He shows real depth beyond the arc, comfortably pulling from well above NBA three-point distance, and that shooting gravity is clearly his most translatable, special-level skill.</p>
+
+  <div class="da-pull"><p>The vision is legitimate. He's flashed genuine no-look passes that suggest real processing speed, and the decent vision he shows attacking downhill -- finding cutters and shooters off two-foot gathers -- is a real plus.</p></div>
+
+  <p>His bullet passes are accurate and well-timed into tight windows, not just flashy. That passing feel paired with his drives makes him a real driver-passer threat, someone who collapses the defense and then actually punishes the help rather than just looking to score every time. He has what's likely the best floater in this draft class, hitting it at a 46% clip -- elite for a guard his size, with visible touch whether shooting it on the move or stopping on a dime first.</p>
+
+  <p>His driving package shows decent burst specifically off a between-the-legs setup move -- that's the one counter where he generates real first-step pop. Outside of that move, athleticism isn't the engine of his offense. He's not a high-flying finisher, hitting just two of six dunk attempts on the season, and based on what I've seen, his layups are going to get sent into the stands repeatedly once he's facing NBA size and verticality at the rim. The tight hips and stiff ankles are real limiters in how he absorbs contact and adjusts mid-air, so he's reliant on craft and angles rather than physical tools to score inside -- a much thinner margin against NBA length.</p>
+
+  <p>He shot roughly 44% from three on close to six attempts per game -- that's not a small sample fluke, that's real volume and real efficiency, and it's the trait that's going to carry his offensive profile regardless of how the athleticism questions resolve.</p>
+
+  <div class="da-stat-grid">
+    <div class="da-stat-box">
+      <span class="da-sv">44%</span>
+      <span class="da-sl">3PT%</span>
+    </div>
+    <div class="da-stat-box">
+      <span class="da-sv">46%</span>
+      <span class="da-sl">Floater%</span>
+    </div>
+    <div class="da-stat-box">
+      <span class="da-sv">2/6</span>
+      <span class="da-sl">Dunk Attempts</span>
+    </div>
+    <div class="da-stat-box">
+      <span class="da-sv">~6</span>
+      <span class="da-sl">3PA Per Game</span>
+    </div>
+  </div>
+
+  <div class="da-divider"></div>
+
+  <div class="da-section">
+    <span class="da-section-label">The Other End</span>
+    <h2 class="da-section-title">Defensive Profile</h2>
+    <span class="da-rule"></span>
+  </div>
+
+  <div class="da-weakness-card">
+    <span class="da-w-label">Film Room Concern</span>
+    <p>This is where the warning signs cluster hardest. He gets overaggressive jumping into help-defense rotations -- leaving his assigned man early to crash toward the ball -- which works occasionally as a gambling steal attempt but more often just creates an open shooter. When he's tasked with picking up a new man after a switch or a rotation, his reaction is consistently a half-step slow, like he's still mentally processing the previous action rather than immediately locking onto the new assignment. He dies on screens, gets beat off the dribble too easily, and frankly doesn't play with nearly enough effort on this end -- that part of the evaluation isn't just my read, it's been a consistent theme among scouts who've watched him all year.</p>
+    <p>Off the ball, the awareness simply isn't there. He loses his man on movement -- not occasionally, but as a pattern -- and gets caught ball-watching at the exact moments he should be tracking his assignment. He gives up backdoor cuts because he's not scanning the floor the way disciplined off-ball defenders do.</p>
+  </div>
+
+  <div class="da-divider"></div>
+
+  <div class="da-section">
+    <span class="da-section-label">Where I Differ</span>
+    <h2 class="da-section-title">The Disconnect</h2>
+    <span class="da-rule"></span>
+  </div>
+
+  <div class="da-disconnect-card">
+    <span class="da-dc-label">Boba vs The Market</span>
+    <p>This is where my evaluation splits hardest from the industry consensus. Acuff has been invited to the NBA Draft Green Room, reserved for prospects the league expects to go in the lottery. Some scouts now view him as the top point guard in this entire class, ahead of Flemings, Wagler, and Philon. Jonathan Wasserman's most recent mock has him going 5th overall to the Clippers.</p>
+    <p>I'm not buying it, and frankly my grade has tightened even further from where it was -- 30-35 puts him well outside the lottery conversation entirely. His shooting development is real and the floater is a legitimate weapon, but a green room invite and a top-five mock placement don't erase what shows up on defensive film -- the gambling, the slow recovery, the off-ball lapses -- or the movement limitations that make him so dependent on craft rather than physical tools to create any separation at all. The league can fall in love with shot-making and scoring volume. I'm grading the whole player, both ends of the floor, and what I see on defense and in his movement profile caps him hard.</p>
+  </div>
+
+  <div class="da-divider"></div>
+
+  <div class="da-section">
+    <span class="da-section-label">Final Take</span>
+    <h2 class="da-section-title">Outlook</h2>
+    <span class="da-rule"></span>
+  </div>
+
+  <div class="da-projection">
+    <p>His shooting range and floater give him a real offensive floor regardless of role, and the vision suggests legitimate upside as a connective passer. But the movement limitations are a genuine long-term ceiling concern -- tight hips and stiff ankles don't typically loosen up much with NBA strength training, and that caps how much separation he'll ever create independently. The defensive tape is the bigger issue: overaggressive gambling, slow recovery in switches, and poor off-ball discipline add up to a player who's actively giving possessions back on one end while scoring them on the other.</p>
+    <p>Early second, late first range. The shooting and passing are real, but the defensive habits and athletic ceiling are significant enough that I have him outside the lottery entirely, buzz be damned.</p>
+  </div>
+
+  <div class="da-grade-banner">
+    <span class="da-grade-num">30-35</span>
+    <span class="da-grade-caption">My Grade · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
 
 
 "wemby-mvp": {
