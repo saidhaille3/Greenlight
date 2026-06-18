@@ -285,7 +285,7 @@ const articleEngineData = {
   <div class="jq-divider"></div>
 
   <div class="jq-section">
-    <span class="jq-section-label">Bag</span>
+    <span class="jq-section-label">Skillset</span>
     <h2 class="jq-section-title">Offensive Toolkit</h2>
     <span class="jq-rule"></span>
   </div>
