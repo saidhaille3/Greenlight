@@ -2,6 +2,379 @@
     
 const articleEngineData = {
 
+"burries-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/burries.jpeg",
+    time: "10 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "Brayden Burries Scouting Report",
+    content: `
+<style>
+  .bb-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .bb-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .bb-article .bb-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .bb-article .bb-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .bb-article .bb-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .bb-article .bb-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .bb-article .bb-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .bb-article .bb-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .bb-article .bb-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .bb-article .bb-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .bb-article .bb-pull p { color: #d4af37; }
+  .bb-article .bb-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .bb-article .bb-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .bb-article .bb-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .bb-article .bb-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .bb-article .bb-stat-box .bb-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .bb-article .bb-stat-box .bb-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .bb-article .bb-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .bb-article .bb-weakness-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .bb-article .bb-weakness-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .bb-article .bb-weakness-card .bb-w-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .bb-article .bb-weakness-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .bb-article .bb-weakness-card p:last-child { margin-bottom: 0 !important; }
+  .bb-article .bb-comp-card {
+    background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .bb-article .bb-comp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .bb-article .bb-comp-card .bb-c-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .bb-article .bb-comp-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .bb-article .bb-comp-card p:last-child { margin-bottom: 0 !important; }
+  .bb-article .bb-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .bb-article .bb-projection .bb-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .bb-article .bb-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .bb-article .bb-projection p:last-child { margin-bottom: 0 !important; }
+  .bb-article .bb-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .bb-article .bb-grade-banner .bb-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .bb-article .bb-grade-banner .bb-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .bb-article strong { font-weight: 700; opacity: 1; }
+  .bb-article em { font-style: italic; }
+</style>
+
+<div class="bb-article">
+
+  <div class="bb-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="bb-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="bb-section">
+    <span class="bb-section-label">Background</span>
+    <h2 class="bb-section-title">Background &amp; Physical Profile</h2>
+    <span class="bb-rule"></span>
+  </div>
+
+  <p>A bit older for this class -- he's 20 years old and will turn 21 during his rookie year, the product of a non-traditional high school path that included sitting out a season due to administrative issues at his original school before transferring to Eleanor Roosevelt High. That extra seasoning shows up on tape -- his game already carries a maturity and poise that most one-and-done freshmen simply don't have yet.</p>
+
+  <p>He measured 6'3.75 barefoot, 215.4 pounds, with a 6'6 wingspan and an 8'2.5 standing reach at the combine -- a strong, NBA-ready frame already, with real room to add more functional strength once he's in a professional program full time. His body shows up immediately on tape -- he's able to move his feet in space and absorb bumps, and he might end up functionally as strong as some current NBA fours, even if his length is the gap that matters most against bigger wings who can simply shoot over him.</p>
+
+  <div class="bb-stat-grid">
+    <div class="bb-stat-box">
+      <span class="bb-sv">6'3.75"</span>
+      <span class="bb-sl">Barefoot</span>
+    </div>
+    <div class="bb-stat-box">
+      <span class="bb-sv">6'6"</span>
+      <span class="bb-sl">Wingspan</span>
+    </div>
+    <div class="bb-stat-box">
+      <span class="bb-sv">215</span>
+      <span class="bb-sl">Pounds</span>
+    </div>
+    <div class="bb-stat-box">
+      <span class="bb-sv">20</span>
+      <span class="bb-sl">Years Old</span>
+    </div>
+  </div>
+
+  <div class="bb-divider"></div>
+
+  <div class="bb-section">
+    <span class="bb-section-label">Bag</span>
+    <h2 class="bb-section-title">Offensive Toolkit</h2>
+    <span class="bb-rule"></span>
+  </div>
+
+  <p>Burries plays with a calm, controlled pace -- nothing rushed, nothing forced, even in high-leverage moments. He's a legitimate three-level scorer with real range, comfortable pulling from above the break and showing deep range on straightaway looks from the top of the key. His catch is smooth and rhythmic, almost momentum-based -- he's already shifting into his shot before the ball fully arrives, which is a subtle but real indicator of advanced footwork and anticipation.</p>
+
+  <div class="bb-pull"><p>The corner-three-into-baseline-drive-reverse sequence is a genuine highlight package -- patient setup into an efficient finish, the kind of move that looks easy precisely because the footwork underneath it is so clean.</p></div>
+
+  <p>He's effective operating out of the triple threat, using pump fakes and angles to manipulate defenders and generate high-percentage shots, combining power with finesse.</p>
+
+  <p>He's not an elite shake-and-bake dribbler, but he compensates with footwork and strength rather than pure handle craft. He uses his frame to manufacture separation -- bumping into defenders to clear room for his pull-ups, particularly that elbow push-off into a step-back from beyond the arc. His handle speeds up when the situation calls for it, even if that isn't his default tempo. He can also throttle down in the paint, showing real touch on a Euro-step finish that lifts the ball over the defender's reach rather than around it.</p>
+
+  <p>He led Arizona in scoring at 16.1 points per game on elite efficiency -- 49.1% from the field, 39.1% from three, and 80.5% from the line -- a shooting profile that confirms the touch is genuine across all three levels rather than a hot-shooting mirage. His footwork shows excellent balance and composure in traffic, and the finishing ability is creative with solid body control and in-air adjustments. He's not an elite vertical athlete -- he posted 17 dunks on the season but also missed four, grading as below average in that specific finishing category per Synergy -- confirming his game is grounded in strength, footwork, and shot-making rather than above-the-rim explosiveness.</p>
+
+  <div class="bb-stat-grid">
+    <div class="bb-stat-box">
+      <span class="bb-sv">16.1</span>
+      <span class="bb-sl">PPG</span>
+    </div>
+    <div class="bb-stat-box">
+      <span class="bb-sv">49.1%</span>
+      <span class="bb-sl">FG%</span>
+    </div>
+    <div class="bb-stat-box">
+      <span class="bb-sv">39.1%</span>
+      <span class="bb-sl">3PT%</span>
+    </div>
+    <div class="bb-stat-box">
+      <span class="bb-sv">80.5%</span>
+      <span class="bb-sl">FT%</span>
+    </div>
+  </div>
+
+  <div class="bb-divider"></div>
+
+  <div class="bb-section">
+    <span class="bb-section-label">The Other End</span>
+    <h2 class="bb-section-title">Defensive Profile</h2>
+    <span class="bb-rule"></span>
+  </div>
+
+  <div class="bb-weakness-card">
+    <span class="bb-w-label">Film Room Concern</span>
+    <p>This is where the evaluation gets more layered. Off the ball, there are real moments of hesitancy -- a beat slow processing rotations, occasionally giving up more cushion than he should, particularly when tracking shooters relocating to the corner in zone coverage. His hands aren't consistently strong on the glass; the ball can get stripped from him in rebounding traffic.</p>
+  </div>
+
+  <p>That said, the underlying instincts and motor are genuinely good. He reads the floor well on the defensive end, can anticipate passes, and stays engaged with strong, active hands -- willing at the nail or in the gaps, posting a 2.8 steal percentage that shows up clearly on tape. He shows real urgency rotating to protect the paint, and when he recognizes he's given too much space on a shooter, he'll close out hard and get a contesting hand up rather than conceding the look. In ball-screen actions near the corner, he can be a step late reacting in congested space, but he has the recovery burst to make up the difference. Against bigger, more physical drivers, he absorbs contact well and does a credible job slowing offensive momentum rather than getting moved off his spot.</p>
+
+  <p>His defensive tools include a strong frame, real toughness, and lateral mobility to guard multiple positions on the perimeter -- a foundation that should let him defend up a position or two as his strength continues to develop.</p>
+
+  <div class="bb-divider"></div>
+
+  <div class="bb-section">
+    <span class="bb-section-label">The Swing Skill</span>
+    <h2 class="bb-section-title">Passing &amp; Playmaking</h2>
+    <span class="bb-rule"></span>
+  </div>
+
+  <p>This is the genuine swing skill in his profile. In transition, his outlet passes to the wing can come in low and slightly off-target -- not wildly inaccurate, but lacking the touch you'd want from a primary table-setter. He doesn't really bend the defense as a facilitator, though to be fair, he didn't need to in Arizona's egalitarian offensive system. He's functioned more as a high-level scorer who can handle in a secondary role than as a true lead playmaker who manipulates a defense possession to possession.</p>
+
+  <div class="bb-comp-card">
+    <span class="bb-c-label">NBA Comparisons</span>
+    <p>NBA.com draws Derrick White and Jrue Holiday comparisons, with continued growth as a lead playmaker identified as the key swing area for his development -- which is a meaningful signal about where evaluators see both the floor and the path to a higher ceiling. The encouraging sign is that flashes already exist of him reading the floor and finding shooters when the offense demands it, suggesting real untapped potential if his usage and trust as a passer increase at the next level.</p>
+  </div>
+
+  <div class="bb-divider"></div>
+
+  <div class="bb-section">
+    <span class="bb-section-label">Final Take</span>
+    <h2 class="bb-section-title">Outlook</h2>
+    <span class="bb-rule"></span>
+  </div>
+
+  <div class="bb-projection">
+    <p>His blend of size, toughness, shooting, and defensive versatility highlights the traits of a future All-Star-caliber talent, with the ability to play on or off the ball and impact winning in multiple areas. He currently sits at 8th overall on Tankathon's big board, which lines up cleanly with the 5-8 range -- a safe, scalable two-way guard whose floor is high because of his strength, shot-making, and defensive feel, with his ceiling tied directly to how much he grows as a play-creator for others rather than just for himself.</p>
+  </div>
+
+  <div class="bb-grade-banner">
+    <span class="bb-grade-num">5-8</span>
+    <span class="bb-grade-caption">Projected Range · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
+
 "wagler-scouting-report": {
     tag: "NBA Draft · Film Room",
     hero: "images/wagler.jpeg",
