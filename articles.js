@@ -1,6 +1,380 @@
 
     
 const articleEngineData = {
+"mara-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/mara.jpeg",
+    time: "10 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "Aday Mara Scouting Report",
+    content: `
+<style>
+  .am-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .am-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .am-article .am-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .am-article .am-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .am-article .am-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .am-article .am-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .am-article .am-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .am-article .am-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .am-article .am-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .am-article .am-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .am-article .am-pull p { color: #d4af37; }
+  .am-article .am-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .am-article .am-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .am-article .am-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .am-article .am-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .am-article .am-stat-box .am-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .am-article .am-stat-box .am-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .am-article .am-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .am-article .am-weakness-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .am-article .am-weakness-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .am-article .am-weakness-card .am-w-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .am-article .am-weakness-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .am-article .am-weakness-card p:last-child { margin-bottom: 0 !important; }
+  .am-article .am-context-card {
+    background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(16,185,129,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .am-article .am-context-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #10b981;
+  }
+  .am-article .am-context-card .am-c-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #10b981;
+    margin-bottom: 1.25rem;
+  }
+  .am-article .am-context-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .am-article .am-context-card p:last-child { margin-bottom: 0 !important; }
+  .am-article .am-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .am-article .am-projection .am-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .am-article .am-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .am-article .am-projection p:last-child { margin-bottom: 0 !important; }
+  .am-article .am-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .am-article .am-grade-banner .am-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .am-article .am-grade-banner .am-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .am-article strong { font-weight: 700; opacity: 1; }
+  .am-article em { font-style: italic; }
+</style>
+
+<div class="am-article">
+
+  <div class="am-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="am-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="am-section">
+    <span class="am-section-label">Physical</span>
+    <h2 class="am-section-title">Physical Profile</h2>
+    <span class="am-rule"></span>
+  </div>
+
+  <p>An unusual body -- wide-hipped, tall in a way that reads ungainly at first glance, but the functional output tells a different story. 7'3 barefoot with a 7'6 wingspan and a 9'9 standing reach that ranks among the longest in combine history. The arm length is the defining physical trait -- it shows up everywhere: in passing angles, in loose ball situations, in shot contests he has no right to be involved in. He glides rather than explodes, using his wingspan to cover ground and his hands to snatch boards or deflect passes. The hips create some instability moving backward, but the overall mobility given the frame is genuinely impressive.</p>
+
+  <div class="am-stat-grid">
+    <div class="am-stat-box">
+      <span class="am-sv">7'3"</span>
+      <span class="am-sl">Barefoot</span>
+    </div>
+    <div class="am-stat-box">
+      <span class="am-sv">7'6"</span>
+      <span class="am-sl">Wingspan</span>
+    </div>
+    <div class="am-stat-box">
+      <span class="am-sv">9'9"</span>
+      <span class="am-sl">Standing Reach</span>
+    </div>
+    <div class="am-stat-box">
+      <span class="am-sv">21</span>
+      <span class="am-sl">Years Old</span>
+    </div>
+  </div>
+
+  <div class="am-divider"></div>
+
+  <div class="am-section">
+    <span class="am-section-label">Bag</span>
+    <h2 class="am-section-title">Offensive Toolkit</h2>
+    <span class="am-rule"></span>
+  </div>
+
+  <p>The passing is the headline skill, and it earns that billing. Mara sees the floor like a guard, delivering pinpoint passes out of the post, finding cutters in transition, or keeping the offense humming from the high post. His assist numbers at 2.4 per game don't fully capture how fluidly he operates.</p>
+
+  <div class="am-pull"><p>What makes the passing special isn't just the volume -- it's the geometry. He throws around defenders rather than through them, bending the ball at angles that require extraordinary arm length and spatial awareness simultaneously.</p></div>
+
+  <p>The passing is creative in a way that 7-footers almost never are, and it shows up in the most specific ways: fake passes out of the post to freeze help defenders before finishing himself, full-court outlet passes off the defensive glass, lob throws from beyond the arc on the catch where he reads the cutter and delivers immediately without resetting.</p>
+
+  <p>He is a terror as a rim runner and lob catcher, finishing with both hands, soft touch, and an understanding of angles that lets him score efficiently in traffic at 67% inside the arc on high volume. The reverse dunk on a full-court pass in transition isn't a trick -- it's a real, repeatable finishing action because the hand-eye coordination and catch radius at his size are genuinely elite.</p>
+
+  <p>The post game has real craft in it. The spin move in the low post is clean -- a legitimate Hakeem-adjacent counter that creates separation through footwork rather than power -- and the hook shot off that left-side spin to the corner is already a polished, reliable NBA weapon. These aren't developmental hopes; they show up consistently on tape.</p>
+
+  <p>The clear limitation is strength. Despite improved strength, he's still adjusting to consistent physicality against high-level competition, and that shows up most directly in post-up situations where a stronger defender can simply hold position and prevent him from getting to his spots.</p>
+
+  <p>The jumper remains a work in progress -- low-volume threes at 30% and mid-50s free throws -- but the mechanics are clean and there's touch on face-ups and midrange looks.</p>
+
+  <div class="am-divider"></div>
+
+  <div class="am-section">
+    <span class="am-section-label">The Other End</span>
+    <h2 class="am-section-title">Defensive Profile</h2>
+    <span class="am-rule"></span>
+  </div>
+
+  <p>This is where the analysis gets genuinely compelling. Michigan posted 100th-percentile rim deterrence numbers with Mara on the floor according to RAPM metrics, highlighting his ability to influence possessions without even recording a block. The chase-down block is a real weapon -- he covers more ground than his frame suggests because the stride length and wingspan let him close distance efficiently without having to fully sprint. Film shows a player who reads angles early, stays vertical, and uses his length to disrupt everything in the paint. He posted one of the top block rates in the Big Ten while rarely getting beat off the dribble by smaller players.</p>
+
+  <p>The mobile off-ball defensive movement -- tracking smaller, quicker players coming off the right wing -- is better than almost anyone his size in this draft class. He'll stay attached, redirect the drive, and not get embarrassed in space the way most 7'3 centers do.</p>
+
+  <div class="am-weakness-card">
+    <span class="am-w-label">Film Room Concern</span>
+    <p>The specific weakness is his backward movement -- the shuffle and backpedal in drop coverage situations. He can get caught in transition or targeted by quicker guards in space, and the lower body coordination is inconsistent, with long legs that can appear stiff and lead to balance issues. There's an awkwardness and instability to the movement when he's asked to retreat quickly that sticks out against an otherwise impressive defensive profile. He's also not a strong screener -- he sets them, but the physicality and timing to actually spring a teammate open aren't consistently there.</p>
+  </div>
+
+  <div class="am-divider"></div>
+
+  <div class="am-section">
+    <span class="am-section-label">The Numbers</span>
+    <h2 class="am-section-title">Advanced Context</h2>
+    <span class="am-rule"></span>
+  </div>
+
+  <div class="am-context-card">
+    <span class="am-c-label">Michigan 2025-26</span>
+    <p>In 40 games and 39 starts at Michigan, Mara posted 12.1 points, 6.8 rebounds, 2.4 assists, and 2.6 blocks per game in just 23.4 minutes while shooting an elite 66.8% from the field. That efficiency on that volume in that limited time is genuinely unusual. He posted an 18.5 assist percentage, already good face-value passing numbers for a big, and the tape shows manipulation stuff -- reading the floor and dishing accordingly -- which is ultra-rare for a seven-footer.</p>
+  </div>
+
+  <div class="am-stat-grid">
+    <div class="am-stat-box">
+      <span class="am-sv">12.1</span>
+      <span class="am-sl">PPG</span>
+    </div>
+    <div class="am-stat-box">
+      <span class="am-sv">6.8</span>
+      <span class="am-sl">RPG</span>
+    </div>
+    <div class="am-stat-box">
+      <span class="am-sv">2.6</span>
+      <span class="am-sl">BPG</span>
+    </div>
+    <div class="am-stat-box">
+      <span class="am-sv">66.8%</span>
+      <span class="am-sl">FG%</span>
+    </div>
+  </div>
+
+  <div class="am-divider"></div>
+
+  <div class="am-section">
+    <span class="am-section-label">Final Take</span>
+    <h2 class="am-section-title">Outlook</h2>
+    <span class="am-rule"></span>
+  </div>
+
+  <div class="am-projection">
+    <p>Mara is a top-15 pick due to his combination of size, rebounding, feel, shot-blocking, and at-rim scoring. The 7th-to-9th rotation man projection undersells what he already brings -- this is a player with legitimate NBA impact right now, today, on the defensive end and as a connective passer, before the strength development and perimeter shooting refinement that a professional strength program should unlock. Even if he reaches only the lower end of his developmental range, you're still looking at a massive rotation big who protects the rim, finishes plays above the basket, and impacts winning.</p>
+    <p>The starter projection down the line isn't a stretch at all -- it's the natural ceiling of a player who already does so many difficult things well, and who is only 21 years old doing them.</p>
+  </div>
+
+  <div class="am-grade-banner">
+    <span class="am-grade-num">8-12</span>
+    <span class="am-grade-caption">Projected Range · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
+
 "quaintance-scouting-report": {
     tag: "NBA Draft · Film Room",
     hero: "images/quaintance.jpeg",
