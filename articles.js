@@ -1084,8 +1084,8 @@ const articleEngineData = {
   </div>
 
   <div class="kf-disconnect-card">
-    <span class="kf-dc-label">Boba vs The Market</span>
-    <p>Your 28-30 grade puts you dramatically behind the market on this one, and that gap is worth naming directly. Flemings is ranked 7th overall on Tankathon's current big board. NBA.com draws De'Aaron Fox and VJ Edgecombe comps and projects an immediate two-way impact. Multiple evaluators see him as a player with everything in the toolkit -- size, speed, shot-making, playmaking, feel, and two-way instincts. The consensus has him as a potential lottery pick, not a late-first.</p>
+    <span class="kf-dc-label">Me vs The Market</span>
+    <p>My 28-30 grade puts him dramatically behind the market on this one, and that gap is worth naming directly. Flemings is ranked 7th overall on Tankathon's current big board. NBA.com draws De'Aaron Fox and VJ Edgecombe comps and projects an immediate two-way impact. Multiple evaluators see him as a player with everything in the toolkit -- size, speed, shot-making, playmaking, feel, and two-way instincts. The consensus has him as a potential lottery pick, not a late-first.</p>
     <p>The case for skepticism comes from the frame -- the sub-6'3 wingspan and thin upper body are real limitations that don't show up in the shooting splits -- and from the offensive predictability, which the college game's lower athleticism ceiling hasn't exposed yet but which NBA defenses will probe aggressively. A guard whose primary creation tool is one hesitation move with no counter faces a real adjustment curve, regardless of how well the move works right now.</p>
   </div>
 
@@ -1103,7 +1103,7 @@ const articleEngineData = {
 
   <div class="kf-grade-banner">
     <span class="kf-grade-num">28-30</span>
-    <span class="kf-grade-caption">My Grade · 2026 NBA Draft</span>
+    <span class="kf-grade-caption">My Grade</span>
   </div>
 
 </div>
