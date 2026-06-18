@@ -1,6 +1,378 @@
 
     
 const articleEngineData = {
+
+"flemings-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/flemings.jpeg",
+    time: "10 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "Kingston Flemings Scouting Report",
+    content: `
+<style>
+  .kf-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .kf-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .kf-article .kf-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .kf-article .kf-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .kf-article .kf-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .kf-article .kf-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .kf-article .kf-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .kf-article .kf-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .kf-article .kf-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .kf-article .kf-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .kf-article .kf-pull p { color: #d4af37; }
+  .kf-article .kf-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .kf-article .kf-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .kf-article .kf-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .kf-article .kf-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .kf-article .kf-stat-box .kf-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .kf-article .kf-stat-box .kf-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .kf-article .kf-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .kf-article .kf-weakness-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .kf-article .kf-weakness-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .kf-article .kf-weakness-card .kf-w-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .kf-article .kf-weakness-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .kf-article .kf-weakness-card p:last-child { margin-bottom: 0 !important; }
+  .kf-article .kf-disconnect-card {
+    background: rgba(139,92,246,0.04);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .kf-article .kf-disconnect-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .kf-article .kf-disconnect-card .kf-dc-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .kf-article .kf-disconnect-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .kf-article .kf-disconnect-card p:last-child { margin-bottom: 0 !important; }
+  .kf-article .kf-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .kf-article .kf-projection .kf-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .kf-article .kf-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .kf-article .kf-projection p:last-child { margin-bottom: 0 !important; }
+  .kf-article .kf-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .kf-article .kf-grade-banner .kf-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .kf-article .kf-grade-banner .kf-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .kf-article strong { font-weight: 700; opacity: 1; }
+  .kf-article em { font-style: italic; }
+</style>
+
+<div class="kf-article">
+
+  <div class="kf-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="kf-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="kf-section">
+    <span class="kf-section-label">Physical</span>
+    <h2 class="kf-section-title">Physical Profile</h2>
+    <span class="kf-rule"></span>
+  </div>
+
+  <p>The frame raises real questions. He measured 6'2.5 barefoot at the combine, 183 pounds, with a 6'3.5 wingspan and an 8'2.5 standing reach -- measurements that confirm what the tape shows: thin upper body, limited wingspan, and small hands for a player being asked to guard and create at an NBA level. The physical tools that typically anchor a two-way guard projection simply aren't there in the measurements. What he does have is a 33.5-inch no-step vertical and a 40.5-inch max vertical -- genuine leaping ability that partially compensates for the length deficiency on the offensive end.</p>
+
+  <div class="kf-stat-grid">
+    <div class="kf-stat-box">
+      <span class="kf-sv">6'2.5"</span>
+      <span class="kf-sl">Barefoot</span>
+    </div>
+    <div class="kf-stat-box">
+      <span class="kf-sv">6'3.5"</span>
+      <span class="kf-sl">Wingspan</span>
+    </div>
+    <div class="kf-stat-box">
+      <span class="kf-sv">40.5"</span>
+      <span class="kf-sl">Max Vertical</span>
+    </div>
+    <div class="kf-stat-box">
+      <span class="kf-sv">183</span>
+      <span class="kf-sl">Pounds</span>
+    </div>
+  </div>
+
+  <div class="kf-divider"></div>
+
+  <div class="kf-section">
+    <span class="kf-section-label">Bag</span>
+    <h2 class="kf-section-title">Offensive Toolkit</h2>
+    <span class="kf-rule"></span>
+  </div>
+
+  <p>The movement package is the best thing about him. He's a genuinely fast guard -- not just fast in a straight line but fast in the way that actually matters in basketball, generating burst off directional changes and out of hesitation moves. He explodes past anyone, doesn't even need a screen, and is vicious when he rejects picks -- turning the corner on bigs and then showing the body control to finish in the paint despite not being big or strong.</p>
+
+  <div class="kf-pull"><p>The hesitation move from the right elbow into the paint is his most refined and dangerous weapon -- a move he runs with real conviction and disguise. The shot profile that comes off it is legitimately beautiful: a high-arcing release with a fluid follow-through that draws Kevin Durant comparisons in the mechanical fluidity rather than the body type.</p></div>
+
+  <p>The arc is the tell -- it gives the ball time to come down softly even when the release point isn't perfect, and it's particularly evident on the midrange pull-up from the right low post area, which is already a polished, repeatable NBA shot.</p>
+
+  <p>The crossover is clean. The handle overall is tight and secure -- never loose, never vulnerable under pressure -- and it's manipulative rather than just fast, meaning he uses it to engineer advantages rather than just blow by people on raw speed. He has a sharp behind-the-back in particular, and crucially, he uses it above the arc to maintain drive momentum rather than stopping to execute it -- the kind of functionally integrated handle detail that separates real ball-handlers from guys who can just do crossover drills.</p>
+
+  <p>He finishes well at the rim with both hands using a variety of moves, and has a reliable midrange pull-up with soft touch. He showed the ability to score in bunches throughout the season, including a career-high 42-point outing. He's also effective at manufacturing foul-drawing opportunities -- using a drive-jump-pull-up or a layup-looking gather to bait defenders into contact and get to the line, which is a real NBA skill.</p>
+
+  <div class="kf-weakness-card">
+    <span class="kf-w-label">Film Room Concern</span>
+    <p>The drive package's limitation is its predictability. The hesitation is the move -- and almost exclusively the move. No spin counter, no real change of direction beyond the between-the-legs used above the arc, no post footwork sequence. Defenders at the NBA level who get a scouting report on him have a single read to key on, which raises real questions about how much the current package survives once defenses take away the one thing he does. The floater game is underdeveloped, with just 2-of-5 on runners as a freshman per Synergy, which is the counter you'd most want to see developed alongside his driving ability.</p>
+  </div>
+
+  <p>He shot 48/39/85 this season -- the three-point percentage is a real number on real volume, and the free throw efficiency is excellent, confirming that the shooting touch is genuine rather than volume-inflated.</p>
+
+  <div class="kf-stat-grid">
+    <div class="kf-stat-box">
+      <span class="kf-sv">16.1</span>
+      <span class="kf-sl">PPG</span>
+    </div>
+    <div class="kf-stat-box">
+      <span class="kf-sv">5.2</span>
+      <span class="kf-sl">APG</span>
+    </div>
+    <div class="kf-stat-box">
+      <span class="kf-sv">48%</span>
+      <span class="kf-sl">FG%</span>
+    </div>
+    <div class="kf-stat-box">
+      <span class="kf-sv">39%</span>
+      <span class="kf-sl">3PT%</span>
+    </div>
+  </div>
+
+  <div class="kf-divider"></div>
+
+  <div class="kf-section">
+    <span class="kf-section-label">The Other End</span>
+    <h2 class="kf-section-title">Defensive Profile</h2>
+    <span class="kf-rule"></span>
+  </div>
+
+  <p>Hard to fully evaluate from the available sample, but the flashes are mixed. The gambling instinct off the ball -- jumping passing lanes, anticipating bounce passes -- shows real defensive IQ when it works. He recorded 8 steals in a single game against Florida State, the second-most in program history, which speaks to real predatory instincts at their best.</p>
+
+  <p>But off the ball more broadly, the awareness breaks down. There's an anxiousness to his defensive positioning -- ball-watching at the wrong moments, gravitating toward loose balls in a way that costs his team positioning on offensive rebounds. His man will be open because he's already moved toward a ball that isn't cleanly his team's possession yet. That's not a scheme issue -- it's a discipline pattern that shows up repeatedly and specifically in transition scramble situations.</p>
+
+  <div class="kf-divider"></div>
+
+  <div class="kf-section">
+    <span class="kf-section-label">Where I Differ</span>
+    <h2 class="kf-section-title">The Disconnect</h2>
+    <span class="kf-rule"></span>
+  </div>
+
+  <div class="kf-disconnect-card">
+    <span class="kf-dc-label">Boba vs The Market</span>
+    <p>Your 28-30 grade puts you dramatically behind the market on this one, and that gap is worth naming directly. Flemings is ranked 7th overall on Tankathon's current big board. NBA.com draws De'Aaron Fox and VJ Edgecombe comps and projects an immediate two-way impact. Multiple evaluators see him as a player with everything in the toolkit -- size, speed, shot-making, playmaking, feel, and two-way instincts. The consensus has him as a potential lottery pick, not a late-first.</p>
+    <p>The case for skepticism comes from the frame -- the sub-6'3 wingspan and thin upper body are real limitations that don't show up in the shooting splits -- and from the offensive predictability, which the college game's lower athleticism ceiling hasn't exposed yet but which NBA defenses will probe aggressively. A guard whose primary creation tool is one hesitation move with no counter faces a real adjustment curve, regardless of how well the move works right now.</p>
+  </div>
+
+  <div class="kf-divider"></div>
+
+  <div class="kf-section">
+    <span class="kf-section-label">Final Take</span>
+    <h2 class="kf-section-title">Outlook</h2>
+    <span class="kf-rule"></span>
+  </div>
+
+  <div class="kf-projection">
+    <p>The shooting touch, the burst, and the foul-drawing craft are legitimate NBA skills. The defensive gambling instincts, when disciplined, could make him a real two-way piece. But the frame, the limited finishing counter package, and the off-ball defensive lapses are real enough concerns that the 28-30 range represents a credible dissenting opinion from the industry consensus -- even if the market has priced him considerably higher.</p>
+  </div>
+
+  <div class="kf-grade-banner">
+    <span class="kf-grade-num">28-30</span>
+    <span class="kf-grade-caption">My Grade · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
 "mara-scouting-report": {
     tag: "NBA Draft · Film Room",
     hero: "images/mara.jpeg",
