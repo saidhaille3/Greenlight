@@ -1,6 +1,355 @@
 
     
 const articleEngineData = {
+"quaintance-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/quaintance.jpeg",
+    time: "10 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "Jayden Quaintance Scouting Report",
+    content: `
+<style>
+  .jq-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .jq-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .jq-article .jq-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .jq-article .jq-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .jq-article .jq-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .jq-article .jq-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .jq-article .jq-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .jq-article .jq-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .jq-article .jq-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .jq-article .jq-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .jq-article .jq-pull p { color: #d4af37; }
+  .jq-article .jq-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .jq-article .jq-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .jq-article .jq-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .jq-article .jq-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .jq-article .jq-stat-box .jq-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .jq-article .jq-stat-box .jq-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .jq-article .jq-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .jq-article .jq-injury-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .jq-article .jq-injury-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .jq-article .jq-injury-card .jq-i-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .jq-article .jq-injury-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .jq-article .jq-injury-card p:last-child { margin-bottom: 0 !important; }
+  .jq-article .jq-def-card {
+    background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .jq-article .jq-def-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #10b981;
+  }
+  .jq-article .jq-def-card .jq-d-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #10b981;
+    margin-bottom: 1.25rem;
+  }
+  .jq-article .jq-def-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .jq-article .jq-def-card p:last-child { margin-bottom: 0 !important; }
+  .jq-article .jq-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .jq-article .jq-projection .jq-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .jq-article .jq-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .jq-article .jq-projection p:last-child { margin-bottom: 0 !important; }
+  .jq-article .jq-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .jq-article .jq-grade-banner .jq-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .jq-article .jq-grade-banner .jq-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .jq-article strong { font-weight: 700; opacity: 1; }
+  .jq-article em { font-style: italic; }
+</style>
+
+<div class="jq-article">
+
+  <div class="jq-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="jq-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="jq-section">
+    <span class="jq-section-label">Physical</span>
+    <h2 class="jq-section-title">Physical Profile</h2>
+    <span class="jq-rule"></span>
+  </div>
+
+  <p>6'9 barefoot, 253 pounds, 7'5.25 wingspan, 9'1 standing reach. That's a legitimately enormous physical package, and the mass is already functional rather than raw -- he moves guys in the paint through sheer load-bearing force rather than technique, which is rare at his age. He's one of the youngest players in this entire draft class, having played 24 games of college basketball at 17 years old, unable to even be a one-and-done due to his youth.</p>
+
+  <div class="jq-stat-grid">
+    <div class="jq-stat-box">
+      <span class="jq-sv">6'9"</span>
+      <span class="jq-sl">Barefoot</span>
+    </div>
+    <div class="jq-stat-box">
+      <span class="jq-sv">7'5"</span>
+      <span class="jq-sl">Wingspan</span>
+    </div>
+    <div class="jq-stat-box">
+      <span class="jq-sv">9'1"</span>
+      <span class="jq-sl">Standing Reach</span>
+    </div>
+    <div class="jq-stat-box">
+      <span class="jq-sv">253</span>
+      <span class="jq-sl">Pounds</span>
+    </div>
+  </div>
+
+  <div class="jq-divider"></div>
+
+  <div class="jq-section">
+    <span class="jq-section-label">Bag</span>
+    <h2 class="jq-section-title">Offensive Toolkit</h2>
+    <span class="jq-rule"></span>
+  </div>
+
+  <p>The honest assessment here is that the bag is thin. He can dribble in spurts -- short, purposeful bursts to a spot -- but there are no real counters underneath it. No dream shake, no low-post footwork sequence, no established go-to move when the first option is taken away. He'll back a defender down and get to his spot, but the finishing inventory once he arrives is limited. The between-the-legs handle flashes something like Drummond or Mitchell (Andre) -- a big man who can put the ball on the floor without looking dangerous, meaning defenses don't have to make a hard choice when he dribbles.</p>
+
+  <p>He does show a surprisingly soft layup touch for a player his size -- real touch around the rim rather than just power finishing. There's a three-pointer on his tape, though whether that's a reliable weapon or an outlier remains genuinely unclear given the sample.</p>
+
+  <p>His midrange shot is a diet that needs to be cut out entirely -- he shot 31.8% on midrange twos at Arizona State -- and his free throw shooting is a legitimate crisis at 47.9% as a freshman, a number that raises real Hack-a-Quaintance concerns at the NBA level.</p>
+
+  <div class="jq-pull"><p>What he does do offensively that's genuinely valuable is operate in congested paint situations without losing his composure or his positioning. He's strong enough to create his own carom opportunities through sheer mass -- working through contact, using subtle leverage to nudge defensive rebounders off their spot and create uncertainty around who actually owns the ball. That's a veteran habit in a young body.</p></div>
+
+  <div class="jq-divider"></div>
+
+  <div class="jq-section">
+    <span class="jq-section-label">The Other End</span>
+    <h2 class="jq-section-title">Defensive Profile</h2>
+    <span class="jq-rule"></span>
+  </div>
+
+  <div class="jq-def-card">
+    <span class="jq-d-label">Where He Lives</span>
+    <p>This is where the evaluation gets genuinely interesting. He posted 2.2 steal percentage and 9.8 block percentage as a freshman -- astounding defensive production numbers that project immediately. He can switch or drop in pick-and-roll, switches up the length of his strides, stays parallel to ball-handlers, plays well off two feet, times himself well, and can easily flip his hips -- a movement profile that reads as legitimately switchable rather than just big.</p>
+    <p>His off-ball zone engagement is better than most players at his developmental stage -- he stays mentally locked in, maintains a sound defensive stance, and doesn't drift into ball-watching. His core strength and footwork allow him to stay engaged and ready rather than having to reset from a compromised position.</p>
+    <p>The hand activity is the most distinctive trait in his entire profile. In congested paint situations, he'll get his hands involved even when he can't cleanly secure the ball -- tipping it out, creating uncertainty for the defensive rebounder, disrupting what would otherwise be a clean possession for the other team. It's disruptive in a very specific, high-value way that most young bigs never develop at all.</p>
+    <p>He's also a strong, technically sound screen setter -- using his mass intelligently to create real separation rather than just standing in someone's path -- and the swim move to establish inside position shows real refinement for a player with this limited body of work.</p>
+  </div>
+
+  <div class="jq-divider"></div>
+
+  <div class="jq-section">
+    <span class="jq-section-label">The Variable</span>
+    <h2 class="jq-section-title">The Injury Elephant</h2>
+    <span class="jq-rule"></span>
+  </div>
+
+  <div class="jq-injury-card">
+    <span class="jq-i-label">Health Risk</span>
+    <p>This is the conversation that overrides everything else. He dealt with a torn ACL and meniscus late in his freshman year, plus recurring knee issues that limited him this past season at Kentucky. He rushed back and played in just four games before shutting it down entirely to focus on the draft. For any prospect that injury history would be a significant draft-night risk; for a player whose entire case is built on elite athleticism and switchable mobility, it's the central variable in the entire evaluation.</p>
+    <p>If his health checks out, few prospects have as much breakout potential -- a top-10 return -- and there may be no better defender in this draft class. That conditional is doing an enormous amount of work in that sentence, and it should.</p>
+  </div>
+
+  <div class="jq-divider"></div>
+
+  <div class="jq-section">
+    <span class="jq-section-label">Final Take</span>
+    <h2 class="jq-section-title">Outlook</h2>
+    <span class="jq-rule"></span>
+  </div>
+
+  <div class="jq-projection">
+    <p>Quaintance is a player I genuinely like the character read on -- the engagement, the effort, the signs of being a high-character sponge who absorbs coaching. The physical tools are real, the defensive instincts are already advanced, and the age-adjusted context is significant. But the offensive package is thin enough that he's almost entirely a defensive projection right now, and projecting on a player coming off ACL and meniscus surgery with a four-game Kentucky sample is a genuine leap of faith.</p>
+    <p>30-40 range reflects the health risk, the offensive limitations, and the reality that teams drafting in that range can't afford to carry a pure developmental defensive center on a rookie-scale contract who can't help you score. The upside is real. The floor is genuinely uncertain.</p>
+  </div>
+
+  <div class="jq-grade-banner">
+    <span class="jq-grade-num">30-40</span>
+    <span class="jq-grade-caption">Projected Range · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
+
 "boozer-scouting-report": {
     tag: "NBA Draft · Film Room",
     hero: "images/boozer.jpeg",
