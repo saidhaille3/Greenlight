@@ -2442,7 +2442,7 @@ const articleEngineData = {
   </div>
 
   <div class="da-disconnect-card">
-    <span class="da-dc-label">Boba vs The Market</span>
+    <span class="da-dc-label">Me vs The Market</span>
     <p>This is where my evaluation splits hardest from the industry consensus. Acuff has been invited to the NBA Draft Green Room, reserved for prospects the league expects to go in the lottery. Some scouts now view him as the top point guard in this entire class, ahead of Flemings, Wagler, and Philon. Jonathan Wasserman's most recent mock has him going 5th overall to the Clippers.</p>
     <p>I'm not buying it, and frankly my grade has tightened even further from where it was -- 30-35 puts him well outside the lottery conversation entirely. His shooting development is real and the floater is a legitimate weapon, but a green room invite and a top-five mock placement don't erase what shows up on defensive film -- the gambling, the slow recovery, the off-ball lapses -- or the movement limitations that make him so dependent on craft rather than physical tools to create any separation at all. The league can fall in love with shot-making and scoring volume. I'm grading the whole player, both ends of the floor, and what I see on defense and in his movement profile caps him hard.</p>
   </div>
