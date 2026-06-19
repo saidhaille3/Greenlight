@@ -2452,64 +2452,57 @@ document.addEventListener('DOMContentLoaded', initWarRoom);
         }, 150);
     }
 
-    const prospects = [
-        {
-            id: 1, rank: 1, name: "AJ Dybantsa", pos: "SF", school: "BYU", hw: "6'9\" / 205 lbs", comp: "Paul George", range: "Top 3", grade: 7, peakGrade: 9,
-            headshotUrl: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?&w=128&q=80&auto=format&fit=crop&crop=faces&h=128",
-            report: "Generational wing scorer. Elite locomotion and physical frame.",
-            physicals: { height: "6'8.5\"", wingspan: "6'11\"", reach: "8'10\"", maxVert: "42.0\"", shuttle: "2.99s" },
-            stats: {
-                finishing: { val: 92, cap: 99, color: "bg-emerald-500" },
-                shooting: { val: 86, cap: 92, color: "bg-emerald-500" },
-                playmaking: { val: 78, cap: 85, color: "bg-amber-400" },
-                defense: { val: 82, cap: 88, color: "bg-emerald-500" },
-                athleticism: { val: 96, cap: 98, color: "bg-blue-500" },
-                iq: { val: 80, cap: 89, color: "bg-amber-400" }
-            }
-        },
-        {
-            id: 2, rank: 2, name: "Darryn Peterson", pos: "SG", school: "Kansas", hw: "6'5\" / 200 lbs", comp: "Devin Booker", range: "Top 5", grade: 9,
-            headshotUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?&w=128&q=80&auto=format&fit=crop&crop=faces&h=128",
-            report: "Safest player in the draft floor-wise. Smooth, elite defensive movement. One of the fastest processors off screens. His off-the-dribble game has veteran nuance. Needs to improve assist-to-turnover ratio to reach absolute ceiling.",
-            physicals: { height: "6'4.5\"", wingspan: "6'9.75\"", reach: "8'7\"", maxVert: "37.5\"", shuttle: "2.95s" },
-            stats: {
-                finishing: { val: 88, color: "bg-emerald-500" },
-                shooting: { val: 90, color: "bg-emerald-500" },
-                playmaking: { val: 70, color: "bg-amber-400" },
-                defense: { val: 85, color: "bg-emerald-500" },
-                athleticism: { val: 84, color: "bg-emerald-500" },
-                iq: { val: 88, color: "bg-emerald-500" }
-            }
-        },
-        {
-            id: 3, rank: 3, name: "Cameron Boozer", pos: "PF", school: "Duke", hw: "6'9\" / 235 lbs", comp: "Paolo Banchero", range: "Top 5", grade: 9,
-            headshotUrl: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?&w=128&q=80&auto=format&fit=crop&crop=faces&h=128",
-            report: "Physically imposing with elite passing for his size. Sees cutters, throws crisp bullet passes. Great transition vision. Not a natural shooter and lacks vertical pop, but highly productive and strong basketball IQ.",
-            physicals: { height: "6'8\"", wingspan: "7'1\"", reach: "9'0\"", maxVert: "35.0\"", shuttle: "3.15s" },
-            stats: {
-                finishing: { val: 89, color: "bg-emerald-500" },
-                shooting: { val: 65, color: "bg-red-500" },
-                playmaking: { val: 86, color: "bg-emerald-500" },
-                defense: { val: 75, color: "bg-amber-400" },
-                athleticism: { val: 72, color: "bg-amber-400" },
-                iq: { val: 92, color: "bg-emerald-500" }
-            }
-        },
-        {
-            id: 4, rank: 4, name: "Keaton Wagler", pos: "SG", school: "Illinois", hw: "6'6\" / 190 lbs", comp: "Tyler Herro", range: "Top 10", grade: 7,
-            headshotUrl: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?&w=128&q=80&auto=format&fit=crop&crop=faces&h=128",
-            report: "Elite triple threat. Cross-step, one-motion release that comes off the catch before defense processes it. Signature jab-cross flows beautifully. Unfazed by contact. Lack of above-the-rim play is his only real limitation.",
-            physicals: { height: "6'5.5\"", wingspan: "6'7\"", reach: "8'5\"", maxVert: "34.0\"", shuttle: "3.08s" },
-            stats: {
-                finishing: { val: 74, color: "bg-amber-400" },
-                shooting: { val: 95, color: "bg-blue-500" },
-                playmaking: { val: 81, color: "bg-emerald-500" },
-                defense: { val: 68, color: "bg-red-500" },
-                athleticism: { val: 75, color: "bg-amber-400" },
-                iq: { val: 85, color: "bg-emerald-500" }
-            }
-        }
-    ];
+const prospects = [
+  { id: 1, rank: 1, name: "Darryn Peterson", pos: "SG", school: "Kansas", hw: "6'5\" / 200 lbs", comp: "Devin Booker", range: "My Grade: #2", grade: 9,
+    headshotUrl: "images/pete.jpeg",
+    report: "Safest player in the draft floor-wise. Elite defensive movement, off-the-dribble craft. Assist numbers and durability are the swing concerns.",
+    physicals: { height: "6'4.5\"", wingspan: "6'9.75\"", reach: "8'7\"", maxVert: "37.5\"", shuttle: "2.95s" },
+    stats: { finishing:{val:88,color:"bg-emerald-500"}, shooting:{val:90,color:"bg-emerald-500"}, playmaking:{val:70,color:"bg-amber-400"}, defense:{val:85,color:"bg-emerald-500"}, athleticism:{val:84,color:"bg-emerald-500"}, iq:{val:88,color:"bg-emerald-500"} }
+  },
+  { id: 2, rank: 2, name: "Cameron Boozer", pos: "PF", school: "Duke", hw: "6'9\" / 235 lbs", comp: "Karl-Anthony Towns (mold question)", range: "My Grade: Top 5", grade: 8,
+    headshotUrl: "images/boozer.jpeg",
+    report: "Elite passer and rebounder with a high floor. No recent precedent for his body type producing a true top-3 superstar -- safe All-Star, not a guaranteed franchise cornerstone.",
+    physicals: { height: "6'8\"", wingspan: "7'1\"", reach: "9'0\"", maxVert: "35.0\"", shuttle: "3.15s" },
+    stats: { finishing:{val:89,color:"bg-emerald-500"}, shooting:{val:65,color:"bg-red-500"}, playmaking:{val:90,color:"bg-emerald-500"}, defense:{val:78,color:"bg-amber-400"}, athleticism:{val:74,color:"bg-amber-400"}, iq:{val:94,color:"bg-emerald-500"} }
+  },
+  { id: 3, rank: 3, name: "Brayden Burries", pos: "G", school: "Arizona", hw: "6'3.75\" / 215 lbs", comp: "Derrick White / Jrue Holiday", range: "My Grade: 5-8", grade: 7,
+    headshotUrl: "images/burries.jpeg",
+    report: "Three-level scorer with a strong, NBA-ready frame. Passing/playmaking is the swing skill for his ceiling.",
+    physicals: { height: "6'3.75\"", wingspan: "6'6\"", reach: "8'2.5\"", maxVert: "--", shuttle: "--" },
+    stats: { finishing:{val:78,color:"bg-amber-400"}, shooting:{val:82,color:"bg-emerald-500"}, playmaking:{val:60,color:"bg-amber-400"}, defense:{val:74,color:"bg-amber-400"}, athleticism:{val:70,color:"bg-amber-400"}, iq:{val:80,color:"bg-emerald-500"} }
+  },
+  { id: 4, rank: 4, name: "Aday Mara", pos: "C", school: "Michigan", hw: "7'3\" / -- lbs", comp: "Passing big, rim deterrent", range: "My Grade: 8-12", grade: 7,
+    headshotUrl: "images/mara.jpeg",
+    report: "Elite passing and rim protection for his size. Strength and perimeter shooting are the development items.",
+    physicals: { height: "7'3\"", wingspan: "7'6\"", reach: "9'9\"", maxVert: "--", shuttle: "--" },
+    stats: { finishing:{val:84,color:"bg-emerald-500"}, shooting:{val:45,color:"bg-red-500"}, playmaking:{val:78,color:"bg-amber-400"}, defense:{val:88,color:"bg-emerald-500"}, athleticism:{val:65,color:"bg-amber-400"}, iq:{val:85,color:"bg-emerald-500"} }
+  },
+  { id: 5, rank: 5, name: "Keaton Wagler", pos: "SG", school: "Illinois", hw: "6'6\" / 190 lbs", comp: "Tyler Herro", range: "My Grade: Top 12", grade: 7,
+    headshotUrl: "images/wagler.jpeg",
+    report: "Triple-threat scorer with elite footwork and shot-making. Defensive frame/strength is the question vs NBA athletes.",
+    physicals: { height: "6'5.5\"", wingspan: "6'6.25\"", reach: "8'5\"", maxVert: "34.0\"", shuttle: "3.08s" },
+    stats: { finishing:{val:74,color:"bg-amber-400"}, shooting:{val:90,color:"bg-blue-500"}, playmaking:{val:81,color:"bg-emerald-500"}, defense:{val:65,color:"bg-red-500"}, athleticism:{val:72,color:"bg-amber-400"}, iq:{val:85,color:"bg-emerald-500"} }
+  },
+  { id: 6, rank: 6, name: "Kingston Flemings", pos: "PG", school: "Houston", hw: "6'2.5\" / 183 lbs", comp: "--", range: "My Grade: 28-30", grade: 5,
+    headshotUrl: "images/flemings.jpeg",
+    report: "Elite burst and a beautiful shot, but a thin frame and a one-move driving package raise real concerns vs the consensus top-8 grade.",
+    physicals: { height: "6'2.5\"", wingspan: "6'3.5\"", reach: "8'2.5\"", maxVert: "40.5\"", shuttle: "--" },
+    stats: { finishing:{val:70,color:"bg-amber-400"}, shooting:{val:80,color:"bg-emerald-500"}, playmaking:{val:75,color:"bg-amber-400"}, defense:{val:55,color:"bg-red-500"}, athleticism:{val:85,color:"bg-emerald-500"}, iq:{val:65,color:"bg-amber-400"} }
+  },
+  { id: 7, rank: 7, name: "Darius Acuff Jr.", pos: "PG", school: "Arkansas", hw: "--", comp: "--", range: "My Grade: 30-35", grade: 5,
+    headshotUrl: "images/acuff.jpeg",
+    report: "Elite shooting range and a great floater, but tight hips/stiff ankles and poor defensive habits cap him well below the lottery buzz.",
+    physicals: { height: "--", wingspan: "--", reach: "--", maxVert: "--", shuttle: "--" },
+    stats: { finishing:{val:55,color:"bg-red-500"}, shooting:{val:88,color:"bg-emerald-500"}, playmaking:{val:70,color:"bg-amber-400"}, defense:{val:45,color:"bg-red-500"}, athleticism:{val:55,color:"bg-red-500"}, iq:{val:68,color:"bg-amber-400"} }
+  },
+  { id: 8, rank: 8, name: "Jayden Quaintance", pos: "PF/C", school: "Kentucky", hw: "6'9\" / 253 lbs", comp: "--", range: "My Grade: 30-40", grade: 5,
+    headshotUrl: "images/quaintance.jpeg",
+    report: "Elite defensive instincts (steal/block production) in a young, massive frame, but ACL/meniscus history and a thin offensive bag make this a real injury-risk bet.",
+    physicals: { height: "6'9\"", wingspan: "7'5.25\"", reach: "9'1\"", maxVert: "--", shuttle: "--" },
+    stats: { finishing:{val:60,color:"bg-amber-400"}, shooting:{val:35,color:"bg-red-500"}, playmaking:{val:40,color:"bg-red-500"}, defense:{val:90,color:"bg-emerald-500"}, athleticism:{val:75,color:"bg-amber-400"}, iq:{val:65,color:"bg-amber-400"} }
+  }
+];
+
 
     function renderBoard() {
         const container = document.getElementById('view-board');
