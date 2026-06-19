@@ -893,14 +893,27 @@ async function fetchNBADraftData() {
 }
 
 // ── BUILD CARDS ──────────────────────────────────────────────
+function getDotStatus(pick) {
+  if (pick.selection) return 'made';                 // gray
+  if (pick.pick === currentOTC) return 'otc';         // red
+  if (currentOTC && pick.pick > currentOTC && pick.pick <= currentOTC + 2) return 'upcoming'; // yellow
+  return 'waiting';                                   // gray/dim
+}
+
+
 function buildDraftCards() {
   const scroller = document.getElementById('draftPickScroller');
   if (!scroller) return;
   scroller.innerHTML = '';
 
+  const sortedPicks = [...draftPicks].sort((a, b) => {
+    if (a.pick === currentOTC) return -1;
+    if (b.pick === currentOTC) return 1;
+    return a.pick - b.pick;
+  });
+
   const madeCount = draftPicks.filter(p => p.selection).length;
-  
-  // Clear the header text entirely as requested
+
   const statusEl = document.getElementById('draftStatusLabel');
   const dotEl    = document.getElementById('draftLiveDot');
   const otcEl    = document.getElementById('draftOTCLabel');
@@ -908,19 +921,22 @@ function buildDraftCards() {
   if (dotEl) dotEl.innerHTML = '';
   if (otcEl) otcEl.innerHTML = '';
 
-  draftPicks.forEach(pick => {
-    const isMade = !!pick.selection;
-    const isOTC  = pick.pick === currentOTC;
+  sortedPicks.forEach(pick => {
+    const dotStatus = getDotStatus(pick);
+    const isMade = dotStatus === 'made';
+    const isOTC  = dotStatus === 'otc';
+    const isUpcoming = dotStatus === 'upcoming';
 
     const card = document.createElement('div');
     card.className = [
       'key-draft-card flex-shrink-0 rounded-2xl p-4 border cursor-pointer transition-all duration-400 ease-out active:scale-95',
-      // Kept your exact original pixel sizing rules for mobile-first adapting
       'min-w-[175px] md:min-w-[195px]',
       isMade
         ? 'premium-glass opacity-60 hover:opacity-100 border-black/5 dark:border-white/5'
         : isOTC
-        ? 'premium-glass otc-glow ring-2 ring-amber-400/20'
+        ? 'premium-glass otc-glow ring-2 ring-red-500/30'
+        : isUpcoming
+        ? 'premium-glass ring-1 ring-amber-400/20'
         : 'premium-glass border-black/5 dark:border-white/10 hover:-translate-y-0.5'
     ].join(' ');
 
@@ -931,18 +947,18 @@ function buildDraftCards() {
         <div class="flex items-center gap-1.5">
           <span class="relative flex h-2 w-2">
             ${isOTC
-              ? `<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>`
-              : isMade
-              ? `<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>`
+              ? `<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>`
+              : isUpcoming
+              ? `<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-50"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>`
               : `<span class="relative inline-flex rounded-full h-2 w-2 bg-neutral-300 dark:bg-neutral-700"></span>`
             }
           </span>
           <span class="uppercase text-[9px] font-black tracking-widest ${
-            isOTC  ? 'text-amber-500 dark:text-amber-400' :
-            isMade ? 'text-emerald-500 dark:text-emerald-400' :
-                     'text-neutral-400 dark:text-neutral-500'
+            isOTC      ? 'text-red-600 dark:text-red-400' :
+            isUpcoming ? 'text-amber-500 dark:text-amber-400' :
+                         'text-neutral-400 dark:text-neutral-500'
           }">
-            ${isOTC ? 'On the Clock' : isMade ? 'Selected' : `Pick #${pick.pick}`}
+            ${isOTC ? 'On the Clock' : isUpcoming ? 'Up Soon' : isMade ? 'Selected' : `Pick #${pick.pick}`}
           </span>
         </div>
         ${pick.viaTeam
@@ -964,7 +980,7 @@ function buildDraftCards() {
           ? `<p class="text-xs font-black text-neutral-800 dark:text-neutral-200 truncate">${pick.selection}</p>
              <p class="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mt-0.5">${pick.position}${pick.college ? ' · ' + pick.college : ''}</p>`
           : isOTC
-          ? `<p class="text-[9px] font-black text-amber-500 dark:text-amber-400 uppercase tracking-widest animate-pulse">Analyzing…</p>`
+          ? `<p class="text-[9px] font-black text-red-500 dark:text-red-400 uppercase tracking-widest animate-pulse">On the Clock</p>`
           : `<p class="text-[9px] font-bold text-neutral-300 dark:text-neutral-700 uppercase tracking-widest">Awaiting Pick</p>`
         }
       </div>
@@ -973,6 +989,7 @@ function buildDraftCards() {
     scroller.appendChild(card);
   });
 }
+
 
 // ── INIT + REFRESH ───────────────────────────────────────────
 async function initDraftTracker() {
