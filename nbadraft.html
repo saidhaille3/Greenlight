@@ -1060,51 +1060,7 @@ const PROSPECTS_2026 = [
   { name: 'Darius Acuff',     pos: 'PG', school: 'Arkansas', consensus: '#8-14' },
 ];
 
-// ── OPEN MODAL ───────────────────────────────────────────────
-window.openDraftModal = function(pick) {
-  lastModalPick = pick;
 
-  const modal     = document.getElementById('draftPickModal');
-  const container = document.getElementById('draftModalContainer');
-
-  // Reset states
-  document.getElementById('draftAILoader').classList.remove('hidden');
-  document.getElementById('draftAIContent').classList.add('hidden');
-  document.getElementById('draftAIError').classList.add('hidden');
-  document.getElementById('draftNeedsGrid').innerHTML    = '';
-  document.getElementById('draftProspectsList').innerHTML = '';
-  document.getElementById('draftGLTake').innerText       = '';
-
-  // Header
-  document.getElementById('draftModalLogo').src          = getNBALogo(pick.team);
-  document.getElementById('draftModalPickNum').innerText = `Pick #${pick.pick} · 2026 NBA Draft${pick.viaTeam ? ' · Via Trade' : ''}`;
-  document.getElementById('draftModalTeamName').innerText = pick.name;
-
-  const ctx = TEAM_CONTEXT[pick.team];
-  document.getElementById('draftModalRecord').innerText  = ctx?.situation?.split('.')[0] || '';
-
-  // If pick already made
-  const selBadge = document.getElementById('draftModalSelectionBadge');
-  if (pick.selection) {
-    selBadge.classList.remove('hidden');
-    document.getElementById('draftModalPlayerName').innerText = pick.selection;
-    document.getElementById('draftModalPlayerPos').innerText  = `${pick.position || ''} ${pick.college ? '· ' + pick.college : ''}`.trim();
-  } else {
-    selBadge.classList.add('hidden');
-  }
-
-  // Show modal
-  modal.classList.remove('hidden');
-  modal.classList.add('flex');
-  setTimeout(() => {
-    container.classList.remove('scale-95', 'opacity-0');
-    container.classList.add('scale-100', 'opacity-100');
-  }, 10);
-  document.body.style.overflow = 'hidden';
-
-  // Fire Claude
-  callDraftAI(pick);
-};
 
 // ── CLOSE MODAL ──────────────────────────────────────────────
 window.closeDraftModal = function() {
@@ -1118,246 +1074,127 @@ window.closeDraftModal = function() {
 };
 
 window.retryDraftAI = function() {
-  if (lastModalPick) callDraftAI(lastModalPick);
+  if (lastModalPick) openDraftModal(lastModalPick);
 };
 
-// ── CLAUDE AI CALL ───────────────────────────────────────────
-const DRAFT_INTEL = {
-  'WAS': {
-    needs: ['PG', 'SF', 'C'],
-    bestAvailable: [
-      { name: 'AJ Dybantsa', pos: 'SF', school: 'BYU', fit: 'The franchise cornerstone they have been waiting a decade for. No debate.' },
-      { name: 'Darryn Peterson', pos: 'SG', school: 'Kansas', fit: 'Elite two-way guard who gives them a winning identity from day one.' },
-      { name: 'Cameron Boozer', pos: 'PF', school: 'Duke', fit: 'Physical interior anchor to build the frontcourt around long term.' }
-    ],
-    take: 'Dybantsa is the pick. Washington has not had a franchise player since Wall. This is that moment.'
+
+const MY_BIG_BOARD = {
+  "Keaton Wagler": {
+    pos: "SG", school: "Illinois", articleId: "wagler-scouting-report",
+    grade: "Top 12", tier: 1,
+    blurb: "Polished triple-threat scorer with elite footwork and a real creation package. Defensive tools are the swing skill, but the offensive feel is top-12 caliber."
   },
-  'UTA': {
-    needs: ['SG', 'SF', 'PG'],
-    bestAvailable: [
-      { name: 'Cameron Boozer', pos: 'PF', school: 'Duke', fit: 'Pairs with Keyonte George as a versatile frontcourt anchor.' },
-      { name: 'Caleb Wilson', pos: 'SF', school: 'UNC', fit: 'Elite athleticism and defense gives Utah the wing they desperately lack.' },
-      { name: 'Darryn Peterson', pos: 'SG', school: 'Kansas', fit: 'Two-way scoring guard to complement George in the backcourt.' }
-    ],
-    take: 'Utah needs to swing for the fences here. Boozer or Wilson -- either one accelerates this rebuild by years.'
+  "Brayden Burries": {
+    pos: "G", school: "Arizona", articleId: "burries-scouting-report",
+    grade: "5-8", tier: 1,
+    blurb: "Three-level scorer with a strong NBA-ready frame and real defensive instincts. Safe, scalable two-way guard whose ceiling depends on growth as a playmaker."
   },
-  'MEM': {
-    needs: ['C', 'SF', 'SG'],
-    bestAvailable: [
-      { name: 'Cameron Boozer', pos: 'PF', school: 'Duke', fit: 'The modern big Morant has never had. Changes their ceiling immediately.' },
-      { name: 'Caleb Wilson', pos: 'SF', school: 'UNC', fit: 'Long athletic wing who thrives in transition -- perfect for Ja\'s pace.' },
-      { name: 'Karim Lopez', pos: 'PF', school: 'NBL', fit: 'Fluid big with guard-like processing to complement Morant\'s playmaking.' }
-    ],
-    take: 'Memphis gets a steal at 3. Boozer next to Morant is a lineup that keeps opponents up at night.'
+  "Aday Mara": {
+    pos: "C", school: "Michigan", articleId: "mara-scouting-report",
+    grade: "8-12", tier: 1,
+    blurb: "Elite passing big with legitimate rim deterrence and surprising mobility. Strength and perimeter shooting are the development items, but already impacts winning."
   },
-  'CHI': {
-    needs: ['C', 'PG', 'SF'],
-    bestAvailable: [
-      { name: 'Caleb Wilson', pos: 'SF', school: 'UNC', fit: 'Athletic wing who gives Chicago the defensive versatility they have lacked for years.' },
-      { name: 'Karim Lopez', pos: 'PF', school: 'NBL', fit: 'Fluid modern big to replace Vucevic era with a more dynamic frontcourt.' },
-      { name: 'Keaton Wagler', pos: 'SG', school: 'Illinois', fit: 'Shooter with guard craft who can play on or off the ball immediately.' }
-    ],
-    take: 'Chicago has two picks to play with. Take the best player at 4, then address depth at 15. Wilson makes sense here.'
+  "Cameron Boozer": {
+    pos: "PF", school: "Duke", articleId: "boozer-scouting-report",
+    grade: "Top 5", tier: 1,
+    blurb: "Elite passer, rebounder, and competitor with a safe floor. Body type lacks a clean top-3 superstar precedent, but a near-lock multi-time All-Star."
   },
-  'LAC': {
-    needs: ['PG', 'SF', 'C'],
-    bestAvailable: [
-      { name: 'Karim Lopez', pos: 'PF', school: 'NBL', fit: 'Versatile big who fits any system -- exactly what a rebuilding Clippers team needs.' },
-      { name: 'Keaton Wagler', pos: 'SG', school: 'Illinois', fit: 'Shooter and creator who gives the Clippers a backcourt identity going forward.' },
-      { name: 'Darius Acuff Jr.', pos: 'PG', school: 'Arkansas', fit: 'Instant offense off the bench -- high floor guard for a team building from scratch.' }
-    ],
-    take: 'Indiana\'s pain is the Clippers\' gain. Lopez at 5 is a value pick that accelerates their youth movement.'
+  "Kingston Flemings": {
+    pos: "PG", school: "Houston", articleId: "flemings-scouting-report",
+    grade: "28-30", tier: 3,
+    blurb: "Elite burst and a beautiful shot, but thin frame and a one-move driving package raise real concerns versus the lottery buzz around him."
   },
-  'BKN': {
-    needs: ['SF', 'C', 'PG'],
-    bestAvailable: [
-      { name: 'Karim Lopez', pos: 'PF', school: 'NBL', fit: 'Fluid big to build around Cam Thomas as the second piece of the future core.' },
-      { name: 'Keaton Wagler', pos: 'SG', school: 'Illinois', fit: 'Shot creator who thrives off movement -- perfect complement to Thomas.' },
-      { name: 'Darius Acuff Jr.', pos: 'PG', school: 'Arkansas', fit: 'Brooklyn needs shooters and Acuff\'s three-point shot is NBA ready now.' }
-    ],
-    take: 'Brooklyn is building something real around Cam Thomas. Lopez at 6 gives them a legitimate second star in waiting.'
+  "Jayden Quaintance": {
+    pos: "PF/C", school: "Kentucky", articleId: "quaintance-scouting-report",
+    grade: "30-40", tier: 3,
+    blurb: "Elite defensive instincts and switchability in a young frame, but ACL/meniscus history and a thin offensive bag make this a real health-risk bet."
   },
-  'SAC': {
-    needs: ['SF', 'C', 'SG'],
-    bestAvailable: [
-      { name: 'Keaton Wagler', pos: 'SG', school: 'Illinois', fit: 'Shooter and creator who fits perfectly next to De\'Aaron Fox on the wing.' },
-      { name: 'Karim Lopez', pos: 'PF', school: 'NBL', fit: 'Frontcourt upgrade who gives Sacramento the big they have needed for years.' },
-      { name: 'Darius Acuff Jr.', pos: 'PG', school: 'Arkansas', fit: 'Backup ball handler who takes pressure off Fox while bringing instant offense.' }
-    ],
-    take: 'Sacramento keeps finding ways to be good but not great. Wagler is the shooting wing that finally pushes them over the top.'
+  "Darius Acuff Jr.": {
+    pos: "PG", school: "Arkansas", articleId: "acuff-scouting-report",
+    grade: "30-35", tier: 3,
+    blurb: "Elite shooting range and a great floater, but tight hips/stiff ankles and poor defensive habits cap him well outside the lottery buzz."
   },
-  'ATL': {
-    needs: ['C', 'SF', 'PG'],
-    bestAvailable: [
-      { name: 'Keaton Wagler', pos: 'SG', school: 'Illinois', fit: 'Shooting creator who thrives in pick and roll -- Trae Young\'s ideal co-pilot.' },
-      { name: 'Darius Acuff Jr.', pos: 'PG', school: 'Arkansas', fit: 'Scorer off the bench who gives Atlanta desperately needed offensive depth.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'High IQ big with rebounding instincts to anchor a weak Atlanta frontcourt.' }
-    ],
-    take: 'Two picks means Atlanta can be creative. Wagler at 8 next to Trae is a genuinely scary offensive combination.'
-  },
-  'DAL': {
-    needs: ['PG', 'C', 'SF'],
-    bestAvailable: [
-      { name: 'Darius Acuff Jr.', pos: 'PG', school: 'Arkansas', fit: 'High floor guard who can run an offense -- exactly what Dallas needs post-Doncic.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Versatile big who gives Dallas a reliable frontcourt presence in the rebuild.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Secondary playmaker who can create his own shot while the rebuild takes shape.' }
-    ],
-    take: 'Dallas is starting over. Acuff at 9 gives them a foundation piece who can be their guy for the next decade.'
-  },
-  'MIL': {
-    needs: ['PG', 'SF', 'SG'],
-    bestAvailable: [
-      { name: 'Darius Acuff Jr.', pos: 'PG', school: 'Arkansas', fit: 'Dynamic scorer who gives Milwaukee a future backcourt piece around Giannis.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Smart veteran-ready big who can contribute immediately off the bench.' },
-      { name: 'Paul McNeil Jr.', pos: 'SG', school: 'NC State', fit: 'Elite shooter with the frame to guard multiple positions in Milwaukee\'s system.' }
-    ],
-    take: 'Milwaukee is in a tricky spot with Giannis aging. Acuff at 10 gives them a long-term backcourt anchor to build around.'
-  },
-  'GSW': {
-    needs: ['PG', 'SF', 'SG'],
-    bestAvailable: [
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'High IQ big who fits Golden State\'s system immediately without disrupting Curry.' },
-      { name: 'Paul McNeil Jr.', pos: 'SG', school: 'NC State', fit: 'Elite off-ball shooter -- exactly what every Warriors lineup needs.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Future point guard to eventually take over from Curry in the Warriors system.' }
-    ],
-    take: 'Golden State is in succession planning mode. McNeil fits the Warriors mold perfectly -- smart, shoots it, defends.'
-  },
-  'OKC': {
-    needs: ['SG', 'SF', 'PF'],
-    bestAvailable: [
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Veteran-ready big who adds frontcourt depth to an already loaded OKC roster.' },
-      { name: 'Paul McNeil Jr.', pos: 'SG', school: 'NC State', fit: 'Shooting wing who gives SGA another legitimate weapon on the perimeter.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Backup ball handler who can learn the game behind SGA before taking a bigger role.' }
-    ],
-    take: 'OKC doesn\'t need to reach. They take the best player available and let them develop behind an already elite core.'
-  },
-  'MIA': {
-    needs: ['PG', 'SG', 'SF'],
-    bestAvailable: [
-      { name: 'Paul McNeil Jr.', pos: 'SG', school: 'NC State', fit: 'Exactly the Heat culture player -- tough, versatile, can guard multiple positions.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Heat culture fit who brings toughness and scoring ability off the bench.' },
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooter with the frame and competitive character Miami always prioritizes.' }
-    ],
-    take: 'Miami finds a way to get culture fits every draft. McNeil is a Heat player through and through -- take him at 13.'
-  },
-  'CHA': {
-    needs: ['C', 'SF', 'PG'],
-    bestAvailable: [
-      { name: 'Paul McNeil Jr.', pos: 'SG', school: 'NC State', fit: 'Wing who can play next to LaMelo and create off-ball -- exactly what Charlotte needs.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Secondary creator who takes pressure off LaMelo to generate everything offensively.' },
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooter to space the floor around LaMelo\'s playmaking.' }
-    ],
-    take: 'Charlotte has two picks and LaMelo. Build around him with shooters and wings. McNeil at 14 and depth at 18.'
-  },
-  'TOR': {
-    needs: ['PG', 'SF', 'C'],
-    bestAvailable: [
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Point guard to build beside Scottie Barnes as the backcourt piece of the future.' },
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooter who gives Toronto perimeter spacing they have desperately lacked.' },
-      { name: 'Paul McNeil Jr.', pos: 'SG', school: 'NC State', fit: 'Versatile wing who thrives alongside a playmaking big like Scottie Barnes.' }
-    ],
-    take: 'Toronto needs a go-to scorer beside Scottie. Philon is the most ready offensive player left on the board at 19.'
-  },
-  'SA': {
-    needs: ['SG', 'SF', 'PF'],
-    bestAvailable: [
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Secondary scorer who takes pressure off Wembanyama to create everything.' },
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooter to space the floor for Wembanyama\'s driving and passing lanes.' },
-      { name: 'Paul McNeil Jr.', pos: 'SG', school: 'NC State', fit: 'Two-way wing who defends and shoots -- everything Wembanyama needs around him.' }
-    ],
-    take: 'The Spurs already won when they got Wembanyama. Now they just need shooters. McNeil or Mullins fit the mold perfectly.'
-  },
-  'DET': {
-    needs: ['SF', 'C', 'SG'],
-    bestAvailable: [
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooting wing who spaces the floor for Cade Cunningham\'s drives and creation.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Secondary ball handler who gives Detroit a capable backup for Cade.' },
-      { name: 'Paul McNeil Jr.', pos: 'SG', school: 'NC State', fit: 'Versatile two-way wing who fits Detroit\'s defensive identity under the new era.' }
-    ],
-    take: 'Detroit is ascending. They don\'t need a star here -- they need a role player who fits. Mullins is that guy at 21.'
-  },
-  'PHI': {
-    needs: ['C', 'SF', 'PG'],
-    bestAvailable: [
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Three-point specialist who gives Philly the shooting they always seem to lack.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Backup guard who can score independently -- crucial when Embiid misses time.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Smart big who can play alongside Embiid without disrupting his post game.' }
-    ],
-    take: 'Philadelphia is in a complicated window. Take the best available shooter and figure the rest out in free agency.'
-  },
-  'ATL2': {
-    needs: ['C', 'PF', 'SF'],
-    bestAvailable: [
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Second pick for Atlanta -- shooting depth to complement their first round selection.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Guard depth who can develop behind the starters in a Trae Young system.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Smart versatile big who gives Atlanta legitimate frontcourt rotation depth.' }
-    ],
-    take: 'Second bite of the apple for Atlanta. Best player available -- no need to overthink it with two picks in the lottery.'
-  },
-  'NYK': {
-    needs: ['C', 'SF', 'PF'],
-    bestAvailable: [
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Veteran-ready big who fits immediately into the Knicks rotation around Brunson.' },
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooter who spaces the floor for Jalen Brunson\'s relentless mid-range attack.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Backup guard depth for a Knicks team that needs reliable second-unit scoring.' }
-    ],
-    take: 'New York needs a big badly. Lendeborg is not flashy but he is ready right now and fits exactly what the Knicks need.'
-  },
-  'LAL': {
-    needs: ['PG', 'SF', 'C'],
-    bestAvailable: [
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooter to space the floor for AD in the post-LeBron transition era.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Future point guard who can eventually lead a rebuilt Lakers offense.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Versatile big who can complement AD as a backup or stretch four.' }
-    ],
-    take: 'The LeBron era is over. Lakers need to build around AD and find their next star. Philon gives them a potential long-term PG.'
-  },
-  'DEN': {
-    needs: ['SG', 'SF', 'PG'],
-    bestAvailable: [
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Scoring guard who thrives in pick and roll -- a natural fit with Jokic as the hub.' },
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Corner three specialist who maximizes Jokic\'s passing gravity on every possession.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Smart big who understands spacing -- will not get in Jokic\'s way.' }
-    ],
-    take: 'Denver needs to keep winning now while Jokic is prime. Philon is the most plug-and-play scorer left on the board.'
-  },
-  'BOS': {
-    needs: ['SF', 'PG', 'C'],
-    bestAvailable: [
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Another shooter for a Celtics team that has built its dynasty on three-point volume.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Future backup guard who learns winning habits from a championship culture.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'High IQ big who fits Boston\'s system and can contribute immediately on defense.' }
-    ],
-    take: 'Boston drafts for the future. They take the best available and let them develop in a championship environment.'
-  },
-  'MIN': {
-    needs: ['SG', 'SF', 'C'],
-    bestAvailable: [
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Secondary ball handler to take pressure off Edwards as a primary creator.' },
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooter who helps cure Minnesota\'s chronic three-point shooting deficiency.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Smart big who can play beside Gobert without disrupting the defensive system.' }
-    ],
-    take: 'Minnesota needs shooters desperately. Mullins solves a real problem -- put him in the corner and let Edwards cook.'
-  },
-  'CLE': {
-    needs: ['SG', 'SF', 'PF'],
-    bestAvailable: [
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooting wing who gives Cleveland another perimeter weapon around Donovan Mitchell.' },
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Guard depth who can develop into a capable backup or starter down the line.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Frontcourt depth for a Cavaliers team that always seems thin at the four.' }
-    ],
-    take: 'Cleveland is in their window with Mitchell. They need role players who can contribute now. Mullins fits the timeline perfectly.'
-  },
-  'DAL2': {
-    needs: ['PG', 'SF', 'C'],
-    bestAvailable: [
-      { name: 'LaBaron Philon', pos: 'PG', school: 'Alabama', fit: 'Second Dallas pick -- gives them two young guards to build their backcourt around.' },
-      { name: 'Braylon Mullins', pos: 'SG', school: 'UConn', fit: 'Shooter who gives Dallas perimeter spacing as they rebuild from scratch.' },
-      { name: 'Yaxel Lendeborg', pos: 'PF', school: 'Michigan', fit: 'Versatile big who can be a rotation piece immediately for a rebuilding Dallas team.' }
-    ],
-    take: 'Dallas closes the first round with another young piece. Two picks, two building blocks. The rebuild is officially underway.'
-  },
+  "Darryn Peterson": {
+    pos: "SG", school: "Kansas", articleId: "peterson-scouting-report",
+    grade: "#2 Overall", tier: 1,
+    blurb: "Safest player in the draft floor-wise. Elite defensive movement and off-the-dribble craft. Passing/assist numbers are the swing concern, not the talent."
+  }
 };
+
+function getTopAvailableForTeam(teamNeeds, count = 3) {
+  // Get names of players already drafted (from draftPicks state)
+  const draftedNames = draftPicks
+    .filter(p => p.selection)
+    .map(p => p.selection);
+
+  // Filter MY_BIG_BOARD: not yet drafted, sorted by tier (best first)
+  const available = Object.entries(MY_BIG_BOARD)
+    .filter(([name]) => !draftedNames.includes(name))
+    .map(([name, data]) => {
+      // simple need-match boost: if player's position matches a team need, rank them higher
+      const needMatch = teamNeeds.includes(data.pos) || 
+                         teamNeeds.some(n => data.pos.includes(n));
+      return { name, ...data, needMatch };
+    })
+    .sort((a, b) => {
+      // needMatch players first, then by tier (lower tier number = better)
+      if (a.needMatch !== b.needMatch) return b.needMatch - a.needMatch;
+      return a.tier - b.tier;
+    });
+
+  return available.slice(0, count);
+}
+
+const TEAM_NEEDS = {
+  'WAS': ['PG', 'SF', 'C'],
+  'UTA': ['PG', 'SG', 'SF'],
+  'MEM': ['PG', 'C', 'SF'],
+  'CHI': ['C', 'SF', 'PG'],
+  'LAC': ['PG', 'C', 'SF'],
+  'BKN': ['SF', 'PG', 'C'],
+  'SAC': ['SF', 'C', 'SG'],
+  'ATL': ['C', 'SF', 'PG'],
+  'DAL': ['C', 'PF', 'SG'],
+  'MIL': ['PG', 'SF', 'C'],
+  'GSW': ['PG', 'SG', 'SF'],
+  'OKC': ['SG', 'SF', 'C'],
+  'MIA': ['PG', 'C', 'SF'],
+  'CHA': ['PG', 'C', 'SF'],
+  'POR': ['PG', 'SF', 'C'],
+  'PHX': ['PG', 'SG', 'C'],
+  'PHI': ['C', 'PG', 'SF'],
+  'ORL': ['PG', 'SG', 'C'],
+  'TOR': ['PG', 'SF', 'C'],
+  'SA':  ['SG', 'PF', 'C'],
+  'DET': ['SG', 'SF', 'C'],
+  'HOU': ['SF', 'C', 'PG'],
+  'CLE': ['SG', 'SF', 'PF'],
+  'NYK': ['C', 'SF', 'PG'],
+  'LAL': ['PG', 'C', 'SF'],
+  'DEN': ['SG', 'SF', 'PG'],
+  'BOS': ['SF', 'C', 'PG'],
+  'MIN': ['SG', 'SF', 'C'],
+  'IND': ['C', 'SF', 'SG'],
+};
+
+function buildDraftIntel(teamAbbr) {
+  const needs = TEAM_NEEDS[teamAbbr] || ['PG', 'SF', 'C'];
+  const top3 = getTopAvailableForTeam(needs, 3);
+
+  const bestAvailable = top3.map(p => ({
+    name: p.name,
+    pos: p.pos,
+    school: p.school,
+    fit: p.blurb
+  }));
+
+  const take = top3.length
+    ? `My grade has ${top3[0].name} (${top3[0].grade}) as the clear value play here -- ${top3[0].blurb}`
+    : `Board is thin on graded players left for this need set -- best player available makes sense.`;
+
+  return { needs, bestAvailable, take };
+}
+
 
 // ── RENDER FUNCTION (replaces callDraftAI entirely) ──────────
 window.openDraftModal = function(pick) {
@@ -1379,9 +1216,8 @@ window.openDraftModal = function(pick) {
   document.getElementById('draftModalPickNum').innerText  = `Pick #${pick.pick} · 2026 NBA Draft${pick.viaTeam ? ' · Via Trade' : ''}`;
   document.getElementById('draftModalTeamName').innerText = pick.name;
 
-  // Use ATL2 key for pick 23 (Hawks second pick)
-  const intelKey = pick.pick === 23 ? 'ATL2' : pick.pick === 30 ? 'DAL2' : pick.team;
-  const intel    = DRAFT_INTEL[intelKey];
+  const intel = buildDraftIntel(pick.team);
+
 
   document.getElementById('draftModalRecord').innerText   = intel
     ? TEAM_CONTEXT[pick.team]?.situation?.split('.')[0] || ''
