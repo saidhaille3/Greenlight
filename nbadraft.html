@@ -1079,71 +1079,65 @@ window.retryDraftAI = function() {
 
 
 const MY_BIG_BOARD = {
+  "Darryn Peterson": {
+    pos: "SG", school: "Kansas", articleId: "peterson-scouting-report",
+    grade: "#2 Overall", rank: 2,
+    blurb: "Safest player in the draft floor-wise. Elite defensive movement and off-the-dribble craft. Passing/assist numbers are the swing concern, not the talent."
+  },
+  "Cameron Boozer": {
+    pos: "PF", school: "Duke", articleId: "boozer-scouting-report",
+    grade: "Top 5", rank: 5,
+    blurb: "Elite passer, rebounder, and competitor with a safe floor. Body type lacks a clean top-3 superstar precedent, but a near-lock multi-time All-Star."
+  },
   "Keaton Wagler": {
     pos: "SG", school: "Illinois", articleId: "wagler-scouting-report",
-    grade: "Top 12", tier: 1,
+    grade: "Top 12", rank: 12,
     blurb: "Polished triple-threat scorer with elite footwork and a real creation package. Defensive tools are the swing skill, but the offensive feel is top-12 caliber."
   },
   "Brayden Burries": {
     pos: "G", school: "Arizona", articleId: "burries-scouting-report",
-    grade: "5-8", tier: 1,
+    grade: "5-8", rank: 8,
     blurb: "Three-level scorer with a strong NBA-ready frame and real defensive instincts. Safe, scalable two-way guard whose ceiling depends on growth as a playmaker."
   },
   "Aday Mara": {
     pos: "C", school: "Michigan", articleId: "mara-scouting-report",
-    grade: "8-12", tier: 1,
+    grade: "8-12", rank: 12,
     blurb: "Elite passing big with legitimate rim deterrence and surprising mobility. Strength and perimeter shooting are the development items, but already impacts winning."
-  },
-  "Cameron Boozer": {
-    pos: "PF", school: "Duke", articleId: "boozer-scouting-report",
-    grade: "Top 5", tier: 1,
-    blurb: "Elite passer, rebounder, and competitor with a safe floor. Body type lacks a clean top-3 superstar precedent, but a near-lock multi-time All-Star."
   },
   "Kingston Flemings": {
     pos: "PG", school: "Houston", articleId: "flemings-scouting-report",
-    grade: "28-30", tier: 3,
+    grade: "28-30", rank: 30,
     blurb: "Elite burst and a beautiful shot, but thin frame and a one-move driving package raise real concerns versus the lottery buzz around him."
-  },
-  "Jayden Quaintance": {
-    pos: "PF/C", school: "Kentucky", articleId: "quaintance-scouting-report",
-    grade: "30-40", tier: 3,
-    blurb: "Elite defensive instincts and switchability in a young frame, but ACL/meniscus history and a thin offensive skillset make this a real health-risk bet."
   },
   "Darius Acuff Jr.": {
     pos: "PG", school: "Arkansas", articleId: "acuff-scouting-report",
-    grade: "30-35", tier: 3,
+    grade: "30-35", rank: 35,
     blurb: "Elite shooting range and a great floater, but tight hips/stiff ankles and poor defensive habits cap him well outside the lottery buzz."
   },
-  "Darryn Peterson": {
-    pos: "SG", school: "Kansas", articleId: "peterson-scouting-report",
-    grade: "#2 Overall", tier: 1,
-    blurb: "Safest player in the draft floor-wise. Elite defensive movement and off-the-dribble craft. Passing/assist numbers are the swing concern, not the talent."
+  "Jayden Quaintance": {
+    pos: "PF/C", school: "Kentucky", articleId: "quaintance-scouting-report",
+    grade: "30-40", rank: 40,
+    blurb: "Elite defensive instincts and switchability in a young frame, but ACL/meniscus history and a thin offensive skillset make this a real health-risk bet."
   }
 };
 
 function getTopAvailableForTeam(teamNeeds, count = 3) {
-  // Get names of players already drafted (from draftPicks state)
   const draftedNames = draftPicks
     .filter(p => p.selection)
     .map(p => p.selection);
 
-  // Filter MY_BIG_BOARD: not yet drafted, sorted by tier (best first)
   const available = Object.entries(MY_BIG_BOARD)
     .filter(([name]) => !draftedNames.includes(name))
     .map(([name, data]) => {
-      // simple need-match boost: if player's position matches a team need, rank them higher
       const needMatch = teamNeeds.includes(data.pos) || 
                          teamNeeds.some(n => data.pos.includes(n));
       return { name, ...data, needMatch };
     })
-    .sort((a, b) => {
-      // needMatch players first, then by tier (lower tier number = better)
-      if (a.needMatch !== b.needMatch) return b.needMatch - a.needMatch;
-      return a.tier - b.tier;
-    });
+    .sort((a, b) => a.rank - b.rank); // pure best-player-available by actual draft slot
 
   return available.slice(0, count);
 }
+
 
 const TEAM_NEEDS = {
   'WAS': ['PG', 'SF', 'C'],
@@ -1185,15 +1179,25 @@ function buildDraftIntel(teamAbbr) {
     name: p.name,
     pos: p.pos,
     school: p.school,
-    fit: p.blurb
+    fit: p.blurb,
+    needMatch: p.needMatch // pass this through to render a "Fills Need" tag
   }));
 
-  const take = top3.length
-    ? `My grade has ${top3[0].name} (${top3[0].grade}) as the clear value play here -- ${top3[0].blurb}`
-    : `Board is thin on graded players left for this need set -- best player available makes sense.`;
+  let take;
+  if (top3.length) {
+    const top = top3[0];
+    if (top.needMatch) {
+      take = `Best player available AND a need fill -- ${top.name} (${top.grade}) is the clear pick. ${top.blurb}`;
+    } else {
+      take = `${top.name} (${top.grade}) is the best player on the board, full stop -- even though ${top.pos} isn't a top-line need. You don't pass on talent this far clear of the field to fill a roster hole this early; you draft the best player and figure out the fit later.`;
+    }
+  } else {
+    take = `Board is thin on graded players left -- best player available makes sense.`;
+  }
 
   return { needs, bestAvailable, take };
 }
+
 
 
 // ── RENDER FUNCTION (replaces callDraftAI entirely) ──────────
@@ -1270,11 +1274,13 @@ row.innerHTML = `
     <div class="flex items-center gap-2 mb-0.5">
       <p class="text-sm font-black uppercase tracking-tight text-neutral-900 dark:text-neutral-100 truncate">${p.name}</p>
       <span class="text-[8px] font-black bg-black/5 dark:bg-white/10 text-neutral-500 dark:text-neutral-400 px-1.5 py-0.5 rounded-full uppercase tracking-widest flex-shrink-0">${p.pos}</span>
+      ${p.needMatch ? `<span class="text-[8px] font-black bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-1.5 py-0.5 rounded-full uppercase tracking-widest flex-shrink-0">Fills Need</span>` : ''}
     </div>
     <p class="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mb-1">${p.school}</p>
     <p class="text-xs font-medium text-neutral-600 dark:text-neutral-300 leading-snug">${p.fit}</p>
   </div>
 `;
+
 
     list.appendChild(row);
   });
@@ -1284,46 +1290,7 @@ row.innerHTML = `
 };
 
 // ── RENDER AI RESPONSE ───────────────────────────────────────
-function renderDraftAI(data, pick) {
-  // Needs pills
-  const needsGrid = document.getElementById('draftNeedsGrid');
-  const needColors = { 'PG':'blue','SG':'purple','SF':'emerald','PF':'amber','C':'red' };
-  (data.needs || []).forEach(need => {
-    const color = needColors[need] || 'gray';
-    const pill  = document.createElement('span');
-    pill.className = `inline-flex items-center px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-${color}-500/10 text-${color}-600 dark:text-${color}-400 border border-${color}-500/20`;
-    pill.innerText = need;
-    needsGrid.appendChild(pill);
-  });
 
-  // Best available prospects
-  const prospectsList = document.getElementById('draftProspectsList');
-  (data.bestAvailable || []).forEach((p, i) => {
-    const row = document.createElement('div');
-    row.className = 'flex items-start gap-3 p-3 rounded-2xl bg-black/[0.03] dark:bg-white/5 border border-black/5 dark:border-white/5 hover:border-amber-400/30 transition-all';
-    row.innerHTML = `
-      <div class="w-7 h-7 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-        <span class="text-[10px] font-black text-amber-600 dark:text-amber-400">${i + 1}</span>
-      </div>
-      <div class="min-w-0 flex-1">
-        <div class="flex items-center gap-2 mb-0.5">
-          <p class="text-sm font-black uppercase tracking-tight dark:text-white truncate">${p.name}</p>
-          <span class="text-[8px] font-black bg-black/5 dark:bg-white/10 text-black/40 dark:text-white/40 px-1.5 py-0.5 rounded-full uppercase tracking-widest flex-shrink-0">${p.pos}</span>
-        </div>
-        <p class="text-[9px] font-bold text-black/30 dark:text-white/30 uppercase tracking-widest mb-1">${p.school || ''}</p>
-        <p class="text-xs font-medium text-black/60 dark:text-white/50 leading-snug">${p.fit}</p>
-      </div>
-    `;
-    prospectsList.appendChild(row);
-  });
-
-  // Greenlight take
-  document.getElementById('draftGLTake').innerText = data.greenlightTake || '';
-
-  // Swap states
-  document.getElementById('draftAILoader').classList.add('hidden');
-  document.getElementById('draftAIContent').classList.remove('hidden');
-}
 </script>
 
 <!-- Hero Section -->
