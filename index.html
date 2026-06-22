@@ -2170,36 +2170,198 @@ function scrollToPodcast() {
       
       <audio id="podcastAudio" src="audio/Ep2.mp3"></audio>
 
-<button id="podcastPlayBtn" onclick="togglePodcast()" class="relative z-20 bg-black dark:bg-white dark:text-black text-white px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-green-600 dark:hover:bg-green-600 dark:hover:text-white transition-all flex items-center gap-4 shadow-2xl active:scale-95">
-        <i id="podcastIcon" class="fa-solid fa-play"></i>
-        <span id="podcastBtnText">Listen Now</span>
-      </button>
+
     </div>
 
-    <div class="md:w-1/3 w-full">
-      <div class="relative aspect-square rounded-[3rem] bg-black overflow-hidden shadow-2xl group">
-        <img id="podcastCover" src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover opacity-60 transition duration-700">
-        
-        <div id="visualizer" class="absolute inset-0 flex items-center justify-center gap-1 opacity-0 transition-opacity duration-500">
-            <span class="w-1 bg-green-500 rounded-full animate-bounce" style="height: 40px; animation-duration: 0.6s;"></span>
-            <span class="w-1 bg-green-500 rounded-full animate-bounce" style="height: 60px; animation-duration: 0.4s;"></span>
-            <span class="w-1 bg-green-500 rounded-full animate-bounce" style="height: 30px; animation-duration: 0.7s;"></span>
-            <span class="w-1 bg-green-500 rounded-full animate-bounce" style="height: 50px; animation-duration: 0.5s;"></span>
-        </div>
+<div class="md:w-1/3 w-full">
+  <div class="relative rounded-[3rem] bg-black overflow-hidden shadow-2xl" style="aspect-ratio: 1/1;">
+    
+    <!-- Background Cover -->
+    <img id="podcastCover" src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1000" 
+         class="absolute inset-0 w-full h-full object-cover opacity-30 transition duration-700 scale-110 blur-sm">
+    
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black/50"></div>
 
-        <div class="absolute bottom-8 left-8 right-8">
-           <div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-              <div id="podcastProgress" class="h-full bg-green-500 w-0 shadow-[0_0_15px_rgba(34,197,94,1)] transition-all duration-300"></div>
-           </div>
-           <div class="flex justify-between mt-2">
-               <span id="podCurrent" class="text-[10px] font-black text-white/40 tabular-nums">0:00</span>
-               <span id="podDuration" class="text-[10px] font-black text-white/40 tabular-nums">0:00</span>
-           </div>
+    <!-- Full Player UI -->
+    <div class="absolute inset-0 flex flex-col p-5 z-10">
+
+      <!-- Show Dropdown -->
+      <div class="relative mb-3">
+        <select id="showDropdown" onchange="switchShow(this.value)"
+          class="w-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[9px] font-black uppercase tracking-widest rounded-xl px-3 py-2.5 outline-none appearance-none cursor-pointer">
+          <option value="greenlight">🎙 Greenlight Pod</option>
+
+        </select>
+        <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-white/50 text-[8px] pointer-events-none"></i>
+      </div>
+
+      <!-- Episode List -->
+      <div id="episodeList" class="space-y-2 overflow-y-auto no-scrollbar flex-1 mb-3">
+      </div>
+
+      <!-- NOW PLAYING LABEL -->
+      <div class="mb-3 px-1">
+        <p class="text-[8px] font-black uppercase tracking-widest text-green-400 mb-0.5">Now Playing</p>
+        <p id="nowPlayingTitle" class="text-[11px] font-black text-white leading-tight truncate">Select an episode</p>
+      </div>
+
+      <!-- Progress Bar (Seekable) -->
+      <div class="mb-3 px-1">
+        <div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden cursor-pointer" id="seekBar" onclick="seekPodcast(event)">
+          <div id="podcastProgress" class="h-full bg-green-500 w-0 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.8)] transition-all duration-300 pointer-events-none"></div>
+        </div>
+        <div class="flex justify-between mt-1.5">
+          <span id="podCurrent" class="text-[9px] font-black text-white/40 tabular-nums">0:00</span>
+          <span id="podDuration" class="text-[9px] font-black text-white/40 tabular-nums">0:00</span>
         </div>
       </div>
+
+      <!-- Controls -->
+      <div class="flex items-center justify-between px-2">
+        
+        <!-- Rewind 15s -->
+        <button onclick="rewindPodcast()" class="flex flex-col items-center gap-0.5 text-white/60 hover:text-white transition active:scale-90">
+          <i class="fa-solid fa-rotate-left text-lg"></i>
+          <span class="text-[7px] font-black">15</span>
+        </button>
+
+        <!-- Play/Pause -->
+        <button onclick="togglePodcast()" 
+          class="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-[0_0_25px_rgba(34,197,94,0.5)] hover:bg-green-400 transition active:scale-90">
+          <i id="podcastIcon" class="fa-solid fa-play text-black text-xl pl-0.5"></i>
+        </button>
+
+        <!-- Forward 15s -->
+        <button onclick="forwardPodcast()" class="flex flex-col items-center gap-0.5 text-white/60 hover:text-white transition active:scale-90">
+          <i class="fa-solid fa-rotate-right text-lg"></i>
+          <span class="text-[7px] font-black">15</span>
+        </button>
+
+      </div>
+
     </div>
   </div>
+</div>
+
+
+  </div>
 </section>
+<script>
+const PODCAST_SHOWS = {
+  greenlight: [
+    { ep: 2, title: "Kat will probably bring the Wemby train to a halt", src: "audio/Ep2.mp3", date: "6/5/26" }
+    
+  ]
+};
+
+function renderEpisodes(showKey) {
+  const list = document.getElementById('episodeList');
+  const episodes = PODCAST_SHOWS[showKey] || [];
+  list.innerHTML = episodes.map((ep, i) => `
+    <div onclick="loadEpisode('${ep.src}', '${ep.title}', ${ep.ep})"
+      class="flex items-center gap-3 p-2.5 rounded-xl cursor-pointer transition-all
+             bg-white/5 hover:bg-white/15 border border-white/5 hover:border-green-500/30 active:scale-[0.98]"
+      id="ep-row-${i}">
+      <div class="w-7 h-7 rounded-lg bg-green-600/80 flex items-center justify-center flex-shrink-0">
+        <span class="text-[9px] font-black text-white">${ep.ep}</span>
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="text-[10px] font-black text-white leading-tight truncate">${ep.title}</p>
+        <p class="text-[8px] text-white/40 font-bold mt-0.5">${ep.date}</p>
+      </div>
+      <i class="fa-solid fa-play text-white/30 text-[8px] flex-shrink-0"></i>
+    </div>
+  `).join('');
+}
+
+function switchShow(showKey) {
+  renderEpisodes(showKey);
+  const audio = document.getElementById('podcastAudio');
+  if (audio) { audio.pause(); audio.src = ''; }
+  document.getElementById('podcastIcon').className = 'fa-solid fa-play text-black text-xl pl-0.5';
+  document.getElementById('podcastBtnText') && (document.getElementById('podcastBtnText').innerText = 'Listen Now');
+  document.getElementById('nowPlayingTitle').innerText = 'Select an episode';
+  document.getElementById('podcastProgress').style.width = '0%';
+  document.getElementById('podCurrent').innerText = '0:00';
+  document.getElementById('podDuration').innerText = '0:00';
+}
+
+function loadEpisode(src, title, epNum) {
+  const audio = document.getElementById('podcastAudio');
+  audio.src = src;
+  audio.load();
+  audio.play().then(() => {
+    document.getElementById('podcastIcon').className = 'fa-solid fa-pause text-black text-xl';
+    document.getElementById('nowPlayingTitle').innerText = `Ep.${epNum} -- ${title}`;
+    const epLabel = document.querySelector('.pod-episode-title');
+    if (epLabel) epLabel.innerText = `Ep.${epNum} -- ${title}`;
+  }).catch(console.error);
+}
+
+window.togglePodcast = function() {
+  const audio = document.getElementById('podcastAudio');
+  const icon = document.getElementById('podcastIcon');
+  const btnText = document.getElementById('podcastBtnText');
+  if (!audio) return;
+  if (audio.paused) {
+    audio.play().then(() => {
+      icon.className = 'fa-solid fa-pause text-black text-xl';
+      if (btnText) btnText.innerText = 'Pause Episode';
+    }).catch(console.error);
+  } else {
+    audio.pause();
+    icon.className = 'fa-solid fa-play text-black text-xl pl-0.5';
+    if (btnText) btnText.innerText = 'Resume Episode';
+  }
+};
+
+window.rewindPodcast = function() {
+  const audio = document.getElementById('podcastAudio');
+  if (audio) audio.currentTime = Math.max(0, audio.currentTime - 15);
+};
+
+window.forwardPodcast = function() {
+  const audio = document.getElementById('podcastAudio');
+  if (audio) audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 15);
+};
+
+window.seekPodcast = function(e) {
+  const audio = document.getElementById('podcastAudio');
+  const bar = document.getElementById('seekBar');
+  if (!audio || !audio.duration) return;
+  const rect = bar.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  audio.currentTime = pct * audio.duration;
+};
+
+const audioEl = document.getElementById('podcastAudio');
+if (audioEl) {
+  audioEl.addEventListener('timeupdate', function() {
+    const pct = (this.currentTime / this.duration) * 100;
+    document.getElementById('podcastProgress').style.width = (pct || 0) + '%';
+    document.getElementById('podCurrent').innerText = formatPodcastTime(this.currentTime);
+    if (!isNaN(this.duration)) {
+      document.getElementById('podDuration').innerText = formatPodcastTime(this.duration);
+    }
+  });
+  audioEl.addEventListener('ended', () => {
+    document.getElementById('podcastIcon').className = 'fa-solid fa-play text-black text-xl pl-0.5';
+  });
+}
+
+function formatPodcastTime(seconds) {
+  const min = Math.floor(seconds / 60);
+  const sec = Math.floor(seconds % 60);
+  return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderEpisodes('greenlight');
+});
+</script>
+
+
 <script>
 window.togglePodcast = function() {
     const audio = document.getElementById('podcastAudio');
