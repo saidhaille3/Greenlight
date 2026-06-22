@@ -3,7 +3,7 @@
 const articleEngineData = {
 "dybantsa-scouting-report": {
     tag: "NBA Draft · Film Room",
-    hero: "images/dybantsa.jpeg",
+    hero: "images/dyb.webp",
     time: "13 MIN READ",
     published: "June 17, 2026",
     updated: null,
