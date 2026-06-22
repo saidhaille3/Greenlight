@@ -1,6 +1,400 @@
 
     
 const articleEngineData = {
+"dybantsa-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/dybantsa.jpeg",
+    time: "13 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "AJ Dybantsa Scouting Report",
+    content: `
+<style>
+  .aj-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .aj-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .aj-article .aj-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .aj-article .aj-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .aj-article .aj-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .aj-article .aj-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .aj-article .aj-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .aj-article .aj-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .aj-article .aj-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .aj-article .aj-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .aj-article .aj-pull p { color: #d4af37; }
+  .aj-article .aj-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .aj-article .aj-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .aj-article .aj-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .aj-article .aj-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .aj-article .aj-stat-box .aj-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .aj-article .aj-stat-box .aj-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .aj-article .aj-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .aj-article .aj-reckoning {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .aj-article .aj-reckoning::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .aj-article .aj-reckoning .aj-r-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .aj-article .aj-reckoning p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .aj-article .aj-reckoning p:last-child { margin-bottom: 0 !important; }
+  .aj-article .aj-def-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.12);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .aj-article .aj-def-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .aj-article .aj-def-card .aj-d-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .aj-article .aj-def-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .aj-article .aj-def-card p:last-child { margin-bottom: 0 !important; }
+  .aj-article .aj-comp-card {
+    background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .aj-article .aj-comp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .aj-article .aj-comp-card .aj-c-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .aj-article .aj-comp-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .aj-article .aj-comp-card p:last-child { margin-bottom: 0 !important; }
+  .aj-article .aj-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .aj-article .aj-projection .aj-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .aj-article .aj-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .aj-article .aj-projection p:last-child { margin-bottom: 0 !important; }
+  .aj-article .aj-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .aj-article .aj-grade-banner .aj-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .aj-article .aj-grade-banner .aj-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .aj-article strong { font-weight: 700; opacity: 1; }
+  .aj-article em { font-style: italic; }
+</style>
+
+<div class="aj-article">
+
+  <div class="aj-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="aj-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="aj-section">
+    <span class="aj-section-label">Physical</span>
+    <h2 class="aj-section-title">Physical Profile</h2>
+    <span class="aj-rule"></span>
+  </div>
+
+  <p>6'9 in shoes with a wingspan hovering around 6'11, an 8'10 standing reach, and a frame that has real room to add functional mass. His movement pattern is genuinely unlike anything in this draft class -- a knee-heavy, arm-swinging gait that looks almost mechanical at first glance but covers ground at a rate that doesn't match how much effort it appears to require. Long strides, unusual load distribution, a gliding quality through open space. It's a movement signature you haven't seen before, which makes it simultaneously fascinating and difficult to project. His ground coverage is mesmerizing, and there's a packed, stored power quality to his athleticism -- like energy coiled tight at the hip and knee rather than dispersed loosely through the body the way springy, elastic athletes tend to move.</p>
+
+  <div class="aj-divider"></div>
+
+  <div class="aj-section">
+    <span class="aj-section-label">Bag</span>
+    <h2 class="aj-section-title">Offensive Toolkit</h2>
+    <span class="aj-rule"></span>
+  </div>
+
+  <p>He averaged 25.5 points, 6.8 rebounds, and 3.7 assists on 51% shooting across 35 games at BYU, the kind of volume-and-efficiency combination that almost never shows up from a true freshman, and his true shooting percentage sat at 60% despite the enormous usage load. His production is real and it's verified by the advanced numbers -- this isn't a volume mirage.</p>
+
+  <p>He finished 73.4% on shots within 4.5 feet of the rim -- 127 of 173 attempts -- and 50.6% on all paint attempts. That's elite at-rim efficiency on real volume. His takeoff zone is notably large -- he'll initiate his gather from the inner elbow, which is further out than most players attempt, and still get the angle and clearance to finish. The arm deny move -- using his hand to swipe a defender's grip at the moment of contact to free the path -- is subtle and sophisticated. He's surefire grab-and-go in transition, with the twitch, elasticity, and toughness to finish at the basket.</p>
+
+  <div class="aj-pull"><p>His midrange pull-up efficiency -- 46.3% on an enormous 12 attempts per 100 possessions -- is the most translatable offensive weapon in his profile. That's a volume and efficiency combination that defines the best midrange scorers in the league, and it's the bedrock of his offensive identity right now.</p></div>
+
+  <p>He also shot 44% on 36 total runners, which speaks to genuine finishing touch in the in-between areas rather than just proximity to the basket.</p>
+
+  <p>He also uses his body intelligently in ways that don't always get credited: the hip bump to slow a trailing defender -- using his lower body to absorb and pause the chase without fouling -- is a veteran habit that shows real physical awareness. The give-and-go without the ball is where he looks most natural as a cutter: his arm strength and swim move win the hand battle against tight press defenders, and he generates separation to catch as a cutter and finish above the rim.</p>
+
+  <p>His off-play communication on the court stands out -- constant verbal engagement with teammates, eye contact, hands pointing. Whether that's true leadership or a young player who believes he's already the authority in the room is a real and important open question.</p>
+
+  <div class="aj-stat-grid">
+    <div class="aj-stat-box">
+      <span class="aj-sv">25.5</span>
+      <span class="aj-sl">PPG</span>
+    </div>
+    <div class="aj-stat-box">
+      <span class="aj-sv">60%</span>
+      <span class="aj-sl">True Shooting</span>
+    </div>
+    <div class="aj-stat-box">
+      <span class="aj-sv">73.4%</span>
+      <span class="aj-sl">At Rim FG%</span>
+    </div>
+    <div class="aj-stat-box">
+      <span class="aj-sv">46.3%</span>
+      <span class="aj-sl">Midrange%</span>
+    </div>
+  </div>
+
+  <div class="aj-reckoning">
+    <span class="aj-r-label">Now The Honest Reckoning</span>
+    <p>His handle is tight relative to his style of play -- meaning he's dependent on hesitation, two-foot gathers, and his physical load rather than genuine manipulation of the dribble to create separation. He can become slightly overreliant on playing off two feet, and his spin moves, while functional, have a telegraphed quality. Defenders  at the NBA level will read some of his moves well in advance. The agility simply isn't there in the same way the athleticism is -- he's a powerful, stored-energy athlete rather than a twitchy, reactive one, and that stored quality makes him predictable when he needs to improvise in tight spaces.</p>
+    <p>His three-point shot is flat. He shot 33.1% overall from three, with a pronounced pause when catching and shooting as he reorganizes his shot. He shot better off the dribble (36%) than catching and shooting (30%), which is the opposite of what you want to see from a developing shooter. The range shows up on tape but the reliability doesn't.</p>
+    <p>When doubles come, and they came often at BYU, he runs from them. Backs to the basket, ball handler's worst nightmare: he turns to face the double and panics. He was seen multiple times running back to the three-point line to avoid the double rather than making the read, which stalls the offense, creates lag, and generates turnovers at the moments when his team needs him to be decisive. That's not a small thing. That's a fundamental processing deficiency under pressure that shows up specifically when he's most needed.</p>
+    <p>He has a tendency to ball hog. His usage rate at BYU was enormous, and while the efficiency held, the shot selection discipline didn't always follow. He's going to have to share the floor with  NBA players who need to be involved, and the adjustment from BYU's system -- which was largely built to feed him -- to an NBA offensive ecosystem where he's one piece of a larger machine is not a guaranteed smooth transition.</p>
+  </div>
+
+  <div class="aj-divider"></div>
+
+  <div class="aj-section">
+    <span class="aj-section-label">The Other End</span>
+    <h2 class="aj-section-title">Defensive Profile</h2>
+    <span class="aj-rule"></span>
+  </div>
+
+  <div class="aj-def-card">
+    <span class="aj-d-label">Film Room Concern</span>
+    <p>He was basically completely inactive as an off-ball help defender this year at BYU.</p>
+    <p>His transition get-back effort is slow and inconsistent, a real tell about where his competitive energy lives on that end. He has bursts of genuine half-court defensive intensity when his assignment demands it. He tracks his man through chaos, maintains visual discipline, and shows real awareness following his check through traffic. But the effort is selective rather than continuous.</p>
+    <p>The most puzzling tendency is what I'd call defensive assignment tunnel vision: He'll be correctly positioned near a help man and in a position where he is close enough to contest a shot. in these situations however, he will watch the oppposing offesnive player wind up for an attempt…..and just...freeze. He has the length and the proximity to swipe the ball into the stands. He just doesn't go. It's almost too much assignment-mindedness, an over-focus on his specific role (or man) rather than reading the full defensive possession and reacting to the most impactful available play.</p>
+    <p>Loose balls reveal some stiffness. When he has to get low quickly or react to an unscripted floor situation, there's a lag. The stored, coiled athleticism that serves him so well in vertical situations doesn't adapt as readily to horizontal or ground-level movement. His screening also has a technical flaw: he's too handsy, extending his arm to initiate contact rather than setting solid body picks, which at the NBA level is going to get called for illegal screens repeatedly.</p>
+  </div>
+
+  <div class="aj-divider"></div>
+
+  <div class="aj-section">
+    <span class="aj-section-label">Comparison</span>
+    <h2 class="aj-section-title">The Comp Problem</h2>
+    <span class="aj-rule"></span>
+  </div>
+
+  <div class="aj-comp-card">
+    <span class="aj-c-label">My Read</span>
+    <p>I see some Kemp in the frame and the athleticism. I also see Wiggins in the movement pattern -- the long, flowing, somewhat stiff style yet explosive style of play that produces good-to-great results in college without quite achieving the dominant consistency you expect from a franchise cornerstone. Andrew Wiggins was the first overall pick. Andrew Wiggins is a very good NBA player who won a championship as a key rotation piece, not a superstar. That's the ceiling I worry about before he plays an NBA minute.</p>
+    <p>The personality reads as charismatic, brash, enormously confident -- almost smugly so, with the eye rolls and the animated reactions that feel reminiscent of a young Dennis Smith Jr. energy. There's charm there, real engagement and passion, but there's also a question nobody can answer yet: is there room inside that sureness for the humility required to accept that he has a long way to go? Some players with supreme confidence are wired to channel it productively. Others use it as insulation against the coaching and development they actually need. Which version Dybantsa is remains genuinely open.</p>
+  </div>
+
+  <div class="aj-divider"></div>
+
+  <div class="aj-section">
+    <span class="aj-section-label">Where I Differ</span>
+    <h2 class="aj-section-title">The Projection Problem</h2>
+    <span class="aj-rule"></span>
+  </div>
+
+  <div class="aj-projection">
+    <p>The Washington Wizards are reportedly torn between Dybantsa and Darryn Peterson for the first overall pick. The consensus has him as a top-3 selection, potentially the first overall pick, a franchise cornerstone.</p>
+    <p>Here's the honest read: his midrange is special. If he develops a deep, varied post-up midrange package -- adding counters to the current pull-up foundation -- he can be a very effective NBA scorer, a microwave who packs points in bunches, capable of winning Sixth Man awards on the right team. But the path from that ceiling to a consistent starter, let alone a franchise cornerstone, requires developments that aren't visible on the current tape: a reliable three-point shot, improved handle under defensive pressure, genuine off-ball defensive engagement, and the adaptability to adjust when NBA defenses solve his telegraphed drives.</p>
+    <p>The BYU context inflated his usage and arguably insulated his weaknesses from full exposure -- he got Gortat-style screens from his center, ran in a system built around his strengths, and faced defenses that couldn't match his athleticism. NBA defenses will be more sophisticated, faster, and more physical than anything he saw this year. The processing deficiency when doubles come is going to get exploited systematically.</p>
+    <p>You don't select a potential Sixth Man candidate first overall. That's the uncomfortable truth underneath the hype. There's a player here worth developing. Whether that player becomes someone worthy of the expectations attached to his number on draft night is the question, and the tape doesn't currently answer it confidently in the affirmative.</p>
+  </div>
+
+  <div class="aj-grade-banner">
+    <span class="aj-grade-num">35 overall</span>
+    <span class="aj-grade-caption">My Grade</span>
+  </div>
+
+</div>
+`
+},
+
 
 "burries-scouting-report": {
     tag: "NBA Draft · Film Room",
