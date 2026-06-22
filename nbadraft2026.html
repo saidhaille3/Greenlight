@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draft Prospects Elite | Greenlight Sports Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#16a34a',
+                            700: '#15803d',
+                        },
+                        premium: {
+                            gold: '#b45309',
+                            slate: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ambient Light Orbs - Ultra Soft Luxury Glow */
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.6;
+            z-index: -1;
+            pointer-events: none;
+            animation: drift 25s infinite alternate ease-in-out;
+        }
+        .glow-1 { top: -10%; right: 10%; width: 45vw; height: 45vw; background: radial-gradient(circle, rgba(22,163,74,0.15) 0%, rgba(56,189,248,0.1) 100%); }
+        .glow-2 { bottom: -10%; left: -5%; width: 55vw; height: 55vw; background: radial-gradient(circle, rgba(251,191,36,0.12) 0%, rgba(244,63,94,0.05) 100%); animation-delay: -7s; }
+        .glow-3 { top: 30%; left: 25%; width: 35vw; height: 35vw; background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, rgba(22,163,74,0.05) 100%); animation-delay: -12s; }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(4%, 6%) scale(1.08); }
+        }
+
+        /* High-End Light Frosted Glassmorphic Specifications */
+        .crystal-glass {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(25px) saturate(210%);
+            -webkit-backdrop-filter: blur(25px) saturate(210%);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 
+                inset 0 1px 2px rgba(255, 255, 255, 0.8),
+                0 4px 6px -1px rgba(0, 0, 0, 0.03),
+                0 10px 30px -3px rgba(15, 23, 42, 0.04);
+        }
+
+        .crystal-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.35) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.9),
+                0 4px 20px -2px rgba(15, 23, 42, 0.03);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .crystal-card:hover {
+            transform: translateY(-3px) scale(1.01);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.55) 100%);
+            border-color: rgba(22, 163, 74, 0.4);
+            box-shadow: 
+                inset 0 1px 2px rgba(255, 255, 255, 1),
+                0 20px 35px -5px rgba(22, 163, 74, 0.08),
+                0 10px 20px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .crystal-card.selected-compare {
+            border-color: #16a34a;
+            background: linear-gradient(135deg, rgba(22, 163, 74, 0.06) 0%, rgba(255, 255, 255, 0.7) 100%);
+            box-shadow: 0 0 25px rgba(22, 163, 74, 0.15), inset 0 1px 2px rgba(255, 255, 255, 1);
+        }
+
+        /* Luxury Micro-Accents */
+        .metric-winner-light {
+            color: #15803d;
+            font-weight: 800;
+            background: rgba(34, 197, 94, 0.12);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .metric-loser-light {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .premium-text-gradient {
+            background: linear-gradient(135deg, #0f172a 30%, #1e293b 70%, #16a34a 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-[#f6f8fb] text-slate-900 min-h-screen overflow-x-hidden font-sans antialiased selection:bg-brand-500/20 selection:text-brand-700">
+
+    <!-- Premium Background Context -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Micro Global Banner -->
+    <div class="w-full bg-slate-900 text-[9px] font-extrabold uppercase tracking-[0.3em] text-slate-300 py-1.5 px-6 flex justify-between items-center z-50 relative">
+        <div><span class="text-brand-500">●</span> Live Intelligence Engine</div>
+        <div class="hidden sm:block">Greenlight Sports Analytics Network Verified</div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 w-full z-40 crystal-glass px-4 lg:px-8 py-3.5 flex justify-between items-center border-b border-slate-200/50">
+        <div class="flex items-center gap-6">
+            <a href="#" class="flex items-center space-x-2.5 group shrink-0">
+                <div class="w-7 h-7 bg-slate-900 rounded-md flex items-center justify-center shadow-md shadow-slate-900/10">
+                    <i class="fa-solid fa-bolt text-brand-500 text-xs"></i>
+                </div>
+                <span class="premium-text-gradient text-lg font-extrabold tracking-tight uppercase">Greenlight<span class="text-xs font-light text-slate-400 lowercase ml-0.5">intl</span></span>
+            </a>
+        </div>
+        
+        <!-- Smart Search Bar Desk -->
+        <div class="hidden md:flex items-center bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-1.5 w-80 lg:w-96 transition-all focus-within:border-brand-500/50 focus-within:bg-white focus-within:shadow-sm">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs"></i>
+            <input type="text" id="searchInput" oninput="filterProspects()" placeholder="Quick Search (Prospect, Tier, School)..." class="bg-transparent border-none outline-none text-xs font-semibold w-full ml-2.5 text-slate-800 placeholder-slate-400/80">
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button onclick="toggleFilterPanel()" class="xl:hidden px-3.5 py-1.5 rounded-lg border border-slate-200 text-slate-700 text-xs font-bold flex items-center gap-2 hover:bg-slate-50">
+                <i class="fa-solid fa-sliders text-brand-500"></i> Filters
+            </button>
+            <div class="w-8 h-8 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center shadow-inner cursor-pointer hover:bg-slate-50">
+                <i class="fa-solid fa-user-tie text-slate-600 text-xs"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Workspace Frame -->
+    <main class="py-6 px-4 lg:px-8 max-w-[1700px] mx-auto relative z-10">
+        
+        <!-- Header Section -->
+        <div class="mb-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200/60 pb-6">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tight text-slate-900 leading-none">
+                    2026 NBA Draft Pool
+                </h1>
+            </div>
+
+            <!-- Global Sorting Metric Row -->
+<!-- Global Sorting Metric Row (Mobile-first Horizontally Scrollable) -->
+<div class="w-full lg:w-auto overflow-x-auto no-scrollbar flex items-center gap-1.5 self-start lg:self-auto bg-slate-100 p-1 rounded-xl border border-slate-200/60 whitespace-nowrap">
+    <span class="text-[10px] font-bold text-slate-500 px-2 sticky left-0 bg-slate-100 z-10">Sort:</span>
+    <button onclick="setSort('rank')" id="sort-rank" class="sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all bg-white text-slate-800 shadow-sm">Tier</button>
+    <button onclick="setSort('pts')" id="sort-pts" class="sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all text-slate-600 hover:text-slate-900">Points</button>
+    <button onclick="setSort('reb')" id="sort-reb" class="sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all text-slate-600 hover:text-slate-900">Rebounds</button>
+    <button onclick="setSort('ast')" id="sort-ast" class="sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all text-slate-600 hover:text-slate-900">Assists</button>
+    <button onclick="setSort('stl')" id="sort-stl" class="sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all text-slate-600 hover:text-slate-900">Steals</button>
+    <button onclick="setSort('blk')" id="sort-blk" class="sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all text-slate-600 hover:text-slate-900">Blocks</button>
+    <button onclick="setSort('fg')" id="sort-fg" class="sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all text-slate-600 hover:text-slate-900">FG%</button>
+    <button onclick="setSort('pt3')" id="sort-pt3" class="sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all text-slate-600 hover:text-slate-900">3PT%</button>
+</div>
+
+        <!-- Layout Matrix: Sidebar Filters + High Density Grid -->
+        <div class="grid grid-cols-1 xl:grid-cols-5 gap-6 items-start">
+            
+            <!-- Advanced Premium Filter Control Deck -->
+            <aside id="filterPanel" class="hidden xl:block xl:col-span-1 crystal-glass rounded-2xl p-4 sticky top-24 border border-slate-200/80 shadow-md">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
+                    <span class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-filter-list text-brand-500"></i> Advanced Engine Filters
+                    </span>
+                    <button onclick="resetFilters()" class="text-[10px] font-bold text-slate-400 hover:text-brand-700 transition-colors">Reset</button>
+                </div>
+
+                <!-- Position Multi-select -->
+                <div class="mb-4">
+                    <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500 mb-2">Tactical Position</label>
+                    <div class="grid grid-cols-3 gap-1">
+                        <button onclick="setFilterPos('All')" class="pos-filter-btn px-2 py-1.5 text-[10px] font-bold uppercase rounded-lg border text-center transition-all bg-slate-900 text-white border-slate-900">All</button>
+                        <button onclick="setFilterPos('PG')" class="pos-filter-btn px-2 py-1.5 text-[10px] font-bold uppercase rounded-lg border text-center transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50">PG</button>
+                        <button onclick="setFilterPos('SG')" class="pos-filter-btn px-2 py-1.5 text-[10px] font-bold uppercase rounded-lg border text-center transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50">SG</button>
+                        <button onclick="setFilterPos('SF')" class="pos-filter-btn px-2 py-1.5 text-[10px] font-bold uppercase rounded-lg border text-center transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50">SF</button>
+                        <button onclick="setFilterPos('PF')" class="pos-filter-btn px-2 py-1.5 text-[10px] font-bold uppercase rounded-lg border text-center transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50">PF</button>
+                        <button onclick="setFilterPos('C')" class="pos-filter-btn px-2 py-1.5 text-[10px] font-bold uppercase rounded-lg border text-center transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50">C</button>
+                    </div>
+                </div>
+
+                <!-- Tier Filter Selector -->
+                <div class="mb-4 pt-3 border-t border-slate-200/60">
+                    <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500 mb-2">Draft Tier Allocation</label>
+                    <select id="tierFilter" onchange="filterProspects()" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 outline-none focus:border-brand-500">
+                        <option value="All">All Projected Tiers</option>
+                        <option value="Top 3">Tier 1 (Top 3 Franchise Core)</option>
+                        <option value="Top 5">Tier 2 (Top 5 Blue Chip)</option>
+                        <option value="Top 12">Tier 3 (Lottery Protected)</option>
+                        <option value="Lottery">Lottery Value</option>
+                        <option value="Late 1st">Late First Round Tier</option>
+                    </select>
+                </div>
+
+                <!-- Performance Metrics Sliders (Interactive Concept for Billion Dollar look) -->
+                <div class="mb-2 pt-3 border-t border-slate-200/60">
+                    <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500 mb-1.5">Minimum Scoring Threshold</label>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 font-bold mb-1">
+                        <span id="ptsMinLabel">10.0 PPG</span>
+                        <span>30.0 PPG</span>
+                    </div>
+                    <input type="range" id="ptsRange" min="10" max="26" step="1" value="10" oninput="updatePtsSlider(this.value)" class="w-full h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-500">
+                </div>
+
+                <div class="pt-3 border-t border-slate-200/60 text-center">
+                    <span class="text-[9px] font-semibold text-slate-400 italic">Advanced filters auto-commit dynamically</span>
+                </div>
+            </aside>
+
+            <!-- Dense High Efficiency Grid System for 100s of Players -->
+            <div class="col-span-1 xl:col-span-4">
+                
+                <!-- Mobile Active Filters Panel info -->
+                <div class="md:hidden mb-4 flex items-center bg-white border border-slate-200 rounded-xl px-3.5 py-2.5">
+                    <i class="fa-solid fa-magnifying-glass text-slate-400 text-xs"></i>
+                    <input type="text" id="searchInputMobile" oninput="filterProspects(true)" placeholder="" class="bg-transparent border-none outline-none text-xs font-semibold w-full ml-2 text-slate-800">
+                </div>
+
+                <!-- High-density Row/Compact Card Combined Grid Layout -->
+                <div id="prospectsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                    <!-- Standard Injection Template via JavaScript Engines -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Bottom Mounted Comparison Utility Engine Glass Deck -->
+    <div id="compareActionBar" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 crystal-glass rounded-2xl px-5 py-3 flex items-center gap-5 transform translate-y-32 opacity-0 transition-all duration-500 shadow-[0_15px_40px_rgba(15,23,42,0.08)] border-slate-300/80 max-w-[90vw]">
+        <div class="flex items-center gap-3">
+            <div id="compareSlot1" class="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden shadow-inner"></div>
+            <span class="text-[10px] font-black tracking-tighter text-slate-400">VS</span>
+            <div id="compareSlot2" class="w-8 h-8 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden shadow-inner"></div>
+        </div>
+        <div class="h-6 w-[1px] bg-slate-200"></div>
+        <button onclick="openCompareModal()" class="bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded-xl text-[10px] font-extrabold uppercase tracking-widest shadow-sm transition-all flex items-center gap-2">
+            <i class="fa-solid fa-bolt-lightning text-brand-500"></i> Run Head-to-Head Matrix
+        </button>
+        <button onclick="clearCompare()" class="w-6 h-6 rounded-lg bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-700 transition-colors">
+            <i class="fa-solid fa-xmark text-xs"></i>
+        </button>
+    </div>
+
+    <!-- Analytics Interactive Modal System -->
+    <div id="compareModal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4 transition-all duration-300">
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-xl transition-opacity duration-300 opacity-0" id="compareBackdrop" onclick="closeCompareModal()"></div>
+        
+        <div id="compareContainer" class="relative w-full max-w-2xl crystal-glass rounded-3xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 border border-white shadow-2xl flex flex-col max-h-[90vh]">
+            <button onclick="closeCompareModal()" class="absolute top-4 right-4 z-50 w-8 h-8 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-800 transition-all shadow-sm">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+
+            <!-- Fixed Header Section inside Modal -->
+            <div class="p-5 border-b border-slate-200/60 bg-white/40 backdrop-blur-md shrink-0">
+                <div class="text-center">
+                    <span class="bg-slate-900 text-white text-[9px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-md">Comparative Scouting Engine Matrix</span>
+                </div>
+            </div>
+
+            <!-- Scrollable Content Field -->
+            <div class="p-6 overflow-y-auto no-scrollbar flex-grow bg-white/60 space-y-6">
+                <div id="compareMatrix" class="grid grid-cols-[1fr_auto_1fr] gap-x-4 gap-y-3 items-center">
+                    <!-- Loaded dynamically via js module -->
+                </div>
+            </div>
+        </div>
+
+
+    <!-- Deep Intelligence Profile Reader Deck -->
+    <div id="articleReader" class="fixed inset-0 z-[100] hidden items-center justify-center p-0 sm:p-6 transition-all duration-300">
+        <div class="absolute inset-0 bg-slate-900/30 backdrop-blur-xl transition-opacity duration-300 opacity-0" id="readerBackdrop" onclick="closeReader()"></div>
+        
+        <div id="readerContainer" class="relative w-full h-full sm:h-auto sm:max-h-[85vh] sm:max-w-3xl crystal-glass sm:rounded-3xl overflow-hidden flex flex-col transform translate-y-12 opacity-0 transition-all duration-400 border border-white shadow-2xl">
+            
+            <div class="absolute top-4 left-4 right-4 flex justify-between items-center z-20">
+                <span id="modalRankBadge" class="bg-slate-900 text-white px-3 py-1 rounded-lg text-[9px] font-extrabold uppercase tracking-widest shadow-sm"></span>
+                <button onclick="closeReader()" class="w-8 h-8 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-800 transition-all shadow-sm">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+
+            <div class="flex-grow overflow-y-auto no-scrollbar">
+                <!-- Cover Segment -->
+                <div class="relative h-44 sm:h-52 w-full bg-slate-100 border-b border-slate-200">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent z-10"></div>
+                    <img id="modalHeroImage" src="" class="w-full h-full object-cover object-top opacity-80" alt="Hero">
+                    <div class="absolute bottom-4 left-6 z-20">
+                        <p id="modalSchoolPos" class="text-[9px] font-extrabold text-brand-700 uppercase tracking-widest mb-1"></p>
+                        <h2 id="modalName" class="text-2xl sm:text-3xl font-black uppercase tracking-tight text-slate-900"></h2>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-white/80">
+                    <!-- Standard High Conglomerate Data Strip -->
+                    <div class="grid grid-cols-5 gap-2 mb-6">
+                        <div class="bg-slate-50 border border-slate-200/60 p-2.5 rounded-xl text-center">
+                            <span class="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">PTS/G</span>
+                            <span id="modalPts" class="block text-sm font-extrabold text-slate-900"></span>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200/60 p-2.5 rounded-xl text-center">
+                            <span class="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">REB/G</span>
+                            <span id="modalReb" class="block text-sm font-extrabold text-slate-900"></span>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200/60 p-2.5 rounded-xl text-center">
+                            <span class="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">AST/G</span>
+                            <span id="modalAst" class="block text-sm font-extrabold text-slate-900"></span>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200/60 p-2.5 rounded-xl text-center">
+                            <span class="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">FG%</span>
+                            <span id="modalFg" class="block text-sm font-extrabold text-slate-900"></span>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200/60 p-2.5 rounded-xl text-center">
+                            <span class="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-0.5">3PT%</span>
+                            <span id="modal3pt" class="block text-sm font-extrabold text-brand-700"></span>
+                        </div>
+                    </div>
+
+                    <div class="max-w-2xl mx-auto">
+                        <div class="flex items-center gap-3 mb-4 pb-4 border-b border-slate-100">
+                            <div class="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white text-[10px] font-bold">GS</div>
+                            <div>
+                                <p class="text-[9px] font-extrabold uppercase tracking-wider text-slate-800">Greenlight Analytics Group</p>
+                                <p class="text-[8px] font-medium text-slate-400 uppercase">Advanced Intelligence Film Room Assessment Report</p>
+                            </div>
+                        </div>
+
+                        <div id="modalReport" class="text-xs font-medium text-slate-600 leading-relaxed space-y-4">
+                            <!-- Report Details -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CORE FUNCTIONAL CONTROL SCRIPT -->
+    <script>
+        const PROSPECTS = [
+            {
+                id: 'pete', name: 'Darryn Peterson', school: 'Kansas', pos: 'SG', rank: "Top 4",
+                image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=400',
+                physical: { height: "6'5\"", weight: "195 lbs", wingspan: "6'10\"", reach: "8'6\"" },
+                stats: { pts: 19.9, reb: 4.8, ast: 1.6, stl: 1.3, blk: 0.6, tov: 2.1, pf: 1.8, fg: 45.2, pt3: 38.5, ft: 82.1, efg: 51.4, ts: 55.8 },
+                advanced: { per: 21.4, usg: 26.5, ws: 4.2, bpm: 5.1, astPct: 14.2, rebPct: 8.5 },
+                combine: { maxVert: "38.5 in", standVert: "32.0 in", sprint: "3.15 sec", agility: "11.10 sec", bench: "8 reps" },
+                report: `<p class="text-sm font-bold text-slate-800 mb-2">High utility perimeter asset processing elite operational efficiency on catch and drive mechanics.</p>`
+            },
+            {
+                id: 'aj', name: 'AJ Dybantsa', school: 'BYU', pos: 'SF', rank: "Top 3",
+                image: 'https://images.unsplash.com/photo-1511067007352-9da8fa49223a?q=80&w=400',
+                physical: { height: "6'9\"", weight: "210 lbs", wingspan: "7'2\"", reach: "9'1\"" },
+                stats: { pts: 25.5, reb: 6.8, ast: 3.7, stl: 1.6, blk: 1.1, tov: 2.8, pf: 2.1, fg: 51.0, pt3: 34.2, ft: 79.5, efg: 56.1, ts: 60.3 },
+                advanced: { per: 26.8, usg: 31.2, ws: 5.8, bpm: 7.4, astPct: 22.1, rebPct: 11.4 },
+                combine: { maxVert: "41.0 in", standVert: "34.5 in", sprint: "3.08 sec", agility: "10.95 sec", bench: "11 reps" },
+                report: `<p class="text-sm font-bold text-slate-800 mb-2">Generational speed-to-height wing specimen showcasing heavy iso-scoring tendencies.</p>`
+            },
+            {
+                id: 'booz', name: 'Cameron Boozer', school: 'Duke', pos: 'PF', rank: "Top 5",
+                image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=400',
+                physical: { height: "6'9\"", weight: "235 lbs", wingspan: "7'3\"", reach: "9'2\"" },
+                stats: { pts: 18.2, reb: 10.5, ast: 4.1, stl: 1.2, blk: 1.9, tov: 1.9, pf: 2.4, fg: 56.3, pt3: 31.0, ft: 76.2, efg: 59.8, ts: 63.1 },
+                advanced: { per: 25.1, usg: 23.8, ws: 5.2, bpm: 6.8, astPct: 18.5, rebPct: 17.2 },
+                combine: { maxVert: "36.5 in", standVert: "30.5 in", sprint: "3.28 sec", agility: "11.42 sec", bench: "14 reps" }
+            },
+            {
+                id: 'wag', name: 'Keaton Wagler', school: 'Illinois', pos: 'PG', rank: "Top 12",
+                image: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=400',
+                physical: { height: "6'6\"", weight: "190 lbs", wingspan: "6'8\"", reach: "8'7\"" },
+                stats: { pts: 17.9, reb: 5.1, ast: 4.2, stl: 1.8, blk: 0.4, tov: 1.7, pf: 1.5, fg: 44.5, pt3: 39.7, ft: 88.5, efg: 53.2, ts: 58.1 },
+                advanced: { per: 20.9, usg: 22.1, ws: 3.9, bpm: 4.8, astPct: 24.5, rebPct: 7.9 },
+                combine: { maxVert: "37.0 in", standVert: "31.0 in", sprint: "3.18 sec", agility: "11.02 sec", bench: "7 reps" }
+            },
+            {
+                id: 'wilson', name: 'Caleb Wilson', school: 'UNC', pos: 'PF', height: "6'10\"", weight: "205 lbs", rank: "Lottery",
+                image: 'https://images.unsplash.com/photo-121554904095-2cbdf4492bf9?q=80&w=400',
+                physical: { height: "6'10\"", weight: "205 lbs", wingspan: "7'4\"", reach: "9'3\"" },
+                stats: { pts: 19.8, reb: 9.4, ast: 2.7, stl: 1.1, blk: 2.3, tov: 2.2, pf: 2.6, fg: 48.9, pt3: 28.5, ft: 71.4, efg: 51.2, ts: 54.0 },
+                advanced: { per: 22.3, usg: 25.0, ws: 4.0, bpm: 5.3, astPct: 12.8, rebPct: 15.4 },
+                combine: { maxVert: "39.0 in", standVert: "33.0 in", sprint: "3.20 sec", agility: "11.25 sec", bench: "9 reps" }
+            },
+            {
+                id: 'lopez', name: 'Karim Lopez', school: 'NZ Breakers', pos: 'SF', rank: "Top 8",
+                image: 'https://images.unsplash.com/photo-1518063319789-7217e6706b04?q=80&w=400',
+                physical: { height: "6'9\"", weight: "215 lbs", wingspan: "7'0\"", reach: "9'0\"" },
+                stats: { pts: 14.2, reb: 7.8, ast: 3.1, stl: 0.9, blk: 1.4, tov: 1.5, pf: 2.2, fg: 50.2, pt3: 35.1, ft: 78.0, efg: 54.7, ts: 57.9 },
+                advanced: { per: 19.1, usg: 19.5, ws: 3.1, bpm: 3.6, astPct: 15.1, rebPct: 12.8 },
+                combine: { maxVert: "35.5 in", standVert: "29.5 in", sprint: "3.32 sec", agility: "11.50 sec", bench: "10 reps" }
+            },
+            {
+                id: 'acuff', name: 'Darius Acuff', school: 'Arkansas', pos: 'PG', rank: "Late 1st",
+                image: 'https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=400',
+                physical: { height: "6'3\"", weight: "185 lbs", wingspan: "6'6\"", reach: "8'3\"" },
+                stats: { pts: 21.2, reb: 3.4, ast: 5.5, stl: 1.2, blk: 0.2, tov: 3.1, pf: 1.6, fg: 42.1, pt3: 41.5, ft: 85.3, efg: 51.0, ts: 56.2 },
+                advanced: { per: 21.8, usg: 29.1, ws: 3.6, bpm: 4.1, astPct: 31.4, rebPct: 5.8 },
+                combine: { maxVert: "36.0 in", standVert: "30.0 in", sprint: "3.12 sec", agility: "10.88 sec", bench: "6 reps" }
+            },
+            {
+                id: 'lend', name: 'Yaxel Lendeborg', school: 'Michigan', pos: 'C', rank: "Late 1st",
+                image: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?q=80&w=400',
+                physical: { height: "6'11\"", weight: "245 lbs", wingspan: "7'5\"", reach: "9'5\"" },
+                stats: { pts: 12.5, reb: 11.2, ast: 2.1, stl: 0.8, blk: 2.6, tov: 1.4, pf: 2.9, fg: 62.4, pt3: 22.0, ft: 68.5, efg: 63.5, ts: 65.4 },
+                advanced: { per: 24.3, usg: 17.8, ws: 4.9, bpm: 5.9, astPct: 10.2, rebPct: 19.5 },
+                combine: { maxVert: "34.0 in", standVert: "28.0 in", sprint: "3.41 sec", agility: "11.85 sec", bench: "16 reps" }
+            }
+        ];
+
+        let currentFilterPos = 'All';
+        let currentTierFilter = 'All';
+        let currentMinPts = 10;
+        let currentSort = 'rank';
+        let compareList = [];
+
+        // Dynamic High-Density Card Micro Engine Rendering
+        function renderProspects() {
+            const grid = document.getElementById('prospectsGrid');
+            grid.innerHTML = '';
+
+            const isMobile = window.innerWidth < 768;
+            const searchVal = document.getElementById(isMobile ? 'searchInputMobile' : 'searchInput').value.toLowerCase();
+
+            // Processing Pipeline
+            let processed = PROSPECTS.filter(p => {
+                const matchesSearch = p.name.toLowerCase().includes(searchVal) || p.school.toLowerCase().includes(searchVal);
+                const matchesPos = currentFilterPos === 'All' ? true : p.pos === currentFilterPos;
+                const matchesTier = currentTierFilter === 'All' ? true : p.rank === currentTierFilter;
+                const matchesPts = p.stats.pts >= currentMinPts;
+                return matchesSearch && matchesPos && matchesTier && matchesPts;
+            });
+
+            // Sorting Strategy Block
+            // Updated Sorting Strategy Block inside renderProspects()
+            processed.sort((a, b) => {
+                if (currentSort === 'rank') {
+                    return a.rank.localeCompare(b.rank);
+                }
+                const statA = a.stats[currentSort] !== undefined ? a.stats[currentSort] : 0;
+                const statB = b.stats[currentSort] !== undefined ? b.stats[currentSort] : 0;
+                return statB - statA;
+            });
+
+
+            if(processed.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-xs font-semibold text-slate-400 border border-dashed border-slate-200 rounded-2xl">No prospects found matching your specific engine criteria.</div>`;
+                return;
+            }
+
+            processed.forEach(p => {
+                const isSelected = compareList.includes(p.id);
+                const card = document.createElement('div');
+                card.className = `crystal-card rounded-xl p-3 flex flex-col justify-between relative cursor-pointer group ${isSelected ? 'selected-compare' : ''}`;
+                card.id = `card-${p.id}`;
+                
+                card.innerHTML = `
+                    <div onclick="openReader('${p.id}')">
+                        <!-- Card Header Matrix Block -->
+                        <div class="flex items-center gap-2.5 mb-2">
+                            <div class="w-10 h-10 rounded-lg bg-slate-100 overflow-hidden shrink-0 border border-slate-200/50">
+                                <img src="${p.image}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" alt="">
+                            </div>
+                            <div class="overflow-hidden flex-grow">
+                                <div class="flex items-center justify-between gap-1">
+                                    <h3 class="text-sm font-extrabold text-slate-900 tracking-tight truncate group-hover:text-brand-700 transition-colors">${p.name}</h3>
+<span class="text-[8px] font-extrabold shrink-0 px-1.5 py-0.5 rounded ${getRankBadgeStyle(p.rank)}">${p.rank}</span>
+                                </div>
+                                <p class="text-[10px] font-semibold text-slate-400 truncate">${p.school} <span class="mx-0.5 text-slate-200">|</span> ${p.pos}</p>
+                            </div>
+                        </div>
+
+                        <!-- Mini Modular Metrics Row -->
+                        <div class="grid grid-cols-4 gap-1 bg-white/60 rounded-lg p-1.5 border border-slate-200/40 text-center mb-2.5">
+                            <div>
+                                <span class="block text-[7px] font-bold text-slate-400 uppercase">PTS</span>
+                                <span class="text-[11px] font-extrabold text-slate-800">${p.stats.pts}</span>
+                            </div>
+                            <div>
+                                <span class="block text-[7px] font-bold text-slate-400 uppercase">REB</span>
+                                <span class="text-[11px] font-semibold text-slate-600">${p.stats.reb}</span>
+                            </div>
+                            <div>
+                                <span class="block text-[7px] font-bold text-slate-400 uppercase">AST</span>
+                                <span class="text-[11px] font-semibold text-slate-600">${p.stats.ast}</span>
+                            </div>
+                            <div>
+                                <span class="block text-[7px] font-bold text-slate-400 uppercase">3PT</span>
+                                <span class="text-[11px] font-extrabold text-brand-700">${p.stats.pt3}%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Platform Bar -->
+                    <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-[9px] font-bold">
+<span class="text-slate-400 font-medium">${p.physical.height} · ${p.physical.weight}</span>
+                        <button onclick="toggleCompare('${p.id}', event)" class="flex items-center gap-1.5 px-2 py-1 rounded-md transition-all ${isSelected ? 'bg-brand-500 text-white shadow-sm' : 'text-slate-400 hover:text-slate-900 hover:bg-slate-50'}">
+                            <i class="fa-solid fa-scale-balanced text-[10px]"></i> ${isSelected ? 'Target Locked' : 'Compare'}
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filtering Actions Logic
+        function filterProspects(isMobile = false) {
+            if(!isMobile) {
+                currentTierFilter = document.getElementById('tierFilter').value;
+            }
+            renderProspects();
+        }
+
+        function setFilterPos(pos) {
+            currentFilterPos = pos;
+            document.querySelectorAll('.pos-filter-btn').forEach(btn => {
+                btn.className = "pos-filter-btn px-2 py-1.5 text-[10px] font-bold uppercase rounded-lg border text-center transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50";
+                if(btn.innerText === pos) {
+                    btn.className = "pos-filter-btn px-2 py-1.5 text-[10px] font-bold uppercase rounded-lg border text-center transition-all bg-slate-900 text-white border-slate-900";
+                }
+            });
+            renderProspects();
+        }
+
+        function updatePtsSlider(val) {
+            currentMinPts = parseFloat(val);
+            document.getElementById('ptsMinLabel').innerText = `${currentMinPts}.0 PPG`;
+            renderProspects();
+        }
+
+        // Updated setSort Function to handle dynamic highlighting across all items
+        function setSort(metric) {
+            currentSort = metric;
+            document.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.className = "sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all text-slate-600 hover:text-slate-900";
+            });
+            const targetBtn = document.getElementById(`sort-${metric}`);
+            if (targetBtn) {
+                targetBtn.className = "sort-btn px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all bg-white text-slate-800 shadow-sm";
+            }
+            renderProspects();
+        }
+
+
+        function resetFilters() {
+            currentFilterPos = 'All';
+            currentTierFilter = 'All';
+            currentMinPts = 10;
+            document.getElementById('tierFilter').value = 'All';
+            document.getElementById('ptsRange').value = 10;
+            document.getElementById('ptsMinLabel').innerText = "10.0 PPG";
+            setFilterPos('All');
+        }
+
+        function toggleFilterPanel() {
+            const panel = document.getElementById('filterPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        // Core Comparison Operational Control Blocks
+        function toggleCompare(id, e) {
+            if(e) e.stopPropagation();
+            if (compareList.includes(id)) {
+                compareList = compareList.filter(pid => pid !== id);
+            } else {
+                if (compareList.length >= 2) compareList.shift();
+                compareList.push(id);
+            }
+            renderProspects();
+            updateCompareActionBar();
+        }
+
+        function clearCompare() {
+            compareList = [];
+            renderProspects();
+            updateCompareActionBar();
+        }
+
+        function updateCompareActionBar() {
+            const bar = document.getElementById('compareActionBar');
+            const s1 = document.getElementById('compareSlot1');
+            const s2 = document.getElementById('compareSlot2');
+
+            if (compareList.length > 0) {
+                bar.classList.remove('translate-y-32', 'opacity-0');
+                const p1 = PROSPECTS.find(p => p.id === compareList[0]);
+                s1.innerHTML = p1 ? `<img src="${p1.image}" class="w-full h-full object-cover">` : '';
+                const p2 = PROSPECTS.find(p => p.id === compareList[1]);
+                s2.innerHTML = p2 ? `<img src="${p2.image}" class="w-full h-full object-cover">` : '';
+            } else {
+                bar.classList.add('translate-y-32', 'opacity-0');
+            }
+        }
+
+        function getMetricLightClass(val1, val2) {
+            if (val1 === val2) return 'text-slate-800';
+            return val1 > val2 ? 'metric-winner-light' : 'metric-loser-light';
+        }
+
+        // Intelligent Multi-Tier Metric Parsing Logic
+        function parseMetricValue(val) {
+            if (typeof val === 'number') return val;
+            if (!val) return 0;
+            // Handle Heights & Wingspans (6'5" -> 77 inches)
+            if (val.includes("'")) {
+                const parts = val.replace(/"/g, '').split("'");
+                return (parseInt(parts[0], 10) * 12) + (parseInt(parts[1], 10) || 0);
+            }
+            // Strip text configurations out for raw computational weight
+            return parseFloat(val.replace(/[^\d.]/g, '')) || 0;
+        }
+
+        function evaluateMetricWinner(val1, val2, lowerIsBetter = false) {
+            const num1 = parseMetricValue(val1);
+            const num2 = parseMetricValue(val2);
+            if (num1 === num2) return ['text-slate-800 font-semibold', 'text-slate-800 font-semibold'];
+            
+            const isPlayer1Winner = lowerIsBetter ? num1 < num2 : num1 > num2;
+            return isPlayer1Winner 
+                ? ['metric-winner-light text-center', 'metric-loser-light text-center'] 
+                : ['metric-loser-light text-center', 'metric-winner-light text-center'];
+        }
+
+        function openCompareModal() {
+            if (compareList.length !== 2) return;
+            const p1 = PROSPECTS.find(p => p.id === compareList[0]);
+            const p2 = PROSPECTS.find(p => p.id === compareList[1]);
+            const matrix = document.getElementById('compareMatrix');
+
+            // Categorized Data Architecture Map
+            const physicalSpec = [
+                { label: 'Height', key: 'height' },
+                { label: 'Weight', key: 'weight' },
+                { label: 'Wingspan', key: 'wingspan' },
+                { label: 'Standing Reach', key: 'reach' }
+            ];
+
+            const basicSpec = [
+                { label: 'PTS/G', key: 'pts' },
+                { label: 'REB/G', key: 'reb' },
+                { label: 'AST/G', key: 'ast' },
+                { label: 'STL/G', key: 'stl' },
+                { label: 'BLK/G', key: 'blk' },
+                { label: 'TOV/G', key: 'tov', lower: true },
+                { label: 'PF/G', key: 'pf', lower: true }
+            ];
+
+            const efficiencySpec = [
+                { label: 'FG %', key: 'fg', suffix: '%' },
+                { label: '3PT %', key: 'pt3', suffix: '%' },
+                { label: 'FT %', key: 'ft', suffix: '%' },
+                { label: 'eFG %', key: 'efg', suffix: '%' },
+                { label: 'True Shooting %', key: 'ts', suffix: '%' }
+            ];
+
+            const advancedSpec = [
+                { label: 'Player Eff. Rating (PER)', key: 'per' },
+                { label: 'Usage Rate %', key: 'usg', suffix: '%' },
+                { label: 'Win Shares (WS)', key: 'ws' },
+                { label: 'Box Plus-Minus (BPM)', key: 'bpm' },
+                { label: 'Assist %', key: 'astPct', suffix: '%' },
+                { label: 'Rebound %', key: 'rebPct', suffix: '%' }
+            ];
+
+            const combineSpec = [
+                { label: 'Max Vertical', key: 'maxVert' },
+                { label: 'Standing Vertical', key: 'standVert' },
+                { label: '3/4 Court Sprint', key: 'sprint', lower: true },
+                { label: 'Lane Agility', key: 'agility', lower: true },
+                { label: 'Bench Press', key: 'bench' }
+            ];
+
+            let htmlString = `
+                <!-- Player Banner Top Block -->
+                <div class="text-center flex flex-col items-center sticky top-0 bg-white/80 py-2 z-10 rounded-xl">
+                    <img src="${p1.image}" class="w-14 h-14 rounded-xl object-cover border border-slate-200 mb-1.5 shadow-sm">
+                    <h3 class="font-extrabold text-xs text-slate-900 truncate max-w-[130px]">${p1.name}</h3>
+                    <p class="text-[9px] text-brand-700 font-bold uppercase tracking-wider">${p1.school} · ${p1.pos}</p>
+                </div>
+                <div class="text-center font-black text-[10px] text-slate-300">VS</div>
+                <div class="text-center flex flex-col items-center sticky top-0 bg-white/80 py-2 z-10 rounded-xl">
+                    <img src="${p2.image}" class="w-14 h-14 rounded-xl object-cover border border-slate-200 mb-1.5 shadow-sm">
+                    <h3 class="font-extrabold text-xs text-slate-900 truncate max-w-[130px]">${p2.name}</h3>
+                    <p class="text-[9px] text-brand-700 font-bold uppercase tracking-wider">${p2.school} · ${p2.pos}</p>
+                </div>
+            `;
+
+            // Segment Generator Helper
+            const appendSection = (title, items, dataKey) => {
+                htmlString += `
+                    <div class="col-span-full border-b border-slate-200/80 pt-4 pb-1">
+                        <span class="text-[9px] font-black uppercase tracking-[0.15em] text-slate-400 bg-slate-50 px-2 py-0.5 rounded">${title}</span>
+                    </div>
+                `;
+                items.forEach(item => {
+                    const val1 = p1[dataKey][item.key];
+                    const val2 = p2[dataKey][item.key];
+                    const styles = evaluateMetricWinner(val1, val2, item.lower);
+                    const suffix = item.suffix || '';
+
+                    htmlString += `
+                        <div class="text-xs text-center ${styles[0]}">${val1 !== undefined ? val1 + suffix : 'N/A'}</div>
+                        <div class="text-center text-[9px] font-bold text-slate-400 uppercase tracking-wide px-1">${item.label}</div>
+                        <div class="text-xs text-center ${styles[1]}">${val2 !== undefined ? val2 + suffix : 'N/A'}</div>
+                    `;
+                });
+            };
+
+            // Run generation strings
+            appendSection('Physical Profile', physicalSpec, 'physical');
+            appendSection('Stats', basicSpec, 'stats');
+            appendSection('Efficiency', efficiencySpec, 'stats');
+            appendSection('Advanced Stats', advancedSpec, 'advanced');
+            appendSection('NBA Combine Athletic Assessments', combineSpec, 'combine');
+
+            matrix.innerHTML = htmlString;
+
+            const modal = document.getElementById('compareModal');
+            const backdrop = document.getElementById('compareBackdrop');
+            const container = document.getElementById('compareContainer');
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                container.classList.remove('scale-95', 'opacity-0');
+                container.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeCompareModal() {
+            const modal = document.getElementById('compareModal');
+            const backdrop = document.getElementById('compareBackdrop');
+            const container = document.getElementById('compareContainer');
+
+            backdrop.classList.add('opacity-0');
+            container.classList.remove('scale-100', 'opacity-100');
+            container.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        function openReader(id) {
+            const prospect = PROSPECTS.find(p => p.id === id);
+            if(!prospect) return;
+
+            document.getElementById('modalRankBadge').innerText = prospect.rank;
+            document.getElementById('modalHeroImage').src = prospect.image;
+document.getElementById('modalSchoolPos').innerText = `${prospect.school} · ${prospect.pos} · ${prospect.physical.height} · ${prospect.physical.weight}`;
+            document.getElementById('modalName').innerText = prospect.name;
+            
+            document.getElementById('modalPts').innerText = prospect.stats.pts;
+            document.getElementById('modalReb').innerText = prospect.stats.reb;
+            document.getElementById('modalAst').innerText = prospect.stats.ast;
+            document.getElementById('modalFg').innerText = prospect.stats.fg + '%';
+            document.getElementById('modal3pt').innerText = prospect.stats.pt3 + '%';
+            
+            document.getElementById('modalReport').innerHTML = prospect.report;
+
+            const modal = document.getElementById('articleReader');
+            const backdrop = document.getElementById('readerBackdrop');
+            const container = document.getElementById('readerContainer');
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                container.classList.remove('translate-y-12', 'opacity-0');
+                container.classList.add('translate-y-0', 'opacity-100');
+            }, 10);
+        }
+
+        function closeReader() {
+            const modal = document.getElementById('articleReader');
+            const backdrop = document.getElementById('readerBackdrop');
+            const container = document.getElementById('readerContainer');
+
+            backdrop.classList.add('opacity-0');
+            container.classList.remove('translate-y-0', 'opacity-100');
+            container.classList.add('translate-y-12', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Initialize Module Engine
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProspects();
+        });
+                // Dynamic Tier Styling Engine
+        function getRankBadgeStyle(rank) {
+            const r = rank.toLowerCase();
+            
+            // Tier 1: Top 3 / Top 4 (Franchise Core - Premium Gold)
+            if (r.includes('top 3') || r.includes('top 4')) {
+                return 'bg-gradient-to-tr from-amber-100 to-yellow-50 text-amber-700 border border-amber-300/60 shadow-[0_0_8px_rgba(251,191,36,0.25)]';
+            }
+            // Tier 2: Top 5 / Top 8 (Blue Chip - Brand Green)
+            else if (r.includes('top 5') || r.includes('top 8')) {
+                return 'bg-gradient-to-tr from-emerald-100 to-brand-50 text-brand-700 border border-brand-300/60 shadow-[0_0_8px_rgba(34,197,94,0.15)]';
+            }
+            // Tier 3: Top 12 / Lottery (Lottery Protected - Deep Blue/Indigo)
+            else if (r.includes('top 12') || r.includes('lottery')) {
+                return 'bg-gradient-to-tr from-blue-100 to-indigo-50 text-blue-700 border border-blue-300/60 shadow-[0_0_8px_rgba(59,130,246,0.15)]';
+            }
+            // Tier 4: Late 1st & Everything Else (Standard Slate)
+            else {
+                return 'bg-gradient-to-tr from-slate-100 to-slate-50 text-slate-600 border border-slate-200/80 shadow-sm';
+            }
+        }
+
+    </script>
+</body>
+</html>
