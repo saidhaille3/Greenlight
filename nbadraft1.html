@@ -750,546 +750,137 @@ filter: invert(1) brightness(2);
 
 </div>
 
-<!-- ============================================================
-     DRAFT PICK MODAL
-     ============================================================ -->
-<div id="draftPickModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-6">
-  <div class="absolute inset-0 bg-black/80 backdrop-blur-xl" onclick="closeDraftModal()"></div>
+<div id="draftPickModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-3 md:p-6">
+  <div class="absolute inset-0 bg-black/75 backdrop-blur-2xl" onclick="closeDraftModal()"></div>
 
-  <div id="draftModalContainer" class="relative w-full max-w-2xl bg-white dark:bg-[#0f0f0f] rounded-[2.5rem] overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.5)] border border-black/10 dark:border-white/10 max-h-[90vh] flex flex-col scale-95 opacity-0 transition-all duration-300">
+  <div id="draftModalContainer" class="relative w-full max-w-2xl max-h-[92vh] flex flex-col rounded-[2.5rem] overflow-hidden scale-95 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+    style="background: rgba(8,8,8,0.85); backdrop-filter: blur(60px) saturate(180%); -webkit-backdrop-filter: blur(60px) saturate(180%); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 40px 120px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06);">
 
-    <!-- Modal Header -->
-    <div class="p-6 md:p-8 border-b border-black/5 dark:border-white/5 bg-gray-50/50 dark:bg-white/5 relative">
-      <button onclick="closeDraftModal()" class="absolute top-4 right-6 text-3xl font-light hover:rotate-90 transition-transform dark:text-white opacity-40 hover:opacity-100">&times;</button>
+    <!-- Ambient glow top -->
+    <div id="draftModalGlow" class="absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-48 rounded-full blur-[80px] opacity-30 pointer-events-none transition-colors duration-700" style="background: #d4af37;"></div>
+
+    <!-- HEADER -->
+    <div class="relative flex-shrink-0 p-6 md:p-8 pb-5" style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <button onclick="closeDraftModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 transition-all text-lg">&times;</button>
 
       <div class="flex items-center gap-4">
-        <img id="draftModalLogo" src="" alt="" class="w-14 h-14 md:w-16 md:h-16 object-contain flex-shrink-0" />
-        <div>
-          <p id="draftModalPickNum" class="text-[9px] font-black uppercase tracking-[0.3em] text-amber-500 mb-1"></p>
-          <h2 id="draftModalTeamName" class="text-2xl md:text-3xl font-black uppercase tracking-tighter dark:text-white leading-none"></h2>
-          <p id="draftModalRecord" class="text-[10px] font-bold opacity-40 uppercase tracking-widest mt-1 dark:text-white"></p>
+        <div class="relative flex-shrink-0">
+          <img id="draftModalLogo" src="" alt="" class="w-14 h-14 md:w-16 md:h-16 object-contain drop-shadow-xl" />
+          <div id="draftModalPickBadge" class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-amber-500 flex items-center justify-center text-[8px] font-black text-black shadow-lg"></div>
         </div>
-        <!-- Selection badge if pick is made -->
-        <div id="draftModalSelectionBadge" class="hidden ml-auto text-right">
-          <p class="text-[8px] font-black uppercase tracking-widest text-green-600 mb-1">Selected</p>
-          <p id="draftModalPlayerName" class="text-base font-black uppercase tracking-tight dark:text-white"></p>
-          <p id="draftModalPlayerPos" class="text-[9px] opacity-40 font-bold dark:text-white"></p>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 mb-1 flex-wrap">
+            <span id="draftModalPickNum" class="text-[9px] font-black uppercase tracking-[0.3em] text-amber-400"></span>
+            <span id="draftModalTradeBadge" class="hidden text-[7px] font-black bg-amber-400/15 text-amber-400 border border-amber-400/25 px-2 py-0.5 rounded-full uppercase tracking-widest">Via Trade</span>
+          </div>
+          <h2 id="draftModalTeamName" class="text-2xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none"></h2>
+          <p id="draftModalRecord" class="text-[10px] font-medium text-white/35 mt-1 uppercase tracking-widest"></p>
         </div>
+        <!-- If pick made -->
+        <div id="draftModalSelectionBadge" class="hidden flex-shrink-0 text-right">
+          <div class="inline-block px-3 py-1 rounded-full mb-1" style="background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);">
+            <span class="text-[8px] font-black text-emerald-400 uppercase tracking-widest">Selected</span>
+          </div>
+          <p id="draftModalPlayerName" class="text-sm font-black text-white uppercase tracking-tight leading-tight"></p>
+          <p id="draftModalPlayerPos" class="text-[9px] text-white/40 font-bold mt-0.5"></p>
+        </div>
+      </div>
+
+      <!-- Tab Bar -->
+      <div class="flex gap-1 mt-6 p-1 rounded-2xl" style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);">
+        <button onclick="switchDraftTab('intel')" id="tab-intel" class="draft-tab flex-1 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all duration-300 text-white/40">
+          🎯 Team Intel
+        </button>
+        <button onclick="switchDraftTab('sources')" id="tab-sources" class="draft-tab flex-1 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all duration-300 text-white/40">
+          📋 All Sources
+        </button>
+        <button onclick="switchDraftTab('board')" id="tab-board" class="draft-tab flex-1 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all duration-300 text-white/40">
+          🏀 Big Board
+        </button>
       </div>
     </div>
 
-    <!-- Modal Body -- AI powered -->
-    <div class="flex-grow overflow-y-auto no-scrollbar p-6 md:p-8">
+    <!-- BODY -->
+    <div class="flex-grow overflow-y-auto no-scrollbar">
 
-      <!-- AI loading state -->
-      <div id="draftAILoader" class="flex flex-col items-center justify-center py-12 gap-4">
-        <div class="flex gap-1.5">
-          <span class="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style="animation-delay:0s"></span>
-          <span class="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style="animation-delay:0.15s"></span>
-          <span class="w-2 h-2 bg-amber-500 rounded-full animate-bounce" style="animation-delay:0.3s"></span>
-        </div>
-        <p class="text-[10px] font-black uppercase tracking-widest text-black/30 dark:text-white/30">Greenlight AI Analyzing...</p>
-      </div>
+      <!-- TAB: TEAM INTEL -->
+      <div id="draftTab-intel" class="draft-tab-content p-5 md:p-7 space-y-5">
 
-      <!-- AI content renders here -->
-      <div id="draftAIContent" class="hidden space-y-6">
-
-        <!-- Team Needs -->
+        <!-- Needs -->
         <div>
-          <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-amber-500 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-crosshairs"></i> Team Needs
-          </h4>
+          <p class="text-[9px] font-black uppercase tracking-[0.4em] text-amber-400 mb-3 flex items-center gap-2">
+            <span class="w-4 h-px bg-amber-400/50"></span> Positional Voids
+          </p>
           <div id="draftNeedsGrid" class="flex flex-wrap gap-2"></div>
         </div>
 
-        <div class="h-px bg-black/5 dark:bg-white/5"></div>
+        <!-- Situation -->
+        <div class="rounded-2xl p-4" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+          <p class="text-[9px] font-black uppercase tracking-[0.35em] text-white/30 mb-2">Front Office Situation</p>
+          <p id="draftSituation" class="text-sm font-medium text-white/70 leading-relaxed"></p>
+        </div>
 
-        <!-- Best Available -->
+        <!-- GLS Targets -->
         <div>
-          <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-ranking-star"></i> Best Available
-          </h4>
+          <p class="text-[9px] font-black uppercase tracking-[0.4em] text-emerald-400 mb-3 flex items-center gap-2">
+            <span class="w-4 h-px bg-emerald-400/50"></span> GLS Recommended Targets
+          </p>
           <div id="draftProspectsList" class="space-y-3"></div>
         </div>
 
-        <div class="h-px bg-black/5 dark:bg-white/5"></div>
-
-        <!-- Greenlight Take -->
-        <div>
-          <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-black/30 dark:text-white/30 mb-3 flex items-center gap-2">
-            <i class="fa-solid fa-bolt"></i> Greenlight Take
-          </h4>
-          <p id="draftGLTake" class="text-sm font-medium leading-relaxed text-black/70 dark:text-white/60 italic"></p>
+        <!-- GLS Take -->
+        <div class="rounded-2xl p-4" style="background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.03) 100%); border: 1px solid rgba(212,175,55,0.12);">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
+              <span class="text-[7px] font-black text-black">GL</span>
+            </div>
+            <p class="text-[9px] font-black uppercase tracking-[0.35em] text-amber-400">Greenlight Take</p>
+          </div>
+          <p id="draftGLTake" class="text-sm font-medium text-white/70 leading-relaxed italic"></p>
         </div>
-
       </div>
 
-      <!-- Error state -->
-      <div id="draftAIError" class="hidden text-center py-8">
-        <p class="text-sm opacity-40 dark:text-white">Couldn't load analysis. Try again.</p>
-        <button onclick="retryDraftAI()" class="mt-4 text-[10px] font-black uppercase tracking-widest text-amber-500 hover:text-amber-600">Retry</button>
+      <!-- TAB: ALL SOURCES -->
+      <div id="draftTab-sources" class="draft-tab-content hidden p-5 md:p-7 space-y-4">
+        <div id="sourceProspectsHeader" class="mb-2">
+          <p class="text-[9px] font-black uppercase tracking-[0.4em] text-white/30 mb-1">Prospects Available At This Pick</p>
+          <p class="text-xs text-white/40 font-medium">Tap any prospect to see all source grades side by side</p>
+        </div>
+        <div id="sourceProspectsList" class="space-y-3"></div>
       </div>
 
+      <!-- TAB: BIG BOARD -->
+      <div id="draftTab-board" class="draft-tab-content hidden p-5 md:p-7">
+        <p class="text-[9px] font-black uppercase tracking-[0.4em] text-white/30 mb-5">Full Class Rankings By Source</p>
+        <div class="overflow-x-auto -mx-2 px-2">
+          <table class="w-full text-left min-w-[420px]">
+            <thead>
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
+                <th class="pb-3 text-[8px] font-black uppercase tracking-widest text-white/25 pl-2">Player</th>
+                <th class="pb-3 text-[8px] font-black uppercase tracking-widest text-white/25 text-center">
+                  <div class="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center mx-auto"><span class="text-[6px] font-black text-black">GL</span></div>
+                </th>
+                <th class="pb-3 text-[8px] font-black uppercase tracking-widest text-white/25 text-center">ESPN</th>
+                <th class="pb-3 text-[8px] font-black uppercase tracking-widest text-white/25 text-center">CBS</th>
+                <th class="pb-3 text-[8px] font-black uppercase tracking-widest text-white/25 text-center">NBA.com</th>
+              </tr>
+            </thead>
+            <tbody id="bigBoardTableBody" class="divide-y divide-white/[0.04]"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 <script>
 // ============================================================
 //  GREENLIGHT NBA DRAFT TRACKER -- 2026 (ACCURATE ORDER)
 //  Draft: June 23-24, 2026 | ESPN/ABC
 // ============================================================
 
-const NBA_DRAFT_2026 = [
-  { pick: 1,  team: 'WAS', name: 'Wizards',                    viaTeam: null },
-  { pick: 2,  team: 'UTA', name: 'Jazz',                       viaTeam: null },
-  { pick: 3,  team: 'MEM', name: 'Grizzlies',                  viaTeam: null },
-  { pick: 4,  team: 'CHI', name: 'Bulls',                      viaTeam: null },
-  { pick: 5,  team: 'LAC', name: 'Clippers',                   viaTeam: 'IND' },
-  { pick: 6,  team: 'BKN', name: 'Nets',                       viaTeam: null },
-  { pick: 7,  team: 'SAC', name: 'Kings',                      viaTeam: null },
-  { pick: 8,  team: 'ATL', name: 'Hawks',                      viaTeam: 'NOP' },
-  { pick: 9,  team: 'DAL', name: 'Mavericks',                  viaTeam: null },
-  { pick: 10, team: 'MIL', name: 'Bucks',                      viaTeam: null },
-  { pick: 11, team: 'GSW', name: 'Warriors',                   viaTeam: null },
-  { pick: 12, team: 'OKC', name: 'Thunder',                    viaTeam: null },
-  { pick: 13, team: 'MIA', name: 'Heat',                       viaTeam: null },
-  { pick: 14, team: 'CHA', name: 'Hornets',                    viaTeam: null },
-  { pick: 15, team: 'CHI', name: 'Bulls',                      viaTeam: 'POR' },
-  { pick: 16, team: 'MEM', name: 'Grizzlies',                  viaTeam: 'PHX' },
-  { pick: 17, team: 'OKC', name: 'Thunder',                    viaTeam: 'PHI' },
-  { pick: 18, team: 'CHA', name: 'Hornets',                    viaTeam: 'ORL' },
-  { pick: 19, team: 'TOR', name: 'Raptors',                    viaTeam: null },
-  { pick: 20, team: 'SA',  name: 'Spurs',                      viaTeam: 'ATL' },
-  { pick: 21, team: 'DET', name: 'Pistons',                    viaTeam: 'MIN' },
-  { pick: 22, team: 'PHI', name: '76ers',                      viaTeam: 'HOU' },
-  { pick: 23, team: 'ATL', name: 'Hawks',                      viaTeam: 'CLE' },
-  { pick: 24, team: 'NYK', name: 'Knicks',                     viaTeam: null },
-  { pick: 25, team: 'LAL', name: 'Lakers',                     viaTeam: null },
-  { pick: 26, team: 'DEN', name: 'Nuggets',                    viaTeam: null },
-  { pick: 27, team: 'BOS', name: 'Celtics',                    viaTeam: null },
-  { pick: 28, team: 'MIN', name: 'Timberwolves',               viaTeam: 'DET' },
-  { pick: 29, team: 'CLE', name: 'Cavaliers',                  viaTeam: 'SA'  },
-  { pick: 30, team: 'DAL', name: 'Mavericks',                  viaTeam: 'OKC' },
-];
 
-function getNBALogo(abbr) {
-  const map = {
-    'WAS':'was','UTA':'uta','MEM':'mem','CHI':'chi','LAC':'lac',
-    'BKN':'bkn','SAC':'sac','ATL':'atl','DAL':'dal','MIL':'mil',
-    'GSW':'gs', 'OKC':'okc','MIA':'mia','CHA':'cha','POR':'por',
-    'PHX':'phx','PHI':'phi','ORL':'orl','TOR':'tor','SA':'sa',
-    'DET':'det','HOU':'hou','CLE':'cle','NYK':'ny', 'LAL':'lal',
-    'DEN':'den','BOS':'bos','MIN':'min','NOP':'no', 'IND':'ind',
-  };
-  return `https://a.espncdn.com/i/teamlogos/nba/500/${map[abbr] || abbr.toLowerCase()}.png`;
-}
-
-// ── STATE ────────────────────────────────────────────────────
-let draftPicks   = NBA_DRAFT_2026.map(p => ({ ...p, selection: null, position: '', college: '' }));
-let currentOTC   = null;
-let lastModalPick = null;
-
-// ── FETCH LIVE DATA ──────────────────────────────────────────
-async function fetchNBADraftData() {
-  try {
-    const res  = await fetch('https://site.api.espn.com/apis/v2/sports/basketball/nba/draft/2026/picks?limit=60');
-    const data = await res.json();
-    if (data?.picks?.length) {
-      data.picks.forEach(ep => {
-        const idx = draftPicks.findIndex(p => p.pick === ep.overallSelection);
-        if (idx !== -1 && ep.athlete) {
-          draftPicks[idx].selection = `${ep.athlete.firstName} ${ep.athlete.lastName}`;
-          draftPicks[idx].college   = ep.athlete.college || '';
-          draftPicks[idx].position  = ep.athlete.position?.abbreviation || '';
-        }
-      });
-      const made  = data.picks.map(p => p.overallSelection);
-      const maxMade = made.length ? Math.max(...made) : 0;
-      currentOTC  = maxMade < 30 ? maxMade + 1 : null;
-    }
-  } catch (e) {
-    console.warn('Draft API unavailable:', e);
-  }
-}
-
-// ── BUILD CARDS ──────────────────────────────────────────────
-function buildDraftCards() {
-  const scroller = document.getElementById('draftPickScroller');
-  if (!scroller) return;
-  scroller.innerHTML = '';
-
-  const madeCount = draftPicks.filter(p => p.selection).length;
-  
-  // Clear the header text entirely as requested
-  const statusEl = document.getElementById('draftStatusLabel');
-  const dotEl    = document.getElementById('draftLiveDot');
-  const otcEl    = document.getElementById('draftOTCLabel');
-  if (statusEl) statusEl.innerHTML = '';
-  if (dotEl) dotEl.innerHTML = '';
-  if (otcEl) otcEl.innerHTML = '';
-
-  draftPicks.forEach(pick => {
-    const isMade = !!pick.selection;
-    const isOTC  = pick.pick === currentOTC;
-
-    const card = document.createElement('div');
-    card.className = [
-      'key-draft-card flex-shrink-0 rounded-2xl p-4 border cursor-pointer transition-all duration-400 ease-out active:scale-95',
-      // Kept your exact original pixel sizing rules for mobile-first adapting
-      'min-w-[175px] md:min-w-[195px]',
-      isMade
-        ? 'premium-glass opacity-60 hover:opacity-100 border-black/5 dark:border-white/5'
-        : isOTC
-        ? 'premium-glass otc-glow ring-2 ring-amber-400/20'
-        : 'premium-glass border-black/5 dark:border-white/10 hover:-translate-y-0.5'
-    ].join(' ');
-
-    card.onclick = () => openDraftModal(pick);
-
-    card.innerHTML = `
-      <div class="flex items-center justify-between mb-3">
-        <div class="flex items-center gap-1.5">
-          <span class="relative flex h-2 w-2">
-            ${isOTC
-              ? `<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>`
-              : isMade
-              ? `<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>`
-              : `<span class="relative inline-flex rounded-full h-2 w-2 bg-neutral-300 dark:bg-neutral-700"></span>`
-            }
-          </span>
-          <span class="uppercase text-[9px] font-black tracking-widest ${
-            isOTC  ? 'text-amber-500 dark:text-amber-400' :
-            isMade ? 'text-emerald-500 dark:text-emerald-400' :
-                     'text-neutral-400 dark:text-neutral-500'
-          }">
-            ${isOTC ? 'On the Clock' : isMade ? 'Selected' : `Pick #${pick.pick}`}
-          </span>
-        </div>
-        ${pick.viaTeam
-          ? `<span class="text-[7px] font-black bg-amber-400/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded-full uppercase tracking-widest border border-amber-400/20">Trade</span>`
-          : ''
-        }
-      </div>
-
-      <div class="flex items-center gap-2.5 mb-2.5">
-        <img src="${getNBALogo(pick.team)}" class="w-8 h-8 object-contain flex-shrink-0" onerror="this.style.opacity=0" />
-        <div class="min-w-0">
-          <p class="text-sm font-black uppercase tracking-tighter leading-tight text-neutral-900 dark:text-neutral-100 truncate">${pick.name}</p>
-          <p class="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest">#${pick.pick} Overall</p>
-        </div>
-      </div>
-
-      <div class="border-t border-black/5 dark:border-white/10 pt-2.5">
-        ${isMade
-          ? `<p class="text-xs font-black text-neutral-800 dark:text-neutral-200 truncate">${pick.selection}</p>
-             <p class="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mt-0.5">${pick.position}${pick.college ? ' · ' + pick.college : ''}</p>`
-          : isOTC
-          ? `<p class="text-[9px] font-black text-amber-500 dark:text-amber-400 uppercase tracking-widest animate-pulse">Analyzing…</p>`
-          : `<p class="text-[9px] font-bold text-neutral-300 dark:text-neutral-700 uppercase tracking-widest">Awaiting Pick</p>`
-        }
-      </div>
-    `;
-
-    scroller.appendChild(card);
-  });
-}
-
-// ── INIT + REFRESH ───────────────────────────────────────────
-async function initDraftTracker() {
-  await fetchNBADraftData();
-  buildDraftCards();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  initDraftTracker();
-  // Refresh every 45s during draft window (June 23-24)
-  setInterval(initDraftTracker, 45000);
-});
-</script>
-<script>
-// ============================================================
-//  DRAFT MODAL + CLAUDE AI INTEL ENGINE
-// ============================================================
-
-// Team context for AI -- needs, situation, key players
-const TEAM_CONTEXT = {
-  'WAS': { needs: ['PG','SF','C'],  situation: 'Full rebuild. Kyle Kuzma gone. Need a franchise cornerstone.' },
-  'UTA': { needs: ['PG','SG','SF'], situation: 'Deep rebuild around Keyonte George. Need star talent at every position.' },
-  'MEM': { needs: ['PG','C','SF'],  situation: 'Ja Morant era still young. Need complementary stars and frontcourt depth.' },
-  'CHI': { needs: ['C','SF','PG'],  situation: 'Two picks (4 and 15). Transitioning away from the Vucevic era. Need a modern center.' },
-  'LAC': { needs: ['PG','C','SF'],  situation: 'Post-Kawhi rebuild. Harden gone. Need to build around young core.' },
-  'BKN': { needs: ['SF','PG','C'],  situation: 'Full teardown. Cam Thomas is the anchor. Need everything around him.' },
-  'SAC': { needs: ['SF','C','SG'],  situation: 'De\'Aaron Fox era. Need a wing and frontcourt to complement him.' },
-  'ATL': { needs: ['C','SF','PG'],  situation: 'Two picks (8 and 23). Trae Young still the engine. Need a defensive anchor.' },
-  'DAL': { needs: ['C','PF','SG'],  situation: 'Two picks (9 and 30). Post-Doncic era. Kyrie gone. Full reset.' },
-  'MIL': { needs: ['PG','SF','C'],  situation: 'Giannis aging. Need next-gen talent to build future around.' },
-  'GSW': { needs: ['PG','SG','SF'], situation: 'Curry in final years. Need to draft the next chapter of the dynasty.' },
-  'OKC': { needs: ['SG','SF','C'],  situation: 'Two picks (12 and 17). SGA era in full swing. Need complementary stars.' },
-  'MIA': { needs: ['PG','C','SF'],  situation: 'Heat culture always. Bam is the anchor. Need a backcourt star.' },
-  'CHA': { needs: ['PG','C','SF'],  situation: 'Two picks (14 and 18). LaMelo Ball era. Need frontcourt help badly.' },
-  'POR': { needs: ['PG','SF','C'],  situation: 'Scoot Henderson development phase. Need talent around him.' },
-  'PHX': { needs: ['PG','SG','C'],  situation: 'Post-KD fire sale rebuild. Devin Booker still the core.' },
-  'PHI': { needs: ['C','PG','SF'],  situation: 'Two picks (17 via OKC, 22 via HOU). Embiid era winding down concerns.' },
-  'ORL': { needs: ['PG','SG','C'],  situation: 'Paolo Banchero led core. Need a star guard to complete the backcourt.' },
-  'TOR': { needs: ['PG','SF','C'],  situation: 'Scottie Barnes era. Full rebuild around him. Need a go-to scorer.' },
-  'SA':  { needs: ['SG','PF','C'],  situation: 'Wembanyama era in full swing. Need shooting and secondary creation.' },
-  'DET': { needs: ['SG','SF','C'],  situation: 'Cade Cunningham building years. Need to add elite talent around him.' },
-  'HOU': { needs: ['SF','C','PG'],  situation: 'Jalen Green and Alperen Sengun core. Need a versatile wing badly.' },
-  'CLE': { needs: ['SG','SF','PF'], situation: 'Donovan Mitchell window. Need complementary pieces and future assets.' },
-  'NYK': { needs: ['C','SF','PG'],  situation: 'Jalen Brunson era. Need frontcourt talent and depth.' },
-  'LAL': { needs: ['PG','C','SF'],  situation: 'Post-LeBron transition. Luka still the anchor. Need a new co-star.' },
-  'DEN': { needs: ['SG','SF','PG'], situation: 'Jokic window closing. Need immediate contributors and future pieces.' },
-  'BOS': { needs: ['SF','C','PG'],  situation: 'Championship window still open. Need depth and future planning.' },
-  'MIN': { needs: ['SG','SF','C'],  situation: 'Edwards era. Need shooting, wings, and defensive versatility.' },
-  'IND': { needs: ['C','SF','SG'],  situation: 'Tyrese Haliburton led team. Lost pick to LAC. Need frontcourt help.' },
-};
-
-// Top 2026 prospects for AI context
-const PROSPECTS_2026 = [
-  { name: 'AJ Dybantsa',      pos: 'SF', school: 'BYU',      consensus: '#1' },
-  { name: 'Darryn Peterson',  pos: 'SG', school: 'Kansas',   consensus: '#2-4' },
-  { name: 'Cameron Boozer',   pos: 'PF', school: 'Duke',     consensus: '#2-4' },
-  { name: 'Caleb Wilson',     pos: 'SF', school: 'UNC',      consensus: '#3-6' },
-  { name: 'Karim Lopez',      pos: 'PF', school: 'NBL',      consensus: '#5-10' },
-  { name: 'Keaton Wagler',    pos: 'SG', school: 'Illinois', consensus: '#6-12' },
-  { name: 'Darius Acuff Jr.', pos: 'PG', school: 'Arkansas', consensus: '#8-15' },
-  { name: 'Yaxel Lendeborg',  pos: 'PF', school: 'Michigan', consensus: '#15-22' },
-  { name: 'Paul McNeil Jr.',  pos: 'SG', school: 'NC State',  consensus: '#20-30' },
-  { name: 'LaBaron Philon',   pos: 'PG', school: 'Alabama',  consensus: '#18-28' },
-  { name: 'Braylon Mullins',  pos: 'SG', school: 'UConn',    consensus: '#25-35' },
-  { name: 'Darius Acuff',     pos: 'PG', school: 'Arkansas', consensus: '#8-14' },
-];
-
-
-
-// ── CLOSE MODAL ──────────────────────────────────────────────
-window.closeDraftModal = function() {
-  const container = document.getElementById('draftModalContainer');
-  container.classList.add('scale-95', 'opacity-0');
-  setTimeout(() => {
-    document.getElementById('draftPickModal').classList.add('hidden');
-    document.getElementById('draftPickModal').classList.remove('flex');
-    document.body.style.overflow = 'auto';
-  }, 300);
-};
-
-window.retryDraftAI = function() {
-  if (lastModalPick) openDraftModal(lastModalPick);
-};
-
-
-const MY_BIG_BOARD = {
-  "Darryn Peterson": {
-    pos: "SG", school: "Kansas", articleId: "peterson-scouting-report",
-    grade: "#2 Overall", rank: 2,
-    blurb: "Safest player in the draft floor-wise. Elite defensive movement and off-the-dribble craft. Passing/assist numbers are the swing concern, not the talent."
-  },
-  "Cameron Boozer": {
-    pos: "PF", school: "Duke", articleId: "boozer-scouting-report",
-    grade: "Top 5", rank: 5,
-    blurb: "Elite passer, rebounder, and competitor with a safe floor. Body type lacks a clean top-3 superstar precedent, but a near-lock multi-time All-Star."
-  },
-  "Keaton Wagler": {
-    pos: "SG", school: "Illinois", articleId: "wagler-scouting-report",
-    grade: "Top 12", rank: 12,
-    blurb: "Polished triple-threat scorer with elite footwork and a real creation package. Defensive tools are the swing skill, but the offensive feel is top-12 caliber."
-  },
-  "Brayden Burries": {
-    pos: "G", school: "Arizona", articleId: "burries-scouting-report",
-    grade: "5-8", rank: 8,
-    blurb: "Three-level scorer with a strong NBA-ready frame and real defensive instincts. Safe, scalable two-way guard whose ceiling depends on growth as a playmaker."
-  },
-  "Aday Mara": {
-    pos: "C", school: "Michigan", articleId: "mara-scouting-report",
-    grade: "8-12", rank: 12,
-    blurb: "Elite passing big with legitimate rim deterrence and surprising mobility. Strength and perimeter shooting are the development items, but already impacts winning."
-  },
-  "Kingston Flemings": {
-    pos: "PG", school: "Houston", articleId: "flemings-scouting-report",
-    grade: "28-30", rank: 30,
-    blurb: "Elite burst and a beautiful shot, but thin frame and a one-move driving package raise real concerns versus the lottery buzz around him."
-  },
-  "Darius Acuff Jr.": {
-    pos: "PG", school: "Arkansas", articleId: "acuff-scouting-report",
-    grade: "30-35", rank: 35,
-    blurb: "Elite shooting range and a great floater, but tight hips/stiff ankles and poor defensive habits cap him well outside the lottery buzz."
-  },
-  "Jayden Quaintance": {
-    pos: "PF/C", school: "Kentucky", articleId: "quaintance-scouting-report",
-    grade: "30-40", rank: 40,
-    blurb: "Elite defensive instincts and switchability in a young frame, but ACL/meniscus history and a thin offensive skillset make this a real health-risk bet."
-  }
-};
-
-function getTopAvailableForTeam(teamNeeds, count = 3) {
-  const draftedNames = draftPicks
-    .filter(p => p.selection)
-    .map(p => p.selection);
-
-  const available = Object.entries(MY_BIG_BOARD)
-    .filter(([name]) => !draftedNames.includes(name))
-    .map(([name, data]) => {
-      const needMatch = teamNeeds.includes(data.pos) || 
-                         teamNeeds.some(n => data.pos.includes(n));
-      return { name, ...data, needMatch };
-    })
-    .sort((a, b) => a.rank - b.rank); // pure best-player-available by actual draft slot
-
-  return available.slice(0, count);
-}
-
-
-const TEAM_NEEDS = {
-  'WAS': ['PG', 'SF', 'C'],
-  'UTA': ['PG', 'SG', 'SF'],
-  'MEM': ['PG', 'C', 'SF'],
-  'CHI': ['C', 'SF', 'PG'],
-  'LAC': ['PG', 'C', 'SF'],
-  'BKN': ['SF', 'PG', 'C'],
-  'SAC': ['SF', 'C', 'SG'],
-  'ATL': ['C', 'SF', 'PG'],
-  'DAL': ['C', 'PF', 'SG'],
-  'MIL': ['PG', 'SF', 'C'],
-  'GSW': ['PG', 'SG', 'SF'],
-  'OKC': ['SG', 'SF', 'C'],
-  'MIA': ['PG', 'C', 'SF'],
-  'CHA': ['PG', 'C', 'SF'],
-  'POR': ['PG', 'SF', 'C'],
-  'PHX': ['PG', 'SG', 'C'],
-  'PHI': ['C', 'PG', 'SF'],
-  'ORL': ['PG', 'SG', 'C'],
-  'TOR': ['PG', 'SF', 'C'],
-  'SA':  ['SG', 'PF', 'C'],
-  'DET': ['SG', 'SF', 'C'],
-  'HOU': ['SF', 'C', 'PG'],
-  'CLE': ['SG', 'SF', 'PF'],
-  'NYK': ['C', 'SF', 'PG'],
-  'LAL': ['PG', 'C', 'SF'],
-  'DEN': ['SG', 'SF', 'PG'],
-  'BOS': ['SF', 'C', 'PG'],
-  'MIN': ['SG', 'SF', 'C'],
-  'IND': ['C', 'SF', 'SG'],
-};
-
-function buildDraftIntel(teamAbbr) {
-  const needs = TEAM_NEEDS[teamAbbr] || ['PG', 'SF', 'C'];
-  const top3 = getTopAvailableForTeam(needs, 3);
-
-  const bestAvailable = top3.map(p => ({
-    name: p.name,
-    pos: p.pos,
-    school: p.school,
-    fit: p.blurb,
-    needMatch: p.needMatch // pass this through to render a "Fills Need" tag
-  }));
-
-  let take;
-  if (top3.length) {
-    const top = top3[0];
-    if (top.needMatch) {
-      take = `Best player available AND a need fill -- ${top.name} (${top.grade}) is the clear pick. ${top.blurb}`;
-    } else {
-      take = `${top.name} (${top.grade}) is the best player on the board, full stop -- even though ${top.pos} isn't a top-line need. You don't pass on talent this far clear of the field to fill a roster hole this early; you draft the best player and figure out the fit later.`;
-    }
-  } else {
-    take = `Board is thin on graded players left -- best player available makes sense.`;
-  }
-
-  return { needs, bestAvailable, take };
-}
-
-
-
-// ── RENDER FUNCTION (replaces callDraftAI entirely) ──────────
-window.openDraftModal = function(pick) {
-  lastModalPick = pick;
-
-  const modal     = document.getElementById('draftPickModal');
-  const container = document.getElementById('draftModalContainer');
-
-  // Reset
-  document.getElementById('draftAILoader').classList.add('hidden');
-  document.getElementById('draftAIContent').classList.add('hidden');
-  document.getElementById('draftAIError').classList.add('hidden');
-  document.getElementById('draftNeedsGrid').innerHTML     = '';
-  document.getElementById('draftProspectsList').innerHTML  = '';
-  document.getElementById('draftGLTake').innerText        = '';
-
-  // Header
-  document.getElementById('draftModalLogo').src           = getNBALogo(pick.team);
-  document.getElementById('draftModalPickNum').innerText  = `Pick #${pick.pick} · 2026 NBA Draft${pick.viaTeam ? ' · Via Trade' : ''}`;
-  document.getElementById('draftModalTeamName').innerText = pick.name;
-
-  const intel = buildDraftIntel(pick.team);
-
-
-  document.getElementById('draftModalRecord').innerText   = intel
-    ? TEAM_CONTEXT[pick.team]?.situation?.split('.')[0] || ''
-    : '';
-
-  const selBadge = document.getElementById('draftModalSelectionBadge');
-  if (pick.selection) {
-    selBadge.classList.remove('hidden');
-    document.getElementById('draftModalPlayerName').innerText = pick.selection;
-    document.getElementById('draftModalPlayerPos').innerText  = `${pick.position || ''} ${pick.college ? '· ' + pick.college : ''}`.trim();
-  } else {
-    selBadge.classList.add('hidden');
-  }
-
-  modal.classList.remove('hidden');
-  modal.classList.add('flex');
-  setTimeout(() => {
-    container.classList.remove('scale-95', 'opacity-0');
-    container.classList.add('scale-100', 'opacity-100');
-  }, 10);
-  document.body.style.overflow = 'hidden';
-
-  if (!intel) {
-    document.getElementById('draftAIError').classList.remove('hidden');
-    return;
-  }
-
-  // Needs pills
-  const needsGrid  = document.getElementById('draftNeedsGrid');
-  const needColors = { 'PG':'blue','SG':'purple','SF':'emerald','PF':'amber','C':'red' };
-  intel.needs.forEach(need => {
-    const color = needColors[need] || 'gray';
-    const pill  = document.createElement('span');
-    pill.className = `inline-flex items-center px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-${color}-500/10 text-${color}-600 dark:text-${color}-400 border border-${color}-500/20`;
-    pill.innerText = need;
-    needsGrid.appendChild(pill);
-  });
-
-  // Prospects
-  const list = document.getElementById('draftProspectsList');
-  intel.bestAvailable.forEach((p, i) => {
-    const row = document.createElement('div');
-// Locate inside your window.openDraftModal where row.className is injected, update it to handle dark text fields accurately:
-row.className = 'flex items-start gap-3 p-3 rounded-2xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/5 dark:border-white/5';
-row.innerHTML = `
-  <div class="w-7 h-7 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-    <span class="text-[10px] font-black text-amber-600 dark:text-amber-400">${i + 1}</span>
-  </div>
-  <div class="min-w-0 flex-1">
-    <div class="flex items-center gap-2 mb-0.5">
-      <p class="text-sm font-black uppercase tracking-tight text-neutral-900 dark:text-neutral-100 truncate">${p.name}</p>
-      <span class="text-[8px] font-black bg-black/5 dark:bg-white/10 text-neutral-500 dark:text-neutral-400 px-1.5 py-0.5 rounded-full uppercase tracking-widest flex-shrink-0">${p.pos}</span>
-      ${p.needMatch ? `<span class="text-[8px] font-black bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-1.5 py-0.5 rounded-full uppercase tracking-widest flex-shrink-0">Fills Need</span>` : ''}
-    </div>
-    <p class="text-[9px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mb-1">${p.school}</p>
-    <p class="text-xs font-medium text-neutral-600 dark:text-neutral-300 leading-snug">${p.fit}</p>
-  </div>
-`;
-
-
-    list.appendChild(row);
-  });
-
-  document.getElementById('draftGLTake').innerText = intel.take;
-  document.getElementById('draftAIContent').classList.remove('hidden');
-};
-
-// ── RENDER AI RESPONSE ───────────────────────────────────────
+──
 
 </script>
 
@@ -1598,35 +1189,67 @@ function updateReadBtn(slide) {
 </script>
 
 
-<div class="pt-10 max-w-7xl mx-auto px-6 pb-24">
-    <div class="group relative overflow-hidden rounded-[2.5rem] bg-white/40 dark:bg-[#0f0f0f]/60 backdrop-blur-3xl border border-black/5 dark:border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.05)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] transition-all duration-500">
+<div class="pt-10 max-w-7xl mx-auto px-4 md:px-6 pb-24">
+  <div class="relative overflow-hidden rounded-[2.5rem] transition-all duration-500"
+    style="background:rgba(8,8,8,0.7); backdrop-filter:blur(40px) saturate(180%); -webkit-backdrop-filter:blur(40px) saturate(180%); border:1px solid rgba(255,255,255,0.07); box-shadow:0 40px 120px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);">
 
-        <button onclick="toggleBigBoard()" class="w-full px-6 py-8 md:px-10 flex items-center justify-between text-left focus:outline-none hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors z-10 relative">
-            <div class="flex items-center gap-4 md:gap-6">
-                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center shadow-lg shadow-amber-500/30 flex-shrink-0">
-                    <i class="fa-solid fa-list-ol text-xl md:text-2xl text-black"></i>
-                </div>
-                <div>
-                    <h2 class="text-2xl md:text-5xl font-black uppercase tracking-tighter text-black dark:text-white leading-none">The Big Board</h2>
-                    <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 mt-1 md:mt-2">Tap to Expand Full Rankings</p>
-                </div>
-            </div>
-            
-            <div id="board-chevron" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex-shrink-0">
-                <i class="fa-solid fa-chevron-down text-black dark:text-white"></i>
-            </div>
-        </button>
+    <!-- Ambient glow -->
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-32 rounded-full blur-[80px] pointer-events-none" style="background:linear-gradient(90deg, rgba(212,175,55,0.15), rgba(16,185,129,0.1));"></div>
 
-        <div id="big-board-content" class="grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" style="grid-template-rows: 0fr;">
-            <div class="overflow-hidden">
-                <div class="px-6 pb-10 md:px-10 pt-2">
-                    
-                    <div id="view-board" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
-                    </div>
-            </div>
+    <!-- Header toggle button -->
+    <button onclick="toggleBigBoard()" class="w-full px-6 py-7 md:px-10 flex items-center justify-between text-left focus:outline-none group relative z-10">
+      <div class="flex items-center gap-4 md:gap-5">
+        <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl"
+          style="background:linear-gradient(135deg, #d4af37, #b8960a); box-shadow:0 8px 24px rgba(212,175,55,0.3);">
+          <i class="fa-solid fa-list-ol text-lg md:text-xl text-black"></i>
         </div>
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-[8px] font-black uppercase tracking-[0.35em] text-amber-400">Greenlight Scouting</span>
+            <span class="text-[7px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full" style="background:rgba(212,175,55,0.1); color:#d4af37; border:1px solid rgba(212,175,55,0.2)">2026 Draft Class</span>
+          </div>
+          <h2 class="text-2xl md:text-4xl font-black uppercase tracking-tighter text-white leading-none">The Big Board</h2>
+        </div>
+      </div>
+      <div id="board-chevron" class="w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-500 flex-shrink-0"
+        style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);">
+        <i class="fa-solid fa-chevron-down text-white/50 text-sm"></i>
+      </div>
+    </button>
 
+    <!-- Collapsible content -->
+    <div id="big-board-content" class="grid transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]" style="grid-template-rows:0fr;">
+      <div class="overflow-hidden">
+        <div class="px-4 md:px-8 pb-10 pt-2">
+
+          <!-- Legend -->
+          <div class="flex flex-wrap gap-3 mb-8 px-2">
+            <div class="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-white/30">
+              <div class="w-4 h-4 rounded-full bg-amber-500 flex items-center justify-center"><span class="text-[5px] font-black text-black">GL</span></div>
+              GLS Report
+            </div>
+            <span class="text-white/10">·</span>
+            <div class="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest" style="color:#10b981">
+              <span>🟢</span> GLS High
+            </div>
+            <div class="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest" style="color:#ef4444">
+              <span>🔴</span> GLS Fade
+            </div>
+            <div class="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest" style="color:#f59e0b">
+              <span>⚠️</span> Contrarian
+            </div>
+            <div class="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest" style="color:#8b5cf6">
+              <span>🟡</span> Market Mismatch
+            </div>
+          </div>
+
+          <!-- Board cards -->
+          <div id="view-board" class="space-y-3"></div>
+
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <script>
@@ -1797,6 +1420,1029 @@ function updateReadBtn(slide) {
     </div>
 </section>
 
+
+<script>
+    // ============================================================
+//  GREENLIGHT NBA DRAFT INTELLIGENCE ENGINE -- 2026
+//  Updated: June 23, 2026 | Includes Giannis/Bucks trade
+// ============================================================
+
+// KEY BREAKING NEWS: Giannis traded to Miami. Bucks receive
+// the No.13 pick from Miami as part of the deal.
+// Pick 13 is now: Milwaukee Bucks (from Miami Heat)
+
+const NBA_DRAFT_2026 = [
+  // ── ROUND 1 ──────────────────────────────────────────────
+  { pick:1,  round:1, team:'WAS', name:'Wizards',       viaTeam:null },
+  { pick:2,  round:1, team:'UTA', name:'Jazz',           viaTeam:null },
+  { pick:3,  round:1, team:'MEM', name:'Grizzlies',      viaTeam:null },
+  { pick:4,  round:1, team:'CHI', name:'Bulls',          viaTeam:null },
+  { pick:5,  round:1, team:'LAC', name:'Clippers',       viaTeam:'IND' },
+  { pick:6,  round:1, team:'BKN', name:'Nets',           viaTeam:null },
+  { pick:7,  round:1, team:'SAC', name:'Kings',          viaTeam:null },
+  { pick:8,  round:1, team:'ATL', name:'Hawks',          viaTeam:'NOP' },
+  { pick:9,  round:1, team:'DAL', name:'Mavericks',      viaTeam:null },
+  { pick:10, round:1, team:'MIL', name:'Bucks',          viaTeam:null },
+  { pick:11, round:1, team:'GSW', name:'Warriors',       viaTeam:null },
+  { pick:12, round:1, team:'OKC', name:'Thunder',        viaTeam:'LAC' },
+  { pick:13, round:1, team:'MIL', name:'Bucks',          viaTeam:'MIA', breaking:'🚨 Giannis Trade -- Bucks receive this pick from Heat' },
+  { pick:14, round:1, team:'CHA', name:'Hornets',        viaTeam:null },
+  { pick:15, round:1, team:'CHI', name:'Bulls',          viaTeam:'POR' },
+  { pick:16, round:1, team:'MEM', name:'Grizzlies',      viaTeam:'PHX' },
+  { pick:17, round:1, team:'OKC', name:'Thunder',        viaTeam:'PHI' },
+  { pick:18, round:1, team:'CHA', name:'Hornets',        viaTeam:'ORL' },
+  { pick:19, round:1, team:'TOR', name:'Raptors',        viaTeam:null },
+  { pick:20, round:1, team:'SA',  name:'Spurs',          viaTeam:'ATL' },
+  { pick:21, round:1, team:'DET', name:'Pistons',        viaTeam:'MIN' },
+  { pick:22, round:1, team:'PHI', name:'76ers',          viaTeam:'HOU' },
+  { pick:23, round:1, team:'ATL', name:'Hawks',          viaTeam:'CLE' },
+  { pick:24, round:1, team:'NYK', name:'Knicks',         viaTeam:null },
+  { pick:25, round:1, team:'LAL', name:'Lakers',         viaTeam:null },
+  { pick:26, round:1, team:'DEN', name:'Nuggets',        viaTeam:null },
+  { pick:27, round:1, team:'BOS', name:'Celtics',        viaTeam:null },
+  { pick:28, round:1, team:'MIN', name:'Timberwolves',   viaTeam:'DET' },
+  { pick:29, round:1, team:'CLE', name:'Cavaliers',      viaTeam:'SA' },
+  { pick:30, round:1, team:'DAL', name:'Mavericks',      viaTeam:'OKC' },
+  // ── ROUND 2 ──────────────────────────────────────────────
+  { pick:31, round:2, team:'NYK', name:'Knicks',         viaTeam:'WAS' },
+  { pick:32, round:2, team:'MEM', name:'Grizzlies',      viaTeam:'IND' },
+  { pick:33, round:2, team:'BKN', name:'Nets',           viaTeam:null },
+  { pick:34, round:2, team:'SAC', name:'Kings',          viaTeam:null },
+  { pick:35, round:2, team:'SA',  name:'Spurs',          viaTeam:'UTA' },
+  { pick:36, round:2, team:'LAC', name:'Clippers',       viaTeam:'MEM' },
+  { pick:37, round:2, team:'OKC', name:'Thunder',        viaTeam:'DAL' },
+  { pick:38, round:2, team:'CHI', name:'Bulls',          viaTeam:'NOP' },
+  { pick:39, round:2, team:'HOU', name:'Rockets',        viaTeam:'CHI' },
+  { pick:40, round:2, team:'BOS', name:'Celtics',        viaTeam:'MIL' },
+  { pick:41, round:2, team:'MIA', name:'Heat',           viaTeam:'GSW' },
+  { pick:42, round:2, team:'SA',  name:'Spurs',          viaTeam:'POR' },
+  { pick:43, round:2, team:'BKN', name:'Nets',           viaTeam:'LAC' },
+  { pick:44, round:2, team:'SA',  name:'Spurs',          viaTeam:'MIA' },
+  { pick:45, round:2, team:'SAC', name:'Kings',          viaTeam:'CHA' },
+  { pick:46, round:2, team:'ORL', name:'Magic',          viaTeam:null },
+  { pick:47, round:2, team:'PHX', name:'Suns',           viaTeam:'PHI' },
+  { pick:48, round:2, team:'DAL', name:'Mavericks',      viaTeam:'PHX' },
+  { pick:49, round:2, team:'DEN', name:'Nuggets',        viaTeam:'ATL' },
+  { pick:50, round:2, team:'TOR', name:'Raptors',        viaTeam:null },
+  { pick:51, round:2, team:'WAS', name:'Wizards',        viaTeam:'MIN' },
+  { pick:52, round:2, team:'LAC', name:'Clippers',       viaTeam:'CLE' },
+  { pick:53, round:2, team:'HOU', name:'Rockets',        viaTeam:null },
+  { pick:54, round:2, team:'GSW', name:'Warriors',       viaTeam:'LAL' },
+  { pick:55, round:2, team:'NYK', name:'Knicks',         viaTeam:null },
+  { pick:56, round:2, team:'CHI', name:'Bulls',          viaTeam:'DEN' },
+  { pick:57, round:2, team:'ATL', name:'Hawks',          viaTeam:'BOS' },
+  { pick:58, round:2, team:'NOP', name:'Pelicans',       viaTeam:'DET' },
+  { pick:59, round:2, team:'MIN', name:'Timberwolves',   viaTeam:'SA' },
+  { pick:60, round:2, team:'WAS', name:'Wizards',        viaTeam:'OKC' },
+];
+
+// ── PROSPECT DATABASE -- Full 60 with multi-source grades ──
+const PROSPECT_DB = {
+  // ═══ TIER 1: CONSENSUS TOP 4 ════════════════════════════
+  'AJ Dybantsa': {
+    pos:'SF', school:'BYU', espnRank:2, cbsRank:1, nbaRank:1, consensusRange:'#1-2',
+    articleId:'dybantsa-scouting-report',
+    glsGrade:'35 OA', glsTag:'🔴 GLS Fade',
+    glsTake:'The scoring is real. 25.5 PPG on 51% shooting is verified production. But he runs from doubles, the handle breaks down under pressure, flat three-point mechanics, and a slow transition get-back. You don\'t select a potential Sixth Man candidate first overall.',
+    espnTake:'Elite positional size, strength and movement. Excels attacking downhill and in the midrange. Grew into a more decisive passer by March. Inconsistent from long range.',
+    cbsTake:'Dynamic scoring forward with All-Star upside. Most physically gifted player in the class. Natural scorer from multiple levels who draws fouls at a high rate.',
+    nbaTake:'Consensus top talent with rare combination of size and skill. Projects as a franchise-altering offensive piece long-term.',
+  },
+  'Darryn Peterson': {
+    pos:'SG', school:'Kansas', espnRank:1, cbsRank:2, nbaRank:2, consensusRange:'#1-2',
+    articleId:'peterson-scouting-report',
+    glsGrade:'#2 OA', glsTag:'🟢 GLS Endorsed',
+    glsTake:'Safest player in the draft floor-wise. Elite defensive movement, compact burst, veteran off-ball craft. The 1:1 assist-to-turnover and health question are the honest concerns -- not the talent. My #2 overall.',
+    espnTake:'Most gifted scorer in this draft. Remarkable long-range shotmaker capable of prolonged hot streaks. Strong athlete with good size and active defensive hands. Health situation at Kansas limited what he showed.',
+    cbsTake:'Alpha scoring guard with genuine two-way tools. Could be the best player in this class by Year 3. His shot creation is special.',
+    nbaTake:'Premium backcourt talent with the tools to be a perennial All-Star. Immediate fit alongside any modern NBA guard.',
+  },
+  'Cameron Boozer': {
+    pos:'PF', school:'Duke', espnRank:3, cbsRank:3, nbaRank:3, consensusRange:'#3',
+    articleId:'boozer-scouting-report',
+    glsGrade:'Top 5', glsTag:'⚠️ GLS Contrarian',
+    glsTake:'Elite passer. 17.8 BPM -- highest since Zion. But the body type lacks a top-3 superstar precedent in the modern era. Safe All-Star, not a guaranteed franchise cornerstone. Top 5, not Top 3.',
+    espnTake:'Physically dominant freshman with elite basketball IQ. Son of NBA vet Carlos Boozer. Toughness, versatility and winning pedigree are his calling cards. High floor, starter ceiling.',
+    cbsTake:'The safest pick in this draft. Highest BPM since Zion Williamson. Exceptional competitor who will win immediately.',
+    nbaTake:'National Player of the Year. Multi-skilled forward who projects as a long-term cornerstone. His basketball IQ stands out.',
+  },
+  'Caleb Wilson': {
+    pos:'SF', school:'UNC', espnRank:4, cbsRank:4, nbaRank:4, consensusRange:'#4',
+    articleId:'wilson-scouting-report',
+    glsGrade:'Top 3', glsTag:'🟢 GLS High',
+    glsTake:'7-foot wingspan, 62.6% true shooting, 66 dunks in 24 games. Three-point shot and upper body strength need time. Ceiling is legitimately among the highest in this entire class.',
+    espnTake:'Exceptional quickness off the floor and improved motor. Most view this as a relatively simple decision for whichever team lands him. Elite athleticism that translates to both ends.',
+    cbsTake:'Raw but gifted wing with a rare athletic profile. The leap in productivity he took at UNC makes him a strong bet to be a high-impact NBA player.',
+    nbaTake:'Explosive forward with elite athleticism and two-way potential. His Giannis-adjacent defensive upside is the headline.',
+  },
+  // ═══ TIER 2: CONFIRMED LOTTERY ════════════════════════
+  'Keaton Wagler': {
+    pos:'SG/PG', school:'Illinois', espnRank:5, cbsRank:6, nbaRank:6, consensusRange:'#5-7',
+    articleId:'wagler-scouting-report',
+    glsGrade:'Top 12', glsTag:'🟡 Market Mismatch',
+    glsTake:'Triple-threat footwork that is genuinely Steph-adjacent. 39.7% from three on real volume. Step-back is elite. The market has him going earlier than my grade and honestly the case is there.',
+    espnTake:'Elite shot-maker with rare footwork and creation ability off the dribble. Rival teams believe he\'s among the top options for several lottery teams.',
+    cbsTake:'One of the best pure scorers in the class. Creation package off the dribble is advanced. Legitimate lottery upside.',
+    nbaTake:'Crafty guard whose scoring instincts and shooting translate at the next level. Final Four contributor at Illinois.',
+  },
+  'Darius Acuff Jr.': {
+    pos:'PG', school:'Arkansas', espnRank:6, cbsRank:7, nbaRank:7, consensusRange:'#6-8',
+    articleId:'acuff-scouting-report',
+    glsGrade:'30-35', glsTag:'🔴 GLS Skeptic',
+    glsTake:'Elite shooting range. Best floater in the class at 46%. But tight hips, stiff ankles, and defensive lapses that show up as a consistent pattern cap him well outside the lottery in my book.',
+    espnTake:'Elite shooter with playmaking upside. Green Room invite. Combine measurements were solid at 6\'2" barefoot with plus wingspan. Sturdy build should help with NBA physicality.',
+    cbsTake:'Pure scorer with deep range and draft-night buzz. Could be a lottery steal if defensive development comes.',
+    nbaTake:'Prolific scorer averaging 23.5 PPG on 48.4% FG and 44% from three. His shooting floor translates immediately.',
+  },
+  'Mikel Brown Jr.': {
+    pos:'SG', school:'Texas Tech', espnRank:7, cbsRank:8, nbaRank:8, consensusRange:'#7-9',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted -- deferred to consensus sources.',
+    espnTake:'High-IQ scorer with excellent feel and instincts. Takes inspiration from SGA and Jalen Brunson. Two-way tools and shot-making ability make him a likely lottery selection.',
+    cbsTake:'Under-the-radar lottery talent. His feel for the game sets him apart from peers at his position.',
+    nbaTake:'Smart, instinctive guard who impacts winning through efficiency rather than raw athleticism.',
+  },
+  'Brayden Burries': {
+    pos:'G', school:'Arizona', espnRank:8, cbsRank:9, nbaRank:9, consensusRange:'#8-11',
+    articleId:'burries-scouting-report',
+    glsGrade:'5-8', glsTag:'🟢 GLS Endorsed',
+    glsTake:'Three-level scorer, NBA-ready at 215 lbs, 49.1/39.1/80.5. Passing ceiling is the open question but the floor is extremely high. Safe lottery pick.',
+    espnTake:'Polished scorer with a quick release, strong frame and real two-way potential. Derrick White and Jrue Holiday comps from NBA.com.',
+    cbsTake:'Complete offensive guard who boxes out, passes, and scores. More well-rounded than his rep suggests.',
+    nbaTake:'Efficient guard who fills multiple backcourt roles. Strong NBA-ready frame accelerates his timeline.',
+  },
+  'Aday Mara': {
+    pos:'C', school:'Michigan', espnRank:9, cbsRank:11, nbaRank:10, consensusRange:'#8-12',
+    articleId:'mara-scouting-report',
+    glsGrade:'8-12', glsTag:'🟢 GLS Endorsed',
+    glsTake:'7\'3" with 7\'6" wingspan. 18.5% assist percentage for a center is absurd. 66.8% FG on volume in 23 min. Already impacts winning. Strength is the development item. Top-10 caliber.',
+    espnTake:'Unique big with rare passing instincts for his size. Massive dimensions -- 9\'9" standing reach. Moved up our rankings after strong combine showing.',
+    cbsTake:'Long-term project with elite defensive tools and surprising feel. Dallas connection through new coach Dusty May.',
+    nbaTake:'Developmental center with top-shelf physical tools and an 18.5% assist rate that is ultra-rare for a seven-footer.',
+  },
+  'Yaxel Lendeborg': {
+    pos:'PF/SF', school:'Michigan', espnRank:10, cbsRank:10, nbaRank:11, consensusRange:'#10-13',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Watched tape early. He\'s a glider -- covers ground efficiently without looking like he\'s working. High-IQ connector. Age (23) is the primary concern; tends to cap quickly as a role player at that age.',
+    espnTake:'His skill set is coveted by every NBA team. 23 years old is the limiting factor. Centerpiece of Michigan\'s 37-3 title team. Warrants lottery consideration despite age.',
+    cbsTake:'All the requisite tools to make an NBA impact. Age limits the ceiling projection but the floor is safe rotation player.',
+    nbaTake:'Versatile forward who does everything well. One of the draft\'s most unique cases given his age and production.',
+  },
+  'Kingston Flemings': {
+    pos:'PG', school:'Houston', espnRank:12, cbsRank:12, nbaRank:7, consensusRange:'#7-12',
+    articleId:'flemings-scouting-report',
+    glsGrade:'28-30', glsTag:'🔴 GLS Skeptic',
+    glsTake:'Elite burst. Beautiful shot. But 6\'2.5" wingspan and a one-hesitation-move offensive package are real. The market has him top-8. I have him late first. The frame is the hard ceiling.',
+    espnTake:'Dynamic guard with elite athleticism and scoring instincts. De\'Aaron Fox and VJ Edgecombe comps. Immediate two-way impact potential.',
+    cbsTake:'Top guard in the class by some metrics. Explosive with the ball. His upside is real if the playmaking develops.',
+    nbaTake:'Gifted scorer with elite burst. 16.1 PPG, 5.2 APG at Houston on 48% FG and 39% from three.',
+  },
+  'Karim Lopez': {
+    pos:'PF/SF', school:'NBL/New Zealand', espnRank:13, cbsRank:13, nbaRank:12, consensusRange:'#10-15',
+    articleId:'lopez-scouting-report',
+    glsGrade:'Top 6', glsTag:'🟢 GLS Sleeper',
+    glsTake:'NBL scoring record holder among draft-eligible prospects -- passed LaMelo, Giddey, and Sarr. Elite body, elite footwork. Three-point shot at 32.6% is the swing skill.',
+    espnTake:'Milwaukee has shown strong interest. Physical tools, versatility and intangibles make him a moldable prospect. Could slip into the teens if not taken early.',
+    cbsTake:'International prospect with polished post game. Real starter upside if the perimeter shot develops.',
+    nbaTake:'Versatile big who scored more than any Next Stars player in NBL history. Legitimate two-way projection.',
+  },
+  'Morez Johnson Jr.': {
+    pos:'PF/C', school:'Michigan', espnRank:14, cbsRank:14, nbaRank:14, consensusRange:'#13-17',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Strong market across mid-to-late lottery range. A wide range of teams are interested in his services. Projects as a modern frontcourt piece.',
+    cbsTake:'Athletic big with real two-way tools. Third Michigan prospect with legitimate lottery upside.',
+    nbaTake:'Physical forward with defensive versatility and offensive upside.',
+  },
+  'Cameron Carr': {
+    pos:'SG/SF', school:'Baylor', espnRank:15, cbsRank:15, nbaRank:15, consensusRange:'#14-18',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Biggest combine winner. 30 points and six 3-pointers in one game. Plus-6¼ wingspan. 42.5-inch max vertical. Coveted profile of athletic traits and 3-point shooting.',
+    cbsTake:'Rising after combine performance. Shooting and athleticism combination is rare.',
+    nbaTake:'Shot-maker with elite athleticism who surged into first-round conversations after combine.',
+  },
+  'Christian Anderson': {
+    pos:'PG', school:'Texas Tech', espnRank:16, cbsRank:18, nbaRank:17, consensusRange:'#15-19',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Steady playmaker with good size for a lead guard. Projects as a reliable contributor in NBA rotations.',
+    cbsTake:'Smart, efficient guard who ran an elite offense at Texas Tech.',
+    nbaTake:'High-IQ floor general who makes winning plays.',
+  },
+  'LaBaron Philon': {
+    pos:'PG', school:'Alabama', espnRank:17, cbsRank:16, nbaRank:16, consensusRange:'#15-20',
+    glsGrade:'Undrafted', glsTag:'🔴 GLS Skeptic',
+    glsTake:'Looks slow in the half-court. Stiff in movement. Built for a college game that doesn\'t fully translate. Dillingham-adjacent body type without the burst.',
+    espnTake:'Dynamic guard projected in the late lottery by some boards. Physical testing helped his cause.',
+    cbsTake:'Playmaking guard with scoring upside. Alabama product with real first-round buzz.',
+    nbaTake:'Creative guard who can push pace and create for others.',
+  },
+  'Hannes Steinbach': {
+    pos:'PF/C', school:'Washington', espnRank:18, cbsRank:17, nbaRank:18, consensusRange:'#16-20',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Arguably the top rebounder in this draft. Led the country with 11.8 boards per game. Productive, physical, good touch around the basket. Not a traditional rim protector.',
+    cbsTake:'Reliable big who brings physicality and relentlessness every night. Makes winning plays.',
+    nbaTake:'Dependable frontcourt piece whose production translates regardless of system.',
+  },
+  'Chris Cenac Jr.': {
+    pos:'PF/C', school:'Houston', espnRank:19, cbsRank:21, nbaRank:20, consensusRange:'#18-23',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Intriguing frontcourt prospect out of Houston. Projects as a versatile big with room to grow.',
+    cbsTake:'Athletic big with defensive tools and upside.',
+    nbaTake:'Physical forward who impacted winning at Houston.',
+  },
+  'Allen Graves': {
+    pos:'PF', school:'Santa Clara', espnRank:20, cbsRank:20, nbaRank:19, consensusRange:'#18-23',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Likely first-round pick who is staying in the draft. Has drawn serious interest from several teams in this range.',
+    cbsTake:'Under-the-radar prospect who emerged as a real first-round talent.',
+    nbaTake:'High-motor forward who competes on both ends.',
+  },
+  'Isaiah Evans': {
+    pos:'SG', school:'Duke', espnRank:21, cbsRank:22, nbaRank:22, consensusRange:'#20-26',
+    articleId:'evans-scouting-report',
+    glsGrade:'13-18', glsTag:'🟢 GLS Sleeper',
+    glsTake:'The combine paradox: 27-inch no-step vertical but puts people on posters on tape. Pre-catch processing speed that rivals anyone in the class. Real mid-first-round sleeper.',
+    espnTake:'Movement shooter with developing playmaking. Strong finishing ability and pre-catch timing stand out.',
+    cbsTake:'Projection pick with translatable scoring instincts and work ethic.',
+    nbaTake:'Shot-maker whose off-ball movement and finishing improve every season.',
+  },
+  'Bennett Stirtz': {
+    pos:'PG', school:'Iowa', espnRank:22, cbsRank:23, nbaRank:23, consensusRange:'#20-26',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Smart, dependable guard who ran a high-powered Iowa offense. High-floor prospect.',
+    cbsTake:'Efficient playmaker who makes the right decision and rarely turns it over.',
+    nbaTake:'Heady guard with winning instincts and a strong shooting foundation.',
+  },
+  'Henri Veesaar': {
+    pos:'C', school:'North Carolina', espnRank:23, cbsRank:24, nbaRank:24, consensusRange:'#22-27',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Towering center with good touch and passing instincts for his size. International background gives him polish.',
+    cbsTake:'Skilled big with intriguing defensive upside and shooting touch.',
+    nbaTake:'Long-term developmental center with surprising finesse.',
+  },
+  'Jayden Quaintance': {
+    pos:'PF/C', school:'Kentucky', espnRank:24, cbsRank:25, nbaRank:25, consensusRange:'#22-30',
+    articleId:'quaintance-scouting-report',
+    glsGrade:'30-40', glsTag:'⚠️ Health Risk',
+    glsTake:'6\'9", 253 lbs, 7\'5" wingspan at 17 years old. Elite defensive instincts. ACL + meniscus history and just four games at Kentucky make this a real leap of faith. 30-40 range.',
+    espnTake:'The medical evaluations will ultimately determine where he lands. Talent is undeniable -- one of the draft\'s most physically gifted players. Health is everything here.',
+    cbsTake:'Developmental big with upside if the knees check out. Could be a top-10 pick if healthy.',
+    nbaTake:'Young, massive prospect with rare tools. One of the youngest players in draft history to enter at this level.',
+  },
+  'Koa Peat': {
+    pos:'PF', school:'Arizona', espnRank:25, cbsRank:26, nbaRank:26, consensusRange:'#24-29',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Athletic forward with a versatile skill set. Arizona product with real two-way tools.',
+    cbsTake:'Physical, energetic forward who impacts games through effort and athleticism.',
+    nbaTake:'High-upside wing with defensive tools and the motor to outperform his draft slot.',
+  },
+  'Meleek Thomas': {
+    pos:'SG', school:'Arkansas', espnRank:26, cbsRank:27, nbaRank:27, consensusRange:'#25-30',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Scoring ability and improving all-around game have stood out in workout settings.',
+    cbsTake:'Capable scorer with developing defensive tools.',
+    nbaTake:'Guard with scoring instincts who projects as a rotation contributor.',
+  },
+  'Ebuka Okorie': {
+    pos:'PG', school:'Stanford', espnRank:27, cbsRank:28, nbaRank:28, consensusRange:'#25-31',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Positional versatility and passing vision stand out for a player his size.',
+    cbsTake:'Smart, multidimensional guard who sees the floor clearly.',
+    nbaTake:'IQ-driven guard who makes winning plays and fills in the gaps.',
+  },
+  'Tarris Reed': {
+    pos:'PF/C', school:'UConn', espnRank:28, cbsRank:29, nbaRank:29, consensusRange:'#26-32',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Physical big from a championship program. Competitive and hard to move off his spot.',
+    cbsTake:'Rugged center who wins with effort and physicality.',
+    nbaTake:'Championship-pedigree big who brings toughness and energy.',
+  },
+  'Sergio De Larrea': {
+    pos:'PG/SG', school:'Spain', espnRank:29, cbsRank:30, nbaRank:30, consensusRange:'#28-34',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Intriguing size, playmaking instincts, and shooting ability that could make him a valuable long-term piece. Possibility of developing overseas adds to his appeal.',
+    cbsTake:'International playmaker with real upside. Could develop into a starting-caliber guard.',
+    nbaTake:'Spanish guard with the tools to contribute at the next level.',
+  },
+  // ═══ ROUND 2 PROSPECTS ══════════════════════════════════
+  'Alex Karaban': {
+    pos:'SF/PF', school:'UConn', espnRank:31, cbsRank:31, nbaRank:31, consensusRange:'#30-35',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Championship-tested wing with three-point shooting and defensive versatility.',
+    cbsTake:'Smart, reliable connector who knows his role on a winning team.',
+    nbaTake:'Two-way wing from a championship program with immediate rotation upside.',
+  },
+  'Zuby Ejiofor': {
+    pos:'PF/C', school:"St. John's", espnRank:32, cbsRank:32, nbaRank:32, consensusRange:'#31-36',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'One of college basketball\'s toughest interior players. Physicality and relentless effort every night. Motor alone gives him a chance to outperform his draft slot.',
+    cbsTake:'High-motor big who attacks the glass and does the dirty work.',
+    nbaTake:'Physical forward who brings energy and toughness every possession.',
+  },
+  'Joshua Jefferson': {
+    pos:'SF/PF', school:'Iowa State', espnRank:33, cbsRank:33, nbaRank:33, consensusRange:'#32-37',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Extremely high IQ, great feel, immense upside. Positional versatility and passing vision for his size are rare.',
+    cbsTake:'Skilled forward who can fit any system. High IQ and versatility are his calling cards.',
+    nbaTake:'Smart, multidimensional forward with second-round value and starter upside.',
+  },
+  'Tounde Yessoufou': {
+    pos:'SF', school:'Baylor', espnRank:34, cbsRank:34, nbaRank:34, consensusRange:'#33-38',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Athletic wing with shooting potential and defensive tools.',
+    cbsTake:'Dynamic wing who can impact the game in multiple ways.',
+    nbaTake:'Versatile forward with upside on both ends.',
+  },
+  'Matt Able': {
+    pos:'SF', school:'NC State', espnRank:35, cbsRank:35, nbaRank:35, consensusRange:'#34-39',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Shooting wing with real positional size and defensive engagement.',
+    cbsTake:'Three-and-D wing who fits what modern teams want.',
+    nbaTake:'Role-ready wing who spaces the floor and defends.',
+  },
+  'Malachi Moreno': {
+    pos:'C', school:'Kentucky', espnRank:36, cbsRank:36, nbaRank:36, consensusRange:'#35-40',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Long, switchable big with upside on both ends.',
+    cbsTake:'Athletic center with tools to develop into a rotation piece.',
+    nbaTake:'Young center with intriguing physical tools.',
+  },
+  'Tarris Reed Jr.': {
+    pos:'PF/C', school:'UConn', espnRank:37, cbsRank:37, nbaRank:37, consensusRange:'#35-41',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Physical big who thrives around the basket. Championship pedigree.',
+    cbsTake:'Tough, reliable interior presence.',
+    nbaTake:'UConn big with back-to-back championship experience.',
+  },
+  'Milan Momcilovic': {
+    pos:'PF/SF', school:'Iowa State', espnRank:38, cbsRank:38, nbaRank:38, consensusRange:'#36-42',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'No. 1 portal target after exiting draft. Skilled forward with shooting and basketball IQ.',
+    cbsTake:'Versatile forward who shoots, passes and defends.',
+    nbaTake:'Smart, multidimensional forward with role-player floor.',
+  },
+  'Luigi Suigo': {
+    pos:'C', school:'Mega Basket (Italy)', espnRank:39, cbsRank:39, nbaRank:39, consensusRange:'#37-43',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'International center with size and touch around the basket.',
+    cbsTake:'European big with upside to develop.',
+    nbaTake:'Draft-and-develop international center.',
+  },
+  'Jack Kayil': {
+    pos:'PG/SG', school:'Alba Berlin (Germany)', espnRank:40, cbsRank:40, nbaRank:40, consensusRange:'#38-44',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'International guard with smart playmaking and shooting instincts.',
+    cbsTake:'European guard with NBA-ready feel.',
+    nbaTake:'International playmaker with solid professional experience.',
+  },
+  'Baba Miller': {
+    pos:'PF/C', school:'Cincinnati', espnRank:41, cbsRank:41, nbaRank:41, consensusRange:'#39-45',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'One of the more intriguing developmental prospects in the second round.',
+    cbsTake:'Big with physical tools and room to grow.',
+    nbaTake:'Developmental forward with upside.',
+  },
+  'Trevon Brazile': {
+    pos:'PF/C', school:'Arkansas', espnRank:42, cbsRank:42, nbaRank:42, consensusRange:'#40-46',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Long, switchable big with real tools. Athleticism is the upside driver.',
+    cbsTake:'Athletic forward who can defend multiple positions.',
+    nbaTake:'Defensive versatility and length make him a developmental target.',
+  },
+  'Felix Okpara': {
+    pos:'C', school:'Tennessee', espnRank:43, cbsRank:43, nbaRank:43, consensusRange:'#41-47',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Athletic rim protector who impacts games through energy and shot-altering.',
+    cbsTake:'Defensive specialist with upside if the offense develops.',
+    nbaTake:'Long, energetic center who challenges every shot.',
+  },
+  "Ja'Kobi Gillespie": {
+    pos:'PG', school:'Tennessee', espnRank:44, cbsRank:44, nbaRank:44, consensusRange:'#42-48',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Smart point guard who played in a winning system at Tennessee.',
+    cbsTake:'Crafty guard with good feel and playmaking.',
+    nbaTake:'SEC guard with winning instincts and IQ.',
+  },
+  'Jaden Bradley': {
+    pos:'PG', school:'Arizona', espnRank:45, cbsRank:45, nbaRank:45, consensusRange:'#43-49',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Defensive guard with athleticism and shot-making ability.',
+    cbsTake:'Two-way guard with real NBA tools.',
+    nbaTake:'Athletic guard with defensive upside.',
+  },
+  'Izaiyah Nelson': {
+    pos:'PF/C', school:'South Florida', espnRank:46, cbsRank:46, nbaRank:46, consensusRange:'#44-50',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Physical big from a mid-major program. Stood out despite level of competition.',
+    cbsTake:'Athletic big with more upside than his recruiting ranking suggested.',
+    nbaTake:'Developmental big with tools.',
+  },
+  'Bryce Hopkins': {
+    pos:'SF/PF', school:"St. John's", espnRank:47, cbsRank:47, nbaRank:47, consensusRange:'#45-51',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Experienced forward who has played winning basketball.',
+    cbsTake:'Older prospect with a reliable foundation.',
+    nbaTake:'Veteran college player ready for a professional role.',
+  },
+  'Tobe Awaka': {
+    pos:'PF', school:'Arizona', espnRank:48, cbsRank:48, nbaRank:48, consensusRange:'#46-52',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Energy forward with athleticism and defensive tools.',
+    cbsTake:'High-motor big who competes on every possession.',
+    nbaTake:'Physical forward with defensive effort and upside.',
+  },
+  'Ugonna Onyenso': {
+    pos:'C', school:'Virginia', espnRank:49, cbsRank:49, nbaRank:49, consensusRange:'#47-53',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Shot-blocking center with length and athleticism.',
+    cbsTake:'Rim protector with draft-worthy tools.',
+    nbaTake:'Long, athletic center with developmental upside.',
+  },
+  'Bruce Thornton': {
+    pos:'PG', school:'Ohio State', espnRank:50, cbsRank:50, nbaRank:50, consensusRange:'#48-54',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Efficient guard who makes winning plays. Smart decision-maker.',
+    cbsTake:'Proven college point guard with winning IQ.',
+    nbaTake:'Reliable guard with a high basketball IQ.',
+  },
+  'Tyler Nickel': {
+    pos:'SG', school:'Vanderbilt', espnRank:51, cbsRank:51, nbaRank:51, consensusRange:'#49-55',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Shooter with good size who can space the floor.',
+    cbsTake:'Perimeter marksman with a quick release.',
+    nbaTake:'Shooting specialist who can contribute immediately.',
+  },
+  'Tobi Lawal': {
+    pos:'PF', school:'Virginia Tech', espnRank:52, cbsRank:52, nbaRank:52, consensusRange:'#50-56',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Athletic forward who competes hard and can defend.',
+    cbsTake:'Physical big with energy and motor.',
+    nbaTake:'Developmental forward with effort and tools.',
+  },
+  'Nick Martinelli': {
+    pos:'SF/PF', school:'Northwestern', espnRank:53, cbsRank:53, nbaRank:53, consensusRange:'#51-57',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Versatile wing with IQ and shot-making ability.',
+    cbsTake:'Smart forward who shoots and makes winning plays.',
+    nbaTake:'Skilled wing with a high floor.',
+  },
+  'Vsevolod Ishchenko': {
+    pos:'SG/SF', school:'Lokomotiv Kuban', espnRank:54, cbsRank:54, nbaRank:54, consensusRange:'#52-58',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'International wing with shooting and athleticism.',
+    cbsTake:'European wing with real draft buzz.',
+    nbaTake:'International wing prospect with upside.',
+  },
+  'Nate Bittle': {
+    pos:'C', school:'Oregon', espnRank:55, cbsRank:55, nbaRank:55, consensusRange:'#53-59',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Long center who can block shots and protect the rim.',
+    cbsTake:'Physical big with draft-worthy length.',
+    nbaTake:'Developmental center with tools.',
+  },
+  'Maliq Brown': {
+    pos:'PF/C', school:'Duke', espnRank:56, cbsRank:56, nbaRank:56, consensusRange:'#54-60',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Duke big with athleticism and defensive tools.',
+    cbsTake:'Athletic forward who defends and competes.',
+    nbaTake:'Physical forward from a championship program.',
+  },
+  'Milos Uzan': {
+    pos:'PG', school:'Houston', espnRank:57, cbsRank:57, nbaRank:57, consensusRange:'#55-60',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Experienced guard who ran a Final Four offense.',
+    cbsTake:'Smart playmaker from a winning program.',
+    nbaTake:'High-IQ guard with winning instincts.',
+  },
+  'Noam Yaacov': {
+    pos:'PG', school:'Oostende (Belgium)', espnRank:58, cbsRank:58, nbaRank:58, consensusRange:'#56-60',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'International guard with feel and playmaking.',
+    cbsTake:'European playmaker with draft upside.',
+    nbaTake:'Draft-and-develop international guard.',
+  },
+  'Oscar Cluff': {
+    pos:'C', school:'Purdue', espnRank:59, cbsRank:59, nbaRank:59, consensusRange:'#57-60',
+    glsGrade:'N/A', glsTag:'📋 Consensus Only',
+    glsTake:'Not personally scouted.',
+    espnTake:'Big from a championship program with physical tools.',
+    cbsTake:'Experienced center with a winning background.',
+    nbaTake:'Veteran big from an elite program.',
+  },
+};
+
+// ── ESPN MOCK DRAFT: Pick-by-pick projections ──────────────
+const ESPN_MOCK = {
+  1:'AJ Dybantsa', 2:'Darryn Peterson', 3:'Cameron Boozer', 4:'Caleb Wilson',
+  5:'Keaton Wagler', 6:'Darius Acuff Jr.', 7:'Mikel Brown Jr.', 8:'Brayden Burries',
+  9:'Aday Mara', 10:'Yaxel Lendeborg', 11:'Kingston Flemings', 12:'Yaxel Lendeborg',
+  13:'Karim Lopez', 14:'Hannes Steinbach', 15:'Hannes Steinbach', 16:'Christian Anderson',
+  17:'LaBaron Philon', 18:'Cameron Carr', 19:'Chris Cenac Jr.', 20:'Allen Graves',
+  21:'Bennett Stirtz', 22:'Dailyn Swain', 23:'Isaiah Evans', 24:'Henri Veesaar',
+  25:'Jayden Quaintance', 26:'Koa Peat', 27:'Meleek Thomas', 28:'Ebuka Okorie',
+  29:'Tarris Reed', 30:'Sergio De Larrea',
+  31:'Alex Karaban', 32:'Zuby Ejiofor', 33:'Joshua Jefferson', 34:'Tounde Yessoufou',
+  35:'Matt Able', 36:'Malachi Moreno', 37:'Tarris Reed Jr.', 38:'Milan Momcilovic',
+  39:'Luigi Suigo', 40:'Jack Kayil', 41:'Baba Miller', 42:'Flory Bidunga',
+  43:'Sergio De Larrea', 44:'Ryan Conwell', 45:'Trevon Brazile', 46:'Braden Smith',
+  47:'Jeremy Fears Jr.', 48:'Amari Allen', 49:'Trevon Brazile', 50:'Tyler Tanner',
+  51:'Meleek Thomas', 52:'Vsevolod Ishchenko', 53:'Bruce Thornton', 54:'Noam Yaacov',
+  55:'Sergio de Larrea', 56:'Milan Momcilovic', 57:'Nate Bittle', 58:'Maliq Brown',
+  59:'Oscar Cluff', 60:'Milos Uzan',
+};
+
+// ── TEAM CONTEXT ───────────────────────────────────────────
+const TEAM_INTEL = {
+  'WAS':{ needs:['PG','SF','C'],   situation:'Full rebuild. No. 1 pick. Decision between Dybantsa and Peterson. Wizards have played it close to the vest.', color:'#E31837' },
+  'UTA':{ needs:['PG','SG','SF'],  situation:'Need a star around Keyonte George. Connection to BYU (Dybantsa) and Utah front office (Carlos Boozer). Sitting at 2 comfortably.', color:'#002B5C' },
+  'MEM':{ needs:['PF','C','SF'],   situation:'Ja Morant era. Need a complementary star. Boozer seen as an almost perfect fit alongside their core.', color:'#5D76A9' },
+  'CHI':{ needs:['SF','C','SG'],   situation:'Two picks (4 and 15). Caleb Wilson seen as a no-brainer. Also need wing depth at 15.', color:'#CE1141' },
+  'LAC':{ needs:['PG','SF','SG'],  situation:'Post-Kawhi rebuild. Wagler and Mikel Brown Jr. the top two options. Open to trading back.', color:'#C8102E' },
+  'BKN':{ needs:['SF','PG','C'],   situation:'Full teardown around Cam Thomas. Need star power. Wild-card spot -- could trade back.', color:'#000000' },
+  'SAC':{ needs:['PG','SF','C'],   situation:'Need a guard after Fox departure. Flemings seen as a De\'Aaron Fox-type replacement by some mocks.', color:'#5A2D81' },
+  'ATL':{ needs:['C','SF','PG'],   situation:'Two picks (8 and 23). Trae Young era. Need defensive anchor and second scorer.', color:'#E03A3E' },
+  'DAL':{ needs:['C','PF','SG'],   situation:'Two picks (9 and 30). New coach Dusty May (ex-Michigan). Michigan prospects Mara, Lendeborg, Johnson all connected.', color:'#00538C' },
+  'MIL':{ needs:['SG','SF','C'],   situation:'🚨 TWO PICKS (10, 13) after Giannis trade. Bucks now in full rebuild mode. Lopez, Lendeborg, Carr all mentioned as targets at 10 and 13.', color:'#00471B', breaking:true },
+  'GSW':{ needs:['PG','SG','SF'],  situation:'Curry\'s final chapter. Need rotation pieces. Mara, Burries, Lendeborg all linked. Open to trading back.', color:'#1D428A' },
+  'OKC':{ needs:['PF','SF','SG'],  situation:'Two picks (12, 17). Cleared roster spot (Wiggins to ATL). Can pick 12 and potentially trade 17 for future asset.', color:'#007AC1' },
+  'MIA':{ needs:['SG','SF','C'],   situation:'🚨 Just traded 13 pick to Bucks for GIANNIS. Heat have pick 41. Context completely changed.', color:'#98002E', breaking:true },
+  'CHA':{ needs:['PG','C','SF'],   situation:'Two picks (14, 18). LaMelo era. Need frontcourt. Steinbach, Carr, Lopez all realistic targets.', color:'#1D1160' },
+  'TOR':{ needs:['PG','SF','C'],   situation:'Scottie Barnes era. Need a go-to scorer. Cenac, Stirtz in range.', color:'#CE1141' },
+  'SA': { needs:['SG','PF','C'],   situation:'Wembanyama era. Need shooting and secondary creation. Graves a likely target.', color:'#C4CED4' },
+  'DET':{ needs:['SG','SF','C'],   situation:'Cade era. Need elite talent added around him. Stirtz, Evans in range.', color:'#C8102E' },
+  'PHI':{ needs:['C','PG','SF'],   situation:'Embiid era uncertainty. Two picks (17 via OKC, 22 via HOU). Need versatile pieces.', color:'#006BB6' },
+  'TOR':{ needs:['PG','SF','C'],   situation:'Full rebuild around Scottie Barnes. Need a go-to scorer.', color:'#CE1141' },
+  'MIN':{ needs:['SG','SF','C'],   situation:'Edwards era. Two picks (28, 59). Need shooting and wings. Okorie a projected target.', color:'#0C2340' },
+  'CLE':{ needs:['SG','SF','PF'],  situation:'Mitchell window. Need complementary pieces. Reed, Quaintance projected in range.', color:'#860038' },
+  'NYK':{ needs:['C','SF','PG'],   situation:'Reigning champions. Three picks (24, 31, 55). Balancing future while maintaining window.', color:'#006BB6' },
+  'LAL':{ needs:['PG','C','SF'],   situation:'Post-LeBron transition. Laker pick 25. Quaintance and Veesaar seen as realistic options.', color:'#552583' },
+  'DEN':{ needs:['SG','SF','PG'],  situation:'Jokic window. Picks 26 and 49. Need contributing role players.', color:'#0E2240' },
+  'BOS':{ needs:['SF','C','PG'],   situation:'Championship contenders. Pick 27. Building future while maintaining window.', color:'#007A33' },
+  'ORL':{ needs:['PG','SG','C'],   situation:'Paolo Banchero led. Pick 46. Need backcourt creation.', color:'#0077C0' },
+  'PHX':{ needs:['PG','SG','C'],   situation:'Post-KD rebuild. Picks 47, 48. Booker still the core.', color:'#1D1160' },
+  'HOU':{ needs:['SF','C','PG'],   situation:'Green/Sengun core. Picks 39, 53. Need complementary wings.', color:'#CE1141' },
+  'NOP':{ needs:['PF','SF','C'],   situation:'Rebuild mode. Pick 58. Building for the future.', color:'#0C2340' },
+  'IND':{ needs:['SF','C','SG'],   situation:'Lost pick 5 to LAC in trade. No first-round pick. Pick 32 via MEM.', color:'#FDB927' },
+};
+
+// ── NBA LOGO HELPER ────────────────────────────────────────
+function getNBALogo(abbr) {
+  const map = {
+    'WAS':'was','UTA':'uta','MEM':'mem','CHI':'chi','LAC':'lac','BKN':'bkn',
+    'SAC':'sac','ATL':'atl','DAL':'dal','MIL':'mil','GSW':'gs','OKC':'okc',
+    'MIA':'mia','CHA':'cha','TOR':'tor','SA':'sa','DET':'det','PHI':'phi',
+    'MIN':'min','CLE':'cle','NYK':'ny','LAL':'lal','DEN':'den','BOS':'bos',
+    'ORL':'orl','PHX':'phx','HOU':'hou','NOP':'no','IND':'ind','POR':'por',
+  };
+  return `https://a.espncdn.com/i/teamlogos/nba/500/${map[abbr]||abbr.toLowerCase()}.png`;
+}
+
+// ── STATE ──────────────────────────────────────────────────
+let draftPicks = NBA_DRAFT_2026.map(p=>({...p,selection:null,position:'',college:''}));
+let currentOTC = null;
+let lastModalPick = null;
+let activeDraftTab = 'intel';
+
+// ── FETCH LIVE PICKS ───────────────────────────────────────
+async function fetchNBADraftData() {
+  try {
+    const res = await fetch('https://site.api.espn.com/apis/v2/sports/basketball/nba/draft/2026/picks?limit=60');
+    const data = await res.json();
+    if (data?.picks?.length) {
+      data.picks.forEach(ep => {
+        const idx = draftPicks.findIndex(p=>p.pick===ep.overallSelection);
+        if (idx!==-1 && ep.athlete) {
+          draftPicks[idx].selection = `${ep.athlete.firstName} ${ep.athlete.lastName}`;
+          draftPicks[idx].college   = ep.athlete.college||'';
+          draftPicks[idx].position  = ep.athlete.position?.abbreviation||'';
+        }
+      });
+      const made = data.picks.map(p=>p.overallSelection);
+      const maxMade = made.length ? Math.max(...made) : 0;
+      currentOTC = maxMade < 60 ? maxMade + 1 : null;
+    }
+  } catch(e){ console.warn('Draft API unavailable'); }
+}
+
+// ── BUILD SCROLLER CARDS ───────────────────────────────────
+function buildDraftCards() {
+  const scroller = document.getElementById('draftPickScroller');
+  if (!scroller) return;
+  scroller.innerHTML = '';
+
+  draftPicks.forEach(pick => {
+    const isMade = !!pick.selection;
+    const isOTC  = pick.pick === currentOTC;
+    const isR2   = pick.round === 2;
+    const hasBreaking = !!pick.breaking;
+
+    const card = document.createElement('div');
+    card.className = [
+      'flex-shrink-0 rounded-2xl p-4 border cursor-pointer transition-all duration-500 active:scale-[0.98] flex flex-col justify-between relative overflow-hidden',
+      'min-w-[185px] md:min-w-[210px] h-[150px]',
+      isOTC ? 'border-amber-400/60 bg-gradient-to-b from-amber-500/[0.08] to-transparent ring-1 ring-amber-400/30 shadow-[0_8px_32px_rgba(251,191,36,0.15)] active:shadow-none'
+      : isMade ? 'border-white/5 dark:border-white/[0.04] bg-black/[0.02] dark:bg-white/[0.01] opacity-75 hover:opacity-100'
+      : 'border-black/5 dark:border-white/10 bg-gradient-to-b from-black/[0.01] dark:from-white/[0.03] to-transparent hover:border-amber-500/30 hover:-translate-y-1 hover:shadow-lg dark:hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+    ].join(' ');
+
+    card.onclick = () => openDraftModal(pick);
+
+    const espnProjection = ESPN_MOCK[pick.pick];
+    const prospect = espnProjection ? PROSPECT_DB[espnProjection] : null;
+
+    // Premium status badge styling
+    let statusBadge = `<span class="text-[8px] font-black uppercase tracking-wider text-black/40 dark:text-white/40">R${pick.round} · #${pick.pick}</span>`;
+    if (isOTC) {
+      statusBadge = `<span class="text-[8px] font-black uppercase tracking-wider text-amber-500 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span> On Clock</span>`;
+    } else if (isMade) {
+      statusBadge = `<span class="text-[8px] font-black uppercase tracking-wider text-emerald-500 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Locked</span>`;
+    }
+
+    card.innerHTML = `
+      <div class="flex items-center justify-between w-full mb-2">
+        ${statusBadge}
+        <div class="flex gap-1 items-center">
+          ${pick.viaTeam ? `<span class="text-[7px] font-extrabold text-amber-500 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 px-1.5 py-0.5 rounded-md uppercase tracking-tight">Via Trade</span>` : ''}
+          ${hasBreaking ? `<span class="text-[7px] font-extrabold text-red-500 dark:text-red-400 bg-red-500/10 border border-red-500/20 px-1.5 py-0.5 rounded-md uppercase tracking-tight animate-pulse">🚨 Live</span>` : ''}
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 my-auto">
+        <div class="w-10 h-10 rounded-xl bg-black/[0.03] dark:bg-white/[0.03] border border-black/5 dark:border-white/5 flex items-center justify-center p-1 flex-shrink-0 shadow-sm">
+          <img src="${getNBALogo(pick.team)}" class="w-full h-full object-contain drop-shadow-md" onerror="this.style.opacity=0" />
+        </div>
+        <div class="min-w-0">
+          <p class="text-sm font-black uppercase tracking-tighter text-black dark:text-white truncate leading-none mb-1">${pick.name}</p>
+          <p class="text-[9px] font-medium text-black/40 dark:text-white/30 uppercase tracking-widest">Pick #${pick.pick}</p>
+        </div>
+      </div>
+
+      <div class="border-t border-black/5 dark:border-white/[0.08] pt-2 w-full mt-2">
+        ${isMade
+          ? `<p class="text-xs font-black text-black dark:text-white truncate uppercase tracking-tight">${pick.selection}</p>
+             <p class="text-[8px] text-black/40 dark:text-white/40 font-bold uppercase tracking-widest mt-0.5 truncate">${pick.position}${pick.college ? ' · ' + pick.college : ''}</p>`
+          : espnProjection
+          ? `<div class="flex flex-col">
+              <p class="text-[10px] font-bold text-black/70 dark:text-white/80 truncate">
+                <span class="text-[8px] font-black uppercase tracking-wider text-black/30 dark:text-white/30 mr-1">Projected:</span>${espnProjection}
+              </p>
+              ${prospect ? `<p class="text-[8px] text-black/40 dark:text-white/40 font-bold uppercase tracking-widest mt-0.5">${prospect.pos} · ${prospect.school}</p>` : ''}
+             </div>`
+          : `<p class="text-[8px] text-black/30 dark:text-white/20 uppercase tracking-widest font-black">Awaiting Selection</p>`
+        }
+      </div>
+    `;
+    scroller.appendChild(card);
+  });
+}
+
+async function initDraftTracker() {
+  await fetchNBADraftData();
+  buildDraftCards();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initDraftTracker();
+  setInterval(initDraftTracker, 45000);
+});
+
+// ── TAB SWITCHER ───────────────────────────────────────────
+window.switchDraftTab = function(tab) {
+  activeDraftTab = tab;
+  document.querySelectorAll('.draft-tab-content').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('.draft-tab').forEach(el => {
+    el.style.background = 'transparent';
+    el.style.color = 'rgba(255,255,255,0.35)';
+  });
+  const content = document.getElementById(`draftTab-${tab}`);
+  const btn     = document.getElementById(`tab-${tab}`);
+  if (content) content.classList.remove('hidden');
+  if (btn) {
+    btn.style.background = 'rgba(255,255,255,0.08)';
+    btn.style.color = '#ffffff';
+  }
+};
+
+// ── CLOSE MODAL ────────────────────────────────────────────
+window.closeDraftModal = function() {
+  const container = document.getElementById('draftModalContainer');
+  container.classList.add('scale-95','opacity-0');
+  setTimeout(() => {
+    document.getElementById('draftPickModal').classList.add('hidden');
+    document.getElementById('draftPickModal').classList.remove('flex');
+    document.body.style.overflow = 'auto';
+  }, 300);
+};
+
+window.retryDraftAI = function() {
+  if (lastModalPick) openDraftModal(lastModalPick);
+};
+
+// ── OPEN MODAL ─────────────────────────────────────────────
+window.openDraftModal = function(pick) {
+  lastModalPick = pick;
+  const modal     = document.getElementById('draftPickModal');
+  const container = document.getElementById('draftModalContainer');
+
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
+
+  setTimeout(() => {
+    container.classList.remove('scale-95','opacity-0');
+    container.classList.add('scale-100','opacity-100');
+  }, 10);
+
+  // Header
+  document.getElementById('draftModalLogo').src       = getNBALogo(pick.team);
+  document.getElementById('draftModalPickNum').innerText = `Pick #${pick.pick} · Round ${pick.round} · 2026 NBA Draft`;
+  document.getElementById('draftModalTeamName').innerText = pick.name;
+  document.getElementById('draftModalPickBadge').innerText = `#${pick.pick}`;
+
+  const tradeBadge = document.getElementById('draftModalTradeBadge');
+  if (pick.viaTeam) {
+    tradeBadge.innerText = `Via ${pick.viaTeam} Trade`;
+    tradeBadge.classList.remove('hidden');
+  } else tradeBadge.classList.add('hidden');
+
+  const intel = TEAM_INTEL[pick.team] || { needs:['SF','PG','C'], situation:'Building for the future.', color:'#d4af37' };
+  document.getElementById('draftModalRecord').innerText = intel.situation.split('.')[0];
+  document.getElementById('draftGLTake').innerText = '';
+
+  // Team color glow
+  const glow = document.getElementById('draftModalGlow');
+  if (glow) glow.style.background = intel.color || '#d4af37';
+
+  // Selection badge
+  const selBadge = document.getElementById('draftModalSelectionBadge');
+  if (pick.selection) {
+    selBadge.classList.remove('hidden');
+    document.getElementById('draftModalPlayerName').innerText = pick.selection;
+    document.getElementById('draftModalPlayerPos').innerText  =
+      `${pick.position||''}${pick.college?' · '+pick.college:''}`.trim();
+  } else selBadge.classList.add('hidden');
+
+  // Breaking news banner
+  let breakingBanner = document.getElementById('draftBreakingBanner');
+  if (pick.breaking) {
+    if (!breakingBanner) {
+      breakingBanner = document.createElement('div');
+      breakingBanner.id = 'draftBreakingBanner';
+      breakingBanner.className = 'mx-5 mt-4 p-3 rounded-2xl text-[10px] font-black uppercase tracking-widest text-red-400 flex items-center gap-2';
+      breakingBanner.style.background = 'rgba(220,38,38,0.1)';
+      breakingBanner.style.border = '1px solid rgba(220,38,38,0.2)';
+      const headerEl = document.querySelector('#draftPickModal .flex-shrink-0');
+      if (headerEl) headerEl.after(breakingBanner);
+    }
+    breakingBanner.innerHTML = `<span class="animate-pulse">🚨</span> ${pick.breaking}`;
+    breakingBanner.classList.remove('hidden');
+  } else if (breakingBanner) breakingBanner.classList.add('hidden');
+
+  // ── Activate default tab ──────────────────────────────
+  switchDraftTab('intel');
+
+  // ── INTEL TAB ─────────────────────────────────────────
+  // Needs pills
+  const needsGrid = document.getElementById('draftNeedsGrid');
+  needsGrid.innerHTML = '';
+  const posColors = { 'PG':'#3b82f6','SG':'#8b5cf6','SF':'#10b981','PF':'#f59e0b','C':'#ef4444' };
+  intel.needs.forEach(need => {
+    const color = posColors[need] || '#d4af37';
+    const pill = document.createElement('span');
+    pill.className = 'inline-flex items-center px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest';
+    pill.style.cssText = `background:${color}15; color:${color}; border:1px solid ${color}25`;
+    pill.innerText = need;
+    needsGrid.appendChild(pill);
+  });
+
+  // Situation
+  document.getElementById('draftSituation').innerText = intel.situation;
+
+  // If breaking news for this team, tint the situation box
+  const situationBox = document.getElementById('draftSituation').parentElement;
+  if (pick.breaking || intel.breaking) {
+    situationBox.style.border = '1px solid rgba(220,38,38,0.2)';
+    situationBox.style.background = 'rgba(220,38,38,0.04)';
+  } else {
+    situationBox.style.border = '1px solid rgba(255,255,255,0.06)';
+    situationBox.style.background = 'rgba(255,255,255,0.03)';
+  }
+
+  // GLS Targets based on team needs + pick number
+  const list = document.getElementById('draftProspectsList');
+  list.innerHTML = '';
+
+  // Find best available GLS-graded prospects for this team's needs
+  const glsProspects = Object.entries(PROSPECT_DB)
+    .filter(([name, p]) => p.articleId && p.espnRank <= 30)
+    .filter(([name]) => !draftPicks.slice(0, pick.pick-1).map(d=>d.selection).includes(name))
+    .sort(([,a],[,b]) => (a.espnRank||99) - (b.espnRank||99))
+    .slice(0, 3);
+
+  glsProspects.forEach(([name, p], i) => {
+    const needMatch = intel.needs.includes(p.pos) || intel.needs.some(n => p.pos.includes(n));
+    const row = document.createElement('div');
+    row.className = 'flex items-start gap-3 p-3.5 rounded-2xl cursor-pointer transition-all duration-200 hover:scale-[1.01]';
+    row.style.cssText = 'background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06)';
+    row.onclick = () => p.articleId && openReader(p.articleId);
+    row.innerHTML = `
+      <div class="w-7 h-7 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 font-black text-[10px]"
+           style="background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.2); color:#d4af37">${i+1}</div>
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center gap-2 mb-1 flex-wrap">
+          <p class="text-sm font-black uppercase tracking-tight text-white truncate">${name}</p>
+          <span class="text-[7px] font-black px-1.5 py-0.5 rounded-full flex-shrink-0"
+                style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.5)">${p.pos}</span>
+          ${needMatch ? `<span class="text-[7px] font-black px-1.5 py-0.5 rounded-full flex-shrink-0"
+                style="background:rgba(16,185,129,0.1); color:#10b981; border:1px solid rgba(16,185,129,0.2)">Fills Need</span>` : ''}
+          <div class="flex-shrink-0 w-4 h-4 rounded-full bg-amber-500 flex items-center justify-center ml-auto">
+            <span class="text-[6px] font-black text-black">GL</span>
+          </div>
+          <span class="text-[8px] font-bold text-amber-400">${p.glsGrade||'--'}</span>
+          ${p.articleId ? `<i class="fa-solid fa-arrow-right text-[8px] text-white/20"></i>` : ''}
+        </div>
+        <p class="text-[10px] font-medium text-white/45 leading-snug">${p.glsTake.substring(0,90)}…</p>
+      </div>`;
+    list.appendChild(row);
+  });
+
+  // GLS Take
+  const espnProj = ESPN_MOCK[pick.pick];
+  const projProspect = espnProj ? PROSPECT_DB[espnProj] : null;
+  if (projProspect) {
+    document.getElementById('draftGLTake').innerText =
+      projProspect.articleId
+        ? projProspect.glsTake
+        : `ESPN projects ${espnProj} here. ${projProspect.espnTake}`;
+  } else {
+    document.getElementById('draftGLTake').innerText =
+      `Pick #${pick.pick} -- best player available for ${pick.name}.`;
+  }
+
+  // ── SOURCES TAB ───────────────────────────────────────
+  const sourceList = document.getElementById('sourceProspectsList');
+  sourceList.innerHTML = '';
+
+  // Get top prospects available around this pick range
+  const pickRange = pick.pick;
+  const nearbyProspects = Object.entries(PROSPECT_DB)
+    .filter(([,p]) => Math.abs((p.espnRank||50) - pickRange) <= 5)
+    .slice(0, 6);
+
+  nearbyProspects.forEach(([name, p]) => {
+    const hasGLS = !!p.articleId;
+    const card = document.createElement('div');
+    card.className = 'rounded-2xl overflow-hidden';
+    card.style.cssText = 'background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06)';
+
+    card.innerHTML = `
+      <div class="p-4">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <p class="text-sm font-black uppercase tracking-tight text-white">${name}</p>
+            <p class="text-[9px] text-white/30 font-bold uppercase tracking-widest mt-0.5">${p.pos} · ${p.school} · Consensus: ${p.consensusRange}</p>
+          </div>
+          ${hasGLS ? `<button onclick="openReader('${p.articleId}')" class="text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-lg transition-all"
+            style="background:rgba(212,175,55,0.1); color:#d4af37; border:1px solid rgba(212,175,55,0.2)">
+            Full Report →
+          </button>` : ''}
+        </div>
+
+        <div class="grid grid-cols-1 gap-2">
+          ${hasGLS ? `
+          <div class="flex items-start gap-2.5 p-3 rounded-xl" style="background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.1)">
+            <div class="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <span class="text-[6px] font-black text-black">GL</span>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-[8px] font-black text-amber-400 uppercase tracking-widest">Greenlight · ${p.glsGrade||'--'}</span>
+                <span class="text-[8px] px-1.5 py-0.5 rounded-full font-black ${p.glsTag?.includes('🟢')?'text-emerald-400':p.glsTag?.includes('🔴')?'text-red-400':p.glsTag?.includes('⚠️')?'text-amber-400':'text-white/30'}"
+                  style="background:rgba(255,255,255,0.05)">${p.glsTag||''}</span>
+              </div>
+              <p class="text-[10px] text-white/50 leading-snug font-medium">${p.glsTake.substring(0,110)}…</p>
+            </div>
+          </div>` : ''}
+
+          <div class="flex items-start gap-2.5 p-3 rounded-xl" style="background:rgba(232,0,13,0.05); border:1px solid rgba(232,0,13,0.1)">
+            <div class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 bg-[#e8000d]">
+              <span class="text-[6px] font-black text-white">E</span>
+            </div>
+            <div class="min-w-0">
+              <span class="text-[8px] font-black uppercase tracking-widest text-[#e8000d] block mb-1">ESPN · #${p.espnRank||'--'}</span>
+              <p class="text-[10px] text-white/50 leading-snug font-medium">${p.espnTake.substring(0,110)}…</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2.5 p-3 rounded-xl" style="background:rgba(30,92,168,0.05); border:1px solid rgba(30,92,168,0.15)">
+            <div class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 bg-[#1e5ca8]">
+              <span class="text-[6px] font-black text-white">C</span>
+            </div>
+            <div class="min-w-0">
+              <span class="text-[8px] font-black uppercase tracking-widest text-[#4a9ae8] block mb-1">CBS Sports · #${p.cbsRank||'--'}</span>
+              <p class="text-[10px] text-white/50 leading-snug font-medium">${p.cbsTake.substring(0,110)}…</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2.5 p-3 rounded-xl" style="background:rgba(201,8,42,0.05); border:1px solid rgba(201,8,42,0.15)">
+            <div class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 bg-[#c9082a]">
+              <span class="text-[6px] font-black text-white">N</span>
+            </div>
+            <div class="min-w-0">
+              <span class="text-[8px] font-black uppercase tracking-widest text-[#e84a6a] block mb-1">NBA.com · #${p.nbaRank||'--'}</span>
+              <p class="text-[10px] text-white/50 leading-snug font-medium">${p.nbaTake.substring(0,110)}…</p>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    sourceList.appendChild(card);
+  });
+
+  // ── BIG BOARD TAB ─────────────────────────────────────
+  const tbody = document.getElementById('bigBoardTableBody');
+  tbody.innerHTML = '';
+
+  const allProspects = Object.entries(PROSPECT_DB)
+    .sort(([,a],[,b]) => (a.espnRank||99)-(b.espnRank||99))
+    .slice(0, 30);
+
+  allProspects.forEach(([name, p], i) => {
+    const isAlreadyDrafted = draftPicks.some(d => d.selection === name);
+    const hasReport = !!p.articleId;
+    const glsColor = p.glsTag?.includes('🟢')?'#10b981':p.glsTag?.includes('🔴')?'#ef4444':p.glsTag?.includes('⚠️')?'#f59e0b':'#d4af37';
+
+    const tr = document.createElement('tr');
+    tr.className = 'transition-colors duration-200';
+    tr.style.opacity = isAlreadyDrafted ? '0.35' : '1';
+    tr.innerHTML = `
+      <td class="py-3 pl-2">
+        <div class="flex items-center gap-2">
+          <span class="text-[9px] font-black text-white/20 w-5 text-center">${i+1}</span>
+          <div>
+            <p class="text-xs font-black text-white uppercase tracking-tight">${name}</p>
+            <p class="text-[8px] text-white/30 font-bold">${p.pos} · ${p.school}</p>
+          </div>
+          ${hasReport ? `<div class="w-4 h-4 rounded-full bg-amber-500 flex items-center justify-center ml-1 flex-shrink-0 cursor-pointer hover:scale-110 transition-transform" onclick="openReader('${p.articleId}')">
+            <span class="text-[5px] font-black text-black">GL</span></div>` : ''}
+        </div>
+      </td>
+      <td class="py-3 text-center">
+        <span class="text-[10px] font-black" style="color:${glsColor}">${p.glsGrade||'--'}</span>
+      </td>
+      <td class="py-3 text-center">
+        <span class="text-[10px] font-bold text-[#e8000d]">${p.espnRank||'--'}</span>
+      </td>
+      <td class="py-3 text-center">
+        <span class="text-[10px] font-bold text-[#4a9ae8]">${p.cbsRank||'--'}</span>
+      </td>
+      <td class="py-3 text-center">
+        <span class="text-[10px] font-bold text-[#e84a6a]">${p.nbaRank||'--'}</span>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+};
+
+</script>
 <script>
 // The Data Engine: Exactly what you'd see driving a broadcast graphic
 
@@ -6109,6 +6755,23 @@ window.closeProfile = () => {
     border-color: rgba(251, 191, 36, 0.8) !important;
     box-shadow: 0 0 35px rgba(251, 191, 36, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
 }
+/* Draft Modal Tabs */
+.draft-tab {
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  transition: all 0.25s ease;
+}
+.draft-tab:hover { color: rgba(255,255,255,0.7) !important; }
+
+/* Draft Modal Glass */
+#draftModalContainer {
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+}
+
+/* Source badge logos */
+.source-badge { display: inline-flex; align-items: center; gap: 4px; }
+
 </style>
 
 <div id="greenlightReader" class="fixed inset-0 z-[300] bg-white dark:bg-[#0a0a0a] translate-x-full reader-transition overflow-y-auto hidden">

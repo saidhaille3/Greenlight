@@ -1,6 +1,838 @@
 
     
 const articleEngineData = {
+
+"lopez-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/lopez.jpeg",
+    time: "11 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "Karim Lopez Scouting Report",
+    content: `
+<style>
+  .kl-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .kl-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .kl-article .kl-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .kl-article .kl-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .kl-article .kl-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .kl-article .kl-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .kl-article .kl-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .kl-article .kl-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .kl-article .kl-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .kl-article .kl-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .kl-article .kl-pull p { color: #d4af37; }
+  .kl-article .kl-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .kl-article .kl-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .kl-article .kl-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .kl-article .kl-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .kl-article .kl-stat-box .kl-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .kl-article .kl-stat-box .kl-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .kl-article .kl-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .kl-article .kl-record-card {
+    background: linear-gradient(135deg, rgba(212,175,55,0.07) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .kl-article .kl-record-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #d4af37;
+  }
+  .kl-article .kl-record-card .kl-rc-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .kl-article .kl-record-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .kl-article .kl-record-card p:last-child { margin-bottom: 0 !important; }
+  .kl-article .kl-weakness-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .kl-article .kl-weakness-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .kl-article .kl-weakness-card .kl-w-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .kl-article .kl-weakness-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .kl-article .kl-weakness-card p:last-child { margin-bottom: 0 !important; }
+  .kl-article .kl-comp-card {
+    background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .kl-article .kl-comp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .kl-article .kl-comp-card .kl-c-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .kl-article .kl-comp-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .kl-article .kl-comp-card p:last-child { margin-bottom: 0 !important; }
+  .kl-article .kl-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .kl-article .kl-projection .kl-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .kl-article .kl-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .kl-article .kl-projection p:last-child { margin-bottom: 0 !important; }
+  .kl-article .kl-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .kl-article .kl-grade-banner .kl-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .kl-article .kl-grade-banner .kl-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .kl-article strong { font-weight: 700; opacity: 1; }
+  .kl-article em { font-style: italic; }
+</style>
+
+<div class="kl-article">
+
+  <div class="kl-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="kl-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="kl-section">
+    <span class="kl-section-label">Physical</span>
+    <h2 class="kl-section-title">Physical Profile &amp; Body</h2>
+    <span class="kl-rule"></span>
+  </div>
+
+  <p>He's 6'8.25 barefoot, 221.8 pounds, with a 6'11.5 wingspan and an 8'9.5 standing reach -- elite positional size for a wing-forward who projects to guard threes and fours interchangeably. His frame is already thick and NBA-ready for a 19-year-old, with broad shoulders, clean posture, and a structural density that reads as genuinely durable rather than just big. His kinetic chain is exceptional -- the way force travels from his base through his hips and into his upper body when he moves has an efficiency and flow that most prospects his age simply don't possess yet.</p>
+
+  <div class="kl-pull"><p>His backpedal on full-court press deserves its own sentence: it's mechanically pristine, almost cornerback-level in how he flips his hips, maintains his base, and retreats without losing his spatial read. His movement efficiency at his size is exceptional.</p></div>
+
+  <p>He tested at 38 inches max vertical and 32 no-step at the combine which shows real athleticism, not just physical mass.</p>
+
+  <div class="kl-stat-grid">
+    <div class="kl-stat-box">
+      <span class="kl-sv">6'8.25"</span>
+      <span class="kl-sl">Barefoot</span>
+    </div>
+    <div class="kl-stat-box">
+      <span class="kl-sv">6'11.5"</span>
+      <span class="kl-sl">Wingspan</span>
+    </div>
+    <div class="kl-stat-box">
+      <span class="kl-sv">38"</span>
+      <span class="kl-sl">Max Vertical</span>
+    </div>
+    <div class="kl-stat-box">
+      <span class="kl-sv">222</span>
+      <span class="kl-sl">Pounds</span>
+    </div>
+  </div>
+
+  <div class="kl-divider"></div>
+
+  <div class="kl-section">
+    <span class="kl-section-label">Bag</span>
+    <h2 class="kl-section-title">Offensive Toolkit</h2>
+    <span class="kl-rule"></span>
+  </div>
+
+  <p>Lopez plays at a pace that resembles a chess match more than an athletic competition. He operates in the third-to-fourth gear range rather than explosive burst, and that's a deliberate strategic choice rather than a limitation. The way he manipulates defenders through gear shifts -- slight hesitation into a stutter-step rhythm change before attacking the lane -- is a Luka Dončić-adjacent quality that makes his offense nearly impossible to key on with pure athleticism alone. He lulls defenders into comfort and then makes them pay for it.</p>
+
+  <p>His most distinctive offensive skill is his body manipulation on drives. He'll run a jab-step-into-crossover sequence -- slowing his tempo, adding a subtle head fake -- before contorting around two defenders in the paint using a combination of hip displacement, shoulder lead, and core flexibility to carve a driving lane that wasn't there a fraction of a second earlier.</p>
+
+  <div class="kl-record-card">
+    <span class="kl-rc-label">History Made</span>
+    <p>He scored 358 points in his NBL season, the most ever by a draft-eligible player in the Next Stars program's history, surpassing LaMelo Ball, Josh Giddey, and Alex Sarr. That number wasn't manufactured by system -- it was earned against adult professionals as an 18-year-old.</p>
+  </div>
+
+  <p>His short-roll floater and running hook -- generated by creating contact with the defender's hip, using an elbow-out push-off to manufacture cushion, then lofting the ball over the outstretched arm -- is already a polished NBA-ready move. It's the same creation mechanism SGA uses to eat in the mid-range: generate space with body contact, then shoot over the resulting gap. His finishing package inside the arc -- the turnaround jumper off the catch, the euro step on straight-line drives, the ability to absorb contact and flip the ball home -- is genuinely advanced for his age and experience level.</p>
+
+  <p>He processes the game quickly off the catch in the post, reading the double-team before it fully materializes and releasing soft-touch pocket passes to cutters before the help collapses.</p>
+
+  <p>The passing isn't a headline trait -- his 1.9 assists per game understates the quality of his read-and-release in half-court situations -- but the decision-making is clearly there. He's never going to be the lead creator, but he understands how to be a connective piece and that intelligence shows up in those brief windows where the game demands it.</p>
+
+  <div class="kl-weakness-card">
+    <span class="kl-w-label">The Swing Skill</span>
+    <p>His three-point shot is the legitimate developmental swing skill. He shot 32.6% from three this season on three attempts per game -- not a shooting disaster, but not the floor-spacing guarantee the league demands from a player at his draft position. His touch is there on stationary rhythm threes and he's adding dribble-jumper attempts to his diet, but the consistency and volume aren't NBA-ready yet. How quickly he rounds into a reliable perimeter threat will largely determine whether his ceiling is a high-end role player or a genuine starter.</p>
+  </div>
+
+  <p>He finished at 50.2% from the field overall, a remarkable efficiency mark for a 19-year-old playing professional ball against grown men.</p>
+
+  <div class="kl-stat-grid">
+    <div class="kl-stat-box">
+      <span class="kl-sv">11.9</span>
+      <span class="kl-sl">PPG</span>
+    </div>
+    <div class="kl-stat-box">
+      <span class="kl-sv">50.2%</span>
+      <span class="kl-sl">FG%</span>
+    </div>
+    <div class="kl-stat-box">
+      <span class="kl-sv">6.1</span>
+      <span class="kl-sl">RPG</span>
+    </div>
+    <div class="kl-stat-box">
+      <span class="kl-sv">1.2</span>
+      <span class="kl-sl">SPG</span>
+    </div>
+  </div>
+
+  <div class="kl-divider"></div>
+
+  <div class="kl-section">
+    <span class="kl-section-label">The Other End</span>
+    <h2 class="kl-section-title">Defensive Profile</h2>
+    <span class="kl-rule"></span>
+  </div>
+
+  <p>His foundation is excellent. The tools -- length, anticipation, active hands, positional size, movement -- are all there. The 1.2 steals per game reflects genuine instincts jumping passing lanes rather than gambling, and his help-side read on shot contests shows the spatial awareness you want from a forward who might guard multiple positions.</p>
+
+  <p>The intensity gap is the honest assessment. He reads the floor well enough to know when to leave his assignment and rotate, but the commitment level on the ball and away from it isn't yet consistent possession to possession.</p>
+
+  <div class="kl-weakness-card">
+    <span class="kl-w-label">Film Room Concern</span>
+    <p>He'll pick his spots defensively rather than locking in for 30 minutes straight, and in the NBL that was manageable. In the NBA, that will get him killed until the professional habits fully form. His contests at the perimeter are too passive -- present but not disruptive -- and getting stationed against a quick two-guard or a slippery three who can put him on his heels laterally will expose the one real athleticism gap in his profile.</p>
+    <p>The framework is right though. There's no mechanical breakdown to fix, no fundamental misunderstanding of defensive concepts, no posture issue. It's a motor and intensity problem -- which is the most coachable version of a defensive problem a prospect can have.</p>
+  </div>
+
+  <div class="kl-divider"></div>
+
+  <div class="kl-section">
+    <span class="kl-section-label">Who Does He Remind You Of</span>
+    <h2 class="kl-section-title">The Comp Problem</h2>
+    <span class="kl-rule"></span>
+  </div>
+
+  <div class="kl-comp-card">
+    <span class="kl-c-label">Boba's Read</span>
+    <p>Franz Wagner is the body-type and skill-set comp that keeps appearing, and it's earned. Both are 6'9 forwards who handle the ball, score in a variety of ways without needing dominant athleticism, and bring positional versatility that fits any roster construction.</p>
+    <p>The LaMelo, Giddey, and Sarr scoring comparison is the most meaningful contextual fact in his entire profile: the Next Stars program has produced real NBA players, and he just outscored all of them.</p>
+  </div>
+
+  <div class="kl-divider"></div>
+
+  <div class="kl-section">
+    <span class="kl-section-label">Final Take</span>
+    <h2 class="kl-section-title">Outlook</h2>
+    <span class="kl-rule"></span>
+  </div>
+
+  <div class="kl-projection">
+    <p>Top-6 is a real grade rooted in his physical profile, his positional size, his offensive maturity at 19, and his defensive ceiling rather than his defensive reality. He's not a finished product defensively and the three-point shot needs work. But his frame is ideal, the footwork is already NBA-level, and the scoring instincts -- the body manipulation, the pace control, the post touch, the running hook, the turnaround -- are the kind of things that take most prospects years to develop and he's already doing them against professionals at 18.</p>
+  </div>
+
+  <div class="kl-grade-banner">
+    <span class="kl-grade-num">Top 6</span>
+    <span class="kl-grade-caption">My Grade · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
+
+"wilson-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/wilson.jpeg",
+    time: "12 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "Caleb Wilson Scouting Report",
+    content: `
+<style>
+  .cw-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .cw-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .cw-article .cw-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .cw-article .cw-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .cw-article .cw-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .cw-article .cw-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .cw-article .cw-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .cw-article .cw-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .cw-article .cw-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .cw-article .cw-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .cw-article .cw-pull p { color: #d4af37; }
+  .cw-article .cw-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .cw-article .cw-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .cw-article .cw-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .cw-article .cw-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .cw-article .cw-stat-box .cw-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .cw-article .cw-stat-box .cw-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .cw-article .cw-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .cw-article .cw-dunk-card {
+    background: linear-gradient(135deg, rgba(212,175,55,0.07) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cw-article .cw-dunk-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #d4af37;
+  }
+  .cw-article .cw-dunk-card .cw-dk-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .cw-article .cw-dunk-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .cw-article .cw-dunk-card p:last-child { margin-bottom: 0 !important; }
+  .cw-article .cw-weakness-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cw-article .cw-weakness-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .cw-article .cw-weakness-card .cw-w-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .cw-article .cw-weakness-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .cw-article .cw-weakness-card p:last-child { margin-bottom: 0 !important; }
+  .cw-article .cw-ceiling-card {
+    background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cw-article .cw-ceiling-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .cw-article .cw-ceiling-card .cw-c-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .cw-article .cw-ceiling-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .cw-article .cw-ceiling-card p:last-child { margin-bottom: 0 !important; }
+  .cw-article .cw-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .cw-article .cw-projection .cw-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .cw-article .cw-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .cw-article .cw-projection p:last-child { margin-bottom: 0 !important; }
+  .cw-article .cw-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .cw-article .cw-grade-banner .cw-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .cw-article .cw-grade-banner .cw-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .cw-article strong { font-weight: 700; opacity: 1; }
+  .cw-article em { font-style: italic; }
+</style>
+
+<div class="cw-article">
+
+  <div class="cw-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="cw-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="cw-section">
+    <span class="cw-section-label">Physical</span>
+    <h2 class="cw-section-title">Physical Profile</h2>
+    <span class="cw-rule"></span>
+  </div>
+
+  <p>6'9.25 barefoot, 210.8 pounds, 7'0.25 wingspan, 9'0 standing reach. The length is the first thing you notice -- his wingspan crosses the seven-foot threshold, which at his position creates defensive coverage and offensive finishing angles that most wings never access. His frame is lean, almost too lean for a player who will eventually need to anchor a frontcourt against NBA centers. He posted a 34.5-inch standing vertical and 39.5-inch max vertical at the combine but that feels conservative given what he does above the rim on tape. He's still growing into his body in the most meaningful sense: not taller, but denser. An NBA strength program will add functional mass to his upper body and lower his center of gravity, and the ceiling rises when that happens.</p>
+
+  <p>The hand injury that ended his freshman season in February -- a broken thumb that cost him nine games -- is the only real physical concern in his profile, and it's already behind him.</p>
+
+  <div class="cw-stat-grid">
+    <div class="cw-stat-box">
+      <span class="cw-sv">6'9.25"</span>
+      <span class="cw-sl">Barefoot</span>
+    </div>
+    <div class="cw-stat-box">
+      <span class="cw-sv">7'0.25"</span>
+      <span class="cw-sl">Wingspan</span>
+    </div>
+    <div class="cw-stat-box">
+      <span class="cw-sv">39.5"</span>
+      <span class="cw-sl">Max Vertical</span>
+    </div>
+    <div class="cw-stat-box">
+      <span class="cw-sv">211</span>
+      <span class="cw-sl">Pounds</span>
+    </div>
+  </div>
+
+  <div class="cw-divider"></div>
+
+  <div class="cw-section">
+    <span class="cw-section-label">Bag</span>
+    <h2 class="cw-section-title">Offensive Toolkit</h2>
+    <span class="cw-rule"></span>
+  </div>
+
+  <p>Wilson doesn't build advantages through dribble creation or three-point gravity. He builds them through timing, pre-read decisiveness, and an athletic ceiling so high that when the game opens up even slightly, he converts plays that most forwards simply can't access.</p>
+
+  <div class="cw-pull"><p>The processing speed is what separates him from other elite athletes at his position. Catching a high-post entry pass, he's already read the defense, committed to his action, and initiated his move before the ball fully arrives -- storing his momentum while the pass is in the air so that the rocker step, the shoulder shimmy fake, or the jab-step misdirection begins from a live platform rather than a standing reset.</p></div>
+
+  <p>That's how a 6'10 freshman regularly beats NBA-caliber athletes off the catch: he's simply already in motion when they think the sequence is still beginning. His 1.4 assist-to-turnover ratio on 28.8% usage speaks directly to this composure -- he's making quick, correct decisions under real defensive pressure at a rate most freshmen forwards can't approach.</p>
+
+  <p>His post finishing package is the most surprising element of his offensive profile for someone of his age. He shows a legitimate shoulder-shimmy rocker step -- a subtle half-body fake that loads the defender's weight in one direction before he explodes the opposite way -- and his counters off it are already varied: he can pull up for a short runner off the gather, fade into a mid-range jumper from the elbow, or use the defender's momentum against them and attack the vacated lane for a rim finish. The foot coverage is exceptional -- he eats ground in two or three steps where most forwards need four or five, arriving at the rim before the help defense can fully rotate.</p>
+
+  <div class="cw-dunk-card">
+    <span class="cw-dk-label">Above The Rim</span>
+    <p>He dunks violently and often. Sixty-six dunks in 24 games at UNC. Not poster dunks in the highlight-reel sense -- he finishes contact dunks and full-extension finishes that require going up and forward simultaneously, covering horizontal and vertical distance in the same leap. His head regularly appears at or above rim level on attempts. The euro-step dunk -- catching a step in traffic, switching launch foot, and arriving above the defense's outstretched arms -- is already in his bag and already spectacular.</p>
+  </div>
+
+  <p>He shot 68% at the rim on 176 total attempts, with reverse layups adding wrist spin to manipulate the angle over shot-blockers, and scoop finishes that exploit his length at undefendable release points. He ran the floor well enough in transition to be a legitimate lob threat on every possession, which Duke head coaches and opposing scouts have had to account for every single time the ball crosses halfcourt. His 14.0 BPM at UNC -- the metric that most comprehensively captures on-court impact -- ranked among the elite freshmen forwards in program history.</p>
+
+  <div class="cw-weakness-card">
+    <span class="cw-w-label">Film Room Concern</span>
+    <p>The honest tension in his offensive profile is what remains when you remove the athleticism. His three-point shot doesn't exist yet -- 25.9% on 1.1 attempts per game is a number that opposing defenses will ignore, and getting ignored at the perimeter in the NBA opens up driving lanes but closes off floor-spacing value in half-court sets. His handle above the three-point line can get loose, with occasional high-dribble possessions that allow defensive hands to swipe through. He prefers going right, and elite scouts at the NBA level will have that tendency charted and loaded into their defensive game plan from night one. And when he runs into resistance in the post -- physical bigs who can hold their ground and push him off his pivot -- the lack of lower body mass creates instability that limits his efficiency in those sequences.</p>
+  </div>
+
+  <div class="cw-stat-grid">
+    <div class="cw-stat-box">
+      <span class="cw-sv">19.8</span>
+      <span class="cw-sl">PPG</span>
+    </div>
+    <div class="cw-stat-box">
+      <span class="cw-sv">9.4</span>
+      <span class="cw-sl">RPG</span>
+    </div>
+    <div class="cw-stat-box">
+      <span class="cw-sv">62.6%</span>
+      <span class="cw-sl">True Shooting</span>
+    </div>
+    <div class="cw-stat-box">
+      <span class="cw-sv">14.0</span>
+      <span class="cw-sl">BPM</span>
+    </div>
+  </div>
+
+  <div class="cw-divider"></div>
+
+  <div class="cw-section">
+    <span class="cw-section-label">The Other End</span>
+    <h2 class="cw-section-title">Defensive Profile</h2>
+    <span class="cw-rule"></span>
+  </div>
+
+  <p>His defensive upside is Giannis-adjacent in the specific sense that his length, lateral mobility, and instincts project toward guarding one through four in the NBA with the right development. His 2.9 stocks per game -- 1.5 steals and 1.4 blocks combined -- already show the two-way impact in real numbers rather than projection. His poke-away technique -- the long, controlled arm reach that strips the ball from a dribbler without overcommitting his body -- is rare and already effective.</p>
+
+  <div class="cw-weakness-card">
+    <span class="cw-w-label">The Motor Question</span>
+    <p>His defensive motor is the critical developmental variable and the honest weakness in his profile. He takes possessions off. There are genuinely dominant stretches where he transforms into a defensive nightmare -- switching everything, contesting at the rim, cutting off driving lanes with his ground coverage -- followed by sequences where he loses his assignment off-ball, sags into the paint when he should be tracking a perimeter shooter, or gets caught gambling on a help-rotation that doesn't materialize. His inconsistency isn't scheme confusion -- it's competitive focus, which is the most coachable of the three possible reasons for defensive lapses and the one that most commonly resolves with professional coaching and higher stakes competition.</p>
+    <p>He also struggles navigating ball screens on the perimeter, sometimes getting caught in the hip of the screener rather than fighting over or under cleanly, and his transition defense effort is inconsistent -- he doesn't always sprint back with the urgency his athletic profile would suggest. He's not an aggressive offensive rebounder, preferring to get back on defense rather than crashing the glass -- a habit that reflects basketball intelligence but also leaves points on the board.</p>
+  </div>
+
+  <div class="cw-divider"></div>
+
+  <div class="cw-section">
+    <span class="cw-section-label">Long View</span>
+    <h2 class="cw-section-title">The Ceiling Question</h2>
+    <span class="cw-rule"></span>
+  </div>
+
+  <div class="cw-ceiling-card">
+    <span class="cw-c-label">My Read</span>
+    <p>This is the genuinely open question in his entire evaluation: what does he look like when the athleticism recedes? The Giannis and Hakeem comparisons on his drives -- the gliding quality, the euro-step with finesse, the post spins that echo The Dream's footwork -- are real when you watch the tape. But Giannis built a second offensive identity around the three-point line. Hakeem had perhaps the most refined post repertoire in NBA history to fall back on. Wilson's mid-range game is real and his post footwork flashes are encouraging, but neither is currently developed enough to carry him if the elite athleticism becomes merely good athleticism over a decade in the league.</p>
+    <p>Kevin Garnett is the comp that keeps floating around in evaluator circles -- same length profile, same two-way impact, same question about offensive floor-spacing. KG figured it out into his late twenties. The path exists. The work required to walk it is the open variable.</p>
+  </div>
+
+  <div class="cw-divider"></div>
+
+  <div class="cw-section">
+    <span class="cw-section-label">Final Take</span>
+    <h2 class="cw-section-title">Outlook</h2>
+    <span class="cw-rule"></span>
+  </div>
+
+  <div class="cw-projection">
+    <p>Top-3 is defensible and possibly conservative depending on how aggressively you project the defensive ceiling. The consensus places him at four behind a combination of Dybantsa, Peterson, and Boozer depending on the evaluator -- but the pure upside case for taking Wilson over any of them is legitimate if you believe the offensive development will come and the defensive motor will lock in under professional accountability.</p>
+    <p>Nineteen years old, seven-foot wingspan, 62.6% true shooting in college, 66 dunks in 24 games, and more post finishing craft than any freshman his size has shown in this program in two decades. The floor is high. The ceiling is genuinely among the highest in this class.</p>
+  </div>
+
+  <div class="cw-grade-banner">
+    <span class="cw-grade-num">Top 3</span>
+    <span class="cw-grade-caption">My Grade · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
+
 "evans-scouting-report": {
     tag: "NBA Draft · Film Room",
     hero: "images/evans.jpeg",
