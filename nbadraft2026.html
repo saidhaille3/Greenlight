@@ -207,14 +207,16 @@
                 <!-- Tier Filter Selector -->
                 <div class="mb-4 pt-3 border-t border-slate-200/60">
                     <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500 mb-2">Draft Tier Allocation</label>
-                    <select id="tierFilter" onchange="filterProspects()" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-700 outline-none focus:border-brand-500">
-                        <option value="All">All Projected Tiers</option>
-                        <option value="Top 3">Tier 1 (Top 3 Franchise Core)</option>
-                        <option value="Top 5">Tier 2 (Top 5 Blue Chip)</option>
-                        <option value="Top 12">Tier 3 (Lottery Protected)</option>
-                        <option value="Lottery">Lottery Value</option>
-                        <option value="Late 1st">Late First Round Tier</option>
-                    </select>
+           <!-- Find the tierFilter select and replace its options: -->
+<select id="tierFilter" onchange="filterProspects()" ...>
+    <option value="All">All Projected Tiers</option>
+    <option value="Top 2">My Top 2 (Cornerstone)</option>
+    <option value="Top 8">Top 5–8 (Blue Chip)</option>
+    <option value="Top 12">Top 12 (Lottery)</option>
+    <option value="Late 1st">Late First Round</option>
+    <option value="30-35">Contrarian Grade (28–40)</option>
+</select>
+
                 </div>
 
                 <!-- Performance Metrics Sliders (Interactive Concept for Billion Dollar look) -->
@@ -362,8 +364,8 @@
     <script>
         const PROSPECTS = [
             {
-                id: 'pete', name: 'Darryn Peterson', school: 'Kansas', pos: 'SG', rank: "Top 4",
-                image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=400',
+                id: 'pete', name: 'Darryn Peterson', school: 'Kansas', pos: 'SG', rank: "#1",
+                image: 'images/peteh.jpeg',
                 physical: { height: "6'5\"", weight: "195 lbs", wingspan: "6'10\"", reach: "8'6\"" },
                 stats: { pts: 19.9, reb: 4.8, ast: 1.6, stl: 1.3, blk: 0.6, tov: 2.1, pf: 1.8, fg: 45.2, pt3: 38.5, ft: 82.1, efg: 51.4, ts: 55.8 },
                 advanced: { per: 21.4, usg: 26.5, ws: 4.2, bpm: 5.1, astPct: 14.2, rebPct: 8.5 },
@@ -371,8 +373,8 @@
                 report: `<p class="text-sm font-bold text-slate-800 mb-2">High utility perimeter asset processing elite operational efficiency on catch and drive mechanics.</p>`
             },
             {
-                id: 'aj', name: 'AJ Dybantsa', school: 'BYU', pos: 'SF', rank: "Top 3",
-                image: 'https://images.unsplash.com/photo-1511067007352-9da8fa49223a?q=80&w=400',
+                id: 'aj', name: 'AJ Dybantsa', school: 'BYU', pos: 'SF', rank: "#35",
+                image: 'images/dyph.png',
                 physical: { height: "6'9\"", weight: "210 lbs", wingspan: "7'2\"", reach: "9'1\"" },
                 stats: { pts: 25.5, reb: 6.8, ast: 3.7, stl: 1.6, blk: 1.1, tov: 2.8, pf: 2.1, fg: 51.0, pt3: 34.2, ft: 79.5, efg: 56.1, ts: 60.3 },
                 advanced: { per: 26.8, usg: 31.2, ws: 5.8, bpm: 7.4, astPct: 22.1, rebPct: 11.4 },
@@ -381,7 +383,7 @@
             },
             {
                 id: 'booz', name: 'Cameron Boozer', school: 'Duke', pos: 'PF', rank: "Top 5",
-                image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=400',
+                image: 'boozerh.png',
                 physical: { height: "6'9\"", weight: "235 lbs", wingspan: "7'3\"", reach: "9'2\"" },
                 stats: { pts: 18.2, reb: 10.5, ast: 4.1, stl: 1.2, blk: 1.9, tov: 1.9, pf: 2.4, fg: 56.3, pt3: 31.0, ft: 76.2, efg: 59.8, ts: 63.1 },
                 advanced: { per: 25.1, usg: 23.8, ws: 5.2, bpm: 6.8, astPct: 18.5, rebPct: 17.2 },
@@ -389,7 +391,7 @@
             },
             {
                 id: 'wag', name: 'Keaton Wagler', school: 'Illinois', pos: 'PG', rank: "Top 12",
-                image: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=400',
+                image: 'weath.png',
                 physical: { height: "6'6\"", weight: "190 lbs", wingspan: "6'8\"", reach: "8'7\"" },
                 stats: { pts: 17.9, reb: 5.1, ast: 4.2, stl: 1.8, blk: 0.4, tov: 1.7, pf: 1.5, fg: 44.5, pt3: 39.7, ft: 88.5, efg: 53.2, ts: 58.1 },
                 advanced: { per: 20.9, usg: 22.1, ws: 3.9, bpm: 4.8, astPct: 24.5, rebPct: 7.9 },
@@ -397,7 +399,7 @@
             },
             {
                 id: 'wilson', name: 'Caleb Wilson', school: 'UNC', pos: 'PF', height: "6'10\"", weight: "205 lbs", rank: "Lottery",
-                image: 'https://images.unsplash.com/photo-121554904095-2cbdf4492bf9?q=80&w=400',
+                image: 'wilson.png',
                 physical: { height: "6'10\"", weight: "205 lbs", wingspan: "7'4\"", reach: "9'3\"" },
                 stats: { pts: 19.8, reb: 9.4, ast: 2.7, stl: 1.1, blk: 2.3, tov: 2.2, pf: 2.6, fg: 48.9, pt3: 28.5, ft: 71.4, efg: 51.2, ts: 54.0 },
                 advanced: { per: 22.3, usg: 25.0, ws: 4.0, bpm: 5.3, astPct: 12.8, rebPct: 15.4 },
@@ -405,15 +407,15 @@
             },
             {
                 id: 'lopez', name: 'Karim Lopez', school: 'NZ Breakers', pos: 'SF', rank: "Top 8",
-                image: 'https://images.unsplash.com/photo-1518063319789-7217e6706b04?q=80&w=400',
+                image: 'lopez.png',
                 physical: { height: "6'9\"", weight: "215 lbs", wingspan: "7'0\"", reach: "9'0\"" },
                 stats: { pts: 14.2, reb: 7.8, ast: 3.1, stl: 0.9, blk: 1.4, tov: 1.5, pf: 2.2, fg: 50.2, pt3: 35.1, ft: 78.0, efg: 54.7, ts: 57.9 },
                 advanced: { per: 19.1, usg: 19.5, ws: 3.1, bpm: 3.6, astPct: 15.1, rebPct: 12.8 },
                 combine: { maxVert: "35.5 in", standVert: "29.5 in", sprint: "3.32 sec", agility: "11.50 sec", bench: "10 reps" }
             },
             {
-                id: 'acuff', name: 'Darius Acuff', school: 'Arkansas', pos: 'PG', rank: "Late 1st",
-                image: 'https://images.unsplash.com/photo-1508344928928-7165b67de128?q=80&w=400',
+                id: 'acuff', name: 'Darius Acuff', school: 'Arkansas', pos: 'PG', rank: "30-35",
+                image: 'acufh.png',
                 physical: { height: "6'3\"", weight: "185 lbs", wingspan: "6'6\"", reach: "8'3\"" },
                 stats: { pts: 21.2, reb: 3.4, ast: 5.5, stl: 1.2, blk: 0.2, tov: 3.1, pf: 1.6, fg: 42.1, pt3: 41.5, ft: 85.3, efg: 51.0, ts: 56.2 },
                 advanced: { per: 21.8, usg: 29.1, ws: 3.6, bpm: 4.1, astPct: 31.4, rebPct: 5.8 },
@@ -421,12 +423,50 @@
             },
             {
                 id: 'lend', name: 'Yaxel Lendeborg', school: 'Michigan', pos: 'C', rank: "Late 1st",
-                image: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?q=80&w=400',
+                image: 'landenburgh.png',
                 physical: { height: "6'11\"", weight: "245 lbs", wingspan: "7'5\"", reach: "9'5\"" },
                 stats: { pts: 12.5, reb: 11.2, ast: 2.1, stl: 0.8, blk: 2.6, tov: 1.4, pf: 2.9, fg: 62.4, pt3: 22.0, ft: 68.5, efg: 63.5, ts: 65.4 },
                 advanced: { per: 24.3, usg: 17.8, ws: 4.9, bpm: 5.9, astPct: 10.2, rebPct: 19.5 },
                 combine: { maxVert: "34.0 in", standVert: "28.0 in", sprint: "3.41 sec", agility: "11.85 sec", bench: "16 reps" }
-            }
+                
+            },
+            {
+    id: 'burries', name: 'Brayden Burries', school: 'Arizona', pos: 'G', rank: "Top 8",
+    image: 'burriesh.webp',
+    physical: { height: "6'3.75\"", weight: "215 lbs", wingspan: "6'6\"", reach: "8'2.5\"" },
+    stats: { pts: 16.1, reb: 4.2, ast: 3.8, stl: 2.8, blk: 0.3, tov: 1.9, pf: 1.7, fg: 49.1, pt3: 39.1, ft: 80.5, efg: 54.2, ts: 57.8 },
+    advanced: { per: 20.1, usg: 21.4, ws: 3.8, bpm: 4.2, astPct: 18.5, rebPct: 8.1 },
+    combine: { maxVert: "--", standVert: "--", sprint: "--", agility: "--", bench: "--" },
+    report: `<p class="text-sm font-bold text-slate-800 mb-2">Three-level scorer with NBA-ready frame and real defensive instincts. Passing/playmaking is the swing skill for his ceiling. Greenlight Grade: 5-8.</p>`
+},
+{
+    id: 'mara', name: 'Aday Mara', school: 'Michigan', pos: 'C', rank: "Top 12",
+    image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?q=80&w=400',
+    physical: { height: "7'3\"", weight: "-- lbs", wingspan: "7'6\"", reach: "9'9\"" },
+    stats: { pts: 12.1, reb: 6.8, ast: 2.4, stl: 0.5, blk: 2.6, tov: 1.2, pf: 2.1, fg: 66.8, pt3: 30.0, ft: 55.0, efg: 68.1, ts: 65.2 },
+    advanced: { per: 24.3, usg: 17.5, ws: 4.8, bpm: 5.7, astPct: 18.5, rebPct: 14.2 },
+    combine: { maxVert: "--", standVert: "--", sprint: "--", agility: "--", bench: "--" },
+    report: `<p class="text-sm font-bold text-slate-800 mb-2">Elite passing big with legitimate rim deterrence. Strength and perimeter shooting are the development items. Already impacts winning today. Greenlight Grade: 8-12.</p>`
+},
+{
+    id: 'flemings', name: 'Kingston Flemings', school: 'Houston', pos: 'PG', rank: "Late 1st",
+    image: 'kingstonh.png',
+    physical: { height: "6'2.5\"", weight: "183 lbs", wingspan: "6'3.5\"", reach: "8'2.5\"" },
+    stats: { pts: 16.1, reb: 3.8, ast: 5.2, stl: 1.9, blk: 0.3, tov: 2.4, pf: 1.8, fg: 48.0, pt3: 39.0, ft: 85.0, efg: 53.5, ts: 58.2 },
+    advanced: { per: 20.5, usg: 24.8, ws: 3.2, bpm: 3.9, astPct: 28.4, rebPct: 6.2 },
+    combine: { maxVert: "40.5 in", standVert: "33.5 in", sprint: "--", agility: "--", bench: "--" },
+    report: `<p class="text-sm font-bold text-slate-800 mb-2">Elite burst and beautiful shot, but thin frame and one-move driving package cap him well below the lottery buzz. Greenlight Grade: 28-30.</p>`
+},
+{
+    id: 'quaintance', name: 'Jayden Quaintance', school: 'Kentucky', pos: 'PF', rank: "Late 1st",
+    image: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?q=80&w=400',
+    physical: { height: "6'9\"", weight: "253 lbs", wingspan: "7'5.25\"", reach: "9'1\"" },
+    stats: { pts: 10.2, reb: 8.8, ast: 1.4, stl: 1.6, blk: 2.2, tov: 1.8, pf: 3.1, fg: 54.0, pt3: 22.0, ft: 47.9, efg: 56.1, ts: 54.8 },
+    advanced: { per: 19.8, usg: 18.2, ws: 3.1, bpm: 4.4, astPct: 8.5, rebPct: 18.8 },
+    combine: { maxVert: "--", standVert: "--", sprint: "--", agility: "--", bench: "--" },
+    report: `<p class="text-sm font-bold text-slate-800 mb-2">Elite defensive instincts in a young massive frame, but ACL/meniscus history and thin offensive bag make this a health-risk bet. Greenlight Grade: 30-40.</p>`
+}
+
         ];
 
         let currentFilterPos = 'All';
@@ -454,14 +494,22 @@
 
             // Sorting Strategy Block
             // Updated Sorting Strategy Block inside renderProspects()
-            processed.sort((a, b) => {
-                if (currentSort === 'rank') {
-                    return a.rank.localeCompare(b.rank);
-                }
-                const statA = a.stats[currentSort] !== undefined ? a.stats[currentSort] : 0;
-                const statB = b.stats[currentSort] !== undefined ? b.stats[currentSort] : 0;
-                return statB - statA;
-            });
+            const rankOrder = {
+    'Top 2': 1, 'Top 3': 2, 'Top 4': 3, 'Top 5': 4,
+    'Top 8': 5, 'Top 12': 6, 'Lottery': 7,
+    'Late 1st': 8, '28-30': 9, '30-35': 10, '30-40': 11, 'Top 35': 12
+};
+
+processed.sort((a, b) => {
+    if (currentSort === 'rank') {
+        const aOrder = rankOrder[a.rank] ?? 99;
+        const bOrder = rankOrder[b.rank] ?? 99;
+        return aOrder - bOrder;
+    }
+    const statA = a.stats[currentSort] !== undefined ? a.stats[currentSort] : 0;
+    const statB = b.stats[currentSort] !== undefined ? b.stats[currentSort] : 0;
+    return statB - statA;
+});
 
 
             if(processed.length === 0) {
@@ -820,26 +868,28 @@ document.getElementById('modalSchoolPos').innerText = `${prospect.school} · ${p
             renderProspects();
         });
                 // Dynamic Tier Styling Engine
+                // Dynamic Tier Styling Engine
+                // Dynamic Tier Styling Engine
         function getRankBadgeStyle(rank) {
             const r = rank.toLowerCase();
             
-            // Tier 1: Top 3 / Top 4 (Franchise Core - Premium Gold)
-            if (r.includes('top 3') || r.includes('top 4')) {
+            if (r.includes('top 2') || r.includes('top 3')) {
                 return 'bg-gradient-to-tr from-amber-100 to-yellow-50 text-amber-700 border border-amber-300/60 shadow-[0_0_8px_rgba(251,191,36,0.25)]';
             }
-            // Tier 2: Top 5 / Top 8 (Blue Chip - Brand Green)
             else if (r.includes('top 5') || r.includes('top 8')) {
                 return 'bg-gradient-to-tr from-emerald-100 to-brand-50 text-brand-700 border border-brand-300/60 shadow-[0_0_8px_rgba(34,197,94,0.15)]';
             }
-            // Tier 3: Top 12 / Lottery (Lottery Protected - Deep Blue/Indigo)
             else if (r.includes('top 12') || r.includes('lottery')) {
                 return 'bg-gradient-to-tr from-blue-100 to-indigo-50 text-blue-700 border border-blue-300/60 shadow-[0_0_8px_rgba(59,130,246,0.15)]';
             }
-            // Tier 4: Late 1st & Everything Else (Standard Slate)
+            else if (r.includes('top 35') || r.includes('28-') || r.includes('30-') || r.includes('late')) {
+                return 'bg-gradient-to-tr from-orange-100 to-red-50 text-red-600 border border-red-300/60 shadow-sm';
+            }
             else {
                 return 'bg-gradient-to-tr from-slate-100 to-slate-50 text-slate-600 border border-slate-200/80 shadow-sm';
             }
         }
+
 
     </script>
 </body>
