@@ -1,6 +1,415 @@
 
     
 const articleEngineData = {
+"evans-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/evans.jpeg",
+    time: "10 MIN READ",
+    published: "June 17, 2026",
+    updated: null,
+    title: "Isaiah Evans Scouting Report",
+    content: `
+<style>
+  .ie-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .ie-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .ie-article .ie-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .ie-article .ie-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .ie-article .ie-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .ie-article .ie-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .ie-article .ie-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .ie-article .ie-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .ie-article .ie-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .ie-article .ie-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .ie-article .ie-pull p { color: #d4af37; }
+  .ie-article .ie-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .ie-article .ie-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .ie-article .ie-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .ie-article .ie-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .ie-article .ie-stat-box .ie-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .ie-article .ie-stat-box .ie-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .ie-article .ie-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .ie-article .ie-combine-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .ie-article .ie-combine-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .ie-article .ie-combine-card .ie-cc-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .ie-article .ie-combine-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .ie-article .ie-combine-card p:last-child { margin-bottom: 0 !important; }
+  .ie-article .ie-weakness-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .ie-article .ie-weakness-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .ie-article .ie-weakness-card .ie-w-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .ie-article .ie-weakness-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .ie-article .ie-weakness-card p:last-child { margin-bottom: 0 !important; }
+  .ie-article .ie-sleeper-card {
+    background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .ie-article .ie-sleeper-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .ie-article .ie-sleeper-card .ie-s-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .ie-article .ie-sleeper-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .ie-article .ie-sleeper-card p:last-child { margin-bottom: 0 !important; }
+  .ie-article .ie-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .ie-article .ie-projection .ie-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .ie-article .ie-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .ie-article .ie-projection p:last-child { margin-bottom: 0 !important; }
+  .ie-article .ie-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .ie-article .ie-grade-banner .ie-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .ie-article .ie-grade-banner .ie-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .ie-article strong { font-weight: 700; opacity: 1; }
+  .ie-article em { font-style: italic; }
+</style>
+
+<div class="ie-article">
+
+  <div class="ie-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="ie-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 17, 2026
+    </div>
+  </div>
+
+  <div class="ie-section">
+    <span class="ie-section-label">Physical</span>
+    <h2 class="ie-section-title">Physical Profile</h2>
+    <span class="ie-rule"></span>
+  </div>
+
+  <p>6'5.5 barefoot, 186 pounds, 6'8.75 wingspan, 8'8.5 standing reach. His frame reads lean -- thin limbs, wiry build -- but he's basketball-built in the way that matters, long enough to get his shot over most wings and strong enough in the moment of contact to finish. The weight will come with an NBA strength program, and there's real developmental upside in that physical growth curve.</p>
+
+  <div class="ie-combine-card">
+    <span class="ie-cc-label">The Combine Paradox</span>
+    <p>Here's where it gets interesting: his combine athletic testing raised red flags that don't fully square with what you see on tape. His 27-inch no-step vertical and second-slowest lane agility time of anyone in this class are legitimately poor numbers -- the kind of marks that typically correspond to a player who can't play above the rim or navigate traffic at full speed. But that's not what he shows you. He puts defenders on posters. He maneuvers through congested paint at full speed without losing a stride. He catches high-ball passes mid-run without breaking his momentum.</p>
+    <p>The gap between his athletic profile on paper and his functional athleticism on tape is one of the most genuinely puzzling disconnects in this entire draft class, and it suggests his actual value lives somewhere the testing simply doesn't measure -- in timing, body control, and proprioception rather than raw twitch.</p>
+  </div>
+
+  <div class="ie-stat-grid">
+    <div class="ie-stat-box">
+      <span class="ie-sv">6'5.5"</span>
+      <span class="ie-sl">Barefoot</span>
+    </div>
+    <div class="ie-stat-box">
+      <span class="ie-sv">6'8.75"</span>
+      <span class="ie-sl">Wingspan</span>
+    </div>
+    <div class="ie-stat-box">
+      <span class="ie-sv">27"</span>
+      <span class="ie-sl">No-Step Vert</span>
+    </div>
+    <div class="ie-stat-box">
+      <span class="ie-sv">35.5"</span>
+      <span class="ie-sl">Max Vert</span>
+    </div>
+  </div>
+
+  <div class="ie-divider"></div>
+
+  <div class="ie-section">
+    <span class="ie-section-label">Bag</span>
+    <h2 class="ie-section-title">Offensive Toolkit</h2>
+    <span class="ie-rule"></span>
+  </div>
+
+  <p>Evans is a natural basketball mover in the truest sense. Everything he does offensively flows from an advanced pre-read processing system that begins before the ball ever arrives. When he's running off a screen from the high post curling out to the right wing for a catch-and-shoot three, he's already committed to his footwork and release by the time the ball is in flight. Defenders cannot rest or cheat with him because he's already decided and already moving. That pre-catch commitment is a trait the best movement shooters in the league share, and Evans has it naturally.</p>
+
+  <p>His shooting is the foundation. He went from 14 made baskets at the rim as a freshman to 64 as a sophomore -- a leap in rim-attack volume that reflects genuine development in his willingness and ability to create off the catch and drive. His shooting splits -- 43.3/36.1/86.0 -- confirm his touch across all three levels is real. He led Duke in made threes, averaged 2.7 per game ranking 5th among all ACC players, and when he hits three or more threes, his teams are a combined 27-0 in his two-year career. That is a meaningful winning correlation.</p>
+
+  <div class="ie-pull"><p>His compact, fluid release is a legitimate NBA weapon. His shot preparation -- early hand placement, active feet finding his spot before the catch, consistent balance at the release point -- creates a repeatable, quick-trigger mechanism that functions off the catch, off the curl, and off straight-line drives.</p></div>
+
+  <p>He's shown deep range from both wings, not just his natural right side.</p>
+
+  <p>His ability to attack the paint in straight-line drives off the catch is more advanced than his reputation suggests. He uses jab-step feints and body fakes to manipulate a tight defender's weight before attacking the gap, and he processes the coverage read fast enough to locate the open roll man or skip pass while still in full drive momentum.</p>
+
+  <p>For a player with an 8.3% assist rate, a modest number, the passing flashes on catch-and-drive reads look better than that figure implies.</p>
+
+  <p>His transition game is genuinely special. He may be the most fluid dribbler in this draft class in the open floor, not in terms of handle complexity, but in terms of total efficiency loss during maneuvering. He executes directional changes, behind-the-back redirections, and sudden directional cuts at full speed without any reduction in pace or stride length. That quality, maintaining momentum through actions rather than pausing to execute them, is genuinely rare and genuinely hard to teach.</p>
+
+  <div class="ie-stat-grid">
+    <div class="ie-stat-box">
+      <span class="ie-sv">15.0</span>
+      <span class="ie-sl">PPG</span>
+    </div>
+    <div class="ie-stat-box">
+      <span class="ie-sv">43.3%</span>
+      <span class="ie-sl">FG%</span>
+    </div>
+    <div class="ie-stat-box">
+      <span class="ie-sv">36.1%</span>
+      <span class="ie-sl">3PT%</span>
+    </div>
+    <div class="ie-stat-box">
+      <span class="ie-sv">59%</span>
+      <span class="ie-sl">True Shooting</span>
+    </div>
+  </div>
+
+  <div class="ie-divider"></div>
+
+  <div class="ie-section">
+    <span class="ie-section-label">The Other End</span>
+    <h2 class="ie-section-title">Defensive Profile</h2>
+    <span class="ie-rule"></span>
+  </div>
+
+  <div class="ie-weakness-card">
+    <span class="ie-w-label">Film Room Concern</span>
+    <p>His defensive stance is the clearest mechanical concern on tape. His base reads as shallow and inconsistent, insufficient hip loading and core engagement to anchor him in position against physical wing matchups. It's a functional weakness that gets exposed when bigger players post him up or drive aggressively at his chest, and it's the physical development priority that has to be addressed in an NBA program before his defensive potential is fully unlocked.</p>
+    <p>Off the ball, his awareness lapses are real. He can lose track of his assignment when ball movement requires him to process help rotations, he gives up too much cushion on off-ball relocations, and he's susceptible to shot fakes and jab-step misdirection on the perimeter when guarding the ball. His modest steal and block numbers -- 0.7 each -- reflect the limited defensive impact rather than obscuring something the tape doesn't show.</p>
+  </div>
+
+  <div class="ie-divider"></div>
+
+  <div class="ie-section">
+    <span class="ie-section-label">Me vs The Market</span>
+    <h2 class="ie-section-title">The Sleeper Case</h2>
+    <span class="ie-rule"></span>
+  </div>
+
+  <div class="ie-sleeper-card">
+    <span class="ie-s-label">Where I Differ</span>
+    <p>Jonathan Wasserman's most recent mock has him going 27th overall. Tankathon slots him 24th. The consensus has him as a late-lottery-to-mid-first value -- a shooting specialist who earns rotation minutes immediately but profiles as a specialist rather than a primary contributor.</p>
+    <p>I have his value in the 13-18 range and the case for it is real: his pre-read processing speed, his transition fluency, his rim-attack development, and his shooting gravity are all traits that the league is demonstrably willing to pay for in the lottery. Combine that with a 59% true shooting percentage on 21.9% usage, and you have a player whose efficiency on the shots he does take is elite.</p>
+    <p>The counterargument is the second-slowest lane agility, pedestrian steal and block numbers, modest assist rate, loose ball security in traffic. These facts limit the projection from elite starter to high-value potential starter. If strength development unlocks a defensive tier he hasn't shown yet, he might even become a good to great starter.</p>
+  </div>
+
+  <div class="ie-divider"></div>
+
+  <div class="ie-section">
+    <span class="ie-section-label">Final Take</span>
+    <h2 class="ie-section-title">Outlook</h2>
+    <span class="ie-rule"></span>
+  </div>
+
+  <div class="ie-projection">
+    <p>He might be the most underrated athlete in this draft in the specific sense of -- functional, situational athleticism that the testing doesn't capture, packaged inside a shooting profile that translates immediately. His ceiling is a modern all around scoring threat with a legitimate on-off impact through shooting and slashing gravity. His floor, even if the defensive development stalls, is a rotation wing who earns minutes in NBA lineups on shooting alone.</p>
+  </div>
+
+  <div class="ie-grade-banner">
+    <span class="ie-grade-num">13-18</span>
+    <span class="ie-grade-caption">My Grade · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
+
 "dybantsa-scouting-report": {
     tag: "NBA Draft · Film Room",
     hero: "images/dyb.webp",
