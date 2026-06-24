@@ -1628,7 +1628,7 @@ const articleEngineData = {
   </div>
 
   <div class="aj-grade-banner">
-    <span class="aj-grade-num">35 overall</span>
+    <span class="aj-grade-num">#10 overall</span>
     <span class="aj-grade-caption">My Grade</span>
   </div>
 
