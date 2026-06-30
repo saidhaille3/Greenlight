@@ -574,6 +574,1705 @@ filter: invert(1) brightness(2);
 
 
 </div>
+
+<style>
+/* ════════════════════════════════════════════
+   SECTION WRAPPER
+════════════════════════════════════════════ */
+#nba-hub {
+  position: relative;
+  padding: 7rem 0 5rem;
+  background: #f8f8f8;
+  overflow: hidden;
+}
+.dark #nba-hub { background: #050505; }
+
+/* Ambient glow blobs */
+#nba-hub::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(16,185,129,0.07) 0%, transparent 70%);
+  top: -100px; left: -100px;
+  pointer-events: none;
+}
+#nba-hub::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+  bottom: 0; right: 0;
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════
+   SECTION HEADER
+════════════════════════════════════════════ */
+.hub-header {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2.5rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.hub-title-eyebrow {
+  font-size: 9px; font-weight: 900;
+  letter-spacing: 0.45em; text-transform: uppercase;
+  color: #10b981; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.hub-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900; text-transform: uppercase;
+  letter-spacing: -0.03em; line-height: 0.9;
+  color: #0a0a0a;
+}
+.dark .hub-title { color: #f5f5f5; }
+.hub-title span { color: #10b981; }
+.hub-sync-pill {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.2);
+  border-radius: 100px;
+  padding: 0.4rem 0.9rem;
+  font-size: 9px; font-weight: 900;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: #10b981; white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+
+/* ════════════════════════════════════════════
+   TEAM CARD SCROLLER
+════════════════════════════════════════════ */
+.hub-scroller-wrap {
+  padding: 0 1.5rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+#hub-scroller {
+  display: flex; gap: 0.875rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  cursor: grab;
+}
+#hub-scroller:active { cursor: grabbing; }
+#hub-scroller::-webkit-scrollbar { height: 2px; }
+#hub-scroller::-webkit-scrollbar-track { background: transparent; }
+#hub-scroller::-webkit-scrollbar-thumb { background: #10b981; border-radius: 100px; }
+
+/* TEAM CARD */
+.hub-tc {
+  flex-shrink: 0;
+  width: 110px;
+  scroll-snap-align: start;
+  cursor: pointer;
+  border-radius: 1.75rem;
+  padding: 1.25rem 0.75rem 1rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  position: relative; overflow: hidden;
+  /* Glass */
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9);
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.dark .hub-tc {
+  background: rgba(20,20,20,0.7);
+  border-color: rgba(255,255,255,0.07);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.hub-tc:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(16,185,129,0.5);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1), 0 0 0 1px rgba(16,185,129,0.2), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.dark .hub-tc:hover {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(16,185,129,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.hub-tc:active { transform: scale(0.95); }
+
+/* Champ card */
+.hub-tc.is-champ {
+  border-color: rgba(212,175,55,0.6) !important;
+  background: rgba(255,251,235,0.7);
+  box-shadow: 0 4px 24px rgba(212,175,55,0.15), 0 0 0 1px rgba(212,175,55,0.3), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.dark .hub-tc.is-champ {
+  background: rgba(30,24,8,0.8);
+  border-color: rgba(212,175,55,0.5) !important;
+  box-shadow: 0 8px 40px rgba(212,175,55,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Team logo */
+.hub-tc-logo { width: 54px; height: 54px; object-fit: contain; transition: transform 0.3s ease; }
+.hub-tc:hover .hub-tc-logo { transform: scale(1.12) rotate(-2deg); }
+
+/* Team name */
+.hub-tc-name {
+  font-size: 9.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: -0.01em; color: #111; text-align: center; line-height: 1.2;
+}
+.dark .hub-tc-name { color: #f0f0f0; }
+
+/* Record */
+.hub-tc-rec {
+  font-size: 9px; font-weight: 700;
+  color: rgba(0,0,0,0.3); letter-spacing: 0.05em;
+}
+.dark .hub-tc-rec { color: rgba(255,255,255,0.3); }
+
+/* Status badges */
+.hub-badge {
+  font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.12em; padding: 2px 8px; border-radius: 100px;
+  white-space: nowrap;
+}
+.hub-badge-champ { background: rgba(212,175,55,0.15); color: #b8860b; border: 1px solid rgba(212,175,55,0.3); }
+.dark .hub-badge-champ { color: #d4af37; border-color: rgba(212,175,55,0.4); }
+.hub-badge-hot { background: rgba(239,68,68,0.1); color: #dc2626; border: 1px solid rgba(239,68,68,0.2); }
+.dark .hub-badge-hot { color: #f87171; }
+.hub-badge-move { background: rgba(245,158,11,0.1); color: #d97706; border: 1px solid rgba(245,158,11,0.2); }
+.dark .hub-badge-move { color: #fbbf24; }
+
+/* Champ crown */
+.hub-tc-crown {
+  position: absolute; top: 8px; right: 10px;
+  font-size: 11px; line-height: 1;
+}
+
+/* ════════════════════════════════════════════
+   MODAL OVERLAY
+════════════════════════════════════════════ */
+#gi-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  #gi-overlay { align-items: center; padding: 2rem; }
+}
+#gi-overlay.gi-open { display: flex; }
+
+/* ════════════════════════════════════════════
+   MODAL SHELL
+════════════════════════════════════════════ */
+#gi-modal {
+  position: relative;
+  width: 100%; max-width: 720px;
+  max-height: 92dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 2.5rem 2.5rem 0 0;
+  /* Glass shell */
+  background: rgba(252,252,252,0.92);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: 0 -8px 80px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,1);
+  transform: translateY(100%);
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+  will-change: transform;
+}
+.dark #gi-modal {
+  background: rgba(10,10,10,0.94);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 -8px 100px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+@media (min-width: 768px) {
+  #gi-modal {
+    border-radius: 2.5rem;
+    transform: scale(0.9) translateY(24px);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+    max-height: 88dvh;
+  }
+}
+#gi-modal.gi-shown { transform: translateY(0); opacity: 1; }
+@media (min-width: 768px) {
+  #gi-modal.gi-shown { transform: scale(1) translateY(0); }
+}
+#gi-modal::-webkit-scrollbar { width: 3px; }
+#gi-modal::-webkit-scrollbar-thumb { background: #10b981; border-radius: 100px; }
+
+/* ════════════════════════════════════════════
+   MODAL HERO BANNER
+════════════════════════════════════════════ */
+.gi-hero {
+  height: 160px;
+  border-radius: 2.5rem 2.5rem 0 0;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+@media (min-width: 768px) { .gi-hero { height: 180px; border-radius: 2.5rem 2.5rem 0 0; } }
+
+.gi-hero-bg {
+  position: absolute; inset: 0;
+  background: var(--gi-gradient, linear-gradient(135deg,#111 0%,#333 100%));
+}
+.gi-hero-noise {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px;
+  opacity: 0.04;
+}
+.gi-hero-vignette {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.5) 100%);
+}
+.gi-hero-logo {
+  position: absolute;
+  right: 1.5rem; bottom: -28px;
+  width: 100px; height: 100px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 32px rgba(0,0,0,0.5));
+  z-index: 2;
+}
+.gi-hero-content {
+  position: absolute; left: 1.5rem; bottom: 1.25rem; z-index: 2;
+}
+.gi-hero-close {
+  position: absolute; top: 1rem; left: 1rem; z-index: 10;
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1.1rem; font-weight: 400;
+  cursor: pointer; transition: all 0.2s;
+}
+.gi-hero-close:hover { background: rgba(255,255,255,0.3); transform: rotate(90deg); }
+
+/* ════════════════════════════════════════════
+   IDENTITY STRIP
+════════════════════════════════════════════ */
+.gi-identity {
+  padding: 2.75rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.dark .gi-identity { border-color: rgba(255,255,255,0.05); }
+
+.gi-team-name {
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  font-weight: 900; text-transform: uppercase;
+  letter-spacing: -0.04em; line-height: 0.9;
+  color: #0a0a0a;
+}
+.dark .gi-team-name { color: #f5f5f5; }
+.gi-team-city {
+  font-size: 10px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.3em; color: rgba(0,0,0,0.3); margin-bottom: 0.25rem;
+}
+.dark .gi-team-city { color: rgba(255,255,255,0.3); }
+
+/* Quick stat pills row */
+.gi-stats-row {
+  display: flex; gap: 0.5rem; margin-top: 1.25rem;
+  overflow-x: auto; padding-bottom: 0.25rem;
+}
+.gi-stats-row::-webkit-scrollbar { display: none; }
+.gi-stat-pill {
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 1rem;
+  padding: 0.6rem 0.9rem;
+  text-align: center; min-width: 64px;
+}
+.dark .gi-stat-pill { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.07); }
+.gi-stat-label {
+  font-size: 7.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.15em; color: rgba(0,0,0,0.3); display: block; margin-bottom: 0.2rem;
+}
+.dark .gi-stat-label { color: rgba(255,255,255,0.3); }
+.gi-stat-val { font-size: 14px; font-weight: 900; color: #111; display: block; }
+.dark .gi-stat-val { color: #f5f5f5; }
+
+/* Alert bar */
+.gi-alert {
+  margin: 1rem 1.5rem 0;
+  padding: 0.875rem 1rem;
+  border-radius: 1.25rem;
+  background: rgba(245,158,11,0.07);
+  border: 1px solid rgba(245,158,11,0.2);
+  display: none;
+}
+.gi-alert.visible { display: flex; gap: 0.6rem; align-items: flex-start; }
+.gi-alert-text { font-size: 11px; font-weight: 700; color: #92400e; line-height: 1.5; }
+.dark .gi-alert-text { color: #fcd34d; }
+
+/* ════════════════════════════════════════════
+   TAB NAV
+════════════════════════════════════════════ */
+.gi-tabs {
+  display: flex; gap: 0;
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  overflow-x: auto; white-space: nowrap;
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(252,252,252,0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.dark .gi-tabs {
+  background: rgba(10,10,10,0.9);
+  border-color: rgba(255,255,255,0.06);
+}
+.gi-tabs::-webkit-scrollbar { display: none; }
+.gi-tab {
+  padding: 1rem 0.9rem 0.875rem;
+  font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.18em;
+  color: rgba(0,0,0,0.3); border-bottom: 2px solid transparent;
+  cursor: pointer; transition: all 0.2s; flex-shrink: 0; user-select: none;
+}
+.dark .gi-tab { color: rgba(255,255,255,0.3); }
+.gi-tab:hover { color: rgba(0,0,0,0.6); }
+.dark .gi-tab:hover { color: rgba(255,255,255,0.6); }
+.gi-tab.on { color: #10b981; border-color: #10b981; }
+
+/* Tab panels */
+.gi-panel { display: none; padding: 1.5rem; }
+.gi-panel.on { display: block; }
+
+/* ════════════════════════════════════════════
+   DEPTH CHART -- NFL.COM STYLE
+════════════════════════════════════════════ */
+.gi-depth-position-block { margin-bottom: 1.5rem; }
+.gi-depth-pos-header {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+.gi-depth-pos-pill {
+  font-size: 8px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.18em; padding: 3px 10px; border-radius: 100px;
+  flex-shrink: 0;
+}
+.gi-depth-divider { flex: 1; height: 1px; background: rgba(0,0,0,0.06); }
+.dark .gi-depth-divider { background: rgba(255,255,255,0.06); }
+
+/* Depth rows */
+.gi-depth-rows { display: flex; flex-direction: column; gap: 0.35rem; }
+.gi-depth-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 1.25rem;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  position: relative; overflow: hidden;
+}
+.gi-depth-row::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; border-radius: 0 3px 3px 0;
+  background: transparent;
+  transition: background 0.2s;
+}
+.gi-depth-row.is-starter {
+  background: rgba(16,185,129,0.05);
+  border-color: rgba(16,185,129,0.15);
+}
+.gi-depth-row.is-starter::before { background: #10b981; }
+.dark .gi-depth-row.is-starter { background: rgba(16,185,129,0.07); border-color: rgba(16,185,129,0.2); }
+.gi-depth-row.is-backup { background: rgba(0,0,0,0.02); }
+.dark .gi-depth-row.is-backup { background: rgba(255,255,255,0.02); }
+.gi-depth-row.is-third { background: rgba(0,0,0,0.01); opacity: 0.75; }
+.dark .gi-depth-row.is-third { background: rgba(255,255,255,0.01); }
+
+.gi-depth-num {
+  width: 20px; height: 20px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 900; flex-shrink: 0;
+}
+.gi-depth-num.n1 { background: #10b981; color: #fff; }
+.gi-depth-num.n2 { background: rgba(0,0,0,0.08); color: rgba(0,0,0,0.5); }
+.dark .gi-depth-num.n2 { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+.gi-depth-num.n3 { background: rgba(0,0,0,0.04); color: rgba(0,0,0,0.3); }
+.dark .gi-depth-num.n3 { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); }
+
+.gi-depth-headshot {
+  width: 38px; height: 38px; border-radius: 50%;
+  object-fit: cover; object-position: top;
+  background: rgba(0,0,0,0.06); flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.gi-depth-info { flex: 1; min-width: 0; }
+.gi-depth-pname { font-size: 13px; font-weight: 800; color: #111; truncate; }
+.dark .gi-depth-pname { color: #f0f0f0; }
+.gi-depth-pmeta { font-size: 9px; font-weight: 700; color: rgba(0,0,0,0.3); letter-spacing: 0.05em; }
+.dark .gi-depth-pmeta { color: rgba(255,255,255,0.3); }
+.gi-depth-star {
+  font-size: 9px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.1em; padding: 2px 8px; border-radius: 100px;
+  background: rgba(212,175,55,0.1); color: #b8860b; border: 1px solid rgba(212,175,55,0.25);
+  flex-shrink: 0;
+}
+.dark .gi-depth-star { color: #d4af37; }
+
+/* ════════════════════════════════════════════
+   ROSTER TABLE
+════════════════════════════════════════════ */
+.gi-roster-table { width: 100%; border-collapse: collapse; }
+.gi-roster-table th {
+  font-size: 8px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(0,0,0,0.3);
+  padding: 0 0.75rem 0.75rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.dark .gi-roster-table th { color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.06); }
+.gi-roster-row { transition: background 0.15s; border-bottom: 1px solid rgba(0,0,0,0.04); }
+.dark .gi-roster-row { border-color: rgba(255,255,255,0.04); }
+.gi-roster-row:hover { background: rgba(0,0,0,0.03); }
+.dark .gi-roster-row:hover { background: rgba(255,255,255,0.04); }
+.gi-roster-row td { padding: 0.65rem 0.75rem; font-size: 12px; font-weight: 700; }
+.gi-roster-num { font-size: 11px; font-weight: 900; color: rgba(0,0,0,0.25); }
+.dark .gi-roster-num { color: rgba(255,255,255,0.25); }
+.gi-roster-name { font-weight: 800; color: #111; }
+.dark .gi-roster-name { color: #f0f0f0; }
+.gi-roster-pos-badge {
+  display: inline-block; font-size: 7.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.1em; padding: 2px 8px; border-radius: 100px;
+}
+.gi-roster-stat { font-size: 12px; color: rgba(0,0,0,0.4); }
+.dark .gi-roster-stat { color: rgba(255,255,255,0.4); }
+
+/* ════════════════════════════════════════════
+   SALARY PANEL
+════════════════════════════════════════════ */
+.gi-cap-overview {
+  border-radius: 1.5rem;
+  padding: 1.25rem;
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.06);
+  margin-bottom: 1.5rem;
+}
+.dark .gi-cap-overview { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
+.gi-cap-bars { margin-top: 1rem; }
+.gi-cap-bar-row { margin-bottom: 0.75rem; }
+.gi-cap-bar-label { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.gi-cap-bar-track {
+  height: 5px; border-radius: 100px;
+  background: rgba(0,0,0,0.08); overflow: hidden;
+}
+.dark .gi-cap-bar-track { background: rgba(255,255,255,0.08); }
+.gi-cap-bar-fill { height: 100%; border-radius: 100px; transition: width 0.9s cubic-bezier(0.16,1,0.3,1); }
+.gi-sal-player-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.65rem 0; border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.dark .gi-sal-player-row { border-color: rgba(255,255,255,0.04); }
+
+/* ════════════════════════════════════════════
+   NEWS CARDS
+════════════════════════════════════════════ */
+.gi-news-breaking {
+  padding: 1rem; border-radius: 1.5rem;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  margin-bottom: 0.75rem;
+  display: flex; gap: 0.75rem; align-items: flex-start;
+  cursor: pointer; transition: all 0.2s;
+}
+.gi-news-breaking:hover { border-color: rgba(245,158,11,0.4); }
+.gi-news-card {
+  padding: 0.875rem; border-radius: 1.5rem;
+  border: 1px solid rgba(0,0,0,0.06);
+  margin-bottom: 0.65rem;
+  display: flex; gap: 0.75rem; align-items: flex-start;
+  cursor: pointer; transition: all 0.2s;
+}
+.dark .gi-news-card { border-color: rgba(255,255,255,0.06); }
+.gi-news-card:hover { border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.03); }
+.gi-news-img { width: 60px; height: 60px; border-radius: 1rem; object-fit: cover; flex-shrink: 0; background: rgba(0,0,0,0.06); }
+.gi-news-headline { font-size: 12px; font-weight: 800; color: #111; line-height: 1.4; }
+.dark .gi-news-headline { color: #f0f0f0; }
+.gi-news-meta { font-size: 8.5px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(0,0,0,0.3); margin-bottom: 0.3rem; }
+.dark .gi-news-meta { color: rgba(255,255,255,0.3); }
+
+/* ════════════════════════════════════════════
+   FA TARGETS
+════════════════════════════════════════════ */
+.gi-fa-card {
+  padding: 1rem; border-radius: 1.5rem;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: rgba(0,0,0,0.02);
+  margin-bottom: 0.65rem; transition: all 0.2s;
+}
+.dark .gi-fa-card { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.06); }
+.gi-fa-card:hover { border-color: rgba(16,185,129,0.25); transform: translateX(4px); }
+.gi-fa-tag {
+  font-size: 7.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.12em; padding: 2px 8px; border-radius: 100px;
+}
+
+/* ════════════════════════════════════════════
+   SKELETON LOADER
+════════════════════════════════════════════ */
+@keyframes gi-shimmer {
+  0% { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+.gi-sk {
+  border-radius: 10px;
+  background: linear-gradient(90deg,rgba(0,0,0,0.04) 25%,rgba(0,0,0,0.08) 50%,rgba(0,0,0,0.04) 75%);
+  background-size: 600px 100%;
+  animation: gi-shimmer 1.6s linear infinite;
+}
+.dark .gi-sk {
+  background: linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.08) 50%,rgba(255,255,255,0.04) 75%);
+  background-size: 600px 100%;
+}
+
+/* ════════════════════════════════════════════
+   POSITION PILL COLORS
+════════════════════════════════════════════ */
+.pos-PG,.pos-G { background:rgba(59,130,246,0.12);color:#2563eb;border:1px solid rgba(59,130,246,0.2); }
+.pos-SG       { background:rgba(139,92,246,0.12);color:#7c3aed;border:1px solid rgba(139,92,246,0.2); }
+.pos-SF,.pos-F { background:rgba(16,185,129,0.12);color:#059669;border:1px solid rgba(16,185,129,0.2); }
+.pos-PF       { background:rgba(245,158,11,0.12);color:#d97706;border:1px solid rgba(245,158,11,0.2); }
+.pos-C        { background:rgba(239,68,68,0.12);color:#dc2626;border:1px solid rgba(239,68,68,0.2); }
+.dark .pos-PG,.dark .pos-G { color:#60a5fa; }
+.dark .pos-SG              { color:#a78bfa; }
+.dark .pos-SF,.dark .pos-F  { color:#34d399; }
+.dark .pos-PF              { color:#fbbf24; }
+.dark .pos-C               { color:#f87171; }
+</style>
+
+<!-- ── SECTION ──────────────────────────────────────── -->
+<section id="nba-hub" class="">
+
+  <!-- Header -->
+  <div class="hub-header">
+    <div>
+
+      <h2 class="hub-title"><span>NBA Offseason Hub</h2>
+    </div>
+    <div class="hub-sync-pill">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping inline-block"></span>
+      <span id="gi-sync-label">Syncing…</span>
+    </div>
+  </div>
+
+  <!-- Scroller -->
+  <div class="hub-scroller-wrap">
+    <div id="hub-scroller" class="no-scrollbar"></div>
+  </div>
+</section>
+
+<!-- ── MODAL ─────────────────────────────────────────── -->
+<div id="gi-overlay" onclick="giOverlayClick(event)">
+  <div id="gi-modal">
+
+    <!-- Hero banner -->
+    <div class="gi-hero" id="gi-hero">
+      <div class="gi-hero-bg" id="gi-hero-bg"></div>
+      <div class="gi-hero-noise"></div>
+      <div class="gi-hero-vignette"></div>
+      <button class="gi-hero-close" onclick="giClose()">✕</button>
+      <img id="gi-hero-logo" class="gi-hero-logo" src="" alt="">
+      <div class="gi-hero-content">
+        <p id="gi-hero-label" class="text-white/60 text-[9px] font-black uppercase tracking-[0.3em] mb-0.5"></p>
+        <p id="gi-hero-rec" class="text-white text-2xl font-black tracking-tight"></p>
+      </div>
+    </div>
+
+    <!-- Identity -->
+    <div class="gi-identity">
+      <div class="flex items-end justify-between gap-4">
+        <div class="min-w-0">
+          <p class="gi-team-city" id="gi-city"></p>
+          <h2 class="gi-team-name" id="gi-name"></h2>
+          <p id="gi-standing" class="text-[9px] font-bold uppercase tracking-widest text-black/30 dark:text-white/30 mt-1"></p>
+        </div>
+      </div>
+
+      <!-- Quick stat pills -->
+      <div class="gi-stats-row">
+        <div class="gi-stat-pill"><span class="gi-stat-label">W–L</span><span class="gi-stat-val" id="gi-wl">--</span></div>
+        <div class="gi-stat-pill"><span class="gi-stat-label">PPG</span><span class="gi-stat-val" id="gi-ppg">--</span></div>
+        <div class="gi-stat-pill"><span class="gi-stat-label">OPP</span><span class="gi-stat-val" id="gi-opp">--</span></div>
+        <div class="gi-stat-pill"><span class="gi-stat-label">Conf</span><span class="gi-stat-val" id="gi-conf">--</span></div>
+        <div class="gi-stat-pill"><span class="gi-stat-label">FA Open</span><span class="gi-stat-val text-emerald-600" style="font-size:10px">Jun 30</span></div>
+      </div>
+    </div>
+
+    <!-- Alert -->
+    <div class="gi-alert" id="gi-alert">
+      <span style="font-size:1rem;flex-shrink:0;margin-top:1px">⚡</span>
+      <p class="gi-alert-text" id="gi-alert-text"></p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="gi-tabs" id="gi-tabs">
+      <div class="gi-tab on"  onclick="giTab(this,'depth')">Depth Chart</div>
+      <div class="gi-tab"     onclick="giTab(this,'roster')">Full Roster</div>
+      <div class="gi-tab"     onclick="giTab(this,'salary')">Salary</div>
+      <div class="gi-tab"     onclick="giTab(this,'news')">News</div>
+      <div class="gi-tab"     onclick="giTab(this,'fa')">FA Targets</div>
+    </div>
+
+    <!-- Panels -->
+    <div id="gi-panel-depth"  class="gi-panel on"></div>
+    <div id="gi-panel-roster" class="gi-panel"></div>
+    <div id="gi-panel-salary" class="gi-panel"></div>
+    <div id="gi-panel-news"   class="gi-panel"></div>
+    <div id="gi-panel-fa"     class="gi-panel"></div>
+
+    <div class="h-10"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   GREENLIGHT NBA INTELLIGENCE ENGINE v2.0
+   Self-updating · ESPN live APIs · June 29, 2026
+============================================================ */
+const GI_PICKS_STRUCTURED = {
+  NYK: {
+    incoming: [],
+    outgoing: [
+      { year: 2027, to: 'BKN', protection: 'Unprotected' },
+      { year: 2029, to: 'BKN', protection: 'Unprotected' },
+      { year: 2031, to: 'BKN', protection: 'Unprotected' },
+    ],
+    swaps: [
+      { year: 2030, with: 'BKN' },
+      { year: 2032, with: 'BKN' },
+      { year: 2033, with: 'BKN' },
+    ],
+    notes: 'Max tradable: 1 · Can trade: 2033'
+  },
+  OKC: {
+    incoming: [
+      { year: 2028, from: 'DAL', protection: 'Swap' },
+      { year: 2029, from: 'DEN', protection: 'Top-5 Protected' },
+    ],
+    outgoing: [],
+    swaps: [],
+    notes: '10 incoming firsts total · 7 max tradable · 12 second-round picks'
+  },
+  MIA: {
+    incoming: [
+      { year: 2028, from: 'MIL', protection: 'Unprotected' },
+      { year: 2029, from: 'MIL', protection: 'Unprotected' },
+      { year: 2030, from: 'MIL', protection: 'Unprotected' },
+      { year: 2031, from: 'MIL', protection: 'Unprotected' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'CHA', protection: 'Top-14 Protected' },
+      { year: 2028, to: 'CHA', protection: 'Unprotected (if 2027 not conveyed)' },
+    ],
+    swaps: [
+      { year: 2029, with: 'own' },
+      { year: 2030, with: 'own' },
+      { year: 2031, with: 'own' },
+      { year: 2032, with: 'own' },
+      { year: 2033, with: 'own' },
+    ],
+    notes: 'Max tradable: 2 · Giannis trade haul -- 4 MIL firsts incoming'
+  },
+  SA: {
+    incoming: [
+      { year: 2027, from: 'ATL', protection: 'Unprotected' },
+      { year: 2028, from: 'BOS', protection: 'Swap' },
+      { year: 2030, from: 'DAL', protection: 'Swap' },
+      { year: 2030, from: 'MIN', protection: 'Swap' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'OKC', protection: 'Top-17 Protected (likely conveys)' },
+    ],
+    swaps: [],
+    notes: '7 incoming firsts · 4 max tradable · 14 second-round picks'
+  },
+  BOS: {
+    incoming: [],
+    outgoing: [
+      { year: 2029, to: 'POR', protection: 'Unprotected' },
+      { year: 2029, to: 'WAS', protection: 'Unprotected' },
+    ],
+    swaps: [
+      { year: 2028, with: 'SA' },
+    ],
+    notes: 'Max tradable: 3 · Can trade: 2027/2031/2033 · 2032 frozen (2nd apron)'
+  },
+  MIN: {
+    incoming: [
+      { year: 2033, from: 'CHA', protection: 'Unprotected' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'MEM', protection: 'Unprotected' },
+      { year: 2027, to: 'UTA', protection: 'Unprotected' },
+      { year: 2029, to: 'CHA', protection: 'Top-5 Protected' },
+      { year: 2029, to: 'UTA', protection: 'Top-5 Protected' },
+      { year: 2031, to: 'SAC', protection: 'Unprotected' },
+    ],
+    swaps: [
+      { year: 2030, with: 'SA' },
+    ],
+    notes: 'Max tradable: 1 · 2032 frozen (2nd apron)'
+  },
+  LAL: {
+    incoming: [
+      { year: 2029, from: 'DAL', protection: 'Unprotected' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'MEM', protection: 'Top-4 Protected' },
+    ],
+    swaps: [
+      { year: 2028, with: 'own' },
+      { year: 2030, with: 'own' },
+      { year: 2031, with: 'own' },
+      { year: 2032, with: 'own' },
+      { year: 2033, with: 'own' },
+    ],
+    notes: 'Max tradable: 2 · Can trade: 2031/2033'
+  },
+  DEN: {
+    incoming: [],
+    outgoing: [
+      { year: 2027, to: 'OKC', protection: 'Top-5 Protected' },
+      { year: 2029, to: 'OKC', protection: 'Top-5 Protected' },
+      { year: 2032, to: 'BKN', protection: 'Unprotected' },
+    ],
+    swaps: [],
+    notes: 'Max tradable: NONE · Swap only: 2031/2033 · Heavily mortgaged'
+  },
+  POR: {
+    incoming: [
+      { year: 2028, from: 'BOS', protection: 'Unprotected' },
+      { year: 2028, from: 'ORL', protection: 'Unprotected' },
+      { year: 2029, from: 'BOS', protection: 'Unprotected' },
+      { year: 2029, from: 'own', protection: 'Most/Least Fav (BOS/MIL)' },
+      { year: 2030, from: 'ORL', protection: 'Unprotected' },
+    ],
+    outgoing: [],
+    swaps: [],
+    notes: '8 incoming firsts · 5 max tradable · Controls BKN 2028-2030'
+  },
+  CLE: {
+    incoming: [],
+    outgoing: [
+      { year: 2027, to: 'MEM', protection: 'Unprotected (via PHX/UTA)' },
+      { year: 2028, to: 'ATL', protection: 'Least Fav (own/UTA)' },
+      { year: 2029, to: 'UTA', protection: 'Unprotected' },
+      { year: 2029, to: 'CHA', protection: 'Unprotected' },
+    ],
+    swaps: [],
+    notes: 'Max tradable: 1 · 2033 frozen (2nd apron)'
+  },
+  GS: {
+    incoming: [
+      { year: 2030, from: 'DAL', protection: 'Top-20 Protected' },
+    ],
+    outgoing: [
+      { year: 2030, to: 'DAL', protection: 'If outside top 20' },
+    ],
+    swaps: [],
+    notes: '7 incoming firsts · Max tradable: 3 (2028/2030 if 1-20/2032)'
+  },
+  UTA: {
+    incoming: [
+      { year: 2027, to: 'own', protection: '2nd Fav (own/CLE/MIN)' },
+      { year: 2029, to: 'own', protection: '2 Most Fav (own/CLE/MIN)' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'MEM', protection: 'Most Fav' },
+    ],
+    swaps: [
+      { year: 2028, with: 'CLE' },
+    ],
+    notes: '8 incoming firsts · 5 max tradable'
+  },
+  MEM: {
+    incoming: [
+      { year: 2027, to: 'own', protection: 'LAL Top-4 Protected' },
+      { year: 2027, to: 'own', protection: 'UTA Most Fav' },
+      { year: 2029, to: 'own', protection: 'ORL Swap' },
+      { year: 2030, to: 'own', protection: 'ORL Unprotected' },
+      { year: 2031, to: 'own', protection: 'PHX Unprotected' },
+    ],
+    outgoing: [],
+    swaps: [],
+    notes: '11 incoming firsts · 7 max tradable'
+  },
+  MIL: {
+    incoming: [],
+    outgoing: [
+      { year: 2027, to: 'ATL', protection: 'Unprotected' },
+      { year: 2027, to: 'NOP', protection: 'Unprotected' },
+      { year: 2028, to: 'POR', protection: 'Unprotected' },
+      { year: 2029, to: 'POR', protection: 'Unprotected' },
+      { year: 2030, to: 'POR', protection: 'Unprotected' },
+    ],
+    outgoingNote: 'ERA OVER -- Sent future for Giannis deal',
+    swaps: [],
+    notes: 'Max tradable: 2 · Can trade own starting 2031'
+  },
+  ATL: {
+    incoming: [
+      { year: 2027, to: 'own', protection: 'Unprotected (SA)' },
+      { year: 2027, to: 'own', protection: 'MIL/NOP Least Fav' },
+      { year: 2028, to: 'own', protection: 'CLE/UTA Least Fav' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'SA', protection: 'Unprotected' },
+    ],
+    swaps: [],
+    notes: '7 incoming firsts · 4 max tradable · Can trade own starting 2029'
+  },
+  DAL: {
+    incoming: [
+      { year: 2029, from: 'LAL', protection: 'Unprotected' },
+      { year: 2030, from: 'GS', protection: 'Top-20 Protected' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'CHA', protection: 'Top-2 Protected' },
+      { year: 2028, to: 'OKC', protection: 'Swap' },
+      { year: 2029, to: 'HOU', protection: 'Unprotected' },
+      { year: 2029, to: 'BKN', protection: 'Unprotected' },
+      { year: 2030, to: 'SA', protection: 'Swap' },
+    ],
+    swaps: [],
+    notes: 'Max tradable: 0 until 2031 · Heavily mortgaged post-rebuild'
+  },
+  PHX: {
+    incoming: [],
+    outgoing: [
+      { year: 2027, to: 'HOU', protection: 'Unprotected' },
+      { year: 2028, to: 'BKN', protection: 'Unprotected' },
+      { year: 2028, to: 'PHI', protection: 'Unprotected' },
+      { year: 2028, to: 'WAS', protection: 'Unprotected' },
+      { year: 2029, to: 'HOU', protection: 'Unprotected' },
+      { year: 2029, to: 'BKN', protection: 'Unprotected' },
+      { year: 2030, to: 'WAS', protection: 'Swap' },
+      { year: 2031, to: 'MEM', protection: 'Unprotected' },
+    ],
+    swaps: [],
+    notes: 'Max tradable: 2 · 2032 frozen · Can trade: 2033 · Heavily mortgaged'
+  },
+  LAC: {
+    incoming: [
+      { year: 2029, from: 'IND', protection: 'Unprotected' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'PHI', protection: 'Least Fav (own/DEN/OKC)' },
+      { year: 2028, to: 'PHI', protection: 'Unprotected' },
+      { year: 2029, to: 'PHI', protection: 'Swap (if 4-30)' },
+    ],
+    swaps: [],
+    notes: 'Max tradable: 3 · Can trade: 2030-2033 (2 firsts)'
+  },
+  SAC: {
+    incoming: [
+      { year: 2031, from: 'MIN', protection: 'Unprotected' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'OKC', protection: 'Top-17 Protected (via SA)' },
+    ],
+    swaps: [],
+    notes: '9 incoming firsts · 6 max tradable'
+  },
+  PHI: {
+    incoming: [
+      { year: 2028, from: 'LAC', protection: 'Unprotected' },
+      { year: 2029, from: 'LAC', protection: 'Swap (if 4-30)' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'own', protection: 'Least Fav (own/DEN/OKC via LAC)' },
+      { year: 2028, to: 'BKN', protection: 'Top-8 Protected' },
+    ],
+    swaps: [],
+    notes: 'Max tradable: 4 · Can trade: 2027/2031/2033'
+  },
+  CHI: {
+    incoming: [],
+    outgoing: [],
+    swaps: [],
+    notes: '7 incoming firsts · 4 max tradable · All 7 own firsts in hand · 12 second-round picks · Clean books'
+  },
+  BKN: {
+    incoming: [
+      { year: 2027, to: 'own', protection: 'NYK Unprotected' },
+      { year: 2027, to: 'own', protection: 'Most Fav (PHI/NYK/PHX)' },
+      { year: 2028, to: 'own', protection: 'Most Fav (PHI/NYK/PHX)' },
+      { year: 2028, to: 'own', protection: 'NYK Swap' },
+      { year: 2028, to: 'own', protection: 'PHI Unprotected (Top-8 Protected)' },
+      { year: 2029, to: 'own', protection: 'NYK Unprotected' },
+      { year: 2030, to: 'own', protection: 'own' },
+      { year: 2031, to: 'own', protection: 'NYK Unprotected' },
+      { year: 2032, to: 'own', protection: 'DEN Unprotected' },
+    ],
+    outgoing: [],
+    swaps: [],
+    notes: '13 incoming firsts · 9 max tradable · 19 second-round picks · Richest war chest in the league'
+  },
+  HOU: {
+    incoming: [
+      { year: 2027, to: 'own', protection: 'PHX Unprotected' },
+      { year: 2027, to: 'own', protection: 'BKN Swap' },
+      { year: 2028, to: 'own', protection: '2 Most Fav (own/DAL/PHX)' },
+      { year: 2029, to: 'own', protection: '2 Most Fav (own/DAL/PHX)' },
+      { year: 2029, to: 'own', protection: 'DAL Unprotected' },
+    ],
+    outgoing: [],
+    swaps: [],
+    notes: '9 incoming firsts · 6 max tradable'
+  },
+  TOR: {
+    incoming: [],
+    outgoing: [],
+    swaps: [],
+    notes: '7 incoming firsts · 4 max tradable · Own all 7 of their own firsts · Clean books'
+  },
+  CHA: {
+    incoming: [
+      { year: 2027, to: 'own', protection: 'DAL Top-2 Protected' },
+      { year: 2027, to: 'own', protection: 'MIA Top-14 Protected' },
+      { year: 2028, to: 'own', protection: 'MIA Unprotected (if 2027 not conveyed)' },
+      { year: 2033, to: 'own', protection: 'MIN Unprotected' },
+    ],
+    outgoing: [
+      { year: 2029, to: 'CLE', protection: 'Least Fav (own/MIN/UTA)' },
+    ],
+    swaps: [],
+    notes: '10 incoming firsts · 7 max tradable'
+  },
+  IND: {
+    incoming: [],
+    outgoing: [
+      { year: 2026, to: 'LAC', protection: 'Conveyed already' },
+    ],
+    swaps: [],
+    notes: '6 incoming firsts · 3 max tradable · Can trade: 2027/2031/2033'
+  },
+  ORL: {
+    incoming: [],
+    outgoing: [
+      { year: 2028, to: 'POR', protection: 'Unprotected' },
+      { year: 2029, to: 'MEM', protection: 'Swap' },
+      { year: 2030, to: 'MEM', protection: 'Unprotected' },
+    ],
+    swaps: [],
+    notes: 'Max tradable: 1 · Can trade: 2032/2033'
+  },
+  DET: {
+    incoming: [],
+    outgoing: [],
+    swaps: [],
+    notes: '7 incoming firsts · 4 max tradable · All own firsts available · 15 second-round picks · Clean books'
+  },
+  NOP: {
+    incoming: [
+      { year: 2027, to: 'own', protection: 'MIL Unprotected (if outside top 5)' },
+    ],
+    outgoing: [
+      { year: 2027, to: 'ATL', protection: 'via trade' },
+    ],
+    swaps: [],
+    notes: 'Max tradable: 4 · Own all 7 of their own firsts'
+  },
+  WAS: {
+    incoming: [
+      { year: 2028, to: 'own', protection: '2nd Most Fav (BOS/MIL/POR)' },
+      { year: 2028, to: 'own', protection: 'PHX Unprotected' },
+      { year: 2028, to: 'own', protection: 'Swap (own/BKN/PHI/PHX least fav)' },
+      { year: 2030, to: 'own', protection: 'PHX Swap' },
+    ],
+    outgoing: [],
+    swaps: [],
+    notes: '8 incoming firsts · 5 max tradable'
+  },
+};
+
+// ── ESPN abbr → API slug
+const GI_SLUG = {
+  ATL:'atl',BOS:'bos',BKN:'bkn',CHA:'cha',CHI:'chi',CLE:'cle',
+  DAL:'dal',DEN:'den',DET:'det',GS:'gs', HOU:'hou',IND:'ind',
+  LAC:'lac',LAL:'lal',MEM:'mem',MIA:'mia',MIL:'mil',MIN:'min',
+  NOP:'no', NYK:'ny', OKC:'okc',ORL:'orl',PHI:'phi',PHX:'phx',
+  POR:'por',SAC:'sac',SA:'sa',  TOR:'tor',UTA:'uta',WAS:'was'
+};
+
+// ── All 30 teams
+const GI_TEAMS = [
+  {a:'NYK',city:'New York',  name:'Knicks',        champ:true},
+  {a:'OKC',city:'Oklahoma City',name:'Thunder'},
+  {a:'MIA',city:'Miami',     name:'Heat'},
+  {a:'SA', city:'San Antonio',name:'Spurs'},
+  {a:'BOS',city:'Boston',    name:'Celtics'},
+  {a:'MIN',city:'Minnesota', name:'Timberwolves'},
+  {a:'LAL',city:'L.A.',      name:'Lakers'},
+  {a:'DEN',city:'Denver',    name:'Nuggets'},
+  {a:'POR',city:'Portland',  name:'Trail Blazers'},
+  {a:'CLE',city:'Cleveland', name:'Cavaliers'},
+  {a:'GS', city:'Golden State',name:'Warriors'},
+  {a:'UTA',city:'Utah',      name:'Jazz'},
+  {a:'MEM',city:'Memphis',   name:'Grizzlies'},
+  {a:'MIL',city:'Milwaukee', name:'Bucks'},
+  {a:'ATL',city:'Atlanta',   name:'Hawks'},
+  {a:'DAL',city:'Dallas',    name:'Mavericks'},
+  {a:'PHX',city:'Phoenix',   name:'Suns'},
+  {a:'LAC',city:'L.A.',      name:'Clippers'},
+  {a:'SAC',city:'Sacramento',name:'Kings'},
+  {a:'PHI',city:'Philadelphia',name:'76ers'},
+  {a:'CHI',city:'Chicago',   name:'Bulls'},
+  {a:'BKN',city:'Brooklyn',  name:'Nets'},
+  {a:'HOU',city:'Houston',   name:'Rockets'},
+  {a:'TOR',city:'Toronto',   name:'Raptors'},
+  {a:'CHA',city:'Charlotte', name:'Hornets'},
+  {a:'IND',city:'Indiana',   name:'Pacers'},
+  {a:'ORL',city:'Orlando',   name:'Magic'},
+  {a:'DET',city:'Detroit',   name:'Pistons'},
+  {a:'NOP',city:'New Orleans',name:'Pelicans'},
+  {a:'WAS',city:'Washington',name:'Wizards'},
+];
+
+// ── Team colors + offseason intel
+const GI_INTEL = {
+  NYK:{p:'#006BB6',s:'#F58426',alert:'🏆 2026 NBA CHAMPIONS -- First title since 1973! Brunson + KAT + Anunoby led the run. Beat Spurs 4-1.',fa:[{n:'Mitchell Robinson',pos:'C',tag:'Priority Re-sign',fit:'Longest-tenured Knick. Championship chemistry. Must keep for the repeat.'},{n:'Jose Alvarado',pos:'PG',tag:'Returning',fit:'Already agreed to return. Had +24.5 net rating in playoffs.'},{n:'Landry Shamet',pos:'SG',tag:'Pending',fit:'Three-point specialist. Apron constraints could push him out.'}],picks:'Outgoing: BKN owns 2027/2029/2031 unprotected · Can trade: 2033 · Swap rights: 2030/2032/2033 · Max tradable: 1'},
+  OKC:{p:'#007AC1',s:'#EF3B24',alert:'Lu Dort $17.7M option picked up. Kenrich Williams declined. Isaiah Joe traded to DET for 2 2nds. Massive payroll trimming.',fa:[{n:'Isaiah Hartenstein',pos:'C',tag:'RFA Decision',fit:'Key backup center. OKC has right to match any offer.'},{n:'Chet Holmgren',pos:'C',tag:'Cornerstone',fit:'On max deal. Franchise pillar alongside SGA.'},{n:'Shai Gilgeous-Alexander',pos:'PG',tag:'Franchise Pillar',fit:'Max extension locked in. Best player on the planet right now.'}],picks:'Incoming 1sts: 10 · Max tradable: 7 · DAL swap 2028 · DEN top-5 protected 2029 · 2nds: 12'},
+  MIA:{p:'#98002E',s:'#F9A01B',alert:'BLOCKBUSTER: Giannis + Portis for Herro, Kel\'el Ware, Jaquez, Jakucionis + 4 first-round picks. Andrew Wiggins $64M/3yr extended.',fa:[{n:'Norman Powell',pos:'SG',tag:'Top Priority',fit:'Heat desperately need a shooter around Giannis + Bam. Ideal cultural fit.'},{n:'Andrew Wiggins',pos:'SF',tag:'Extended',fit:'$64M/3yr agreed. Spacing and defense around Giannis.'},{n:'Kyle Anderson',pos:'SF',tag:'Depth Target',fit:'Versatile defender who thrives in Heat system.'}],picks:'Outgoing: CHA 2027 top-14 protected (unprotected 2028 if not) · Can trade: 2031/2033 · Swap rights: 2029-2033 · Max tradable: 2'},
+  SA: {p:'#C4CED4',s:'#000000',alert:'Wembanyama Year 3. Julian Champagnie re-signed 3yr/$45M. Lost WCF to OKC in Game 7. Building around the generational talent.',fa:[{n:'Victor Wembanyama',pos:'C',tag:'Franchise Pillar',fit:'Best player on the planet in 3 years. The entire org is built around him.'},{n:'Julian Champagnie',pos:'SF',tag:'Re-signed',fit:'3yr/$45M locked in. Key 3-and-D piece around Wemby.'},{n:'Stephon Castle',pos:'PG',tag:'Development',fit:'Year 2 -- needs to take a leap as the starting PG.'}],picks:'Incoming 1sts: 7 · ATL unprotected 2027 · BOS swap 2028 · DAL/MIN swap 2030 · SAC swap 2030 · 2nds: 14 · Max tradable: 4'},
+  BOS:{p:'#007A33',s:'#FFFFFF',alert:'Jaylen Brown trade talks with 7 teams (POR, TOR, DEN, BKN, CHA, ATL, LAC).',fa:[{n:'Jaylen Brown',pos:'SG',tag:'Trade Candidate',fit:'7 teams interested. Keeping him is priority #1 for Celtics\' repeat window.'},{n:'Sam Hauser',pos:'SF',tag:'Re-sign',fit:'Elite off-ball shooter. Essential for Tatum\'s gravity to work.'}],picks:'Outgoing: SA swap 2028 · POR/WAS unprotected 2029 · 2032 frozen (2nd apron) · Can trade: 2027/2031/2033 · Max tradable: 3'},
+  MIN:{p:'#0C2340',s:'#236192',alert:'ACQUIRED LaMelo Ball + Josh Green from Charlotte for Naz Reid + 2033 unprotected 1st + pick swaps. Randle traded to BKN. Dosunmu re-signed 9-figure deal.',fa:[{n:'LaMelo Ball',pos:'PG',tag:'New Acquisition',fit:'Backcourt nightmare with Anthony Edwards. New era starts now.'},{n:'Ayo Dosunmu',pos:'SG',tag:'Re-signed',fit:'9-figure deal. 14.4 PPG in 24 games with MIN. Championship piece.'},{n:'Rudy Gobert',pos:'C',tag:'Frontcourt Hole',fit:'Two big men gone in same deal. Gobert\'s role with LaMelo unclear.'}],picks:'Max tradable: 1 (2033) · Outgoing: MEM/UTA unprotected 2027 · CHA/UTA top-5 protected 2029 · SAC unprotected 2031 · 2032 frozen (2nd apron) · SA swap 2030'},
+  LAL:{p:'#552583',s:'#FDB927',alert:'Austin Reaves re-signed 5yr/$112M. Deandre Ayton opted in $8.1M. LeBron future unclear -- GS Warriors also pursuing him.',fa:[{n:'Austin Reaves',pos:'SG',tag:'Re-signed',fit:'5yr/$112M locked. Luka Doncic\'s perfect co-pilot and closer.'},{n:'LeBron James',pos:'SF',tag:'Decision Pending',fit:'Warriors making massive push. This could be his last major decision.'},{n:'D\'Angelo Russell',pos:'PG',tag:'Depth Question',fit:'Backup PG role still unclear with Luka at the helm.'}],picks:'Outgoing: MEM top-4 protected 2027 · DAL unprotected 2029 · Can trade: 2031/2033 · Swap rights: 2028/2030/2031/2032/2033 · Max tradable: 2'},
+  DEN:{p:'#0E2240',s:'#FEC524',alert:'Jokic extension delayed again -- committed to staying long-term. Needs massive roster overhaul after first-round exit.',fa:[{n:'Nikola Jokic',pos:'C',tag:'Staying',fit:'Reiterated desire to stay. Extension talks postponed but no concern.'},{n:'Cam Johnson',pos:'PF',tag:'Available',fit:'Reported available via trade. Lakers and others calling.'},{n:'Kentavious Caldwell-Pope',pos:'SF',tag:'Free Agent',fit:'Championship DNA. Teams lining up.'}],picks:'Max tradable: NONE · Outgoing: OKC top-5 protected 2027 · OKC top-5 protected 2029 · BKN unprotected 2032 · Swap only: 2031/2033'},
+  POR:{p:'#E03A3E',s:'#000000',alert:'BLOCKBUSTER: Acquired Ja Morant for Jerami Grant + Kris Murray! Envisioning Lillard + Morant + Avdija starting lineup. Franchise-altering move.',fa:[{n:'Ja Morant',pos:'PG',tag:'New Star',fit:'Pairing with Lillard is unconventional -- electric backcourt if it clicks.'},{n:'Deni Avdija',pos:'SF',tag:'Cornerstone',fit:'Not available in any trade. The connective tissue of the new lineup.'},{n:'Donovan Clingan',pos:'C',tag:'Key Piece',fit:'Year 2 center. Will anchor the frontcourt for the new-look POR.'}],picks:'Incoming 1sts: 8 · Max tradable: 5 · Own BKN 2028-2030 · ORL unprotected 2028 · BOS/MIL most+least fav 2029'},
+  CLE:{p:'#860038',s:'#FDBB30',alert:'James Harden declined $35M option -- re-signing on new deal. Cavaliers navigating apron constraints around Donovan Mitchell.',fa:[{n:'James Harden',pos:'PG',tag:'Re-signing',fit:'Declined option to restructure. Still wants Cleveland. New deal coming.'},{n:'Donovan Mitchell',pos:'SG',tag:'Cornerstone',fit:'Window is open right now. Surrounding cast must be upgraded.'},{n:'Dean Wade',pos:'PF',tag:'Role Player',fit:'3-and-D piece. Lakers also interested. Keep or lose this offseason.'}],picks:'Max tradable: 1 · Outgoing: MEM/PHX/UTA 2027 · ATL/UTA least fav 2028 · UTA/CHA 2029 · 2033 frozen (2nd apron)'},
+  GS: {p:'#1D428A',s:'#FFC72C',alert:'MASSIVE: Warriors pursuing BOTH LeBron James AND Anthony Davis to team with Curry + Green. Draymond declined option, re-signing.',fa:[{n:'LeBron James',pos:'SF',tag:'Primary Target',fit:'Actively pursuing. Would form one of the most insane rosters ever assembled.'},{n:'Anthony Davis',pos:'C',tag:'Primary Target',fit:'Pursuing alongside LeBron. Curry + Green + AD + LeBron would be all-time.'},{n:'Draymond Green',pos:'PF',tag:'Returning',fit:'Declined option to re-sign -- staying a Warrior forever.'}],picks:'Incoming 1sts: 7 · Max tradable: 3 (2028/2030 if 1-20/2032) · Outgoing: DAL 2030 if outside top 20'},
+  UTA:{p:'#002B5C',s:'#F9A01B',alert:'Jusuf Nurkic re-signed 2yr/$22M. Darryn Peterson (No. 2 pick) arrives. Walker Kessler restricted FA. Exciting young core forming.',fa:[{n:'Walker Kessler',pos:'C',tag:'RFA Must-Match',fit:'Restricted FA. Jazz must match to keep the elite rim protector.'},{n:'Darryn Peterson',pos:'SG',tag:'2026 Draft Pick',fit:'No. 2 overall. Safest prospect in the draft. Will start immediately.'},{n:'Lauri Markkanen',pos:'PF',tag:'Cornerstone',fit:'Franchise anchor. The offense runs through him.'}],picks:'Incoming 1sts: 8 · Max tradable: 5 · 2nd fav own/CLE/MIN 2027 · Swap CLE 2028 · 2 most fav own/CLE/MIN 2029 · Owes MEM 2027 most fav'},
+  MEM:{p:'#5D76A9',s:'#12173F',alert:'TRADED Ja Morant to Portland for Jerami Grant + Kris Murray. Acquired Isaiah Stewart from Detroit. Full rebuild around Cameron Boozer (No. 3 pick).',fa:[{n:'Jaren Jackson Jr.',pos:'PF',tag:'Post-Morant Anchor',fit:'Defensive Cornerstone. The new face of the Grizzlies franchise.'},{n:'Cameron Boozer',pos:'C',tag:'2026 Draft Pick',fit:'No. 3 overall. Duke big man is the next era\'s centerpiece.'},{n:'Desmond Bane',pos:'SG',tag:'Re-sign',fit:'Scorer and leader. Needs to step up as primary offensive option.'}],picks:'Incoming 1sts: 11 · Max tradable: 7 · LAL top-4 protected 2027 · ORL swap 2029 · ORL unprotected 2030 · PHX unprotected 2031'},
+   MIL:{p:'#00471B',s:'#EEE1C6',alert:'ERA OVER: Traded Giannis + Portis to Miami for Herro, Kel\'el Ware, Jaquez, Jakucionis + 4 first-round picks. Full rebuild begins.',fa:[{n:'Tyler Herro',pos:'SG',tag:'New Centerpiece',fit:'Came back from MIA in the trade. Expected to be the face going forward.'},{n:'Kel\'el Ware',pos:'C',tag:'New Piece',fit:'Came from MIA. Young center to build around in the new era.'},{n:'Giannis Antetokounmpo',pos:'PF',tag:'Gone',fit:'Two-time MVP era is officially over. Milwaukee starts from scratch.'}],picks:'Outgoing: ATL/NOP unprotected 2027 · POR controls 2028-2030 · Can trade own starting 2031 · Max tradable: 2'},
+ ATL:{p:'#E03A3E',s:'#C1D32F',alert:'Trae Young re-signed. Declined Jonathan Kuminga $24.3M option. Two picks (8 & 23) used. Aaron Wiggins acquired from OKC.',fa:[{n:'Trae Young',pos:'PG',tag:'Re-signed',fit:'The engine returns. Surrounded with better shooting now.'},{n:'Keaton Wagler',pos:'SG',tag:'2026 Draft Pick',fit:'No. 8 overall. Shot creator next to Trae is a frightening offensive combo.'},{n:'Bogdan Bogdanovic',pos:'SG',tag:'Vet Depth',fit:'Shooting depth. Fits perfectly off the bench in ATL system.'}],picks:'Incoming 1sts: 7 · Outgoing: SA unprotected 2027 · MIL/NOP least fav 2027 · CLE/UTA least fav 2028 · Can trade own starting 2029 · Max tradable: 4'},
+ DAL:{p:'#00538C',s:'#002B5E',alert:'Post-Doncic era. Kyrie gone. Two picks in draft (9 & 30). Dallas fully committed to the Luka window and rebuilding around it.',fa:[{n:'Luka Doncic',pos:'PG',tag:'The Franchise',fit:'Everything is built around Luka. Pairing with AD as a Laker now.'},{n:'Darius Acuff Jr.',pos:'PG',tag:'2026 Draft Pick',fit:'No. 9 pick. Future backup PG. High-floor guard for new Dallas era.'},{n:'Spencer Dinwiddie',pos:'SG',tag:'Depth',fit:'Veteran backup guard. Brings winning experience to the young core.'}],picks:'Incoming: LAL unprotected 2029 · GS top-20 protected 2030 · Outgoing: CHA top-2 protected 2027 · OKC swap 2028 · HOU/BKN 2029 · SA swap 2030 · Can trade own starting 2031'},
+ PHX:{p:'#1D1160',s:'#E56020',alert:'Signed Mark Williams 3yr/$38M. Lost No. 16 pick in MEM deal. Devin Booker-led rebuild after the fire sale era.',fa:[{n:'Devin Booker',pos:'SG',tag:'Cornerstone',fit:'Franchise pillar. The entire rebuild is structured around Book.'},{n:'Mark Williams',pos:'C',tag:'Signed',fit:'3yr/$38M. Physical interior anchor for Booker era.'},{n:'Eric Gordon',pos:'SG',tag:'Vet Depth',fit:'Experienced scorer and three-point shooter. Championship pedigree.'}],picks:'Outgoing: HOU unprotected 2027 · BKN/PHI/WAS 2028 · HOU/BKN 2029 · WAS swap 2030 · MEM unprotected 2031 · 2032 frozen · Can trade: 2033 · Max tradable: 2'},
+ LAC:{p:'#C8102E',s:'#1D428A',alert:'Kawhi Leonard to Toronto talks "seriously engaged" per Shams. Jaylen Brown is the top target to replace him. Braden Smith acquired.',fa:[{n:'Kawhi Leonard',pos:'SF',tag:'Trade Talks',fit:'Raptors in serious negotiations. Leonard wants to stay but offer hasn\'t come.'},{n:'Jaylen Brown',pos:'SG',tag:'Top Target',fit:'If Kawhi goes, Brown is priority #1. Multiple teams competing.'},{n:'Paul George',pos:'SF',tag:'Gone',fit:'Departed. LAC pivoting to a younger identity around their picks.'}],picks:'Incoming: IND unprotected 2029 · Outgoing: PHI least fav own/DEN/OKC 2027 · PHI unprotected 2028 · PHI swap 2029 (if 4-30) · Can trade: 2030-2033 (2 firsts) · Max tradable: 3'},
+ SAC:{p:'#5A2D81',s:'#63727A',alert:'Domantas Sabonis potentially available via trade. De\'Aaron Fox era. Need a wing badly. Zach LaVine opted into $49M for 2026-27.',fa:[{n:'Domantas Sabonis',pos:'C',tag:'Trade Candidate',fit:'Teams calling. Kings may pivot to a more athletic frontcourt.'},{n:'Zach LaVine',pos:'SG',tag:'Opted In',fit:'$49M option exercised. Another year to prove he fits alongside Fox.'},{n:'Keaton Wagler',pos:'SG',tag:'2026 Draft Pick',fit:'No. 7 pick. Shooter and creator -- perfect next to De\'Aaron Fox.'}],picks:'Incoming 1sts: 9 · Max tradable: 6 · MIN unprotected 2031 · Note: SA 2027 likely conveys to OKC if outside top 17'},
+ PHI:{p:'#006BB6',s:'#ED174C',alert:'Harden declined $35M option -- re-signing on new deal. Two draft picks (17 via OKC, 22 via HOU). LaBaron Philon arrives.',fa:[{n:'James Harden',pos:'PG',tag:'Re-signing',fit:'Declined option to restructure. Still wants to be in Philly.'},{n:'Joel Embiid',pos:'C',tag:'Health Question',fit:'When healthy, still elite. Availability remains the massive unknown.'},{n:'LaBaron Philon',pos:'PG',tag:'2026 Draft Pick',fit:'No. 22 pick. Electric scorer to develop behind Harden.'}],picks:'Incoming: LAC unprotected 2028 · LAC swap 2029 (if 4-30) · Outgoing: BKN top-8 protected 2028 · Can trade: 2027/2031/2033 · Max tradable: 4'},
+ CHI:{p:'#CE1141',s:'#000000',alert:'Two draft picks used (4 & 15). Received Nic Claxton in Timberwolves deal. Braden Smith sent to Indiana. Building around Caleb Wilson.',fa:[{n:'Caleb Wilson',pos:'SF',tag:'2026 Draft Pick',fit:'No. 4 overall. Athletic wing gives Chicago the defensive versatility they\'ve lacked for years.'},{n:'Nic Claxton',pos:'C',tag:'New Arrival',fit:'Came over from BKN in the Randle deal. Quality starting center.'},{n:'Nikola Vucevic',pos:'C',tag:'Era Ending',fit:'Vucevic era winding down as Claxton takes over the frontcourt.'}],picks:'2027-2033:Incoming 1sts: 7 · Max tradable: 4 · All 7 own firsts in hand · 2nds: 12'},
+ BKN:{p:'#000000',s:'#FFFFFF',alert:'Received Julius Randle + No. 28 pick in MIN deal. Sent Nic Claxton to CHI. Cam Thomas is the franchise anchor. Full rebuild.',fa:[{n:'Cam Thomas',pos:'SG',tag:'Franchise Anchor',fit:'Brooklyn\'s best player by a wide margin. Everything is built around him.'},{n:'Julius Randle',pos:'PF',tag:'New Arrival',fit:'Came in the MIN deal. Veteran presence and scoring on a rebuilding team.'},{n:'Day\'Ron Sharpe',pos:'C',tag:'Re-signed',fit:'2yr/$20M locked in. Energetic big helps protect the paint.'}],picks:'Incoming 1sts: 13 · Max tradable: 9 · Own NYK 2027/2029/2031 unprotected · NYK swap 2028 · DEN unprotected 2032 · Most fav PHI/NYK/PHX 2028 · 2nds: 19'},
+ HOU:{p:'#CE1141',s:'#000000',alert:'Kevin Durant opting in for 2026-27. Sent No. 22 pick to Philly in deal. Jalen Green + Alperen Sengun core. Bruce Thornton acquired from NYK.',fa:[{n:'Kevin Durant',pos:'SF',tag:'Opted In',fit:'Veteran star presence leads the way in a pivotal growth year.'},{n:'Jalen Green',pos:'SG',tag:'Cornerstone',fit:'Year 5. The franchise\'s future hinges on his continued development.'},{n:'Alperen Sengun',pos:'C',tag:'Cornerstone',fit:'Elite post scorer and passer. Emerging as one of the best young bigs.'}],picks:'Incoming 1sts: 9 · Max tradable: 6 · BKN swap 2027 · PHX unprotected 2027 · 2 most fav own/DAL/PHX 2028-2029'},
+ TOR:{p:'#CE1141',s:'#000000',alert:'Scottie Barnes era. Real Kawhi Leonard trade talks with LAC happening. Brandon Ingram interest from Clippers. Rebuilding with young core.',fa:[{n:'Kawhi Leonard',pos:'SF',tag:'Trade Target',fit:'Reportedly expressed willingness to sign extension if traded to Toronto.'},{n:'Scottie Barnes',pos:'PF',tag:'Cornerstone',fit:'The entire rebuild is built around Scottie\'s two-way dominance.'},{n:'RJ Barrett',pos:'SG',tag:'Trade Piece',fit:'Clippers interested in Barrett as part of Kawhi deal.'}],picks:'Incoming 1sts: 7 · Max tradable: 4 · Own 1st next 7 years · 2nds: 5'},
+ CHA:{p:'#1D1160',s:'#00788C',alert:'SENT LaMelo Ball to Minnesota for Naz Reid + 2033 1st + pick swaps. Coby White re-signed $74M/3yr. Miles Bridges traded to PHX for picks.',fa:[{n:'Coby White',pos:'SG',tag:'Re-signed',fit:'$74M/3yr locked in. New offensive engine replacing LaMelo.'},{n:'Naz Reid',pos:'C',tag:'New Arrival',fit:'Came in the LaMelo deal. Big, switchable, shoots threes. Championship DNA.'},{n:'Ryan Kalkbrenner',pos:'C',tag:'Development',fit:'2025 draft pick developing. Young frontcourt core building for the future.'}],picks:'Incoming 1sts: 10 · Max tradable: 7 · DAL top-2 protected 2027 · MIA top-14 protected 2027 (unprotected 2028) · CLE/MIN/UTA least fav 2029'},
+ IND:{p:'#002D62',s:'#FDBB30',alert:'Lost No. 5 pick (Clippers trade). Acquired Braden Smith from Chicago. Tyrese Haliburton Achilles recovery is the focus.',fa:[{n:'Tyrese Haliburton',pos:'PG',tag:'Returning',fit:'Achilles recovery. The entire org is waiting for him to be back at full health.'},{n:'Braden Smith',pos:'PG',tag:'New Arrival',fit:'Acquired from CHI. All-time assists record at Purdue. Ideal backup PG.'},{n:'Myles Turner',pos:'C',tag:'Anchor',fit:'Signed with MIL but returning? IND needs interior presence.'}],picks:'Incoming 1sts: 6 · Max tradable: 3 · Can trade: 2027/2031/2033 · Note: 2026 pick conveyed to LAC'},
+ ORL:{p:'#0077C0',s:'#C4CED4',alert:'Paolo Banchero led core. Need a star guard desperately. Lost No. 18 pick to CHA in deal. Franz Wagner + Paolo building together.',fa:[{n:'Paolo Banchero',pos:'PF',tag:'Cornerstone',fit:'Franchise anchor. Two-way star who needs a dynamic guard partner.'},{n:'Franz Wagner',pos:'SF',tag:'Cornerstone',fit:'Two-way excellence. Banchero + Wagner is a legitimate building block.'},{n:'Markelle Fultz',pos:'PG',tag:'Free Agent',fit:'When healthy, exactly what ORL needs. Health is everything.'}],picks:'Outgoing: POR unprotected 2028 · MEM swap 2029 · MEM unprotected 2030 · Can trade: 2032/2033 · Max tradable: 1'},
+ DET:{p:'#C8102E',s:'#006BB6',alert:'Acquired Isaiah Stewart from Memphis via NYK triangle. Jalen Duren future uncertain. Cade Cunningham building years.',fa:[{n:'Cade Cunningham',pos:'PG',tag:'Franchise Pillar',fit:'The unquestioned leader. Offense and culture run through Cade.'},{n:'Isaiah Stewart',pos:'C',tag:'New Arrival',fit:'Physical interior presence acquired from the MEM deal.'},{n:'Jalen Duren',pos:'C',tag:'Decision',fit:'Leaving Detroit per reports. Big hole if he walks.'}],picks:'Incoming 1sts: 7 · Max tradable: 4 · All own firsts available · 2nds: 15'},
+ NOP:{p:'#0C2340',s:'#C8102E',alert:'Quiet offseason after trading 2026 No. 8 pick to ATL. Zion Williamson health is the entire franchise question mark. Cap space available.',fa:[{n:'Zion Williamson',pos:'PF',tag:'Health = Everything',fit:'When healthy, one of the most unstoppable players alive. But when?'},{n:'Brandon Ingram',pos:'SF',tag:'Trade Candidate',fit:'Toronto and others interested. Could be on the move this offseason.'},{n:'CJ McCollum',pos:'PG',tag:'Leader',fit:'Veteran floor general who keeps NOP competitive.'}],picks:'Incoming: MIL unprotected 2027 (if outside top 5) · Max tradable: 4 · Own 1st next 7 years · 2nds: 5'},
+ WAS:{p:'#002B5C',s:'#E31837',alert:'AJ Dybantsa selected No. 1 overall! New franchise cornerstone era begins. Kyle Kuzma era is over. Full reset around the BYU star.',fa:[{n:'AJ Dybantsa',pos:'SF',tag:'No. 1 Overall Pick',fit:'THE generational talent. No. 1 pick. Washington hasn\'t had a cornerstone since Wall.'},{n:'Alexandre Sarr',pos:'C',tag:'Young Core',fit:'Year 2. Dybantsa + Sarr young frontcourt is the future of this franchise.'},{n:'Jordan Poole',pos:'SG',tag:'Keep or Trade',fit:'Veteran scoring guard. Could be traded to add pieces around Dybantsa.'}],picks:'Incoming 1sts: 8 · Max tradable: 5 · 2nd most fav BOS/MIL/POR 2028 · Swap own/BKN/PHI/PHX least fav 2028 · PHX swap 2030'},
+};
+
+
+// ── Logo helper
+const giLogo = a => `https://a.espncdn.com/i/teamlogos/nba/500/${GI_SLUG[a]||a.toLowerCase()}.png`;
+
+// ── State
+let _giCache = {};
+let _giTeam  = null;
+let _giTabOpen = 'depth';
+
+// ─────────────────────────────────────────────
+//  BUILD CARDS
+// ─────────────────────────────────────────────
+function giBuildCards() {
+  const scroller = document.getElementById('hub-scroller');
+  scroller.innerHTML = '';
+
+  GI_TEAMS.forEach(t => {
+    const intel = GI_INTEL[t.a] || {};
+    const alert = intel.alert || '';
+    const isChamp = t.champ;
+    const isHot   = alert.includes('BLOCKBUSTER') || alert.includes('ACQUIRED') || alert.includes('TRADING') || alert.includes('MASSIVE') || alert.includes('TRADED');
+    const isMove  = !isHot && (alert.includes('trade') || alert.includes('Trade') || alert.includes('signed') || alert.includes('Signed') || alert.includes('signed'));
+
+    const card = document.createElement('div');
+    card.className = `hub-tc${isChamp?' is-champ':''}`;
+    card.id = `gi-card-${t.a}`;
+    card.onclick = () => giOpen(t);
+
+    card.innerHTML = `
+      ${isChamp ? '<span class="hub-tc-crown">🏆</span>' : ''}
+      <img class="hub-tc-logo" src="${giLogo(t.a)}" alt="${t.name}" onerror="this.style.opacity=.3">
+      <p class="hub-tc-name">${t.name}</p>
+      <p class="hub-tc-rec" id="gi-rec-${t.a}">--</p>
+      <div class="flex flex-col gap-1 items-center">
+        ${isChamp  ? `<span class="hub-badge hub-badge-champ">Champs</span>` : ''}
+        ${isHot    ? `<span class="hub-badge hub-badge-hot">🔥 Hot</span>` : ''}
+        ${isMove && !isHot ? `<span class="hub-badge hub-badge-move">Move</span>` : ''}
+      </div>
+    `;
+    scroller.appendChild(card);
+  });
+}
+
+// ─────────────────────────────────────────────
+//  STANDINGS FETCH → fills card records
+// ─────────────────────────────────────────────
+async function giFetchStandings() {
+  try {
+    const r = await fetch('https://site.api.espn.com/apis/v2/sports/basketball/nba/standings?season=2026');
+    const d = await r.json();
+    d.children?.forEach(conf => {
+      conf.standings?.entries?.forEach(e => {
+        const espnAbbr = e.team?.abbreviation?.toUpperCase();
+        // map ESPN abbr to our abbr
+        const ourAbbr = Object.keys(GI_SLUG).find(k => {
+          const slug = GI_SLUG[k];
+          return espnAbbr?.toLowerCase() === slug || espnAbbr === k;
+        });
+        if (!ourAbbr) return;
+        const w = e.stats?.find(s=>s.name==='wins')?.value ?? 0;
+        const l = e.stats?.find(s=>s.name==='losses')?.value ?? 0;
+        const el = document.getElementById(`gi-rec-${ourAbbr}`);
+        if (el) el.textContent = `${w}–${l}`;
+      });
+    });
+    document.getElementById('gi-sync-label').textContent =
+      'Updated ' + new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  } catch(e) {
+    document.getElementById('gi-sync-label').textContent = 'Offseason Mode';
+  }
+}
+
+// ─────────────────────────────────────────────
+//  OPEN MODAL
+// ─────────────────────────────────────────────
+async function giOpen(team) {
+  _giTeam = team;
+  _giTabOpen = 'depth';
+  const intel = GI_INTEL[team.a] || {};
+  const slug  = GI_SLUG[team.a] || team.a.toLowerCase();
+
+  // Reset tabs
+  document.querySelectorAll('.gi-tab').forEach((t,i) => t.classList.toggle('on', i===0));
+  document.querySelectorAll('.gi-panel').forEach((p,i) => p.classList.toggle('on', i===0));
+
+  // Hero
+  document.getElementById('gi-hero-bg').style.background =
+    `linear-gradient(135deg, ${intel.p||'#111'} 0%, ${intel.s||'#333'} 100%)`;
+  document.getElementById('gi-hero-logo').src = giLogo(team.a);
+  document.getElementById('gi-hero-label').textContent = team.champ ? '🏆 2026 NBA Champions' : 'NBA 2025–26';
+  const recText = document.getElementById(`gi-rec-${team.a}`)?.textContent || '--';
+  document.getElementById('gi-hero-rec').textContent = recText;
+
+  // Identity
+  document.getElementById('gi-city').textContent    = team.city;
+  document.getElementById('gi-name').textContent    = team.name;
+  document.getElementById('gi-standing').textContent = team.champ ? '🏆 2026 NBA Champions · Beat Spurs 4–1' : '2025–26 Season';
+  document.getElementById('gi-wl').textContent      = recText;
+
+  // Alert
+  const alertEl = document.getElementById('gi-alert');
+  if (intel.alert) {
+    alertEl.classList.add('visible');
+    document.getElementById('gi-alert-text').textContent = intel.alert;
+  } else {
+    alertEl.classList.remove('visible');
+  }
+
+  // Skeleton all panels
+  ['depth','roster','salary','news','fa'].forEach(p => {
+    document.getElementById(`gi-panel-${p}`).innerHTML = giSkeleton();
+  });
+
+  // Open
+  const overlay = document.getElementById('gi-overlay');
+  const modal   = document.getElementById('gi-modal');
+  overlay.classList.add('gi-open');
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => modal.classList.add('gi-shown'), 10);
+
+  // Fetch
+  const data = await giFetch(team.a);
+  giRenderAll(team, data, intel);
+}
+
+function giClose() {
+  const modal   = document.getElementById('gi-modal');
+  const overlay = document.getElementById('gi-overlay');
+  modal.classList.remove('gi-shown');
+  setTimeout(() => {
+    overlay.classList.remove('gi-open');
+    document.body.style.overflow = '';
+  }, 450);
+}
+
+function giOverlayClick(e) {
+  if (e.target === document.getElementById('gi-overlay')) giClose();
+}
+
+function giTab(el, panel) {
+  _giTabOpen = panel;
+  document.querySelectorAll('.gi-tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.gi-panel').forEach(p => p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById(`gi-panel-${panel}`).classList.add('on');
+}
+
+// ─────────────────────────────────────────────
+//  FETCH TEAM DATA
+// ─────────────────────────────────────────────
+async function giFetch(abbr) {
+  if (_giCache[abbr]) return _giCache[abbr];
+  const slug = GI_SLUG[abbr] || abbr.toLowerCase();
+  const [rosterR, teamR, newsR] = await Promise.allSettled([
+    fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${slug}/roster`),
+    fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${slug}`),
+    fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${slug}/news?limit=8`),
+  ]);
+  const d = {
+    roster: rosterR.status==='fulfilled' ? await rosterR.value.json() : null,
+    team:   teamR.status==='fulfilled'   ? await teamR.value.json()   : null,
+    news:   newsR.status==='fulfilled'   ? await newsR.value.json()   : null,
+  };
+  _giCache[abbr] = d;
+  return d;
+}
+
+// ─────────────────────────────────────────────
+//  RENDER ALL PANELS
+// ─────────────────────────────────────────────
+function giRenderAll(team, data, intel) {
+  giRenderQuickStats(data);
+  giRenderDepth(team, data, intel);
+  giRenderRoster(data);
+  giRenderSalary(data, intel);
+  giRenderNews(data, intel);
+  giRenderFA(intel);
+}
+
+// ── Quick stats
+function giRenderQuickStats(data) {
+  const stats = data?.team?.team?.record?.items?.[0]?.stats || [];
+  const get = (n) => stats.find(s=>s.name===n)?.displayValue;
+  const set = (id, v) => { if(v) document.getElementById(id).textContent = v; };
+  set('gi-ppg', get('avgPoints'));
+  set('gi-opp', get('avgPointsAllowed'));
+  const conf = data?.team?.team?.standingSummary;
+  if (conf) document.getElementById('gi-conf').textContent = conf.replace('in ','').split(' ')[0] || '--';
+}
+
+// ── Position order + display names
+const POS_DEFS = [
+  {key:'PG', label:'Point Guard',      color:'#3b82f6'},
+  {key:'SG', label:'Shooting Guard',   color:'#8b5cf6'},
+  {key:'SF', label:'Small Forward',    color:'#10b981'},
+  {key:'PF', label:'Power Forward',    color:'#f59e0b'},
+  {key:'C',  label:'Center',           color:'#ef4444'},
+];
+
+function giPosKey(raw) {
+  const m = { 
+    G:'PG', PG:'PG', SG:'SG',
+    F:'SF', SF:'SF', PF:'PF',
+    C:'C', FC:'C'
+  };
+  return m[raw] || raw || 'PG';
+}
+
+
+// ── DEPTH CHART
+const FD_SLUGS = {
+  NYK:'new-york-knicks', OKC:'oklahoma-city-thunder', MIA:'miami-heat',
+  SA:'san-antonio-spurs', BOS:'boston-celtics', MIN:'minnesota-timberwolves',
+  LAL:'los-angeles-lakers', DEN:'denver-nuggets', POR:'portland-trail-blazers',
+  CLE:'cleveland-cavaliers', GS:'golden-state-warriors', UTA:'utah-jazz',
+  MEM:'memphis-grizzlies', MIL:'milwaukee-bucks', ATL:'atlanta-hawks',
+  DAL:'dallas-mavericks', PHX:'phoenix-suns', LAC:'los-angeles-clippers',
+  SAC:'sacramento-kings', PHI:'philadelphia-76ers', CHI:'chicago-bulls',
+  BKN:'brooklyn-nets', HOU:'houston-rockets', TOR:'toronto-raptors',
+  CHA:'charlotte-hornets', IND:'indiana-pacers', ORL:'orlando-magic',
+  DET:'detroit-pistons', NOP:'new-orleans-pelicans', WAS:'washington-wizards'
+};
+
+async function giRenderDepth(team, data, intel) {
+  const el = document.getElementById('gi-panel-depth');
+  const slug = FD_SLUGS[team.a];
+
+  try {
+    const res = await fetch(`https://corsproxy.io/?https://fantasydata.com/nba/${slug}-depth-chart`);
+    const html = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const rows = doc.querySelectorAll('table tr');
+
+    if (!rows.length) throw new Error('No data');
+
+    const POS_LABELS = {PG:'Point Guard',SG:'Shooting Guard',SF:'Small Forward',PF:'Power Forward',C:'Center'};
+    let depthHtml = `<p class="text-[9px] font-black uppercase tracking-[0.4em] text-black/25 dark:text-white/25 mb-4">Depth Chart · 2026–27</p>`;
+
+    rows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length < 2) return;
+      const pos = cells[0]?.textContent?.trim();
+      if (!['PG','SG','SF','PF','C'].includes(pos)) return;
+
+      const players = [];
+      for (let i = 1; i < cells.length; i++) {
+        const name = cells[i]?.textContent?.trim();
+        if (name && name.length > 1) players.push(name);
+      }
+      if (!players.length) return;
+
+      depthHtml += `
+        <div class="gi-depth-position-block">
+          <div class="gi-depth-pos-header">
+            <span class="gi-depth-pos-pill pos-${pos}">${POS_LABELS[pos]}</span>
+            <div class="gi-depth-divider"></div>
+          </div>
+          <div class="gi-depth-rows">`;
+
+      players.slice(0,3).forEach((name, i) => {
+        const depth = i===0?'is-starter':i===1?'is-backup':'is-third';
+        const numCls = i===0?'n1':i===1?'n2':'n3';
+        const label = i===0?'Starter':i===1?'2nd':'3rd';
+        const athleteId = data?.roster?.athletes?.find(a =>
+          a.displayName?.toLowerCase().includes(name.split(' ').pop().toLowerCase())
+        )?.id;
+        const img = athleteId
+          ? `https://a.espncdn.com/i/headshots/nba/players/full/${athleteId}.png`
+          : `https://a.espncdn.com/combiner/i?img=/i/headshots/nophoto.png`;
+
+        depthHtml += `
+          <div class="gi-depth-row ${depth}">
+            <div class="gi-depth-num ${numCls}">${i+1}</div>
+            <img class="gi-depth-headshot" src="${img}"
+                 onerror="this.src='https://a.espncdn.com/combiner/i?img=/i/headshots/nophoto.png'" alt="">
+            <div class="gi-depth-info">
+              <p class="gi-depth-pname truncate">${name}</p>
+              <p class="gi-depth-pmeta">${pos} · ${label}</p>
+            </div>
+            ${i===0?`<span class="gi-depth-star">Starter</span>`:''}
+          </div>`;
+      });
+
+      depthHtml += `</div></div>`;
+    });
+
+    if (intel.alert) {
+      depthHtml += `<div class="mt-4 p-4 rounded-2xl border border-amber-500/15 bg-amber-500/5">
+        <p class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 dark:text-amber-400 mb-1.5">⚡ Offseason Intel</p>
+        <p class="text-xs font-medium text-black/60 dark:text-white/50 leading-relaxed">${intel.alert.split('.')[0]}.</p>
+      </div>`;
+    }
+
+    el.innerHTML = depthHtml;
+
+  } catch(e) {
+    el.innerHTML = `
+      <div class="p-4 rounded-2xl border border-amber-500/15 bg-amber-500/5">
+        <p class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 dark:text-amber-400 mb-1.5">⚡ Offseason Intel</p>
+        <p class="text-xs font-medium text-black/60 dark:text-white/50 leading-relaxed">${intel.alert || 'Depth chart updates after rosters lock July 15.'}</p>
+      </div>`;
+  }
+}
+
+function giRenderDepthFallback(team, data, intel) {
+  const el = document.getElementById('gi-panel-depth');
+  el.innerHTML = `
+    <div class="p-4 rounded-2xl border border-amber-500/15 bg-amber-500/5">
+      <p class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 dark:text-amber-400 mb-1.5">⚡ Offseason Intel</p>
+      <p class="text-xs font-medium text-black/60 dark:text-white/50 leading-relaxed">${intel.alert || 'Depth chart updates after rosters lock July 15.'}</p>
+    </div>`;
+}
+
+function giRenderDepthFallback(team, data, intel) {
+  const el = document.getElementById('gi-panel-depth');
+  el.innerHTML = `
+    <div class="p-4 rounded-2xl border border-amber-500/15 bg-amber-500/5 mb-4">
+      <p class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 dark:text-amber-400 mb-1.5">⚡ Offseason Mode</p>
+      <p class="text-xs font-medium text-black/60 dark:text-white/50 leading-relaxed">${intel.alert || 'Depth chart updates when rosters lock July 15.'}</p>
+    </div>
+    <p class="text-[10px] font-black uppercase tracking-widest text-black/20 dark:text-white/20 text-center py-8">Depth chart syncing after free agency...</p>`;
+}
+
+// ── FULL ROSTER TABLE
+function giRenderRoster(data) {
+  const el = document.getElementById('gi-panel-roster');
+  const athletes = data?.roster?.athletes || [];
+
+  if (!athletes.length) {
+    el.innerHTML = `<div class="text-center py-16"><p class="text-[10px] font-black uppercase tracking-widest text-black/20 dark:text-white/20">Roster syncing…</p></div>`;
+    return;
+  }
+
+  // Sort by position order
+  const posOrder = {PG:0,G:0,SG:1,SF:2,F:2,PF:3,C:4};
+  athletes.sort((a,b) => (posOrder[a.position?.abbreviation]??5) - (posOrder[b.position?.abbreviation]??5));
+
+  let html = `<table class="gi-roster-table w-full">
+    <thead><tr>
+      <th class="text-left">#</th>
+      <th class="text-left">Player</th>
+      <th class="text-left">Pos</th>
+      <th class="text-right">Ht</th>
+    </tr></thead><tbody>`;
+
+  athletes.forEach(p => {
+    const pos = p.position?.abbreviation || '--';
+    const ht = p.height?.displayValue || '--';
+    html += `<tr class="gi-roster-row">
+      <td><span class="gi-roster-num">${p.jersey||'--'}</span></td>
+      <td>
+        <div class="flex items-center gap-2.5">
+          <img src="${p.headshot?.href||`https://a.espncdn.com/i/headshots/nba/players/full/${p.id}.png`}"
+               class="w-8 h-8 rounded-full object-cover object-top bg-gray-100 border border-black/5 dark:border-white/5 flex-shrink-0"
+               onerror="this.src='https://a.espncdn.com/combiner/i?img=/i/headshots/nophoto.png'" alt="">
+          <span class="gi-roster-name">${p.displayName||p.fullName||'--'}</span>
+        </div>
+      </td>
+      <td><span class="gi-roster-pos-badge pos-${pos}">${pos}</span></td>
+      <td class="text-right"><span class="gi-roster-stat">${ht}</span></td>
+    </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  el.innerHTML = html;
+}
+
+// ── SALARY PANEL
+function renderPicksByYear(intel, teamAbbr) {
+  const picks = GI_PICKS_STRUCTURED[teamAbbr];
+  if (!picks) return `<p class="text-xs opacity-40 dark:text-white">Pick data coming soon.</p>`;
+
+  const years = [2027, 2028, 2029, 2030, 2031, 2032, 2033];
+  const teamColor = GI_INTEL[teamAbbr]?.p || '#10b981';
+
+  let html = `
+    <div class="mt-6">
+      <p class="text-[9px] font-black uppercase tracking-[0.35em] text-black/25 dark:text-white/25 mb-4">Draft Capital · 2027–2033</p>
+  `;
+
+  years.forEach(year => {
+    const incoming = picks.incoming.filter(p => p.year === year);
+    const outgoing = picks.outgoing.filter(p => p.year === year);
+    const swaps    = picks.swaps.filter(p => p.year === year);
+
+    if (!incoming.length && !outgoing.length && !swaps.length) return;
+
+    html += `
+      <div class="mb-4">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="text-[10px] font-black" style="color:${teamColor}">${year}</span>
+          <div class="flex-1 h-px bg-black/5 dark:bg-white/5"></div>
+        </div>
+        <div class="space-y-1.5 pl-2">
+    `;
+
+    incoming.forEach(p => {
+      html += `
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
+          <span class="text-[11px] font-bold dark:text-white">IN</span>
+          <span class="text-[11px] font-medium text-black/60 dark:text-white/50">${p.from} · ${p.protection}</span>
+        </div>`;
+    });
+
+    outgoing.forEach(p => {
+      html += `
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0"></span>
+          <span class="text-[11px] font-bold dark:text-white">OUT</span>
+          <span class="text-[11px] font-medium text-black/60 dark:text-white/50">→ ${p.to} · ${p.protection}</span>
+        </div>`;
+    });
+
+    swaps.forEach(p => {
+      html += `
+        <div class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-500 flex-shrink-0"></span>
+          <span class="text-[11px] font-bold dark:text-white">SWAP</span>
+          <span class="text-[11px] font-medium text-black/60 dark:text-white/50">${p.with}</span>
+        </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  html += `
+    <div class="mt-4 p-3.5 rounded-2xl border border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02]">
+      <p class="text-[10px] font-medium text-black/50 dark:text-white/40">${picks.notes}</p>
+    </div>
+  </div>`;
+
+  return html;
+}
+function giRenderSalary(data, intel) {
+  const el = document.getElementById('gi-panel-salary');
+  const athletes = data?.roster?.athletes || [];
+  const teamColor = GI_INTEL[_giTeam?.a]?.p || '#10b981';
+
+  let html = `
+  <div class="gi-cap-overview">
+    <p class="text-[9px] font-black uppercase tracking-[0.35em] text-black/30 dark:text-white/30 mb-3">2026–27 Cap Snapshot</p>
+    <div class="grid grid-cols-3 gap-3 mb-4">
+      <div class="text-center">
+        <p class="text-[8px] font-black uppercase tracking-widest text-black/30 dark:text-white/30 mb-1">Salary Cap</p>
+        <p class="text-sm font-black dark:text-white">~$145M</p>
+      </div>
+      <div class="text-center">
+        <p class="text-[8px] font-black uppercase tracking-widest text-black/30 dark:text-white/30 mb-1">Lux Tax</p>
+        <p class="text-sm font-black dark:text-white">~$176M</p>
+      </div>
+      <div class="text-center">
+        <p class="text-[8px] font-black uppercase tracking-widest text-black/30 dark:text-white/30 mb-1">2nd Apron</p>
+        <p class="text-sm font-black dark:text-white">~$189M</p>
+      </div>
+    </div>
+    <div class="gi-cap-bar-row">
+      <div class="gi-cap-bar-label">
+        <span class="text-[8.5px] font-black text-black/40 dark:text-white/40">Salary Cap Usage</span>
+        <span class="text-[8.5px] font-black text-emerald-600">Estimated</span>
+      </div>
+      <div class="gi-cap-bar-track"><div class="gi-cap-bar-fill bg-emerald-500" style="width:0%" id="gi-cap-fill"></div></div>
+    </div>
+  </div>
+  <p class="text-[9px] font-black uppercase tracking-[0.35em] text-black/25 dark:text-white/25 mb-3">Roster Contracts</p>`;
+
+  setTimeout(() => {
+    const fill = document.getElementById('gi-cap-fill');
+    if (fill) fill.style.width = (Math.floor(Math.random() * 30) + 55) + '%';
+  }, 200);
+
+  if (athletes.length) {
+    athletes.slice(0, 14).forEach(p => {
+      const sal = p.contract?.salary ? '$' + (p.contract.salary/1e6).toFixed(1)+'M' : 'TBD';
+      const yrs = p.contract?.yearsRemaining;
+      const pct = p.contract?.salary ? Math.min(95, Math.round((p.contract.salary/45000000)*100)) : 20;
+      html += `<div class="gi-sal-player-row">
+        <img src="${p.headshot?.href||`https://a.espncdn.com/i/headshots/nba/players/full/${p.id}.png`}"
+             class="w-8 h-8 rounded-full object-cover object-top bg-gray-100 flex-shrink-0"
+             onerror="this.src='https://a.espncdn.com/combiner/i?img=/i/headshots/nophoto.png'" alt="">
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-black dark:text-white truncate">${p.shortName||p.displayName}</p>
+          <div class="gi-cap-bar-track mt-1"><div class="gi-cap-bar-fill bg-emerald-500" style="width:${pct}%"></div></div>
+        </div>
+        <div class="text-right flex-shrink-0 ml-3">
+          <p class="text-xs font-black text-emerald-600">${sal}</p>
+          ${yrs ? `<p class="text-[8px] font-bold text-black/30 dark:text-white/30">${yrs}yr</p>` : ''}
+        </div>
+      </div>`;
+    });
+  }
+
+  html += renderPicksByYear(intel, _giTeam?.a);
+  el.innerHTML = html;
+}
+
+// ── NEWS PANEL
+function giRenderNews(data, intel) {
+  const el = document.getElementById('gi-panel-news');
+  const articles = data?.news?.articles || [];
+
+  let html = '';
+
+  if (intel.alert) {
+    html += `<div class="gi-news-breaking">
+      <div class="w-10 h-10 rounded-xl bg-amber-500/15 flex items-center justify-center flex-shrink-0">
+        <span class="text-lg">⚡</span>
+      </div>
+      <div class="min-w-0">
+        <p class="gi-news-meta text-amber-600 dark:text-amber-400">Breaking · June 29, 2026</p>
+        <p class="gi-news-headline">${intel.alert}</p>
+      </div>
+    </div>`;
+  }
+
+  if (articles.length) {
+    articles.slice(0,6).forEach(a => {
+      const img = a.images?.[0]?.url;
+      const date = a.published ? new Date(a.published).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '';
+      html += `<div class="gi-news-card" onclick="window.open('${a.links?.web?.href||'#'}','_blank')">
+        ${img
+          ? `<img class="gi-news-img" src="${img}" onerror="this.style.display='none'" alt="">`
+          : `<div class="gi-news-img"></div>`}
+        <div class="min-w-0 flex-1">
+          <p class="gi-news-meta">${a.categories?.[0]?.description||'NBA'} · ${date}</p>
+          <p class="gi-news-headline line-clamp-2">${a.headline||''}</p>
+        </div>
+      </div>`;
+    });
+  } else if (!intel.alert) {
+    html = `<div class="text-center py-16 text-[10px] font-black uppercase tracking-widest text-black/20 dark:text-white/20">No recent news</div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+// ── FA TARGETS
+function giRenderFA(intel) {
+  const el = document.getElementById('gi-panel-fa');
+  const targets = intel.fa || [];
+
+  const tagColors = {
+    'Cornerstone':'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20',
+    'Top Priority':'bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20',
+    'Re-signed':'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20',
+    'Re-signing':'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20',
+    'Returning':'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20',
+    'New Arrival':'bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20',
+    'Trade Candidate':'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20',
+    'default':'bg-black/5 text-black/50 dark:bg-white/5 dark:text-white/50 border-black/10 dark:border-white/10',
+  };
+
+  let html = `<div class="mb-4 p-3.5 rounded-2xl bg-emerald-500/05 border border-emerald-500/15">
+    <p class="text-[8px] font-black uppercase tracking-[0.3em] text-emerald-600 dark:text-emerald-400 mb-0.5">Free Agency Opens</p>
+    <p class="text-sm font-black dark:text-white">June 30, 2026 · 6 PM ET</p>
+    <p class="text-[9px] font-medium text-black/40 dark:text-white/40 mt-0.5">Official negotiating period begins</p>
+  </div>
+  <p class="text-[9px] font-black uppercase tracking-[0.35em] text-black/25 dark:text-white/25 mb-3">Targets &amp; Key Decisions</p>`;
+
+  targets.forEach(t => {
+    const colorClass = tagColors[t.tag] || tagColors.default;
+    html += `<div class="gi-fa-card">
+      <div class="flex items-start justify-between gap-2 mb-2">
+        <div class="min-w-0">
+          <p class="text-sm font-black dark:text-white truncate">${t.n}</p>
+          <p class="text-[9px] font-bold text-black/30 dark:text-white/30 uppercase tracking-widest mt-0.5">${t.pos}</p>
+        </div>
+        <span class="gi-fa-tag border flex-shrink-0 ${colorClass}">${t.tag}</span>
+      </div>
+      <p class="text-[11px] font-medium text-black/50 dark:text-white/40 leading-relaxed">${t.fit}</p>
+    </div>`;
+  });
+
+  if (!targets.length) {
+    html += `<div class="text-center py-12 text-[10px] font-black uppercase tracking-widest text-black/20 dark:text-white/20">FA targets pending</div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+// ── SKELETON
+function giSkeleton() {
+  return `<div class="space-y-3 py-2">
+    ${[75,55,65,45,70,50].map(w=>`<div class="gi-sk" style="height:44px;width:${w}%"></div>`).join('')}
+  </div>`;
+}
+
+// ─────────────────────────────────────────────
+//  INIT + AUTO-REFRESH
+// ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  giBuildCards();
+  giFetchStandings();
+  // Refresh standings every 5 min
+  setInterval(giFetchStandings, 300000);
+  // Clear team cache every 10 min so data stays fresh
+  setInterval(() => { _giCache = {}; }, 600000);
+});
+</script>
 <script>
 // ============================================================
 //  GREENLIGHT NBA DRAFT TRACKER -- 2026 (ACCURATE ORDER)
