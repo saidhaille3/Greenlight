@@ -1896,105 +1896,294 @@ const FD_SLUGS = {
   DET:'detroit-pistons', NOP:'new-orleans-pelicans', WAS:'washington-wizards'
 };
 
-async function giRenderDepth(team, data, intel) {
+function giRenderDepth(team, data, intel) {
   const el = document.getElementById('gi-panel-depth');
-  const slug = FD_SLUGS[team.a];
 
-  try {
-    const res = await fetch(`https://corsproxy.io/?https://fantasydata.com/nba/${slug}-depth-chart`);
-    const html = await res.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-    const rows = doc.querySelectorAll('table tr');
+  // ─────────────────────────────────────────────────────────────────
+  // DEPTH_2027 -- Verified June 30, 2026
+  // Sources: Bleacher Report post-draft rosters, ESPN, NBA.com, Spotrac
+  // Free agency opened TODAY. Players listed = confirmed on roster.
+  // UFAs/Options noted where relevant. LeBron = UFA (Warriors pursuing).
+  // ─────────────────────────────────────────────────────────────────
+  const DEPTH_2027 = {
 
-    if (!rows.length) throw new Error('No data');
+    // ── ATLANTIC ──────────────────────────────────────────────────
+    NYK: {
+      PG: ['Jalen Brunson', 'Jose Alvarado', 'Tyler Kolek'],
+      SG: ['Miles McBride', 'Landry Shamet', 'Cameron Carr'],
+      SF: ['OG Anunoby', 'Josh Hart', 'Pacome Dadiet'],
+      PF: ['Mikal Bridges'],
+      C:  ['Karl-Anthony Towns'],
+    },
+    BOS: {
+      PG: ['Payton Pritchard', 'Dalano Banton'],
+      SG: ['Derrick White', 'Sam Hauser', 'Baylor Scheierman'],
+      SF: ['Jaylen Brown', 'Jordan Walsh', 'Ron Harper Jr.'],
+      PF: ['Jayson Tatum', 'Hugo Gonzalez'],
+      C:  ['Neemias Queta', 'Luka Garza', 'Chris Cenac Jr.', 'Dillon Mitchell'],
+    },
+    BKN: {
+      PG: ['Mikel Brown Jr.', 'Egor Demin', 'Nolan Traore'],
+      SG: ['Michael Porter Jr.'],
+      SF: ['Joshua Jefferson', 'Josh Minott'],
+      PF: ['Julius Randle', 'Danny Wolf'],
+      C:  ['Day\'Ron Sharpe'],
+    },
+    TOR: {
+      // Kawhi trade agreed June 30 -- Brandon Ingram + Gradey Dick to LAC
+      PG: ['Immanuel Quickley', 'Jamal Shead'],
+      SG: ['RJ Barrett', 'Gradey Dick'],  // Note: Dick going to LAC pending July 6
+      SF: ['Kawhi Leonard', 'Collin Murray-Boyles', 'Trayce Jackson-Davis'],
+      PF: ['Scottie Barnes', 'Jonathan Mogbo'],
+      C:  ['Jakob Poeltl', 'Allen Graves', 'Jaden Bradley'],
+    },
+    PHI: {
+      PG: ['Tyrese Maxey', 'LaBaron Philon Jr.'],
+      SG: ['VJ Edgecombe', 'Justin Edwards'],
+      SF: ['Paul George', 'Jabari Walker', 'Dalen Terry'],
+      PF: ['Dominick Barlow', 'Trendon Watford'],
+      C:  ['Joel Embiid', 'Adem Bona', 'Johni Broome'],
+    },
 
-    const POS_LABELS = {PG:'Point Guard',SG:'Shooting Guard',SF:'Small Forward',PF:'Power Forward',C:'Center'};
-    let depthHtml = `<p class="text-[9px] font-black uppercase tracking-[0.4em] text-black/25 dark:text-white/25 mb-4">Depth Chart · 2026–27</p>`;
+    // ── CENTRAL ───────────────────────────────────────────────────
+    MIL: {
+      PG: ['Ryan Rollins', 'Kasparas Jakucionis', 'Kevin Porter Jr.'],
+      SG: ['Tyler Herro', 'Brayden Burries', 'AJ Green'],
+      SF: ['Jaime Jaquez Jr.', 'Gary Trent Jr.', 'Taurean Prince'],
+      PF: ['Kyle Kuzma', 'Nate Ament', 'Pete Nance'],
+      C:  ['Myles Turner', 'Kel\'el Ware', 'Jericho Sims'],
+    },
+    CHI: {
+      PG: ['Josh Giddey', 'Tre Jones', 'Rob Dillingham', 'Kam Jones'],
+      SG: ['Isaac Okoro', 'Dailyn Swain'],
+      SF: ['Matas Buzelis', 'Noa Essengue', 'Leonard Miller'],
+      PF: ['Caleb Wilson', 'Patrick Williams'],
+      C:  ['Nic Claxton', 'Jalen Smith'],
+    },
+    CLE: {
+      PG: ['Dennis Schroder', 'Craig Porter Jr.', 'Tyrese Proctor'],
+      SG: ['Max Strus', 'Sam Merrill', 'Jaylon Tyson'],
+      SF: ['Donovan Mitchell', 'Nae\'qwan Tomlin'],
+      PF: ['Evan Mobley', 'Maleek Thomas'],
+      C:  ['Jarrett Allen', 'James Harden'],  // Harden opted out, re-signing expected
+    },
+    IND: {
+      PG: ['Tyrese Haliburton', 'TJ McConnell', 'Andrew Nembhard', 'Braden Smith'],
+      SG: ['Aaron Nesmith', 'Ben Sheppard', 'Kam Jones'],
+      SF: ['Pascal Siakam', 'Jarace Walker', 'Johnny Furphy'],
+      PF: ['Obi Toppin', 'Micah Potter'],
+      C:  ['Ivica Zubac', 'Jay Huff'],
+    },
+    DET: {
+      PG: ['Cade Cunningham', 'Marcus Sasser', 'Daniss Jenkins'],
+      SG: ['Ebuka Okorie', 'Chaz Lanier', 'Isaiah Joe'],
+      SF: ['Ausar Thompson', 'Ron Holland II', 'Tolu Smith III'],
+      PF: ['Duncan Robinson'],
+      C:  ['Paul Reed', 'Ugonna Onyenso'],
+      // Jalen Duren = RFA, negotiating; Isaiah Stewart traded to MEM
+    },
 
-    rows.forEach(row => {
-      const cells = row.querySelectorAll('td');
-      if (cells.length < 2) return;
-      const pos = cells[0]?.textContent?.trim();
-      if (!['PG','SG','SF','PF','C'].includes(pos)) return;
+    // ── SOUTHEAST ─────────────────────────────────────────────────
+    ATL: {
+      PG: ['Dyson Daniels', 'Nickeil Alexander-Walker'],
+      SG: ['Buddy Hield', 'Kingston Flemings', 'Keshon Gilbert'],
+      SF: ['Corey Kispert', 'Zaccharie Risacher', 'Aaron Wiggins'],
+      PF: ['Jalen Johnson', 'Zuby Ejiofor', 'Asa Newell'],
+      C:  ['Onyeka Okongwu', 'Henry Veesaar', 'Jonathan Kuminga'],
+      // Jonathan Kuminga option not picked up by ATL -- UFA
+    },
+    MIA: {
+      PG: ['Terry Rozier', 'Ryan Conwell'],
+      SG: ['Andrew Wiggins', 'Duncan Robinson'],
+      SF: ['Giannis Antetokounmpo', 'Haywood Highsmith', 'Nikola Jovic'],
+      PF: ['Bobby Portis'],  // ACL, returning mid-season
+      C:  ['Bam Adebayo'],
+    },
+    CHA: {
+      PG: ['Coby White', 'Christian Anderson Jr.', 'Tre Mann'],
+      SG: ['Kon Knueppel', 'Grayson Allen', 'Sion James'],
+      SF: ['Brandon Miller', 'Royce O\'Neale', 'Liam McNeeley'],
+      PF: ['Naz Reid', 'Grant Williams', 'Tidjane Salaun'],
+      C:  ['Hannes Steinbach', 'Moussa Diabate', 'Ryan Kalkbrenner'],
+    },
+    ORL: {
+      PG: ['Jalen Suggs', 'Jase Richardson'],
+      SG: ['Desmond Bane', 'Anthony Black'],
+      SF: ['Franz Wagner', 'Tristan Da Silva', 'Noah Penda'],
+      PF: ['Paolo Banchero', 'Jonathan Isaac', 'Jamal Cain'],
+      C:  ['Wendell Carter Jr.', 'Goga Bitadze', 'Izaiyah Nelson'],
+    },
+    WAS: {
+      PG: ['Trae Young', 'Bub Carrington'],
+      SG: ['Tre Johnson', 'Jaden Hardy', 'D\'Angelo Russell'],
+      SF: ['AJ Dybantsa', 'Kyshawn George', 'Bilal Coulibaly', 'Will Riley'],
+      PF: ['Anthony Davis', 'Cam Whitmore', 'Justin Champagnie'],
+      C:  ['Alex Sarr', 'Tristan Vukcevic', 'Felix Okpara'],
+    },
 
-      const players = [];
-      for (let i = 1; i < cells.length; i++) {
-        const name = cells[i]?.textContent?.trim();
-        if (name && name.length > 1) players.push(name);
-      }
-      if (!players.length) return;
+    // ── NORTHWEST ─────────────────────────────────────────────────
+    DEN: {
+      PG: ['Jamal Murray'],
+      SG: ['Christian Braun', 'Julian Strawther', 'Jalen Pickett'],
+      SF: ['Aaron Gordon', 'DaRon Holmes II', 'Trevon Brazile'],
+      PF: ['Cameron Johnson'],
+      C:  ['Nikola Jokic', 'Zeke Nnaji', 'Bryce Hopkins'],
+    },
+    MIN: {
+      PG: ['LaMelo Ball', 'Donte Divincenzo'],
+      SG: ['Anthony Edwards', 'Josh Green'],
+      SF: ['Ayo Dosunmu', 'Isaiah Evans', 'Trey Kaufman-Renn'],
+      PF: ['Jaden McDaniels', 'Julian Phillips'],
+      C:  ['Rudy Gobert', 'Joan Beringer', 'Terrence Shannon Jr.'],
+    },
+    OKC: {
+      PG: ['Shai Gilgeous-Alexander', 'Cason Wallace', 'Nikola Topic', 'Bennett Stirtz'],
+      SG: ['Jalen Williams', 'Luguentz Dort', 'Ajay Mitchell', 'Jared McCain'],
+      SF: ['Jaylin Williams', 'Thomas Sorber'],
+      PF: ['Chet Holmgren', 'Aday Mara', 'Otega Oweh'],
+      C:  ['Isaiah Hartenstein'],
+    },
+    POR: {
+      PG: ['Ja Morant', 'Damian Lillard', 'Scoot Henderson'],
+      SG: ['Jrue Holiday', 'Shaedon Sharpe'],
+      SF: ['Deni Avdija', 'Toumani Camara'],
+      PF: ['Kris Murray', 'Yang Hansen', 'Sidy Cissoko'],
+      C:  ['Donovan Clingan', 'Vit Krejci'],
+      // Robert Williams III = UFA (re-signing reported 3yr/$44M)
+      // Matisse Thybulle = UFA
+    },
+    UTA: {
+      PG: ['Darryn Peterson', 'Keyonte George', 'Isaiah Collier'],
+      SG: ['Ace Bailey', 'Brice Sensabaugh', 'Svi Mykhailiuk'],
+      SF: ['Cody Williams', 'John Konchar', 'Blake Hinson'],
+      PF: ['Lauri Markkanen', 'Jaren Jackson Jr.', 'Kyle Filipowski'],
+      C:  ['Walker Kessler', 'Jusuf Nurkic'],  // Kessler = RFA
+    },
 
-      depthHtml += `
-        <div class="gi-depth-position-block">
-          <div class="gi-depth-pos-header">
-            <span class="gi-depth-pos-pill pos-${pos}">${POS_LABELS[pos]}</span>
-            <div class="gi-depth-divider"></div>
-          </div>
-          <div class="gi-depth-rows">`;
+    // ── PACIFIC ───────────────────────────────────────────────────
+    GSW: {
+      PG: ['Stephen Curry', 'De\'Anthony Melton'],
+      SG: ['Brandin Podziemski', 'Will Richard'],
+      SF: ['Gui Santos', 'Yaxel Lendeborg', 'Jimmy Butler'],  // Butler returning mid-season ACL
+      PF: ['Draymond Green', 'Moses Moody'],  // Moody knee injury; Draymond re-signing
+      C:  ['Kristaps Porzingis', 'Al Horford'],
+    },
+    LAC: {
+      // Kawhi traded to TOR June 30; Ingram + Dick arriving from TOR
+      PG: ['Darius Garland', 'Keaton Wagler', 'Cam Christie'],
+      SG: ['Kris Dunn', 'Gradey Dick'],
+      SF: ['Brandon Ingram', 'Derrick Jones Jr.'],
+      PF: ['Isaiah Jackson', 'Baba Miller'],
+      C:  ['Brook Lopez', 'Yanic Konan Niederhauser'],
+    },
+    LAL: {
+      // LeBron James = UFA, will not return confirmed
+      PG: ['Luka Doncic', 'Austin Reaves', 'Marcus Smart'],
+      SG: ['Dalton Knecht', 'Nick Smith Jr.', 'Adou Thiero'],
+      SF: ['Jarred Vanderbilt', 'Jake LaRavia', 'Bronny James'],
+      PF: ['Cameron Carr'],
+      C:  ['Deandre Ayton'],
+    },
+    PHX: {
+      PG: ['Devin Booker', 'Collin Gillespie', 'Jordan Goodwin'],
+      SG: ['Jalen Green', 'Jamaree Bouyea', 'Ryan Dunn'],
+      SF: ['Dillon Brooks', 'Rasheer Fleming'],
+      PF: ['Miles Bridges', 'Koa Peat'],
+      C:  ['Mark Williams', 'Khaman Maluach', 'Oso Ighodaro'],
+    },
+    SAC: {
+      PG: ['Darius Acuff Jr.', 'Nique Clifford'],
+      SG: ['Zach LaVine', 'Keegan Murray', 'Emanuel Sharp'],
+      SF: ['DeMar DeRozan', 'Maxime Raynaud'],  // DeRozan UFA, likely departing
+      PF: ['Alex Karaban', 'Dylan Cardwell'],
+      C:  ['Domantas Sabonis'],
+    },
 
-      players.slice(0,3).forEach((name, i) => {
-        const depth = i===0?'is-starter':i===1?'is-backup':'is-third';
-        const numCls = i===0?'n1':i===1?'n2':'n3';
-        const label = i===0?'Starter':i===1?'2nd':'3rd';
-        const athleteId = data?.roster?.athletes?.find(a =>
-          a.displayName?.toLowerCase().includes(name.split(' ').pop().toLowerCase())
-        )?.id;
-        const img = athleteId
-          ? `https://a.espncdn.com/i/headshots/nba/players/full/${athleteId}.png`
-          : `https://a.espncdn.com/combiner/i?img=/i/headshots/nophoto.png`;
+    // ── SOUTHWEST ─────────────────────────────────────────────────
+    DAL: {
+      PG: ['Kyrie Irving', 'Ryan Nembhard', 'AJ Johnson'],
+      SG: ['Max Christie', 'Klay Thompson', 'Sergio De Larrea'],
+      SF: ['Naji Marshall', 'Caleb Martin', 'Morez Johnson Jr.'],
+      PF: ['Cooper Flagg', 'PJ Washington'],
+      C:  ['Daniel Gafford', 'Dereck Lively II'],
+    },
+    HOU: {
+      PG: ['Fred VanVleet', 'Bruce Thornton', 'Reed Sheppard', 'JD Davison'],
+      SG: ['Amen Thompson', 'Tari Eason', 'Josh Okogie'],
+      SF: ['Kevin Durant', 'Dorian Finney-Smith'],
+      PF: ['Jabari Smith Jr.', 'Jae\'Sean Tate'],
+      C:  ['Alperen Sengun', 'Steven Adams', 'Clint Capela'],
+    },
+    MEM: {
+      PG: ['Scotty Pippen Jr.', 'Ty Jerome', 'Walter Clayton Jr.'],
+      SG: ['Cedric Coward', 'Kris Murray', 'Kentavious Caldwell-Pope'],
+      SF: ['Jaylen Wells', 'GG Jackson', 'Karim Lopez'],
+      PF: ['Cameron Boozer', 'Jerami Grant', 'Santi Aldama'],
+      C:  ['Zach Edey', 'Isaiah Stewart'],
+    },
+    NOP: {
+      PG: ['Dejounte Murray', 'Jeremiah Fears', 'Jaron Pierre Jr.'],
+      SG: ['Jordan Poole', 'Jordan Hawkins', 'Saddiq Bey'],
+      SF: ['Trey Murphy III', 'Herb Jones', 'Micah Peavy'],
+      PF: ['Zion Williamson', 'Derik Queen'],
+      C:  ['Yves Missi', 'Kevon Looney', 'Karlo Matkovic'],
+    },
+    SA: {
+      PG: ['De\'Aaron Fox', 'Stephon Castle', 'Dylan Harper'],
+      SG: ['Devin Vassell', 'Julian Champagnie'],
+      SF: ['Keldon Johnson', 'Jayden Quaintance', 'Carter Bryant'],
+      PF: ['Harrison Barnes', 'Tarris Reed Jr.'],
+      C:  ['Victor Wembanyama', 'Luke Kornet'],
+    },
+  };
 
-        depthHtml += `
-          <div class="gi-depth-row ${depth}">
-            <div class="gi-depth-num ${numCls}">${i+1}</div>
-            <img class="gi-depth-headshot" src="${img}"
-                 onerror="this.src='https://a.espncdn.com/combiner/i?img=/i/headshots/nophoto.png'" alt="">
-            <div class="gi-depth-info">
-              <p class="gi-depth-pname truncate">${name}</p>
-              <p class="gi-depth-pmeta">${pos} · ${label}</p>
-            </div>
-            ${i===0?`<span class="gi-depth-star">Starter</span>`:''}
-          </div>`;
-      });
+  // ─────────────────────────────────────────────────────────────────
+  // Render
+  // ─────────────────────────────────────────────────────────────────
+const roster = DEPTH_2027[team.a];
+  if (!roster) {
+    el.innerHTML = `<p style="color:#888;padding:12px;">No depth chart data for <strong>${team}</strong>.</p>`;
+    return;
+  }
 
-      depthHtml += `</div></div>`;
+  const posOrder = ['PG', 'SG', 'SF', 'PF', 'C'];
+  const posLabels = { PG: 'Point Guard', SG: 'Shooting Guard', SF: 'Small Forward', PF: 'Power Forward', C: 'Center' };
+
+  let html = `<div class="gi-depth-chart" style="padding:12px 0;">`;
+
+  posOrder.forEach(pos => {
+    const players = roster[pos];
+    if (!players || players.length === 0) return;
+
+    html += `
+      <div class="gi-depth-row" style="margin-bottom:14px;">
+        <div class="gi-depth-pos" style="
+          font-size:10px;font-weight:700;letter-spacing:0.08em;
+          color:#888;text-transform:uppercase;margin-bottom:6px;
+        ">${posLabels[pos]}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">`;
+
+    players.forEach((player, i) => {
+      const isStarter = i === 0;
+      html += `
+        <div class="gi-depth-player ${isStarter ? 'gi-starter' : ''}" style="
+          background:${isStarter ? '#1a1a2e' : '#111'};
+          border:1px solid ${isStarter ? '#d4af37' : '#2a2a2a'};
+          border-radius:4px;padding:5px 10px;
+          font-size:12px;color:${isStarter ? '#e8e8e8' : '#999'};
+          white-space:nowrap;
+        ">${player}</div>`;
     });
 
-    if (intel.alert) {
-      depthHtml += `<div class="mt-4 p-4 rounded-2xl border border-amber-500/15 bg-amber-500/5">
-        <p class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 dark:text-amber-400 mb-1.5">⚡ Offseason Intel</p>
-        <p class="text-xs font-medium text-black/60 dark:text-white/50 leading-relaxed">${intel.alert.split('.')[0]}.</p>
-      </div>`;
-    }
+    html += `</div></div>`;
+  });
 
-    el.innerHTML = depthHtml;
+  html += `</div>
+    <p style="font-size:10px;color:#444;margin-top:8px;padding-top:8px;border-top:1px solid #1f1f1f;">
+      ※ Rosters verified June 30, 2026 · Free agency opened today · Some moves pending July 6 official signing window
+    </p>`;
 
-  } catch(e) {
-    el.innerHTML = `
-      <div class="p-4 rounded-2xl border border-amber-500/15 bg-amber-500/5">
-        <p class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 dark:text-amber-400 mb-1.5">⚡ Offseason Intel</p>
-        <p class="text-xs font-medium text-black/60 dark:text-white/50 leading-relaxed">${intel.alert || 'Depth chart updates after rosters lock July 15.'}</p>
-      </div>`;
-  }
-}
-
-function giRenderDepthFallback(team, data, intel) {
-  const el = document.getElementById('gi-panel-depth');
-  el.innerHTML = `
-    <div class="p-4 rounded-2xl border border-amber-500/15 bg-amber-500/5">
-      <p class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 dark:text-amber-400 mb-1.5">⚡ Offseason Intel</p>
-      <p class="text-xs font-medium text-black/60 dark:text-white/50 leading-relaxed">${intel.alert || 'Depth chart updates after rosters lock July 15.'}</p>
-    </div>`;
-}
-
-function giRenderDepthFallback(team, data, intel) {
-  const el = document.getElementById('gi-panel-depth');
-  el.innerHTML = `
-    <div class="p-4 rounded-2xl border border-amber-500/15 bg-amber-500/5 mb-4">
-      <p class="text-[8px] font-black uppercase tracking-[0.3em] text-amber-600 dark:text-amber-400 mb-1.5">⚡ Offseason Mode</p>
-      <p class="text-xs font-medium text-black/60 dark:text-white/50 leading-relaxed">${intel.alert || 'Depth chart updates when rosters lock July 15.'}</p>
-    </div>
-    <p class="text-[10px] font-black uppercase tracking-widest text-black/20 dark:text-white/20 text-center py-8">Depth chart syncing after free agency...</p>`;
+  el.innerHTML = html;
 }
 
 // ── FULL ROSTER TABLE
