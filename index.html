@@ -1639,37 +1639,281 @@ const GI_TEAMS = [
 ];
 
 // ── Team colors + offseason intel
+
+// ── UPDATED FA TARGETS -- July 6, 2026
+// Rule: No players already confirmed re-signed or on roster
+// Sources: NBA.com, ESPN, Yahoo Sports, Bleacher Report live FA tracker
+
 const GI_INTEL = {
-  NYK:{p:'#006BB6',s:'#F58426',alert:'🏆 2026 NBA CHAMPIONS -- First title since 1973! Brunson + KAT + Anunoby led the run. Beat Spurs 4-1.',fa:[{n:'Mitchell Robinson',pos:'C',tag:'Priority Re-sign',fit:'Longest-tenured Knick. Championship chemistry. Must keep for the repeat.'},{n:'Jose Alvarado',pos:'PG',tag:'Returning',fit:'Already agreed to return. Had +24.5 net rating in playoffs.'},{n:'Landry Shamet',pos:'SG',tag:'Pending',fit:'Three-point specialist. Apron constraints could push him out.'}],picks:'Outgoing: BKN owns 2027/2029/2031 unprotected · Can trade: 2033 · Swap rights: 2030/2032/2033 · Max tradable: 1'},
-  OKC:{p:'#007AC1',s:'#EF3B24',alert:'Lu Dort $17.7M option picked up. Kenrich Williams declined. Isaiah Joe traded to DET for 2 2nds. Massive payroll trimming.',fa:[{n:'Isaiah Hartenstein',pos:'C',tag:'RFA Decision',fit:'Key backup center. OKC has right to match any offer.'},{n:'Chet Holmgren',pos:'C',tag:'Cornerstone',fit:'On max deal. Franchise pillar alongside SGA.'},{n:'Shai Gilgeous-Alexander',pos:'PG',tag:'Franchise Pillar',fit:'Max extension locked in. Best player on the planet right now.'}],picks:'Incoming 1sts: 10 · Max tradable: 7 · DAL swap 2028 · DEN top-5 protected 2029 · 2nds: 12'},
-  MIA:{p:'#98002E',s:'#F9A01B',alert:'BLOCKBUSTER: Giannis + Portis for Herro, Kel\'el Ware, Jaquez, Jakucionis + 4 first-round picks. Andrew Wiggins $64M/3yr extended.',fa:[{n:'Norman Powell',pos:'SG',tag:'Top Priority',fit:'Heat desperately need a shooter around Giannis + Bam. Ideal cultural fit.'},{n:'Andrew Wiggins',pos:'SF',tag:'Extended',fit:'$64M/3yr agreed. Spacing and defense around Giannis.'},{n:'Kyle Anderson',pos:'SF',tag:'Depth Target',fit:'Versatile defender who thrives in Heat system.'}],picks:'Outgoing: CHA 2027 top-14 protected (unprotected 2028 if not) · Can trade: 2031/2033 · Swap rights: 2029-2033 · Max tradable: 2'},
-  SA: {p:'#C4CED4',s:'#000000',alert:'Wembanyama Year 3. Julian Champagnie re-signed 3yr/$45M. Lost WCF to OKC in Game 7. Building around the generational talent.',fa:[{n:'Victor Wembanyama',pos:'C',tag:'Franchise Pillar',fit:'Best player on the planet in 3 years. The entire org is built around him.'},{n:'Julian Champagnie',pos:'SF',tag:'Re-signed',fit:'3yr/$45M locked in. Key 3-and-D piece around Wemby.'},{n:'Stephon Castle',pos:'PG',tag:'Development',fit:'Year 2 -- needs to take a leap as the starting PG.'}],picks:'Incoming 1sts: 7 · ATL unprotected 2027 · BOS swap 2028 · DAL/MIN swap 2030 · SAC swap 2030 · 2nds: 14 · Max tradable: 4'},
-  BOS:{p:'#007A33',s:'#FFFFFF',alert:'Jaylen Brown trade talks with 7 teams (POR, TOR, DEN, BKN, CHA, ATL, LAC).',fa:[{n:'Jaylen Brown',pos:'SG',tag:'Trade Candidate',fit:'7 teams interested. Keeping him is priority #1 for Celtics\' repeat window.'},{n:'Sam Hauser',pos:'SF',tag:'Re-sign',fit:'Elite off-ball shooter. Essential for Tatum\'s gravity to work.'}],picks:'Outgoing: SA swap 2028 · POR/WAS unprotected 2029 · 2032 frozen (2nd apron) · Can trade: 2027/2031/2033 · Max tradable: 3'},
-  MIN:{p:'#0C2340',s:'#236192',alert:'ACQUIRED LaMelo Ball + Josh Green from Charlotte for Naz Reid + 2033 unprotected 1st + pick swaps. Randle traded to BKN. Dosunmu re-signed 9-figure deal.',fa:[{n:'LaMelo Ball',pos:'PG',tag:'New Acquisition',fit:'Backcourt nightmare with Anthony Edwards. New era starts now.'},{n:'Ayo Dosunmu',pos:'SG',tag:'Re-signed',fit:'9-figure deal. 14.4 PPG in 24 games with MIN. Championship piece.'},{n:'Rudy Gobert',pos:'C',tag:'Frontcourt Hole',fit:'Two big men gone in same deal. Gobert\'s role with LaMelo unclear.'}],picks:'Max tradable: 1 (2033) · Outgoing: MEM/UTA unprotected 2027 · CHA/UTA top-5 protected 2029 · SAC unprotected 2031 · 2032 frozen (2nd apron) · SA swap 2030'},
-  LAL:{p:'#552583',s:'#FDB927',alert:'Austin Reaves re-signed 5yr/$112M. Deandre Ayton opted in $8.1M. LeBron future unclear -- GS Warriors also pursuing him.',fa:[{n:'Austin Reaves',pos:'SG',tag:'Re-signed',fit:'5yr/$112M locked. Luka Doncic\'s perfect co-pilot and closer.'},{n:'LeBron James',pos:'SF',tag:'Decision Pending',fit:'Warriors making massive push. This could be his last major decision.'},{n:'D\'Angelo Russell',pos:'PG',tag:'Depth Question',fit:'Backup PG role still unclear with Luka at the helm.'}],picks:'Outgoing: MEM top-4 protected 2027 · DAL unprotected 2029 · Can trade: 2031/2033 · Swap rights: 2028/2030/2031/2032/2033 · Max tradable: 2'},
-  DEN:{p:'#0E2240',s:'#FEC524',alert:'Jokic extension delayed again -- committed to staying long-term. Needs massive roster overhaul after first-round exit.',fa:[{n:'Nikola Jokic',pos:'C',tag:'Staying',fit:'Reiterated desire to stay. Extension talks postponed but no concern.'},{n:'Cam Johnson',pos:'PF',tag:'Available',fit:'Reported available via trade. Lakers and others calling.'},{n:'Kentavious Caldwell-Pope',pos:'SF',tag:'Free Agent',fit:'Championship DNA. Teams lining up.'}],picks:'Max tradable: NONE · Outgoing: OKC top-5 protected 2027 · OKC top-5 protected 2029 · BKN unprotected 2032 · Swap only: 2031/2033'},
-  POR:{p:'#E03A3E',s:'#000000',alert:'BLOCKBUSTER: Acquired Ja Morant for Jerami Grant + Kris Murray! Envisioning Lillard + Morant + Avdija starting lineup. Franchise-altering move.',fa:[{n:'Ja Morant',pos:'PG',tag:'New Star',fit:'Pairing with Lillard is unconventional -- electric backcourt if it clicks.'},{n:'Deni Avdija',pos:'SF',tag:'Cornerstone',fit:'Not available in any trade. The connective tissue of the new lineup.'},{n:'Donovan Clingan',pos:'C',tag:'Key Piece',fit:'Year 2 center. Will anchor the frontcourt for the new-look POR.'}],picks:'Incoming 1sts: 8 · Max tradable: 5 · Own BKN 2028-2030 · ORL unprotected 2028 · BOS/MIL most+least fav 2029'},
-  CLE:{p:'#860038',s:'#FDBB30',alert:'James Harden declined $35M option -- re-signing on new deal. Cavaliers navigating apron constraints around Donovan Mitchell.',fa:[{n:'James Harden',pos:'PG',tag:'Re-signing',fit:'Declined option to restructure. Still wants Cleveland. New deal coming.'},{n:'Donovan Mitchell',pos:'SG',tag:'Cornerstone',fit:'Window is open right now. Surrounding cast must be upgraded.'},{n:'Dean Wade',pos:'PF',tag:'Role Player',fit:'3-and-D piece. Lakers also interested. Keep or lose this offseason.'}],picks:'Max tradable: 1 · Outgoing: MEM/PHX/UTA 2027 · ATL/UTA least fav 2028 · UTA/CHA 2029 · 2033 frozen (2nd apron)'},
-  GS: {p:'#1D428A',s:'#FFC72C',alert:'MASSIVE: Warriors pursuing BOTH LeBron James AND Anthony Davis to team with Curry + Green. Draymond declined option, re-signing.',fa:[{n:'LeBron James',pos:'SF',tag:'Primary Target',fit:'Actively pursuing. Would form one of the most insane rosters ever assembled.'},{n:'Anthony Davis',pos:'C',tag:'Primary Target',fit:'Pursuing alongside LeBron. Curry + Green + AD + LeBron would be all-time.'},{n:'Draymond Green',pos:'PF',tag:'Returning',fit:'Declined option to re-sign -- staying a Warrior forever.'}],picks:'Incoming 1sts: 7 · Max tradable: 3 (2028/2030 if 1-20/2032) · Outgoing: DAL 2030 if outside top 20'},
-  UTA:{p:'#002B5C',s:'#F9A01B',alert:'Jusuf Nurkic re-signed 2yr/$22M. Darryn Peterson (No. 2 pick) arrives. Walker Kessler restricted FA. Exciting young core forming.',fa:[{n:'Walker Kessler',pos:'C',tag:'RFA Must-Match',fit:'Restricted FA. Jazz must match to keep the elite rim protector.'},{n:'Darryn Peterson',pos:'SG',tag:'2026 Draft Pick',fit:'No. 2 overall. Safest prospect in the draft. Will start immediately.'},{n:'Lauri Markkanen',pos:'PF',tag:'Cornerstone',fit:'Franchise anchor. The offense runs through him.'}],picks:'Incoming 1sts: 8 · Max tradable: 5 · 2nd fav own/CLE/MIN 2027 · Swap CLE 2028 · 2 most fav own/CLE/MIN 2029 · Owes MEM 2027 most fav'},
-  MEM:{p:'#5D76A9',s:'#12173F',alert:'TRADED Ja Morant to Portland for Jerami Grant + Kris Murray. Acquired Isaiah Stewart from Detroit. Full rebuild around Cameron Boozer (No. 3 pick).',fa:[{n:'Jaren Jackson Jr.',pos:'PF',tag:'Post-Morant Anchor',fit:'Defensive Cornerstone. The new face of the Grizzlies franchise.'},{n:'Cameron Boozer',pos:'C',tag:'2026 Draft Pick',fit:'No. 3 overall. Duke big man is the next era\'s centerpiece.'},{n:'Desmond Bane',pos:'SG',tag:'Re-sign',fit:'Scorer and leader. Needs to step up as primary offensive option.'}],picks:'Incoming 1sts: 11 · Max tradable: 7 · LAL top-4 protected 2027 · ORL swap 2029 · ORL unprotected 2030 · PHX unprotected 2031'},
-   MIL:{p:'#00471B',s:'#EEE1C6',alert:'ERA OVER: Traded Giannis + Portis to Miami for Herro, Kel\'el Ware, Jaquez, Jakucionis + 4 first-round picks. Full rebuild begins.',fa:[{n:'Tyler Herro',pos:'SG',tag:'New Centerpiece',fit:'Came back from MIA in the trade. Expected to be the face going forward.'},{n:'Kel\'el Ware',pos:'C',tag:'New Piece',fit:'Came from MIA. Young center to build around in the new era.'},{n:'Giannis Antetokounmpo',pos:'PF',tag:'Gone',fit:'Two-time MVP era is officially over. Milwaukee starts from scratch.'}],picks:'Outgoing: ATL/NOP unprotected 2027 · POR controls 2028-2030 · Can trade own starting 2031 · Max tradable: 2'},
- ATL:{p:'#E03A3E',s:'#C1D32F',alert:'Trae Young re-signed. Declined Jonathan Kuminga $24.3M option. Two picks (8 & 23) used. Aaron Wiggins acquired from OKC.',fa:[{n:'Trae Young',pos:'PG',tag:'Re-signed',fit:'The engine returns. Surrounded with better shooting now.'},{n:'Keaton Wagler',pos:'SG',tag:'2026 Draft Pick',fit:'No. 8 overall. Shot creator next to Trae is a frightening offensive combo.'},{n:'Bogdan Bogdanovic',pos:'SG',tag:'Vet Depth',fit:'Shooting depth. Fits perfectly off the bench in ATL system.'}],picks:'Incoming 1sts: 7 · Outgoing: SA unprotected 2027 · MIL/NOP least fav 2027 · CLE/UTA least fav 2028 · Can trade own starting 2029 · Max tradable: 4'},
- DAL:{p:'#00538C',s:'#002B5E',alert:'Post-Doncic era. Kyrie gone. Two picks in draft (9 & 30). Dallas fully committed to the Luka window and rebuilding around it.',fa:[{n:'Luka Doncic',pos:'PG',tag:'The Franchise',fit:'Everything is built around Luka. Pairing with AD as a Laker now.'},{n:'Darius Acuff Jr.',pos:'PG',tag:'2026 Draft Pick',fit:'No. 9 pick. Future backup PG. High-floor guard for new Dallas era.'},{n:'Spencer Dinwiddie',pos:'SG',tag:'Depth',fit:'Veteran backup guard. Brings winning experience to the young core.'}],picks:'Incoming: LAL unprotected 2029 · GS top-20 protected 2030 · Outgoing: CHA top-2 protected 2027 · OKC swap 2028 · HOU/BKN 2029 · SA swap 2030 · Can trade own starting 2031'},
- PHX:{p:'#1D1160',s:'#E56020',alert:'Signed Mark Williams 3yr/$38M. Lost No. 16 pick in MEM deal. Devin Booker-led rebuild after the fire sale era.',fa:[{n:'Devin Booker',pos:'SG',tag:'Cornerstone',fit:'Franchise pillar. The entire rebuild is structured around Book.'},{n:'Mark Williams',pos:'C',tag:'Signed',fit:'3yr/$38M. Physical interior anchor for Booker era.'},{n:'Eric Gordon',pos:'SG',tag:'Vet Depth',fit:'Experienced scorer and three-point shooter. Championship pedigree.'}],picks:'Outgoing: HOU unprotected 2027 · BKN/PHI/WAS 2028 · HOU/BKN 2029 · WAS swap 2030 · MEM unprotected 2031 · 2032 frozen · Can trade: 2033 · Max tradable: 2'},
- LAC:{p:'#C8102E',s:'#1D428A',alert:'Kawhi Leonard to Toronto talks "seriously engaged" per Shams. Jaylen Brown is the top target to replace him. Braden Smith acquired.',fa:[{n:'Kawhi Leonard',pos:'SF',tag:'Trade Talks',fit:'Raptors in serious negotiations. Leonard wants to stay but offer hasn\'t come.'},{n:'Jaylen Brown',pos:'SG',tag:'Top Target',fit:'If Kawhi goes, Brown is priority #1. Multiple teams competing.'},{n:'Paul George',pos:'SF',tag:'Gone',fit:'Departed. LAC pivoting to a younger identity around their picks.'}],picks:'Incoming: IND unprotected 2029 · Outgoing: PHI least fav own/DEN/OKC 2027 · PHI unprotected 2028 · PHI swap 2029 (if 4-30) · Can trade: 2030-2033 (2 firsts) · Max tradable: 3'},
- SAC:{p:'#5A2D81',s:'#63727A',alert:'Domantas Sabonis potentially available via trade. De\'Aaron Fox era. Need a wing badly. Zach LaVine opted into $49M for 2026-27.',fa:[{n:'Domantas Sabonis',pos:'C',tag:'Trade Candidate',fit:'Teams calling. Kings may pivot to a more athletic frontcourt.'},{n:'Zach LaVine',pos:'SG',tag:'Opted In',fit:'$49M option exercised. Another year to prove he fits alongside Fox.'},{n:'Keaton Wagler',pos:'SG',tag:'2026 Draft Pick',fit:'No. 7 pick. Shooter and creator -- perfect next to De\'Aaron Fox.'}],picks:'Incoming 1sts: 9 · Max tradable: 6 · MIN unprotected 2031 · Note: SA 2027 likely conveys to OKC if outside top 17'},
- PHI:{p:'#006BB6',s:'#ED174C',alert:'Harden declined $35M option -- re-signing on new deal. Two draft picks (17 via OKC, 22 via HOU). LaBaron Philon arrives.',fa:[{n:'James Harden',pos:'PG',tag:'Re-signing',fit:'Declined option to restructure. Still wants to be in Philly.'},{n:'Joel Embiid',pos:'C',tag:'Health Question',fit:'When healthy, still elite. Availability remains the massive unknown.'},{n:'LaBaron Philon',pos:'PG',tag:'2026 Draft Pick',fit:'No. 22 pick. Electric scorer to develop behind Harden.'}],picks:'Incoming: LAC unprotected 2028 · LAC swap 2029 (if 4-30) · Outgoing: BKN top-8 protected 2028 · Can trade: 2027/2031/2033 · Max tradable: 4'},
- CHI:{p:'#CE1141',s:'#000000',alert:'Two draft picks used (4 & 15). Received Nic Claxton in Timberwolves deal. Braden Smith sent to Indiana. Building around Caleb Wilson.',fa:[{n:'Caleb Wilson',pos:'SF',tag:'2026 Draft Pick',fit:'No. 4 overall. Athletic wing gives Chicago the defensive versatility they\'ve lacked for years.'},{n:'Nic Claxton',pos:'C',tag:'New Arrival',fit:'Came over from BKN in the Randle deal. Quality starting center.'},{n:'Nikola Vucevic',pos:'C',tag:'Era Ending',fit:'Vucevic era winding down as Claxton takes over the frontcourt.'}],picks:'2027-2033:Incoming 1sts: 7 · Max tradable: 4 · All 7 own firsts in hand · 2nds: 12'},
- BKN:{p:'#000000',s:'#FFFFFF',alert:'Received Julius Randle + No. 28 pick in MIN deal. Sent Nic Claxton to CHI. Cam Thomas is the franchise anchor. Full rebuild.',fa:[{n:'Cam Thomas',pos:'SG',tag:'Franchise Anchor',fit:'Brooklyn\'s best player by a wide margin. Everything is built around him.'},{n:'Julius Randle',pos:'PF',tag:'New Arrival',fit:'Came in the MIN deal. Veteran presence and scoring on a rebuilding team.'},{n:'Day\'Ron Sharpe',pos:'C',tag:'Re-signed',fit:'2yr/$20M locked in. Energetic big helps protect the paint.'}],picks:'Incoming 1sts: 13 · Max tradable: 9 · Own NYK 2027/2029/2031 unprotected · NYK swap 2028 · DEN unprotected 2032 · Most fav PHI/NYK/PHX 2028 · 2nds: 19'},
- HOU:{p:'#CE1141',s:'#000000',alert:'Kevin Durant opting in for 2026-27. Sent No. 22 pick to Philly in deal. Jalen Green + Alperen Sengun core. Bruce Thornton acquired from NYK.',fa:[{n:'Kevin Durant',pos:'SF',tag:'Opted In',fit:'Veteran star presence leads the way in a pivotal growth year.'},{n:'Jalen Green',pos:'SG',tag:'Cornerstone',fit:'Year 5. The franchise\'s future hinges on his continued development.'},{n:'Alperen Sengun',pos:'C',tag:'Cornerstone',fit:'Elite post scorer and passer. Emerging as one of the best young bigs.'}],picks:'Incoming 1sts: 9 · Max tradable: 6 · BKN swap 2027 · PHX unprotected 2027 · 2 most fav own/DAL/PHX 2028-2029'},
- TOR:{p:'#CE1141',s:'#000000',alert:'Scottie Barnes era. Real Kawhi Leonard trade talks with LAC happening. Brandon Ingram interest from Clippers. Rebuilding with young core.',fa:[{n:'Kawhi Leonard',pos:'SF',tag:'Trade Target',fit:'Reportedly expressed willingness to sign extension if traded to Toronto.'},{n:'Scottie Barnes',pos:'PF',tag:'Cornerstone',fit:'The entire rebuild is built around Scottie\'s two-way dominance.'},{n:'RJ Barrett',pos:'SG',tag:'Trade Piece',fit:'Clippers interested in Barrett as part of Kawhi deal.'}],picks:'Incoming 1sts: 7 · Max tradable: 4 · Own 1st next 7 years · 2nds: 5'},
- CHA:{p:'#1D1160',s:'#00788C',alert:'SENT LaMelo Ball to Minnesota for Naz Reid + 2033 1st + pick swaps. Coby White re-signed $74M/3yr. Miles Bridges traded to PHX for picks.',fa:[{n:'Coby White',pos:'SG',tag:'Re-signed',fit:'$74M/3yr locked in. New offensive engine replacing LaMelo.'},{n:'Naz Reid',pos:'C',tag:'New Arrival',fit:'Came in the LaMelo deal. Big, switchable, shoots threes. Championship DNA.'},{n:'Ryan Kalkbrenner',pos:'C',tag:'Development',fit:'2025 draft pick developing. Young frontcourt core building for the future.'}],picks:'Incoming 1sts: 10 · Max tradable: 7 · DAL top-2 protected 2027 · MIA top-14 protected 2027 (unprotected 2028) · CLE/MIN/UTA least fav 2029'},
- IND:{p:'#002D62',s:'#FDBB30',alert:'Lost No. 5 pick (Clippers trade). Acquired Braden Smith from Chicago. Tyrese Haliburton Achilles recovery is the focus.',fa:[{n:'Tyrese Haliburton',pos:'PG',tag:'Returning',fit:'Achilles recovery. The entire org is waiting for him to be back at full health.'},{n:'Braden Smith',pos:'PG',tag:'New Arrival',fit:'Acquired from CHI. All-time assists record at Purdue. Ideal backup PG.'},{n:'Myles Turner',pos:'C',tag:'Anchor',fit:'Signed with MIL but returning? IND needs interior presence.'}],picks:'Incoming 1sts: 6 · Max tradable: 3 · Can trade: 2027/2031/2033 · Note: 2026 pick conveyed to LAC'},
- ORL:{p:'#0077C0',s:'#C4CED4',alert:'Paolo Banchero led core. Need a star guard desperately. Lost No. 18 pick to CHA in deal. Franz Wagner + Paolo building together.',fa:[{n:'Paolo Banchero',pos:'PF',tag:'Cornerstone',fit:'Franchise anchor. Two-way star who needs a dynamic guard partner.'},{n:'Franz Wagner',pos:'SF',tag:'Cornerstone',fit:'Two-way excellence. Banchero + Wagner is a legitimate building block.'},{n:'Markelle Fultz',pos:'PG',tag:'Free Agent',fit:'When healthy, exactly what ORL needs. Health is everything.'}],picks:'Outgoing: POR unprotected 2028 · MEM swap 2029 · MEM unprotected 2030 · Can trade: 2032/2033 · Max tradable: 1'},
- DET:{p:'#C8102E',s:'#006BB6',alert:'Acquired Isaiah Stewart from Memphis via NYK triangle. Jalen Duren future uncertain. Cade Cunningham building years.',fa:[{n:'Cade Cunningham',pos:'PG',tag:'Franchise Pillar',fit:'The unquestioned leader. Offense and culture run through Cade.'},{n:'Isaiah Stewart',pos:'C',tag:'New Arrival',fit:'Physical interior presence acquired from the MEM deal.'},{n:'Jalen Duren',pos:'C',tag:'Decision',fit:'Leaving Detroit per reports. Big hole if he walks.'}],picks:'Incoming 1sts: 7 · Max tradable: 4 · All own firsts available · 2nds: 15'},
- NOP:{p:'#0C2340',s:'#C8102E',alert:'Quiet offseason after trading 2026 No. 8 pick to ATL. Zion Williamson health is the entire franchise question mark. Cap space available.',fa:[{n:'Zion Williamson',pos:'PF',tag:'Health = Everything',fit:'When healthy, one of the most unstoppable players alive. But when?'},{n:'Brandon Ingram',pos:'SF',tag:'Trade Candidate',fit:'Toronto and others interested. Could be on the move this offseason.'},{n:'CJ McCollum',pos:'PG',tag:'Leader',fit:'Veteran floor general who keeps NOP competitive.'}],picks:'Incoming: MIL unprotected 2027 (if outside top 5) · Max tradable: 4 · Own 1st next 7 years · 2nds: 5'},
- WAS:{p:'#002B5C',s:'#E31837',alert:'AJ Dybantsa selected No. 1 overall! New franchise cornerstone era begins. Kyle Kuzma era is over. Full reset around the BYU star.',fa:[{n:'AJ Dybantsa',pos:'SF',tag:'No. 1 Overall Pick',fit:'THE generational talent. No. 1 pick. Washington hasn\'t had a cornerstone since Wall.'},{n:'Alexandre Sarr',pos:'C',tag:'Young Core',fit:'Year 2. Dybantsa + Sarr young frontcourt is the future of this franchise.'},{n:'Jordan Poole',pos:'SG',tag:'Keep or Trade',fit:'Veteran scoring guard. Could be traded to add pieces around Dybantsa.'}],picks:'Incoming 1sts: 8 · Max tradable: 5 · 2nd most fav BOS/MIL/POR 2028 · Swap own/BKN/PHI/PHX least fav 2028 · PHX swap 2030'},
+  NYK:{p:'#006BB6',s:'#F58426',
+    alert:'🏆 2026 NBA CHAMPIONS. Shamet back 4yr. Robinson left. Drummond signed 1yr/$3.8M. Championship defense now.',
+    fa:[
+      {n:'Mitchell Robinson',pos:'C',tag:'Gone -- Exploring',fit:'Lost him. Drummond is the bridge. Need another legit center if they want to protect the repeat.'},
+      {n:'Jordan Clarkson',pos:'SG',tag:'Available UFA',fit:'Just won a ring with NYK. Sixth Man scoring off the bench. Could return cheap or cash in elsewhere.'},
+      {n:'Jalen Duren',pos:'C',tag:'RFA -- Pistons',fit:'If NYK wants to swing big, Duren is the elite interior upgrade. Detroit will match but the Knicks have the cap muscle to force it.'},
+    ],
+    picks:'Max tradable: 1 · Can trade: 2033 · Swap rights: 2030/2032/2033'},
+
+  OKC:{p:'#007AC1',s:'#EF3B24',
+    alert:'Isaiah Hartenstein re-signed. Dort option picked up. Joe + Wiggins traded for 4 second-round picks. Payroll trimming underway.',
+    fa:[
+      {n:'Peyton Watson',pos:'SF',tag:'RFA -- Nuggets',fit:'Denver says they\'ll match anything, but OKC has the picks and the cap flexibility to test that. Elite defensive wing at 23 years old.'},
+      {n:'Jonathan Kuminga',pos:'PF',tag:'UFA -- ATL declined opt',fit:'23-year-old combo forward. Atlanta cut him loose. Premier athleticism and isolation scoring -- fits OKC\'s physicality.'},
+      {n:'Gary Trent Jr.',pos:'SG',tag:'Available UFA',fit:'OKC has enough creation. They need a dead-eye spot-up guy who can guard. Trent is that.'},
+    ],
+    picks:'Incoming 1sts: 10 · Max tradable: 7 · 2nds: 12'},
+
+  MIA:{p:'#98002E',s:'#F9A01B',
+    alert:'Giannis + Portis acquired. Wiggins extended. Fontecchio re-signed. Hardaway Jr. signed 1yr. Heat building around Giannis + Bam.',
+    fa:[
+      {n:'LeBron James',pos:'SF',tag:'Top Target -- UFA',fit:'Rich Paul has Miami in the inner circle. Giannis + LeBron + Bam would be the most ridiculous frontcourt in NBA history.'},
+      {n:'James Harden',pos:'PG',tag:'Available UFA',fit:'Harden declined his option. Heat need a creative playmaker to run the show alongside Giannis. Harden\'s passing and pull-up game fits.'},
+      {n:'Rui Hachimura',pos:'PF',tag:'Available UFA',fit:'Elite three-point shooting at 6\'8". Heat desperately need floor spacing around Giannis and Bam\'s post game.'},
+    ],
+    picks:'Max tradable: 2 · Can trade: 2031/2033'},
+
+  SA:{p:'#C4CED4',s:'#000000',
+    alert:'Champagnie signed multi-year. Barnes re-signed 1yr/$8M. Tobias Harris reportedly joining.',
+    fa:[
+      {n:'Tobias Harris',pos:'PF',tag:'Reported Deal',fit:'Veteran 3-and-D wing who won\'t step on Wembanyama\'s toes. Exactly what SA needs -- smart, space the floor, get out of the way.'},
+      {n:'Gary Payton II',pos:'PG',tag:'Available UFA',fit:'Elite perimeter defender. Wembanyama needs dogs around him defensively. Payton is that guy off the bench.'},
+      {n:'Gabe Vincent',pos:'PG',tag:'Available UFA',fit:'Reliable backup guard who can defend multiple positions and knock down threes. Fits the Spurs\' depth needs perfectly.'},
+    ],
+    picks:'Incoming 1sts: 7 · Max tradable: 4 · 2nds: 14'},
+
+  BOS:{p:'#007A33',s:'#FFFFFF',
+    alert:'Jaylen Brown traded to PHI for Paul George. Queta extended 4yr. Ron Harper Jr. signed 3yr. Reloading around Tatum.',
+    fa:[
+      {n:'Khris Middleton',pos:'SF',tag:'Available UFA',fit:'34 years old but still a legitimate half-court weapon. Boston needs a vet scorer now that Brown is gone.'},
+      {n:'Bradley Beal',pos:'SG',tag:'High Risk UFA',fit:'Injury history is toxic, but if he\'s healthy the three-level scoring is exactly what Tatum needs next to him. Medical gamble.'},
+      {n:'Bennedict Mathurin',pos:'SG',tag:'Available UFA',fit:'Young bucket-getter who proved he can score in volume. Could be the complementary scorer they need to reload fast.'},
+    ],
+    picks:'Max tradable: 3 · Can trade: 2027/2031/2033'},
+
+  MIN:{p:'#0C2340',s:'#236192',
+    alert:'LaMelo acquired. Dosunmu re-signed. Randle traded to BKN. Now pitching LeBron James hard.',
+    fa:[
+      {n:'LeBron James',pos:'SF',tag:'Top Pursuit -- UFA',fit:'Minnesota is on Rich Paul\'s whiteboard. Edwards + LaMelo + LeBron is absurd. The Wolves are pitching legacy -- they\'ve never won a title.'},
+      {n:'Draymond Green',pos:'PF',tag:'Available UFA',fit:'Declined his option. Gobert + Draymond frontcourt is arguably the best defensive duo in basketball. MIN needs that identity.'},
+      {n:'Jalen Duren',pos:'C',tag:'RFA -- Pistons',fit:'If they pivot off Gobert, Duren is the modern upgrade. 22 years old, averaged 19.5 and 10.5 this season.'},
+    ],
+    picks:'Max tradable: 1 (2033) · 2032 frozen'},
+
+  LAL:{p:'#552583',s:'#FDB927',
+    alert:'LeBron leaving. Kessler acquired via S&T from UTA. Ayton traded to WAS. Sexton + Grimes signed. Lakers fully pivoting to Luka era.',
+    fa:[
+      {n:'Rui Hachimura',pos:'PF',tag:'Likely Departing',fit:'Leaving with LeBron per reports. But if they can keep him around Luka on a discount he\'s the perfect spacing big wing they need.'},
+      {n:'Nick Richards',pos:'C',tag:'Available UFA',fit:'Physical backup center now that Ayton is gone. Kessler is the starter -- need a tough body behind him.'},
+      {n:'Jonathan Kuminga',pos:'PF',tag:'UFA Target',fit:'Athletic combo forward who can guard and score in isolation next to Luka. High upside at 23 years old.'},
+    ],
+    picks:'Can trade: 2031/2033 · Swap rights: 2028/2030/2031/2032/2033'},
+
+  DEN:{p:'#0E2240',s:'#FEC524',
+    alert:'Jokic staying but delaying extension talks until after 2026-27. Peyton Watson RFA -- Denver saying they will match everything.',
+    fa:[
+      {n:'Peyton Watson',pos:'SF',tag:'Must Match RFA',fit:'Denver says they\'re matching any offer. 14.6 PPG, 41.1% from three, plus defensive upside. Cannot let him walk.'},
+      {n:'Russell Westbrook',pos:'PG',tag:'Available UFA',fit:'15.2 and 6.7 last year. Backup ball handler who doesn\'t need the ball to function could work behind Murray. Low risk.'},
+      {n:'Nicolas Batum',pos:'PF',tag:'Available UFA',fit:'Veteran IQ, defense, and a legit three-point threat. Exactly the kind of glue guy Denver needs around Jokic.'},
+    ],
+    picks:'Max tradable: NONE · Heavily mortgaged'},
+
+  POR:{p:'#E03A3E',s:'#000000',
+    alert:'Ja Morant acquired. Robert Williams III re-signed 3yr/$44M. Building the Lillard + Morant + Avdija era.',
+    fa:[
+      {n:'Kelly Oubre Jr.',pos:'SF',tag:'Available UFA',fit:'2yr deal reported. Physical wing who gives Portland the athleticism and energy off the bench that their new backcourt needs.'},
+      {n:'Khris Middleton',pos:'SF',tag:'Available UFA',fit:'Half-court shot creator at the 3. Gives Morant and Lillard a third option who can score without needing creation.'},
+      {n:'Gary Payton II',pos:'PG',tag:'Available UFA',fit:'Elite on-ball defender to give the Blazers some defensive identity with their new star-heavy offensive backcourt.'},
+    ],
+    picks:'Incoming 1sts: 8 · Max tradable: 5'},
+
+  CLE:{p:'#860038',s:'#FDBB30',
+    alert:'Harden declined option but re-signing. Valančiūnas return expected. LeBron James -- Cleveland now the frontrunner for a homecoming.',
+    fa:[
+      {n:'LeBron James',pos:'SF',tag:'FRONTRUNNER -- UFA',fit:'"Growing belief" around the NBA it\'s Cleveland. Anniversary of 2016 title is fresh. Bronny is there. Rich Paul\'s whiteboard has CLE at the top of the inner circle.'},
+      {n:'Jalen Duren',pos:'C',tag:'RFA -- Pistons',fit:'If they land LeBron they need a center. Duren at 22 averaged 19.5 and 10.5. The Cavs could blow the cap up for LeBron + Duren.'},
+      {n:'Rui Hachimura',pos:'PF',tag:'Available UFA',fit:'6\'8" shooter at 44.3% from three. If LeBron comes home, Hachimura is the perfect third piece to space around him and Mitchell.'},
+    ],
+    picks:'Max tradable: 1 · 2033 frozen'},
+
+  GS:{p:'#1D428A',s:'#FFC72C',
+    alert:'Porzingis re-signed 2yr/$40M. De\'Anthony Melton re-signed 2yr/$11M. Quenten Post RFA -- Memphis submitted offer sheet. Draymond declined option.',
+    fa:[
+      {n:'Draymond Green',pos:'PF',tag:'Declined Option -- RFA/UFA',fit:'Declined his $27.7M option. The Warriors want him back. If Curry\'s running it back, Draymond should be there. But he\'s exploring.'},
+      {n:'LeBron James',pos:'SF',tag:'Pursuing -- UFA',fit:'Warriors losing Draymond market. Now pivoting hard to LeBron pitch. Curry\'s final chapter with LeBron would be an all-time NBA moment.'},
+      {n:'Jonathan Kuminga',pos:'PF',tag:'UFA Target',fit:'GSW drafted him. He became a UFA when ATL declined the option. Warriors know him. Athletic wing next to Curry makes sense.'},
+    ],
+    picks:'Incoming 1sts: 7 · Max tradable: 3'},
+
+  UTA:{p:'#002B5C',s:'#F9A01B',
+    alert:'Kessler traded to LAL. Nurkic re-signed 2yr. Okogie signed 2yr/$12M. Peterson (No. 2 pick) and Ace Bailey arriving. Full youth movement.',
+    fa:[
+      {n:'Jordan Clarkson',pos:'SG',tag:'Available UFA',fit:'Utah drafted Clarkson\'s era but this rebuild is for real. He\'s off the roster now. Could return as a vet mentor for Peterson and Bailey.'},
+      {n:'Nick Richards',pos:'C',tag:'Available UFA',fit:'Physical interior presence behind Nurkic. Utah\'s frontcourt depth is thin after trading Kessler. Richards is a cheap, solid plug.'},
+      {n:'Gary Payton II',pos:'PG',tag:'Available UFA',fit:'Veteran defensive anchor for a young Jazz team still learning what winning looks like.'},
+    ],
+    picks:'Incoming 1sts: 8 · Max tradable: 5 (post-Kessler deal)'},
+
+  MEM:{p:'#5D76A9',s:'#12173F',
+    alert:'Morant traded. Boozer (No. 3) arrives. Isaiah Stewart acquired. Quenten Post offer sheet submitted to GSW. Full youth rebuild.',
+    fa:[
+      {n:'Quenten Post',pos:'C',tag:'RFA Offer Sheet -- GSW',fit:'Memphis submitted the offer sheet to force Golden State\'s hand. They need a center next to Boozer and Stewart to develop the frontcourt.'},
+      {n:'Kentavious Caldwell-Pope',pos:'SF',tag:'Available UFA',fit:'Championship DNA, elite defender, knockdown corner three. Championship-caliber wing who can teach the young core how to win.'},
+      {n:'Nicolas Batum',pos:'PF',tag:'Available UFA',fit:'Veteran IQ piece for a young team that just blew it up. Batum knows how to win and won\'t need a star\'s role.'},
+    ],
+    picks:'Incoming 1sts: 11 · Max tradable: 7'},
+
+  MIL:{p:'#00471B',s:'#EEE1C6',
+    alert:'Post-Giannis era. Herro, Kel\'el Ware, Jaquez back. Norman Powell signed 2yr. Turner reportedly joining. Full identity reset.',
+    fa:[
+      {n:'Myles Turner',pos:'C',tag:'Reported Deal',fit:'Rim protector to anchor the post-Giannis frontcourt. Kel\'el Ware + Turner gives Milwaukee a legit twin-tower rebuild foundation.'},
+      {n:'Khris Middleton',pos:'SF',tag:'Available UFA',fit:'One last tour at home? Middleton built his career in Milwaukee. Veteran leadership for a young team starting over.'},
+      {n:'Jonathan Kuminga',pos:'PF',tag:'UFA Target',fit:'Athletic young combo forward to build around Herro. 23 years old and 46.3% from the field -- exactly what this rebuild needs.'},
+    ],
+    picks:'Can trade own starting 2031 · Max tradable: 2'},
+
+  ATL:{p:'#E03A3E',s:'#C1D32F',
+    alert:'Trae re-signed. Kuminga option declined -- he\'s a UFA. Aaron Wiggins arrived from OKC deal. Hawks drafting Wagler (No. 8).',
+    fa:[
+      {n:'Jonathan Kuminga',pos:'PF',tag:'Released -- Now UFA',fit:'Hawks declined his $24.3M option which makes him a free agent they can now pursue at a reset price. Young, athletic, can guard -- fits next to Trae.'},
+      {n:'DeMar DeRozan',pos:'SF',tag:'Available UFA',fit:'Sacramento releasing him. Half-court mid-range maestro gives Trae a second playmaker who never needs the ball in his hands.'},
+      {n:'Nick Richards',pos:'C',tag:'Available UFA',fit:'Physical interior anchor. Atlanta\'s frontcourt is one of the softest in the league. Richards brings toughness they desperately lack.'},
+    ],
+    picks:'Incoming 1sts: 7 · Max tradable: 4 · Can trade own starting 2029'},
+
+  DAL:{p:'#00538C',s:'#002B5E',
+    alert:'Post-Doncic era. Acuff (No. 9) drafted. Kyrie still aboard. Two picks used. Full reset around Flagg and existing core.',
+    fa:[
+      {n:'DeMar DeRozan',pos:'SF',tag:'Available UFA',fit:'SAC releasing him. Veteran bucket-getter who can run a secondary offense. Takes pressure off Flagg to create everything in Year 1.'},
+      {n:'Khris Middleton',pos:'SF',tag:'Available UFA',fit:'Smart, efficient wing who doesn\'t need a huge role. Perfect vet piece around Dallas\'s young core while Flagg and Acuff develop.'},
+      {n:'Russell Westbrook',pos:'PG',tag:'Available UFA',fit:'Backup ball handler with juice. Young roster needs veteran energy and someone who can run the second unit without being passive.'},
+    ],
+    picks:'Incoming: LAL unprotected 2029 · GS top-20 prot. 2030 · Can trade own starting 2031'},
+
+  PHX:{p:'#1D1160',s:'#E56020',
+    alert:'Luke Kennard signed. Mark Williams signed 3yr. Post-fire sale rebuild. Booker era. Heavily mortgaged pick situation.',
+    fa:[
+      {n:'Rui Hachimura',pos:'PF',tag:'Available UFA',fit:'44.3% from three at 6\'8". Booker needs a real shooting big who can guard on the other end. Hachimura fits that role exactly.'},
+      {n:'Peyton Watson',pos:'SF',tag:'RFA -- Nuggets',fit:'Elite defensive wing who can guard 1 through 4. If Phoenix wants to build an identity around defense and Booker, Watson is the move.'},
+      {n:'Bradley Beal',pos:'SG',tag:'High Risk UFA',fit:'Injury-riddled but still a three-level scorer. Phoenix is desperate for offensive creation. Medical gamble but massive upside if healthy.'},
+    ],
+    picks:'Heavily mortgaged · Max tradable: 2 · Can trade: 2033'},
+
+  LAC:{p:'#C8102E',s:'#1D428A',
+    alert:'Kawhi to Toronto done. Ingram + Dick incoming from TOR. Hachimura signed 2yr/$28M. Miller re-signed 3yr. Building around Garland + Ingram.',
+    fa:[
+      {n:'Bennedict Mathurin',pos:'SG',tag:'Available UFA',fit:'Volume scorer who proved he can put up numbers independently. Gives the Clippers a second offensive option behind Ingram.'},
+      {n:'Draymond Green',pos:'PF',tag:'Available UFA',fit:'Leadership, defense, IQ. LAC has the cap room. Draymond + Ingram + Garland is a legit contender core in the West.'},
+      {n:'Gary Trent Jr.',pos:'SG',tag:'Available UFA',fit:'Shooter who can guard. Garland needs someone to spot up while he attacks. Trent is a plug-and-play option at a reasonable price.'},
+    ],
+    picks:'Incoming: IND unprotected 2029 · Max tradable: 3'},
+
+  SAC:{p:'#5A2D81',s:'#63727A',
+    alert:'DeRozan released. LaVine opted in. Sabonis possibly available. Precious Achiuwa re-signed. Acuff (No. 9 SAC) drafted.',
+    fa:[
+      {n:'DeMar DeRozan',pos:'SF',tag:'Releasing -- UFA',fit:'Wait -- they\'re the ones letting him go. Fox needs a wing, not another guard. Target here is the replacement.'},
+      {n:'Khris Middleton',pos:'SF',tag:'Available UFA',fit:'Smart wing scorer who doesn\'t need creation. Slots in perfectly next to Fox as a half-court safety valve when the clock winds down.'},
+      {n:'Jalen Duren',pos:'C',tag:'RFA -- Pistons',fit:'Sacramento was in serious talks per reports. A Duren + Sabonis frontcourt is massive but would require moving Sabonis. Intriguing.'},
+    ],
+    picks:'Incoming 1sts: 9 · Max tradable: 6'},
+
+  PHI:{p:'#006BB6',s:'#ED174C',
+    alert:'ACQUIRED Jaylen Brown from BOS. Harden declined option but re-signing. Philon (No. 22) drafted. LeBron is reportedly being pitched.',
+    fa:[
+      {n:'LeBron James',pos:'SF',tag:'Pursuing -- UFA',fit:'Rich Paul mentioned PHI when discussing suitors. Brown + LeBron + Embiid is a Big Three that would make the East shake. Money is there.'},
+      {n:'James Harden',pos:'PG',tag:'Re-signing -- UFA',fit:'Declined his option to restructure. Wants to stay in Philly. New deal expected -- keeps the engine running for Brown\'s first season as a Sixer.'},
+      {n:'Nicolas Batum',pos:'PF',tag:'Available UFA',fit:'Veteran leadership and three-point shooting. Embiid needs smart IQ guys around him. Batum is a perfect low-cost glue piece.'},
+    ],
+    picks:'Incoming: LAC unprotected 2028 · Max tradable: 4'},
+
+  CHI:{p:'#CE1141',s:'#000000',
+    alert:'Claxton acquired. Wilson (No. 4) drafted. Norman Powell signed 2yr. Most cap space in the East. Active shopping.',
+    fa:[
+      {n:'Jalen Duren',pos:'C',tag:'RFA -- Pistons',fit:'Chicago has the cap space to submit an offer sheet Detroit would struggle to match. Duren + Claxton would be a terrifying young frontcourt.'},
+      {n:'Jonathan Kuminga',pos:'PF',tag:'UFA Target',fit:'Athletic young forward at 23. Bulls need upside and scoring next to their young core. Kuminga\'s raw ability is the highest ceiling available.'},
+      {n:'Bradley Beal',pos:'SG',tag:'Available UFA',fit:'High-risk, high-reward. If Beal is healthy he\'s a 20+ point scorer. Chicago has the room to gamble. Worth the medical risk at the right price.'},
+    ],
+    picks:'All 7 own firsts in hand · Max tradable: 4 · 2nds: 12'},
+
+  BKN:{p:'#000000',s:'#FFFFFF',
+    alert:'Randle + No. 28 pick received. Sharpe extended 2yr/$20M. Full rebuild around Cam Thomas. Richest war chest in the league.',
+    fa:[
+      {n:'Jalen Duren',pos:'C',tag:'RFA -- Pistons',fit:'Brooklyn has the picks and cap space to submit an unmatchable offer. Duren + Thomas as the frontcourt for the next decade is elite building.'},
+      {n:'Rui Hachimura',pos:'PF',tag:'Available UFA',fit:'Shooting big who plays smart. Brooklyn needs legitimate talent around Thomas. Hachimura at 6\'8" and 44.3% from three is real value.'},
+      {n:'Jonathan Kuminga',pos:'PF',tag:'UFA Target',fit:'23 years old, 46.3% FG, elite athleticism. Kuminga + Cam Thomas as BKN\'s young core is the kind of long-term asset accumulation Marks loves.'},
+    ],
+    picks:'Incoming 1sts: 13 · Max tradable: 9 · 2nds: 19'},
+
+  HOU:{p:'#CE1141',s:'#000000',
+    alert:'KD opted in. Thornton acquired from NYK. Green + Sengun core intact. Rockets building toward contention window.',
+    fa:[
+      {n:'Draymond Green',pos:'PF',tag:'Available UFA',fit:'Declined his option. Houston + Draymond is a fascinating fit -- veteran IQ and defense to anchor a young team trying to win now.'},
+      {n:'James Harden',pos:'PG',tag:'Re-signing PHI',fit:'Former Rocket. PHI will keep him but Houston stays on the radar as backup. If Harden falls out of PHI, HOU would welcome him home.'},
+      {n:'Khris Middleton',pos:'SF',tag:'Available UFA',fit:'Half-court shot creator to give KD and Green a reliable third wheel. Middleton doesn\'t need the ball -- perfect fit next to those two.'},
+    ],
+    picks:'Incoming 1sts: 9 · Max tradable: 6'},
+
+  TOR:{p:'#CE1141',s:'#000000',
+    alert:'KAWHI back. Ingram + Gradey Dick sent to LAC. Building around Kawhi + Scottie in Toronto.',
+    fa:[
+      {n:'LeBron James',pos:'SF',tag:'Available UFA',fit:'Rich Paul mentioned Toronto as a potential fit on the podcast. Kawhi + Scottie + LeBron would be the greatest defensive front three in NBA history.'},
+      {n:'DeMar DeRozan',pos:'SF',tag:'Available UFA',fit:'Coming home narrative is real. SAC releasing him. Toronto is where DeMar became a star. One final chapter in The 6.'},
+      {n:'Draymond Green',pos:'PF',tag:'Available UFA',fit:'Nurse-coached defense-first systems need a brain. Draymond + Kawhi + Scottie Barnes as Toronto\'s defensive core would be genuinely terrifying.'},
+    ],
+    picks:'Incoming 1sts: 7 · Max tradable: 4'},
+
+  CHA:{p:'#1D1160',s:'#00788C',
+    alert:'LaMelo traded. Naz Reid arrived. Coby White re-signed $74M/3yr. 20 second-round picks accumulated. Rebuilding with assets.',
+    fa:[
+      {n:'Bennedict Mathurin',pos:'SG',tag:'Available UFA',fit:'Young scorer who can play off the ball next to Coby White. Charlotte needs offensive juice after losing LaMelo\'s creation.'},
+      {n:'Nick Richards',pos:'C',tag:'Available UFA',fit:'They already know him -- Richards played in Charlotte before. Physical center who gives the young frontcourt around Naz Reid some toughness.'},
+      {n:'Gary Trent Jr.',pos:'SG',tag:'Available UFA',fit:'Shooter. Charlotte is starved for perimeter scoring post-LaMelo. Trent fits as a veteran contributor while the young core develops.'},
+    ],
+    picks:'Incoming 1sts: 10 · Max tradable: 7'},
+
+  IND:{p:'#002D62',s:'#FDBB30',
+    alert:'Haliburton Achilles recovery ongoing. Braden Smith acquired. Lost pick to LAC. Waiting for Tyrese to return healthy.',
+    fa:[
+      {n:'Myles Turner',pos:'C',tag:'Departed -- MIL',fit:'Gone to Milwaukee. Indiana needs a new anchor. Their center situation is now a real problem heading into Haliburton\'s return season.'},
+      {n:'Nick Richards',pos:'C',tag:'Available UFA',fit:'Cheap, physical center while they wait for the right move. The Pacers can\'t break the bank -- Richards is the practical bridge option.'},
+      {n:'Gabe Vincent',pos:'PG',tag:'Available UFA',fit:'Reliable backup guard who defends and hits threes. IND needs depth insurance behind Haliburton during recovery.'},
+    ],
+    picks:'Incoming 1sts: 6 · Max tradable: 3'},
+
+  ORL:{p:'#0077C0',s:'#C4CED4',
+    alert:'Banchero + Franz core intact. Lost No. 18 pick to CHA. Desperately need a guard creator to complete the backcourt.',
+    fa:[
+      {n:'James Harden',pos:'PG',tag:'Re-signing PHI -- Off Table',fit:'Would\'ve been the dream but he\'s going back to Philly. ORL needs a point guard badly regardless.'},
+      {n:'Bennedict Mathurin',pos:'SG',tag:'Available UFA',fit:'Aggressive scorer who creates off the bounce. Banchero needs a guard who can get their own shot. Mathurin is young and explosive.'},
+      {n:'Gary Trent Jr.',pos:'SG',tag:'Available UFA',fit:'Shooting guard who can guard. Banchero and Franz need perimeter spacing -- Trent is a plug-and-play option they can afford.'},
+    ],
+    picks:'Can trade: 2032/2033 · Max tradable: 1'},
+
+  DET:{p:'#C8102E',s:'#006BB6',
+    alert:'Jalen Duren RFA -- 19.5 and 10.5 this season. Huerter signed 3yr/$27M. Onyenso two-way. Stewart arrived from MEM.',
+    fa:[
+      {n:'Jalen Duren',pos:'C',tag:'MUST MATCH RFA',fit:'Averaged 19.5 and 10.5. All-NBA regular season. Pistons will match everything -- generational wealth vs. leverage battle. He\'s staying.'},
+      {n:'Bradley Beal',pos:'SG',tag:'Available UFA',fit:'If Cade needs another creator, Beal is the highest-ceiling swing available. Health is the only question. Detroit has cap room to gamble.'},
+      {n:'Russell Westbrook',pos:'PG',tag:'Available UFA',fit:'Veteran backup guard energy for a young team. Westbrook at 37 still posts 15 and 6.7. Piston culture could use that swagger off the bench.'},
+    ],
+    picks:'Incoming 1sts: 7 · Max tradable: 4 · 2nds: 15'},
+
+  NOP:{p:'#0C2340',s:'#C8102E',
+    alert:'Quiet offseason. Zion health = everything. Ingram trade talks with TOR. Cap space available to be creative.',
+    fa:[
+      {n:'LeBron James',pos:'SF',tag:'Available UFA -- Long Shot',fit:'Zion + LeBron would be the most absurd power forward combo ever. Pelicans don\'t have the money but the idea is genuinely hilarious and terrifying.'},
+      {n:'DeMar DeRozan',pos:'SF',tag:'Available UFA',fit:'Veteran scorer who doesn\'t need creation. Gives Murray and McCollum a third offensive option who can make shots in the half court.'},
+      {n:'Khris Middleton',pos:'SF',tag:'Available UFA',fit:'Smart half-court wing to take pressure off Zion. When healthy Zion can\'t be the only creation option -- Middleton as the backup plan.'},
+    ],
+    picks:'Max tradable: 4 · Own all 7 own firsts'},
+
+  WAS:{p:'#002B5C',s:'#E31837',
+    alert:'Dybantsa No. 1. Ayton acquired from LAL for Hardy + 2nds. Anthony Davis extension eligible August 6. Sarr Year 2.',
+    fa:[
+      {n:'Anthony Davis',pos:'C',tag:'Extension Eligible Aug 6',fit:'10-time All-Star. Washington is building around AD + Dybantsa + Sarr. Extension talks begin August 6. The franchise needs this done.'},
+      {n:'Jalen Duren',pos:'C',tag:'RFA -- Detroit',fit:'If Davis wants out, Duren is the young alternative. But WAS is betting on AD and Dybantsa. Duren as backup plan only if Davis leaves.'},
+      {n:'Draymond Green',pos:'PF',tag:'Available UFA',fit:'Veteran IQ to mentor the young Wizards core. Dybantsa is 19 years old -- he needs a winner around him who knows how to compete.'},
+    ],
+    picks:'Incoming 1sts: 8 · Max tradable: 5'},
 };
 
 
