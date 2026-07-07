@@ -4700,12 +4700,46 @@ const articleEngineData = {
   </div>
 
 
-<div style="display:inline-flex; align-items:center; gap:0.35rem; opacity:0.45;">
-  <span style="font-family:'Inter',sans-serif;font-size:0.52rem;font-weight:300;
-               letter-spacing:0.2em;text-transform:uppercase;color:#FF0000;">Updated</span>
-  <span style="font-family:'Inter',sans-serif;font-size:0.52rem;font-weight:600;
-               text-transform:uppercase;letter-spacing:0.1em;color:inherit;">· June 5, 2026</span>
+<div class="mb-10 p-5 sm:p-7 rounded-[2rem] bg-gradient-to-br from-black/5 to-transparent dark:from-white/10 dark:to-white/5 border border-black/10 dark:border-white/10 shadow-lg backdrop-blur-md transition-all hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_40px_rgba(255,255,255,0.05)]">
+    <div class="flex items-center gap-3 mb-5">
+        <span class="flex h-2.5 w-2.5 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="font-black text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-emerald-600 dark:text-emerald-400">Pre-Draft Update</span>
+    </div>
+    <p class="font-medium text-sm sm:text-base leading-relaxed mb-6 text-black/80 dark:text-white/90">
+        Before the draft kicked off, I officially moved Darryn Peterson up to my <strong>#1 overall prospect</strong>. Here is the original receipt:
+    </p>
+    
+    <!-- PUT YOUR REAL X.COM LINK IN THE HREF BELOW -->
+    <a href="https://x.com/qb_vision/status/2067485341590630737?s=46" target="_blank" class="group block p-5 sm:p-6 rounded-3xl bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition-all duration-500 transform hover:-translate-y-1">
+        <div class="flex justify-between items-start mb-4">
+            <div class="flex items-center gap-3 sm:gap-4">
+                <img src="images/me.png" alt="@Qb_vision" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-100 dark:border-white/10 shadow-sm">
+                <div>
+
+                    <p class="text-[9px] sm:text-[10px] font-bold text-black/40 dark:text-white/40 uppercase tracking-widest mt-1.5">@Qb_vision</p>
+                </div>
+            </div>
+            <i class="fa-brands fa-x-twitter text-xl sm:text-2xl text-black dark:text-white opacity-20 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"></i>
+        </div>
+        
+        <!-- PASTE YOUR REAL TWEET TEXT BELOW -->
+        <p class="text-sm sm:text-base font-medium text-black/80 dark:text-gray-300 mb-5 line-clamp-3 leading-relaxed">
+    
+    
+    Ok so Darryn Peterson is the best player in this draft. I see some Kawhi in him.
+        </p>
+        
+        <div class="flex items-center text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-blue-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            Read on X <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+        </div>
+    </a>
 </div>
+
+
+
 
   <div class="ps-section">
     <span class="ps-section-label">Physical</span>
