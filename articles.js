@@ -4709,7 +4709,7 @@ const articleEngineData = {
         <span class="font-black text-[9px] sm:text-[10px] tracking-[0.3em] uppercase text-emerald-600 dark:text-emerald-400">Pre-Draft Update</span>
     </div>
     <p class="font-medium text-sm sm:text-base leading-relaxed mb-6 text-black/80 dark:text-white/90">
-        Before the draft kicked off, I officially moved Darryn Peterson up to my <strong>#1 overall prospect</strong>. Here is the original receipt:
+        Before the draft kicked off, I officially moved Darryn Peterson up to my <strong>#1 overall prospect</strong>. 
     </p>
     
     <!-- PUT YOUR REAL X.COM LINK IN THE HREF BELOW -->
