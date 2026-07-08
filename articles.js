@@ -1247,7 +1247,7 @@ const articleEngineData = {
     hero: "images/dyb.webp",
     time: "13 MIN READ",
     published: "June 17, 2026",
-    updated: null,
+    updated: "July 8, 2026",
     title: "AJ Dybantsa Scouting Report",
     content: `
 <style>
@@ -1575,7 +1575,7 @@ const articleEngineData = {
   </div>
 
   <div class="aj-reckoning">
-    <span class="aj-r-label">Now The Honest Reckoning</span>
+    <span class="aj-r-label">Now The Honest Truth</span>
     <p>His handle is tight relative to his style of play -- meaning he's dependent on hesitation, two-foot gathers, and his physical load rather than genuine manipulation of the dribble to create separation. He can become slightly overreliant on playing off two feet, and his spin moves, while functional, have a telegraphed quality. Defenders  at the NBA level will read some of his moves well in advance. The agility simply isn't there in the same way the athleticism is -- he's a powerful, stored-energy athlete rather than a twitchy, reactive one, and that stored quality makes him predictable when he needs to improvise in tight spaces.</p>
     <p>His three-point shot is flat. He shot 33.1% overall from three, with a pronounced pause when catching and shooting as he reorganizes his shot. He shot better off the dribble (36%) than catching and shooting (30%), which is the opposite of what you want to see from a developing shooter. The range shows up on tape but the reliability doesn't.</p>
     <p>When doubles come, and they came often at BYU, he runs from them. Backs to the basket, ball handler's worst nightmare: he turns to face the double and panics. He was seen multiple times running back to the three-point line to avoid the double rather than making the read, which stalls the offense, creates lag, and generates turnovers at the moments when his team needs him to be decisive. That's not a small thing. That's a fundamental processing deficiency under pressure that shows up specifically when he's most needed.</p>
