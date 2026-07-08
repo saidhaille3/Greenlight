@@ -4892,7 +4892,7 @@ const articleEngineData = {
     hero: "images/finch.png",
     time: "15 MIN READ",
     published: "April 12, 2026",
-    updated: null,
+    updated: "July 6, 2026",
     title: "Good Enough Is the Enemy of Great",
     content: `
 <style>
