@@ -1770,22 +1770,22 @@ function giRenderDepth(team,intel){
     {pos:'C',  courtLabel:'Paint'},
   ];
 
-  const buildNode=(name,pos,isStarter)=>{
-    const c=posColors[pos]||posColors.SF;
-    const img=giHeadshot(name);
-    const shortName=name.split(' ').length>1?name.split(' ').slice(-1)[0]:name;
-    return `
-    <div class="gi-pnode" title="${name}">
-      <div class="gi-av-ring" style="--av-border:${c.ring};--av-glow:${c.glow}">
-        <img src="${img}" alt="${name}"
-             onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(shortName)}&background=1a2a45&color=ffffff&size=96&bold=true&format=png'"
-             loading="lazy">
-        ${isStarter?'<span class="gi-starter-dot"></span>':''}
-        <span class="gi-pos-badge" style="background:${c.badge};color:${c.badgeText}">${pos}</span>
+  const buildNode = (name, pos, isStarter) => {
+  const c = posColors[pos] || posColors.SF;
+  const short = name.split(' ').slice(-1)[0];
+  return `
+  <div class="gi-pnode" title="${name}">
+    <div class="gi-av-ring" style="--av-border:${c.ring};--av-glow:${c.glow}">
+      <div style="width:clamp(42px,10vw,52px);height:clamp(42px,10vw,52px);border-radius:50%;background:#1a2a45;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:11px;font-weight:900;color:${c.badgeText};">${short.substring(0,3).toUpperCase()}</span>
       </div>
-      <p class="gi-pname">${shortName}</p>
-    </div>`;
-  };
+      ${isStarter ? '<span class="gi-starter-dot"></span>' : ''}
+      <span class="gi-pos-badge" style="background:${c.badge};color:${c.badgeText}">${pos}</span>
+    </div>
+    <p class="gi-pname">${short}</p>
+  </div>`;
+};
+
 
   let starters='', benchPlayers=[];
 
