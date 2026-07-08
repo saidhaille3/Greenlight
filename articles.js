@@ -5170,9 +5170,9 @@ const articleEngineData = {
 
   <p>A million miles. Six days before the playoffs.</p>
 
-  <p>Read that sentence and hold it. That statement sounds like it's coming from a man who has lost the thread of an entire season -- and who has been losing it, in patches and fragments, for years -- and who does not fully understand that the thread itself is part of his job to hold.</p>
+  <p>Read that sentence and hold it. That statement sounds like it's coming from a man who has lost the thread of an entire season -- and who has been losing it, in patches and fragments, for years. It sounds like a coach who does not yet fully understand that the thread itself...is part of his job to hold.</p>
 
-  <p>This is the Chris Finch problem. Not that he is a bad coach. He is not. Not that he has failed this franchise. He has not, by most conventional measures.</p>
+  <p>This is the Chris Finch problem. Not that he is a bad coach. He is not. Not that he has failed this franchise. He has not, at least by most conventional measures.</p>
 
   <p>The problem is far more insidious than failure.</p>
 
@@ -5184,17 +5184,40 @@ const articleEngineData = {
     <span class="fa-part-rule"></span>
   </div>
 
+
   <p>To understand the argument, you must first understand the context it lives inside. Because the argument is not that Chris Finch should never have been here.</p>
+
 
   <p>When Finch arrived, the Timberwolves hadn't been relevant in years. He rebuilt the culture. He built a defensive identity. He took an irrelevant team to two Western Conference Finals in back-to-back seasons. The second-longest playoff streak in franchise history since the Kevin Garnett era. He holds the highest winning percentage in franchise history.</p>
 
+<!-- 1. BUILDERS vs CONQUERORS -- gold pull quote, philosophical/neutral tone -->
+<div style="
+  margin: 2.75rem 0;
+  padding: 1.75rem 1.75rem 1.75rem 2rem;
+  border-left: 3px solid #d4af37;
+  background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+  border-radius: 0 1.25rem 1.25rem 0;
+">
+  <p style="
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem);
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.55;
+    margin: 0;
+    color: #b8960a;
+  ">Sports rewards builders. Then demands conquerors. </p>
+</div>
+
+
   <p>These accomplishments are real. They deserve genuine respect. But there is a particular cruelty in professional sports that rewards builders and then demands conquerors and acts surprised when the two are not the same person. The NBA is littered with coaches who were exactly the right man for the moment they entered and exactly the wrong man for the moment the franchise needed to ascend. Men who built programs but couldn't win championships. Men who were great architects but poor generals.</p>
 
-  <p>Chris Finch built the house. The question: the urgent, time-sensitive, Anthony-Edwards'-prime and what comes with it.</p>
+  <p>Chris Finch built the house. Now comes the urgent, time-sensitive question: Anthony-Edwards'-prime and what comes with it.</p>
 
   <p>Can Chris Finch lead what lives inside it to a championship.?</p>
 
-  <p>The evidence is accumulated across six years and two conference finals exits. It is also accumulated in this season of documented and statistically verified dysfunction (heck even Finch himself has acknowledged it). And these collection of evidence says a resounding no.</p>
+  <p>The evidence is accumulated across six years and two conference finals exits. It is also accumulated in this season of documented and statistically verified dysfunction (heck even Finch himself has acknowledged it). And these collection of evidence says a resounding <span class="font-black text-red-800 dark:text-red-700 uppercase tracking-[0.2em] text-[1.15em] mx-1">NO.</span>
+</p>
 
   <p>Here is why.</p>
 
@@ -5235,7 +5258,42 @@ const articleEngineData = {
     <span class="fa-part-rule"></span>
   </div>
 
-  <p>Finch's so-called "young core" -- Rob Dillingham, Terrence Shannon Jr., and Jaylen Clark, second-year pros all acquired with development in mind -- has been, by the season's own accounting, a collective disappointment.</p>
+  <p>Finch's "young core" consisted of Rob Dillingham, Terrence Shannon Jr., and Jaylen Clark. They are second-year pros acquired with development in mind and they have been, by the season's own accounting, a collective disappointment.</p>
+  <!-- 2. CONLEY / KNOWN QUANTITY -- red warning card, damning indictment tone -->
+<div style="
+  background: rgba(220,38,38,0.04);
+  border: 1px solid rgba(220,38,38,0.15);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+">
+  <div style="
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  "></div>
+  <span style="
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  ">Hampered Development</span>
+  <p style="
+    font-family: 'Georgia', serif;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin: 0;
+    opacity: 0.85;
+  ">Finch is a coach who trusts the known floor over the promising ceiling. Almost excessivley. </p>
+</div>
+
 
   <p>Dillingham, the former Timberwolf was the most expensive of the group in terms of draft capital spent. During his time here, his shot inside the arc plummeted every year. Shannon's promised offensive development largely stagnated. Clark remains an offensive ghost who earns his minutes entirely on defense.</p>
 
@@ -5243,20 +5301,20 @@ const articleEngineData = {
 
   <div class="fa-stat">
     <div class="fa-stat-box">
-      <span class="fa-sv">27th</span>
-      <span class="fa-sl">Bench Scoring</span>
+      <span class="fa-sv">27th ranked</span>
+      <span class="fa-sl">Team Bench Scoring</span>
     </div>
 
     <div class="fa-stat-box">
-      <span class="fa-sv">25th</span>
-      <span class="fa-sl">Bench Minutes</span>
+      <span class="fa-sv">25th ranked</span>
+      <span class="fa-sl">Team Bench Minutes</span>
     </div>
 
   </div>
 
   <p>For most of the season, the Timberwolves ranked 27th in the NBA in bench scoring. Every regular bench player had a negative on/off net rating. The team ranked 25th in bench minutes. That is lower than the two previous seasons, lower than when they had less talent, lower than a team with genuine championship aspirations should ever be.</p>
 
-  <p>And yet buried inside that dysfunction was something Finch consistently refused to pull: Joan Beringer. A 19-year-old French rookie big with legitimate rim-running athleticism, elite timing instincts, and a fearlessness around the rim that his teammates openly lacked. He was repeatedly cycled back to the G League rather than given the sustained NBA minutes that could accelerate his development.</p>
+  <p>And yet buried inside that dysfunction was a player Finch consistently refused to play: Joan Beringer. A 19-year-old French rookie big with legitimate rim-running athleticism, elite timing instincts, and a fearlessness around the rim that his teammates openly lacked. He was repeatedly cycled back to the G League rather than given the sustained NBA minutes that could accelerate his development.</p> 
 
   <p>When Beringer had a breakout game and the question arose about his role going forward, Finch's answer was essentially: he probably isn't done going back to Iowa. The stated rationale was finding him minutes alongside three established bigs who don't miss games.</p>
 
@@ -5292,8 +5350,25 @@ const articleEngineData = {
   <p>Against Charlotte on April 5 -- with a five-point halftime lead, after Bones Hyland hit a buzzer-beater three to close the half -- the Timberwolves came out in the third quarter and were outscored 34-19. Charlotte took the lead early in the third and never trailed again. Six of Minnesota's 18 turnovers came in that third quarter alone.</p>
 
   <p>The Hornets made halftime adjustments. Minnesota did not. Or more precisely -- Minnesota came out of halftime playing the same way they played in the first half, against a team that had watched that first half and built a response to it.</p>
+  
+
 
   <p>This deficiency is real and chronic. And it points to a team who is being out-coached. The opponent's staff identified something, communicated it clearly, and the players executed it. The Timberwolves staff either didn't identify it, didn't communicate it clearly, or communicated it and the players didn't execute which circles back to the edge problem and the locker room authority problem.</p>
+  <!-- 3. TWO EXPLANATIONS -- centered isolated callout, verdict tone -->
+<div style="
+  font-family: 'Georgia', serif;
+  font-size: clamp(1.05rem, 2.8vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.65;
+  margin: 2.5rem 0;
+  padding: 2rem 1.75rem;
+  border-top: 1px solid rgba(220,38,38,0.2);
+  border-bottom: 1px solid rgba(220,38,38,0.2);
+  text-align: center;
+  color: #dc2626;
+">
+  When a coach knows the problem and the problem keeps happening, there are only two explanations.
+</div>
 
   <p>The Wolves' late-game offensive structure devolves into the same pattern repeatedly: heavy isolation, little variety, no fallback architecture when the isolation isn't working.</p>
 
@@ -5308,6 +5383,39 @@ const articleEngineData = {
   </div>
 
   <p>Championship coaches are improvisational artists working within structure. They have a system. They trust it. And then the game tells them something and they respond. They pull a lever, swap a lineup, call a timeout that changes momentum, make a substitution that reframes the game's entire narrative.</p>
+<div style="
+  position: relative;
+  margin: 4rem 0;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(145deg, #050505 0%, #1a0505 100%);
+  border-left: 4px solid #dc2626;
+  border-radius: 0 1.5rem 1.5rem 0;
+  box-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.15), inset 0 0 0 1px rgba(220, 38, 38, 0.1);
+  overflow: hidden;
+">
+  <div style="position: absolute; top: -50%; left: -10%; width: 250px; height: 250px; background: radial-gradient(circle, rgba(220,38,38,0.12) 0%, transparent 70%); filter: blur(40px); pointer-events: none;"></div>
+  
+  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; position: relative; z-index: 2;">
+    <span style="display: block; width: 6px; height: 6px; background: #dc2626; border-radius: 50%; box-shadow: 0 0 10px #dc2626;"></span>
+    <span style="font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 900; letter-spacing: 0.35em; text-transform: uppercase; color: #dc2626;">The Critical Flaw</span>
+  </div>
+
+  <p style="
+    position: relative;
+    z-index: 2;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.25rem, 3.5vw, 1.6rem) !important;
+    font-style: italic;
+    font-weight: 900 !important;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+    color: #f8fafc !important;
+    opacity: 1 !important;
+  ">
+    Finch's deepest flaw is his <span style="background: linear-gradient(120deg, #ef4444, #b91c1c); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 25px rgba(220,38,38,0.3);">philosophical relationship</span> with adaptation.
+  </p>
+</div>
+
 
   <p>Adaptive intelligence -- never so committed to what is planned that you cannot see what is actually happening.</p>
 
@@ -5325,11 +5433,11 @@ const articleEngineData = {
 
   <p>Here is the number that clarifies everything.</p>
 
-  <p>No team in the NBA played more clutch-time games this season than the Timberwolves. Their record: 20-26. A 43% win rate in the moments that decide contests.</p>
+  <p>No team in the NBA played more clutch-time games this season than the Timberwolves. Their record: 20-26. A 43% win rate in the moments that decide contests. That places them well outside the top half of the leauge. The year prior, they had an abysmal 41.9% clutch win rate which ranked 25th in the leauge</p>
 
   <div class="fa-number">
     <span class="fa-big">20–26</span>
-    <span class="fa-caption">Clutch record · Most clutch games in the NBA · 43% win rate</span>
+    <span class="fa-caption">Clutch record</span>
   </div>
 
   <p>For a team with Anthony Edwards. With Rudy Gobert. With Julius Randle. With a roster that its own front office has called arguably the deepest in franchise history.</p>
@@ -5349,17 +5457,18 @@ const articleEngineData = {
     </div>
     <div class="fa-stat-box">
       <span class="fa-sv" style="color:#d4af37;">28%</span>
-      <span class="fa-sl">Team FGs He Carries</span>
+      <span class="fa-sl">Accounts for 28% of his team's FGs</span>
     </div>
     <div class="fa-stat-box">
       <span class="fa-sv">–6.4</span>
       <span class="fa-sl">Offensive Rating Drop</span>
     </div>
     <div class="fa-stat-box">
-      <span class="fa-sv" style="color:#d4af37;">10+</span>
+      <span class="fa-sv">10+</span>
       <span class="fa-sl">Games Missed (Knee)</span>
     </div>
   </div>
+
 
   <p>Anthony Edwards has already missed double-digit games this season with knee inflammation at 24 years old. He carries approximately 28% of his team's made field goals. Without him, the offensive rating drops by 6.4 points.</p>
 
@@ -5374,8 +5483,49 @@ const articleEngineData = {
   <p>The championship coach test asks one question: when this team is playing a tough Western Conference matchup in a seven-game series and the opponent has made halftime adjustments that are working…what does Chris Finch do?</p>
 
   <p>The evidence, across six seasons and two conference finals exits and one season of the most consistent late-game dysfunction in the league, answers that question.</p>
+<style>
+  .finch-article .fa-statement {
+    margin: 3rem 0;
+    padding: 1.5rem;
+    border-left: 4px solid #dc2626;
+    background: linear-gradient(to right, rgba(220, 38, 38, 0.08), transparent);
+    border-radius: 0 0.75rem 0.75rem 0;
+  }
+  
+  @media (min-width: 640px) {
+    .finch-article .fa-statement {
+      padding: 2rem 2.5rem;
+      margin: 4rem 0;
+    }
+  }
 
-  <div class="fa-pull-red"><p>He trusts the formula. He tightens the rotation. He runs the isolation. He manages the press conference.</p></div>
+  .finch-article .fa-statement p {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.05rem, 3vw, 1.3rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.65 !important;
+    opacity: 0.9 !important;
+    margin-bottom: 1.25rem !important;
+    color: inherit;
+  }
+
+  .finch-article .fa-statement p:last-child {
+    margin-bottom: 0 !important;
+    font-size: clamp(1.15rem, 3.5vw, 1.45rem) !important;
+    font-weight: 900 !important;
+    color: #dc2626 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+</style>
+  <div class="fa-statement">
+    <p>Ant-Man needs a coach whose edge matches his talent.</p>
+    
+    <p>A Championship Coach</p>
+  </div>
+
+
 
   <p>And the team that was a million miles away in April is still a million miles away when the series ends.</p>
 
