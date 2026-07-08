@@ -394,7 +394,7 @@ const articleEngineData = {
   </div>
 
   <div class="kl-comp-card">
-    <span class="kl-c-label">Boba's Read</span>
+    <span class="kl-c-label">My Read</span>
     <p>Franz Wagner is the body-type and skill-set comp that keeps appearing, and it's earned. Both are 6'9 forwards who handle the ball, score in a variety of ways without needing dominant athleticism, and bring positional versatility that fits any roster construction.</p>
     <p>The LaMelo, Giddey, and Sarr scoring comparison is the most meaningful contextual fact in his entire profile: the Next Stars program has produced real NBA players, and he just outscored all of them.</p>
   </div>
@@ -412,8 +412,8 @@ const articleEngineData = {
   </div>
 
   <div class="kl-grade-banner">
-    <span class="kl-grade-num">Top 6</span>
-    <span class="kl-grade-caption">My Grade · 2026 NBA Draft</span>
+    <span class="kl-grade-num">Top 6 Talent</span>
+    <span class="kl-grade-caption">4th Overall  2026</span>
   </div>
 
 </div>
@@ -825,8 +825,8 @@ const articleEngineData = {
   </div>
 
   <div class="cw-grade-banner">
-    <span class="cw-grade-num">Top 3</span>
-    <span class="cw-grade-caption">My Grade · 2026 NBA Draft</span>
+    <span class="cw-grade-num">Top 3 Talent</span>
+
   </div>
 
 </div>
@@ -1234,8 +1234,8 @@ const articleEngineData = {
   </div>
 
   <div class="ie-grade-banner">
-    <span class="ie-grade-num">13-18</span>
-    <span class="ie-grade-caption">My Grade · 2026 NBA Draft</span>
+    <span class="ie-grade-num">13-18 Talent</span>
+
   </div>
 
 </div>
@@ -2002,8 +2002,8 @@ const articleEngineData = {
   </div>
 
   <div class="bb-grade-banner">
-    <span class="bb-grade-num">5-8</span>
-    <span class="bb-grade-caption">Projected Range · 2026 NBA Draft</span>
+    <span class="bb-grade-num">5-8 talent</span>
+    <span class="bb-grade-caption">5th Overall 2026</span>
   </div>
 
 </div>
@@ -2364,8 +2364,8 @@ const articleEngineData = {
   </div>
 
   <div class="kw-grade-banner">
-    <span class="kw-grade-num">Top 12</span>
-    <span class="kw-grade-caption">My Grade · 2026 NBA Draft</span>
+    <span class="kw-grade-num">Top 12 Talent</span>
+    <span class="kw-grade-caption">6th Overall 2026</span>
   </div>
 
 </div>
@@ -2737,8 +2737,8 @@ const articleEngineData = {
   </div>
 
   <div class="kf-grade-banner">
-    <span class="kf-grade-num">28-30</span>
-    <span class="kf-grade-caption">My Grade</span>
+    <span class="kf-grade-num">28-30 Talent</span>
+
   </div>
 
 </div>
@@ -3110,8 +3110,8 @@ const articleEngineData = {
   </div>
 
   <div class="am-grade-banner">
-    <span class="am-grade-num">8-12</span>
-    <span class="am-grade-caption">Projected Range · 2026 NBA Draft</span>
+    <span class="am-grade-num">8-12 Talent</span>
+    <span class="am-grade-caption">8th Overall 2026</span>
   </div>
 
 </div>
@@ -3459,8 +3459,8 @@ const articleEngineData = {
   </div>
 
   <div class="jq-grade-banner">
-    <span class="jq-grade-num">30-40</span>
-    <span class="jq-grade-caption">Projected Range · 2026 NBA Draft</span>
+    <span class="jq-grade-num">30-40 Talent</span>
+
   </div>
 
 </div>
@@ -3744,8 +3744,8 @@ const articleEngineData = {
   </div>
 
   <div class="cb-grade-banner">
-    <span class="cb-grade-num">Top 5</span>
-    <span class="cb-grade-caption">Not Top 3 · My Grade · 2026 NBA Draft</span>
+    <span class="cb-grade-num">Top 5 talent</span>
+    <span class="cb-grade-caption">3rd overall 2026</span>
   </div>
 
 </div>
@@ -4096,8 +4096,8 @@ const articleEngineData = {
   </div>
 
   <div class="da-grade-banner">
-    <span class="da-grade-num">30-35</span>
-    <span class="da-grade-caption">My Grade · 2026 NBA Draft</span>
+    <span class="da-grade-num">30-35 Talent</span>
+
   </div>
 
 </div>
