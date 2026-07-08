@@ -3639,13 +3639,14 @@ function launchProspect(articleId) {
   New Episode
 </div>
 <p class="pod-episode-title">
-  Ep.2 — 6/5/26: Kat will probably bring the Wemby train to a screeching halt (for now) + Formula for the future NBA in combatting wemby's dominance
+  Ep.3 — 7/6/26: Why Lebron to Minnesota makes perfect sense. Breaking down his schematic fit with Lamelo & Ant.
 </p>
 
 
       </p>
       
-      <audio id="podcastAudio" src="audio/Ep2.mp3"></audio>
+<audio id="podcastAudio" src="audio/Ep3.mp3"></audio>
+
 
 
     </div>
@@ -3727,10 +3728,11 @@ function launchProspect(articleId) {
 <script>
 const PODCAST_SHOWS = {
   greenlight: [
+    { ep: 3, title: "Why Lebron to Minnesota makes perfect sense. Breaking down his schematic fit with Lamelo & Ant.", src: "audio/Ep3.mp3", date: "7/6/26" }, // <-- Add your new episode here
     { ep: 2, title: "Kat will probably bring the Wemby train to a halt", src: "audio/Ep2.mp3", date: "6/5/26" }
-    
   ]
 };
+
 
 function renderEpisodes(showKey) {
   const list = document.getElementById('episodeList');
