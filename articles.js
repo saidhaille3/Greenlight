@@ -4489,7 +4489,7 @@ const articleEngineData = {
     hero: "images/pete.jpeg",
     time: "10 MIN READ",
     published: "May 18, 2026",
-    updated: null,
+    updated: "June 10, 2026",
     title: "Darryn Peterson Scouting Report",
     content: `
 <style>

@@ -5319,7 +5319,17 @@ window.openReader = function(id) {
   setMeta('og:url', 'https://glsnetwork.com/index.html#' + id);
   document.title = data.title + ' · Greenlight';
 
-  // ... rest of your existing openReader code
+ const stampEl = document.getElementById('reader-updated-stamp');
+if (data.updated) {
+  stampEl.style.display = 'flex';
+  stampEl.innerHTML = `
+    <span style="font-family:'Inter',sans-serif;font-size:0.52rem;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:#FF0000;opacity:0.45;">Updated</span>
+    <span style="font-family:'Inter',sans-serif;font-size:0.52rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:inherit;opacity:0.45;">· ${data.updated}</span>
+  `;
+} else {
+  stampEl.style.display = 'none';
+}
+
 
   
   window._savedScrollY = window.scrollY;
