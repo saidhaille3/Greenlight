@@ -1608,7 +1608,7 @@ const articleEngineData = {
 
   <div class="aj-comp-card">
     <span class="aj-c-label">My Read</span>
-    <p>I see some Kemp in the frame and the athleticism. I also see Wiggins in the movement pattern -- the long, flowing, somewhat stiff style yet explosive style of play that produces good-to-great results in college without quite achieving the dominant consistency you expect from a franchise cornerstone. Andrew Wiggins was the first overall pick. Andrew Wiggins is a very good NBA player who won a championship as a key rotation piece, not a superstar. That's the ceiling I worry about before he plays an NBA minute.</p>
+    <p>I see some Kemp in the frame and the athleticism. I also see Wiggins in the movement pattern -- the long, flowing, somewhat stiff yet explosive style of play that produces good-to-great results in college without quite achieving the dominant consistency you expect from a franchise cornerstone. Andrew Wiggins was the first overall pick. Andrew Wiggins is a very good NBA player who won a championship as a key rotation piece, not a superstar. That's the ceiling I worry about before he plays an NBA minute.</p>
     <p>The personality reads as charismatic, brash, enormously confident -- almost smugly so, with the eye rolls and the animated reactions that feel reminiscent of a young Dennis Smith Jr. energy. There's charm there, real engagement and passion, but there's also a question nobody can answer yet: is there room inside that sureness for the humility required to accept that he has a long way to go? Some players with supreme confidence are wired to channel it productively. Others use it as insulation against the coaching and development they actually need. Which version Dybantsa is remains genuinely open.</p>
   </div>
 
