@@ -3756,7 +3756,7 @@ const articleEngineData = {
     hero: "images/acuff.jpeg",
     time: "10 MIN READ",
     published: "June 17, 2026",
-    updated: null,
+    updated: "July 9, 2026,"
     title: "Darius Acuff Jr. Scouting Report",
     content: `
 <style>
@@ -4079,7 +4079,7 @@ const articleEngineData = {
   <div class="da-disconnect-card">
     <span class="da-dc-label">Me vs The Market</span>
     <p>This is where my evaluation splits hardest from the industry consensus. Acuff has been invited to the NBA Draft Green Room, reserved for prospects the league expects to go in the lottery. Some scouts now view him as the top point guard in this entire class, ahead of Flemings, Wagler, and Philon. Jonathan Wasserman's most recent mock has him going 5th overall to the Clippers.</p>
-    <p>I'm not buying it, and frankly my grade has tightened even further from where it was -- 30-35 puts him well outside the lottery conversation entirely. His shooting development is real and the floater is a legitimate weapon, but a green room invite and a top-five mock placement don't erase what shows up on defensive film -- the gambling, the slow recovery, the off-ball lapses -- or the movement limitations that make him so dependent on craft rather than physical tools to create any separation at all. The league can fall in love with shot-making and scoring volume. I'm grading the whole player, both ends of the floor, and what I see on defense and in his movement profile caps him hard.</p>
+    <p>I just don't see it. His shooting development is real and the floater is a legitimate weapon, but a green room invite and a top-five mock placement don't erase what shows up on defensive film -- the gambling, the slow recovery, the off-ball lapses -- or the movement limitations that make him so dependent on craft rather than physical tools to create any separation at all. The league can fall in love with shot-making and scoring volume. I'm grading the whole player, both ends of the floor, and what I see on defense and in his movement profile caps him hard.</p>
   </div>
 
   <div class="da-divider"></div>
@@ -4092,7 +4092,7 @@ const articleEngineData = {
 
   <div class="da-projection">
     <p>His shooting range and floater give him a real offensive floor regardless of role, and the vision suggests legitimate upside as a connective passer. But the movement limitations are a genuine long-term ceiling concern -- tight hips and stiff ankles don't typically loosen up much with NBA strength training, and that caps how much separation he'll ever create independently. The defensive tape is the bigger issue: overaggressive gambling, slow recovery in switches, and poor off-ball discipline add up to a player who's actively giving possessions back on one end while scoring them on the other.</p>
-    <p>Early second, late first range. The shooting and passing are real, but the defensive habits and athletic ceiling are significant enough that I have him outside the lottery entirely, buzz be damned.</p>
+    <p>Early second, late first range. The shooting and passing are real, but the defensive habits and athletic ceiling are significant enough that I have him outside the lottery entirely.</p>
   </div>
 
   <div class="da-grade-banner">
