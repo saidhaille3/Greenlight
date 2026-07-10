@@ -3756,7 +3756,7 @@ const articleEngineData = {
     hero: "images/acuff.jpeg",
     time: "10 MIN READ",
     published: "June 17, 2026",
-    updated: "July 9, 2026,"
+    updated: "July 9, 2026",
     title: "Darius Acuff Jr. Scouting Report",
     content: `
 <style>
