@@ -1768,12 +1768,13 @@ function giRenderDepth(team,intel){
 
   // Court zone order -- backcourt at top, frontcourt at bottom (like looking at opponent's half)
   const zones=[
-    {pos:'PG', courtLabel:'Backcourt'},
-    {pos:'SG', courtLabel:'Guard Line'},
-    {pos:'SF', courtLabel:'Wing'},
-    {pos:'PF', courtLabel:'Frontcourt'},
     {pos:'C',  courtLabel:'Paint'},
+    {pos:'PF', courtLabel:'Frontcourt'},
+    {pos:'SF', courtLabel:'Wing'},
+    {pos:'SG', courtLabel:'Guard Line'},
+    {pos:'PG', courtLabel:'Backcourt'},
   ];
+
 
   const buildNode = (name, pos, isStarter) => {
   const c = posColors[pos] || posColors.SF;
