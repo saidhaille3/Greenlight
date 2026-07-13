@@ -5302,9 +5302,10 @@ if (myButton) {
 <script>
 window.openReader = function(id) {
     window._currentArticleId = id;
+    currentArticleId = id;
     
-
   const data = articleEngineData[id];
+
   if (!data) return;
 
   // Update OG meta tags for sharing
