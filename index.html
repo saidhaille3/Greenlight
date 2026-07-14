@@ -1447,37 +1447,638 @@ filter: invert(1) brightness(2);
       remain EXACTLY as in the original -- only render functions change ── */
 
 const GI_PICKS_STRUCTURED = {
-  NYK:{incoming:[],outgoing:[{year:2027,to:'BKN',protection:'Unprotected'},{year:2029,to:'BKN',protection:'Unprotected'},{year:2031,to:'BKN',protection:'Unprotected'}],swaps:[{year:2030,with:'BKN'},{year:2032,with:'BKN'},{year:2033,with:'BKN'}],notes:'Max tradable: 1 · Can trade: 2033'},
-  OKC:{incoming:[{year:2028,from:'DAL',protection:'Swap'},{year:2029,from:'DEN',protection:'Top-5 Protected'}],outgoing:[],swaps:[],notes:'10 incoming firsts · 7 max tradable · 12 second-round picks'},
-  MIA:{incoming:[{year:2028,from:'MIL',protection:'Unprotected'},{year:2029,from:'MIL',protection:'Unprotected'},{year:2030,from:'MIL',protection:'Unprotected'},{year:2031,from:'MIL',protection:'Unprotected'}],outgoing:[{year:2027,to:'CHA',protection:'Top-14 Protected'},{year:2028,to:'CHA',protection:'Unprotected (if 2027 not conveyed)'}],swaps:[],notes:'Max tradable: 2 · Giannis trade haul -- 4 MIL firsts incoming'},
-  SA:{incoming:[{year:2027,from:'ATL',protection:'Unprotected'},{year:2028,from:'BOS',protection:'Swap'},{year:2030,from:'DAL',protection:'Swap'},{year:2030,from:'MIN',protection:'Swap'}],outgoing:[{year:2027,to:'OKC',protection:'Top-17 Protected'}],swaps:[],notes:'7 incoming firsts · 4 max tradable · 14 second-round picks'},
-  BOS:{incoming:[],outgoing:[{year:2029,to:'POR',protection:'Unprotected'},{year:2029,to:'WAS',protection:'Unprotected'}],swaps:[{year:2028,with:'SA'}],notes:'Max tradable: 3 · Can trade: 2027/2031/2033'},
-  MIN:{incoming:[{year:2033,from:'CHA',protection:'Unprotected'}],outgoing:[{year:2027,to:'MEM',protection:'Unprotected'},{year:2027,to:'UTA',protection:'Unprotected'},{year:2029,to:'CHA',protection:'Top-5 Protected'},{year:2029,to:'UTA',protection:'Top-5 Protected'},{year:2031,to:'SAC',protection:'Unprotected'}],swaps:[{year:2030,with:'SA'}],notes:'Max tradable: 1 · 2032 frozen (2nd apron)'},
-  LAL:{incoming:[{year:2029,from:'DAL',protection:'Unprotected'}],outgoing:[{year:2027,to:'MEM',protection:'Top-4 Protected'}],swaps:[],notes:'Max tradable: 2 · Can trade: 2031/2033'},
-  DEN:{incoming:[],outgoing:[{year:2027,to:'OKC',protection:'Top-5 Protected'},{year:2029,to:'OKC',protection:'Top-5 Protected'},{year:2032,to:'BKN',protection:'Unprotected'}],swaps:[],notes:'Max tradable: NONE · Heavily mortgaged'},
-  POR:{incoming:[{year:2028,from:'BOS',protection:'Unprotected'},{year:2028,from:'ORL',protection:'Unprotected'},{year:2029,from:'BOS',protection:'Unprotected'},{year:2030,from:'ORL',protection:'Unprotected'}],outgoing:[],swaps:[],notes:'8 incoming firsts · 5 max tradable'},
-  CLE:{incoming:[],outgoing:[{year:2027,to:'MEM',protection:'Unprotected'},{year:2029,to:'UTA',protection:'Unprotected'},{year:2029,to:'CHA',protection:'Unprotected'}],swaps:[],notes:'Max tradable: 1 · 2033 frozen'},
-  GS:{incoming:[{year:2030,from:'DAL',protection:'Top-20 Protected'}],outgoing:[],swaps:[],notes:'7 incoming firsts · Max tradable: 3'},
-  UTA:{incoming:[],outgoing:[{year:2027,to:'MEM',protection:'Most Fav'}],swaps:[{year:2028,with:'CLE'}],notes:'8 incoming firsts · 5 max tradable'},
-  MEM:{incoming:[{year:2027,from:'LAL',protection:'Top-4 Protected'},{year:2027,from:'UTA',protection:'Most Fav'},{year:2031,from:'PHX',protection:'Unprotected'}],outgoing:[],swaps:[],notes:'11 incoming firsts · 7 max tradable'},
-  MIL:{incoming:[],outgoing:[{year:2027,to:'ATL',protection:'Unprotected'},{year:2028,to:'POR',protection:'Unprotected'},{year:2029,to:'POR',protection:'Unprotected'},{year:2030,to:'POR',protection:'Unprotected'}],swaps:[],notes:'Max tradable: 2 · Can trade own starting 2031'},
-  ATL:{incoming:[{year:2027,from:'SA',protection:'Unprotected'},{year:2027,from:'MIL',protection:'NOP Least Fav'}],outgoing:[{year:2027,to:'SA',protection:'Unprotected'}],swaps:[],notes:'7 incoming firsts · 4 max tradable'},
-  DAL:{incoming:[{year:2029,from:'LAL',protection:'Unprotected'},{year:2030,from:'GS',protection:'Top-20 Protected'}],outgoing:[{year:2027,to:'CHA',protection:'Top-2 Protected'},{year:2028,to:'OKC',protection:'Swap'},{year:2029,to:'HOU',protection:'Unprotected'},{year:2029,to:'BKN',protection:'Unprotected'},{year:2030,to:'SA',protection:'Swap'}],swaps:[],notes:'Max tradable: 0 until 2031 · Heavily mortgaged'},
-  PHX:{incoming:[],outgoing:[{year:2027,to:'HOU',protection:'Unprotected'},{year:2028,to:'BKN',protection:'Unprotected'},{year:2029,to:'HOU',protection:'Unprotected'},{year:2031,to:'MEM',protection:'Unprotected'}],swaps:[],notes:'Max tradable: 2 · 2032 frozen · Heavily mortgaged'},
-  LAC:{incoming:[{year:2029,from:'IND',protection:'Unprotected'}],outgoing:[{year:2027,to:'PHI',protection:'Least Fav'},{year:2028,to:'PHI',protection:'Unprotected'}],swaps:[],notes:'Max tradable: 3 · Can trade: 2030-2033'},
-  SAC:{incoming:[{year:2031,from:'MIN',protection:'Unprotected'}],outgoing:[],swaps:[],notes:'9 incoming firsts · 6 max tradable'},
-  PHI:{incoming:[{year:2028,from:'LAC',protection:'Unprotected'}],outgoing:[{year:2028,to:'BKN',protection:'Top-8 Protected'}],swaps:[],notes:'Max tradable: 4 · Can trade: 2027/2031/2033'},
-  CHI:{incoming:[],outgoing:[],swaps:[],notes:'7 incoming firsts · 4 max tradable · Clean books'},
-  BKN:{incoming:[{year:2027,from:'NYK',protection:'Unprotected'},{year:2029,from:'NYK',protection:'Unprotected'},{year:2031,from:'NYK',protection:'Unprotected'},{year:2032,from:'DEN',protection:'Unprotected'}],outgoing:[],swaps:[],notes:'13 incoming firsts · 9 max tradable · 19 second-round picks · Richest war chest'},
-  HOU:{incoming:[{year:2027,from:'PHX',protection:'Unprotected'},{year:2029,from:'DAL',protection:'Unprotected'},{year:2029,from:'PHX',protection:'Unprotected'}],outgoing:[],swaps:[],notes:'9 incoming firsts · 6 max tradable'},
-  TOR:{incoming:[],outgoing:[],swaps:[],notes:'7 incoming firsts · 4 max tradable · Clean books'},
-  CHA:{incoming:[{year:2027,from:'DAL',protection:'Top-2 Protected'},{year:2027,from:'MIA',protection:'Top-14 Protected'},{year:2033,from:'MIN',protection:'Unprotected'}],outgoing:[{year:2029,to:'CLE',protection:'Least Fav'}],swaps:[],notes:'10 incoming firsts · 7 max tradable'},
-  IND:{incoming:[],outgoing:[{year:2026,to:'LAC',protection:'Conveyed already'}],swaps:[],notes:'6 incoming firsts · 3 max tradable'},
-  ORL:{incoming:[],outgoing:[{year:2028,to:'POR',protection:'Unprotected'},{year:2030,to:'MEM',protection:'Unprotected'}],swaps:[],notes:'Max tradable: 1 · Can trade: 2032/2033'},
-  DET:{incoming:[],outgoing:[],swaps:[],notes:'7 incoming firsts · 4 max tradable · 15 second-round picks · Clean books'},
-  NOP:{incoming:[{year:2027,from:'MIL',protection:'Unprotected (if outside top 5)'}],outgoing:[{year:2027,to:'ATL',protection:'via trade'}],swaps:[],notes:'Max tradable: 4 · Own all 7 own firsts'},
-  WAS:{incoming:[{year:2028,from:'PHX',protection:'Unprotected'},{year:2030,from:'PHX',protection:'Swap'}],outgoing:[],swaps:[],notes:'8 incoming firsts · 5 max tradable'},
+  NYK:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[{from:'SAC',protection:'Unprotected (via HOU deal)'}],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:false,in:[],out:[{to:'BKN',protection:'Unprotected'}]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[{from:'SAC',protection:'Via HOU trade'}],out:[]},
+      2030:{own:true,in:[{from:'PHX',protection:'Via deal'},{from:'DAL',protection:'Via deal'}],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:1,apronStatus:'2nd Apron'
+  },
+  OKC:{
+    first:{
+      2027:{own:true,in:[{from:'LAC',protection:'Swap'}],out:[]},
+      2028:{own:true,in:[{from:'DAL',protection:'Swap'},{from:'MEM',protection:'Top-5 Prot'}],out:[]},
+      2029:{own:true,in:[{from:'DEN',protection:'Top-5 Prot'}],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[{from:'WAS',protection:'Unprotected'},{from:'HOU',protection:'Unprotected'}],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:7,apronStatus:'Under Cap'
+  },
+  MIA:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[{from:'MIL',protection:'Unprotected'}],out:[]},
+      2029:{own:true,in:[{from:'MIL',protection:'Unprotected'}],out:[]},
+      2030:{own:true,in:[{from:'MIL',protection:'Unprotected'}],out:[]},
+      2031:{own:true,in:[{from:'MIL',protection:'Unprotected'}],out:[{to:'CHA',protection:'Top-14 Prot'}]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:false,in:[{from:'MIL',protection:'Unprotected (Giannis deal)'}],out:[]},
+    },
+    maxTradeable:2,apronStatus:'2nd Apron'
+  },
+  SA:{
+    first:{
+      2027:{own:true,in:[{from:'ATL',protection:'Unprotected'}],out:[]},
+      2028:{own:true,in:[{from:'BOS',protection:'Swap'}],out:[]},
+      2029:{own:true,in:[],out:[{to:'OKC',protection:'Top-17 Prot'}]},
+      2030:{own:true,in:[{from:'DAL',protection:'Swap'},{from:'MIN',protection:'Swap'}],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[{from:'PHI',protection:'Unprotected'},{from:'WAS',protection:'Unprotected'}],out:[]},
+      2030:{own:true,in:[{from:'PHI',protection:'Unprotected'}],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:4,apronStatus:'Under Cap'
+  },
+  BOS:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[{to:'SA',protection:'Swap'}]},
+      2029:{own:false,in:[],out:[{to:'POR',protection:'Unprotected'}]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[{from:'ORL',protection:'Unprotected'}],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:3,apronStatus:'Lux Tax'
+  },
+  MIN:{
+    first:{
+      2027:{own:false,in:[],out:[{to:'MEM',protection:'Unprotected'},{to:'UTA',protection:'Unprotected'}]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:false,in:[],out:[{to:'CHA',protection:'Top-5 Prot'},{to:'UTA',protection:'Top-5 Prot'}]},
+      2030:{own:true,in:[],out:[{to:'SA',protection:'Swap'}]},
+      2031:{own:false,in:[],out:[{to:'SAC',protection:'Unprotected'}]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[{from:'CHA',protection:'Unprotected'}],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:false,in:[],out:[{to:'FROZEN',protection:'2nd Apron Frozen'}]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:1,apronStatus:'2nd Apron'
+  },
+  LAL:{
+    first:{
+      2027:{own:true,in:[],out:[{to:'MEM',protection:'Top-4 Prot'}]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[{from:'DAL',protection:'Unprotected'}],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:2,apronStatus:'Lux Tax'
+  },
+  DEN:{
+    first:{
+      2027:{own:false,in:[],out:[{to:'OKC',protection:'Top-5 Prot'}]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:false,in:[],out:[{to:'OKC',protection:'Top-5 Prot'}]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:false,in:[],out:[{to:'BKN',protection:'Unprotected'}]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[{from:'SA',protection:'Unprotected'},{from:'SA',protection:'Unprotected (Tarris Reed deal)'}],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:0,apronStatus:'2nd Apron'
+  },
+  POR:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[{from:'BOS',protection:'Unprotected'},{from:'ORL',protection:'Unprotected'}],out:[]},
+      2029:{own:true,in:[{from:'BOS',protection:'Unprotected'}],out:[]},
+      2030:{own:true,in:[{from:'ORL',protection:'Unprotected'}],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:5,apronStatus:'Under Cap'
+  },
+  CLE:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:false,in:[],out:[{to:'UTA',protection:'Unprotected'},{to:'CHA',protection:'Unprotected'}]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[{from:'SAC',protection:'Unprotected (SAC/CLE deal)'}],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:false,in:[],out:[{to:'FROZEN',protection:'Frozen (Apron)'}]},
+    },
+    maxTradeable:1,apronStatus:'2nd Apron'
+  },
+  GS:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[{from:'DAL',protection:'Top-20 Prot'}],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:false,in:[],out:[{to:'PHI',protection:'Via WAS deal'}]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:3,apronStatus:'Lux Tax'
+  },
+  UTA:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[{from:'CLE',protection:'Swap'}],out:[]},
+      2029:{own:true,in:[{from:'MIN',protection:'Top-5 Prot'},{from:'CLE',protection:'Unprotected'}],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[{from:'MIN',protection:'Unprotected'}],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:5,apronStatus:'Under Cap'
+  },
+  MEM:{
+    first:{
+      2027:{own:true,in:[{from:'LAL',protection:'Top-4 Prot'},{from:'UTA',protection:'MostFav'},{from:'MIN',protection:'Unprotected'}],out:[]},
+      2028:{own:true,in:[{from:'ORL',protection:'Unprotected'}],out:[]},
+      2029:{own:true,in:[{from:'ORL',protection:'Unprotected'}],out:[]},
+      2030:{own:true,in:[{from:'ORL',protection:'Unprotected'}],out:[]},
+      2031:{own:true,in:[{from:'PHX',protection:'Unprotected'}],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[{from:'OKC',protection:'Unprotected'},{from:'OKC',protection:'Unprotected'},{from:'DET',protection:'Unprotected'},{from:'DET',protection:'Unprotected'},{from:'DET',protection:'Unprotected'}],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:7,apronStatus:'Under Cap'
+  },
+  MIL:{
+    first:{
+      2027:{own:true,in:[],out:[{to:'ATL',protection:'Unprotected'}]},
+      2028:{own:false,in:[],out:[{to:'MIA',protection:'Unprotected'}]},
+      2029:{own:false,in:[],out:[{to:'MIA',protection:'Unprotected'}]},
+      2030:{own:false,in:[],out:[{to:'MIA',protection:'Unprotected'},{to:'MIA',protection:'Swap'}]},
+      2031:{own:true,in:[],out:[{to:'MIA',protection:'Unprotected'}]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:false,in:[],out:[{to:'MIA',protection:'Unprotected (Giannis deal)'}]},
+    },
+    maxTradeable:2,apronStatus:'Under Cap'
+  },
+  ATL:{
+    first:{
+      2027:{own:true,in:[{from:'SA',protection:'Unprotected'},{from:'MIL',protection:'Unprotected'}],out:[{to:'SA',protection:'Unprotected'}]},
+      2028:{own:true,in:[{from:'CLE',protection:'Swap'}],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[{from:'PHI',protection:'Unprotected'},{from:'WAS',protection:'Unprotected (via OKC)'}],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[{from:'PHI',protection:'Unprotected'},{from:'WAS',protection:'Unprotected'}],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:4,apronStatus:'Under Cap'
+  },
+  DAL:{
+    first:{
+      2027:{own:true,in:[],out:[{to:'CHA',protection:'Top-2 Prot'}]},
+      2028:{own:false,in:[],out:[{to:'OKC',protection:'Swap'}]},
+      2029:{own:false,in:[],out:[{to:'HOU',protection:'Unprotected'},{to:'BKN',protection:'Unprotected'},{to:'LAL',protection:'Unprotected'}]},
+      2030:{own:true,in:[],out:[{to:'SA',protection:'Swap'},{to:'GS',protection:'Top-20 Prot'}]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:false,in:[],out:[{to:'LAC',protection:'Via IND deal'}]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:0,apronStatus:'2nd Apron'
+  },
+  PHX:{
+    first:{
+      2027:{own:false,in:[],out:[{to:'HOU',protection:'Unprotected'}]},
+      2028:{own:false,in:[],out:[{to:'BKN',protection:'Unprotected'}]},
+      2029:{own:false,in:[],out:[{to:'HOU',protection:'Unprotected'}]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:false,in:[],out:[{to:'MEM',protection:'Unprotected'}]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:false,in:[],out:[{to:'FROZEN',protection:'2nd Apron Frozen'}]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:2,apronStatus:'2nd Apron'
+  },
+  LAC:{
+    first:{
+      2027:{own:true,in:[{from:'IND',protection:'Unprotected'}],out:[{to:'PHI',protection:'LeastFav'}]},
+      2028:{own:true,in:[{from:'IND',protection:'Unprotected'},{from:'DAL',protection:'Via deal'}],out:[{to:'PHI',protection:'Unprotected'}]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[{from:'DAL',protection:'Unprotected'}],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:3,apronStatus:'Under Cap'
+  },
+  SAC:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:false,in:[],out:[{to:'HOU',protection:'Unprotected (via NYK deal)'}]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[{from:'MIN',protection:'Unprotected'}],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:6,apronStatus:'Lux Tax'
+  },
+  PHI:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[{from:'LAC',protection:'Unprotected'}],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:false,in:[],out:[{to:'ATL',protection:'Unprotected'},{to:'WAS',protection:'Unprotected'}]},
+      2028:{own:true,in:[{from:'GS',protection:'Via WAS deal'}],out:[{to:'BKN',protection:'Top-8 Prot'}]},
+      2029:{own:false,in:[],out:[{to:'ATL',protection:'Unprotected'},{to:'WAS',protection:'Unprotected'}]},
+      2030:{own:false,in:[],out:[{to:'SA',protection:'Unprotected'},{to:'WAS',protection:'Unprotected'}]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:4,apronStatus:'Lux Tax'
+  },
+  CHI:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:false,in:[],out:[{to:'OKC',protection:'Via WAS deal'}]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:4,apronStatus:'Under Cap'
+  },
+  BKN:{
+    first:{
+      2027:{own:true,in:[{from:'NYK',protection:'Unprotected'}],out:[]},
+      2028:{own:true,in:[{from:'PHX',protection:'Unprotected'}],out:[]},
+      2029:{own:true,in:[{from:'NYK',protection:'Unprotected'},{from:'DAL',protection:'Unprotected'}],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[{from:'NYK',protection:'Unprotected'}],out:[]},
+      2032:{own:true,in:[{from:'DEN',protection:'Unprotected'}],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:9,apronStatus:'Under Cap'
+  },
+  HOU:{
+    first:{
+      2027:{own:true,in:[{from:'PHX',protection:'Unprotected'}],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[{from:'DAL',protection:'Unprotected'},{from:'PHX',protection:'Unprotected'},{from:'SAC',protection:'Via NYK deal'}],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[{from:'WAS',protection:'Unprotected'},{from:'WAS',protection:'Unprotected'}],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:6,apronStatus:'Under Cap'
+  },
+  TOR:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:4,apronStatus:'Under Cap'
+  },
+  CHA:{
+    first:{
+      2027:{own:true,in:[{from:'DAL',protection:'Top-2 Prot'},{from:'MIA',protection:'Top-14 Prot'}],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[{from:'CLE',protection:'Unprotected'},{from:'MIN',protection:'Top-5 Prot'}],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:false,in:[],out:[{to:'MIN',protection:'Unprotected'}]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:7,apronStatus:'Under Cap'
+  },
+  IND:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[{from:'CHI',protection:'Future swap (Braden Smith deal)'}],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:3,apronStatus:'Under Cap'
+  },
+  ORL:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:false,in:[],out:[{to:'MEM',protection:'Unprotected'},{to:'BOS',protection:'Unprotected'}]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:false,in:[],out:[{to:'MEM',protection:'Unprotected'}]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[{to:'BOS',protection:'Unprotected'}]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:1,apronStatus:'Under Cap'
+  },
+  DET:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:false,in:[],out:[{to:'MEM',protection:'Unprotected'},{to:'MEM',protection:'Unprotected'},{to:'MEM',protection:'Unprotected (Isaiah Stewart deal)'}]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:4,apronStatus:'Under Cap'
+  },
+  NOP:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:4,apronStatus:'Under Cap'
+  },
+  WAS:{
+    first:{
+      2027:{own:true,in:[],out:[]},
+      2028:{own:true,in:[{from:'PHX',protection:'Unprotected'}],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[{from:'PHX',protection:'Swap'}],out:[]},
+      2031:{own:true,in:[],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    second:{
+      2027:{own:false,in:[],out:[{to:'OKC',protection:'Unprotected'},{to:'HOU',protection:'Unprotected'}]},
+      2028:{own:true,in:[],out:[]},
+      2029:{own:true,in:[],out:[]},
+      2030:{own:true,in:[{from:'PHI',protection:'Unprotected'}],out:[]},
+      2031:{own:true,in:[{from:'PHI',protection:'Unprotected'}],out:[]},
+      2032:{own:true,in:[],out:[]},
+      2033:{own:true,in:[],out:[]},
+    },
+    maxTradeable:5,apronStatus:'Under Cap'
+  },
 };
+
 
 const GI_SLUG={ATL:'atl',BOS:'bos',BKN:'bkn',CHA:'cha',CHI:'chi',CLE:'cle',DAL:'dal',DEN:'den',DET:'det',GS:'gs',HOU:'hou',IND:'ind',LAC:'lac',LAL:'lal',MEM:'mem',MIA:'mia',MIL:'mil',MIN:'min',NOP:'no',NYK:'ny',OKC:'okc',ORL:'orl',PHI:'phi',PHX:'phx',POR:'por',SAC:'sac',SA:'sa',TOR:'tor',UTA:'uta',WAS:'was'};
 
@@ -2007,64 +2608,126 @@ function giRenderSalary(data,intel){
   }
 
   // Draft picks
-  html+=renderPicksVisual(teamAbbr);
+    html += renderPicksVisual(teamAbbr);
+
   el.innerHTML=html;
 }
 
 function renderPicksVisual(teamAbbr){
-  const picks=GI_PICKS_STRUCTURED[teamAbbr];
-  if(!picks)return'';
-  const teamColor=GI_INTEL[teamAbbr]?.p||'#10b981';
-  const years=[2027,2028,2029,2030,2031,2032,2033];
+  const picks = GI_PICKS_STRUCTURED[teamAbbr];
+  if(!picks) return '';
+  const teamColor = GI_INTEL[teamAbbr]?.p || '#10b981';
+  const years = [2027,2028,2029,2030,2031,2032,2033];
 
-  let html=`<p class="gi-picks-header">Draft Capital · 2027–2033</p>`;
+  let html = `
+  <div style="margin-top:1.5rem;">
+    <p style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.2);margin-bottom:1rem;">Draft Capital · 2027–2033</p>
 
-  years.forEach(year=>{
-    const incoming=picks.incoming.filter(p=>p.year===year);
-    const outgoing=picks.outgoing.filter(p=>p.year===year);
-    const swaps=picks.swaps.filter(p=>p.year===year);
-    if(!incoming.length&&!outgoing.length&&!swaps.length)return;
-
-    html+=`<div style="margin-bottom:0.875rem;">
-      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.4rem;">
-        <span style="font-size:13px;font-weight:900;color:${teamColor};min-width:32px;">${year}</span>
-        <div style="flex:1;height:1px;background:rgba(255,255,255,0.05);"></div>
+    <!-- MAX TRADEABLE + APRON STATUS PILLS -->
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.25rem;">
+      <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:100px;padding:0.35rem 0.9rem;display:inline-flex;align-items:center;gap:0.4rem;">
+        <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.3);">Max Tradeable</span>
+        <span style="font-size:13px;font-weight:900;color:#10b981;">${picks.maxTradeable}</span>
       </div>
-      <div style="padding-left:0.25rem;display:flex;flex-direction:column;gap:0.3rem;">`;
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:0.35rem 0.9rem;display:inline-flex;align-items:center;gap:0.4rem;">
+        <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.3);">Cap Status</span>
+        <span style="font-size:10px;font-weight:900;color:${picks.apronStatus==='2nd Apron'?'#f87171':picks.apronStatus==='Lux Tax'?'#fbbf24':'#34d399'};">${picks.apronStatus}</span>
+      </div>
+    </div>
 
-    incoming.forEach(p=>{
-      html+=`<div class="gi-pick-row">
-        <span style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;padding:2px 8px;border-radius:100px;background:rgba(16,185,129,0.12);color:#34d399;border:1px solid rgba(16,185,129,0.2);flex-shrink:0;">IN</span>
-        <img src="${giLogo(p.from)}" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" alt="${p.from}">
-        <span class="gi-pick-from">${p.from}</span>
-        <span class="gi-pick-prot">${p.protection}</span>
-      </div>`;
-    });
-    outgoing.forEach(p=>{
-      html+=`<div class="gi-pick-row">
-        <span style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;padding:2px 8px;border-radius:100px;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.2);flex-shrink:0;">OUT</span>
-        <img src="${giLogo(p.to)}" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" alt="${p.to}">
-        <span class="gi-pick-from">${p.to}</span>
-        <span class="gi-pick-prot">${p.protection}</span>
-      </div>`;
-    });
-    swaps.forEach(p=>{
-      html+=`<div class="gi-pick-row">
-        <span style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;padding:2px 8px;border-radius:100px;background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2);flex-shrink:0;">SWAP</span>
-        <img src="${giLogo(p.with)}" style="width:18px;height:18px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" alt="${p.with}">
-        <span class="gi-pick-from">${p.with}</span>
-      </div>`;
-    });
+    <!-- ROUND TOGGLE -->
+    <div style="display:flex;gap:0.4rem;margin-bottom:1rem;">
+      <button onclick="giPickTab(this,'first','${teamAbbr}')" id="tab-first-${teamAbbr}"
+        style="flex:1;padding:0.5rem 0;border-radius:0.75rem;font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;border:1px solid rgba(255,255,255,0.1);background:${teamColor};color:#fff;cursor:pointer;transition:all 0.2s;">
+        1st Round
+      </button>
+      <button onclick="giPickTab(this,'second','${teamAbbr}')" id="tab-second-${teamAbbr}"
+        style="flex:1;padding:0.5rem 0;border-radius:0.75rem;font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4);cursor:pointer;transition:all 0.2s;">
+        2nd Round
+      </button>
+    </div>
 
-    html+=`</div></div>`;
-  });
+    <!-- FIRST ROUND PANEL -->
+    <div id="picks-first-${teamAbbr}">
+      ${renderRoundRows(years, picks.first, teamColor)}
+    </div>
 
-  if(picks.notes){
-    html+=`<div class="gi-picks-note">${picks.notes}</div>`;
-  }
+    <!-- SECOND ROUND PANEL -->
+    <div id="picks-second-${teamAbbr}" style="display:none;">
+      ${renderRoundRows(years, picks.second, teamColor)}
+    </div>
+  </div>`;
 
   return html;
 }
+
+function renderRoundRows(years, roundData, teamColor){
+  let html = '';
+  years.forEach(year => {
+    const y = roundData[year];
+    if(!y) return;
+
+    const hasActivity = y.in.length > 0 || y.out.length > 0 || !y.own;
+
+    html += `
+    <div style="margin-bottom:0.6rem;border-radius:1rem;overflow:hidden;border:1px solid ${hasActivity?'rgba(255,255,255,0.08)':'rgba(255,255,255,0.04)'};background:${hasActivity?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.015)'};">
+
+      <!-- YEAR HEADER ROW -->
+      <div style="display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0.875rem;border-bottom:${(y.in.length>0||y.out.length>0)?'1px solid rgba(255,255,255,0.05)':'none'};">
+        <span style="font-size:15px;font-weight:900;color:${hasActivity?teamColor:'rgba(255,255,255,0.25)'};min-width:36px;letter-spacing:-0.02em;">${year}</span>
+        <div style="flex:1;display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;">
+          ${y.own ? `<span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;padding:3px 8px;border-radius:100px;background:rgba(16,185,129,0.1);color:#34d399;border:1px solid rgba(16,185,129,0.2);">OWN ✓</span>` : ''}
+          ${!y.own && y.in.length===0 && y.out.length===0 ? `<span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;padding:3px 8px;border-radius:100px;background:rgba(239,68,68,0.08);color:rgba(248,113,113,0.6);border:1px solid rgba(239,68,68,0.15);">NONE</span>` : ''}
+        </div>
+      </div>
+
+      <!-- IN ROWS -->
+      ${y.in.map(p => `
+      <div style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.03);">
+        <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;padding:2px 8px;border-radius:100px;background:rgba(16,185,129,0.12);color:#34d399;border:1px solid rgba(16,185,129,0.2);flex-shrink:0;">IN</span>
+        <img src="${giLogo(p.from)}" style="width:16px;height:16px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" alt="">
+        <span style="font-size:10px;font-weight:800;color:rgba(255,255,255,0.7);flex-shrink:0;">${p.from}</span>
+        <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.2);margin-left:auto;text-align:right;max-width:130px;line-height:1.3;">${p.protection}</span>
+      </div>`).join('')}
+
+      <!-- OUT ROWS -->
+      ${y.out.map(p => `
+      <div style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.03);">
+        <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;padding:2px 8px;border-radius:100px;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.2);flex-shrink:0;">OUT</span>
+        <img src="${giLogo(p.to)}" style="width:16px;height:16px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" alt="">
+        <span style="font-size:10px;font-weight:800;color:rgba(255,255,255,0.7);flex-shrink:0;">${p.to}</span>
+        <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.2);margin-left:auto;text-align:right;max-width:130px;line-height:1.3;">${p.protection}</span>
+      </div>`).join('')}
+
+    </div>`;
+  });
+  return html;
+}
+
+window.giPickTab = function(btn, round, teamAbbr){
+  const firstPanel  = document.getElementById(`picks-first-${teamAbbr}`);
+  const secondPanel = document.getElementById(`picks-second-${teamAbbr}`);
+  const firstTab    = document.getElementById(`tab-first-${teamAbbr}`);
+  const secondTab   = document.getElementById(`tab-second-${teamAbbr}`);
+  const teamColor   = GI_INTEL[teamAbbr]?.p || '#10b981';
+
+  if(round === 'first'){
+    firstPanel.style.display  = 'block';
+    secondPanel.style.display = 'none';
+    firstTab.style.background  = teamColor;
+    firstTab.style.color       = '#fff';
+    secondTab.style.background = 'rgba(255,255,255,0.05)';
+    secondTab.style.color      = 'rgba(255,255,255,0.4)';
+  } else {
+    firstPanel.style.display  = 'none';
+    secondPanel.style.display = 'block';
+    secondTab.style.background = teamColor;
+    secondTab.style.color      = '#fff';
+    firstTab.style.background  = 'rgba(255,255,255,0.05)';
+    firstTab.style.color       = 'rgba(255,255,255,0.4)';
+  }
+};
+
 
 // ══════════════════════════════════════════════════════════════
 //  NEWS
