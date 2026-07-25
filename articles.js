@@ -360,9 +360,9 @@ const articleEngineData = {
     <span class="lb-r-label">The Starting Five</span>
     <p>Tyrese Maxey at point guard, VJ Edgecombe at shooting guard, Jaylen Brown at small forward, LeBron at power forward, Joel Embiid at center.</p>
     <p>They are damn near elite at every position. A 41-year-old operating as the connective tissue between Maxey's explosiveness, Brown's physicality, and Embiid's interior dominance.</p>
-    <p>On paper.</p>
-  </div>
 
+  </div>
+    <p>On paper.</p>
   <p>But here's the word that keeps surfacing in every honest conversation about this roster -- and it surfaced before LeBron even arrived. After a full season of Paul George, Embiid, and Maxey sharing the floor together, Maxey looked back and said simply: "We never really figured it out."</p>
 
   <p>Two stars and one fading star never figured it out. Now subtract that fading star. Add another -- older, yes, but one who, when the light catches him right, still shines like nobody this game has seen outside of Michael Jordan. And the light still catches him.</p>
