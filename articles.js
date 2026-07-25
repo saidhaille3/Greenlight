@@ -442,7 +442,7 @@ const articleEngineData = {
 
   <p>The East -- even with the Knicks newly crowned and legitimate teeth grown across the conference -- is still the more forgiving bracket for a player in the final chapter of his physical story. Philadelphia gives LeBron Embiid's interior dominance to absorb contact. Maxey's explosiveness to carry early round possessions. Brown's physicality so LeBron doesn't have to be physical. The most loaded roster he has ever joined -- and he joined it for eight million dollars, which means the financial sacrifice is real, but the basketball ask is the lightest it has been since he was 25 and physically capable of carrying anything.</p>
 
-  <p>The franchises that waited know all of this. The front offices that restructured, that held spots, that flew executives to pitch meetings, that cleared cap space and told their fan bases to believe -- they know. They feel the particular sting of having been used not maliciously but deliberately as leverage. As options. As the audience for a performance that was always going to end the same way.</p>
+  <p>The franchises that waited know all of this. The front offices that restructured, that held spots, cleared cap space, told their fan bases to believe and sat by their phones waiting on a call that never came -- no meeting, no pitch, no room to make their case in person. Just voicemails into a void. They know. They feel the particular sting of having been used not maliciously but deliberately as leverage. As options. As the audience for a performance that was always going to end the same way.</p>
 
   <p>They just can't say it out loud. Because LeBron James is 41 years old, still an All-Star, still capable of moments that make you forget the calendar.</p>
 
