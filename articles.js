@@ -462,7 +462,7 @@ const articleEngineData = {
 
   <div class="lb-section">
     <span class="lb-section-label">Final Take</span>
-    <h2 class="lb-section-title">The Honest Read On Philadelphia</h2>
+    <h2 class="lb-section-title">My Honest Read On Philadelphia</h2>
     <span class="lb-rule"></span>
   </div>
 
