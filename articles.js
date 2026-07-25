@@ -2,7 +2,7 @@ const articleEngineData = {
 
 "lebron-philly": {
     tag: "NBA · Free Agency",
-    hero: "images/Lebrontrade.jpeg",
+    hero: "images/LeBrontrade.jpeg",
     time: "12 MIN READ",
     published: "July 25, 2026",
     updated: null,
@@ -479,7 +479,6 @@ const articleEngineData = {
 </div>
 `
 },
-
 
 "lopez-scouting-report": {
     tag: "NBA Draft · Film Room",
