@@ -452,7 +452,7 @@ const articleEngineData = {
 
   <p>Nobody wants to look small.</p>
 
-  <p>So they'll wish him well. They'll say the right things. They'll spend the summer solving the problems his three-week indecision created. And LeBron James will report to Philadelphia in October -- older, rested, strategically positioned -- and the whole league will watch to see if the light still catches him.</p>
+  <p>So they'll wish him well. They'll say the right things. Minnesota will spend the rest of the summer trying to solve the problems his three-week indecision created. And LeBron James will report to Philadelphia in October -- older, rested, strategically positioned -- and the whole league will watch to see if the light still catches him.</p>
 
   <p>It probably will.</p>
 
