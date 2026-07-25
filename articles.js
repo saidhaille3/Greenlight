@@ -345,7 +345,7 @@ const articleEngineData = {
   <div class="lb-divider"></div>
 
   <div class="lb-section">
-    <span class="lb-section-label">The Roster</span>
+    <span class="lb-section-label">Philly's Roster</span>
     <h2 class="lb-section-title">What He's Actually Walking Into</h2>
     <span class="lb-rule"></span>
   </div>
