@@ -5,7 +5,7 @@ const articleEngineData = {
     hero: "images/LeBrontrade.jpeg",
     time: "12 MIN READ",
     published: "July 25, 2026",
-    updated: null,
+    updated: "July 25, 2026",
     title: "The Manipulation: LeBron, Philly, and the Ghost of Dream Teams Past",
     content: `
 <style>
