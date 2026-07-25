@@ -444,9 +444,9 @@ const articleEngineData = {
 
   <p>The franchises that waited know all of this. The front offices that restructured, that held spots, that flew executives to pitch meetings, that cleared cap space and told their fan bases to believe -- they know. They feel the particular sting of having been used not maliciously but deliberately as leverage. As options. As the audience for a performance that was always going to end the same way.</p>
 
-  <p>They just can't say it out loud. Because LeBron James is 41 years old, still an All-Star, still capable of moments that make you forget the calendar, and the moment you publicly criticize his decision-making process you look like the bitter ex who couldn't close the deal.</p>
+  <p>They just can't say it out loud. Because LeBron James is 41 years old, still an All-Star, still capable of moments that make you forget the calendar.</p>
 
-  <p>That's the final layer of the manipulation. Not just that he plays franchises against each other. But that he constructs the narrative so airtight that the franchises who got played have no dignified way to say so.</p>
+  <p>That's the final layer of the manipulation. He constructs the narrative so airtight that the franchises who got played have no dignified way to say so.</p>
 
   <p>Cleveland burned his jersey in 2010 and looked small.</p>
 
