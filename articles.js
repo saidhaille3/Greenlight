@@ -434,7 +434,7 @@ const articleEngineData = {
 
   <p>He generates months of speculation, narrative energy, and genuine organizational paralysis across the entire league -- and then, when the moment is right, he resolves the tension in a single social media post that frames the decision as a deeply personal spiritual journey rather than what it functionally is: a competitive calculation made by one of the most strategically intelligent people the sport has ever produced.</p>
 
-  <p>The stated motive this time was basketball happiness. Last time it was legacy and platform in Los Angeles. Before that it was home -- Ohio, identity, unfinished business. Before that it was championships with his brothers in Miami. Every decision has arrived wrapped in a different emotional language. Every decision has been received by the public as authentic because LeBron is authentic -- genuinely so, in most ways that matter. But authenticity and strategy are not mutually exclusive. A man can mean every word he says and still be engineering the outcome he wanted from the beginning.</p>
+  <p>The stated motive this time was basketball happiness. Last time it was legacy and platform in Los Angeles. Before that it was home -- Ohio, identity, unfinished business. Before that it was championships with his brothers in Miami. Every decision has arrived wrapped in a different emotional language. Every decision has been received by the public as authentic. But authenticity and strategy are not mutually exclusive. A man can mean every word he says and still be engineering the outcome he wanted from the beginning.</p>
 
   <p>And the outcome he wanted was always the path of least resistance to a fifth ring.</p>
 
