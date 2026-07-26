@@ -472,7 +472,7 @@ const articleEngineData = {
     <p>But LeBron knows something too. He knows what the Spurs showed everyone in the playoffs -- that KAT neutralized Wembanyama's paint dominance by pulling him out of the key, which is the one schematic wrinkle that made San Antonio beatable. That specific matchup problem doesn't exist in the East. Wemby stays in the West. OKC stays in the West. The gauntlet stays in the West.</p>
     <p>LeBron did avoid a challenge. But he also identified exactly which challenges his 41-year-old body can still absorb -- and which ones it can't.</p>
     <p>Hate or love it, it's a coldly…emphasis on cold..coldly intelligent basketball decision. And four stars and a budding wildcard sharing one ball, one locker room, and one October through June for the first time -- in a city that has already lived through exactly this experiment in a different sport and called it a cautionary tale -- is not a guaranteed formula.</p>
-    <p>The last deception worked. LeBron got the roster he wanted. He got the platform. He got the narrative. He called it his last decision and made sure the whole world was watching when he made it.</p>
+    <p>LeBron got the roster he wanted. He got the platform. He got the narrative. He called it his last decision and made sure the whole world was watching when he made it.</p>
     <p>Whether it gets him his fifth ring, an early exit he can't explain away, or a seventh Finals loss to his legacy -- nobody knows. At 41, the runway is gone. This is the answer. Whatever it is.</p>
   </div>
 
