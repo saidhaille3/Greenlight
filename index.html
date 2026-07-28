@@ -845,16 +845,40 @@ filter: invert(1) brightness(2);
 
 /* ── ALERT ── */
 .gi-alert {
-  margin: 1rem 1.5rem 0;
-  padding: 0.875rem 1rem;
-  border-radius: 1.25rem;
-  background: rgba(245,158,11,0.06);
-  border: 1px solid rgba(245,158,11,0.2);
+  margin: 1.5rem 1.5rem 0;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: none;
+  flex-direction: column;
 }
-.gi-alert.visible { display: flex; gap: 0.6rem; align-items: flex-start; }
-.gi-alert-text { font-size: 11px; font-weight: 700; color: #fcd34d; line-height: 1.5; }
-
+.gi-alert.visible { 
+  display: flex; 
+}
+.gi-alert-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.gi-alert-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #f59e0b; box-shadow: 0 0 8px rgba(245, 158, 11, 0.9); flex-shrink: 0;
+}
+.gi-alert-tag {
+  font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.35em; color: #f59e0b;
+}
+.gi-alert-date {
+  font-size: 7px; font-weight: 700; color: rgba(255, 255, 255, 0.2); letter-spacing: 0.1em;
+}
+.gi-alert-text { 
+  font-size: 13px; 
+  font-weight: 700; 
+  color: rgba(255, 255, 255, 0.7); 
+  line-height: 1.7; 
+  padding-left: 0.875rem; 
+  border-left: 2px solid rgba(245, 158, 11, 0.4); 
+}
 /* ── TABS ── */
 .gi-tabs {
   display: flex; gap: 0;
@@ -1494,11 +1518,14 @@ document.addEventListener('click', function(e){
       </div>
     </div>
 
-    <div class="gi-alert" id="gi-alert">
-      <span style="font-size:1rem;flex-shrink:0;margin-top:1px">⚡</span>
-      <p class="gi-alert-text" id="gi-alert-text"></p>
-    </div>
-
+<div class="gi-alert" id="gi-alert">
+  <div class="gi-alert-header">
+    <span class="gi-alert-dot"></span>
+    <span class="gi-alert-tag">Breaking</span>
+   
+  </div>
+  <p class="gi-alert-text" id="gi-alert-text"></p>
+</div>
     <div class="gi-tabs" id="gi-tabs">
       <div class="gi-tab on"  onclick="giTab(this,'depth')">Depth Chart</div>
       <div class="gi-tab"     onclick="giTab(this,'roster')">Roster</div>
