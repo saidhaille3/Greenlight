@@ -2159,12 +2159,12 @@ const GI_PICKS_STRUCTURED = {
 };
 
 const GI_CAP_SPACE = {
-  NYK: -45, OKC: 48, MIA: -38, SA: 42, BOS: -28,
-  MIN: -52, LAL: -22, DEN: -41, POR: 38, CLE: -44,
-  GS: -31, UTA: 55, MEM: 44, MIL: 18, ATL: 35,
-  DAL: -48, PHX: -39, LAC: 22, SAC: -18, PHI: -29,
-  CHI: 52, BKN: 61, HOU: 28, TOR: 19, CHA: 48,
-  IND: 24, ORL: 31, DET: 26, NOP: 33, WAS: 41
+  NYK: -55, OKC: -60, MIA: -48, SA: -35, BOS: -44,
+  MIN: -58, LAL: -42, DEN: -38, POR: -40, CLE: -30,
+  GS: -32, UTA: -36, MEM: -38, MIL: -45, ATL: -34,
+  DAL: -39, PHX: -52, LAC: -40, SAC: -28, PHI: -33,
+  CHI: 31, BKN: 41, HOU: -46, TOR: -38, CHA: -35,
+  IND: -36, ORL: -50, DET: -28, NOP: -30, WAS: -32
 };
 
 
@@ -2210,7 +2210,9 @@ const GI_INTEL={
       {n:'Jonathan Kuminga',pos:'PF',tag:'UFA -- ATL Declined Option',fit:'23-year-old athletic forward freed after ATL declined his $24.3M option. Would give New York a powerful backup 4 who can attack the paint and finish above the rim.'},
       {n:'Bradley Beal',pos:'SG',tag:'High Risk UFA',fit:'Declined $5.6M Clippers option. Injury risk is real but if healthy gives NYK an additional ball-handler who can score independently. Vet minimum gamble worth considering.'},
     ],
-    picks:'Champions core locked · Max tradeable: 1 · Repeater tax · Dolan said NO 2nd Apron'},
+picks:'Champions core locked · Max tradeable: 1 · Repeater tax · Dolan said NO 2nd Apron', exceptions:'Over 1st Apron -- $6M taxpayer MLE available (unused) · BAE unavailable (over apron) · Vet minimums',
+},
+
 
   OKC:{p:'#007AC1',s:'#EF3B24',alert:'Hartenstein extended 3yr. Dort traded to ATL July 19 (3-team -- got 2031+2032 2nds + 2027 2nd from DAL). Risacher acquired from ATL. Josh Dix 2-way signed. Cason Wallace extension eligible. Isaiah Joe acquired from DET.',
     fa:[
@@ -2218,7 +2220,8 @@ const GI_INTEL={
       {n:'Matisse Thybulle',pos:'SG',tag:'UFA -- Available',fit:'One of the best perimeter defenders in the league. Signed 1yr/$3.29M with LAL before -- OKC can offer him a real role as the defensive stopper next to SGA.'},
       {n:'Patrick Beverley',pos:'PG',tag:'Veteran Minimum',fit:'Championship pedigree. Hardnose defender who would upgrade OKC\'s backup PG spot and mentor Nikola Topic. Culture fit that Presti would love.'},
     ],
-    picks:'Incoming 1sts: 10 · Max tradeable: 7 · 2nds: 12+ · Under Cap'},
+    picks:'Incoming 1sts: 10 · Max tradeable: 7 · 2nds: 12+ · Under Cap', exceptions:'Over 2nd Apron -- NO mid-level exception of any kind · Vet minimums only',
+},
 
   MIA:{p:'#98002E',s:'#F9A01B',alert:'Giannis signed via trade (Herro, Ware, Jaquez, Jakucionis, picks sent to MIL). Wiggins opted in + 2yr extension. Tim Hardaway Jr. signed. LeBron chose PHI. Tre Donaldson 2-way. Bobby Portis signed. Norman Powell departed.',
     fa:[
@@ -2226,7 +2229,8 @@ const GI_INTEL={
       {n:'Kyle Kuzma',pos:'PF',tag:'UFA -- Available',fit:'Versatile 20 PPG forward who can play alongside Giannis. Gives Miami a backup 4 who can handle the ball and shoot the three. MIL let him walk so Miami can pounce.'},
       {n:'Russell Westbrook',pos:'PG',tag:'Veteran Minimum',fit:'Still brings energy and athleticism off the bench. Spoelstra is a master at using Russ\'s explosive downhill game in short bursts. Heat culture reclamation project.'},
     ],
-    picks:'Max tradeable: 2 · 2nd Apron · Giannis trade cost: MIL gets Herro, Ware, Jaquez, Jakucionis + 3 unprotected 1sts'},
+    picks:'Max tradeable: 2 · 2nd Apron · Giannis trade cost: MIL gets Herro, Ware, Jaquez, Jakucionis + 3 unprotected 1sts', exceptions:'Over 1st Apron -- Taxpayer MLE used on Tim Hardaway Jr. · BAE still available · Vet minimums',
+},
 
   SA:{p:'#C4CED4',s:'#000000',alert:'Wembanyama 5yr/$252M signed (25% max, deliberately left $50M on table). Champagnie multi-yr signed. Barnes 1yr/$8M. McLaughlin 1yr/$3.3M. Tobias Harris signed. Fox/Castle/Vassell/Harper/Quaintance core intact.',
     fa:[
@@ -2234,7 +2238,8 @@ const GI_INTEL={
       {n:'Kyle Anderson',pos:'PF',tag:'Veteran UFA',fit:'Smart, slow-it-down playmaker who thrives in passing-oriented offenses. Would be the perfect low-usage secondary ballhandler next to Fox and Wemby\'s elite passing.'},
       {n:'Patty Mills',pos:'PG',tag:'Veteran Minimum',fit:'SA legend at the end of his career. Championship culture install. Gives Castle and Harper a mentor they can actually learn from in the backup PG spot.'},
     ],
-    picks:'Incoming 1sts: 7 · Max tradeable: 4 · Under Cap'},
+    picks:'Incoming 1sts: 7 · Max tradeable: 4 · Under Cap', exceptions:'Full $15M NT-MLE fully used on Tobias Harris · BAE available · Vet minimums',
+},
 
   BOS:{p:'#007A33',s:'#FFFFFF',alert:'Jaylen Brown traded to PHI (got Paul George + 2 1sts + 2 2nds). Queta 4yr/$56M extended. Robinson 3yr/$47M from NYK. Ron Harper Jr. 3yr signed. Jordan Walsh 3yr extension. Rebuilding around Tatum + PG. Bradley Beal linked.',
     fa:[
@@ -2242,7 +2247,8 @@ const GI_INTEL={
       {n:'DeMar DeRozan',pos:'SF',tag:'UFA -- Scorer',fit:'18.4 PPG off the bench next to Tatum and PG would be a nightmare. LAL and Portland mentioned but BOS could offer him a real role. Veteran scorer at league minimum or MLE.'},
       {n:'Kyle Kuzma',pos:'PF',tag:'UFA -- Stretch 4',fit:'Would give Boston a versatile backup 4 who can shoot threes and defend. They need frontcourt depth after the Brown trade and Kuzma fits the Celtics\' system.'},
     ],
-    picks:'Max tradeable: 3 · Lux Tax · BOS got: PG + 2 unprotected 1sts + 2 2nds · PHI got Jaylen Brown'},
+    picks:'Max tradeable: 3 · Lux Tax · BOS got: PG + 2 unprotected 1sts + 2 2nds · PHI got Jaylen Brown', exceptions:'Full $15M NT-MLE fully used on Mitchell Robinson · BAE available · Vet minimums',
+},
 
   MIN:{p:'#0C2340',s:'#236192',alert:'LaMelo Ball acquired from CHA (Naz Reid + 2033 1st + picks sent). Ayo Dosunmu re-signed 5yr/$112M. Randle traded to BKN (got Nic Claxton + No.33 pick). Hard capped at 2nd Apron. LeBron chose PHI. Jaden McDaniels extension eligible Oct 1.',
     fa:[
@@ -2250,7 +2256,8 @@ const GI_INTEL={
       {n:'Kevin Love',pos:'PF',tag:'Veteran Minimum',fit:'Big man floor spacer is a big need. Love at the veteran minimum fixes it without busting the cap.'},
       {n:'DeAndre Jordan',pos:'C',tag:'Veteran Minimum',fit:'Gobert needs backup depth behind him. Jordan is a willing defender who won\'t clog the LaMelo pick-and-roll. Cheap insurance at C.'},
     ],
-    picks:'Max tradeable: 1 (2033) · 2nd Apron hard capped · LaMelo deal: CHA got Reid + 2033 1st + 3 swaps + 3 2nds'},
+    picks:'Max tradeable: 1 (2033) · 2nd Apron hard capped · LaMelo deal: CHA got Reid + 2033 1st + 3 swaps + 3 2nds', exceptions:'Over 1st Apron -- $6M taxpayer MLE available (unused) · BAE unavailable (over apron) · Vet minimums',
+},
 
   LAL:{p:'#552583',s:'#FDB927',alert:'LeBron chose PHI. Kessler 4yr/$130M S&T from UTA (Jazz got 2031+2033 1sts + 2 swaps). Reaves 4yr/$185M max re-signed. Sexton 2yr/$19M. Thybulle 1yr/$3.29M July 20. Ayton traded to WAS (Hardy + 2nds back). Grimes signed.',
     fa:[
@@ -2258,7 +2265,8 @@ const GI_INTEL={
       {n:'DeMar DeRozan',pos:'SF',tag:'Low Priority -- Vet Min Only',fit:'LAL can only offer vet min per ESPN\'s Bobby Marks. At vet min DeRozan might not be interested. But if he takes it, the midrange scoring alongside Luka is valuable off the bench.'},
       {n:'Patrick Beverley',pos:'PG',tag:'Veteran Minimum',fit:'Defensive pest backup PG to back up Luka and give Collin Sexton some help. Hardnose presence that fits the mold of what LAL teams have always coveted.'},
     ],
-    picks:'Kessler S&T cost: UTA 2031+2033 unprotected + 2 swaps · Ayton: WAS gets Ayton, LAL got Hardy + 2nds'},
+    picks:'Kessler S&T cost: UTA 2031+2033 unprotected + 2 swaps · Ayton: WAS gets Ayton, LAL got Hardy + 2nds', exceptions:'Used Room Exception on Collin Sexton (fully spent) · BAE unavailable (used in 2025-26 on Marcus Smart) · Vet minimums',
+},
 
   DEN:{p:'#0E2240',s:'#FEC524',alert:'Jokic delaying extension talks. Peyton Watson RFA -- Denver says they\'re matching. Valanciunas waived. Marvin Bagley III 1yr. Alpha Diallo 1yr/$1.4M. Tyus Jones 1yr/$3.88M. LeBron chose PHI.',
     fa:[
@@ -2266,7 +2274,8 @@ const GI_INTEL={
       {n:'Kyle Kuzma',pos:'PF',tag:'UFA -- Jokic Fit',fit:'Versatile ball-handler who thrives in Jokic pick-and-roll concepts. Denver needs a backup 4 who can handle the rock and create for others. Kuzma did that in DC.'},
       {n:'DeMar DeRozan',pos:'SF',tag:'UFA -- Denver Mentioned',fit:'Sportsgrid projects DEN as a strong DeRozan destination. 18.4 PPG midrange scorer who doesn\'t need creation -- perfect third option alongside Jokic and Murray.'},
     ],
-    picks:'Max tradeable: NONE · 2nd Apron · No tradeable 1sts in near term'},
+    picks:'Max tradeable: NONE · 2nd Apron · No tradeable 1sts in near term', exceptions:'Over 1st Apron -- Limited to $6M taxpayer MLE only · NO BAE · Vet minimums',
+},
 
   POR:{p:'#E03A3E',s:'#000000',alert:'Ja Morant acquired (MEM got Jalen Grant + Murray). Robert Williams III re-signed 3yr/$44M. Lillard + Morant + Avdija era. Quinten Post arriving via offer sheet (Warriors not matching 3yr/$30M). New HC Micah Nori hired.',
     fa:[
@@ -2274,7 +2283,8 @@ const GI_INTEL={
       {n:'Jonathan Kuminga',pos:'PF',tag:'UFA -- Fits Timeline',fit:'25-year-old power forward would give Portland legitimate frontcourt depth alongside their young core. Rim-running finisher who thrives next to creative passers like Morant.'},
       {n:'Kyle Anderson',pos:'PF',tag:'Veteran UFA',fit:'High-IQ playmaker at the 4 who slows the game down in ways that Morant\'s chaos can actually use. Veteran presence for a young team figuring out its rotation.'},
     ],
-    picks:'Incoming 1sts: 8+ · Max tradeable: 5 · Under Cap'},
+    picks:'Incoming 1sts: 8+ · Max tradeable: 5 · Under Cap', exceptions:'Over 1st Apron -- $6M taxpayer MLE available (unused) · BAE unavailable (over apron) · Vet minimums',
+},
 
   CLE:{p:'#860038',s:'#FDBB30',alert:'Mitchell 4yr/$273M max extension SIGNED. Harden declined $42.3M option -- new multi-year deal framework agreed. Darius Garland arrived via LAC trade (February). LeBron chose PHI not CLE. Nance Jr. departed IND.',
     fa:[
@@ -2282,7 +2292,8 @@ const GI_INTEL={
       {n:'Kyle Kuzma',pos:'PF',tag:'UFA -- Frontcourt Depth',fit:'Cleveland needs a backup 4 who can ball-handle and shoot threes alongside Evan Mobley. Kuzma\'s versatility and 20 PPG scoring fits perfectly in the Cavaliers system.'},
       {n:'Matisse Thybulle',pos:'SG',tag:'UFA -- Defensive Wing',fit:'Elite perimeter defender who would give CLE a two-way presence behind Mitchell in the rotation. Signed cheap and contributes immediately with no offensive burden.'},
     ],
-    picks:'Max tradeable: 1 · 2nd Apron · 2033 frozen · LOST Garland in the Harden trade'},
+    picks:'Max tradeable: 1 · 2nd Apron · 2033 frozen · LOST Garland in the Harden trade', exceptions:'NT-MLE available (unused) · BAE available · Note: signing Harden could push over 1st apron · Vet minimums',
+},
 
   GS:{p:'#1D428A',s:'#FFC72C',alert:'Porzingis 2yr/$40M re-signed. Melton declined option -- 2yr/$11.2M new deal. Draymond GREEN RE-SIGNED (new deal after declining $27.7M option). Jimmy Butler ACL recovery -- says he\'s "right back." Post offer sheet declined (MEM gets him). LeBron chose PHI.',
     fa:[
@@ -2290,7 +2301,8 @@ const GI_INTEL={
       {n:'Jonathan Kuminga',pos:'PF',tag:'UFA -- S&T Possible',fit:'Jake Fischer noted GS and CLE as Kuminga interests. A sign-and-trade with ATL could work. Young athletic 4 who played for Golden State\'s system -- familiar faces and fit.'},
       {n:'Bradley Beal',pos:'SG',tag:'Reclamation Target',fit:'Bleacher Report links Celtics but Warriors were mentioned too. If healthy he fills a major gap at scoring guard. Low-cost flier for a team that needs secondary creation beside Curry.'},
     ],
-    picks:'Incoming 1sts: 7 · Max tradeable: 3 · Hard-capped 1st Apron · Draymond RE-SIGNED after declining $27.7M option'},
+    picks:'Incoming 1sts: 7 · Max tradeable: 3 · Hard-capped 1st Apron · Draymond RE-SIGNED after declining $27.7M option', exceptions:'Full $15M NT-MLE available (unused) · BAE available (possibly earmarked for De\'Anthony Melton) · Vet minimums',
+},
 
   UTA:{p:'#002B5C',s:'#F9A01B',alert:'Kessler S&T to LAL (got 2031+2033 unprotected 1sts + 2 swaps). Nurkic 2yr/$22M re-signed. Mo Bamba 2yr signed. Okogie 2yr/$12M. Darryn Peterson (No.2 pick) + Ace Bailey arrive. Full elite rebuild.',
     fa:[
@@ -2298,7 +2310,8 @@ const GI_INTEL={
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Shooter',fit:'Shooting wing who has bounced around but can drain threes at a high clip. Utah needs floor-spacing around Peterson and Ace Bailey. Cheap contract, high upside.'},
       {n:'Patty Mills',pos:'PG',tag:'Veteran Minimum',fit:'Culture install. Peterson is a 19-year-old learning the pro game -- Patty Mills is the perfect mentor in the backup PG spot for a rebuilding Jazz squad.'},
     ],
-    picks:'Incoming 1sts: 8+ (LAL 2031+2033 + 2 swaps) + CLE swaps · Max tradeable: 5 · Under Cap'},
+    picks:'Incoming 1sts: 8+ (LAL 2031+2033 + 2 swaps) + CLE swaps · Max tradeable: 5 · Under Cap', exceptions:'Under Cap -- Room Exception split on Jaxson Hayes + Josh Okogie (fully spent) · BAE unavailable (used in 2025-26 on Kevin Love) · Vet minimums',
+},
 
   MEM:{p:'#5D76A9',s:'#12173F',alert:'Morant traded to POR (got Jalen Grant + Murray). Cameron Boozer (No.3 pick). KCP $21.6M opted in. Quinten Post arriving (Warriors not matching 3yr/$30M). Isaiah Stewart acquired from DET (3 future 2nds). Santi Aldama to DAL.',
     fa:[
@@ -2306,7 +2319,8 @@ const GI_INTEL={
       {n:'Kyle Anderson',pos:'PF',tag:'UFA -- Perfect Pace Fit',fit:'Slow-it-down, high-IQ 4 who has played well in Memphis-style systems. Gives Boozer a veteran frontcourt partner who makes the right play every time.'},
       {n:'Patty Mills',pos:'PG',tag:'Veteran Minimum',fit:'Pippen Jr. backup who brings championship DNA. Young team building around Boozer needs locker room culture pieces. Mills is that in spades.'},
     ],
-    picks:'Incoming 1sts: 11 · Max tradeable: 7 · Under Cap · Aldama to DAL got AJ Johnson + 2030 1st + 2 2nds'},
+    picks:'Incoming 1sts: 11 · Max tradeable: 7 · Under Cap · Aldama to DAL got AJ Johnson + 2030 1st + 2 2nds', exceptions:'$15M NT-MLE partially used on Quinten Post ($10.35M spent, ~$4.7M remaining) · BAE available · Vet minimums',
+},
 
   MIL:{p:'#00471B',s:'#EEE1C6',alert:'Post-Giannis era. Received Herro, Kel\'el Ware, Jaquez Jr., Jakucionis + future picks from MIA. Gary Trent Jr. 4yr/$64M signed July 16. Gary Harris $3.8M option exercised. Myles Turner reportedly joining. Pete Nance returning.',
     fa:[
@@ -2314,7 +2328,8 @@ const GI_INTEL={
       {n:'DeMar DeRozan',pos:'SF',tag:'UFA -- Veteran Scorer',fit:'Milwaukee needs a shot-creator to help Tyler Herro lead the offense. DeRozan\'s midrange game is exactly the complementary weapon that helps Herro without stepping on his creation.'},
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Hometown Tie',fit:'Nwora grew up rooting for the Bucks. Budget wing who can shoot and contributes without dominating usage. Good floor-spacing depth on a rebuilding roster.'},
     ],
-    picks:'Giannis trade return: Herro + Ware + Jaquez + Jakucionis + MIA picks · Max tradeable: 2 · Under Cap'},
+    picks:'Giannis trade return: Herro + Ware + Jaquez + Jakucionis + MIA picks · Max tradeable: 2 · Under Cap', exceptions:'$15M NT-MLE available (unused, but near 1st apron limit) · BAE available · Vet minimums',
+},
 
   ATL:{p:'#E03A3E',s:'#C1D32F',alert:'Kuminga $24.3M option DECLINED -- now UFA. CJ McCollum 1yr/$21M re-signed. Dort acquired from OKC July 19. Ryan Nembhard acquired from DAL. Carter + 2nd from SAC. Risacher to DAL.',
     fa:[
@@ -2322,7 +2337,8 @@ const GI_INTEL={
       {n:'Bradley Beal',pos:'SG',tag:'UFA -- Trae Pairing',fit:'Declined $5.6M LAC option. Beal as a secondary ball-handler next to Trae Young would be genuinely terrifying. Both St. Louis natives. Tatum connection at BOS is a threat to steal him.'},
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Wing Depth',fit:'Budget shooting wing to give ATL rotation depth around their young core. With Risacher gone they need bodies on the wing behind Dort. Nwora is cheap and competent.'},
     ],
-    picks:'Incoming 1sts: 7 · Max tradeable: 4 · Under Cap · Sent Risacher to DAL + picks to OKC in 3-team'},
+    picks:'Incoming 1sts: 7 · Max tradeable: 4 · Under Cap · Sent Risacher to DAL + picks to OKC in 3-team', exceptions:'$15M NT-MLE mostly used on Jock Landale ($14.1M spent, ~$944K remaining) · BAE available · Vet minimums',
+},
 
   DAL:{p:'#00538C',s:'#002B5E',alert:'Dusty May hired HC (2026 NCAA Champ coach). Morez Johnson (No.9 pick). Kyrie still aboard. Zaccharie Risacher acquired from ATL (3-team July 19). AJ Johnson + 2030 1st acquired from MEM for Aldama. Nembhard traded to ATL.',
     fa:[
@@ -2330,7 +2346,8 @@ const GI_INTEL={
       {n:'Kyle Anderson',pos:'PF',tag:'UFA -- IQ Fit',fit:'Slow-it-down playmaker who never turns the ball over. Dallas needs a high-IQ forward alongside Flagg while Cooper is learning the pro game. Anderson makes everyone around him better.'},
       {n:'Patty Mills',pos:'PG',tag:'Veteran Minimum',fit:'Backup ball-handler behind Kyrie. Flagg needs mentors and DAL needs depth. Mills gives them both -- championship experience at the vet minimum.'},
     ],
-    picks:'Max tradeable: 0 · 2nd Apron · 2nd Apron constraints · Got Risacher + AJ Johnson + 2030 1st'},
+    picks:'Max tradeable: 0 · 2nd Apron · 2nd Apron constraints · Got Risacher + AJ Johnson + 2030 1st', exceptions:'Over 1st Apron -- Taxpayer MLE partially used on Tarik Biberovic ($3M) · BAE used on Marcus Sasser · Vet minimums',
+},
 
   PHX:{p:'#1D1160',s:'#E56020',alert:'Miles Bridges acquired from CHA (Allen + O\'Neale + 2033 1st sent). Mark Williams 3yr/$38M. Gillespie 4yr/$48M. Goodwin 3yr/$19M. Kennard 2yr/$12M July 14. Bradley Beal declined LAC option -- PHX watching. Booker era.',
     fa:[
@@ -2338,7 +2355,8 @@ const GI_INTEL={
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Wing Depth',fit:'Phoenix needs budget wing depth behind Bridges. Nwora is a shooter who fits in any lineup. Cheap contract that doesn\'t impact their apron situation.'},
       {n:'Matisse Thybulle',pos:'SG',tag:'UFA -- Defensive Identity',fit:'Elite defender who would upgrade Phoenix\'s perimeter D significantly. Gives Booker a two-way partner in the backcourt who doesn\'t need the ball to be effective.'},
     ],
-    picks:'Heavily mortgaged · Max tradeable: 2 · 2nd Apron · Sent 2033 1st to CHA for Bridges'},
+    picks:'Heavily mortgaged · Max tradeable: 2 · 2nd Apron · Sent 2033 1st to CHA for Bridges', exceptions:'Over 1st Apron -- Taxpayer MLE partially used on Tarik Biberovic ($3M) · BAE used on Marcus Sasser · Vet minimums',
+},
 
   LAC:{p:'#C8102E',s:'#1D428A',alert:'Kawhi to TOR agreed -- on hold (NBA Aspiration investigation active). Garland traded to CLE in Feb for Harden. Hachimura 2yr/$28M. Brook Lopez 1yr re-signed. Keaton Wagler (No.5 pick). Bennedict Mathurin RFA still unsigned.',
     fa:[
@@ -2346,7 +2364,8 @@ const GI_INTEL={
       {n:'DeMar DeRozan',pos:'SF',tag:'UFA -- Veteran Wing',fit:'NBC Sports listed LAC as a possible DeRozan destination. Would give Wagler and Hachimura a proven veteran scorer who can mentor the young core through the rebuild.'},
       {n:'Kyle Anderson',pos:'PF',tag:'UFA -- Wagler Complement',fit:'High-IQ 4 who teaches young players through proximity. Wagler is 22 and learning the pro game -- Anderson is the type of veteran floor general who makes that easier.'},
     ],
-    picks:'Incoming: IND unprotected 1sts 2027/2028 · Max tradeable: 3 · Under Cap · SENT Garland to CLE for Harden'},
+    picks:'Incoming: IND unprotected 1sts 2027/2028 · Max tradeable: 3 · Under Cap · SENT Garland to CLE for Harden', exceptions:'$15M NT-MLE mostly used on Rui Hachimura ($14M spent, ~$1M remaining) · BAE available · Vet minimums',
+},
 
   SAC:{p:'#5A2D81',s:'#63727A',alert:'LaVine $49M opted IN. DeRozan WAIVED -- top UFA now. Acuff Jr. (No.7 pick). Carter dealt to ATL. Achiuwa 2yr/$11.5M re-signed. Sabonis trade market building per Windhorst.',
     fa:[
@@ -2354,7 +2373,8 @@ const GI_INTEL={
       {n:'Kyle Kuzma',pos:'PF',tag:'UFA -- Frontcourt Upgrade',fit:'Could replace the DeRozan role as the high-usage creator. 20 PPG forward who handles the ball and gives Sacramento a legitimate second star to build around besides Sabonis.'},
       {n:'Bradley Beal',pos:'SG',tag:'Potential S&T Target',fit:'If SAC is moving Sabonis they could acquire Beal via S&T from LAC. Former star with Sacramento connections -- and if healthy reuniting with an old guard is worth the risk.'},
     ],
-    picks:'Incoming 1sts: 9 · Max tradeable: 6 · Lux Tax · DeRozan waived -- $10M guaranteed, Kings can stretch rest'},
+    picks:'Incoming 1sts: 9 · Max tradeable: 6 · Lux Tax · DeRozan waived -- $10M guaranteed, Kings can stretch rest', exceptions:'$15M NT-MLE available (unused) · BAE fully used on Precious Achiuwa · Vet minimums',
+},
 
   PHI:{p:'#006BB6',s:'#ED174C',alert:'🔥 LeBron James SIGNED July 24 2yr/$8M. Jaylen Brown arrived from BOS (sent PG + 2 1sts + 2 2nds). Harden declined option -- framework with CLE agreed. Dean Wade signed. Rayan Rupert 2-way. LeBron + Embiid + Brown = Big Three.',
     fa:[
@@ -2362,7 +2382,8 @@ const GI_INTEL={
       {n:'Matisse Thybulle',pos:'SG',tag:'UFA -- Defensive Need',fit:'The Big Three needs defensive support around it. Thybulle at the veteran minimum gives PHI an elite perimeter stopper who won\'t demand shots and completes their two-way identity.'},
       {n:'Kyle Anderson',pos:'PF',tag:'Veteran UFA',fit:'Ball-handling forward who makes sense as the backup 4 behind LeBron. Slow-tempo playmaker who doesn\'t step on the Big Three\'s toes but keeps the offense moving when they rest.'},
     ],
-    picks:'Sent to BOS: PG + 2 unprotected 1sts + 2 2nds · Max tradeable: 4 · Lux Tax'},
+    picks:'Sent to BOS: PG + 2 unprotected 1sts + 2 2nds · Max tradeable: 4 · Lux Tax', exceptions:'$15M NT-MLE fully used -- split on Dean Wade ($9M) + Anfernee Simons ($6M) · BAE used on Ariel Hukporti · Vet minimums',
+},
 
   CHI:{p:'#CE1141',s:'#000000',alert:'Tiago Splitter HC. Nic Claxton acquired (3-team with MIN/BKN). Caleb Wilson (No.4 pick). Zach Collins 2yr/$17M. Massive cap space -- most in East. Got Claxton + No.33 from BKN.',
     fa:[
@@ -2370,7 +2391,8 @@ const GI_INTEL={
       {n:'Kyle Kuzma',pos:'PF',tag:'UFA -- Frontcourt Leader',fit:'20 PPG ball-handler who can lead a rebuild. If CHI misses on Kuminga, Kuzma is the next best forward available who can give Wilson and the young core a proven scorer to learn from.'},
       {n:'DeMar DeRozan',pos:'SF',tag:'Homecoming UFA',fit:'DeRozan is a Chicago icon. Played his best NBA basketball here. Chicago has money to spend and DeRozan at 36 still drops 18 a night. The story writes itself.'},
     ],
-    picks:'All 7 own firsts in hand · Max tradeable: 4 · Under Cap · Got Claxton + No.33 from BKN'},
+    picks:'All 7 own firsts in hand · Max tradeable: 4 · Under Cap · Got Claxton + No.33 from BKN', exceptions:'Under Cap -- Used Room Exception (unused so far) · BAE unavailable (went under cap) · Vet minimums',
+},
 
   BKN:{p:'#000000',s:'#FFFFFF',alert:'Julius Randle + No.28 pick received from MIN (3-team). Keon Ellis signed from CLE. Cam Thomas + Randle core. Full rebuild. Ziaire Williams -- BKN declined $6.25M option.',
     fa:[
@@ -2378,7 +2400,8 @@ const GI_INTEL={
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Wing Depth',fit:'Cheap shooting wing who doesn\'t need the ball. Brooklyn is hoarding picks and spending minimally -- Nwora fits the budget rotation and gives Cam Thomas a shooter on the wing.'},
       {n:'Patrick Beverley',pos:'PG',tag:'Veteran Minimum',fit:'Cam Thomas is 22 and needs mentors. Beverley brings hardnose defense and locker-room accountability that every young team needs. Vet minimum value at its finest.'},
     ],
-    picks:'Incoming 1sts: 13+ · Max tradeable: 9 · 2nds: 19 · Under Cap'},
+    picks:'Incoming 1sts: 13+ · Max tradeable: 9 · 2nds: 19 · Under Cap', exceptions:'Under Cap -- Used Room Exception (unused so far) · BAE unavailable (went under cap) · Vet minimums',
+},
 
   HOU:{p:'#CE1141',s:'#000000',alert:'KD opted IN. Bruce Thornton acquired from NYK. Tari Eason RFA still unsigned. Fred VanVleet $25M option exercised (returning from ACL). DFS traded to CHA (got 3 future 2nds). Marcus Smart + Bogdan Bogdanovic acquired. Sengun core intact.',
     fa:[
@@ -2386,7 +2409,8 @@ const GI_INTEL={
       {n:'DeMar DeRozan',pos:'SF',tag:'UFA -- Veteran Layer',fit:'If HOU misses on locking in Eason they need a proven scorer. DeRozan gives KD a reliable secondary option at the midrange who won\'t demand creation. Championship-window depth.'},
       {n:'Kyle Anderson',pos:'PF',tag:'UFA -- Jokic-Type Complement',fit:'High-IQ forward who makes every offense better. Sengun\'s playmaking works best with smart movers around him -- Anderson is exactly that, plus he defends and never turns it over.'},
     ],
-    picks:'Incoming 1sts: 9 · Max tradeable: 6 · Under Cap · DFS + 3 2nds to CHA; got Smart + Bogdanovic'},
+    picks:'Incoming 1sts: 9 · Max tradeable: 6 · Under Cap · DFS + 3 2nds to CHA; got Smart + Bogdanovic', exceptions:'Taxpayer MLE fully used on Marcus Smart ($6.06M) · BAE available · Vet minimums',
+},
 
   TOR:{p:'#CE1141',s:'#000000',alert:'Kawhi trade from LAC agreed -- on hold pending NBA Aspiration investigation. Alijah Martin 2yr/$4.8M re-signed. Ron Harper Jr. 3yr signed. Building around Kawhi + Scottie Barnes pending investigation. Ingram + Dick + picks sent to LAC.',
     fa:[
@@ -2394,7 +2418,8 @@ const GI_INTEL={
       {n:'Kyle Kuzma',pos:'PF',tag:'UFA -- Scottie Complement',fit:'Versatile ball-handling 4 who spaces the floor and creates off the bounce. Gives Scottie Barnes a frontcourt partner who handles the ball so Barnes can attack from the wing.'},
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Wing Depth',fit:'Budget shooting wing who fills out TOR\'s rotation cheaply. With Dick sent to LAC in the Kawhi deal, Toronto needs wing depth that doesn\'t break the bank.'},
     ],
-    picks:'Incoming 1sts: 7 · Max tradeable: 4 · Lux Tax · Sent to LAC: Ingram + Gradey Dick + picks'},
+    picks:'Incoming 1sts: 7 · Max tradeable: 4 · Lux Tax · Sent to LAC: Ingram + Gradey Dick + picks', exceptions:'$15M NT-MLE available (unused, near 1st apron limit) · BAE available · Vet minimums',
+},
 
   CHA:{p:'#1D1160',s:'#00788C',alert:'LaMelo to MIN (got Naz Reid + 2033 1st + 3 swaps + 3 2nds). Bridges to PHX (got Allen + O\'Neale + 2033 1st). Coby White 3yr/$74M re-signed. DFS acquired from HOU. 20+ second-round picks. Full rebuild with Coby + Knueppel.',
     fa:[
@@ -2402,7 +2427,8 @@ const GI_INTEL={
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Cheap Wing',fit:'Budget shooting wing who gives Charlotte rotation depth without blocking their cap flexibility or their young players\' development. Fits the "fill rotations cheap" rebuild strategy.'},
       {n:'Patty Mills',pos:'PG',tag:'Veteran Minimum',fit:'Coby White and Kon Knueppel are young. Charlotte needs veterans who set culture. Mills is cheap, smart, and makes young guards better just by being in the building.'},
     ],
-    picks:'Incoming 1sts: 10+ (2033 from MIN + 2033 from PHX) · Max tradeable: 7 · Under Cap'},
+    picks:'Incoming 1sts: 10+ (2033 from MIN + 2033 from PHX) · Max tradeable: 7 · Under Cap', exceptions:'$15M NT-MLE fully used on Dorian Finney-Smith (via trade) · BAE unavailable (used in 2025-26 on Malaki Branham) · Vet minimums',
+},
 
   IND:{p:'#002D62',s:'#FDBB30',alert:'Haliburton Achilles recovery -- expected back for training camp. Larry Nance Jr. 1yr/$4M from BOS. Kelly Oubre Jr. 2yr/$17M. Dusty May left for DAL HC. Tiago Splitter to CHI. Lost pick to LAC. Braden Smith extension-eligible.',
     fa:[
@@ -2410,7 +2436,8 @@ const GI_INTEL={
       {n:'Kyle Anderson',pos:'PF',tag:'UFA -- Haliburton Complement',fit:'Smart ball-handler who makes everyone around him better -- the exact profile for a team whose entire system runs through Tyrese Haliburton. Would not step on Hali\'s toes at all.'},
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Wing Rotation',fit:'Indiana needs wing depth while Haliburton recovers. Nwora is a budget shooter who gives Siakam and the core shooters without burning cap dollars needed for Braden Smith\'s extension.'},
     ],
-    picks:'Incoming 1sts: 6 · Max tradeable: 3 · Under Cap · Sent 2027+2028 unprotected 1sts to LAC'},
+    picks:'Incoming 1sts: 6 · Max tradeable: 3 · Under Cap · Sent 2027+2028 unprotected 1sts to LAC', exceptions:'$15M NT-MLE partially used on Kelly Oubre Jr. ($8.05M, ~$7M remaining, near apron limit) · BAE available · Vet minimums',
+},
 
   ORL:{p:'#0077C0',s:'#C4CED4',alert:'Banchero + Franz core intact. No major FA additions. Jonathan Isaac 1yr min re-signed. New HC Sean Sweeney hired. Need a guard creator urgently.',
     fa:[
@@ -2418,7 +2445,8 @@ const GI_INTEL={
       {n:'Bradley Beal',pos:'SG',tag:'UFA -- Scorer',fit:'Injury history is the concern but at a reasonable AAV Beal gives Paolo and Franz the ball-dominant guard they\'ve never had. If healthy this is an elite frontcourt-star combo.'},
       {n:'DeMar DeRozan',pos:'SF',tag:'UFA -- Wing Scorer',fit:'18.4 PPG creator who generates his own shot without needing the system to create for him. Paulo can unlock defenses while DeRozan gets his midrange looks on the other side.'},
     ],
-    picks:'Max tradeable: 1 · Under Cap · New HC Sean Sweeney (fmr Spurs asst)'},
+    picks:'Max tradeable: 1 · Under Cap · New HC Sean Sweeney (fmr Spurs asst)', exceptions:'Over 1st Apron -- $6M taxpayer MLE available (unused) · BAE unavailable (over apron) · Vet minimums',
+},
 
   DET:{p:'#C8102E',s:'#006BB6',alert:'Jalen Duren RFA -- talks stalled, 25% max framework emerging. Huerter 3yr/$27M re-signed. Isaiah Stewart to MEM (3 future 2nds). John Collins signed PF. Caris LeVert arrived. Daniss Jenkins 4yr/$4M option. Isaiah Joe from OKC.',
     fa:[
@@ -2426,7 +2454,8 @@ const GI_INTEL={
       {n:'DeMar DeRozan',pos:'SF',tag:'UFA -- Marc Stein Report',fit:'Marc Stein\'s Stein Line says Detroit is considering jumping into the DeRozan sweepstakes. 18.4 PPG next to Cade gives the Pistons a veteran scorer who can close games they\'ve been losing.'},
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Wing Depth',fit:'Stewart is gone and DET needs wing rotation depth. Nwora is a budget shooter who fills out the rotation without eating into the cap space needed to finalize the Duren deal.'},
     ],
-    picks:'Incoming 1sts: 7 · Max tradeable: 4 · 2nds: 15 · Under Cap · Stewart to MEM for 3 future 2nds'},
+    picks:'Incoming 1sts: 7 · Max tradeable: 4 · 2nds: 15 · Under Cap · Stewart to MEM for 3 future 2nds', exceptions:'$15M NT-MLE partially used on Isaiah Joe via trade ($11.3M, ~$3.7M remaining) · BAE unavailable (used in 2025-26 on Daniss Jenkins) · Vet minimums',
+},
 
   NOP:{p:'#0C2340',s:'#C8102E',alert:'Quiet offseason. Zion health = everything. DeAndre Jordan 1yr returning. Cap space available. Jeremiah Fears arriving. Kevon Looney departed LAL 1yr min.',
     fa:[
@@ -2434,7 +2463,8 @@ const GI_INTEL={
       {n:'Kyle Anderson',pos:'PF',tag:'UFA -- Smart Fit',fit:'High-IQ forward who thrives in Alvin Gentry-style halfcourt offenses. Gives NOP a reliable backup 4 who makes plays and doesn\'t need the ball to contribute when Zion is resting.'},
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Wing Depth',fit:'New Orleans needs wing depth and shooting while they figure out the Zion situation. Nwora provides that cheaply without affecting the cap flexibility needed if they make a bigger move.'},
     ],
-    picks:'Max tradeable: 4 · Own all 7 own firsts · Under Cap'},
+    picks:'Max tradeable: 4 · Own all 7 own firsts · Under Cap', exceptions:'$15M NT-MLE available (unused, near 1st apron limit) · BAE available · Vet minimums',
+},
 
   WAS:{p:'#002B5C',s:'#E31837',alert:'Dybantsa No.1 overall. Ayton acquired from LAL (Hardy + 2031/2032 2nds sent). Trae Young 4yr/$212M. Khris Middleton 3yr/$17.6M via S&T from DAL. Alex Sarr foot surgery (not missing regular season). D\'Angelo Russell to MEM in 6-team deal.',
     fa:[
@@ -2442,7 +2472,8 @@ const GI_INTEL={
       {n:'Jordan Nwora',pos:'SF',tag:'UFA -- Wing Rotation',fit:'Budget shooting wing who gives WAS rotation depth around Dybantsa and Sarr. Washington is developing young players -- Nwora doesn\'t block development and fills the wing depth gap.'},
       {n:'Patrick Beverley',pos:'PG',tag:'Veteran Minimum',fit:'Backup PG behind Trae who brings defensive toughness and keeps young players like Dybantsa honest in practice. Exact culture piece a team full of teenagers needs in the building.'},
     ],
-    picks:'Incoming 1sts: 8 · Max tradeable: 5 · Under Cap · Got Ayton from LAL (Hardy + 2 2nds sent back)'},
+    picks:'Incoming 1sts: 8 · Max tradeable: 5 · Under Cap · Got Ayton from LAL (Hardy + 2 2nds sent back)', exceptions:'$15M NT-MLE available (unused) · BAE unavailable (used in 2025-26 on Blake Wesley) · Vet minimums',
+},
 };
 
 
@@ -2810,6 +2841,9 @@ const spaceColor = space > 30 ? '#10b981' : space > 0 ? '#fbbf24' : '#ef4444';
 const spaceWidth = Math.min(100, Math.max(4, (Math.abs(space) / 65) * 100));
 const spaceLabel = space > 0 ? `$${space}M Under Cap` : space < 0 ? `$${Math.abs(space)}M Over Cap` : 'At The Cap';
 
+const exceptionsText = intel.exceptions || null;
+
+
 const estimatedPayroll = space < 0 ? 165 + Math.abs(space) : 165 - space;
 // rough estimate until real data
   const capPct=Math.min(99,Math.round((estimatedPayroll/APRON)*100));
@@ -2852,6 +2886,17 @@ const estimatedPayroll = space < 0 ? 165 + Math.abs(space) : 165 - space;
       <div style="height:100%;width:${spaceWidth}%;border-radius:100px;background:${spaceColor};box-shadow:0 0 12px ${spaceColor}66;transition:width 1s ease;"></div>
     </div>
   </div>
+  ${exceptionsText ? `
+  <div style="margin-bottom:1.25rem;padding:1rem 1.25rem;border-radius:1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);display:flex;gap:0.75rem;align-items:flex-start;">
+    <span style="font-size:1rem;flex-shrink:0;">💰</span>
+    <div>
+      <p style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.25em;color:rgba(255,255,255,0.3);margin-bottom:0.3rem;">Spending Tools</p>
+      <p style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);line-height:1.6;">${exceptionsText}</p>
+    </div>
+  </div>` : ''}
+
+  <!-- Apron gauge -->
+  <div class="gi-sal-hero">
 
   <!-- Apron gauge -->
   <div class="gi-sal-hero">
