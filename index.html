@@ -5628,7 +5628,8 @@ function toggleChat() {
     chatWindow.classList.toggle('active-chat');
 
     // Check auth state and show/hide overlay
-    const isLoggedIn = typeof auth !== 'undefined' && auth.currentUser;
+const isLoggedIn = window._firebaseUser != null;
+
 
     if (overlay) {
         if (!isLoggedIn) {
@@ -6899,6 +6900,7 @@ async function updateArticleCommentCount(articleId) {
     });
 
 onAuthStateChanged(auth, async (user) => {
+    window._firebaseUser = user;  
     if (!user) {
         // login disabled temporarily
         listenForMessages();
