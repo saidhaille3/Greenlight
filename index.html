@@ -6682,47 +6682,34 @@ window.showReactions = (event, msgId, originalText) => {
 // --- COLOR CUSTOMIZATION ENGINE ---
 
 window.saveChatColors = async () => {
-    if (!auth.currentUser) return;
+    if (!auth.currentUser) {
+        alert("Not logged in");
+        return;
+    }
 
     const btn = document.getElementById('updateColorsBtn');
     const btnText = document.getElementById('btnText');
-    const btnIcon = document.getElementById('btnIcon');
     const nameColor = document.getElementById('nameColorPicker').value;
     const textColor = document.getElementById('textColorPicker').value;
 
-    // 1. Loading State
     btn.disabled = true;
     btnText.innerText = "Saving...";
-    btn.classList.add('opacity-50');
 
     try {
-        const userRef = doc(db, "users", auth.currentUser.uid);
-await setDoc(userRef, {
+        await setDoc(doc(db, "users", auth.currentUser.uid), {
+            chatNameColor: nameColor,
+            chatTextColor: textColor
+        }, { merge: true });
 
-                chatNameColor: nameColor,
-    chatTextColor: textColor
-}, { merge: true });
-
-
-        // 2. Success Feedback
-        btn.classList.remove('opacity-50', 'bg-black', 'dark:bg-white');
-        btn.classList.add('bg-green-600', 'text-white');
-        btnText.innerText = "Updated!";
-        btnIcon.className = "fa-solid fa-check";
-
-        // 3. Reset after 2 seconds
+        btnText.innerText = "Saved!";
         setTimeout(() => {
             btn.disabled = false;
-            btn.classList.remove('bg-green-600', 'text-white');
-            btn.classList.add('bg-black', 'dark:bg-white');
             btnText.innerText = "Update Colors";
-            btnIcon.className = "fa-solid fa-paintbrush";
         }, 2000);
 
     } catch (e) {
-        console.error("Error saving colors:", e);
-        btnText.innerText = "Error!";
-        btn.classList.add('bg-red-600');
+        alert("Error: " + e.message);
+        btnText.innerText = "Update Colors";
         btn.disabled = false;
     }
 };
