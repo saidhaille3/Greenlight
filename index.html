@@ -6309,15 +6309,45 @@ window.closeAuthPrompt = () => {
 };
 
 // --- UPDATED CLICK HANDLERS ---
-
-// Update your toggleArticleLike function:
 window.toggleArticleLike = async function() {
     if (!auth.currentUser) {
-        openAuthPrompt(); // Replaced alert
+        openAuthPrompt();
         return;
     }
-    // ... rest of your code
+    
+    if (!currentArticleId) return;
+
+    const articleRef = doc(db, "articles", currentArticleId);
+    const userId = auth.currentUser.uid;
+
+    try {
+        const docSnap = await getDoc(articleRef);
+        
+        if (!docSnap.exists()) {
+            await setDoc(articleRef, {
+                likes: [userId],
+                viewCount: 1
+            });
+            return;
+        }
+
+        const data = docSnap.data();
+        const hasLiked = data.likes?.includes(userId);
+
+        if (hasLiked) {
+            await updateDoc(articleRef, {
+                likes: arrayRemove(userId)
+            });
+        } else {
+            await updateDoc(articleRef, {
+                likes: arrayUnion(userId)
+            });
+        }
+    } catch (e) {
+        console.error("Error toggling like:", e);
+    }
 };
+
 
 
 </script>
