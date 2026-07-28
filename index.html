@@ -6982,7 +6982,17 @@ listenForMessages();
             console.error("Logout Error:", error);
         }
     };
-    let currentArticleId = null;
+let currentArticleId = null;
+
+setInterval(() => {
+  if (window._currentArticleId && window._currentArticleId !== currentArticleId) {
+    currentArticleId = window._currentArticleId;
+    listenToArticleMetrics(currentArticleId);
+    loadArticleComments(currentArticleId);
+    updateArticleCommentCount(currentArticleId);
+  }
+}, 500);
+
 
 // Initialization for Reader Comments
 // Ensure openReader is globally accessible before module scripts run
