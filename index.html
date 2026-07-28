@@ -1566,7 +1566,7 @@ const GI_PICKS_STRUCTURED = {
       2032:{own:true,in:[],out:[]},
       2033:{own:true,in:[],out:[]},
     },
-    maxTradeable:7,apronStatus:'Under Cap'
+    maxTradeable:7,apronStatus:'2nd Apron'
   },
   MIA:{
     first:{
@@ -2886,14 +2886,88 @@ const estimatedPayroll = space < 0 ? 165 + Math.abs(space) : 165 - space;
       <div style="height:100%;width:${spaceWidth}%;border-radius:100px;background:${spaceColor};box-shadow:0 0 12px ${spaceColor}66;transition:width 1s ease;"></div>
     </div>
   </div>
-  ${exceptionsText ? `
-  <div style="margin-bottom:1.25rem;padding:1rem 1.25rem;border-radius:1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);display:flex;gap:0.75rem;align-items:flex-start;">
-    <span style="font-size:1rem;flex-shrink:0;">💰</span>
-    <div>
-      <p style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.25em;color:rgba(255,255,255,0.3);margin-bottom:0.3rem;">Spending Tools</p>
-      <p style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.6);line-height:1.6;">${exceptionsText}</p>
+${intel.exceptions ? (() => {
+  const raw = intel.exceptions;
+  const tools = raw.split('·').map(s => s.trim()).filter(Boolean);
+  
+  const getToolConfig = (text) => {
+    const t = text.toLowerCase();
+    const used = t.includes('fully used') || t.includes('fully spent') || t.includes('unavailable') || t.includes('no ') || t.includes('frozen') || t.includes('none');
+    const partial = t.includes('partially') || t.includes('remaining') || t.includes('near') || t.includes('~$');
+    
+    let icon = '💰';
+    let label = 'Exception';
+    
+    if (t.includes('taxpayer mle') || t.includes('$6m taxpayer')) { icon = '🏷️'; label = 'Taxpayer MLE'; }
+    else if (t.includes('nt-mle') || t.includes('$15m')) { icon = '💎'; label = 'Full MLE'; }
+    else if (t.includes('bae') || t.includes('bi-annual')) { icon = '📋'; label = 'BAE'; }
+    else if (t.includes('room exception') || t.includes('room ex')) { icon = '🚪'; label = 'Room Exception'; }
+    else if (t.includes('vet min') || t.includes('veteran min')) { icon = '📝'; label = 'Vet Minimums'; }
+    else if (t.includes('frozen')) { icon = '🔒'; label = 'Frozen'; }
+    else if (t.includes('under cap') || t.includes('cap space')) { icon = '💵'; label = 'Cap Space'; }
+    
+    let status = used ? 'used' : partial ? 'partial' : 'available';
+    
+    const statusConfig = {
+      available: { dot: '#10b981', glow: 'rgba(16,185,129,0.3)', bg: 'rgba(16,185,129,0.06)', border: 'rgba(16,185,129,0.2)', label: 'AVAILABLE', labelColor: '#10b981' },
+      partial:   { dot: '#fbbf24', glow: 'rgba(251,191,36,0.3)',  bg: 'rgba(251,191,36,0.06)',  border: 'rgba(251,191,36,0.2)',  label: 'PARTIAL',   labelColor: '#fbbf24' },
+      used:      { dot: '#ef4444', glow: 'rgba(239,68,68,0.2)',   bg: 'rgba(255,255,255,0.02)', border: 'rgba(255,255,255,0.06)', label: 'USED',      labelColor: 'rgba(255,255,255,0.2)' },
+    };
+    
+    return { icon, label, status, cfg: statusConfig[status], text, isUsed: used };
+  };
+
+  const cards = tools.map(t => {
+    const { icon, label, cfg, text, isUsed } = getToolConfig(t);
+    return `
+    <div style="
+      position:relative;
+      padding:0.875rem 1rem;
+      border-radius:1.25rem;
+      background:${cfg.bg};
+      border:1px solid ${cfg.border};
+      display:flex;
+      align-items:flex-start;
+      gap:0.75rem;
+      overflow:hidden;
+      transition:all 0.2s;
+      ${isUsed ? 'opacity:0.55;' : ''}
+    ">
+      <div style="
+        width:36px;height:36px;
+        border-radius:0.75rem;
+        background:rgba(255,255,255,0.04);
+        border:1px solid rgba(255,255,255,0.08);
+        display:flex;align-items:center;justify-content:center;
+        font-size:1rem;flex-shrink:0;
+        ${isUsed ? 'filter:grayscale(1);' : ''}
+      ">${icon}</div>
+      
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.2rem;">
+          <p style="font-size:10px;font-weight:900;color:${isUsed ? 'rgba(255,255,255,0.3)' : '#f0f0f0'};text-transform:uppercase;letter-spacing:0.05em;">${label}</p>
+          <div style="display:flex;align-items:center;gap:0.3rem;">
+            <span style="width:5px;height:5px;border-radius:50%;background:${cfg.dot};box-shadow:0 0 6px ${cfg.glow};flex-shrink:0;"></span>
+            <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:${cfg.labelColor};">${cfg.label}</span>
+          </div>
+        </div>
+        <p style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.35);line-height:1.5;">${t}</p>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+  <div style="margin-bottom:1.5rem;">
+    <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.875rem;">
+      <p style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.4em;color:rgba(255,255,255,0.2);">Spending Tools</p>
+      <div style="flex:1;height:1px;background:rgba(255,255,255,0.05);"></div>
     </div>
-  </div>` : ''}
+    <div style="display:flex;flex-direction:column;gap:0.5rem;">
+      ${cards}
+    </div>
+  </div>`;
+})() : ''}
+
 
   <!-- Apron gauge -->
   <div class="gi-sal-hero">
