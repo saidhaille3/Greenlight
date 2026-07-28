@@ -6697,10 +6697,12 @@ window.saveChatColors = async () => {
 
     try {
         const userRef = doc(db, "users", auth.currentUser.uid);
-        await updateDoc(userRef, {
-            chatNameColor: nameColor,
-            chatTextColor: textColor
-        });
+await setDoc(userRef, {
+
+                chatNameColor: nameColor,
+    chatTextColor: textColor
+}, { merge: true });
+
 
         // 2. Success Feedback
         btn.classList.remove('opacity-50', 'bg-black', 'dark:bg-white');
