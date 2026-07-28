@@ -7026,7 +7026,8 @@ async function loadArticleComments(articleId) {
                         <div>
                             <h4 class="user-name font-black text-sm uppercase dark:text-white">${c.username}</h4>
                             <div class="flex items-center gap-2">
-                                <p class="text-[9px] opacity-40 font-bold uppercase tracking-widest">Just Now</p>
+                                <p class="text-[9px] opacity-40 font-bold uppercase tracking-widest">${c.timestamp ? new Date(c.timestamp.toDate()).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'}) : 'Just Now'}</p>
+
                                 ${c.isEdited ? `<span class="text-[8px] font-black text-amber-600 dark:text-amber-400 bg-amber-500/10 px-1.5 rounded cursor-help" title="Original: ${c.originalText}">EDITED</span>` : ''}
                             </div>
                         </div>
