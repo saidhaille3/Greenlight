@@ -6319,34 +6319,6 @@ window.toggleArticleLike = async function() {
     // ... rest of your code
 };
 
-// Update your submitArticleComment listener:
-document.addEventListener('click', async (e) => {
-    if (e.target.id !== 'submitArticleComment') return;
-    
-    const input = document.getElementById('articleCommentInput');
-    const text = input?.value.trim();
-    
-    if (!auth.currentUser) {
-        openAuthPrompt();
-        return;
-    }
-    
-    if (!text || !currentArticleId) return;
-    
-    try {
-        await addDoc(collection(db, `articles/${currentArticleId}/comments`), {
-            text: text,
-            username: currentUsername,
-            uid: auth.currentUser.uid,
-            timestamp: serverTimestamp(),
-            upvotes: 0,
-            stars: []
-        });
-        input.value = "";
-    } catch(err) {
-        console.error("Comment failed:", err);
-    }
-});
 
 </script>
 <script>
