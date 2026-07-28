@@ -2158,6 +2158,15 @@ const GI_PICKS_STRUCTURED = {
   },
 };
 
+const GI_CAP_SPACE = {
+  NYK: -45, OKC: 48, MIA: -38, SA: 42, BOS: -28,
+  MIN: -52, LAL: -22, DEN: -41, POR: 38, CLE: -44,
+  GS: -31, UTA: 55, MEM: 44, MIL: 18, ATL: 35,
+  DAL: -48, PHX: -39, LAC: 22, SAC: -18, PHI: -29,
+  CHI: 52, BKN: 61, HOU: 28, TOR: 19, CHA: 48,
+  IND: 24, ORL: 31, DET: 26, NOP: 33, WAS: 41
+};
+
 
 const GI_SLUG={ATL:'atl',BOS:'bos',BKN:'bkn',CHA:'cha',CHI:'chi',CLE:'cle',DAL:'dal',DEN:'den',DET:'det',GS:'gs',HOU:'hou',IND:'ind',LAC:'lac',LAL:'lal',MEM:'mem',MIA:'mia',MIL:'mil',MIN:'min',NOP:'no',NYK:'ny',OKC:'okc',ORL:'orl',PHI:'phi',PHX:'phx',POR:'por',SAC:'sac',SA:'sa',TOR:'tor',UTA:'uta',WAS:'was'};
 
@@ -2795,8 +2804,14 @@ function giRenderSalary(data,intel){
   const teamColor=GI_INTEL[teamAbbr]?.p||'#10b981';
 
   // Cap numbers for 2026-27
-  const CAP=145, LUX=176, APRON=189;
-  const estimatedPayroll=Math.floor(Math.random()*50)+115; // rough estimate until real data
+const CAP=165, LUX=200, APRON=222;
+const space = GI_CAP_SPACE[teamAbbr] || 0;
+const spaceColor = space > 30 ? '#10b981' : space > 0 ? '#fbbf24' : '#ef4444';
+const spaceWidth = Math.min(100, Math.max(4, (Math.abs(space) / 65) * 100));
+const spaceLabel = space > 0 ? `$${space}M Under Cap` : space < 0 ? `$${Math.abs(space)}M Over Cap` : 'At The Cap';
+
+const estimatedPayroll = space < 0 ? 165 + Math.abs(space) : 165 - space;
+// rough estimate until real data
   const capPct=Math.min(99,Math.round((estimatedPayroll/APRON)*100));
   const capFillPct=Math.min(99,Math.round((estimatedPayroll/APRON)*100));
 
@@ -2827,7 +2842,20 @@ function giRenderSalary(data,intel){
   </div>
 
   <!-- Apron gauge -->
+  <!-- Cap Space Bar -->
+  <div style="margin-bottom:1.25rem;padding:1.1rem 1.25rem;border-radius:1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.75rem;">
+      <span style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.3);">Cap Space Available</span>
+      <span style="font-size:20px;font-weight:900;color:${spaceColor};">${spaceLabel}</span>
+    </div>
+    <div style="height:8px;border-radius:100px;background:rgba(255,255,255,0.06);">
+      <div style="height:100%;width:${spaceWidth}%;border-radius:100px;background:${spaceColor};box-shadow:0 0 12px ${spaceColor}66;transition:width 1s ease;"></div>
+    </div>
+  </div>
+
+  <!-- Apron gauge -->
   <div class="gi-sal-hero">
+
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.5rem;">
       <span style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.25em;color:rgba(255,255,255,0.3);">Estimated Payroll Position</span>
       <span style="font-size:18px;font-weight:900;color:${gaugeColor};letter-spacing:-0.02em;">~$${estimatedPayroll}M</span>
