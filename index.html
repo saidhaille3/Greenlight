@@ -2610,7 +2610,7 @@ function giBuildCards(){
       ${isChamp?'<span class="hub-tc-crown">🏆</span>':''}
       <img class="hub-tc-logo" src="${giLogo(t.a)}" alt="${t.name}" onerror="this.style.opacity=.3">
       <p class="hub-tc-name">${t.name}</p>
-      <p class="hub-tc-rec" id="gi-rec-${t.a}">--</p>
+      <p class="hub-tc-rec">${GI_MANUAL_STATS[t.a]?.wl||'--'}</p>
       <div class="flex flex-col gap-1 items-center">
         ${isChamp?`<span class="hub-badge hub-badge-champ">Champs</span>`:''}
         ${isHot?`<span class="hub-badge hub-badge-hot">🔥 Active</span>`:''}
@@ -2621,29 +2621,11 @@ function giBuildCards(){
 }
 
 
+
 // ─────────────────────────────────────────────
 //  STANDINGS FETCH
 // ─────────────────────────────────────────────
-async function giFetchStandings(){
-  try{
-    const r=await fetch('https://site.api.espn.com/apis/v2/sports/basketball/nba/standings?season=2026');
-    const d=await r.json();
-    d.children?.forEach(conf=>{
-      conf.standings?.entries?.forEach(e=>{
-        const espnAbbr=e.team?.abbreviation?.toUpperCase();
-        const ourAbbr=Object.keys(GI_SLUG).find(k=>{const s=GI_SLUG[k];return espnAbbr?.toLowerCase()===s||espnAbbr===k;});
-        if(!ourAbbr)return;
-        const w=e.stats?.find(s=>s.name==='wins')?.value??0;
-        const l=e.stats?.find(s=>s.name==='losses')?.value??0;
-        const el=document.getElementById(`gi-rec-${ourAbbr}`);
-        if(el)el.textContent=`${w}–${l}`;
-      });
-    });
-    document.getElementById('gi-sync-label').textContent='Updated July 25, 2026';
 
-}catch(e){}
-
-}
 
 // ─────────────────────────────────────────────
 //  OPEN MODAL
@@ -2656,12 +2638,18 @@ async function giOpen(team){
   document.getElementById('gi-hero-bg').style.background=`linear-gradient(135deg,${intel.p||'#111'} 0%,${intel.s||'#333'} 100%)`;
   document.getElementById('gi-hero-logo').src=giLogo(team.a);
   document.getElementById('gi-hero-label').textContent=team.champ?'🏆 2026 NBA Champions':'NBA 2025–26';
-  const recText=document.getElementById(`gi-rec-${team.a}`)?.textContent||'--';
-  document.getElementById('gi-hero-rec').textContent=recText;
+document.getElementById('gi-hero-rec').textContent = GI_MANUAL_STATS[team.a]?.wl || '--';
+
   document.getElementById('gi-city').textContent=team.city;
   document.getElementById('gi-name').textContent=team.name;
   document.getElementById('gi-standing').textContent=team.champ?'🏆 2026 NBA Champions · Beat Spurs 4–1':'2025–26 Season';
-  document.getElementById('gi-wl').textContent=recText;
+  const ms = GI_MANUAL_STATS[team.a] || {};
+document.getElementById('gi-hero-rec').textContent = ms.wl || '--';
+document.getElementById('gi-wl').textContent  = ms.wl  || '--';
+document.getElementById('gi-ppg').textContent = ms.ppg || '--';
+document.getElementById('gi-opp').textContent = ms.opp || '--';
+document.getElementById('gi-conf').textContent = ms.conf || '--';
+
   const alertEl=document.getElementById('gi-alert');
   if(intel.alert){alertEl.classList.add('visible');document.getElementById('gi-alert-text').textContent=intel.alert;}
   else alertEl.classList.remove('visible');
@@ -2676,35 +2664,17 @@ async function giOpen(team){
   giRenderAll(team,data,intel);
 }
 
-function giClose(){
-  const modal=document.getElementById('gi-modal');
-  const overlay=document.getElementById('gi-overlay');
-  modal.classList.remove('gi-shown');
-  setTimeout(()=>{overlay.classList.remove('gi-open');document.body.style.overflow='';},450);
-}
-function giOverlayClick(e){if(e.target===document.getElementById('gi-overlay'))giClose();}
-function giTab(el,panel){
-  document.querySelectorAll('.gi-tab').forEach(t=>t.classList.remove('on'));
-  document.querySelectorAll('.gi-panel').forEach(p=>p.classList.remove('on'));
-  el.classList.add('on');
-  document.getElementById(`gi-panel-${panel}`).classList.add('on');
-}
-
 // ─────────────────────────────────────────────
 //  FETCH
 // ─────────────────────────────────────────────
 async function giFetch(abbr){
   if(_giCache[abbr])return _giCache[abbr];
   const slug=GI_SLUG[abbr]||abbr.toLowerCase();
-  const [rosterR,teamR,newsR]=await Promise.allSettled([
-    fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${slug}/roster`),
-    fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${slug}`),
-    fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${slug}/news?limit=8`),
-  ]);
-  const d={
-    roster:rosterR.status==='fulfilled'?await rosterR.value.json():null,
-    team:teamR.status==='fulfilled'?await teamR.value.json():null,
-    news:newsR.status==='fulfilled'?await newsR.value.json():null,
+  const newsR = await fetch(`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/${slug}/news?limit=8`).catch(()=>null);
+  const d = {
+    roster: null,
+    team: null,
+    news: newsR ? await newsR.json().catch(()=>null) : null,
   };
   _giCache[abbr]=d;
   return d;
@@ -2714,7 +2684,6 @@ async function giFetch(abbr){
 //  RENDER ALL
 // ─────────────────────────────────────────────
 function giRenderAll(team,data,intel){
-  giRenderQuickStats(data);
   giRenderDepth(team,intel);
   giRenderRoster(data);
   giRenderSalary(data,intel);
@@ -2879,6 +2848,7 @@ function giRenderRoster(data){
   html+=`</tbody></table>`;
   el.innerHTML=html;
 }
+
 
 // ══════════════════════════════════════════════════════════════
 //  SALARY -- VISUAL FIRST
@@ -3459,14 +3429,16 @@ function giSkeleton(){
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     giBuildCards();
-    giFetchStandings();
+    document.getElementById('gi-sync-label').textContent = 'Updated Jul 29, 2026';
+    document.getElementById('gi-sync-dot').style.background = '#10b981';
   });
 } else {
   giBuildCards();
-  giFetchStandings();
+  document.getElementById('gi-sync-label').textContent = 'Updated Jul 29, 2026';
+  document.getElementById('gi-sync-dot').style.background = '#10b981';
 }
-setInterval(giFetchStandings, 300000);
 setInterval(() => { _giCache = {}; }, 600000);
+
 
 </script>
 
@@ -3665,6 +3637,581 @@ document.addEventListener('DOMContentLoaded', () => {
 // ============================================================
 //  DRAFT MODAL + CLAUDE AI INTEL ENGINE
 // ============================================================
+const GI_MANUAL_STATS = {
+  // Format: wl, ppg (PS/G), opp (PA/G), conf standing
+  NYK: { wl:'53–29', ppg:'116.5', opp:'110.1', conf:'3rd East' },
+  OKC: { wl:'64–18', ppg:'119.0', opp:'107.9', conf:'1st West' },
+  MIA: { wl:'43–39', ppg:'120.9', opp:'118.5', conf:'10th East' },
+  SA:  { wl:'62–20', ppg:'119.8', opp:'111.5', conf:'2nd West' },
+  BOS: { wl:'56–26', ppg:'114.9', opp:'107.2', conf:'2nd East' },
+  MIN: { wl:'49–33', ppg:'118.0', opp:'114.6', conf:'6th West' },
+  LAL: { wl:'53–29', ppg:'116.3', opp:'114.6', conf:'4th West' },
+  DEN: { wl:'54–28', ppg:'122.1', opp:'116.9', conf:'3rd West' },
+  POR: { wl:'42–40', ppg:'115.5', opp:'115.8', conf:'7th West' },
+  CLE: { wl:'52–30', ppg:'119.5', opp:'115.4', conf:'4th East' },
+  GS:  { wl:'37–45', ppg:'114.6', opp:'115.2', conf:'10th West' },
+  UTA: { wl:'22–60', ppg:'117.6', opp:'126.0', conf:'15th West' },
+  MEM: { wl:'25–57', ppg:'114.7', opp:'120.7', conf:'13th West' },
+  MIL: { wl:'32–50', ppg:'110.6', opp:'116.8', conf:'11th East' },
+  ATL: { wl:'46–36', ppg:'118.5', opp:'116.0', conf:'6th East' },
+  DAL: { wl:'26–56', ppg:'114.1', opp:'119.6', conf:'12th West' },
+  PHX: { wl:'45–37', ppg:'112.6', opp:'111.1', conf:'8th West' },
+  LAC: { wl:'42–40', ppg:'113.8', opp:'112.6', conf:'9th West' },
+  SAC: { wl:'22–60', ppg:'111.0', opp:'121.0', conf:'14th West' },
+  PHI: { wl:'45–37', ppg:'115.9', opp:'116.1', conf:'7th East' },
+  CHI: { wl:'31–51', ppg:'116.3', opp:'121.5', conf:'12th East' },
+  BKN: { wl:'20–62', ppg:'105.9', opp:'115.9', conf:'13th East' },
+  HOU: { wl:'52–30', ppg:'115.2', opp:'110.0', conf:'5th West' },
+  TOR: { wl:'46–36', ppg:'114.6', opp:'111.8', conf:'5th East' },
+  CHA: { wl:'44–38', ppg:'116.0', opp:'111.2', conf:'9th East' },
+  IND: { wl:'19–63', ppg:'112.4', opp:'120.4', conf:'14th East' },
+  ORL: { wl:'45–37', ppg:'115.7', opp:'115.1', conf:'8th East' },
+  DET: { wl:'60–22', ppg:'117.8', opp:'109.6', conf:'1st East' },
+  NOP: { wl:'26–56', ppg:'115.5', opp:'120.0', conf:'11th West' },
+  WAS: { wl:'17–65', ppg:'112.9', opp:'124.9', conf:'15th East' },
+};
+const GI_ROSTER = {
+
+  // ── NEW YORK KNICKS ─────────────────────────────────
+  NYK: [
+    { n:'Karl-Anthony Towns',  pos:'C',  ht:'7\'0"',  sal:'$53.1M' },
+    { n:'OG Anunoby',          pos:'SF', ht:'6\'7"',  sal:'$39.6M' },
+    { n:'Jalen Brunson',       pos:'PG', ht:'6\'1"',  sal:'$34.9M' },
+    { n:'Mikal Bridges',       pos:'SF', ht:'6\'6"',  sal:'$24.9M' },
+    { n:'Josh Hart',           pos:'SG', ht:'6\'5"',  sal:'$19.5M' },
+    { n:'Mitchell Robinson',   pos:'C',  ht:'7\'1"',  sal:'$13.0M' },
+    { n:'Landry Shamet',       pos:'SG', ht:'6\'4"',  sal:'$4.5M'  },
+    { n:'Miles McBride',       pos:'PG', ht:'6\'2"',  sal:'$4.3M'  },
+    { n:'Jose Alvarado',       pos:'PG', ht:'6\'0"',  sal:'$4.5M'  },
+    { n:'Jordan Clarkson',     pos:'SG', ht:'6\'5"',  sal:'$3.9M'  },
+    { n:'Tyler Kolek',         pos:'PG', ht:'6\'6"',  sal:'$2.6M'  },
+    { n:'Mohamed Diawara',     pos:'SF', ht:'6\'7"',  sal:'$2.0M'  },
+    { n:'Pacome Dadiet',       pos:'SF', ht:'6\'9"',  sal:'$2.3M'  },
+  ],
+
+  // ── OKLAHOMA CITY THUNDER ───────────────────────────
+  OKC: [
+    { n:'Shai Gilgeous-Alexander', pos:'PG', ht:'6\'6"',  sal:'$38.3M' },
+    { n:'Isaiah Hartenstein',      pos:'C',  ht:'7\'0"',  sal:'$28.5M' },
+    { n:'Alex Caruso',             pos:'SG', ht:'6\'5"',  sal:'$18.1M' },
+    { n:'Chet Holmgren',           pos:'PF', ht:'7\'1"',  sal:'$13.7M' },
+    { n:'Jalen Williams',          pos:'SG', ht:'6\'6"',  sal:'$6.6M'  },
+    { n:'Cason Wallace',           pos:'PG', ht:'6\'4"',  sal:'$5.8M'  },
+    { n:'Aaron Wiggins',           pos:'SF', ht:'6\'6"',  sal:'$10.1M' },
+    { n:'Isaiah Joe',              pos:'SG', ht:'6\'5"',  sal:'$11.3M' },
+    { n:'Nikola Topic',            pos:'PG', ht:'6\'6"',  sal:'$5.2M'  },
+    { n:'Jaylin Williams',         pos:'PF', ht:'6\'10"', sal:'$8.5M'  },
+    { n:'Kenrich Williams',        pos:'SF', ht:'6\'7"',  sal:'$7.2M'  },
+    { n:'Ajay Mitchell',           pos:'SG', ht:'6\'4"',  sal:'$3.0M'  },
+    { n:'Thomas Sorber',           pos:'C',  ht:'7\'0"',  sal:'$4.7M'  },
+    { n:'Jared McCain',            pos:'SG', ht:'6\'2"',  sal:'$4.2M'  },
+  ],
+
+  // ── MIAMI HEAT ──────────────────────────────────────
+  MIA: [
+    { n:'Giannis Antetokounmpo', pos:'PF', ht:'6\'11"', sal:'$54.1M' },
+    { n:'Bam Adebayo',           pos:'C',  ht:'6\'9"',  sal:'$37.1M' },
+    { n:'Andrew Wiggins',        pos:'SF', ht:'6\'7"',  sal:'$28.2M' },
+    { n:'Nikola Jovic',          pos:'PF', ht:'7\'0"',  sal:'$4.4M'  },
+    { n:'Davion Mitchell',       pos:'PG', ht:'6\'2"',  sal:'$11.6M' },
+    { n:'Tim Hardaway Jr.',      pos:'SG', ht:'6\'5"',  sal:'$6.1M'  },
+    { n:'Bobby Portis',          pos:'PF', ht:'6\'10"', sal:'$13.4M' },
+    { n:'Simone Fontecchio',     pos:'SF', ht:'6\'8"',  sal:'$8.3M'  },
+    { n:'Pelle Larsson',         pos:'SG', ht:'6\'5"',  sal:'$2.0M'  },
+    { n:'Dru Smith',             pos:'PG', ht:'6\'3"',  sal:'$1.9M'  },
+    { n:'Vladislav Goldin',      pos:'C',  ht:'7\'1"',  sal:'$1.8M'  },
+    { n:'Ryan Conwell',          pos:'PG', ht:'6\'4"',  sal:'$1.8M'  },
+  ],
+
+  // ── SAN ANTONIO SPURS ───────────────────────────────
+  SA: [
+    { n:'Victor Wembanyama', pos:'C',  ht:'7\'4"',  sal:'$13.4M' },
+    { n:'De\'Aaron Fox',     pos:'PG', ht:'6\'3"',  sal:'$37.1M' },
+    { n:'Stephon Castle',    pos:'SG', ht:'6\'6"',  sal:'$9.6M'  },
+    { n:'Devin Vassell',     pos:'SF', ht:'6\'5"',  sal:'$27.0M' },
+    { n:'Dylan Harper',      pos:'PG', ht:'6\'6"',  sal:'$12.4M' },
+    { n:'Keldon Johnson',    pos:'SF', ht:'6\'5"',  sal:'$17.5M' },
+    { n:'Harrison Barnes',   pos:'PF', ht:'6\'8"',  sal:'$19.0M' },
+    { n:'Julian Champagnie', pos:'SF', ht:'6\'6"',  sal:'$3.0M'  },
+    { n:'Luke Kornet',       pos:'C',  ht:'7\'2"',  sal:'$11.0M' },
+    { n:'Tobias Harris',     pos:'PF', ht:'6\'8"',  sal:'$19.0M' },
+    { n:'Carter Bryant',     pos:'SF', ht:'6\'7"',  sal:'$4.9M'  },
+    { n:'Kelly Olynyk',      pos:'PF', ht:'7\'0"',  sal:'$13.4M' },
+    { n:'David Jones',       pos:'SG', ht:'6\'6"',  sal:'$1.8M'  },
+  ],
+
+  // ── BOSTON CELTICS ──────────────────────────────────
+  BOS: [
+    { n:'Jayson Tatum',       pos:'PF', ht:'6\'8"',  sal:'$54.1M' },
+    { n:'Jaylen Brown',       pos:'SG', ht:'6\'6"',  sal:'$53.1M' },
+    { n:'Derrick White',      pos:'SG', ht:'6\'4"',  sal:'$28.1M' },
+    { n:'Neemias Queta',      pos:'C',  ht:'7\'0"',  sal:'$7.8M'  },
+    { n:'Payton Pritchard',   pos:'PG', ht:'6\'1"',  sal:'$7.2M'  },
+    { n:'Sam Hauser',         pos:'SF', ht:'6\'8"',  sal:'$10.0M' },
+    { n:'Nikola Vucevic',     pos:'C',  ht:'7\'0"',  sal:'$21.5M' },
+    { n:'Ron Harper Jr.',     pos:'SF', ht:'6\'6"',  sal:'$3.8M'  },
+    { n:'Jordan Walsh',       pos:'SF', ht:'6\'7"',  sal:'$2.3M'  },
+    { n:'Mitchell Robinson',  pos:'C',  ht:'7\'1"',  sal:'$15.6M' },
+    { n:'Paul George',        pos:'SF', ht:'6\'8"',  sal:'$51.7M' },
+    { n:'Amari Williams',     pos:'C',  ht:'7\'1"',  sal:'$2.0M'  },
+    { n:'Hugo Gonzalez',      pos:'SG', ht:'6\'5"',  sal:'$1.8M'  },
+  ],
+
+  // ── MINNESOTA TIMBERWOLVES ──────────────────────────
+  MIN: [
+    { n:'Anthony Edwards',  pos:'SG', ht:'6\'4"',  sal:'$45.6M' },
+    { n:'LaMelo Ball',      pos:'PG', ht:'6\'7"',  sal:'$38.0M' },
+    { n:'Rudy Gobert',      pos:'C',  ht:'7\'1"',  sal:'$35.0M' },
+    { n:'Jaden McDaniels',  pos:'SF', ht:'6\'9"',  sal:'$24.4M' },
+    { n:'Ayo Dosunmu',      pos:'PG', ht:'6\'5"',  sal:'$22.4M' },
+    { n:'Josh Green',       pos:'SF', ht:'6\'6"',  sal:'$13.7M' },
+    { n:'Donte DiVincenzo', pos:'SG', ht:'6\'5"',  sal:'$12.0M' },
+    { n:'Isaiah Evans',     pos:'SF', ht:'6\'6"',  sal:'$4.2M'  },
+    { n:'Trey Lyles',       pos:'PF', ht:'6\'9"',  sal:'$3.6M'  },
+    { n:'Terrence Shannon', pos:'SG', ht:'6\'6"',  sal:'$2.5M'  },
+    { n:'Mouhamadou Gueye', pos:'PF', ht:'6\'9"',  sal:'$2.3M'  },
+    { n:'Joan Beringer',    pos:'C',  ht:'7\'1"',  sal:'$4.2M'  },
+    { n:'Bones Hyland',     pos:'PG', ht:'6\'3"',  sal:'$1.9M'  },
+  ],
+
+  // ── LOS ANGELES LAKERS ──────────────────────────────
+  LAL: [
+    { n:'Luka Doncic',            pos:'PG', ht:'6\'7"',  sal:'$46.0M' },
+    { n:'Walker Kessler',         pos:'C',  ht:'7\'1"',  sal:'$32.5M' },
+    { n:'Austin Reaves',          pos:'SG', ht:'6\'5"',  sal:'$14.9M' },
+    { n:'Quentin Grimes',         pos:'SG', ht:'6\'6"',  sal:'$15.0M' },
+    { n:'Collin Sexton',          pos:'PG', ht:'6\'1"',  sal:'$9.5M'  },
+    { n:'Sandro Mamukelashvili',  pos:'PF', ht:'6\'11"', sal:'$13.0M' },
+    { n:'Jarred Vanderbilt',      pos:'PF', ht:'6\'9"',  sal:'$11.6M' },
+    { n:'Dalton Knecht',          pos:'SG', ht:'6\'6"',  sal:'$4.0M'  },
+    { n:'Jake LaRavia',           pos:'SF', ht:'6\'9"',  sal:'$6.0M'  },
+    { n:'Jaxson Hayes',           pos:'C',  ht:'7\'0"',  sal:'$3.4M'  },
+    { n:'Kevon Looney',           pos:'C',  ht:'6\'9"',  sal:'$3.2M'  },
+    { n:'Cam Carr',               pos:'SG', ht:'6\'5"',  sal:'$1.8M'  },
+    { n:'Bronny James',           pos:'PG', ht:'6\'2"',  sal:'$1.9M'  },
+  ],
+
+  // ── DENVER NUGGETS ──────────────────────────────────
+  DEN: [
+    { n:'Nikola Jokic',       pos:'C',  ht:'7\'0"',  sal:'$55.2M' },
+    { n:'Jamal Murray',       pos:'PG', ht:'6\'4"',  sal:'$46.4M' },
+    { n:'Aaron Gordon',       pos:'PF', ht:'6\'8"',  sal:'$22.8M' },
+    { n:'Cameron Johnson',    pos:'PF', ht:'6\'8"',  sal:'$21.1M' },
+    { n:'Christian Braun',    pos:'SG', ht:'6\'7"',  sal:'$4.9M'  },
+    { n:'Peyton Watson',      pos:'SF', ht:'6\'8"',  sal:'$6.5M (QO)' },
+    { n:'Julian Strawther',   pos:'SG', ht:'6\'7"',  sal:'$3.5M'  },
+    { n:'DaRon Holmes II',    pos:'PF', ht:'6\'10"', sal:'$3.2M'  },
+    { n:'Zeke Nnaji',         pos:'C',  ht:'6\'11"', sal:'$8.2M'  },
+    { n:'Alpha Diallo',       pos:'SF', ht:'6\'7"',  sal:'$1.9M'  },
+    { n:'Marvin Bagley III',  pos:'PF', ht:'6\'11"', sal:'$1.9M'  },
+    { n:'Tyus Jones',         pos:'PG', ht:'6\'0"',  sal:'$3.9M'  },
+  ],
+
+  // ── PORTLAND TRAIL BLAZERS ──────────────────────────
+  POR: [
+    { n:'Ja Morant',         pos:'PG', ht:'6\'3"',  sal:'$39.4M' },
+    { n:'Damian Lillard',    pos:'PG', ht:'6\'2"',  sal:'$36.6M' },
+    { n:'Deni Avdija',       pos:'SF', ht:'6\'9"',  sal:'$14.4M' },
+    { n:'Donovan Clingan',   pos:'C',  ht:'7\'2"',  sal:'$7.2M'  },
+    { n:'Shaedon Sharpe',    pos:'SG', ht:'6\'6"',  sal:'$8.4M'  },
+    { n:'Scoot Henderson',   pos:'PG', ht:'6\'2"',  sal:'$10.7M' },
+    { n:'Jrue Holiday',      pos:'SG', ht:'6\'4"',  sal:'$32.4M' },
+    { n:'Robert Williams III',pos:'C', ht:'6\'9"',  sal:'$14.7M' },
+    { n:'Matisse Thybulle',  pos:'SG', ht:'6\'5"',  sal:'$11.6M' },
+    { n:'Kris Murray',       pos:'PF', ht:'6\'8"',  sal:'$3.1M'  },
+    { n:'Toumani Camara',    pos:'SF', ht:'6\'8"',  sal:'$2.9M'  },
+    { n:'Sidy Cissoko',      pos:'SG', ht:'6\'7"',  sal:'$2.3M'  },
+    { n:'Vit Krejci',        pos:'SF', ht:'6\'10"', sal:'$1.9M'  },
+    { n:'Yang Hansen',       pos:'SF', ht:'6\'7"',  sal:'$4.4M'  },
+  ],
+
+  // ── CLEVELAND CAVALIERS ─────────────────────────────
+  CLE: [
+    { n:'Donovan Mitchell',  pos:'SG', ht:'6\'1"',  sal:'$46.4M' },
+    { n:'Evan Mobley',       pos:'PF', ht:'7\'0"',  sal:'$46.4M' },
+    { n:'James Harden',      pos:'PG', ht:'6\'5"',  sal:'$39.4M (new deal pending)' },
+    { n:'Jarrett Allen',     pos:'C',  ht:'6\'11"', sal:'$20.0M' },
+    { n:'Max Strus',         pos:'SG', ht:'6\'6"',  sal:'$15.9M' },
+    { n:'Dennis Schroder',   pos:'PG', ht:'6\'1"',  sal:'$14.1M' },
+    { n:'Dean Wade',         pos:'PF', ht:'6\'9"',  sal:'$6.6M'  },
+    { n:'Sam Merrill',       pos:'SG', ht:'6\'5"',  sal:'$8.5M'  },
+    { n:'Thomas Bryant',     pos:'C',  ht:'7\'1"',  sal:'$3.5M'  },
+    { n:'Craig Porter Jr.',  pos:'PG', ht:'6\'4"',  sal:'$2.3M'  },
+    { n:'Nae\'qwan Tomlin',  pos:'SF', ht:'6\'9"',  sal:'$2.0M'  },
+    { n:'Maleek Thomas',     pos:'PF', ht:'6\'8"',  sal:'$1.8M'  },
+    { n:'Jaylon Tyson',      pos:'SG', ht:'6\'6"',  sal:'$3.5M'  },
+  ],
+
+  // ── GOLDEN STATE WARRIORS ───────────────────────────
+  GS: [
+    { n:'Stephen Curry',      pos:'PG', ht:'6\'2"',  sal:'$59.6M' },
+    { n:'Jimmy Butler',       pos:'SF', ht:'6\'7"',  sal:'$54.1M' },
+    { n:'Draymond Green',     pos:'PF', ht:'6\'6"',  sal:'$25.9M (new deal pending)' },
+    { n:'Kristaps Porzingis', pos:'C',  ht:'7\'3"',  sal:'$30.7M' },
+    { n:'De\'Anthony Melton', pos:'SG', ht:'6\'2"',  sal:'$5.5M'  },
+    { n:'Brandin Podziemski', pos:'SG', ht:'6\'5"',  sal:'$3.7M'  },
+    { n:'Moses Moody',        pos:'SF', ht:'6\'6"',  sal:'$11.6M' },
+    { n:'Al Horford',         pos:'C',  ht:'6\'9"',  sal:'$5.7M'  },
+    { n:'Will Richard',       pos:'SG', ht:'6\'5"',  sal:'$2.3M'  },
+    { n:'Gui Santos',         pos:'SF', ht:'6\'8"',  sal:'$1.9M'  },
+    { n:'Charles Bassey',     pos:'C',  ht:'6\'10"', sal:'$3.1M'  },
+    { n:'Jerome Robinson',    pos:'SG', ht:'6\'6"',  sal:'$1.8M'  },
+  ],
+
+  // ── UTAH JAZZ ────────────────────────────────────────
+  UTA: [
+    { n:'Lauri Markkanen',   pos:'PF', ht:'7\'0"',  sal:'$46.4M' },
+    { n:'Jaren Jackson Jr.', pos:'C',  ht:'6\'11"', sal:'$35.0M' },
+    { n:'Darryn Peterson',   pos:'SG', ht:'6\'5"',  sal:'$9.1M'  },
+    { n:'Ace Bailey',        pos:'SF', ht:'6\'8"',  sal:'$9.1M'  },
+    { n:'Keyonte George',    pos:'PG', ht:'6\'4"',  sal:'$4.3M'  },
+    { n:'Cody Williams',     pos:'SF', ht:'6\'8"',  sal:'$5.7M'  },
+    { n:'Walker Kessler',    pos:'C',  ht:'7\'1"',  sal:'-- (traded to LAL)' },
+    { n:'Jusuf Nurkic',      pos:'C',  ht:'7\'0"',  sal:'$19.4M' },
+    { n:'Kyle Filipowski',   pos:'PF', ht:'7\'1"',  sal:'$3.0M'  },
+    { n:'Isaiah Collier',    pos:'PG', ht:'6\'3"',  sal:'$4.7M'  },
+    { n:'Blake Hinson',      pos:'SF', ht:'6\'7"',  sal:'$2.1M'  },
+    { n:'Brice Sensabaugh',  pos:'SG', ht:'6\'5"',  sal:'$3.6M'  },
+    { n:'Jordan Clarkson',   pos:'SG', ht:'6\'5"',  sal:'$12.9M' },
+    { n:'Kevin Love',        pos:'PF', ht:'6\'8"',  sal:'$4.2M'  },
+    { n:'Mo Bamba',          pos:'C',  ht:'7\'0"',  sal:'$5.5M'  },
+    { n:'Svi Mykhailiuk',    pos:'SF', ht:'6\'8"',  sal:'$3.7M'  },
+    { n:'John Konchar',      pos:'SF', ht:'6\'5"',  sal:'$6.2M'  },
+  ],
+
+  // ── MEMPHIS GRIZZLIES ───────────────────────────────
+  MEM: [
+    { n:'Cameron Boozer',        pos:'PF', ht:'6\'9"',  sal:'$9.6M'  },
+    { n:'Zach Edey',             pos:'C',  ht:'7\'4"',  sal:'$6.0M'  },
+    { n:'Isaiah Stewart',        pos:'C',  ht:'6\'9"',  sal:'$15.0M' },
+    { n:'Scotty Pippen Jr.',     pos:'PG', ht:'6\'1"',  sal:'$4.1M'  },
+    { n:'Kentavious Caldwell-Pope',pos:'SG',ht:'6\'5"', sal:'$21.6M' },
+    { n:'Ty Jerome',             pos:'PG', ht:'6\'5"',  sal:'$8.8M'  },
+    { n:'Jerami Grant',          pos:'PF', ht:'6\'8"',  sal:'$32.0M' },
+    { n:'Jaylen Wells',          pos:'SF', ht:'6\'5"',  sal:'$3.8M'  },
+    { n:'Quinten Post',          pos:'C',  ht:'7\'1"',  sal:'$10.0M' },
+    { n:'GG Jackson II',         pos:'PF', ht:'6\'9"',  sal:'$3.4M'  },
+    { n:'Cedric Coward',         pos:'SF', ht:'6\'6"',  sal:'$5.7M'  },
+    { n:'Kyle Anderson',         pos:'PF', ht:'6\'9"',  sal:'$9.8M'  },
+    { n:'Taylor Hendricks',      pos:'PF', ht:'6\'9"',  sal:'$6.1M'  },
+    { n:'Walter Clayton Jr.',    pos:'PG', ht:'6\'2"',  sal:'$4.0M'  },
+    { n:'D\'Angelo Russell',     pos:'PG', ht:'6\'4"',  sal:'$5.7M'  },
+    { n:'Karim Lopez',           pos:'PF', ht:'6\'9"',  sal:'$7.1M'  },
+  ],
+
+  // ── MILWAUKEE BUCKS ─────────────────────────────────
+  MIL: [
+    { n:'Tyler Herro',          pos:'SG', ht:'6\'5"',  sal:'$31.0M' },
+    { n:'Damian Lillard',       pos:'PG', ht:'6\'2"',  sal:'$36.6M' },
+    { n:'Myles Turner',         pos:'C',  ht:'7\'0"',  sal:'$25.3M' },
+    { n:'Kyle Kuzma',           pos:'PF', ht:'6\'9"',  sal:'$22.4M' },
+    { n:'Kel\'el Ware',         pos:'C',  ht:'7\'2"',  sal:'$4.4M'  },
+    { n:'Kasparas Jakucionis',  pos:'PG', ht:'6\'4"',  sal:'$3.7M'  },
+    { n:'Jaime Jaquez Jr.',     pos:'SF', ht:'6\'7"',  sal:'$3.9M'  },
+    { n:'Ousmane Dieng',        pos:'SF', ht:'6\'9"',  sal:'$6.7M'  },
+    { n:'Gary Trent Jr.',       pos:'SG', ht:'6\'5"',  sal:'$3.7M'  },
+    { n:'Gary Harris',          pos:'SG', ht:'6\'4"',  sal:'$3.6M'  },
+    { n:'Taurean Prince',       pos:'SF', ht:'6\'6"',  sal:'$3.3M'  },
+    { n:'AJ Green',             pos:'SG', ht:'6\'5"',  sal:'$2.3M'  },
+    { n:'Bobby Portis',         pos:'PF', ht:'6\'10"', sal:'$13.4M' },
+    { n:'Ryan Rollins',         pos:'SG', ht:'6\'4"',  sal:'$4.0M'  },
+    { n:'Pete Nance',           pos:'PF', ht:'6\'10"', sal:'$2.0M'  },
+    { n:'Nate Ament',           pos:'PF', ht:'6\'10"', sal:'$1.8M'  },
+  ],
+
+  // ── ATLANTA HAWKS ───────────────────────────────────
+  ATL: [
+    { n:'Jalen Johnson',              pos:'PF', ht:'6\'9"',  sal:'$30.0M' },
+    { n:'Dyson Daniels',              pos:'SG', ht:'6\'7"',  sal:'$7.7M'  },
+    { n:'CJ McCollum',               pos:'SG', ht:'6\'3"',  sal:'$21.0M' },
+    { n:'Onyeka Okongwu',            pos:'C',  ht:'6\'9"',  sal:'$15.0M' },
+    { n:'Nickeil Alexander-Walker',  pos:'SG', ht:'6\'5"',  sal:'$15.2M' },
+    { n:'Corey Kispert',             pos:'SF', ht:'6\'7"',  sal:'$14.0M' },
+    { n:'Zaccharie Risacher',        pos:'SF', ht:'6\'9"',  sal:'$13.2M' },
+    { n:'Jonathan Kuminga',          pos:'PF', ht:'6\'8"',  sal:'-- (UFA, talks ongoing)' },
+    { n:'Jock Landale',              pos:'C',  ht:'7\'1"',  sal:'$3.5M'  },
+    { n:'Buddy Hield',               pos:'SG', ht:'6\'4"',  sal:'$9.2M'  },
+    { n:'Devin Carter',              pos:'SG', ht:'6\'3"',  sal:'$4.9M'  },
+    { n:'Aaron Wiggins',             pos:'SF', ht:'6\'6"',  sal:'$10.1M' },
+    { n:'Kingston Flemings',         pos:'PG', ht:'6\'2"',  sal:'$2.1M'  },
+    { n:'Zuby Ejiofor',              pos:'PF', ht:'6\'9"',  sal:'$2.0M'  },
+    { n:'Henry Veesaar',             pos:'C',  ht:'7\'1"',  sal:'$1.9M'  },
+    { n:'Asa Newell',                pos:'PF', ht:'6\'10"', sal:'$3.2M'  },
+    { n:'Gabe Vincent',              pos:'PG', ht:'6\'3"',  sal:'$11.5M' },
+  ],
+
+  // ── DALLAS MAVERICKS ────────────────────────────────
+  DAL: [
+    { n:'Kyrie Irving',     pos:'PG', ht:'6\'2"',  sal:'$36.6M' },
+    { n:'Cooper Flagg',     pos:'PF', ht:'6\'9"',  sal:'$13.8M' },
+    { n:'Klay Thompson',    pos:'SG', ht:'6\'6"',  sal:'$16.7M' },
+    { n:'Daniel Gafford',   pos:'C',  ht:'6\'11"', sal:'$14.4M' },
+    { n:'PJ Washington',    pos:'PF', ht:'6\'7"',  sal:'$14.2M' },
+    { n:'Max Christie',     pos:'SG', ht:'6\'6"',  sal:'$7.7M'  },
+    { n:'Naji Marshall',    pos:'SF', ht:'6\'7"',  sal:'$9.0M'  },
+    { n:'Caleb Martin',     pos:'SF', ht:'6\'5"',  sal:'$9.6M'  },
+    { n:'Dereck Lively II', pos:'C',  ht:'7\'1"',  sal:'$5.3M'  },
+    { n:'AJ Johnson',       pos:'SF', ht:'6\'7"',  sal:'$3.1M'  },
+    { n:'Khris Middleton',  pos:'SF', ht:'6\'8"',  sal:'$33.3M' },
+    { n:'Morez Johnson Jr.',pos:'PF', ht:'6\'10"', sal:'$5.1M'  },
+    { n:'Tyus Jones',       pos:'PG', ht:'6\'0"',  sal:'$7.5M'  },
+    { n:'Dwight Powell',    pos:'C',  ht:'6\'11"', sal:'$4.0M'  },
+  ],
+
+  // ── PHOENIX SUNS ────────────────────────────────────
+  PHX: [
+    { n:'Devin Booker',     pos:'SG', ht:'6\'5"',  sal:'$53.1M' },
+    { n:'Jalen Green',      pos:'SG', ht:'6\'5"',  sal:'$33.6M' },
+    { n:'Miles Bridges',    pos:'PF', ht:'6\'7"',  sal:'$22.8M' },
+    { n:'Mark Williams',    pos:'C',  ht:'7\'0"',  sal:'$12.7M' },
+    { n:'Dillon Brooks',    pos:'SF', ht:'6\'6"',  sal:'$21.1M' },
+    { n:'Collin Gillespie', pos:'PG', ht:'6\'3"',  sal:'$10.0M' },
+    { n:'Ryan Dunn',        pos:'SF', ht:'6\'8"',  sal:'$4.7M'  },
+    { n:'Royce O\'Neale',   pos:'SF', ht:'6\'6"',  sal:'$10.1M' },
+    { n:'Grayson Allen',    pos:'SG', ht:'6\'4"',  sal:'$16.9M' },
+    { n:'Bradley Beal',     pos:'SG', ht:'6\'4"',  sal:'$24.7M' },
+    { n:'Khaman Maluach',   pos:'C',  ht:'7\'2"',  sal:'$6.0M'  },
+    { n:'Koa Peat',         pos:'PF', ht:'6\'10"', sal:'$5.5M'  },
+    { n:'Jordan Goodwin',   pos:'PG', ht:'6\'3"',  sal:'$5.5M'  },
+    { n:'Nassir Little',    pos:'SF', ht:'6\'5"',  sal:'$3.1M'  },
+    { n:'Rasheer Fleming',  pos:'SF', ht:'6\'8"',  sal:'$2.0M'  },
+  ],
+
+  // ── LOS ANGELES CLIPPERS ────────────────────────────
+  LAC: [
+    { n:'Kawhi Leonard',       pos:'SF', ht:'6\'7"',  sal:'$50.0M (trade to TOR pending)' },
+    { n:'Darius Garland',      pos:'PG', ht:'6\'1"',  sal:'$39.4M' },
+    { n:'Keaton Wagler',       pos:'SG', ht:'6\'6"',  sal:'$9.2M'  },
+    { n:'Brook Lopez',         pos:'C',  ht:'7\'0"',  sal:'$8.8M'  },
+    { n:'Bogdan Bogdanovic',   pos:'SG', ht:'6\'6"',  sal:'$16.0M' },
+    { n:'Isaiah Jackson',      pos:'C',  ht:'7\'1"',  sal:'$7.6M'  },
+    { n:'Kris Dunn',           pos:'PG', ht:'6\'4"',  sal:'$5.4M'  },
+    { n:'Derrick Jones Jr.',   pos:'SF', ht:'6\'7"',  sal:'$10.0M' },
+    { n:'Bennedict Mathurin',  pos:'SG', ht:'6\'6"',  sal:'-- (RFA, LAC can match)' },
+    { n:'Nicolas Batum',       pos:'SF', ht:'6\'8"',  sal:'$5.6M'  },
+    { n:'Rui Hachimura',       pos:'PF', ht:'6\'8"',  sal:'$14.0M' },
+    { n:'John Collins',        pos:'PF', ht:'6\'9"',  sal:'$26.6M' },
+    { n:'Baba Miller',         pos:'PF', ht:'6\'10"', sal:'$2.2M'  },
+  ],
+
+  // ── SACRAMENTO KINGS ────────────────────────────────
+  SAC: [
+    { n:'Domantas Sabonis',  pos:'C',  ht:'6\'11"', sal:'$42.3M' },
+    { n:'Zach LaVine',       pos:'SG', ht:'6\'5"',  sal:'$47.5M' },
+    { n:'Darius Acuff Jr.',  pos:'PG', ht:'6\'1"',  sal:'$9.5M'  },
+    { n:'Keegan Murray',     pos:'SF', ht:'6\'8"',  sal:'$11.1M' },
+    { n:'Precious Achiuwa',  pos:'PF', ht:'6\'8"',  sal:'$11.5M' },
+    { n:'Malik Monk',        pos:'PG', ht:'6\'3"',  sal:'$18.8M' },
+    { n:'De\'Andre Hunter',  pos:'SF', ht:'6\'7"',  sal:'$23.3M' },
+    { n:'Nique Clifford',    pos:'SF', ht:'6\'7"',  sal:'$3.1M'  },
+    { n:'Devin Carter',      pos:'SG', ht:'6\'3"',  sal:'$4.9M (traded to ATL)' },
+    { n:'Alex Karaban',      pos:'PF', ht:'6\'9"',  sal:'$3.0M'  },
+    { n:'Maxime Raynaud',    pos:'C',  ht:'7\'2"',  sal:'$2.1M'  },
+    { n:'Sasha Vezenkov',    pos:'SF', ht:'6\'8"',  sal:'$2.0M'  },
+  ],
+
+  // ── PHILADELPHIA 76ERS ──────────────────────────────
+  PHI: [
+    { n:'Joel Embiid',        pos:'C',  ht:'7\'0"',  sal:'$55.2M' },
+    { n:'LeBron James',       pos:'SF', ht:'6\'9"',  sal:'$8.0M'  },
+    { n:'Tyrese Maxey',       pos:'PG', ht:'6\'2"',  sal:'$38.0M' },
+    { n:'Jaylen Brown',       pos:'SG', ht:'6\'6"',  sal:'$53.1M' },
+    { n:'VJ Edgecombe',       pos:'SG', ht:'6\'5"',  sal:'$11.1M' },
+    { n:'Kelly Oubre Jr.',    pos:'SF', ht:'6\'7"',  sal:'$8.4M'  },
+    { n:'Andre Drummond',     pos:'C',  ht:'6\'10"', sal:'$3.9M'  },
+    { n:'Quentin Grimes',     pos:'SG', ht:'6\'6"',  sal:'-- (signed LAL)' },
+    { n:'LaBaron Philon',     pos:'PG', ht:'6\'1"',  sal:'$6.5M'  },
+    { n:'Justin Edwards',     pos:'SF', ht:'6\'7"',  sal:'$4.5M'  },
+    { n:'Jabari Walker',      pos:'PF', ht:'6\'8"',  sal:'$2.1M'  },
+    { n:'Dominick Barlow',    pos:'PF', ht:'6\'9"',  sal:'$3.4M'  },
+    { n:'Rayan Rupert',       pos:'SF', ht:'6\'7"',  sal:'$2.3M'  },
+    { n:'Adem Bona',          pos:'C',  ht:'6\'10"', sal:'$2.1M'  },
+    { n:'Anfernee Simons',    pos:'SG', ht:'6\'3"',  sal:'$6.0M'  },
+    { n:'Dean Wade',          pos:'PF', ht:'6\'9"',  sal:'$9.0M'  },
+  ],
+
+  // ── CHICAGO BULLS ───────────────────────────────────
+  CHI: [
+    { n:'Josh Giddey',      pos:'PG', ht:'6\'8"',  sal:'$25.0M' },
+    { n:'Nic Claxton',      pos:'C',  ht:'6\'11"', sal:'$25.4M' },
+    { n:'Caleb Wilson',     pos:'SF', ht:'6\'9"',  sal:'$9.5M'  },
+    { n:'Patrick Williams', pos:'PF', ht:'6\'8"',  sal:'$18.0M' },
+    { n:'Collin Sexton',    pos:'PG', ht:'6\'1"',  sal:'-- (signed LAL)' },
+    { n:'Anfernee Simons',  pos:'SG', ht:'6\'3"',  sal:'$27.7M' },
+    { n:'Matas Buzelis',    pos:'SF', ht:'6\'10"', sal:'$5.5M'  },
+    { n:'Noa Essengue',     pos:'SF', ht:'6\'9"',  sal:'$5.4M'  },
+    { n:'Rob Dillingham',   pos:'PG', ht:'6\'1"',  sal:'$6.6M'  },
+    { n:'Zach Collins',     pos:'C',  ht:'7\'1"',  sal:'$18.1M' },
+    { n:'Tre Jones',        pos:'PG', ht:'6\'2"',  sal:'$8.0M'  },
+    { n:'Jalen Smith',      pos:'PF', ht:'6\'10"', sal:'$9.0M'  },
+    { n:'Isaac Okoro',      pos:'SF', ht:'6\'5"',  sal:'$11.0M' },
+    { n:'Jaden Ivey',       pos:'SG', ht:'6\'4"',  sal:'$10.1M' },
+    { n:'Guerschon Yabusele',pos:'PF', ht:'6\'9"', sal:'$5.5M'  },
+    { n:'Nick Richards',    pos:'C',  ht:'7\'0"',  sal:'$5.0M'  },
+    { n:'Jevon Carter',     pos:'PG', ht:'6\'1"',  sal:'$6.8M'  },
+    { n:'Dailyn Swain',     pos:'SG', ht:'6\'4"',  sal:'$2.0M'  },
+  ],
+
+  // ── BROOKLYN NETS ───────────────────────────────────
+  BKN: [
+    { n:'Cam Thomas',        pos:'SG', ht:'6\'4"',  sal:'$6.8M'  },
+    { n:'Julius Randle',     pos:'PF', ht:'6\'8"',  sal:'$30.9M' },
+    { n:'Michael Porter Jr.',pos:'SF', ht:'6\'10"', sal:'$38.3M' },
+    { n:'Nic Claxton',       pos:'C',  ht:'6\'11"', sal:'-- (traded to CHI)' },
+    { n:'Egor Demin',        pos:'PG', ht:'6\'9"',  sal:'$6.9M'  },
+    { n:'Drake Powell',      pos:'SF', ht:'6\'7"',  sal:'$3.4M'  },
+    { n:'Kobe Bufkin',       pos:'SG', ht:'6\'5"',  sal:'$4.5M'  },
+    { n:'Ziaire Williams',   pos:'SF', ht:'6\'7"',  sal:'$6.3M'  },
+    { n:'Noah Clowney',      pos:'PF', ht:'6\'9"',  sal:'$3.4M'  },
+    { n:'Nolan Traore',      pos:'PG', ht:'6\'4"',  sal:'$3.8M'  },
+    { n:'Terance Mann',      pos:'SF', ht:'6\'5"',  sal:'$15.5M' },
+    { n:'Day\'Ron Sharpe',   pos:'C',  ht:'6\'10"', sal:'$6.3M'  },
+    { n:'Josh Minott',       pos:'SF', ht:'6\'8"',  sal:'$3.0M'  },
+    { n:'Ochai Agbaji',      pos:'SG', ht:'6\'5"',  sal:'$6.4M'  },
+    { n:'Haywood Highsmith', pos:'SF', ht:'6\'7"',  sal:'$5.6M'  },
+    { n:'Dariq Whitehead',   pos:'SG', ht:'6\'5"',  sal:'$3.4M'  },
+  ],
+
+  // ── HOUSTON ROCKETS ─────────────────────────────────
+  HOU: [
+    { n:'Kevin Durant',         pos:'PF', ht:'6\'10"', sal:'$54.7M' },
+    { n:'Alperen Sengun',       pos:'C',  ht:'6\'10"', sal:'$33.9M' },
+    { n:'Fred VanVleet',        pos:'PG', ht:'6\'1"',  sal:'$25.0M' },
+    { n:'Jabari Smith Jr.',     pos:'PF', ht:'6\'10"', sal:'$12.4M' },
+    { n:'Amen Thompson',        pos:'SF', ht:'6\'7"',  sal:'$9.7M'  },
+    { n:'Reed Sheppard',        pos:'PG', ht:'6\'3"',  sal:'$10.6M' },
+    { n:'Tari Eason',           pos:'SF', ht:'6\'7"',  sal:'$5.7M (RFA)' },
+    { n:'Dorian Finney-Smith',  pos:'SF', ht:'6\'7"',  sal:'$12.7M' },
+    { n:'Marcus Smart',         pos:'PG', ht:'6\'3"',  sal:'$6.1M'  },
+    { n:'Bogdan Bogdanovic',    pos:'SG', ht:'6\'6"',  sal:'$16.0M' },
+    { n:'Steven Adams',         pos:'C',  ht:'6\'11"', sal:'$14.1M' },
+    { n:'Clint Capela',         pos:'C',  ht:'6\'10"', sal:'$6.7M'  },
+    { n:'Bruce Thornton',       pos:'PG', ht:'6\'2"',  sal:'$3.5M'  },
+  ],
+
+  // ── TORONTO RAPTORS ─────────────────────────────────
+  TOR: [
+    { n:'Scottie Barnes',     pos:'PF', ht:'6\'8"',  sal:'$38.7M' },
+    { n:'Kawhi Leonard',      pos:'SF', ht:'6\'7"',  sal:'$50.0M (trade pending NBA investigation)' },
+    { n:'Immanuel Quickley',  pos:'PG', ht:'6\'3"',  sal:'$32.5M' },
+    { n:'RJ Barrett',         pos:'SG', ht:'6\'7"',  sal:'$27.7M' },
+    { n:'Jakob Poeltl',       pos:'C',  ht:'7\'1"',  sal:'$19.5M' },
+    { n:'Brandon Ingram',     pos:'SF', ht:'6\'8"',  sal:'$38.1M' },
+    { n:'Collin Murray-Boyles',pos:'PF', ht:'6\'7"', sal:'$6.3M'  },
+    { n:'Gradey Dick',        pos:'SG', ht:'6\'7"',  sal:'$5.0M'  },
+    { n:'Alijah Martin',      pos:'PG', ht:'6\'2"',  sal:'$2.4M'  },
+    { n:'Jamal Shead',        pos:'PG', ht:'6\'2"',  sal:'$2.3M'  },
+    { n:'Ja\'Kobe Walter',    pos:'SG', ht:'6\'5"',  sal:'$3.6M'  },
+    { n:'Jonathan Mogbo',     pos:'PF', ht:'6\'9"',  sal:'$2.0M'  },
+    { n:'Allen Graves',       pos:'C',  ht:'7\'0"',  sal:'$1.9M'  },
+  ],
+
+  // ── CHARLOTTE HORNETS ───────────────────────────────
+  CHA: [
+    { n:'Coby White',        pos:'PG', ht:'6\'5"',  sal:'$12.9M' },
+    { n:'Kon Knueppel',      pos:'SG', ht:'6\'7"',  sal:'$10.0M' },
+    { n:'Brandon Miller',    pos:'SF', ht:'6\'9"',  sal:'$11.9M' },
+    { n:'Naz Reid',          pos:'PF', ht:'6\'9"',  sal:'$21.6M' },
+    { n:'Grant Williams',    pos:'PF', ht:'6\'7"',  sal:'$13.6M' },
+    { n:'Grayson Allen',     pos:'SG', ht:'6\'4"',  sal:'-- (traded to CHA)' },
+    { n:'Royce O\'Neale',    pos:'SF', ht:'6\'6"',  sal:'$10.1M' },
+    { n:'Pat Connaughton',   pos:'SG', ht:'6\'5"',  sal:'$3.8M'  },
+    { n:'Tidjane Salaun',    pos:'SF', ht:'6\'9"',  sal:'$7.9M'  },
+    { n:'Moussa Diabate',    pos:'C',  ht:'7\'0"',  sal:'$2.2M'  },
+    { n:'Hannes Steinbach',  pos:'C',  ht:'7\'0"',  sal:'$2.0M'  },
+    { n:'Tre Mann',          pos:'PG', ht:'6\'5"',  sal:'$8.0M'  },
+    { n:'Mike Conley',       pos:'PG', ht:'6\'1"',  sal:'$11.5M' },
+    { n:'Malaki Branham',    pos:'SG', ht:'6\'5"',  sal:'$5.0M'  },
+  ],
+
+  // ── INDIANA PACERS ──────────────────────────────────
+  IND: [
+    { n:'Tyrese Haliburton',  pos:'PG', ht:'6\'5"',  sal:'$45.6M' },
+    { n:'Pascal Siakam',      pos:'PF', ht:'6\'8"',  sal:'$45.6M' },
+    { n:'Ivica Zubac',        pos:'C',  ht:'7\'0"',  sal:'$18.9M' },
+    { n:'Aaron Nesmith',      pos:'SF', ht:'6\'5"',  sal:'$11.0M' },
+    { n:'Ben Sheppard',       pos:'SG', ht:'6\'6"',  sal:'$5.0M'  },
+    { n:'Jarace Walker',      pos:'PF', ht:'6\'8"',  sal:'$6.7M'  },
+    { n:'TJ McConnell',       pos:'PG', ht:'6\'1"',  sal:'$10.2M' },
+    { n:'Obi Toppin',         pos:'PF', ht:'6\'9"',  sal:'$14.0M' },
+    { n:'Larry Nance Jr.',    pos:'PF', ht:'6\'7"',  sal:'$4.0M'  },
+    { n:'Kelly Oubre Jr.',    pos:'SF', ht:'6\'7"',  sal:'$8.1M'  },
+    { n:'Andrew Nembhard',    pos:'PG', ht:'6\'5"',  sal:'$18.1M' },
+    { n:'Jay Huff',           pos:'C',  ht:'7\'1"',  sal:'$1.9M'  },
+  ],
+
+  // ── ORLANDO MAGIC ───────────────────────────────────
+  ORL: [
+    { n:'Paolo Banchero',    pos:'PF', ht:'6\'10"', sal:'$41.5M' },
+    { n:'Franz Wagner',      pos:'SF', ht:'6\'10"', sal:'$38.7M' },
+    { n:'Jalen Suggs',       pos:'PG', ht:'6\'4"',  sal:'$35.0M' },
+    { n:'Desmond Bane',      pos:'SG', ht:'6\'6"',  sal:'$36.7M' },
+    { n:'Wendell Carter Jr.',pos:'C',  ht:'6\'10"', sal:'$10.9M' },
+    { n:'Jonathan Isaac',    pos:'PF', ht:'6\'11"', sal:'$15.0M' },
+    { n:'Anthony Black',     pos:'SG', ht:'6\'7"',  sal:'$7.9M'  },
+    { n:'Goga Bitadze',      pos:'C',  ht:'7\'0"',  sal:'$8.3M'  },
+    { n:'Tristan Da Silva',  pos:'SF', ht:'6\'9"',  sal:'$3.8M'  },
+    { n:'Jase Richardson',   pos:'PG', ht:'6\'3"',  sal:'$5.2M'  },
+    { n:'Moritz Wagner',     pos:'C',  ht:'6\'11"', sal:'$5.0M'  },
+    { n:'Jett Howard',       pos:'SG', ht:'6\'6"',  sal:'$5.5M'  },
+  ],
+
+  // ── DETROIT PISTONS ─────────────────────────────────
+  DET: [
+    { n:'Cade Cunningham',   pos:'PG', ht:'6\'6"',  sal:'$46.4M' },
+    { n:'Jalen Duren',       pos:'C',  ht:'6\'11"', sal:'$9.5M (QO, contract talks ongoing)' },
+    { n:'Ausar Thompson',    pos:'SF', ht:'6\'7"',  sal:'$8.8M'  },
+    { n:'Kevin Huerter',     pos:'SG', ht:'6\'7"',  sal:'$18.0M' },
+    { n:'Ron Holland II',    pos:'SF', ht:'6\'7"',  sal:'$8.7M'  },
+    { n:'Tobias Harris',     pos:'PF', ht:'6\'8"',  sal:'$26.6M' },
+    { n:'Duncan Robinson',   pos:'SG', ht:'6\'7"',  sal:'$16.8M' },
+    { n:'Caris LeVert',      pos:'SG', ht:'6\'5"',  sal:'$14.1M' },
+    { n:'Paul Reed',         pos:'PF', ht:'6\'9"',  sal:'$5.3M'  },
+    { n:'Isaiah Joe',        pos:'SG', ht:'6\'5"',  sal:'$11.3M' },
+    { n:'Ebuka Okorie',      pos:'SG', ht:'6\'7"',  sal:'$2.2M'  },
+    { n:'Ugonna Onyenso',    pos:'C',  ht:'7\'1"',  sal:'$1.9M'  },
+    { n:'Daniss Jenkins',    pos:'PG', ht:'6\'5"',  sal:'$3.8M'  },
+    { n:'Chaz Lanier',       pos:'SG', ht:'6\'6"',  sal:'$2.1M'  },
+    { n:'John Collins',      pos:'PF', ht:'6\'9"',  sal:'$6.0M'  },
+  ],
+
+  // ── NEW ORLEANS PELICANS ────────────────────────────
+  NOP: [
+    { n:'Zion Williamson',  pos:'PF', ht:'6\'6"',  sal:'$39.4M' },
+    { n:'Dejounte Murray',  pos:'PG', ht:'6\'6"',  sal:'$30.8M' },
+    { n:'Trey Murphy III',  pos:'SF', ht:'6\'9"',  sal:'$25.0M' },
+    { n:'Herb Jones',       pos:'SF', ht:'6\'8"',  sal:'$13.9M' },
+    { n:'Jordan Poole',     pos:'SG', ht:'6\'4"',  sal:'$31.8M' },
+    { n:'Jordan Hawkins',   pos:'SG', ht:'6\'5"',  sal:'$4.7M'  },
+    { n:'Yves Missi',       pos:'C',  ht:'7\'1"',  sal:'$3.4M'  },
+    { n:'Jeremiah Fears',   pos:'PG', ht:'6\'3"',  sal:'$7.5M'  },
+    { n:'DeAndre Jordan',   pos:'C',  ht:'6\'11"', sal:'$3.2M'  },
+    { n:'Derik Queen',      pos:'PF', ht:'6\'9"',  sal:'$5.2M'  },
+    { n:'Kevon Looney',     pos:'C',  ht:'6\'9"',  sal:'$8.0M'  },
+    { n:'Saddiq Bey',       pos:'SF', ht:'6\'8"',  sal:'$6.1M'  },
+    { n:'Dalen Terry',      pos:'SG', ht:'6\'7"',  sal:'$5.5M'  },
+  ],
+
+  // ── WASHINGTON WIZARDS ──────────────────────────────
+  WAS: [
+    { n:'AJ Dybantsa',      pos:'SF', ht:'6\'9"',  sal:'$9.1M'  },
+    { n:'Trae Young',       pos:'PG', ht:'6\'1"',  sal:'$46.4M' },
+    { n:'Alex Sarr',        pos:'C',  ht:'7\'3"',  sal:'$11.8M' },
+    { n:'Anthony Davis',    pos:'PF', ht:'6\'10"', sal:'$54.1M' },
+    { n:'Khris Middleton',  pos:'SF', ht:'6\'8"',  sal:'$5.9M'  },
+    { n:'Cam Whitmore',     pos:'SF', ht:'6\'7"',  sal:'$3.5M'  },
+    { n:'Tre Johnson',      pos:'SG', ht:'6\'5"',  sal:'$8.2M'  },
+    { n:'Kyshawn George',   pos:'SG', ht:'6\'7"',  sal:'$4.5M'  },
+    { n:'Bub Carrington',   pos:'PG', ht:'6\'4"',  sal:'$4.7M'  },
+    { n:'Marcus Smart',     pos:'PG', ht:'6\'3"',  sal:'$19.9M' },
+    { n:'D\'Angelo Russell',pos:'PG', ht:'6\'4"',  sal:'$5.7M (traded to MEM)' },
+    { n:'Jaden Hardy',      pos:'SG', ht:'6\'5"',  sal:'$6.0M'  },
+    { n:'Bilal Coulibaly',  pos:'SF', ht:'6\'7"',  sal:'$7.3M'  },
+    { n:'Blake Wesley',     pos:'SG', ht:'6\'5"',  sal:'$5.6M'  },
+    { n:'Will Riley',       pos:'SF', ht:'6\'8"',  sal:'$3.5M'  },
+  ],
+
+};
 
 // Team context for AI -- needs, situation, key players
 const TEAM_CONTEXT = {
