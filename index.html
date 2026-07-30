@@ -2818,35 +2818,33 @@ function giRenderDepth(team,intel){
 //  ROSTER TABLE
 // ══════════════════════════════════════════════════════════════
 function giRenderRoster(data){
-  const el=document.getElementById('gi-panel-roster');
-  const athletes=data?.roster?.athletes||[];
-  if(!athletes.length){
-    el.innerHTML=`<div class="text-center py-16"><p class="text-[10px] font-black uppercase tracking-widest text-white/20">Roster syncing…</p></div>`;
+  const el = document.getElementById('gi-panel-roster');
+  const teamAbbr = _giTeam?.a;
+  const players = GI_ROSTER[teamAbbr] || [];
+  
+  if(!players.length){
+    el.innerHTML = `<div class="text-center py-16"><p class="text-[10px] font-black uppercase tracking-widest text-white/20">No roster data available</p></div>`;
     return;
   }
-  const posOrder={PG:0,G:0,SG:1,SF:2,F:2,PF:3,C:4};
-  athletes.sort((a,b)=>(posOrder[a.position?.abbreviation]??5)-(posOrder[b.position?.abbreviation]??5));
-  let html=`<table class="gi-roster-table w-full"><thead><tr>
-    <th class="text-left">#</th><th class="text-left">Player</th><th class="text-left">Pos</th><th class="text-right">Ht</th>
+
+  const posOrder = {PG:0, SG:1, SF:2, PF:3, C:4};
+  const sorted = [...players].sort((a,b) => (posOrder[a.pos]??5) - (posOrder[b.pos]??5));
+
+  let html = `<table class="gi-roster-table w-full"><thead><tr>
+    <th class="text-left">Player</th><th class="text-left">Pos</th><th class="text-left">Ht</th><th class="text-right">Salary</th>
   </tr></thead><tbody>`;
-  athletes.forEach(p=>{
-    const pos=p.position?.abbreviation||'--';
-    const ht=p.height?.displayValue||'--';
-    html+=`<tr class="gi-roster-row">
-      <td><span class="gi-roster-num">${p.jersey||'--'}</span></td>
-      <td><div class="flex items-center gap-2.5">
-        <img src="${p.headshot?.href||`https://a.espncdn.com/i/headshots/nba/players/full/${p.id}.png`}"
-             class="w-8 h-8 rounded-full object-cover object-top flex-shrink-0"
-             style="background:#1a2a45;border:1px solid rgba(255,255,255,0.08)"
-             onerror="this.src='https://a.espncdn.com/combiner/i?img=/i/headshots/nophoto.png'" alt="">
-        <span style="font-size:12px;font-weight:800;color:#e0e0e0">${p.displayName||p.fullName||'--'}</span>
-      </div></td>
-      <td><span class="gi-roster-pos-badge pos-${pos}">${pos}</span></td>
-      <td class="text-right"><span class="gi-roster-stat">${ht}</span></td>
+
+  sorted.forEach(p => {
+    html += `<tr class="gi-roster-row">
+      <td><span style="font-size:12px;font-weight:800;color:#e0e0e0">${p.n}</span></td>
+      <td><span class="gi-roster-pos-badge pos-${p.pos}">${p.pos}</span></td>
+      <td><span class="gi-roster-stat">${p.ht}</span></td>
+      <td class="text-right"><span class="gi-roster-stat">${p.sal}</span></td>
     </tr>`;
   });
-  html+=`</tbody></table>`;
-  el.innerHTML=html;
+
+  html += `</tbody></table>`;
+  el.innerHTML = html;
 }
 
 
