@@ -3085,31 +3085,42 @@ ${intel.exceptions ? (() => {
   const tools = raw.split('·').map(s => s.trim()).filter(Boolean);
   
   const getToolConfig = (text) => {
-    const t = text.toLowerCase();
-    const used = t.includes('fully used') || t.includes('fully spent') || t.includes('unavailable') || t.includes('no ') || t.includes('frozen') || t.includes('none');
-    const partial = t.includes('partially') || t.includes('remaining') || t.includes('near') || t.includes('~$');
-    
-    let icon = '💰';
-    let label = 'Exception';
-    
-    if (t.includes('taxpayer mle') || t.includes('$6m taxpayer')) { icon = '🏷️'; label = 'Taxpayer MLE'; }
-    else if (t.includes('nt-mle') || t.includes('$15m')) { icon = '💎'; label = 'Full MLE'; }
-    else if (t.includes('bae') || t.includes('bi-annual')) { icon = '📋'; label = 'BAE'; }
-    else if (t.includes('room exception') || t.includes('room ex')) { icon = '🚪'; label = 'Room Exception'; }
-    else if (t.includes('vet min') || t.includes('veteran min')) { icon = '📝'; label = 'Vet Minimums'; }
-    else if (t.includes('frozen')) { icon = '🔒'; label = 'Frozen'; }
-    else if (t.includes('under cap') || t.includes('cap space')) { icon = '💵'; label = 'Cap Space'; }
-    
-    let status = used ? 'used' : partial ? 'partial' : 'available';
-    
-    const statusConfig = {
-      available: { dot: '#10b981', glow: 'rgba(16,185,129,0.3)', bg: 'rgba(16,185,129,0.06)', border: 'rgba(16,185,129,0.2)', label: 'AVAILABLE', labelColor: '#10b981' },
-      partial:   { dot: '#fbbf24', glow: 'rgba(251,191,36,0.3)',  bg: 'rgba(251,191,36,0.06)',  border: 'rgba(251,191,36,0.2)',  label: 'PARTIAL',   labelColor: '#fbbf24' },
-      used:      { dot: '#ef4444', glow: 'rgba(239,68,68,0.2)',   bg: 'rgba(255,255,255,0.02)', border: 'rgba(255,255,255,0.06)', label: 'USED',      labelColor: 'rgba(255,255,255,0.2)' },
-    };
-    
-    return { icon, label, status, cfg: statusConfig[status], text, isUsed: used };
+  const t = text.toLowerCase();
+  const used = t.includes('fully used') || t.includes('fully spent') || t.includes('unavailable') || t.includes('no ') || t.includes('frozen') || t.includes('none');
+  const partial = t.includes('partially') || t.includes('remaining') || t.includes('near') || t.includes('~$');
+
+  let icon = '💰';
+  let label = 'Exception';
+
+  if (t.includes('non-taxpayer') || t.includes('nt-mle') || t.includes('$15m')) {
+    icon = '💎'; label = 'Non-Taxpayer MLE';
+  } else if (t.includes('taxpayer mle') || t.includes('$6m taxpayer') || t.includes('$6.06m')) {
+    icon = '🏷️'; label = 'Taxpayer MLE';
+  } else if (t.includes('bi-annual') || t.includes('bae')) {
+    icon = '📋'; label = 'Bi-Annual Exception';
+  } else if (t.includes('room mid-level') || t.includes('room exception') || t.includes('room ex')) {
+    icon = '🚪'; label = 'Room MLE';
+  } else if (t.includes('vet min') || t.includes('veteran min')) {
+    icon = '📝'; label = 'Veteran Minimums';
+  } else if (t.includes('frozen')) {
+    icon = '🔒'; label = 'Frozen (2nd Apron)';
+  } else if (t.includes('under cap') || t.includes('cap space')) {
+    icon = '💵'; label = 'Cap Space';
+  } else if (t.includes('base year') || t.includes('byc')) {
+    icon = '🔄'; label = 'Base Year Compensation';
+  }
+
+  let status = used ? 'used' : partial ? 'partial' : 'available';
+
+  const statusConfig = {
+    available: { dot: '#10b981', glow: 'rgba(16,185,129,0.3)', bg: 'rgba(16,185,129,0.06)', border: 'rgba(16,185,129,0.2)', label: 'AVAILABLE', labelColor: '#10b981' },
+    partial:   { dot: '#fbbf24', glow: 'rgba(251,191,36,0.3)',  bg: 'rgba(251,191,36,0.06)',  border: 'rgba(251,191,36,0.2)',  label: 'PARTIAL',   labelColor: '#fbbf24' },
+    used:      { dot: '#ef4444', glow: 'rgba(239,68,68,0.2)',   bg: 'rgba(255,255,255,0.02)', border: 'rgba(255,255,255,0.06)', label: 'USED',      labelColor: 'rgba(255,255,255,0.2)' },
   };
+
+  return { icon, label, status, cfg: statusConfig[status], text, isUsed: used };
+};
+
 
   const cards = tools.map(t => {
     const { icon, label, cfg, text, isUsed } = getToolConfig(t);
@@ -3849,43 +3860,44 @@ const GI_ROSTER = {
 
   // ── NEW YORK KNICKS ─────────────────────────────────
   NYK: [
-    { n:'Karl-Anthony Towns',  pos:'C',  ht:'7\'0"',  sal:'$53.1M' },
-    { n:'OG Anunoby',          pos:'SF', ht:'6\'7"',  sal:'$39.6M' },
-    { n:'Jalen Brunson',       pos:'PG', ht:'6\'1"',  sal:'$34.9M' },
-    { n:'Mikal Bridges',       pos:'SF', ht:'6\'6"',  sal:'$24.9M' },
-    { n:'Josh Hart',           pos:'SG', ht:'6\'5"',  sal:'$19.5M' },
-    { n:'Mitchell Robinson',   pos:'C',  ht:'7\'1"',  sal:'$13.0M' },
-    { n:'Landry Shamet',       pos:'SG', ht:'6\'4"',  sal:'$4.5M'  },
-    { n:'Miles McBride',       pos:'PG', ht:'6\'2"',  sal:'$4.3M'  },
-    { n:'Jose Alvarado',       pos:'PG', ht:'6\'0"',  sal:'$4.5M'  },
+    { n:'Karl-Anthony Towns',  pos:'C',  ht:'7\'0"',  sal:'$57.1M' },
+    { n:'OG Anunoby',          pos:'SF', ht:'6\'7"',  sal:'$42.5M' },
+    { n:'Jalen Brunson',       pos:'PG', ht:'6\'1"',  sal:'$37.7M' },
+    { n:'Mikal Bridges',       pos:'SF', ht:'6\'6"',  sal:'$33.5M' },
+    { n:'Josh Hart',           pos:'SG', ht:'6\'5"',  sal:'$20.59M' },
+    { n:'Landry Shamet',       pos:'SG', ht:'6\'4"',  sal:'$5.4M'  },
+    { n:'Miles McBride',       pos:'PG', ht:'6\'2"',  sal:'$4.0M'  },
+    { n:'Jose Alvarado',       pos:'PG', ht:'6\'0"',  sal:'$4.4M'  },
     { n:'Jordan Clarkson',     pos:'SG', ht:'6\'5"',  sal:'$3.9M'  },
-    { n:'Tyler Kolek',         pos:'PG', ht:'6\'6"',  sal:'$2.6M'  },
-    { n:'Mohamed Diawara',     pos:'SF', ht:'6\'7"',  sal:'$2.0M'  },
-    { n:'Pacome Dadiet',       pos:'SF', ht:'6\'9"',  sal:'$2.3M'  },
+        { n:'Andre Drummond',     pos:'C', ht:'6\'11"',  sal:'$2.4M'  },
+        { n:'Jack Kayil',     pos:'SG', ht:'6\'5"',  sal:'$3.9M'  },
+                { n:'Tyler Kolek',     pos:'PG', ht:'6\'2"',  sal:'$2.9M'  },
+    { n:'Mohamed Diawara',     pos:'SF', ht:'6\'7"',  sal:'$2.2M'  },
+    { n:'Pacome Dadiet',       pos:'SF', ht:'6\'9"',  sal:'$3.0M'  },
   ],
 
   // ── OKLAHOMA CITY THUNDER ───────────────────────────
   OKC: [
-    { n:'Shai Gilgeous-Alexander', pos:'PG', ht:'6\'6"',  sal:'$38.3M' },
-    { n:'Isaiah Hartenstein',      pos:'C',  ht:'7\'0"',  sal:'$28.5M' },
-    { n:'Alex Caruso',             pos:'SG', ht:'6\'5"',  sal:'$18.1M' },
-    { n:'Chet Holmgren',           pos:'PF', ht:'7\'1"',  sal:'$13.7M' },
-    { n:'Jalen Williams',          pos:'SG', ht:'6\'6"',  sal:'$6.6M'  },
-    { n:'Cason Wallace',           pos:'PG', ht:'6\'4"',  sal:'$5.8M'  },
-    { n:'Aaron Wiggins',           pos:'SF', ht:'6\'6"',  sal:'$10.1M' },
-    { n:'Isaiah Joe',              pos:'SG', ht:'6\'5"',  sal:'$11.3M' },
-    { n:'Nikola Topic',            pos:'PG', ht:'6\'6"',  sal:'$5.2M'  },
+    { n:'Shai Gilgeous-Alexander', pos:'PG', ht:'6\'6"',  sal:'$40.8M' },
+    { n:'Isaiah Hartenstein',      pos:'C',  ht:'7\'0"',  sal:'$23.1M' },
+    { n:'Alex Caruso',             pos:'SG', ht:'6\'5"',  sal:'$19.5M' },
+    { n:'Chet Holmgren',           pos:'PF', ht:'7\'1"',  sal:'$41.5M' },
+    { n:'Jalen Williams',          pos:'SG', ht:'6\'6"',  sal:'$41.5M'  },
+    { n:'Cason Wallace',           pos:'PG', ht:'6\'4"',  sal:'$7.4M'  },
+    { n:'Aday Mara',            pos:'C', ht:'7\'3"',  sal:'$7.8M'  },
+    { n:'Nikola Topic',            pos:'PG', ht:'6\'6"',  sal:'$5.4M'  },
     { n:'Jaylin Williams',         pos:'PF', ht:'6\'10"', sal:'$8.5M'  },
-    { n:'Kenrich Williams',        pos:'SF', ht:'6\'7"',  sal:'$7.2M'  },
-    { n:'Ajay Mitchell',           pos:'SG', ht:'6\'4"',  sal:'$3.0M'  },
+    { n:'Kenrich Williams',        pos:'SF', ht:'6\'7"',  sal:'$5.0M'  },
+    { n:'Ajay Mitchell',           pos:'SG', ht:'6\'4"',  sal:'$2.8M'  },
     { n:'Thomas Sorber',           pos:'C',  ht:'7\'0"',  sal:'$4.7M'  },
-    { n:'Jared McCain',            pos:'SG', ht:'6\'2"',  sal:'$4.2M'  },
+    { n:'Jared McCain',            pos:'SG', ht:'6\'2"',  sal:'$4.4M'  },
+        { n:'Bennet Stirtz',            pos:'PG', ht:'6\'4"',  sal:'$4.7M'  },
   ],
 
   // ── MIAMI HEAT ──────────────────────────────────────
   MIA: [
-    { n:'Giannis Antetokounmpo', pos:'PF', ht:'6\'11"', sal:'$54.1M' },
-    { n:'Bam Adebayo',           pos:'C',  ht:'6\'9"',  sal:'$37.1M' },
+    { n:'Giannis Antetokounmpo', pos:'PF', ht:'6\'11"', sal:'$58.5M' },
+    { n:'Bam Adebayo',           pos:'C',  ht:'6\'9"',  sal:'$49.5M' },
     { n:'Andrew Wiggins',        pos:'SF', ht:'6\'7"',  sal:'$28.2M' },
     { n:'Nikola Jovic',          pos:'PF', ht:'7\'0"',  sal:'$4.4M'  },
     { n:'Davion Mitchell',       pos:'PG', ht:'6\'2"',  sal:'$11.6M' },
@@ -3918,12 +3930,12 @@ const GI_ROSTER = {
   // ── BOSTON CELTICS ──────────────────────────────────
   BOS: [
     { n:'Jayson Tatum',       pos:'PF', ht:'6\'8"',  sal:'$54.1M' },
-    { n:'Jaylen Brown',       pos:'SG', ht:'6\'6"',  sal:'$53.1M' },
+
     { n:'Derrick White',      pos:'SG', ht:'6\'4"',  sal:'$28.1M' },
     { n:'Neemias Queta',      pos:'C',  ht:'7\'0"',  sal:'$7.8M'  },
     { n:'Payton Pritchard',   pos:'PG', ht:'6\'1"',  sal:'$7.2M'  },
     { n:'Sam Hauser',         pos:'SF', ht:'6\'8"',  sal:'$10.0M' },
-    { n:'Nikola Vucevic',     pos:'C',  ht:'7\'0"',  sal:'$21.5M' },
+
     { n:'Ron Harper Jr.',     pos:'SF', ht:'6\'6"',  sal:'$3.8M'  },
     { n:'Jordan Walsh',       pos:'SF', ht:'6\'7"',  sal:'$2.3M'  },
     { n:'Mitchell Robinson',  pos:'C',  ht:'7\'1"',  sal:'$15.6M' },
