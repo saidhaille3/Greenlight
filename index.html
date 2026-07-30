@@ -2831,12 +2831,26 @@ function giRenderRoster(data){
   const sorted = [...players].sort((a,b) => (posOrder[a.pos]??5) - (posOrder[b.pos]??5));
 
   let html = `<table class="gi-roster-table w-full"><thead><tr>
-    <th class="text-left">Player</th><th class="text-left">Pos</th><th class="text-left">Ht</th><th class="text-right">Salary</th>
+    <th class="text-left">Player</th>
+    <th class="text-left">Pos</th>
+    <th class="text-left">Ht</th>
+    <th class="text-right">Salary</th>
   </tr></thead><tbody>`;
 
   sorted.forEach(p => {
+    const img = giHeadshot(p.n);
+    const shortName = p.n.split(' ').slice(-1)[0];
     html += `<tr class="gi-roster-row">
-      <td><span style="font-size:12px;font-weight:800;color:#e0e0e0">${p.n}</span></td>
+      <td>
+        <div class="flex items-center gap-2.5">
+          <img src="${img}" 
+               class="w-8 h-8 rounded-full object-cover object-top flex-shrink-0"
+               style="background:#1a2a45;border:1px solid rgba(255,255,255,0.08)"
+               onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(shortName)}&background=1a2a45&color=ffffff&size=64&bold=true&format=png'"
+               alt="">
+          <span style="font-size:12px;font-weight:800;color:#e0e0e0">${p.n}</span>
+        </div>
+      </td>
       <td><span class="gi-roster-pos-badge pos-${p.pos}">${p.pos}</span></td>
       <td><span class="gi-roster-stat">${p.ht}</span></td>
       <td class="text-right"><span class="gi-roster-stat">${p.sal}</span></td>
@@ -3412,6 +3426,12 @@ function giRenderFA(intel){
 
   let htmlFinal=html;
   el.innerHTML=htmlFinal;
+}
+function giTab(el, panel) {
+  document.querySelectorAll('.gi-tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.gi-panel').forEach(p => p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('gi-panel-' + panel).classList.add('on');
 }
 
 // ── SKELETON
