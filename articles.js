@@ -2120,7 +2120,7 @@ const articleEngineData = {
     hero: "images/burries.jpeg",
     time: "10 MIN READ",
     published: "June 17, 2026",
-    updated: null,
+    updated: "July 30, 2026",
     title: "Brayden Burries Scouting Report",
     content: `
 <style>
@@ -2377,7 +2377,7 @@ const articleEngineData = {
 
   <p>A bit older for this class -- he's 20 years old and will turn 21 during his rookie year, the product of a non-traditional high school path that included sitting out a season due to administrative issues at his original school before transferring to Eleanor Roosevelt High. That extra seasoning shows up on tape -- his game already carries a maturity and poise that most one-and-done freshmen simply don't have yet.</p>
 
-  <p>He measured 6'3.75 barefoot, 215.4 pounds, with a 6'6 wingspan and an 8'2.5 standing reach at the combine -- a strong, NBA-ready frame already, with real room to add more functional strength once he's in a professional program full time. His body shows up immediately on tape -- he's able to move his feet in space and absorb bumps, and he might end up functionally as strong as some current NBA fours, even if his length is the gap that matters most against bigger wings who can simply shoot over him.</p>
+  <p>He measured 6'3.75 barefoot, 215.4 pounds, with a 6'6 wingspan and an 8'2.5 standing reach at the combine -- a strong, NBA-ready frame already, with real room to add more functional strength once he's in a professional program full time. His body shows up immediately on tape -- he's able to move his feet in space and absorb bumps, and he might end up functionally as strong as some current NBA threes and some fours, even if his length is the gap that matters most against bigger wings who can simply shoot over him.</p>
 
   <div class="bb-stat-grid">
     <div class="bb-stat-box">
