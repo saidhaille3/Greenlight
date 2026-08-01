@@ -1,5 +1,608 @@
 const articleEngineData = {
 
+"darnold-knew": {
+    tag: "NFL · Quarterback",
+    hero: "images/darnold.jpeg",
+    time: "14 MIN READ",
+    published: "May 17, 2026",
+    updated: null,
+    title: "Some of Us Already Knew",
+    content: `
+<style>
+  .sd-x-embed {
+    display: block;
+    margin: 2.5rem 0;
+    padding: 1.5rem 1.75rem;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 1.75rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .sd-x-embed:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+  }
+  .dark .sd-x-embed {
+    background: #0f0f0f;
+    border-color: rgba(255,255,255,0.08);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .dark .sd-x-embed:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  }
+  .sd-x-embed .sd-xe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .sd-x-embed .sd-xe-identity {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .sd-x-embed .sd-xe-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(212,175,55,0.3);
+    flex-shrink: 0;
+  }
+  .sd-x-embed .sd-xe-handle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #0f0f0f;
+    line-height: 1.2;
+  }
+  .dark .sd-x-embed .sd-xe-handle {
+    color: #f0f0f0;
+  }
+  .sd-x-embed .sd-xe-date {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: #888;
+    margin-top: 0.15rem;
+  }
+  .sd-x-embed .sd-xe-logo path {
+    fill: #0f0f0f;
+    transition: fill 0.2s ease;
+  }
+  .dark .sd-x-embed .sd-xe-logo path {
+    fill: #f0f0f0;
+  }
+  .sd-x-embed .sd-xe-text {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    line-height: 1.7;
+    color: #0f0f0f;
+    margin: 0 0 1.25rem;
+    font-weight: 400;
+  }
+  .dark .sd-x-embed .sd-xe-text {
+    color: #f0f0f0;
+  }
+  .sd-x-embed .sd-xe-cta {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #1d9bf0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+
+  .sd-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .sd-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.9;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .sd-article .sd-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .sd-article .sd-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .sd-article .sd-lede {
+    font-size: clamp(1.2rem, 3.2vw, 1.55rem);
+    font-weight: 700;
+    line-height: 1.55;
+    opacity: 1;
+    margin-bottom: 2rem;
+  }
+  .sd-article .sd-lede::first-letter {
+    float: left;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3.5rem, 10vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.78;
+    margin-right: 0.12em;
+    margin-top: 0.08em;
+    color: #d4af37;
+  }
+  .sd-article .sd-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .sd-article .sd-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .sd-article .sd-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .sd-article .sd-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .sd-article .sd-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .sd-article .sd-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .sd-article .sd-pull p { color: #d4af37; }
+  .sd-article .sd-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .sd-article .sd-tweet-card {
+    background: linear-gradient(135deg, rgba(212,175,55,0.07) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .sd-article .sd-tweet-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #d4af37;
+  }
+  .sd-article .sd-tweet-card .sd-tweet-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .sd-article .sd-tweet-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .sd-article .sd-tweet-card p:last-child { margin-bottom: 0 !important; }
+  .sd-article .sd-tape-card {
+    background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .sd-article .sd-tape-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .sd-article .sd-tape-card .sd-tape-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .sd-article .sd-tape-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .sd-article .sd-tape-card p:last-child { margin-bottom: 0 !important; }
+  .sd-article .sd-ghost-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .sd-article .sd-ghost-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .sd-article .sd-ghost-card .sd-ghost-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .sd-article .sd-ghost-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .sd-article .sd-ghost-card p:last-child { margin-bottom: 0 !important; }
+  .sd-article .sd-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .sd-article .sd-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .sd-article .sd-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .sd-article .sd-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .sd-article .sd-stat-box .sd-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .sd-article .sd-stat-box .sd-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .sd-article .sd-isolated {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.2rem, 3.5vw, 1.7rem);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    margin: 2.5rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(212,175,55,0.2);
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+    text-align: center;
+    color: #d4af37;
+  }
+  .sd-article .sd-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .sd-article .sd-projection .sd-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .sd-article .sd-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .sd-article .sd-projection p:last-child { margin-bottom: 0 !important; }
+  .sd-article .sd-finale {
+    font-size: clamp(1.05rem, 2.6vw, 1.3rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.85 !important;
+    opacity: 1 !important;
+  }
+  .sd-article .sd-finale .sd-gold { color: #d4af37; font-style: italic; }
+  .sd-article strong { font-weight: 700; opacity: 1; }
+  .sd-article em { font-style: italic; }
+</style>
+
+<div class="sd-article">
+
+  <div class="sd-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="sd-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      May 17, 2026
+    </div>
+  </div>
+
+  <p class="sd-lede">May 17, 2017.</p>
+
+  <p>Sam Darnold had not yet played his final college season. The NFL draft machine had not fully assembled its consensus. The "seeing ghosts" moment was two and a half years away. The trades, the clipboard years, the punchlines -- none of it existed yet.</p>
+
+<a href="https://x.com/qb_vision/status/865851445853253633?s=46" target="_blank" class="sd-x-embed">
+  <div class="sd-xe-header">
+    <div class="sd-xe-identity">
+      <img src="images/me.png" class="sd-xe-avatar" />
+      <div>
+        <div class="sd-xe-handle">@Qb_Vision</div>
+        <div class="sd-xe-date">May 17, 2017</div>
+      </div>
+    </div>
+    <svg class="sd-xe-logo" width="20" height="20" viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
+    </svg>
+  </div>
+  <p class="sd-xe-text">Sam Darnold is so good he's tankable for.</p>
+  <div class="sd-xe-cta">View on X →</div>
+</a>
+
+
+  <p>In NFL language, that is the ceiling. You don't tank for a prospect you think is merely good. You don't deliberately lose football games for a guy you believe might develop into something useful. Tanking is reserved for the quarterbacks you watch on tape and feel something close to certainty about -- the ones where the physical tools, the processing speed, and the feel for the game all converge into something that looks categorically different from everyone else at his level. You tank for generational. Nothing less justifies it.</p>
+
+  <p>That tweet was posted in May of 2017. Before his senior season. Before the combine. Before the draft cycle turned Darnold into a national conversation. Before anybody who wasn't watching USC tape closely had formed a real opinion.</p>
+
+  <div class="sd-tweet-card">
+    <span class="sd-tweet-label">The Record -- February 28, 2018</span>
+    
+    <a href="https://x.com/qb_vision/status/971137413891477504?s=46" target="_blank" class="sd-x-embed">
+  <div class="sd-xe-header">
+    <div class="sd-xe-identity">
+      <img src="images/me.png" class="sd-xe-avatar" />
+      <div>
+        <div class="sd-xe-handle">@Qb_Vision</div>
+        <div class="sd-xe-date">March 6, 2018</div>
+      </div>
+    </div>
+    <svg class="sd-xe-logo" width="20" height="20" viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"/>
+    </svg>
+  </div>
+  <p class="sd-xe-text">Since the Vikings currently have no QBs, I'm all for them trading up for either Sam Darnold, Lamar Jackson or Baker Mayfield. Drafting your QB of the future is always better than signing a 30-year-old mediocre to 30-plus million dollars.</p>
+  <div class="sd-xe-cta">View on X →</div>
+</a>
+<p>On March 6, 2018, as the Vikings were navigating the chaos of Kirk Cousins' impending free agency: "Since the Vikings currently have no QBs, I'm all for them trading up for either Sam Darnold, Lamar Jackson or Baker Mayfield. Drafting your QB of the future is always better than signing a 30-year-old mediocre to 30-plus million dollars."</p>
+  </div>
+
+  <p>Minnesota did not listen. They signed Cousins. They paid a 30-year-old mediocre quarterback exactly what this writer said not to pay him, and they spent the next six years learning why the warning was correct.</p>
+
+  <p>What they could not have known -- what nobody could have scripted -- is that Sam Darnold would end up in Minnesota anyway. Not as the franchise cornerstone this writer wanted him to be in 2018. As a one-year bridge quarterback in 2024. And that he would walk into Kevin O'Connell's system and confirm every single thing the tape said in 2017.</p>
+
+  <p>But before any of that. The story first.</p>
+
+  <div class="sd-divider"></div>
+
+  <div class="sd-section">
+    <span class="sd-section-label">Film Room</span>
+    <h2 class="sd-section-title">What The Tape Said</h2>
+    <span class="sd-rule"></span>
+  </div>
+
+  <p>The 2018 quarterback class was historically loaded. Mayfield. Allen. Jackson. Rosen. The debate consumed draft season from September through April. Everyone had a ranking. Most of those rankings were wrong.</p>
+
+  <p>The correct evaluation -- the one that history has now validated completely -- had Darnold first and Jackson second. Jackson at 32 would become a two-time MVP. Mayfield at one would spend 2026 on an expiring contract feeling disrespected by his own franchise. Allen at seven would compile conference championship appearances without a ring. Rosen would wash out of the league entirely.</p>
+
+  <p>The pre-combine order that @Qb_Vision published was not a guess. It was tape. And what the tape on Darnold showed was a quarterback whose gifts were distinct from every other prospect in that room.</p>
+
+  <div class="sd-tape-card">
+    <span class="sd-tape-label">The Arm</span>
+    <p>The arm talent was genuine -- not just arm strength in the raw, mechanical sense, but the kind of touch and trajectory control that produces ball placement. The ball did not just arrive on time. It arrived exactly where the receiver could do something after he caught it. Leading throws into open space. The trajectory calculated not just to complete the pass but to manufacture yards after contact -- to put the football where only the intended receiver could get it and where catching it already pointed toward the next ten yards. That is feel. That is rare. Most NFL quarterbacks never develop it even after a decade of professional coaching.</p>
+  </div>
+
+  <p>The release was the other thing. That over-arc delivery -- high, smooth, functionally beautiful -- produced a ball flight that is simply not common. It gives receivers a runway. It creates catch points that are already in motion toward space. It is the mechanical signature of a quarterback who understands not just where his receiver is but where his receiver is going.</p>
+
+  <p>And the pocket mobility -- not the scrambling kind, not the panic-and-run college quarterback response to pressure, but the subtle internal kind. The quiet step-up into the pocket. The ability to sense a collapsing edge without seeing it, to redirect the body just enough to keep the eyes downfield and the mechanics intact. Pocket awareness at 19 years old that resembled veterans who had processed those scenarios for a decade.</p>
+
+  <div class="sd-pull"><p>NFL scouts in 2017 described him as smart, poised, tough, accurate. One scout said Darnold might be the only prospect capable of surviving Cleveland because he wouldn't let the pressure get to his head. Daniel Jeremiah reported that Darnold was the most-discussed player at the entire 2017 NFL Combine -- a full year before he was draft eligible -- with an executive texting him that Darnold was "rare" and hard to ignore even while studying other players' tape.</p></div>
+
+  <p>The evaluators who watched film were all saying variations of the same thing. @Qb_Vision said it first, in May of 2017, in five words.</p>
+
+  <p>What followed was nine years of the NFL trying to tell a different story.</p>
+
+  <div class="sd-divider"></div>
+
+  <div class="sd-section">
+    <span class="sd-section-label">New York</span>
+    <h2 class="sd-section-title">The Jets: The Vehicle Was On Fire</h2>
+    <span class="sd-rule"></span>
+  </div>
+
+  <p>Darnold went third overall in 2018 to the New York Jets. The Jets had not drafted correctly, developed correctly, or built correctly around a young quarterback in decades. None of that institutional failure stopped them from handing a 20-year-old the keys and expecting him to drive a broken vehicle somewhere beautiful.</p>
+
+  <p>The offensive lines in front of him rotated through injuries and mediocrity. The weapons around him were serviceable at best. Coaching staffs changed. Systems changed. The one constant was Darnold -- absorbing losses that were organizational problems wearing a quarterback's jersey, taking blame with the quiet professionalism of a man who understood that pointing fingers publicly was not going to fix what was structurally broken.</p>
+
+  <p>He went 13-25 over three seasons. The numbers were not good. The context was never examined with the same energy as the failures.</p>
+
+  <div class="sd-divider"></div>
+
+  <div class="sd-section">
+    <span class="sd-section-label">October 2019</span>
+    <h2 class="sd-section-title">The Moment That Stuck</h2>
+    <span class="sd-rule"></span>
+  </div>
+
+  <div class="sd-ghost-card">
+    <span class="sd-ghost-label">Monday Night Football</span>
+    <p>October 2019. Monday Night Football. Jets against the undefeated defending Super Bowl champion Patriots. The score reached 33-0. Darnold completed 11 of 32 passes for 86 yards, threw four interceptions, lost a fumble. Mic'd up for the broadcast, he turned to his coaches and said it: "I'm seeing ghosts."</p>
+    <p>The internet made it permanent. The clip became a verdict. Every subsequent interception, every bad game, every organizational failure that landed on his statistics got filtered through that single moment -- the kid who cracked, whose mind wasn't built for the weight of the moment, who saw things that weren't there.</p>
+  </div>
+
+  <p>Here is what the verdict never examined: he was 22 years old. He was playing behind a broken offensive line for a 1-4 team against the best defense in football. He said something honest in a moment of frustration that a microphone happened to catch. In a different city with different infrastructure, that game is a forgotten bad night in a long career. In New York, it became his obituary.</p>
+
+  <p>He refused to let it be.</p>
+
+  <div class="sd-divider"></div>
+
+  <div class="sd-section">
+    <span class="sd-section-label">Carolina</span>
+    <h2 class="sd-section-title">The Mirage</h2>
+    <span class="sd-rule"></span>
+  </div>
+
+  <p>The Jets traded him to Carolina in April 2021 for a sixth-round pick and two future selections. Three picks for a 23-year-old with a first-round arm and unresolved questions. It read like a closing statement.</p>
+
+  <p>The Panthers looked briefly like salvation. Through four games of the 2021 season, Darnold ranked sixth in ESPN's total QBR, completed 67.8% of his passes, threw five rushing touchdowns -- as many as he had in three full years with New York. There were serious arguments being made that the environment had broken him, not the player.</p>
+
+  <p>Then the Panthers went 5-12. Carolina drafted Baker Mayfield before the next season started. Darnold played two games and was released. The San Francisco 49ers signed him as a backup. He spent 2023 holding a clipboard behind Brock Purdy -- a seventh-round pick -- on the same stage Darnold had been told, repeatedly, he wasn't equipped for.</p>
+
+  <p>He showed up to every meeting. He prepared for every game he would not play. That refusal to accept the categorization is, in retrospect, the most important thing about him.</p>
+
+  <div class="sd-divider"></div>
+
+  <div class="sd-section">
+    <span class="sd-section-label">Minnesota</span>
+    <h2 class="sd-section-title">The Resurrection -- And The Irony</h2>
+    <span class="sd-rule"></span>
+  </div>
+
+  <p>March 6, 2018. @Qb_Vision told the Vikings to trade up for Sam Darnold. Minnesota did not listen. They signed Kirk Cousins instead. They paid a 30-year-old quarterback exactly the contract this writer warned against, and they spent the next six years cycling through quarterbacks and watching playoff windows open and close without resolution.</p>
+
+  <p>Six years later, in the strange logic of how NFL careers actually unfold, they got Darnold anyway.</p>
+
+  <p>Not as the franchise cornerstone. As a one-year bridge. A placeholder. The guy they needed to keep the seat warm until J.J. McCarthy was ready.</p>
+
+  <p>McCarthy tore his meniscus before the season began. Darnold became the starter.</p>
+
+  <div class="sd-stat-grid">
+    <div class="sd-stat-box">
+      <span class="sd-sv">4,319</span>
+      <span class="sd-sl">Passing Yards</span>
+    </div>
+    <div class="sd-stat-box">
+      <span class="sd-sv">35</span>
+      <span class="sd-sl">Touchdowns</span>
+    </div>
+    <div class="sd-stat-box">
+      <span class="sd-sv">14-3</span>
+      <span class="sd-sl">Record</span>
+    </div>
+    <div class="sd-stat-box">
+      <span class="sd-sv">1st</span>
+      <span class="sd-sl">Pro Bowl</span>
+    </div>
+  </div>
+
+  <p>What followed was confirmation of every word written about him in 2017. 4,319 passing yards. 35 touchdowns. 14-3 record. First Pro Bowl. MVP vote finalist. The arm talent was still there. The placement was still there. The leading throws into space, the over-arc release, the feel for where the receiver needed the ball to arrive before the receiver even knew -- none of it had gone anywhere. It had been buried under bad environments and worse narratives and a media ecosystem that had already written the ending before the story was finished.</p>
+
+  <p>When asked that year whether the Jets had failed him, Darnold said: "I had a lot of opportunities in New York. I always feel like I could've played better there." Both things were true. He was honest enough to hold them simultaneously without needing either one to carry all the weight.</p>
+
+  <p>The Vikings moved on for McCarthy after the season anyway. Again, a free agent. Again, the NFL had to decide what he was worth.</p>
+
+  <div class="sd-divider"></div>
+
+  <div class="sd-section">
+    <span class="sd-section-label">Seattle</span>
+    <h2 class="sd-section-title">The Finishing</h2>
+    <span class="sd-rule"></span>
+  </div>
+
+  <p>Darnold signed with the Seattle Seahawks. Mike MacDonald's defense was being constructed to suffocate -- aggressive, physical, structured to win games before the offense ever needed to be spectacular. What Seattle needed was not a gunslinger. They needed a quarterback who would manage the game efficiently, protect the football, and trust a machine larger than himself to finish the job.</p>
+
+  <p>He threw for 4,048 yards and 25 touchdowns as Seattle went 14-3 and earned the top seed in the NFC. He played the NFC Championship game against the Rams with a torn oblique muscle -- injured in practice ten days prior -- and delivered 346 yards, three touchdowns, and zero turnovers in a 31-27 win while Matthew Stafford matched him possession by possession on the other sideline.</p>
+
+  <div class="sd-isolated">February 8, 2026. Santa Clara. Super Bowl LX.</div>
+
+  <p>The Seahawks defeated the New England Patriots -- the same franchise that produced the Monday night nightmare, the ghosts, the clip that followed him everywhere -- 29-13. Darnold threw for 202 yards and one touchdown. Kenneth Walker III rushed for 135 yards and earned MVP. The defense sacked Drake Maye six times. Darnold did not need to be the centerpiece. He needed to be present, reliable, and real. He was all three.</p>
+
+  <p>At Super Bowl Opening Night he said: "Having a really good defense helps a lot. It makes those decisions in the red zone a lot easier. I never feel like I have to force the ball."</p>
+
+  <div class="sd-pull"><p>That is the sentence. For years the diagnosis was that he forced it -- that the moment was too large and his processing too slow. Here he stood, the week before the biggest game of his life, explaining calmly that he had learned not to force it. That the arm and the placement and the feel that @Qb_Vision recognized before his final college season had finally found a home worthy of what it always was.</p></div>
+
+  <p>After the final whistle, someone asked about bouncing around the league and believing in himself through all of it. Darnold said: "As long as you believe in yourself, anything's possible."</p>
+
+  <p>It lands as a cliché only if you skip the decade of evidence underneath it.</p>
+
+  <div class="sd-divider"></div>
+
+  <div class="sd-section">
+    <span class="sd-section-label">The Meaning</span>
+    <h2 class="sd-section-title">What This Actually Means</h2>
+    <span class="sd-rule"></span>
+  </div>
+
+  <p>Darnold said it on the Green Light podcast ahead of the Super Bowl: "You get quarterbacks that get drafted really high, and sometimes people are really, really fast to give up on them -- especially in this social media culture. We live in a time where TikTok is king and these clips go viral, and they have an opinion about a young quarterback."</p>
+
+  <p>He was not wrong. The NFL media ecosystem decided who Sam Darnold was in October 2019 and spent six years looking for confirmation. The "seeing ghosts" clip is not a data point. It is a narrative anchor -- the moment the story locked and everything after got filtered through it. The framework was never really about evaluation. It was about a story easier to tell than the truth.</p>
+
+  <p>The truth is a quarterback with genuine gifts -- the arm, the placement, the release, the pocket feel, all of it visible on tape in 2017 -- who landed in a succession of broken environments before finally finding one that fit. The gifts did not diminish in New York. They were never given conditions to breathe.</p>
+
+  <div class="sd-projection">
+    <span class="sd-proj-label">The Tape Doesn't Lie</span>
+    <p>Go back to that pre-combine ranking from February 28, 2018. Darnold 1. Jackson 2. Mayfield 3. Rosen 4. History has now graded that list. Jackson became a two-time MVP. Mayfield is playing 2026 on an expiring deal feeling disrespected. Allen has conference championship appearances and no rings. Rosen is out of football entirely. And Darnold -- ranked first, correctly, before a single combine rep was taken -- just won the Super Bowl.</p>
+    <p>The evaluator who published that ranking did not get famous for it. There was no television segment. No vindication tour. Just timestamps on tweets that nobody paid enough attention to at the time, sitting in an archive that the internet never deletes.</p>
+  </div>
+
+  <p class="sd-finale">Some of us knew what Sam Darnold was before the league did.<br><br><span class="sd-gold">The tweets are still up.</span></p>
+
+</div>
+`
+},
 "lebron-philly": {
     tag: "NBA · Free Agency",
     hero: "images/LeBrontrade.jpeg",
