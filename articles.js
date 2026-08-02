@@ -1174,7 +1174,7 @@ const articleEngineData = {
     time: "12 MIN READ",
     published: "July 25, 2026",
     updated: "July 25, 2026",
-    title: "The Deception: LeBron, Philly, and the Ghost of Dream Teams Past",
+    title: "The Deception",
     content: `
 <style>
   .lb-article {
@@ -1190,6 +1190,16 @@ const articleEngineData = {
     font-weight: 400;
     color: inherit;
     opacity: 0.88;
+  }
+    .lb-article .lb-deck {
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.55;
+    opacity: 0.65;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.1);
   }
   .lb-article .lb-byline {
     display: flex;
@@ -1463,8 +1473,8 @@ const articleEngineData = {
       July 25, 2026
     </div>
   </div>
-
-  <p class="lb-lede">Let's be honest about what just happened.</p>
+  <p class="lb-deck">LeBron, Philly, and the Ghost of Dream Teams Past</p>
+  <p>Let's be honest about what just happened.</p>
 
   <p>Not Rich Paul's carefully worded framing about "basketball happiness" and sacrifice and grinding and competing. The real version.</p>
 
