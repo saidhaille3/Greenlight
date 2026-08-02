@@ -1173,7 +1173,7 @@ const articleEngineData = {
     hero: "images/LeBrontrade.jpeg",
     time: "12 MIN READ",
     published: "July 25, 2026",
-    updated: "July 25, 2026",
+    updated: "August 2, 2026",
     title: "The Deception",
     content: `
 <style>
