@@ -1,4 +1,5 @@
 const articleEngineData = {
+
 "carr-scouting-report": {
     tag: "NBA Draft · Film Room",
     hero: "images/carrnbadraft26.jpeg",
