@@ -836,6 +836,7 @@ const articleEngineData = {
     font-weight: 700 !important;
     line-height: 1.75 !important;
     opacity: 1 !important;
+    color:purple;
   }
   .vk-article .vk-coda {
     font-family: 'Georgia', serif;
@@ -890,7 +891,7 @@ const articleEngineData = {
 
   <div class="vk-unknown-card">
     <span class="vk-card-label">Known Unknown</span>
-    <p>Murray played all 17 games in 2024 proving he could stay healthy post-ACL. Then his foot ended his 2025 season in Week 5. The question entering 2026 isn't whether he's talented enough -- it's whether his body will hold together for seventeen weeks in a system that needs him present to function.</p>
+    <p>Murray played all 17 games in 2024 proving he could stay healthy post-ACL. Then his foot ended his 2025 season in Week 5. The question entering 2026 isn't whether he's talented enough. It's whether his body will hold together for seventeen weeks.</p>
   </div>
 
   <div class="vk-divider"></div>
@@ -903,17 +904,17 @@ const articleEngineData = {
 
   <p>Jefferson. Addison. Jennings. On paper this is a top-three receiving corps in the NFC and possibly the country. In practice -- literally, in Eagan this week -- it has started to look like it.</p>
 
-  <p>Jefferson catching five balls on Saturday in the first public practice of camp is not a data point. It is a reminder. This man was PPR WR21 last season playing behind one of the worst quarterback situations in recent memory. Put a functional passer behind him and the number climbs back toward the top five in the sport. The only question is which passer and when.</p>
+  <p>Jefferson catching five balls on Saturday in the first public practice of camp is a reminder. Jefferson was PPR WR21 last season playing behind one of the worst quarterback situations in recent memory. Put a functional passer behind him and the number climbs back toward the top five in the sport. The only question is which passer and when.</p>
 
-  <p>Jordan Addison is the breakout candidate nobody is properly accounting for. WR43 in PPR last year. Plays in the same offense as the best receiver in football. Has never had a competent quarterback for a full season. A Murray who is clicking by Week 4 turns Addison into a nationally relevant fantasy asset and a genuine schematic problem for opposing secondaries who cannot choose between him and Jefferson.</p>
+  <p>Jordan Addison is the breakout candidate in the WR room. He was WR43 in PPR last year. Plays in the same offense as the best receiver in football. A Murray who is clicking by Week 4 turns Addison into a nationally relevant fantasy asset and a genuine schematic problem for opposing secondaries.</p>
 
-  <p>Jauan Jennings changed the identity of this offense the moment he signed. Nine touchdowns in San Francisco last year. Blocks like a tight end. Doesn't drop footballs in the red zone. He is being discussed as a depth piece. He is not a depth piece. He is the player who makes this offense two-dimensional in a way it has never been under O'Connell -- a physical boundary receiver who takes the dirty work and makes it look clean.</p>
+  <p>Jauan Jennings changed the identity of this offense the moment he signed. Nine touchdowns in San Francisco last year. Blocks like a tight end. Doesn't drop footballs in the red zone. He is being discussed as a depth piece. He is not a depth piece. He is the player who makes this offense two-dimensional in a way it has never been under O'Connell -- a physical boundary receiver who takes the dirty work.</p>
 
-  <p>Undrafted rookie Dillon Bell from Georgia has been connecting with Murray in camp. Kirby Smart and Steve Smith both vouched loudly for him during the pre-draft process. He is a long shot. He is also worth watching every day until he isn't.</p>
+  <p>Undrafted rookie Dillon Bell from Georgia has been connecting with Murray in camp. Kirby Smart and Steve Smith both vouched loudly for him during the pre-draft process. He is a long shot. He is also worth watching every day during camp.</p>
 
   <div class="vk-worry-card">
     <span class="vk-card-label">Schematic Worry</span>
-    <p>Jefferson's yards per route run, target share, and yards after catch all declined last year -- not because he regressed, but because the offense was broken around him. The rebound is assumed. It is not guaranteed. Assumptions about Jefferson's ceiling have been wrong before in this building.</p>
+    <p>Jefferson's yards per route run, target share, and yards after catch all declined last year -- not because he regressed, but because the offense was broken around him. The rebound is assumed.</p>
   </div>
 
   <div class="vk-divider"></div>
@@ -928,7 +929,7 @@ const articleEngineData = {
 
   <p>With Murray identifying defenders pre-snap and delivering quickly into the intermediate middle of the field -- where Hockenson has always lived -- the short-area receiving ability that made him a two-time Pro Bowler should have room to reactivate. That is the optimistic projection. The realistic one is a 29-year-old tight end who took a discount to stay on a one-year prove-it situation, working to remind the league he is still the player it thought he was two years ago.</p>
 
-  <p>Josh Oliver is a chess piece. One of the best run-blocking tight ends in football. He does not catch passes in a way that changes games. He does make the run game structurally sound in 12-personnel sets in a way that almost nobody is modeling for this offense yet.</p>
+  <p>Josh Oliver is a chess piece. One of the best run-blocking tight ends in football. He does not catch passes in a way that changes games. He does make the run game structurally sound in 12-personnel sets.</p>
 
   <div class="vk-divider"></div>
 
@@ -938,15 +939,15 @@ const articleEngineData = {
     <span class="vk-rule"></span>
   </div>
 
-  <p>Frank Smith is here. That is the sentence that matters most at this position group. The man who turned De'Von Achane into one of the most explosive backs in football in Miami just drafted a sixth-round rookie from Wake Forest whose athletic profile mirrors Achane's almost exactly. That is not coincidence. That is a coordinator installing a system and acquiring the personnel to run it.</p>
+  <p>Frank Smith is here. That is the sentence that matters most at this position group. The man who turned De'Von Achane into one of the most explosive backs in football in Miami just drafted a Demond Claiborne, a sixth-round rookie from Wake Forest whose athletic profile is elite. He is slowly installing his kind of running system and acquiring the personnel to run it.</p>
 
-  <p>Aaron Jones is the nominal starter. He is 31. He took a pay cut. He barely played in 2025. He is a smart, capable receiving back and a respected veteran presence. He is also a player whose body has been sending consistent signals for three seasons that it cannot sustain a full workload. Jordan Mason -- who averaged 3.5 yards after contact and thrived in San Francisco's wide-zone system -- is bigger, more powerful, and more durable. He will take this job by midseason if Jones cannot stay healthy, and he may take it before that if Smith's zone concepts suit Mason's skill set better than they suit a 31-year-old whose best attribute is now receiving, not running.</p>
+  <p>Aaron Jones is the nominal starter. He is 31. He took a pay cut. He barely played in 2025. He is a good, capable back and a respected veteran presence. He is also a player whose body has been sending consistent signals for three seasons that it cannot sustain a full workload. Jordan Mason -- who averaged 3.5 yards after contact and thrived in San Francisco's wide-zone system -- is bigger, more powerful, and more durable. He will take this job by midseason if Jones cannot stay healthy, and he may take it before that if Smith's zone concepts suit Mason's skill set better than they suit Jones.</p>
 
-  <p>Demond Claiborne will not matter in September. He may matter enormously in December. Watch him.</p>
+  <p>Demond Claiborne may not matter in September. He may matter enormously in December. Watch him.</p>
 
   <div class="vk-worry-card">
     <span class="vk-card-label">Known Known Nobody Wants to Say Out Loud</span>
-    <p>Kevin O'Connell does not trust the run game. This is not a personnel problem. This is a philosophy problem. In four seasons he has never -- not once -- committed to the ground game as a primary identity even when the personnel suggested he should. He is a pass-first coordinator who became a pass-first head coach and has operated that way regardless of what his roster told him. Frank Smith is here now. Jordan Mason is here. A fullback is here. A healthy offensive line is theoretically here. The infrastructure has never been more complete. And O'Connell has stood at this podium before -- different year, different backs, same press conference language about establishing the run. The commitment has to show up on third-and-two in November. Not in Eagan in August.</p>
+    <p>Kevin O'Connell does not trust the run game. This is not a personnel problem. This is a philosophy problem. In four seasons he has never -- not once -- committed to the ground game as a primary identity even when the personnel suggested he should. He is a pass-first coordinator who became a pass-first head coach and has operated that way regardless of what his roster told him. Frank Smith is here now. A healthy offensive line is theoretically here. The infrastructure has never been more complete. And O'Connell has stood at this podium before -- different year, different backs, same press conference language about establishing the run. The commitment has to show up on a third-and-two in November.</p>
   </div>
 
   <div class="vk-divider"></div>
@@ -957,17 +958,17 @@ const articleEngineData = {
     <span class="vk-rule"></span>
   </div>
 
-  <p>Christian Darrisaw said Thursday after the team's second practice: "Feel the best I've felt in two years." That sentence is worth more to Minnesota's 2026 season than almost any other thing said at this training camp. Darrisaw was a top-11 ranked tackle in 2024 before multiple ligament tears ended his season. He is the cornerstone of this offensive line and the protection around a quarterback who is already processing a new offense. If he is fully back, this unit has a legitimate identity. If he is not, 2026 looks a lot like 2025.</p>
+  <p>Christian Darrisaw said Thursday after the team's second practice: "I feel the best I've felt in two years." That sentence is worth more to Minnesota's 2026 season than almost any other thing said at this training camp. Darrisaw was a top-5 ranked tackle in 2024 before multiple ligament tears ended his season. He is the cornerstone of this offensive line and the protection around a quarterback who is already processing a new offense. If he is fully back, this unit has a legitimate identity. If he is not, 2026 looks a lot like 2025.</p>
 
-  <p>Brian O'Neill has signed a contract extension that keeps him in Minnesota through 2030. The right tackle who graded sixth among all right tackles in the league last season is locked in as the other bookend. This team now has Darrisaw through 2029 and O'Neill through 2030. That is organizational continuity at the two most important positions on the offensive line. It matters more than almost any other roster decision made this offseason.</p>
+  <p>Brian O'Neill has signed a contract extension that keeps him in Minnesota through 2030. The right tackle who graded sixth among all right tackles in the league last season is locked in as the other bookend. This team now has Darrisaw through 2029 and O'Neill through 2030. That is organizational continuity at the two most important positions on the offensive line.</p>
 
   <p>Donovan Jackson is the interior upgrade in year two. He described feeling like a "headless chicken" learning the playbook as a rookie. He is more comfortable now. Second-year jumps for guards are real and frequently dramatic. If Jackson becomes what Ohio State suggested he could be, the interior stops being an annual problem and starts being a genuine strength.</p>
 
-  <p>Blake Brandel at center remains the most honest question mark on this roster. The snap-exchange issues between Brandel and Murray in the first days of camp are not surprising -- they are expected from a player who has never started at this level working with a quarterback who has been in the building since March. They are also not nothing. The center runs the protection. The protection runs through a quarterback who is already absorbing an entirely new offensive system. Brandel getting this right is not optional. It is load-bearing.</p>
+  <p>Blake Brandel at center remains a big question mark on this roster. The snap-exchange issues between Brandel and Murray in the first days of camp are not surprising -- they are expected from a player who has never started at this level working with a quarterback who has been in the building since March. But it is also a concern as of now. </p>
 
   <div class="vk-worry-card">
     <span class="vk-card-label">Schematic Worry</span>
-    <p>Minnesota deployed 26 different offensive line combinations last season. One quarterback learning a new offense plus one center learning a new position plus a left tackle managing a knee on a careful pitch count is too many moving parts asking to be stationary at the same time.</p>
+    <p>Minnesota deployed 26 different offensive line combinations last season. One quarterback learning a new offense plus one center learning a new position plus a left tackle managing a knee on a careful pitch count is a lot of moving parts.</p>
   </div>
 
   <div class="vk-divider"></div>
@@ -980,11 +981,11 @@ const articleEngineData = {
 
   <p>Caleb Banks -- cleared for camp after missing all spring practices with a broken left foot -- worked into 11-on-11 drills with the second team on Wednesday before moving to almost exclusively first-team reps alongside Levi Drake Rodriguez and Jalen Redmond on Friday. The 18th overall pick from Florida is three days into his NFL career and already pushing for a starting role. That is either a reflection of how good he is or how thin the depth is. Most likely it is both.</p>
 
-  <p>Banks is the most physically gifted pass rusher Brian Flores has had since arriving in Minnesota. The ceiling is a game-wrecker -- 6'6", 85-inch wingspan, elite first step coming off a healed foot that should only get faster as camp progresses. The floor is a rotational disruptor who develops into the centerpiece of this defense in 2027. Either outcome changes what Flores can do schematically. He currently blitzes at one of the highest rates in the league because he has needed to manufacture pressure. Banks manufacturing it himself from his alignment changes the entire arithmetic.</p>
+  <p>Banks makes an argument for the most physically gifted pass rusher Brian Flores has had since arriving in Minnesota. The ceiling is a game-wrecker -- 6'6", 85-inch wingspan, and a good first step coming off a healed foot that should only get faster as camp progresses. The floor is a rotational disruptor who develops into the centerpiece of this defense in 2027. Either outcome changes what Flores can do schematically. He currently blitzes at one of the highest rates in the league because he has needed to manufacture pressure. Banks manufacturing it himself from his alignment changes the entire arithmetic.</p>
 
   <p>Dallas Turner is the other half of this equation. Eight sacks and 15 quarterback hits last season in a rotational role. Jonathan Greenard -- the veteran who absorbed the primary edge rushing burden -- was traded to Philadelphia. Turner is the number-one rusher now. He is 23 years old. Everything Flores wants to build on defense in 2026 runs through how quickly Turner can carry that responsibility at scale.</p>
 
-  <p>Andrew Van Ginkel does not show up in highlight packages. He makes this defense structurally sound in a way that is genuinely difficult to quantify. The ability to rush, drop, align everywhere, and make quarterbacks feel pressure without always recording the sack is the kind of player Flores' scheme demands and almost never gets credit for building around.</p>
+  <p>Andrew Van Ginkel does not show up in highlight packages. He makes this defense structurally sound in a way that is difficult to quantify. The ability to rush, drop, align everywhere, and make quarterbacks feel pressure without always recording the sack is the kind of player Flores' scheme demands.</p>
 
   <div class="vk-worry-card">
     <span class="vk-card-label">Schematic Worry</span>
@@ -1019,7 +1020,7 @@ const articleEngineData = {
 
   <p>The safety position is the honest wound that has not closed.</p>
 
-  <p>For the first time in fifteen years, Harrison Smith's number 22 was not printed in the Vikings' training camp roster publication. Smith has not formally retired. He was absent from mandatory minicamp for the first time in his career. Flores described replacing him as a collective effort -- because Smith held an authority within the scheme that Flores has granted no other player: the ability to make independent pre-snap checks. That is not a role. That is institutional knowledge walking out of the building.</p>
+  <p>For the first time in fifteen years, Harrison Smith's number 22 was not printed in the Vikings' training camp roster publication. Smith has not formally retired. He was absent from mandatory minicamp for the first time in his career. Flores described replacing him as a collective effort -- because Smith held an authority within the scheme that Flores has granted no other player: the ability to make independent pre-snap checks. That is more than a role. It presents as institutional knowledge walking and it is no longer in the building.</p>
 
   <p>Josh Metellus and Theo Jackson are currently the first-team safeties, with Jay Ward and rookie Jakobe Thomas mixing in. Metellus started 14 games last year and recorded 86 tackles -- competent, professional, not Harrison Smith. Ward showed flashes in his five late-season starts. Thomas is a third-round rookie from Miami who needs time the defense may not have. The communication, disguise, and leadership that Smith provided at the back end of this defense cannot be reassigned. It has to be rebuilt from scratch.</p>
 
@@ -1038,7 +1039,7 @@ const articleEngineData = {
 
   <p>Kevin O'Connell and Nolan Teasley are four days into their first training camp together. Teasley was hired in May. He has no prior relationship with O'Connell. He inherited a roster that finished 9-8, a quarterback competition that is not yet resolved, and a defensive back room that lost its franchise centerpiece without a clear successor.</p>
 
-  <p>At their joint press conference to open camp, both men emphasized how aligned they have been over the past two months. That is what they are supposed to say. The actual test of that alignment is what happens when this team is 4-5 in November and the quarterback decision made in August is being re-examined under the worst possible conditions.</p>
+  <p>At their joint press conference to open camp, both men emphasized how aligned they have been over the past two months. That is what they are supposed to say. The actual test of that alignment will be tested this year.</p>
 
   <p>O'Connell has been brilliant in this building. He has also never won a playoff game. He is entering year five with a new general manager who did not hire him, a quarterback competition that is unresolved after four days of camp, and a defense that is younger and less experienced than any Flores has fielded in Minnesota. The pressure cooker is quiet right now. By October it will be audible.</p>
 
@@ -1050,7 +1051,7 @@ const articleEngineData = {
     <span class="vk-rule"></span>
   </div>
 
-  <p>The NFC North is the best division in football. Detroit is legitimate. Chicago is ascending in year two under Ben Johnson. Green Bay never concedes. Every division game is a war. Minnesota could go 3-3 in division and still make the playoffs. They could go 2-4 and miss it entirely while finishing 9-8.</p>
+  <p>The NFC North is the best division in football. Detroit still has Dan Campbell and an elite offense. Chicago had ascended. Green Bay never concedes. Every division game is a war. Minnesota could go 3-3 in division and still make the playoffs. They could go 2-4 and miss it entirely while finishing sub .500.</p>
 
   <div class="vk-record-grid">
     <div class="vk-record-box vk-record-box--floor">
@@ -1073,12 +1074,12 @@ const articleEngineData = {
   <div class="vk-proj-grid">
     <div class="vk-proj-item">
       <div class="vk-proj-name">Justin Jefferson</div>
-      <div class="vk-proj-stat">1,380 yards · 10 TDs</div>
+      <div class="vk-proj-stat">1,380 yards · 8 TDs</div>
       <div class="vk-proj-note">Returns to top-five conversation with a functional quarterback for the first time.</div>
     </div>
     <div class="vk-proj-item">
       <div class="vk-proj-name">Kyler Murray</div>
-      <div class="vk-proj-stat">3,900 yds · 26 TD · 10 INT · 620 rush yds</div>
+      <div class="vk-proj-stat">4,200 yds · 26 TD · 10 INT · 620 rush yds</div>
       <div class="vk-proj-note">The dual-threat element makes the stat line look better than the efficiency suggests.</div>
     </div>
     <div class="vk-proj-item">
@@ -1100,8 +1101,8 @@ const articleEngineData = {
 
   <div class="vk-closing">
     <p>The 2026 Minnesota Vikings are a quarterback decision away from being a legitimate NFC contender or a nine-win team that made the wrong choice in August and spent the rest of the year paying for it. The weapons are real. The defense has ascending pieces. The coaching staff has proven it can extract excellence from reclamation quarterbacks.</p>
-    <p>They have done this before. Darnold was supposed to be a bridge and threw 35 touchdowns. Murray was supposed to be done and is now competing for a starting job on a minimum contract with another chance at the only thing that matters.</p>
-    <p class="vk-coda">Same song. Different verse. Minnesota keeps playing it and hoping the chorus finally changes.</p>
+    <p>They have done this before. Darnold was supposed to be a bridge and threw 35 touchdowns. Murray's team has given up on him and he is now competing for a starting job on a minimum contract with another chance at the only thing that matters.</p>
+    <p class="vk-coda">Same song. Different verse.</p>
   </div>
 
 </div>
