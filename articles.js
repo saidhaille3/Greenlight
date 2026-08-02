@@ -1,4 +1,547 @@
 const articleEngineData = {
+"carr-scouting-report": {
+    tag: "NBA Draft · Film Room",
+    hero: "images/carrnbadraft26.jpeg",
+    time: "11 MIN READ",
+    published: "August 2, 2026",
+    updated: null,
+    title: "Cameron Carr Scouting Report",
+    content: `
+<style>
+  .cc-article {
+    font-family: 'Georgia', serif;
+    color: inherit;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .cc-article p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+    color: inherit;
+    opacity: 0.88;
+  }
+  .cc-article .cc-byline {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.12);
+  }
+  .cc-article .cc-byline-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.5;
+    line-height: 1.6;
+  }
+  .cc-article .cc-section {
+    margin: 3.5rem 0 1.25rem;
+  }
+  .cc-article .cc-section-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 0.45rem;
+  }
+  .cc-article .cc-section-title {
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: inherit;
+    margin: 0;
+  }
+  .cc-article .cc-rule {
+    display: block;
+    height: 3px;
+    width: 2.5rem;
+    background: #d4af37;
+    margin-top: 0.85rem;
+    border-radius: 2px;
+  }
+  .cc-article .cc-pull {
+    margin: 2.75rem 0;
+    padding: 1.75rem 1.75rem 1.75rem 2rem;
+    border-left: 3px solid #d4af37;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 80%);
+    border-radius: 0 1.25rem 1.25rem 0;
+  }
+  .cc-article .cc-pull p {
+    font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+    font-style: italic;
+    font-weight: 700 !important;
+    line-height: 1.55 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    color: #b8960a;
+  }
+  .dark .cc-article .cc-pull p { color: #d4af37; }
+  .cc-article .cc-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+    margin: 2.5rem 0;
+  }
+  @media (min-width: 520px) {
+    .cc-article .cc-stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .cc-article .cc-stat-box {
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 0.875rem;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .dark .cc-article .cc-stat-box {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .cc-article .cc-stat-box .cc-sv {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.3rem;
+  }
+  .cc-article .cc-stat-box .cc-sl {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.4;
+  }
+  .cc-article .cc-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(212,175,55,0.35), transparent);
+    margin: 3rem 0;
+  }
+  .cc-article .cc-heritage-card {
+    background: linear-gradient(135deg, rgba(212,175,55,0.07) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cc-article .cc-heritage-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #d4af37;
+  }
+  .cc-article .cc-heritage-card .cc-h-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .cc-article .cc-heritage-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .cc-article .cc-heritage-card p:last-child { margin-bottom: 0 !important; }
+  .cc-article .cc-shot-card {
+    background: linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(212,175,55,0.04) 100%);
+    border: 1px solid rgba(16,185,129,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cc-article .cc-shot-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #10b981;
+  }
+  .cc-article .cc-shot-card .cc-s-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #10b981;
+    margin-bottom: 1.25rem;
+  }
+  .cc-article .cc-shot-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .cc-article .cc-shot-card p:last-child { margin-bottom: 0 !important; }
+  .cc-article .cc-weakness-card {
+    background: rgba(220,38,38,0.04);
+    border: 1px solid rgba(220,38,38,0.15);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cc-article .cc-weakness-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #dc2626;
+  }
+  .cc-article .cc-weakness-card .cc-w-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #dc2626;
+    margin-bottom: 1.25rem;
+  }
+  .cc-article .cc-weakness-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .cc-article .cc-weakness-card p:last-child { margin-bottom: 0 !important; }
+  .cc-article .cc-passing-card {
+    background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(59,130,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cc-article .cc-passing-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #3b82f6;
+  }
+  .cc-article .cc-passing-card .cc-p-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #3b82f6;
+    margin-bottom: 1.25rem;
+  }
+  .cc-article .cc-passing-card p {
+    margin-bottom: 0.85rem !important;
+    opacity: 0.85 !important;
+  }
+  .cc-article .cc-passing-card p:last-child { margin-bottom: 0 !important; }
+  .cc-article .cc-disconnect-card {
+    background: linear-gradient(135deg, rgba(139,92,246,0.05) 0%, rgba(212,175,55,0.03) 100%);
+    border: 1px solid rgba(139,92,246,0.18);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cc-article .cc-disconnect-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .cc-article .cc-disconnect-card .cc-dc-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .cc-article .cc-disconnect-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .cc-article .cc-disconnect-card p:last-child { margin-bottom: 0 !important; }
+  .cc-article .cc-comp-card {
+    background: linear-gradient(135deg, rgba(139,92,246,0.04) 0%, rgba(59,130,246,0.03) 100%);
+    border: 1px solid rgba(139,92,246,0.14);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cc-article .cc-comp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #8b5cf6;
+  }
+  .cc-article .cc-comp-card .cc-cc-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #8b5cf6;
+    margin-bottom: 1.25rem;
+  }
+  .cc-article .cc-comp-card p {
+    margin-bottom: 0.85rem !important;
+  }
+  .cc-article .cc-comp-card p:last-child { margin-bottom: 0 !important; }
+  .cc-article .cc-projection {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.04) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+  .cc-article .cc-projection .cc-proj-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 1.25rem;
+  }
+  .cc-article .cc-projection p {
+    margin-bottom: 0.85rem !important;
+  }
+  .cc-article .cc-projection p:last-child { margin-bottom: 0 !important; }
+  .cc-article .cc-grade-banner {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: rgba(212,175,55,0.07);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 1.75rem;
+    margin: 2.5rem 0;
+  }
+  .cc-article .cc-grade-banner .cc-grade-num {
+    display: block;
+    font-family: 'Georgia', serif;
+    font-size: clamp(3rem, 12vw, 6rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    color: #d4af37;
+    margin-bottom: 0.4rem;
+  }
+  .cc-article .cc-grade-banner .cc-grade-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.45;
+  }
+  .cc-article .cc-coda {
+    font-style: italic;
+    font-weight: 700 !important;
+    opacity: 0.7 !important;
+    font-size: clamp(1.05rem, 2.6vw, 1.25rem) !important;
+    line-height: 1.75 !important;
+    text-align: center;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(212,175,55,0.15);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+    margin: 2rem 0 !important;
+    color: #d4af37 !important;
+  }
+  .cc-article strong { font-weight: 700; opacity: 1; }
+  .cc-article em { font-style: italic; }
+</style>
+
+<div class="cc-article">
+
+  <div class="cc-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="cc-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      June 25, 2026
+    </div>
+  </div>
+
+  <div class="cc-section">
+    <span class="cc-section-label">Physical</span>
+    <h2 class="cc-section-title">Physical Profile</h2>
+    <span class="cc-rule"></span>
+  </div>
+
+  <p>6'4.5 barefoot, 184 pounds, 7'0.75 wingspan, 8'8 standing reach. His wingspan is the first number that matters here -- it crosses the seven-foot threshold on a 6'4 guard, which creates defensive coverage, shot-contest angles, and passing lane access that most shooting guards simply don't have. His combine vertical numbers confirm what the eye test screams: 38-inch no-step, 42.5-inch max vertical.</p>
+
+  <div class="cc-heritage-card">
+    <span class="cc-h-label">Bloodline</span>
+    <p>His father Chris Carr was runner-up to Kobe Bryant in the 1997 NBA Slam Dunk Contest. The aerial inheritance is real and it shows up in everything Cameron does above the rim.</p>
+  </div>
+
+  <p>His frame is the concern that doesn't go away. 184 pounds on a 6'4 guard is thin in a way that shows up physically -- narrow shoulders, legs that don't generate the lower-body load needed to hold position against NBA bodies on either end of the floor. Brandon Ingram is in the league at 190 pounds and 6'8, and analysts spend years debating whether that frame limits him against physical defenders. Carr is smaller and lighter. The strength program he's about to enter in Los Angeles will be the most consequential variable in his entire development arc.</p>
+
+  <div class="cc-stat-grid">
+    <div class="cc-stat-box">
+      <span class="cc-sv">6'4.5"</span>
+      <span class="cc-sl">Barefoot</span>
+    </div>
+    <div class="cc-stat-box">
+      <span class="cc-sv">7'0.75"</span>
+      <span class="cc-sl">Wingspan</span>
+    </div>
+    <div class="cc-stat-box">
+      <span class="cc-sv">42.5"</span>
+      <span class="cc-sl">Max Vertical</span>
+    </div>
+    <div class="cc-stat-box">
+      <span class="cc-sv">184</span>
+      <span class="cc-sl">Pounds</span>
+    </div>
+  </div>
+
+  <div class="cc-divider"></div>
+
+  <div class="cc-section">
+    <span class="cc-section-label">Bag</span>
+    <h2 class="cc-section-title">Offensive Toolkit</h2>
+    <span class="cc-rule"></span>
+  </div>
+
+  <p>Carr is a linear burst athlete -- elite separation in a straight line, very good speed in the open floor, and legitimate above-the-rim finishing ability on those straight drives. He is not a reactive or lateral athlete in the same sense. His quickness is directional rather than multidimensional, which makes him devastating running the floor or winning off a screen on the right wing, and considerably less effective when the defense forces him sideways or backward.</p>
+
+  <div class="cc-shot-card">
+    <span class="cc-s-label">The Weapon</span>
+    <p>His three-point shot stands out. 37.4% from three on 11 attempts per 100 possessions at Baylor -- volume and efficiency. The arc on his shot is the specific quality that separates it from the generic perimeter shot profile: it's a high-trajectory release with real elevation, the kind that creates a steep descent angle over outstretched hands that makes it genuinely hard to contest even on tight closeouts. He'll elevate into a contested look and release it from a point that most defenders' fingertips can't reach. That is a real, translatable NBA skill -- the vertical pop on his jumper is what makes his catch-and-shoot game a lottery-ticket weapon rather than a situational one. A side-step three off a live-dribble gather -- pulling up sideways out of a drive, Harden-adjacent -- shows up in his shot diet too, and while it's raw in its current form, the shot mechanics on it are sound enough that the action can develop with reps.</p>
+  </div>
+
+  <p>His movement shooting is the more ready-to-use version of that skill. Coming off pin-down screens and DHO actions on the right wing, he turns the corner fast, gets his feet aligned early, and gets the shot off with a timing and elevation that beat most closeouts cleanly. That wing-screen movement pattern is already an NBA weapon. Teams will immediately identify it and begin running actions designed to get him there, and he has the conversion rate to make them pay.</p>
+
+  <p>His floater is where the tool set shows its developmental stage most clearly. He likes to initiate it off a right block drive -- not from a true post position, but from that right side baseline area using the driving lane as his launch pad. The problem is the mechanics: the release is stiff, the wrist action is programmed rather than fluid, and the launch point sits further from the basket than ideal -- he'll extend the floater range all the way past the dotted line into near-midrange territory, which is an ambition the mechanics don't yet support consistently. At his best on it, the extended range floater shows real touch. At his worst, it's a mechanical mis-fire launched from an indefensible decision-making position.</p>
+
+  <div class="cc-weakness-card">
+    <span class="cc-w-label">Film Room Concern</span>
+    <p>His two-point jumper volume confirms what the tape suggests: he shot just 10-of-38 on two-point jumpers all season. There is no real in-between pull-up game. His hesitation move -- his primary isolation tool -- is a flat-footed weight-shift fake without hip or shoulder loading, followed by straight-line acceleration. It works against defenders who respect the three-point threat enough to be on their heels. Against defenders who don't, or who have studied the one-gear burst tendency, it stalls. He has no step-back, no real change-of-direction counter, no pull-up floater off that hesitation that he can count on yet. His creation package right now is essentially: hesitate, attack straight, try to finish before the defense recovers.</p>
+    <p>His right-hand finishing has a specific mechanical gap. On the euro step going right, the footwork is compromised -- a stiff plant foot without the hip rotation that creates clean separation from the shot-blocker's reach. He can't complete that action with confidence, which means he's predominantly a left-to-basket attacker. NBA scouts will have that charted and exploited. His deceleration mechanics compound the problem: he struggles to bend into a balanced gather off full speed, which means he sometimes runs into his finish rather than through it, creating contact he can't absorb cleanly and shots off improper balance.</p>
+  </div>
+
+  <div class="cc-passing-card">
+    <span class="cc-p-label">The Hidden Skill</span>
+    <p>His passing game is the most underrated element in his profile, and the most surprising discovery on tape. His bounce pass has genuine sophistication -- a hard, low-trajectory, snapping delivery with real velocity on it that arrives before the defense can collapse, and it's anticipatory rather than reactionary. He delivers it before the roll man has fully declared, reading the coverage and triggering the pass early, which means the ball beats the help rotation to the spot. That's a processing speed on ball-screen reads that most shooting guards don't have, and it's the thing that makes his 2.6 assists per game feel like an undercount of real playmaking feel. He's a good lob thrower, a clean skip passer on drive-and-kick actions, and his ability to hit cutting roll men in stride -- leading them forward rather than placing the ball where they currently are -- reflects a spatial intelligence that will be valued by good coaching staffs immediately.</p>
+  </div>
+
+  <p>His 9.2 BPM and 62.2% true shooting at Baylor are the advanced stats that contextualize everything: he was genuinely impactful on the floor, efficient with the possessions he touched, and his shot profile -- heavy on three-point attempts and rim attacks, almost nothing in the midrange dead zone -- is exactly what analytics departments draw up as ideal.</p>
+
+  <div class="cc-stat-grid">
+    <div class="cc-stat-box">
+      <span class="cc-sv">18.9</span>
+      <span class="cc-sl">PPG</span>
+    </div>
+    <div class="cc-stat-box">
+      <span class="cc-sv">37.4%</span>
+      <span class="cc-sl">3PT%</span>
+    </div>
+    <div class="cc-stat-box">
+      <span class="cc-sv">62.2%</span>
+      <span class="cc-sl">True Shooting</span>
+    </div>
+    <div class="cc-stat-box">
+      <span class="cc-sv">9.2</span>
+      <span class="cc-sl">BPM</span>
+    </div>
+  </div>
+
+  <div class="cc-divider"></div>
+
+  <div class="cc-section">
+    <span class="cc-section-label">The Other End</span>
+    <h2 class="cc-section-title">Defensive Profile</h2>
+    <span class="cc-rule"></span>
+  </div>
+
+  <p>The tools are there and the tape flashes them. A 7'0.75 wingspan on a guard who posts 1.3 blocks per game as a shooting guard is a real defensive asset -- those numbers don't happen by accident. He contests shots at the rim in ways guards aren't supposed to be involved in, and his length combined with the vertical pop makes him a genuine shot-alteration threat in help coverage.</p>
+
+  <div class="cc-weakness-card">
+    <span class="cc-w-label">The Frame Problem</span>
+    <p>His fundamental weakness on defense is the same frame problem that shows up on offense. He gets backed down. Physically stronger guards and wings will feel the lack of lower-body resistance immediately and begin posting him up or using physicality to get inside his stance. His hip positioning is too upright for consistent point-of-attack defense -- the hips sit too high, which limits leverage and makes him easier to move off his spot than his wing measurements imply. He'll also lose ground fighting through ball screens, getting caught on the hip of the screener rather than navigating cleanly over or under, which leaves him a half-step behind on perimeter recoveries more often than it should.</p>
+    <p>His positioning off-ball lapses at times -- he can get caught ball-watching, leaving his assignment a clear lane -- and the decision between staying attached to his man and jumping passing lanes is not always made with good discipline. When he gambles right, he looks like a disruptive defender. When he gambles wrong, someone is wide open.</p>
+  </div>
+
+  <div class="cc-divider"></div>
+
+  <div class="cc-section">
+    <span class="cc-section-label">Who Does He Remind You Of</span>
+    <h2 class="cc-section-title">The Comp Problem</h2>
+    <span class="cc-rule"></span>
+  </div>
+
+  <div class="cc-comp-card">
+    <span class="cc-cc-label">My Read</span>
+    <p>NBA.com draws Devin Vassell and Trey Murphy III comparisons, and the Mikal Bridges ceiling gets floated in evaluator circles. Those comps all share the same architectural profile: a long, mobile wing whose offensive value comes from catch-and-shoot gravity and athleticism rather than primary creation, who can guard multiple positions with the right physical development, and who generates real winning impact in a complementary role without needing the ball to operate.</p>
+    <p>The Vassell comp is probably most honest as a realistic outcome rather than a ceiling. But he's much more explosive than Vassell. Carr's three-point shot has more elevation and range. His passing feel is better than most people in his tier. His blocking instincts as a guard are legitimate. Vassell got himself to 190-plus pounds and uses that functional strength to defend consistently. Carr needs to make that same leap, and it's not guaranteed.</p>
+  </div>
+
+  <div class="cc-divider"></div>
+
+  <div class="cc-section">
+    <span class="cc-section-label">Me vs The Market</span>
+    <h2 class="cc-section-title">The Disconnect</h2>
+    <span class="cc-rule"></span>
+  </div>
+
+  <div class="cc-disconnect-card">
+    <span class="cc-dc-label">Where I Differ</span>
+    <p>The market landed him at 24th overall, traded from the Knicks to the Lakers. The consensus had him as a three-and-D wing with lottery upside -- a Devin Vassell-style value proposition available in the mid-first-round. My grade of 33-36 says the current tape reads second-round value, and here's the honest case for that position: the one-dimensional burst, the missing deceleration mechanics, the compromised right-hand finishing, the total absence of an in-between game, and the frame that can't currently hold up defensively against NBA physicality all add up to a player whose ceiling depends almost entirely on developments that haven't happened yet.</p>
+    <p>The counter-case -- and it's legitimate -- is that his shot is already real, his passing feel is already real, the vertical pop is already real, and his father spent six years in the NBA after nearly winning a Slam Dunk Contest. The basketball pedigree and the athleticism are rare in the specific sense that they were handed down intact.</p>
+  </div>
+
+  <div class="cc-divider"></div>
+
+  <div class="cc-section">
+    <span class="cc-section-label">Final Take</span>
+    <h2 class="cc-section-title">Outlook</h2>
+    <span class="cc-rule"></span>
+  </div>
+
+  <div class="cc-projection">
+    <p>His immediate NBA role is clear: catch-and-shoot threat off the bench, transition finisher, lob threat on cuts, and a player who contributes on the defensive end through length and shot-contesting rather than physicality. He's an eighth man on a quality team today -- and that's not a slight, that's a real rotation role on an NBA roster that he can contribute to right now.</p>
+    <p>The longer arc depends on the strength program, the deceleration mechanics, and whether the floater and right-hand finishing develop enough to give him a second offensive dimension when the three-point shot isn't falling. If the body catches up, the lateral fluidity improves, and the stiff hesitation counter package gets a real companion move, the Vassell comparison becomes defensible. If it doesn't, he's a three-point specialist with a long NBA career -- a guy who goes unconscious and drops 13 threes on a random Wednesday in February for as long as that jump shot stays above the rim.</p>
+  </div>
+
+  <p class="cc-coda">That jump shot. Goodness. The arc on it is genuinely something.</p>
+
+  <div class="cc-grade-banner">
+    <span class="cc-grade-num">33-36</span>
+    <span class="cc-grade-caption">My Grade · 2026 NBA Draft</span>
+  </div>
+
+</div>
+`
+},
+
 "vikings-2026": {
     tag: "NFL · Minnesota Vikings",
     hero: "images/vikingstraining26.jpeg",
