@@ -1075,7 +1075,7 @@ const articleEngineData = {
     <div class="vk-proj-item">
       <div class="vk-proj-name">Justin Jefferson</div>
       <div class="vk-proj-stat">1,380 yards · 8 TDs</div>
-      <div class="vk-proj-note">Returns to top-five conversation with a functional quarterback for the first time.</div>
+      <div class="vk-proj-note">Returns to top-five conversation with a functional quarterback.</div>
     </div>
     <div class="vk-proj-item">
       <div class="vk-proj-name">Kyler Murray</div>
