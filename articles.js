@@ -958,7 +958,7 @@ const articleEngineData = {
     <span class="vk-rule"></span>
   </div>
 
-  <p>Christian Darrisaw said Thursday after the team's second practice: "I feel the best I've felt in two years." That sentence is worth more to Minnesota's 2026 season than almost any other thing said at this training camp. Darrisaw was a top-5 ranked tackle in 2024 before multiple ligament tears ended his season. He is the cornerstone of this offensive line and the protection around a quarterback who is already processing a new offense. If he is fully back, this unit has a legitimate identity. If he is not, 2026 looks a lot like 2025.</p>
+  <p>Christian Darrisaw said Thursday after the team's second practice: "I feel the best I've felt in two years." That sentence is worth more to Minnesota's 2026 season than almost any other thing said at this training camp. Darrisaw was a top-5 ranked tackle in 2024 before multiple ligament tears ended his season. He is the cornerstone of this offensive line and the protection around a quarterback who is processing a new offense. If he is fully back, this unit has a legitimate identity. If he is not, 2026 looks a lot like 2025.</p>
 
   <p>Brian O'Neill has signed a contract extension that keeps him in Minnesota through 2030. The right tackle who graded sixth among all right tackles in the league last season is locked in as the other bookend. This team now has Darrisaw through 2029 and O'Neill through 2030. That is organizational continuity at the two most important positions on the offensive line.</p>
 
