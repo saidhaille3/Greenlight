@@ -2208,7 +2208,7 @@ const articleEngineData = {
     hero: "images/lopez.jpeg",
     time: "11 MIN READ",
     published: "June 17, 2026",
-    updated: null,
+    updated: "Aug 3, 2025",
     title: "Karim Lopez Scouting Report",
     content: `
 <style>
@@ -2597,7 +2597,7 @@ const articleEngineData = {
   <div class="kl-comp-card">
     <span class="kl-c-label">My Read</span>
     <p>Franz Wagner is the body-type and skill-set comp that keeps appearing, and it's earned. Both are 6'9 forwards who handle the ball, score in a variety of ways without needing dominant athleticism, and bring positional versatility that fits any roster construction.</p>
-    <p>The LaMelo, Giddey, and Sarr scoring comparison is the most meaningful contextual fact in his entire profile: the Next Stars program has produced real NBA players, and he just outscored all of them.</p>
+    <p>The LaMelo, Giddey, and Sarr international league scoring comparison is the most meaningful contextual fact in his entire profile: the Next Stars program has produced real NBA players, and he just outscored all of them.</p>
   </div>
 
   <div class="kl-divider"></div>
