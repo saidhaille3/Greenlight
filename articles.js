@@ -548,7 +548,7 @@ const articleEngineData = {
     hero: "images/vikingstraining26.jpeg",
     time: "18 MIN READ",
     published: "August 2, 2026",
-    updated: null,
+    updated: "August 2, 2026",
     title: "Same Song, Different Verse",
     content: `
 <style>
@@ -859,7 +859,7 @@ const articleEngineData = {
     </div>
   </div>
 
-  <p class="vk-deck">Minnesota Vikings 2026. Training camp is open. The quarterback question is open. Everything else is details.</p>
+  <p class="vk-deck">Minnesota Vikings 2026. Training camp is open. The quarterback question is open.</p>
 
   <p>Kirk Cousins was the answer. Then he wasn't. Sam Darnold was a bridge. Then he was a Pro Bowler and a champion with another team. J.J. McCarthy was the future. Then 2025 happened. And now Kyler Murray -- the 2019 number one overall pick, a man who won Offensive Rookie of the Year and two Pro Bowls and then spent three years being swallowed alive by the one of the worst organization in professional football -- is standing on a practice field in Eagan, Minnesota, on a veteran minimum contract worth $1.3 million and competing for a starting job.</p>
 
