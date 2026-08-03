@@ -2567,7 +2567,11 @@ const DEPTH_2027={
 };
 
 // ── Logo helper
-const giLogo = a=>`https://a.espncdn.com/i/teamlogos/nba/500/${GI_SLUG[a]||a.toLowerCase()}.png`;
+const giLogo = a => {
+  if(a === 'UTA') return 'https://a.espncdn.com/i/teamlogos/nba/500/utah.png';
+  return `https://a.espncdn.com/i/teamlogos/nba/500/${GI_SLUG[a]||a.toLowerCase()}.png`;
+};
+
 const giHeadshot = name => {
   const slugMap = {
   // ── EXISTING STARS (already in your code) ──
