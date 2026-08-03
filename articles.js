@@ -2626,7 +2626,7 @@ const articleEngineData = {
     hero: "images/wilson.jpeg",
     time: "12 MIN READ",
     published: "June 17, 2026",
-    updated: null,
+    updated: "Aug 3, 2026",
     title: "Caleb Wilson Scouting Report",
     content: `
 <style>
@@ -2953,7 +2953,7 @@ const articleEngineData = {
 
   <div class="cw-dunk-card">
     <span class="cw-dk-label">Above The Rim</span>
-    <p>He dunks violently and often. Sixty-six dunks in 24 games at UNC. Not poster dunks in the highlight-reel sense -- he finishes contact dunks and full-extension finishes that require going up and forward simultaneously, covering horizontal and vertical distance in the same leap. His head regularly appears at or above rim level on attempts. The euro-step dunk -- catching a step in traffic, switching launch foot, and arriving above the defense's outstretched arms -- is already in his bag and already spectacular.</p>
+    <p>He dunks violently and often. Sixty-six dunks in 24 games at UNC. He finishes contact dunks and full-extension finishes that require going up and forward simultaneously, covering horizontal and vertical distance in the same leap. His head regularly appears at or above rim level on attempts. The euro-step dunk -- catching a step in traffic, switching launch foot, and arriving above the defense's outstretched arms -- is already in his bag and already spectacular.</p>
   </div>
 
   <p>He shot 68% at the rim on 176 total attempts, with reverse layups adding wrist spin to manipulate the angle over shot-blockers, and scoop finishes that exploit his length at undefendable release points. He ran the floor well enough in transition to be a legitimate lob threat on every possession, which Duke head coaches and opposing scouts have had to account for every single time the ball crosses halfcourt. His 14.0 BPM at UNC -- the metric that most comprehensively captures on-court impact -- ranked among the elite freshmen forwards in program history.</p>
@@ -3002,13 +3002,13 @@ const articleEngineData = {
 
   <div class="cw-section">
     <span class="cw-section-label">Long View</span>
-    <h2 class="cw-section-title">The Ceiling Question</h2>
+    <h2 class="cw-section-title">Ridiclous Cieling</h2>
     <span class="cw-rule"></span>
   </div>
 
   <div class="cw-ceiling-card">
     <span class="cw-c-label">My Read</span>
-    <p>This is the genuinely open question in his entire evaluation: what does he look like when the athleticism recedes? The Giannis and Hakeem comparisons on his drives -- the gliding quality, the euro-step with finesse, the post spins that echo The Dream's footwork -- are real when you watch the tape. But Giannis built a second offensive identity around the three-point line. Hakeem had perhaps the most refined post repertoire in NBA history to fall back on. Wilson's mid-range game is real and his post footwork flashes are encouraging, but neither is currently developed enough to carry him if the elite athleticism becomes merely good athleticism over a decade in the league.</p>
+    <p>First let me say, he has the highest ceiling in this class. Now...and this is the open question in his entire evaluation: what does he look like when the athleticism recedes? The Giannis and Hakeem comparisons on his drives -- the gliding quality, the euro-step with finesse, the post spins that echo The Dream's footwork -- are real when you watch the tape. But Giannis built a second offensive identity around the three-point line. Hakeem had perhaps the most refined post repertoire in NBA history to fall back on. Wilson's mid-range game is real and his post footwork flashes are encouraging, but neither is currently developed enough to carry him if the elite athleticism becomes merely good athleticism over a decade in the league.</p>
     <p>Kevin Garnett is the comp that keeps floating around in evaluator circles -- same length profile, same two-way impact, same question about offensive floor-spacing. KG figured it out into his late twenties. The path exists. The work required to walk it is the open variable.</p>
   </div>
 
