@@ -2023,7 +2023,7 @@ const articleEngineData = {
 
   <p>Not Rich Paul's carefully worded framing about "basketball happiness" and sacrifice and grinding and competing. The real version.</p>
 
-  <p>LeBron James -- 41 years old, fresh off a two-year, eight-million dollar deal -- just signed with the Philadelphia 76ers. And the announcement came wrapped in the same cloth he's been cutting for sixteen years. The soul-searching. The reluctant hero returning to the arena. The carefully staged uncertainty. "I thought I was done when the season ended. I was pretty sure I played my last game." Heavy words. Moving words. Words that conveniently kept every franchise in the league on hold for three weeks while the market froze around him.</p>
+  <p>41 year old LeBron James just signed with the Philadelphia 76ers and the announcement came wrapped in the same cloth he's been cutting for sixteen years. The soul-searching. The reluctant hero returning to the arena. The carefully staged uncertainty. "I thought I was done when the season ended. I was pretty sure I played my last game." Heavy words. Moving words. Words that conveniently kept every franchise in the league on hold for three weeks while the market froze around him.</p>
 
   <p>Minnesota held its roster spot. Golden State restructured conversations. Cleveland cleared emotional bandwidth for a homecoming that never came. Miami floated Giannis proximity as bait. On a podcast, Rich Paul pulled out a whiteboard…like a professor…and listed the candidates -- Philadelphia, Miami, Minnesota, Denver, Golden State, Cleveland -- while the league held its collective breath.</p>
 
