@@ -436,22 +436,22 @@ const articleEngineData = {
 
   <div class="cc-shot-card">
     <span class="cc-s-label">The Weapon</span>
-    <p>His three-point shot stands out. 37.4% from three on 11 attempts per 100 possessions at Baylor -- volume and efficiency. The arc on his shot is the specific quality that separates it from the generic perimeter shot profile: it's a high-trajectory release with real elevation, the kind that creates a steep descent angle over outstretched hands that makes it genuinely hard to contest even on tight closeouts. He'll elevate into a contested look and release it from a point that most defenders' fingertips can't reach. That is a real, translatable NBA skill -- the vertical pop on his jumper is what makes his catch-and-shoot game a lottery-ticket weapon rather than a situational one. A side-step three off a live-dribble gather -- pulling up sideways out of a drive, Harden-adjacent -- shows up in his shot diet too, and while it's raw in its current form, the shot mechanics on it are sound enough that the action can develop with reps.</p>
+    <p>His three-point shot stands out. 37.4% from three on 11 attempts per 100 possessions at Baylor -- volume and efficiency. The arc on his shot is the specific quality that separates it from the generic perimeter shot profile: it's a high-trajectory release with great elevation, the kind that creates a steep descent angle over outstretched hands that makes it genuinely hard to contest even on tight closeouts. He'll elevate into a contested look and release it from a point that most defenders' fingertips can't reach. That is a translatable NBA skill -- the vertical pop on his jumper is what makes his catch-and-shoot game a lottery-ticket weapon rather than a situational one. A side-step three off a live-dribble gather -- pulling up sideways out of a drive, Harden-adjacent -- shows up in his shot diet too, and while it's raw in its current form, the shot mechanics on it are sound enough that the action can develop with reps.</p>
   </div>
 
   <p>His movement shooting is the more ready-to-use version of that skill. Coming off pin-down screens and DHO actions on the right wing, he turns the corner fast, gets his feet aligned early, and gets the shot off with a timing and elevation that beat most closeouts cleanly. That wing-screen movement pattern is already an NBA weapon. Teams will immediately identify it and begin running actions designed to get him there, and he has the conversion rate to make them pay.</p>
 
-  <p>His floater is where the tool set shows its developmental stage most clearly. He likes to initiate it off a right block drive -- not from a true post position, but from that right side baseline area using the driving lane as his launch pad. The problem is the mechanics: the release is stiff, the wrist action is programmed rather than fluid, and the launch point sits further from the basket than ideal -- he'll extend the floater range all the way past the dotted line into near-midrange territory, which is an ambition the mechanics don't yet support consistently. At his best on it, the extended range floater shows real touch. At his worst, it's a mechanical mis-fire launched from an indefensible decision-making position.</p>
+  <p>His floater is where the tool set shows its developmental stage most clearly. He likes to initiate it off a right block drive -- not from a true post position, but from that right side baseline area using the driving lane as his launch pad. The problem is the mechanics: the release is stiff, the wrist action is programmed rather than fluid, and the launch point sits further from the basket than ideal -- he'll extend the floater range all the way past the dotted line into near-midrange territory, which is an ambition the mechanics don't yet support consistently. At his best on it, the extended range floater shows good touch. At his worst, it's a mechanical mis-fire launched from an indefensible decision-making position.</p>
 
   <div class="cc-weakness-card">
     <span class="cc-w-label">Film Room Concern</span>
-    <p>His two-point jumper volume confirms what the tape suggests: he shot just 10-of-38 on two-point jumpers all season. There is no real in-between pull-up game. His hesitation move -- his primary isolation tool -- is a flat-footed weight-shift fake without hip or shoulder loading, followed by straight-line acceleration. It works against defenders who respect the three-point threat enough to be on their heels. Against defenders who don't, or who have studied the one-gear burst tendency, it stalls. He has no step-back, no real change-of-direction counter, no pull-up floater off that hesitation that he can count on yet. His creation package right now is essentially: hesitate, attack straight, try to finish before the defense recovers.</p>
+    <p>His two-point jumper volume confirms what the tape suggests: he shot just 10-of-38 on two-point jumpers all season. There is no real in-between pull-up game. His hesitation move -- his primary isolation tool -- is a flat-footed weight-shift fake without hip or shoulder loading, followed by straight-line acceleration. It works against defenders who respect the three-point threat enough to be on their heels. Against defenders who don't, or who have studied the one-gear burst tendency, it stalls. He has no step-back, no reliable change-of-direction counter, no pull-up floater off that hesitation that he can count on yet. His creation package right now is essentially: hesitate, attack straight, try to finish before the defense recovers.</p>
     <p>His right-hand finishing has a specific mechanical gap. On the euro step going right, the footwork is compromised -- a stiff plant foot without the hip rotation that creates clean separation from the shot-blocker's reach. He can't complete that action with confidence, which means he's predominantly a left-to-basket attacker. NBA scouts will have that charted and exploited. His deceleration mechanics compound the problem: he struggles to bend into a balanced gather off full speed, which means he sometimes runs into his finish rather than through it, creating contact he can't absorb cleanly and shots off improper balance.</p>
   </div>
 
   <div class="cc-passing-card">
     <span class="cc-p-label">The Hidden Skill</span>
-    <p>His passing game is the most underrated element in his profile, and the most surprising discovery on tape. His bounce pass has genuine sophistication -- a hard, low-trajectory, snapping delivery with real velocity on it that arrives before the defense can collapse, and it's anticipatory rather than reactionary. He delivers it before the roll man has fully declared, reading the coverage and triggering the pass early, which means the ball beats the help rotation to the spot. That's a processing speed on ball-screen reads that most shooting guards don't have, and it's the thing that makes his 2.6 assists per game feel like an undercount of real playmaking feel. He's a good lob thrower, a clean skip passer on drive-and-kick actions, and his ability to hit cutting roll men in stride -- leading them forward rather than placing the ball where they currently are -- reflects a spatial intelligence that will be valued by good coaching staffs immediately.</p>
+    <p>His passing game is the most underrated element in his profile, and the most surprising discovery on tape. His bounce pass has genuine sophistication -- a hard, low-trajectory, snapping delivery with good velocity on it that arrives before the defense can collapse, and it's anticipatory rather than reactionary. He delivers it before the roll man has fully declared, reading the coverage and triggering the pass early, which means the ball beats the help rotation to the spot. That's a processing speed on ball-screen reads that most shooting guards don't have, and it's the thing that makes his 2.6 assists per game feel like an undercount of genuine playmaking feel. He's a good lob thrower, a clean skip passer on drive-and-kick actions, and his ability to hit cutting roll men in stride -- leading them forward rather than placing the ball where they currently are -- reflects a spatial intelligence that will be valued by good coaching staffs immediately.</p>
   </div>
 
   <p>His 9.2 BPM and 62.2% true shooting at Baylor are the advanced stats that contextualize everything: he was genuinely impactful on the floor, efficient with the possessions he touched, and his shot profile -- heavy on three-point attempts and rim attacks, almost nothing in the midrange dead zone -- is exactly what analytics departments draw up as ideal.</p>
@@ -483,7 +483,7 @@ const articleEngineData = {
     <span class="cc-rule"></span>
   </div>
 
-  <p>The tools are there and the tape flashes them. A 7'0.75 wingspan on a guard who posts 1.3 blocks per game as a shooting guard is a real defensive asset -- those numbers don't happen by accident. He contests shots at the rim in ways guards aren't supposed to be involved in, and his length combined with the vertical pop makes him a genuine shot-alteration threat in help coverage.</p>
+  <p>The tools are there and the tape flashes them. A 7'0.75 wingspan on a guard who posts 1.3 blocks per game as a shooting guard is a decent defensive asset -- those numbers don't happen by accident. He contests shots at the rim in ways guards aren't supposed to be involved in, and his length combined with the vertical pop makes him a genuine shot-alteration threat in help coverage.</p>
 
   <div class="cc-weakness-card">
     <span class="cc-w-label">The Frame Problem</span>
@@ -501,7 +501,7 @@ const articleEngineData = {
 
   <div class="cc-comp-card">
     <span class="cc-cc-label">My Read</span>
-    <p>NBA.com draws Devin Vassell and Trey Murphy III comparisons, and the Mikal Bridges ceiling gets floated in evaluator circles. Those comps all share the same architectural profile: a long, mobile wing whose offensive value comes from catch-and-shoot gravity and athleticism rather than primary creation, who can guard multiple positions with the right physical development, and who generates real winning impact in a complementary role without needing the ball to operate.</p>
+    <p>NBA.com draws Devin Vassell and Trey Murphy III comparisons, and the Mikal Bridges ceiling gets floated in evaluator circles. Those comps all share the same architectural profile: a long, mobile wing whose offensive value comes from catch-and-shoot gravity and athleticism rather than primary creation, who can guard multiple positions with the right physical development, and who generates decent winning impact in a complementary role without needing the ball to operate.</p>
     <p>The Vassell comp is probably most honest as a realistic outcome rather than a ceiling. But he's much more explosive than Vassell. Carr's three-point shot has more elevation and range. His passing feel is better than most people in his tier. His blocking instincts as a guard are legitimate. Vassell got himself to 190-plus pounds and uses that functional strength to defend consistently. Carr needs to make that same leap, and it's not guaranteed.</p>
   </div>
 
@@ -528,8 +528,8 @@ const articleEngineData = {
   </div>
 
   <div class="cc-projection">
-    <p>His immediate NBA role is clear: catch-and-shoot threat off the bench, transition finisher, lob threat on cuts, and a player who contributes on the defensive end through length and shot-contesting rather than physicality. He's an eighth man on a quality team today -- and that's not a slight, that's a real rotation role on an NBA roster that he can contribute to right now.</p>
-    <p>The longer arc depends on the strength program, the deceleration mechanics, and whether the floater and right-hand finishing develop enough to give him a second offensive dimension when the three-point shot isn't falling. If the body catches up, the lateral fluidity improves, and the stiff hesitation counter package gets a real companion move, the Vassell comparison becomes defensible. If it doesn't, he's a three-point specialist with a long NBA career -- a guy who goes unconscious and drops 13 threes on a random Wednesday in February for as long as that jump shot stays above the rim.</p>
+    <p>His immediate NBA role is clear: catch-and-shoot threat off the bench, transition finisher, lob threat on cuts, and a player who contributes on the defensive end through length and shot-contesting rather than physicality. He's an eighth man on a quality team today -- and that's not a slight, that's a rotation role on an NBA roster that he can contribute to right now.</p>
+    <p>The longer arc depends on the strength program, the deceleration mechanics, and whether the floater and right-hand finishing develop enough to give him a second offensive dimension when the three-point shot isn't falling. If the body catches up, the lateral fluidity improves, and the stiff hesitation counter package gets a companion move, the Vassell comparison becomes defensible. If it doesn't, he's a three-point specialist with a long NBA career -- a guy who goes unconscious and drops 13 threes on a random Wednesday in February for as long as that jump shot stays above the rim.</p>
   </div>
 
   <p class="cc-coda">That jump shot. Goodness. The arc on it is genuinely something.</p>
@@ -2498,7 +2498,7 @@ const articleEngineData = {
 
   <div class="kl-pull"><p>His backpedal on full-court press deserves its own sentence: it's mechanically pristine, almost cornerback-level in how he flips his hips, maintains his base, and retreats without losing his spatial read. His movement efficiency at his size is exceptional.</p></div>
 
-  <p>He tested at 38 inches max vertical and 32 no-step at the combine which shows real athleticism, not just physical mass.</p>
+  <p>He tested at 38 inches max vertical and 32 no-step at the combine which shows good athleticism, not just physical mass.</p>
 
   <div class="kl-stat-grid">
     <div class="kl-stat-box">
@@ -2597,7 +2597,7 @@ const articleEngineData = {
   <div class="kl-comp-card">
     <span class="kl-c-label">My Read</span>
     <p>Franz Wagner is the body-type and skill-set comp that keeps appearing, and it's earned. Both are 6'9 forwards who handle the ball, score in a variety of ways without needing dominant athleticism, and bring positional versatility that fits any roster construction.</p>
-    <p>The LaMelo, Giddey, and Sarr international league scoring comparison is the most meaningful contextual fact in his entire profile: the Next Stars program has produced real NBA players, and he just outscored all of them.</p>
+    <p>The LaMelo, Giddey, and Sarr international league scoring comparison is the most meaningful contextual fact in his entire profile: the Next Stars program has produced NBA players — one of them becoming a future All-star — and he outscored all of them.</p>
   </div>
 
   <div class="kl-divider"></div>
@@ -2609,7 +2609,7 @@ const articleEngineData = {
   </div>
 
   <div class="kl-projection">
-    <p>Top-6 is a real grade rooted in his physical profile, his positional size, his offensive maturity at 19, and his defensive ceiling rather than his defensive reality. He's not a finished product defensively and the three-point shot needs work. But his frame is ideal, the footwork is already NBA-level, and the scoring instincts -- the body manipulation, the pace control, the post touch, the running hook, the turnaround -- are the kind of things that take most prospects years to develop and he's already doing them against professionals at 18.</p>
+    <p>My Top-6 grade is rooted in his physical profile, his positional size, his offensive maturity at 19, and his defensive ceiling rather than his defensive reality. He's not a finished product defensively and the three-point shot needs work. But his frame is ideal, the footwork is already NBA-level, and the scoring instincts -- the body manipulation, the pace control, the post touch, the running hook, the turnaround -- are the kind of things that take most prospects years to develop and he's already doing them against professionals at 18.</p>
   </div>
 
   <div class="kl-grade-banner">
@@ -2947,7 +2947,7 @@ const articleEngineData = {
 
   <div class="cw-pull"><p>The processing speed is what separates him from other elite athletes at his position. Catching a high-post entry pass, he's already read the defense, committed to his action, and initiated his move before the ball fully arrives -- storing his momentum while the pass is in the air so that the rocker step, the shoulder shimmy fake, or the jab-step misdirection begins from a live platform rather than a standing reset.</p></div>
 
-  <p>That's how a 6'10 freshman regularly beats NBA-caliber athletes off the catch: he's simply already in motion when they think the sequence is still beginning. His 1.4 assist-to-turnover ratio on 28.8% usage speaks directly to this composure -- he's making quick, correct decisions under real defensive pressure at a rate most freshmen forwards can't approach.</p>
+  <p>That's how a 6'10 freshman regularly beats NBA-caliber athletes off the catch: he's simply already in motion when they think the sequence is still beginning. His 1.4 assist-to-turnover ratio on 28.8% usage speaks directly to this composure -- he's making quick, correct decisions under chaotic defensive pressure at a rate most freshmen forwards can't approach.</p>
 
   <p>His post finishing package is the most surprising element of his offensive profile for someone of his age. He shows a legitimate shoulder-shimmy rocker step -- a subtle half-body fake that loads the defender's weight in one direction before he explodes the opposite way -- and his counters off it are already varied: he can pull up for a short runner off the gather, fade into a mid-range jumper from the elbow, or use the defender's momentum against them and attack the vacated lane for a rim finish. The foot coverage is exceptional -- he eats ground in two or three steps where most forwards need four or five, arriving at the rim before the help defense can fully rotate.</p>
 
