@@ -403,7 +403,7 @@ const articleEngineData = {
     <p>His father Chris Carr was runner-up to Kobe Bryant in the 1997 NBA Slam Dunk Contest. The aerial inheritance is real and it shows up in everything Cameron does above the rim.</p>
   </div>
 
-  <p>His frame is the concern that doesn't go away. 184 pounds on a 6'4 guard is thin in a way that shows up physically -- narrow shoulders, legs that don't generate the lower-body load needed to hold position against NBA bodies on either end of the floor. Brandon Ingram is in the league at 190 pounds and 6'8, and analysts spend years debating whether that frame limits him against physical defenders. Carr is smaller and lighter. The strength program he's about to enter in Los Angeles will be the most consequential variable in his entire development arc.</p>
+  <p>His frame is the concern that doesn't go away. 184 pounds on a 6'4 guard is thin in a way that shows up physically. Shoulders that don't have much definition and legs that are thin and  don't generate the lower-body load needed to hold position against NBA bodies on either end of the floor. Brandon Ingram is in the league at 190 pounds and 6'8, and analysts spend years debating whether that frame limits him against physical defenders. Carr is smaller and lighter. The strength program he's about to enter in Los Angeles will be the most consequential variable in his entire development arc.</p>
 
   <div class="cc-stat-grid">
     <div class="cc-stat-box">
@@ -516,7 +516,7 @@ const articleEngineData = {
   <div class="cc-disconnect-card">
     <span class="cc-dc-label">Where I Differ</span>
     <p>The market landed him at 24th overall, traded from the Knicks to the Lakers. The consensus had him as a three-and-D wing with lottery upside -- a Devin Vassell-style value proposition available in the mid-first-round. My grade of 33-36 says the current tape reads second-round value, and here's the honest case for that position: the one-dimensional burst, the missing deceleration mechanics, the compromised right-hand finishing, the total absence of an in-between game, and the frame that can't currently hold up defensively against NBA physicality all add up to a player whose ceiling depends almost entirely on developments that haven't happened yet.</p>
-    <p>The counter-case -- and it's legitimate -- is that his shot is already real, his passing feel is already real, the vertical pop is already real, and his father spent six years in the NBA after nearly winning a Slam Dunk Contest. The basketball pedigree and the athleticism are rare in the specific sense that they were handed down intact.</p>
+    <p>The counter-case -- and it's legitimate -- is that his shot can be something special, his passing feel is very underrated, the vertical pop is obvious. The basketball pedigree is there as well. His father spent six years in the NBA. The basketball pedigree and the athleticism are rare in the specific sense that they were handed down intact.</p>
   </div>
 
   <div class="cc-divider"></div>
