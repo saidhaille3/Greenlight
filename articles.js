@@ -5,7 +5,7 @@ const articleEngineData = {
     hero: "images/carrnbadraft26.jpeg",
     time: "11 MIN READ",
     published: "August 2, 2026",
-    updated: null,
+    updated: "August 6, 2026",
     title: "Cameron Carr Scouting Report",
     content: `
 <style>
@@ -2208,7 +2208,7 @@ const articleEngineData = {
     hero: "images/lopez.jpeg",
     time: "11 MIN READ",
     published: "June 17, 2026",
-    updated: "Aug 3, 2025",
+    updated: "Aug 6, 2025",
     title: "Karim Lopez Scouting Report",
     content: `
 <style>
@@ -2626,7 +2626,7 @@ const articleEngineData = {
     hero: "images/wilson.jpeg",
     time: "12 MIN READ",
     published: "June 17, 2026",
-    updated: "Aug 3, 2026",
+    updated: "Aug 6, 2026",
     title: "Caleb Wilson Scouting Report",
     content: `
 <style>
