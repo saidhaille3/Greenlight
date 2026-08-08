@@ -25,19 +25,23 @@ const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
 // --- RESEND ---
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+
 
 // --- FIREBASE ADMIN ---
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    }),
-  });
+let db = null;
+if (process.env.FIREBASE_PROJECT_ID) {
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      }),
+    });
+  }
+  db = admin.firestore();
 }
-const db = admin.firestore();
 
 // --- LIVEKIT ---
 const LIVEKIT_API_KEY = process.env.LIVEKIT_API_KEY;
@@ -46,10 +50,11 @@ const LIVEKIT_URL = process.env.LIVEKIT_URL;
 
 // --- MUX ---
 const Mux = require('@mux/mux-node');
-const mux = new Mux({
+const mux = process.env.MUX_TOKEN_ID ? new Mux({
   tokenId: process.env.MUX_TOKEN_ID,
   tokenSecret: process.env.MUX_TOKEN_SECRET,
-});
+}) : null;
+
 const LIVE_STREAM_ID = process.env.MUX_LIVE_STREAM_ID;
 
 // --- STATE ---
