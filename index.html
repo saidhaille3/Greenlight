@@ -4721,7 +4721,7 @@ setInterval(() => { _giCache = {}; }, 600000);
 
   <!-- ── SCOREBOARD STRIP ── -->
   <div class="nfl-scores-wrap">
-    <p class="nfl-teams-label" style="margin-bottom:0.6rem;">📺 Games</p>
+
     <div id="nfl-score-scroller" class="no-scrollbar"></div>
   </div>
 
@@ -4939,15 +4939,18 @@ const NFL_TEAMS = [
    cap:'+$8.1M',pffOff:87.2,pffDef:83.4,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'MIA',city:'Miami',name:'Dolphins',div:'AFC East',p:'#008E97',s:'#FC4C02',champ:false,
-   alert:'Malik Willis new QB1 after Tua released. $99.2M dead cap hit -- NFL record. Austin Jackson (RT) and Greg Dulcich (TE) dealing with camp injuries. New HC Jeff Hafley.',
+alert:'Malik Willis signed 3yr/$67.5M as new QB1 after Tua released. Jaylen Waddle TRADED (blockbuster -- returned 1st, 3rd, 4th). Dead cap from Tua/Waddle era massive. New HC Joe Brady. Dolphins at Vikings Week 1. Austin Jackson (RT) injury concern.',
+
    cap:'-$7.4M',pffOff:72.3,pffDef:70.1,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'NE',city:'New England',name:'Patriots',div:'AFC East',p:'#002244',s:'#C60C30',champ:false,
-   alert:'AJ Brown acquired from PHI. Drake Maye Year 2 with real weapons. Kayshon Boutte shining in camp. Rookie OT Caleb Lomu playing everywhere along the line.',
+alert:'Drake Maye Year 3 -- AJ Brown acquired from PHI + Romeo Doubs from GB. Week 1 opener at SEA (Super Bowl LX rematch). ⚠️ RB TreVeyon Henderson OUT (ankle) -- Rhamondre Stevenson expected to carry the load. C Ben Brown also OUT (knee). CB Christian Gonzalez signed to record extension.',
+
    cap:'+$38.2M',pffOff:72.4,pffDef:70.8,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'NYJ',city:'New York',name:'Jets',div:'AFC East',p:'#125740',s:'#000000',champ:false,
-   alert:'Aaron Rodgers locked in as QB1. Minkah Fitzpatrick acquired from MIA -- 3yr/$40M extension. Rookie David Bailey drawing massive hype in camp. Rookie TE Kenyon Sadiq (No.16) suffering hernia setback.',
+alert:'Geno Smith is QB1 -- traded from LV, making history as 8th Week 1 Jets starter in 11 years. Aaron Glenn\'s first year as HC. Kenyon Sadiq (TE) missed camp with hernia. Breece Hall leads the backfield. Will McDonald & Kingsley Enagbare anchor the edge. Voted team captain, Smith looked sharp in preseason (7-of-7, 65 yds, TD).',
+
    cap:'+$6.2M',pffOff:76.8,pffDef:81.4,wl:'0-0',pfg:'--',pag:'--'},
 
   // AFC North
@@ -4960,20 +4963,24 @@ const NFL_TEAMS = [
    cap:'+$12.6M',pffOff:88.9,pffDef:79.4,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'CLE',city:'Cleveland',name:'Browns',div:'AFC North',p:'#311D00',s:'#FF3C00',champ:false,
-   alert:'Myles Garrett traded to LAR. QB battle: Deshaun Watson vs Shedeur Sanders vs Dillon Gabriel -- Sanders looking slightly better early. No.1 pick Spencer Fano battling Dawand Jones at LT.',
+alert:'Myles Garrett TRADED to LAR -- massive rebuild in progress. QB battle: Watson beat Shedeur. No.1 pick Spencer Fano battling Dawand Jones at LT. Jerry Jeudy leads the receivers. Trevon Diggs was briefly signed (SEA) then cut.',
+
    cap:'+$18.4M',pffOff:69.2,pffDef:75.8,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'PIT',city:'Pittsburgh',name:'Steelers',div:'AFC North',p:'#FFB612',s:'#101820',champ:false,
-   alert:'Aaron Rodgers locked in as QB1. Michael Pittman Jr. acquired from IND on 3yr/$59M. Keeanu Benton extended 4yr/$72M Aug 14. Rico Dowdle taking lead RB role. Rookie OT Max Iheanachor standing up to TJ Watt in camp.',
+alert:'Aaron Rodgers locked in as QB1 -- 1yr/$25M, confirmed his FINAL NFL season (retiring after 2026). HC Mike McCarthy (new) reunited with Rodgers. Michael Pittman Jr. acquired from IND. Keeanu Benton extended 4yr/$72M. Rico Dowdle lead RB. Drew Allar & Will Howard developing behind Rodgers. Mason Rudolph is backup.',
+
    cap:'+$7.3M',pffOff:75.6,pffDef:85.2,wl:'0-0',pfg:'--',pag:'--'},
 
   // AFC South
   {a:'HOU',city:'Houston',name:'Texans',div:'AFC South',p:'#03202F',s:'#A71930',champ:false,
-   alert:'CJ Stroud ascending. Tank Dell returned to padded practice after missing all of 2025. Rookie C Keylan Rutledge (No.1 pick) impressing DeMeco Ryans. Jadeveon Clowney adds edge depth.',
+alert:'CJ Stroud is "confident ahead of biggest season of his life." ⚠️ Tank Dell on IR (knee) -- out until at least Week 5. Tee Higgins (torn ACL, camp) massive blow. Kayshon Boutte acquired in wake of Higgins injury. Rookie C Keylan Rutledge (No.1 pick) impressive. David Montgomery arrived from DET.',
+
    cap:'+$22.1M',pffOff:85.7,pffDef:77.3,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'IND',city:'Indianapolis',name:'Colts',div:'AFC South',p:'#002C5F',s:'#A2AAAD',champ:false,
-   alert:'Daniel Jones new QB1 -- looking excellent 8 months after Achilles surgery taking all first-team reps. Sauce Gardner + Charvarius Ward at CB drawing praise. Tyler Warren massive target share expected. Anthony Richardson now backup.',
+alert:'Daniel Jones QB1 -- strong camp post-Achilles recovery. Anthony Richardson RETAINED as backup (surprise -- team didn\'t cut him). Sauce Gardner + Charvarius Ward lockdown CB duo. Tyler Warren huge target share expected at TE. Josh Downs leads WRs with expanded role. Colby Wooden cut (Packers-Zaire Franklin trade loss).',
+
    cap:'+$31.4M',pffOff:73.2,pffDef:78.6,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'JAX',city:'Jacksonville',name:'Jaguars',div:'AFC South',p:'#006778',s:'#D7A22A',champ:false,
@@ -4990,11 +4997,13 @@ const NFL_TEAMS = [
    cap:'+$19.7M',pffOff:78.4,pffDef:76.9,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'KC',city:'Kansas City',name:'Chiefs',div:'AFC West',p:'#E31837',s:'#FFB81C',champ:false,
-   alert:'Mahomes signed $504.75M deal through 2033 -- largest contract in NFL history. Fully healthy from knee injury. Kenneth Walker III signed from SEA. Trent McDuffie traded to LAR. Rashee Rice back in team drills. Rookie DT Peter Woods impressing.',
+alert:'Mahomes signed $504.75M deal through 2033 -- largest contract in NFL history. Fully healthy. Kenneth Walker III signed from SEA. Trent McDuffie traded to LAR. Rashee Rice back in team drills. Rookie DT Peter Woods impressing. ⚠️ Josh Simmons NOT expected to start at OT for Week 1 opener vs DEN.',
+
    cap:'-$12.4M',pffOff:91.3,pffDef:82.6,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'LV',city:'Las Vegas',name:'Raiders',div:'AFC West',p:'#000000',s:'#A5ACAF',champ:false,
-   alert:'Kirk Cousins is QB1 -- rookie Fernando Mendoza (1st round) developing behind him. Klint Kubiak new HC from SEA. Noah Brown signed Aug 16. Aaron Donald return feeling inevitable.',
+alert:'Kirk Cousins QB1 -- rookie Fernando Mendoza developing behind. Klint Kubiak new HC. ⚠️ RB Ashton Jeanty (ankle sprain) -- Rapoport says "more low than high, not major" -- Kubiak optimistic for Week 1. Chiefs at Raiders Week 1. Jordan Meredith (OL) traded to NYJ. Chiefs at Raiders on CBS.',
+
    cap:'+$38.9M',pffOff:67.1,pffDef:65.8,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'LAC',city:'L.A.',name:'Chargers',div:'AFC West',p:'#0080C6',s:'#FFC20E',champ:false,
@@ -5003,7 +5012,8 @@ const NFL_TEAMS = [
 
   // NFC East
   {a:'DAL',city:'Dallas',name:'Cowboys',div:'NFC East',p:'#003594',s:'#041E42',champ:false,
-   alert:'Von Miller signed Aug 16. Tyler Guyton leading LT race. Jaydon Blue flashing explosive ability at RB. Rookie LB Jaishawn Barham generating buzz. Caleb Downs key piece of revamped defense.',
+alert:'Von Miller signed. Tyler Guyton leading LT race. Rookie LB Jaishawn Barham generating buzz. Caleb Downs key piece of revamped defense. ⚠️ LG Tyler Smith out 4-6 weeks (thumb surgery). Jaydon Blue WAIVED (cut day surprise) -- Malik Davis locks down RB2 spot. Dak Prescott leads offense.',
+
    cap:'-$9.3M',pffOff:81.4,pffDef:76.3,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'NYG',city:'New York',name:'Giants',div:'NFC East',p:'#0B2265',s:'#A71930',champ:false,
@@ -5011,11 +5021,13 @@ const NFL_TEAMS = [
    cap:'+$34.7M',pffOff:65.4,pffDef:74.2,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'PHI',city:'Philadelphia',name:'Eagles',div:'NFC East',p:'#004C54',s:'#A5ACAF',champ:false,
-   alert:'AJ Brown traded to NE for 2028 1st. Jonathan Greenard from MIN on 4yr/$100M. Riq Woolen signed. Jalen Hurts shining as pads came on. Rookie WR Makai Lemon dealing with hamstring. Cooper DeJean moving to safety.',
+alert:'AJ Brown traded to NE for 2028 1st-round pick. Jonathan Greenard signed 4yr/$100M from MIN. Riq Woolen added at CB. Jalen Hurts locked in. Rookie WR Makai Lemon (hamstring) limited in camp. Cooper DeJean moving to safety. Eagles kept 4 QBs (Hurts, McKee, Dalton, Payton).',
+
    cap:'+$5.1M',pffOff:88.7,pffDef:86.2,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'WAS',city:'Washington',name:'Commanders',div:'NFC East',p:'#5A1414',s:'#FFB612',champ:false,
-   alert:'Jayden Daniels Year 2. Stefon Diggs signed -- slots perfectly opposite Terry McLaurin. Rookie LB Sonny Styles bringing the boom and drawing DROY talk. Dorance Armstrong suspended 1 game.',
+alert:'Jayden Daniels Year 3 -- Commanders vs Colts in London to open Week 1 (9:30 AM ET, NFL Network). Stefon Diggs signed -- slots opposite Terry McLaurin. Rookie LB Sonny Styles DROY buzz. Odafe Oweh signed at edge. Dorance Armstrong suspended 1 game.',
+
    cap:'+$11.8M',pffOff:80.6,pffDef:73.2,wl:'0-0',pfg:'--',pag:'--'},
 
   // NFC North
@@ -5024,20 +5036,24 @@ const NFL_TEAMS = [
    cap:'+$1.2M',pffOff:73.8,pffDef:71.4,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'DET',city:'Detroit',name:'Lions',div:'NFC North',p:'#0076B6',s:'#B0B7BC',champ:false,
-   alert:'Jahmyr Gibbs signed extension -- highest-paid RB in the league. David Montgomery traded to HOU. Penei Sewell moving to LT, rookie Blake Miller at RT. Isaac TeSlaa sluggish camp at WR3. Alim McNeill finally fully healthy.',
+alert:'Jahmyr Gibbs extension -- highest-paid RB in the NFL. David Montgomery traded to HOU. Penei Sewell to LT, rookie Blake Miller at RT. ⚠️ S Kerby Joseph on PUP (knee) -- Lions open without BOTH starting safeties. Sam LaPorta (hip) didn\'t play preseason. Isiah Pacheco on IR (back). Saints at Lions Week 1.',
+
    cap:'+$2.4M',pffOff:90.7,pffDef:80.6,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'GB',city:'Green Bay',name:'Packers',div:'NFC North',p:'#203731',s:'#FFB612',champ:false,
-   alert:'Jordan Love era in full swing. Matthew Golden Year 2 breakout expected -- catching everything in camp. Tucker Kraft returning from ACL. Micah Parsons acquired -- edge depth question until his return. Romeo Doubs departed.',
+alert:'Matthew Golden Year 2 -- catching everything in camp. Tucker Kraft returning from ACL. 🚨 Josh Jacobs on Commissioner\'s Exempt List -- Kaleb Johnson (ex-PIT) added as insurance. Zaire Franklin acquired from IND (Pro Bowl LB). Romeo Doubs departed to NE.',
+
    cap:'+$9.6M',pffOff:84.2,pffDef:76.4,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'MIN',city:'Minnesota',name:'Vikings',div:'NFC North',p:'#4F2683',s:'#FFC62F',champ:false,
-   alert:'Kyler Murray vs JJ McCarthy QB battle -- Murray leading with 73 snaps vs McCarthy\'s 38 in 11-on-11s. Jonathan Greenard traded to PHI. Kevin O\'Connell overhauling the run game. Rookies Caleb Banks and Domonique Orange rotating with first team D.',
+alert:'Kyler Murray won QB battle. Dolphins at Vikings Week 1. Rookie WR adds Caleb Banks + Domonique Orange rotating with first-team D. Kevin O\'Connell overhauling the run game.',
+
    cap:'+$7.1M',pffOff:81.4,pffDef:78.9,wl:'0-0',pfg:'--',pag:'--'},
 
   // NFC South
   {a:'ATL',city:'Atlanta',name:'Falcons',div:'NFC South',p:'#A71930',s:'#000000',champ:false,
-   alert:'Tua Tagovailoa signed 1yr min -- expected to start Week 1 with Michael Penix Jr. (ACL) still not cleared for team drills. Kevin Stefanski new HC. Jalon Walker ACL torn in camp. Bijan Robinson contract extension done. Jahan Dotson clearly WR2.',
+alert:'Tua Tagovailoa named OFFICIAL Week 1 starter -- Michael Penix Jr. (ACL) inactive. Kevin Stefanski new HC. Jalon Walker ACL torn in camp -- huge loss at LB. Bijan Robinson extended. Jahan Dotson locked in as WR2. Falcons at Saints Monday Night Football Week 2.',
+
    cap:'+$18.3M',pffOff:77.6,pffDef:71.8,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'CAR',city:'Carolina',name:'Panthers',div:'NFC South',p:'#0085CA',s:'#101820',champ:false,
@@ -5054,19 +5070,23 @@ const NFL_TEAMS = [
 
   // NFC West
   {a:'ARI',city:'Arizona',name:'Cardinals',div:'NFC West',p:'#97233F',s:'#000000',champ:false,
-   alert:'Mike LaFleur new HC (from LAR OC). Marvin Harrison Jr. Year 2 -- early camp drops now forgotten. Jeremiyah Love vs Tyler Allgeier at RB. Josh Sweat on PUP but coach not worried for Week 1.',
+alert:'Mike LaFleur new HC (ex-LAR OC). Marvin Harrison Jr. Year 3. 🚨 James Conner (IR, foot) + Trey Benson (IR, knee, season-ending) both OUT -- No. 3 overall pick Jeremiyah Love (ankle) is the ONLY healthy option at RB but coach "optimistic" he plays Week 1. Cardinals at Giants Week 1.',
+
    cap:'+$28.4M',pffOff:71.8,pffDef:67.2,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'LAR',city:'L.A.',name:'Rams',div:'NFC West',p:'#003594',s:'#FFA300',champ:false,
-   alert:'🚨 Myles Garrett acquired from CLE -- blockbuster of offseason. Trent McDuffie also acquired from KC. Matthew Stafford calling camp "highest-quality practice" in 18 years. Aaron Donald return feels inevitable. Stetson Bennett now QB2.',
+alert:'🚨 Aaron Donald is back! Myles Garrett acquired from CLE -- reigning DPOY (23 sacks, NFL record). Trent McDuffie acquired from KC. Matthew Stafford calling camp "highest-quality practice in 18 years." Chris Shula new DC. 49ers at Rams Thursday Night (Netflix) -- Week 1 opener.',
+
    cap:'+$3.7M',pffOff:87.1,pffDef:88.6,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'SF',city:'San Francisco',name:'49ers',div:'NFC West',p:'#AA0000',s:'#B3995D',champ:false,
-   alert:'Mike Evans (quad), Christian Kirk (calf), rookie De\'Zhaun Stribling (hamstring) all missing camp time. Ricky Pearsall knee surgery -- out for season. HC Kyle Shanahan limited after car accident, asst HC Foerster running show. Deebo Samuel back.',
+alert:'Ricky Pearsall on season-ending IR (knee). Mike Evans (quad) limited in camp. Rookie De\'Zhaun Stribling (hamstring) working back -- gets clearer path to snaps. 49ers at Rams Week 1 (Netflix, Thu Sep 10). HC Shanahan limited after car accident; Foerster running show. Deebo Samuel healthy.',
+
    cap:'+$4.9M',pffOff:88.4,pffDef:84.1,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'SEA',city:'Seattle',name:'Seahawks',div:'NFC West',p:'#002244',s:'#69BE28',champ:true,
-   alert:'🏆 Super Bowl LX Champions. Jaxon Smith-Njigba extended $42.15M/yr. Devon Witherspoon extended 4yr/$132M Aug 15. Tory Horton hype back after injury. RB Jadarian Price -- coach says "nobody has covered him yet." Kenneth Walker departed to KC.',
+alert:'🏆 Super Bowl LX Champions -- host Wednesday\'s Kickoff Game vs NE (rematch). JSN extended $42.15M/yr. Devon Witherspoon extended 4yr/$132M. Tory Horton (hamstring, LP) questionable for Week 1. Nick Emmanwori (ankle) also limited. Emanuel Wilson steps up at RB with Charbonnet on PUP (ACL). Ty Okada (hamstring) OUT.',
+
    cap:'+$11.6M',pffOff:89.2,pffDef:87.4,wl:'0-0',pfg:'--',pag:'--'},
 ];
 
