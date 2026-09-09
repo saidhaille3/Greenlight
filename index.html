@@ -1413,7 +1413,7 @@ filter: invert(1) brightness(2);
   animation: gi-shimmer 1.6s linear infinite;
 }
 </style>
-
+<!--
 <section id="nba-hub" class="">
 <div class="hub-header" style="position:relative;">
 
@@ -1429,7 +1429,7 @@ filter: invert(1) brightness(2);
   <span id="gi-sync-label">Syncing…</span>
 </div>
 
-<!-- Color picker popup -->
+
 <div id="syncColorPicker" style="
   display:none;
   position:absolute;
@@ -1466,6 +1466,7 @@ filter: invert(1) brightness(2);
     <div id="hub-scroller" class="no-scrollbar"></div>
   </div>
 </section>
+
 <script>
 function toggleSyncColorPicker(){
   const picker = document.getElementById('syncColorPicker');
@@ -1514,7 +1515,7 @@ document.addEventListener('click', function(e){
 });
 
 </script>
-<!-- MODAL -->
+
 <div id="gi-overlay" onclick="giOverlayClick(event)">
   <div id="gi-modal">
     <div class="gi-hero" id="gi-hero">
@@ -3079,7 +3080,7 @@ const estimatedPayroll = space < 0 ? 165 + Math.abs(space) : 165 - space;
   const luxMarkerPct=Math.round((LUX/APRON)*100);
 
   let html=`
-  <!-- Three number summary -->
+
   <div class="gi-sal-nums">
     <div class="gi-sal-num-card" style="--cap-color:#10b981">
       <span class="gi-sal-num-label">Salary Cap</span>
@@ -3098,8 +3099,7 @@ const estimatedPayroll = space < 0 ? 165 + Math.abs(space) : 165 - space;
     </div>
   </div>
 
-  <!-- Apron gauge -->
-  <!-- Cap Space Bar -->
+
   <div style="margin-bottom:1.25rem;padding:1.1rem 1.25rem;border-radius:1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.75rem;">
       <span style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.3);">Cap Space Available</span>
@@ -3203,10 +3203,8 @@ ${intel.exceptions ? (() => {
 })() : ''}
 
 
-  <!-- Apron gauge -->
-  <div class="gi-sal-hero">
 
-  <!-- Apron gauge -->
+
   <div class="gi-sal-hero">
 
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.5rem;">
@@ -3214,14 +3212,14 @@ ${intel.exceptions ? (() => {
       <span style="font-size:18px;font-weight:900;color:${gaugeColor};letter-spacing:-0.02em;">~$${estimatedPayroll}M</span>
     </div>
     <div class="gi-apron-gauge">
-      <!-- Fill -->
+
       <div class="gi-apron-fill" id="gi-apron-fill" style="width:0%;background:linear-gradient(90deg,#10b981 0%,${gaugeColor} 100%)"></div>
-      <!-- Cursor dot -->
+
       <div class="gi-apron-cursor" id="gi-apron-cursor" style="left:0%"></div>
-      <!-- Cap marker -->
+
       <div class="gi-apron-tick" style="left:${capMarkerPct}%"></div>
       <div class="gi-apron-marker" style="left:${capMarkerPct}%;color:#10b981">Cap</div>
-      <!-- Lux marker -->
+
       <div class="gi-apron-tick" style="left:${luxMarkerPct}%"></div>
       <div class="gi-apron-marker" style="left:${luxMarkerPct}%;color:#fbbf24">Lux</div>
     </div>
@@ -3296,7 +3294,7 @@ function renderPicksVisual(teamAbbr){
   <div style="margin-top:1.5rem;">
     <p style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.2);margin-bottom:1rem;">Draft Capital · 2027–2033</p>
 
-    <!-- MAX TRADEABLE + APRON STATUS PILLS -->
+
     <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.25rem;">
       <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:100px;padding:0.35rem 0.9rem;display:inline-flex;align-items:center;gap:0.4rem;">
         <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.3);">Max Tradeable</span>
@@ -3308,7 +3306,7 @@ function renderPicksVisual(teamAbbr){
       </div>
     </div>
 
-    <!-- ROUND TOGGLE -->
+
     <div style="display:flex;gap:0.4rem;margin-bottom:1rem;">
       <button onclick="giPickTab(this,'first','${teamAbbr}')" id="tab-first-${teamAbbr}"
         style="flex:1;padding:0.5rem 0;border-radius:0.75rem;font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;border:1px solid rgba(255,255,255,0.1);background:${teamColor};color:#fff;cursor:pointer;transition:all 0.2s;">
@@ -3320,12 +3318,12 @@ function renderPicksVisual(teamAbbr){
       </button>
     </div>
 
-    <!-- FIRST ROUND PANEL -->
+
     <div id="picks-first-${teamAbbr}">
       ${renderRoundRows(years, picks.first, teamColor)}
     </div>
 
-    <!-- SECOND ROUND PANEL -->
+
     <div id="picks-second-${teamAbbr}" style="display:none;">
       ${renderRoundRows(years, picks.second, teamColor)}
     </div>
@@ -3345,7 +3343,7 @@ function renderRoundRows(years, roundData, teamColor){
     html += `
     <div style="margin-bottom:0.6rem;border-radius:1rem;overflow:hidden;border:1px solid ${hasActivity?'rgba(255,255,255,0.08)':'rgba(255,255,255,0.04)'};background:${hasActivity?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.015)'};">
 
-      <!-- YEAR HEADER ROW -->
+
       <div style="display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0.875rem;border-bottom:${(y.in.length>0||y.out.length>0)?'1px solid rgba(255,255,255,0.05)':'none'};">
         <span style="font-size:15px;font-weight:900;color:${hasActivity?teamColor:'rgba(255,255,255,0.25)'};min-width:36px;letter-spacing:-0.02em;">${year}</span>
         <div style="flex:1;display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center;">
@@ -3354,7 +3352,7 @@ function renderRoundRows(years, roundData, teamColor){
         </div>
       </div>
 
-      <!-- IN ROWS -->
+
       ${y.in.map(p => `
       <div style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.03);">
         <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;padding:2px 8px;border-radius:100px;background:rgba(16,185,129,0.12);color:#34d399;border:1px solid rgba(16,185,129,0.2);flex-shrink:0;">IN</span>
@@ -3363,7 +3361,7 @@ function renderRoundRows(years, roundData, teamColor){
         <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.2);margin-left:auto;text-align:right;max-width:130px;line-height:1.3;">${p.protection}</span>
       </div>`).join('')}
 
-      <!-- OUT ROWS -->
+
       ${y.out.map(p => `
       <div style="display:flex;align-items:center;gap:0.6rem;padding:0.5rem 0.875rem;border-bottom:1px solid rgba(255,255,255,0.03);">
         <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;padding:2px 8px;border-radius:100px;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.2);flex-shrink:0;">OUT</span>
@@ -3656,7 +3654,3321 @@ setInterval(() => { _giCache = {}; }, 600000);
 
 
 </script>
+-->
+<style>
+/* ── NFL HUB BASE ── */
+#nfl-hub {
+  position: relative;
+  padding: 4rem 0 0;
+  background: transparent;
+  overflow: hidden;
+}
 
+#nfl-hub::before {
+  content: '';
+  position: absolute;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(0,100,0,0.07) 0%, transparent 65%);
+  top: -200px; left: -200px;
+  pointer-events: none;
+}
+
+#nfl-hub::after {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 65%);
+  bottom: -100px; right: -100px;
+  pointer-events: none;
+}
+/* ═══════════════════════════════════════════════
+   NFL LIVE MODAL v2 -- 3D FIELD + PLAY DIAGRAMS
+═══════════════════════════════════════════════ */
+#nfl-live-overlay {
+  position:fixed;inset:0;z-index:9100;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(28px);
+  display:none;align-items:flex-end;justify-content:center;
+}
+@media(min-width:768px){#nfl-live-overlay{align-items:center;padding:2rem;}}
+#nfl-live-overlay.live-open{display:flex;}
+
+#nfl-live-modal {
+  width:100%;max-width:780px;max-height:94dvh;
+  overflow-y:auto;overscroll-behavior:contain;
+  border-radius:2.5rem 2.5rem 0 0;
+  background:#050a05;
+  border:1px solid rgba(255,255,255,0.07);border-bottom:none;
+  box-shadow:0 -8px 80px rgba(0,0,0,0.9);
+  transform:translateY(100%);
+  transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+@media(min-width:768px){
+  #nfl-live-modal{border-radius:2.5rem;border-bottom:1px solid rgba(255,255,255,0.07);transform:scale(0.9) translateY(24px);opacity:0;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),opacity 0.4s ease;max-height:90dvh;}
+}
+#nfl-live-modal.live-shown{transform:translateY(0);opacity:1;}
+@media(min-width:768px){#nfl-live-modal.live-shown{transform:scale(1) translateY(0);}}
+#nfl-live-modal::-webkit-scrollbar{width:2px;}
+#nfl-live-modal::-webkit-scrollbar-thumb{background:#22c55e;border-radius:100px;}
+
+/* ── CLOSE BTN ── */
+#live-close-btn {
+  position:absolute;top:1rem;right:1.25rem;
+  width:34px;height:34px;
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:#fff;cursor:pointer;transition:all 0.2s;
+}
+#live-close-btn:hover{background:rgba(255,255,255,0.15);transform:rotate(90deg);}
+
+/* ── SCORE ROW ── */
+#live-score-row {
+  display:flex;align-items:center;justify-content:space-between;gap:0.75rem;
+  flex-wrap:nowrap;
+}
+.live-team-block{display:flex;align-items:center;gap:0.6rem;flex:1;min-width:0;}
+.live-team-block--right{justify-content:flex-end;}
+.live-team-logo{width:44px;height:44px;object-fit:contain;flex-shrink:0;}
+.live-team-name{font-size:16px;font-weight:900;text-transform:uppercase;letter-spacing:-0.02em;color:#f0f0f0;line-height:1;}
+.live-team-rec{font-size:9px;font-weight:700;color:rgba(255,255,255,0.25);margin-top:2px;}
+.live-center-block{text-align:center;flex-shrink:0;}
+
+#live-status-pill{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);
+  border-radius:100px;padding:4px 12px;margin-bottom:8px;
+}
+#live-pulse-dot{
+  width:5px;height:5px;border-radius:50%;background:#ef4444;
+  animation:livePulse 1s infinite;flex-shrink:0;
+}
+@keyframes livePulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+#live-clock{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:#f87171;}
+
+#live-score-nums{
+  display:flex;align-items:center;gap:0.6rem;justify-content:center;
+}
+#live-away-score,#live-home-score{
+  font-size:40px;font-weight:900;letter-spacing:-0.04em;color:#f0f0f0;line-height:1;
+  transition:color 0.4s;
+}
+#live-score-dash{font-size:18px;font-weight:900;color:rgba(255,255,255,0.15);}
+#live-quarter-label{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.3);margin-top:4px;}
+
+/* ── SITUATION BAR ── */
+#live-situation-bar{
+  margin-top:1rem;padding:0.6rem 1rem;
+  border-radius:0.875rem;
+  background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);
+  display:flex;align-items:center;justify-content:space-between;gap:0.75rem;
+}
+#live-possession-indicator{display:flex;align-items:center;gap:0.5rem;}
+#live-down-text{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:#4ade80;}
+#live-field-position-label{font-size:9px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.1em;}
+
+/* ── 3D FIELD ── */
+#live-field-3d-wrap {
+  position:relative;
+  margin:1rem 1.25rem 0;
+  border-radius:1.5rem;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.07);
+  background:#0a1a0a;
+  box-shadow:inset 0 0 60px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.03);
+}
+#live-field-canvas {
+  display:block;width:100%;
+  height:240px;
+}
+@media(min-width:600px){#live-field-canvas{height:300px;}}
+
+/* End zone labels */
+.live-ez-label {
+  position:absolute;top:50%;transform:translateY(-50%);
+  font-size:8px;font-weight:900;text-transform:uppercase;
+  letter-spacing:0.15em;color:rgba(255,255,255,0.5);
+  writing-mode:vertical-rl;
+}
+.live-ez-label--away{left:6px;}
+.live-ez-label--home{right:6px;}
+
+/* Yard markers */
+#live-yard-markers {
+  position:absolute;bottom:4px;left:8%;right:8%;
+  display:flex;justify-content:space-between;pointer-events:none;
+}
+.live-yard-marker-label {
+  font-size:7px;font-weight:900;color:rgba(255,255,255,0.25);
+  text-align:center;width:20px;margin:0 auto;
+}
+
+/* Play type badge */
+#live-play-type-badge {
+  position:absolute;top:8px;right:8px;
+  font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;
+  padding:3px 10px;border-radius:100px;
+  backdrop-filter:blur(8px);
+}
+#live-play-type-badge.hidden{display:none;}
+
+/* ── YAC BAR ── */
+#live-yac-bar {
+  margin:0.875rem 1.25rem 0;
+  padding:0.875rem 1rem;
+  border-radius:1.25rem;
+  background:rgba(16,185,129,0.06);
+  border:1px solid rgba(16,185,129,0.18);
+}
+#live-yac-bar.hidden{display:none;}
+#live-yac-label-row {
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;
+}
+.live-yac-tag {
+  display:flex;align-items:center;gap:0.3rem;
+  font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:#4ade80;
+}
+#live-yac-yards{font-size:12px;font-weight:900;color:#f0f0f0;}
+#live-yac-track {
+  position:relative;height:6px;border-radius:100px;
+  background:rgba(255,255,255,0.07);overflow:visible;margin:0 10px;
+}
+#live-yac-fill {
+  height:100%;border-radius:100px;background:linear-gradient(90deg,#60a5fa,#4ade80);
+  transition:width 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+#live-yac-catch-marker,#live-yac-end-marker {
+  position:absolute;top:50%;transform:translate(-50%,-50%);
+}
+#live-yac-labels-row {
+  display:flex;justify-content:space-between;margin-top:0.4rem;
+  font-size:8px;font-weight:700;color:rgba(255,255,255,0.3);
+}
+
+/* ── WEATHER STRIP ── */
+#live-wx-strip {
+  margin:0.875rem 1.25rem 0;
+  padding:0.75rem 1rem;
+  border-radius:1.25rem;
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;
+}
+#live-wx-icon-svg{font-size:20px;flex-shrink:0;}
+#live-wx-temp-val{font-size:14px;font-weight:900;color:#f0f0f0;line-height:1;}
+#live-wx-detail-val{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);margin-top:2px;}
+#live-wx-impact-pill{margin-left:auto;padding:4px 10px;border-radius:100px;font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;}
+
+/* ── TABS ── */
+#live-tabs-row {
+  display:flex;gap:0;padding:0 1rem;margin-top:1rem;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  overflow-x:auto;white-space:nowrap;
+  position:sticky;top:0;z-index:20;
+  background:rgba(5,10,5,0.97);backdrop-filter:blur(20px);
+}
+#live-tabs-row::-webkit-scrollbar{display:none;}
+.live-tab {
+  display:flex;align-items:center;gap:0.35rem;
+  padding:0.875rem 0.875rem 0.75rem;
+  font-size:8.5px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;
+  color:rgba(255,255,255,0.25);border-bottom:2px solid transparent;
+  cursor:pointer;transition:all 0.2s;flex-shrink:0;user-select:none;
+}
+.live-tab:hover{color:rgba(255,255,255,0.6);}
+.live-tab.on{color:#22c55e;border-color:#22c55e;}
+.live-tab svg{opacity:0.6;}
+.live-tab.on svg{opacity:1;}
+
+.live-panel{display:none;padding:1.25rem;}
+.live-panel.on{display:block;}
+
+/* ── PBP PLAYS ── */
+.live-pbp-entry{
+  display:flex;gap:0.75rem;
+  padding:0.75rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.live-pbp-entry:last-child{border-bottom:none;}
+.live-pbp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.live-pbp-qtr{font-size:8px;font-weight:900;color:rgba(255,255,255,0.25);text-transform:uppercase;margin-bottom:2px;}
+.live-pbp-text{font-size:12px;font-weight:700;color:rgba(255,255,255,0.75);line-height:1.5;}
+.live-pbp-badge{
+  font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;
+  padding:2px 7px;border-radius:100px;flex-shrink:0;
+  align-self:flex-start;margin-top:3px;margin-left:auto;
+}
+.badge-td{background:rgba(251,191,36,0.15);color:#fbbf24;border:1px solid rgba(251,191,36,0.3);}
+.badge-fg{background:rgba(59,130,246,0.12);color:#60a5fa;border:1px solid rgba(59,130,246,0.2);}
+.badge-to{background:rgba(239,68,68,0.12);color:#f87171;border:1px solid rgba(239,68,68,0.2);}
+.badge-pen{background:rgba(251,191,36,0.08);color:rgba(251,191,36,0.6);border:1px solid rgba(251,191,36,0.15);}
+
+/* ── PREGAME ── */
+.live-pregame-header{
+  text-align:center;padding:1.5rem 0 1rem;
+}
+.live-stat-card{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
+  border-radius:1rem;padding:0.75rem;text-align:center;
+}
+
+/* ── HEADER ── */
+.nfl-hub-header {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.25rem 1rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nfl-hub-eyebrow {
+  font-size: 9px; font-weight: 900;
+  letter-spacing: 0.45em; text-transform: uppercase;
+  color: #22c55e; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+
+.nfl-hub-title {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 800; text-transform: uppercase;
+  letter-spacing: -0.03em; line-height: 0.9;
+  color: #111111;
+}
+.dark .nfl-hub-title { color: #f0f0f0; }
+.nfl-hub-title span { color: #22c55e; }
+
+.nfl-sync-pill {
+  display: flex; align-items: center; gap: 0.5rem;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 100px;
+  padding: 0.4rem 0.9rem;
+  font-size: 9px; font-weight: 900;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: #22c55e; white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+
+/* ── SCOREBOARD STRIP ── */
+.nfl-scores-wrap {
+  padding: 0 1.25rem 0.75rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#nfl-score-scroller {
+  display: flex; gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.75rem;
+  cursor: grab;
+}
+#nfl-score-scroller:active { cursor: grabbing; }
+#nfl-score-scroller::-webkit-scrollbar { height: 2px; }
+#nfl-score-scroller::-webkit-scrollbar-thumb { background: #22c55e; border-radius: 100px; }
+
+/* ── GAME CARD ── */
+.nfl-game-card {
+  flex-shrink: 0;
+  width: 220px;
+  scroll-snap-align: start;
+  border-radius: 1.75rem;
+  padding: 1rem;
+  cursor: pointer;
+  position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.dark .nfl-game-card {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.nfl-game-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgba(34,197,94,0.4);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(34,197,94,0.2), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.dark .nfl-game-card:hover {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(34,197,94,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.nfl-game-card.is-live {
+  border-color: rgba(239,68,68,0.4) !important;
+  box-shadow: 0 4px 24px rgba(239,68,68,0.12), inset 0 1px 0 rgba(255,255,255,0.8) !important;
+}
+.dark .nfl-game-card.is-live {
+  box-shadow: 0 4px 24px rgba(239,68,68,0.2), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+}
+
+/* ── GAME CARD INTERNALS ── */
+.nfl-card-status {
+  display: flex; align-items: center; gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+.nfl-status-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.nfl-status-text {
+  font-size: 8.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.nfl-card-matchup {
+  display: flex; flex-direction: column; gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+.nfl-card-team-row {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nfl-card-team-left {
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.nfl-card-logo {
+  width: 28px; height: 28px; object-fit: contain;
+}
+.nfl-card-team-name {
+  font-size: 11px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: -0.01em; color: #111;
+}
+.dark .nfl-card-team-name { color: #e0e0e0; }
+.nfl-card-record {
+  font-size: 8px; font-weight: 700; color: rgba(0,0,0,0.35);
+}
+.dark .nfl-card-record { color: rgba(255,255,255,0.25); }
+.nfl-card-score {
+  font-size: 18px; font-weight: 900; letter-spacing: -0.03em; color: #111;
+}
+.dark .nfl-card-score { color: #f0f0f0; }
+.nfl-card-score.is-winning { color: #16a34a; }
+.dark .nfl-card-score.is-winning { color: #4ade80; }
+
+.nfl-card-divider {
+  height: 1px; background: rgba(0,0,0,0.05);
+  margin: 0.6rem 0;
+}
+.dark .nfl-card-divider { background: rgba(255,255,255,0.06); }
+
+/* ── DOWN & DISTANCE ── */
+.nfl-card-down {
+  font-size: 9px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.1em; color: #22c55e; margin-bottom: 0.35rem;
+}
+
+/* ── WEATHER STRIP ── */
+.nfl-weather-strip {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.875rem;
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.05);
+  margin-top: 0.5rem;
+}
+.dark .nfl-weather-strip {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.06);
+}
+.nfl-weather-icon { font-size: 13px; flex-shrink: 0; }
+.nfl-weather-temp {
+  font-size: 11px; font-weight: 900; color: #111;
+}
+.dark .nfl-weather-temp { color: #e0e0e0; }
+.nfl-weather-detail {
+  font-size: 8px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: rgba(0,0,0,0.35);
+}
+.dark .nfl-weather-detail { color: rgba(255,255,255,0.3); }
+.nfl-weather-impact {
+  margin-left: auto; flex-shrink: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+}
+
+/* ── TEAM SCROLLER ── */
+.nfl-teams-wrap {
+  padding: 1rem 1.25rem 0.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.nfl-teams-label {
+  font-size: 9px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.4em; color: rgba(0,0,0,0.25);
+  margin-bottom: 0.75rem;
+}
+.dark .nfl-teams-label { color: rgba(255,255,255,0.2); }
+
+#nfl-team-scroller {
+  display: flex; gap: 0.6rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+  cursor: grab;
+}
+#nfl-team-scroller:active { cursor: grabbing; }
+#nfl-team-scroller::-webkit-scrollbar { height: 2px; }
+#nfl-team-scroller::-webkit-scrollbar-thumb { background: #22c55e; border-radius: 100px; }
+
+/* ── TEAM CARD ── */
+.nfl-tc {
+  flex-shrink: 0;
+  width: 88px;
+  scroll-snap-align: start;
+  cursor: pointer;
+  border-radius: 1.5rem;
+  padding: 0.875rem 0.5rem 0.75rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.7);
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.dark .nfl-tc {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.07);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.nfl-tc:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: rgba(34,197,94,0.4);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(34,197,94,0.15), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.dark .nfl-tc:hover {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(34,197,94,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.nfl-tc:active { transform: scale(0.95); }
+
+.nfl-tc-logo { width: 40px; height: 40px; object-fit: contain; transition: transform 0.3s ease; }
+.nfl-tc:hover .nfl-tc-logo { transform: scale(1.1) rotate(-2deg); }
+.nfl-tc-name {
+  font-size: 7.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: -0.01em; text-align: center; line-height: 1.2; color: #111;
+}
+.dark .nfl-tc-name { color: #e0e0e0; }
+.nfl-tc-rec {
+  font-size: 7.5px; font-weight: 700; color: rgba(0,0,0,0.4);
+}
+.dark .nfl-tc-rec { color: rgba(255,255,255,0.25); }
+.nfl-tc-badge {
+  font-size: 6.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.08em; padding: 2px 6px; border-radius: 100px;
+}
+.nfl-badge-champ { background: rgba(212,175,55,0.15); color: #d4af37; border: 1px solid rgba(212,175,55,0.3); }
+.nfl-badge-hot { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+.nfl-badge-battle { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+.nfl-badge-injury { background: rgba(239,68,68,0.08); color: #fca5a5; border: 1px solid rgba(239,68,68,0.15); }
+
+/* ══════════════════════════════════════════════
+   NFL MODAL
+══════════════════════════════════════════════ */
+#nfl-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.72);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  display: none; align-items: flex-end; justify-content: center;
+}
+@media(min-width:768px){
+  #nfl-overlay { align-items: center; padding: 2rem; }
+}
+#nfl-overlay.nfl-open { display: flex; }
+
+#nfl-modal {
+  position: relative;
+  width: 100%; max-width: 760px;
+  max-height: 94dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 2.5rem 2.5rem 0 0;
+  background: rgba(8,14,24,0.94);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-bottom: none;
+  box-shadow: 0 -8px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
+  transform: translateY(100%);
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+  will-change: transform;
+}
+@media(min-width:768px){
+  #nfl-modal {
+    border-radius: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transform: scale(0.9) translateY(24px);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+    max-height: 90dvh;
+  }
+}
+#nfl-modal.nfl-shown { transform: translateY(0); opacity: 1; }
+@media(min-width:768px){ #nfl-modal.nfl-shown { transform: scale(1) translateY(0); } }
+#nfl-modal::-webkit-scrollbar { width: 3px; }
+#nfl-modal::-webkit-scrollbar-thumb { background: #22c55e; border-radius: 100px; }
+
+/* ── MODAL HERO ── */
+.nfl-hero {
+  height: 180px; border-radius: 2.5rem 2.5rem 0 0;
+  position: relative; overflow: hidden; flex-shrink: 0;
+}
+@media(min-width:768px){ .nfl-hero { height: 200px; } }
+.nfl-hero-bg { position: absolute; inset: 0; }
+.nfl-hero-noise {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px; opacity: 0.05;
+}
+.nfl-hero-vignette {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 10%, rgba(8,14,24,0.88) 100%);
+}
+.nfl-hero-logo {
+  position: absolute; right: 1.5rem; bottom: -28px;
+  width: 88px; height: 88px; object-fit: contain;
+  filter: drop-shadow(0 12px 32px rgba(0,0,0,0.7));
+  z-index: 2;
+}
+.nfl-hero-content { position: absolute; left: 1.5rem; bottom: 1.25rem; z-index: 2; }
+.nfl-hero-close {
+  position: absolute; top: 1rem; left: 1rem; z-index: 10;
+  width: 36px; height: 36px;
+  background: rgba(0,0,0,0.4); backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 1rem; cursor: pointer; transition: all 0.2s;
+}
+.nfl-hero-close:hover { background: rgba(255,255,255,0.15); transform: rotate(90deg); }
+
+/* ── IDENTITY ── */
+.nfl-identity {
+  padding: 3rem 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.nfl-team-name {
+  font-size: clamp(2rem,7vw,3rem); font-weight: 900;
+  text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.9; color: #f0f0f0;
+}
+.nfl-team-city {
+  font-size: 9px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.3em; color: rgba(255,255,255,0.25); margin-bottom: 0.2rem;
+}
+.nfl-stats-row {
+  display: flex; gap: 0.5rem; margin-top: 1.25rem;
+  overflow-x: auto; padding-bottom: 0.25rem;
+}
+.nfl-stats-row::-webkit-scrollbar { display: none; }
+.nfl-stat-pill {
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 1rem; padding: 0.6rem 0.9rem;
+  text-align: center; min-width: 58px;
+}
+.nfl-stat-label {
+  font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.15em; color: rgba(255,255,255,0.25); display: block; margin-bottom: 0.2rem;
+}
+.nfl-stat-val { font-size: 14px; font-weight: 900; color: #f0f0f0; display: block; }
+
+/* ── TABS ── */
+.nfl-tabs {
+  display: flex; gap: 0; padding: 0 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  overflow-x: auto; white-space: nowrap;
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(8,14,24,0.95); backdrop-filter: blur(20px);
+}
+.nfl-tabs::-webkit-scrollbar { display: none; }
+.nfl-tab {
+  padding: 1rem 0.9rem 0.875rem;
+  font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.25); border-bottom: 2px solid transparent;
+  cursor: pointer; transition: all 0.2s; flex-shrink: 0; user-select: none;
+}
+.nfl-tab:hover { color: rgba(255,255,255,0.6); }
+.nfl-tab.on { color: #22c55e; border-color: #22c55e; }
+
+.nfl-panel { display: none; padding: 1.5rem; }
+.nfl-panel.on { display: block; }
+
+/* ── DEPTH CHART FIELD ── */
+.nfl-field-shell {
+  position: relative; border-radius: 1.75rem; overflow: hidden;
+  background: #0a1f0a; padding: 1rem 0.75rem;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.5);
+}
+.nfl-field-lines {
+  position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.06;
+}
+.nfl-unit-label {
+  text-align: center; font-size: 7px; font-weight: 900;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(255,255,255,0.2); margin-bottom: 0.4rem; margin-top: 0.75rem;
+  position: relative; z-index: 2;
+}
+.nfl-pos-row {
+  display: flex; justify-content: center; gap: 0.4rem;
+  margin-bottom: 0.5rem; position: relative; z-index: 2;
+  flex-wrap: wrap;
+}
+.nfl-pnode {
+  display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+  width: clamp(52px,13vw,64px); flex-shrink: 0;
+  cursor: pointer; transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.nfl-pnode:hover { transform: translateY(-4px); }
+.nfl-av-ring {
+  position: relative; border-radius: 50%; padding: 2.5px;
+  background: var(--av-border, rgba(255,255,255,0.12));
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 6px 16px rgba(0,0,0,0.5), 0 0 14px var(--av-glow, rgba(255,255,255,0.04));
+}
+.nfl-av-inner {
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: #1a2a1a;
+  width: clamp(36px,9vw,44px); height: clamp(36px,9vw,44px);
+}
+.nfl-starter-dot {
+  position: absolute; bottom: 1px; right: 1px;
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 2px solid #0a1f0a; background: #22c55e;
+  box-shadow: 0 0 6px rgba(34,197,94,0.8);
+}
+.nfl-pos-badge {
+  position: absolute; top: -3px; left: -3px;
+  font-size: 6px; font-weight: 900; text-transform: uppercase;
+  padding: 2px 4px; border-radius: 100px; letter-spacing: 0.04em;
+  border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(6px);
+}
+.nfl-pname {
+  font-size: 8px; font-weight: 800; text-transform: uppercase;
+  color: rgba(255,255,255,0.85); text-align: center;
+  letter-spacing: -0.01em; line-height: 1.2;
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.nfl-pname-pff {
+  font-size: 7px; font-weight: 900; text-align: center;
+}
+
+/* ── PFF GRADE COLORS ── */
+.pff-elite { color: #fbbf24; }
+.pff-above { color: #34d399; }
+.pff-avg   { color: rgba(255,255,255,0.4); }
+.pff-below { color: #f87171; }
+
+/* ── POSITIONAL BATTLE ── */
+.nfl-battle-card {
+  border-radius: 1.5rem; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.025);
+  margin-bottom: 0.75rem;
+  transition: all 0.25s;
+}
+.nfl-battle-card:hover { border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); }
+.nfl-battle-header {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.75rem 1rem 0.5rem;
+}
+.nfl-battle-pos {
+  font-size: 8px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.3);
+}
+.nfl-battle-status {
+  font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.12em; padding: 2px 8px; border-radius: 100px; margin-left: auto;
+}
+.battle-open { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.2); }
+.battle-active { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+.battle-locked { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+
+.nfl-battle-players {
+  display: flex; gap: 0.5rem; padding: 0.5rem 1rem 1rem;
+}
+.nfl-battle-player {
+  flex: 1; background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 1.25rem; padding: 0.75rem;
+  display: flex; flex-direction: column; gap: 0.35rem;
+}
+.nfl-battle-player.is-leading {
+  background: rgba(34,197,94,0.06);
+  border-color: rgba(34,197,94,0.2);
+}
+.nfl-bp-name { font-size: 11px; font-weight: 900; text-transform: uppercase; color: #f0f0f0; }
+.nfl-bp-pff {
+  font-size: 10px; font-weight: 900;
+}
+.nfl-bp-note { font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.3); line-height: 1.4; }
+.nfl-battle-meter-wrap { padding: 0 1rem 0.875rem; }
+.nfl-battle-meter {
+  height: 6px; border-radius: 100px; overflow: hidden;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+}
+.nfl-battle-meter-a { background: #22c55e; border-radius: 100px 0 0 100px; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
+.nfl-battle-meter-b { background: rgba(255,255,255,0.1); border-radius: 0 100px 100px 0; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
+
+/* ── CAP / SALARY ── */
+.nfl-cap-hero {
+  border-radius: 1.5rem; padding: 1.25rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 1.25rem; position: relative; overflow: hidden;
+}
+.nfl-cap-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(34,197,94,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.nfl-cap-gauge {
+  position: relative; height: 10px; border-radius: 100px;
+  background: rgba(255,255,255,0.06); overflow: visible; margin: 1.25rem 0 2rem;
+}
+.nfl-cap-fill {
+  height: 100%; border-radius: 100px; position: absolute; left: 0; top: 0;
+  background: linear-gradient(90deg, #22c55e 0%, #fbbf24 70%, #ef4444 100%);
+  box-shadow: 0 0 12px rgba(34,197,94,0.4);
+  transition: width 1s cubic-bezier(0.16,1,0.3,1);
+}
+.nfl-cap-marker {
+  position: absolute; top: -16px; transform: translateX(-50%);
+  font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.1em; white-space: nowrap;
+}
+.nfl-cap-cursor {
+  position: absolute; top: -4px; bottom: -4px; width: 3px;
+  border-radius: 2px; background: #fff;
+  box-shadow: 0 0 10px rgba(255,255,255,0.6);
+  transform: translateX(-50%);
+  transition: left 1s cubic-bezier(0.16,1,0.3,1);
+}
+.nfl-cap-nums {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 0.75rem; margin-bottom: 1.25rem;
+}
+.nfl-cap-num-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 1.25rem; padding: 0.875rem 0.75rem;
+  text-align: center; position: relative; overflow: hidden;
+}
+.nfl-cap-num-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--cap-color,#22c55e); border-radius: 2px 2px 0 0;
+}
+.nfl-cap-label {
+  font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.15em; color: rgba(255,255,255,0.25); display: block; margin-bottom: 0.4rem;
+}
+.nfl-cap-val {
+  font-size: 15px; font-weight: 900; color: #f0f0f0; display: block; letter-spacing: -0.02em;
+}
+.nfl-cap-sub {
+  font-size: 7.5px; font-weight: 700; color: rgba(255,255,255,0.2); display: block; margin-top: 0.2rem;
+}
+
+/* ── MATCHUP TAB ── */
+.nfl-matchup-unit {
+  border-radius: 1.5rem; padding: 1rem 1.125rem;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 0.75rem;
+}
+.nfl-matchup-unit-label {
+  font-size: 8px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.25em; color: rgba(255,255,255,0.25); margin-bottom: 0.875rem;
+}
+.nfl-matchup-row {
+  display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.625rem;
+}
+.nfl-matchup-side {
+  flex: 1; min-width: 0;
+}
+.nfl-matchup-grade {
+  font-size: 16px; font-weight: 900; letter-spacing: -0.02em;
+}
+.nfl-matchup-desc {
+  font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.35);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.nfl-matchup-vs {
+  font-size: 8px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.15em; color: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+.nfl-matchup-edge {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem 0.75rem; border-radius: 100px;
+  font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.12em;
+}
+.edge-home { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+.edge-away { background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+.edge-even { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.08); }
+
+/* ── WEATHER MODAL ── */
+.nfl-weather-modal-card {
+  border-radius: 1.5rem; padding: 1.25rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 1rem;
+}
+.nfl-weather-grid {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; margin-top: 1rem;
+}
+.nfl-weather-stat {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 1rem; padding: 0.75rem;
+}
+.nfl-weather-stat-label {
+  font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.25); margin-bottom: 0.25rem;
+}
+.nfl-weather-stat-val {
+  font-size: 18px; font-weight: 900; color: #f0f0f0;
+}
+.nfl-weather-impact-box {
+  border-radius: 1.25rem; padding: 1rem;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.18); margin-top: 1rem;
+}
+.nfl-weather-impact-title {
+  font-size: 8px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.3em; color: #fbbf24; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.nfl-weather-impact-text {
+  font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.6); line-height: 1.6;
+}
+
+/* ── ROSTER TABLE ── */
+.nfl-roster-table { width: 100%; border-collapse: collapse; }
+.nfl-roster-table th {
+  font-size: 7.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.2);
+  padding: 0 0.75rem 0.75rem; text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.nfl-roster-row {
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.15s;
+}
+.nfl-roster-row:hover { background: rgba(255,255,255,0.03); }
+.nfl-roster-row td { padding: 0.6rem 0.75rem; font-size: 12px; font-weight: 700; color: #e0e0e0; }
+.nfl-roster-pos-badge {
+  display: inline-block; font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.08em; padding: 2px 7px; border-radius: 100px;
+}
+.pos-QB { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.2); }
+.pos-RB { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+.pos-WR { background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+.pos-TE { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+.pos-OL,.pos-OT,.pos-OG,.pos-C { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
+.pos-DL,.pos-DE,.pos-DT { background: rgba(236,72,153,0.12); color: #f472b6; border: 1px solid rgba(236,72,153,0.2); }
+.pos-LB,.pos-ILB,.pos-OLB { background: rgba(6,182,212,0.12); color: #22d3ee; border: 1px solid rgba(6,182,212,0.2); }
+.pos-CB { background: rgba(251,191,36,0.12); color: #fde68a; border: 1px solid rgba(251,191,36,0.2); }
+.pos-S,.pos-SS,.pos-FS { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.2); }
+.pos-K,.pos-P,.pos-LS { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.1); }
+
+.nfl-pff-grade {
+  font-size: 11px; font-weight: 900;
+  display: inline-flex; align-items: center; gap: 0.25rem;
+}
+
+/* ── INJURY REPORT ── */
+.nfl-injury-row {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.625rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.nfl-injury-row:last-child { border-bottom: none; }
+.nfl-inj-name { font-size: 12px; font-weight: 800; color: #e0e0e0; flex: 1; }
+.nfl-inj-pos { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; }
+.nfl-inj-status {
+  font-size: 7.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.12em; padding: 3px 9px; border-radius: 100px; flex-shrink: 0;
+}
+.inj-out { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+.inj-doubtful { background: rgba(239,68,68,0.08); color: #fca5a5; border: 1px solid rgba(239,68,68,0.15); }
+.inj-questionable { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+.inj-probable { background: rgba(34,197,94,0.1); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+.inj-ir { background: rgba(139,92,246,0.12); color: #a78bfa; border: 1px solid rgba(139,92,246,0.2); }
+.inj-pup { background: rgba(6,182,212,0.1); color: #22d3ee; border: 1px solid rgba(6,182,212,0.18); }
+
+/* ── SKELETON ── */
+@keyframes nfl-shimmer {
+  0% { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+.nfl-sk {
+  border-radius: 10px;
+  background: linear-gradient(90deg,rgba(255,255,255,0.03) 25%,rgba(255,255,255,0.07) 50%,rgba(255,255,255,0.03) 75%);
+  background-size: 600px 100%;
+  animation: nfl-shimmer 1.6s linear infinite;
+}
+
+/* ── LIVE GAME MODAL ── */
+#nfl-live-overlay {
+  position: fixed; inset: 0; z-index: 9100;
+  background: rgba(0,0,0,0.8); backdrop-filter: blur(28px);
+  display: none; align-items: flex-end; justify-content: center;
+}
+@media(min-width:768px){ #nfl-live-overlay { align-items: center; padding: 2rem; } }
+#nfl-live-overlay.live-open { display: flex; }
+
+#nfl-live-modal {
+  width: 100%; max-width: 760px; max-height: 94dvh;
+  overflow-y: auto; overscroll-behavior: contain;
+  border-radius: 2.5rem 2.5rem 0 0;
+  background: rgba(5,10,5,0.96);
+  backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.07); border-bottom: none;
+  box-shadow: 0 -8px 80px rgba(0,0,0,0.8);
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+@media(min-width:768px){
+  #nfl-live-modal {
+    border-radius: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.07);
+    transform: scale(0.9) translateY(24px); opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+    max-height: 90dvh;
+  }
+}
+#nfl-live-modal.live-shown { transform: translateY(0); opacity: 1; }
+@media(min-width:768px){ #nfl-live-modal.live-shown { transform: scale(1) translateY(0); } }
+#nfl-live-modal::-webkit-scrollbar { width: 3px; }
+#nfl-live-modal::-webkit-scrollbar-thumb { background: #ef4444; border-radius: 100px; }
+
+/* ── DRIVE TRACKER ── */
+.nfl-field-strip {
+  position: relative; height: 48px;
+  background: #0a1f0a; border-radius: 1rem; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06); margin: 1rem 1.5rem;
+}
+.nfl-field-strip-lines {
+  position: absolute; inset: 0; display: flex;
+  align-items: stretch;
+}
+.nfl-field-yard {
+  flex: 1; border-right: 1px solid rgba(255,255,255,0.06);
+}
+.nfl-ball-marker {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  transition: left 0.8s cubic-bezier(0.16,1,0.3,1);
+  z-index: 2;
+}
+.nfl-ball-icon {
+  background: #fbbf24; border-radius: 50%;
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; box-shadow: 0 0 12px rgba(251,191,36,0.6);
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.nfl-endzone-a {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 8%;
+  background: rgba(239,68,68,0.15);
+  display: flex; align-items: center; justify-content: center;
+}
+.nfl-endzone-b {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 8%;
+  background: rgba(59,130,246,0.15);
+  display: flex; align-items: center; justify-content: center;
+}
+.nfl-endzone-text {
+  font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.1em; color: rgba(255,255,255,0.5);
+  writing-mode: vertical-rl;
+}
+
+/* ── PBP FEED ── */
+.nfl-pbp-play {
+  display: flex; gap: 0.75rem; padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.nfl-pbp-play:last-child { border-bottom: none; }
+.nfl-pbp-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 4px;
+}
+.nfl-pbp-qtr { font-size: 8px; font-weight: 900; color: rgba(255,255,255,0.25); text-transform: uppercase; }
+.nfl-pbp-text { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.75); line-height: 1.5; }
+.nfl-pbp-yards {
+  margin-left: auto; flex-shrink: 0;
+  font-size: 11px; font-weight: 900; color: #22c55e;
+}
+</style>
+<section id="nfl-hub" class="">
+
+  <!-- Header -->
+  <div class="nfl-hub-header">
+    <div>
+      <p class="nfl-hub-eyebrow">
+        <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse"></span>
+        Live · 2026 NFL KICKOFF
+      </p>
+      <h2 class="nfl-hub-title"><span>NFL</span> GAME HUB</h2>
+    </div>
+    <div class="nfl-sync-pill">
+      <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping inline-block"></span>
+      <span id="nfl-sync-label">Live Data</span>
+    </div>
+  </div>
+
+  <!-- ── SCOREBOARD STRIP ── -->
+  <div class="nfl-scores-wrap">
+    <p class="nfl-teams-label" style="margin-bottom:0.6rem;">📺 Games</p>
+    <div id="nfl-score-scroller" class="no-scrollbar"></div>
+  </div>
+
+  <!-- ── TEAM SCROLLER ── -->
+  <div class="nfl-teams-wrap">
+    <p class="nfl-teams-label">🏈 All 32 Teams</p>
+    <div id="nfl-team-scroller" class="no-scrollbar"></div>
+  </div>
+
+</section>
+<div id="nfl-overlay" onclick="nflOverlayClick(event)">
+  <div id="nfl-modal">
+
+    <div class="nfl-hero" id="nfl-hero">
+      <div class="nfl-hero-bg" id="nfl-hero-bg"></div>
+      <div class="nfl-hero-noise"></div>
+      <div class="nfl-hero-vignette"></div>
+      <button class="nfl-hero-close" onclick="nflClose()">✕</button>
+      <img id="nfl-hero-logo" class="nfl-hero-logo" src="" alt="">
+      <div class="nfl-hero-content">
+        <p id="nfl-hero-label" class="text-white/40 text-[9px] font-black uppercase tracking-[0.3em] mb-0.5"></p>
+        <p id="nfl-hero-rec" class="text-white text-2xl font-black tracking-tight"></p>
+      </div>
+    </div>
+
+    <div class="nfl-identity">
+      <div class="flex items-end justify-between gap-4">
+        <div class="min-w-0">
+          <p class="nfl-team-city" id="nfl-city"></p>
+          <h2 class="nfl-team-name" id="nfl-name"></h2>
+          <p id="nfl-division" class="text-[9px] font-bold uppercase tracking-widest text-white/20 mt-1"></p>
+        </div>
+      </div>
+      <div class="nfl-stats-row">
+        <div class="nfl-stat-pill"><span class="nfl-stat-label">W–L</span><span class="nfl-stat-val" id="nfl-wl">--</span></div>
+        <div class="nfl-stat-pill"><span class="nfl-stat-label">PF/G</span><span class="nfl-stat-val" id="nfl-pfg">--</span></div>
+        <div class="nfl-stat-pill"><span class="nfl-stat-label">PA/G</span><span class="nfl-stat-val" id="nfl-pag">--</span></div>
+        <div class="nfl-stat-pill"><span class="nfl-stat-label">Cap Space</span><span class="nfl-stat-val text-green-400 text-[11px]" id="nfl-cap">--</span></div>
+        <div class="nfl-stat-pill"><span class="nfl-stat-label">PFF Off</span><span class="nfl-stat-val" id="nfl-pff-off">--</span></div>
+        <div class="nfl-stat-pill"><span class="nfl-stat-label">PFF Def</span><span class="nfl-stat-val" id="nfl-pff-def">--</span></div>
+      </div>
+    </div>
+
+    <!-- Alert -->
+    <div class="gi-alert" id="nfl-alert">
+      <div class="gi-alert-header">
+        <span class="gi-alert-dot"></span>
+        <span class="gi-alert-tag">Breaking</span>
+      </div>
+      <p class="gi-alert-text" id="nfl-alert-text"></p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="nfl-tabs">
+      <div class="nfl-tab on"  onclick="nflTab(this,'depth')">Depth Chart</div>
+      <div class="nfl-tab"     onclick="nflTab(this,'battles')">⚔️ Battles</div>
+      <div class="nfl-tab"     onclick="nflTab(this,'roster')">Roster</div>
+      <div class="nfl-tab"     onclick="nflTab(this,'cap')">Cap</div>
+      <div class="nfl-tab"     onclick="nflTab(this,'injuries')">Injuries</div>
+      <div class="nfl-tab"     onclick="nflTab(this,'news')">News</div>
+    </div>
+
+    <div id="nfl-panel-depth"    class="nfl-panel on"></div>
+    <div id="nfl-panel-battles"  class="nfl-panel"></div>
+    <div id="nfl-panel-roster"   class="nfl-panel"></div>
+    <div id="nfl-panel-cap"      class="nfl-panel"></div>
+    <div id="nfl-panel-injuries" class="nfl-panel"></div>
+    <div id="nfl-panel-news"     class="nfl-panel"></div>
+    <div class="h-10"></div>
+  </div>
+</div>
+<div id="nfl-live-overlay" onclick="nflLiveOverlayClick(event)">
+  <div id="nfl-live-modal">
+
+    <!-- Header: Scoreboard -->
+    <div id="live-header" style="padding:1.5rem 1.5rem 0;position:relative;">
+      <button onclick="nflLiveClose()" id="live-close-btn">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+
+      <div id="live-score-row">
+        <!-- Away -->
+        <div class="live-team-block">
+          <img id="live-away-logo" src="" class="live-team-logo">
+          <div>
+            <p id="live-away-name" class="live-team-name"></p>
+            <p id="live-away-rec" class="live-team-rec"></p>
+          </div>
+        </div>
+
+        <!-- Center Score -->
+        <div class="live-center-block">
+          <div id="live-status-pill">
+            <span id="live-pulse-dot"></span>
+            <span id="live-clock">LIVE</span>
+          </div>
+          <div id="live-score-nums">
+            <span id="live-away-score">0</span>
+            <span id="live-score-dash">–</span>
+            <span id="live-home-score">0</span>
+          </div>
+          <p id="live-quarter-label"></p>
+        </div>
+
+        <!-- Home -->
+        <div class="live-team-block live-team-block--right">
+          <div style="text-align:right">
+            <p id="live-home-name" class="live-team-name"></p>
+            <p id="live-home-rec" class="live-team-rec"></p>
+          </div>
+          <img id="live-home-logo" src="" class="live-team-logo">
+        </div>
+      </div>
+
+      <!-- Possession + Down/Distance bar -->
+      <div id="live-situation-bar">
+        <div id="live-possession-indicator">
+          <span id="live-poss-logo-wrap"><img id="live-poss-logo" src="" style="width:18px;height:18px;object-fit:contain;"></span>
+          <span id="live-down-text">--</span>
+        </div>
+        <div id="live-field-position-label"></div>
+      </div>
+    </div>
+
+    <!-- 3D Field with Play Diagram -->
+    <div id="live-field-3d-wrap">
+      <canvas id="live-field-canvas"></canvas>
+      <div id="live-play-annotation"></div>
+
+      <!-- End zone labels -->
+      <div id="live-ez-away" class="live-ez-label live-ez-label--away"></div>
+      <div id="live-ez-home" class="live-ez-label live-ez-label--home"></div>
+
+      <!-- Yard line markers -->
+      <div id="live-yard-markers"></div>
+
+      <!-- Play type badge -->
+      <div id="live-play-type-badge" class="hidden"></div>
+    </div>
+
+    <!-- YAC Indicator -->
+    <div id="live-yac-bar" class="hidden">
+      <div id="live-yac-inner">
+        <div id="live-yac-label-row">
+          <span class="live-yac-tag">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#4ade80" stroke-width="1.5"/><path d="M5 3v2l1.5 1.5" stroke="#4ade80" stroke-width="1.2" stroke-linecap="round"/></svg>
+            YAC
+          </span>
+          <span id="live-yac-yards">0 yds after catch</span>
+        </div>
+        <div id="live-yac-track">
+          <div id="live-yac-fill"></div>
+          <div id="live-yac-catch-marker">
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" fill="#60a5fa" stroke="white" stroke-width="1"/></svg>
+          </div>
+          <div id="live-yac-end-marker">
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><circle cx="4" cy="4" r="3" fill="#4ade80" stroke="white" stroke-width="1"/></svg>
+          </div>
+        </div>
+        <div id="live-yac-labels-row">
+          <span id="live-yac-catch-label">Caught</span>
+          <span id="live-yac-end-label">Tackle</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weather strip -->
+    <div id="live-wx-strip">
+      <span id="live-wx-icon-svg"></span>
+      <div>
+        <p id="live-wx-temp-val"></p>
+        <p id="live-wx-detail-val"></p>
+      </div>
+      <div id="live-wx-impact-pill"></div>
+    </div>
+
+    <!-- Tabs -->
+    <div id="live-tabs-row">
+      <div class="live-tab on" onclick="nflLiveTab(this,'pbp')">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="1" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><line x1="4" y1="4.5" x2="9" y2="4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="4" y1="6.5" x2="9" y2="6.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="4" y1="8.5" x2="7" y2="8.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Play by Play
+      </div>
+      <div class="live-tab" onclick="nflLiveTab(this,'box')">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="1" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><line x1="1" y1="5" x2="12" y2="5" stroke="currentColor" stroke-width="1.2"/><line x1="1" y1="9" x2="12" y2="9" stroke="currentColor" stroke-width="1.2"/><line x1="5" y1="1" x2="5" y2="12" stroke="currentColor" stroke-width="1.2"/></svg>
+        Box Score
+      </div>
+      <div class="live-tab" onclick="nflLiveTab(this,'matchup')">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 11L6.5 2L11 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="3.5" y1="8" x2="9.5" y2="8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Matchup
+      </div>
+      <div class="live-tab" onclick="nflLiveTab(this,'wx')">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="5" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M3 9.5c0-1.38 1.57-2.5 3.5-2.5S10 8.12 10 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        Weather
+      </div>
+    </div>
+
+    <div id="live-panel-pbp" class="live-panel on"></div>
+    <div id="live-panel-box" class="live-panel"></div>
+    <div id="live-panel-matchup" class="live-panel"></div>
+    <div id="live-panel-wx" class="live-panel"></div>
+    <div style="height:2rem;"></div>
+  </div>
+</div>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   GREENLIGHT NFL INTELLIGENCE ENGINE v1.0
+   32 Teams · Live Scores · Weather · PFF Grades · Cap · Depth
+═══════════════════════════════════════════════════════════════ */
+
+/* ── NFL TEAM DATA ── */
+const NFL_TEAMS = [
+  // AFC East
+  {a:'BUF',city:'Buffalo',name:'Bills',div:'AFC East',p:'#00338D',s:'#C60C30',champ:false,
+   alert:'DJ Moore acquired from CHI -- Josh Allen finally has a true WR1. Rookie LB Kaleb Elarms-Orr flashing. Defense a work in progress early in camp.',
+   cap:'+$8.1M',pffOff:87.2,pffDef:83.4,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'MIA',city:'Miami',name:'Dolphins',div:'AFC East',p:'#008E97',s:'#FC4C02',champ:false,
+   alert:'Malik Willis new QB1 after Tua released. $99.2M dead cap hit -- NFL record. Austin Jackson (RT) and Greg Dulcich (TE) dealing with camp injuries. New HC Jeff Hafley.',
+   cap:'-$7.4M',pffOff:72.3,pffDef:70.1,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'NE',city:'New England',name:'Patriots',div:'AFC East',p:'#002244',s:'#C60C30',champ:false,
+   alert:'AJ Brown acquired from PHI. Drake Maye Year 2 with real weapons. Kayshon Boutte shining in camp. Rookie OT Caleb Lomu playing everywhere along the line.',
+   cap:'+$38.2M',pffOff:72.4,pffDef:70.8,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'NYJ',city:'New York',name:'Jets',div:'AFC East',p:'#125740',s:'#000000',champ:false,
+   alert:'Aaron Rodgers locked in as QB1. Minkah Fitzpatrick acquired from MIA -- 3yr/$40M extension. Rookie David Bailey drawing massive hype in camp. Rookie TE Kenyon Sadiq (No.16) suffering hernia setback.',
+   cap:'+$6.2M',pffOff:76.8,pffDef:81.4,wl:'0-0',pfg:'--',pag:'--'},
+
+  // AFC North
+  {a:'BAL',city:'Baltimore',name:'Ravens',div:'AFC North',p:'#241773',s:'#9E7C0C',champ:false,
+   alert:'Zay Flowers signed 4yr/$140M. Starting center competition ongoing -- Ethan Pocic (torn Achilles) still working back. Rookie WR Ja\'Kobi Lane drawing Michael Thomas comparisons in camp.',
+   cap:'+$4.8M',pffOff:90.1,pffDef:84.2,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'CIN',city:'Cincinnati',name:'Bengals',div:'AFC North',p:'#FB4F14',s:'#000000',champ:false,
+   alert:'Joe Burrow healthy. Under-center package looks ugly but team says it\'s intentional. WR3 battle: Andrei Iosivas vs rookie Colbie Young. D so good Ted Karras compared it to 2016 Patriots.',
+   cap:'+$12.6M',pffOff:88.9,pffDef:79.4,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'CLE',city:'Cleveland',name:'Browns',div:'AFC North',p:'#311D00',s:'#FF3C00',champ:false,
+   alert:'Myles Garrett traded to LAR. QB battle: Deshaun Watson vs Shedeur Sanders vs Dillon Gabriel -- Sanders looking slightly better early. No.1 pick Spencer Fano battling Dawand Jones at LT.',
+   cap:'+$18.4M',pffOff:69.2,pffDef:75.8,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'PIT',city:'Pittsburgh',name:'Steelers',div:'AFC North',p:'#FFB612',s:'#101820',champ:false,
+   alert:'Aaron Rodgers locked in as QB1. Michael Pittman Jr. acquired from IND on 3yr/$59M. Keeanu Benton extended 4yr/$72M Aug 14. Rico Dowdle taking lead RB role. Rookie OT Max Iheanachor standing up to TJ Watt in camp.',
+   cap:'+$7.3M',pffOff:75.6,pffDef:85.2,wl:'0-0',pfg:'--',pag:'--'},
+
+  // AFC South
+  {a:'HOU',city:'Houston',name:'Texans',div:'AFC South',p:'#03202F',s:'#A71930',champ:false,
+   alert:'CJ Stroud ascending. Tank Dell returned to padded practice after missing all of 2025. Rookie C Keylan Rutledge (No.1 pick) impressing DeMeco Ryans. Jadeveon Clowney adds edge depth.',
+   cap:'+$22.1M',pffOff:85.7,pffDef:77.3,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'IND',city:'Indianapolis',name:'Colts',div:'AFC South',p:'#002C5F',s:'#A2AAAD',champ:false,
+   alert:'Daniel Jones new QB1 -- looking excellent 8 months after Achilles surgery taking all first-team reps. Sauce Gardner + Charvarius Ward at CB drawing praise. Tyler Warren massive target share expected. Anthony Richardson now backup.',
+   cap:'+$31.4M',pffOff:73.2,pffDef:78.6,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'JAX',city:'Jacksonville',name:'Jaguars',div:'AFC South',p:'#006778',s:'#D7A22A',champ:false,
+   alert:'Travis Hunter playing both ways -- 51 def reps, 35 off reps in first 6 practices, had INT + 35-yd catch. Parker Washington emerging as slot star. Anton Harrison moving to LT.',
+   cap:'+$16.8M',pffOff:75.9,pffDef:76.4,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'TEN',city:'Tennessee',name:'Titans',div:'AFC South',p:'#0C2340',s:'#4B92DB',champ:false,
+   alert:'Robert Saleh new HC. Cam Ward playing mistake-free football. No.5 pick WR Carnell Tate flashing big-play ability. Elic Ayomanor camp star but left early with shoulder. Calvin Ridley role in question.',
+   cap:'+$44.6M',pffOff:71.2,pffDef:70.1,wl:'0-0',pfg:'--',pag:'--'},
+
+  // AFC West
+  {a:'DEN',city:'Denver',name:'Broncos',div:'AFC West',p:'#FB4F14',s:'#002244',champ:false,
+   alert:'Bo Nix healthy and looking sharp with new OC Davis Webb. CB Riley Moss having a monster camp over first-rounder Jahdae Barron. Evan Engram thriving in new system.',
+   cap:'+$19.7M',pffOff:78.4,pffDef:76.9,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'KC',city:'Kansas City',name:'Chiefs',div:'AFC West',p:'#E31837',s:'#FFB81C',champ:false,
+   alert:'Mahomes signed $504.75M deal through 2033 -- largest contract in NFL history. Fully healthy from knee injury. Kenneth Walker III signed from SEA. Trent McDuffie traded to LAR. Rashee Rice back in team drills. Rookie DT Peter Woods impressing.',
+   cap:'-$12.4M',pffOff:91.3,pffDef:82.6,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'LV',city:'Las Vegas',name:'Raiders',div:'AFC West',p:'#000000',s:'#A5ACAF',champ:false,
+   alert:'Kirk Cousins is QB1 -- rookie Fernando Mendoza (1st round) developing behind him. Klint Kubiak new HC from SEA. Noah Brown signed Aug 16. Aaron Donald return feeling inevitable.',
+   cap:'+$38.9M',pffOff:67.1,pffDef:65.8,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'LAC',city:'L.A.',name:'Chargers',div:'AFC West',p:'#0080C6',s:'#FFC20E',champ:false,
+   alert:'Justin Herbert leads the offense. Omarion Hampton called most improved player by Mike McDaniel. 5-man LG competition ongoing. Rashawn Slater avoided serious injury. New HC Mike McDaniel.',
+   cap:'+$14.2M',pffOff:86.4,pffDef:79.8,wl:'0-0',pfg:'--',pag:'--'},
+
+  // NFC East
+  {a:'DAL',city:'Dallas',name:'Cowboys',div:'NFC East',p:'#003594',s:'#041E42',champ:false,
+   alert:'Von Miller signed Aug 16. Tyler Guyton leading LT race. Jaydon Blue flashing explosive ability at RB. Rookie LB Jaishawn Barham generating buzz. Caleb Downs key piece of revamped defense.',
+   cap:'-$9.3M',pffOff:81.4,pffDef:76.3,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'NYG',city:'New York',name:'Giants',div:'NFC East',p:'#0B2265',s:'#A71930',champ:false,
+   alert:'John Harbaugh new HC. Abdul Carter (No.1 pick edge) dominating camp -- DPOY upside. Malik Nabers healthy and participating. Odell Beckham Jr. back and elevated to first team. Beaux Collins waived Aug 14.',
+   cap:'+$34.7M',pffOff:65.4,pffDef:74.2,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'PHI',city:'Philadelphia',name:'Eagles',div:'NFC East',p:'#004C54',s:'#A5ACAF',champ:false,
+   alert:'AJ Brown traded to NE for 2028 1st. Jonathan Greenard from MIN on 4yr/$100M. Riq Woolen signed. Jalen Hurts shining as pads came on. Rookie WR Makai Lemon dealing with hamstring. Cooper DeJean moving to safety.',
+   cap:'+$5.1M',pffOff:88.7,pffDef:86.2,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'WAS',city:'Washington',name:'Commanders',div:'NFC East',p:'#5A1414',s:'#FFB612',champ:false,
+   alert:'Jayden Daniels Year 2. Stefon Diggs signed -- slots perfectly opposite Terry McLaurin. Rookie LB Sonny Styles bringing the boom and drawing DROY talk. Dorance Armstrong suspended 1 game.',
+   cap:'+$11.8M',pffOff:80.6,pffDef:73.2,wl:'0-0',pfg:'--',pag:'--'},
+
+  // NFC North
+  {a:'CHI',city:'Chicago',name:'Bears',div:'NFC North',p:'#0B162A',s:'#C83803',champ:false,
+   alert:'Caleb Williams Year 2. Darnell Wright extended 4yr/$116M. Garrett Bradbury won starting center job. Coby Bryant knee injury concern. Colston Loveland and Luther Burden III generating hype.',
+   cap:'+$1.2M',pffOff:73.8,pffDef:71.4,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'DET',city:'Detroit',name:'Lions',div:'NFC North',p:'#0076B6',s:'#B0B7BC',champ:false,
+   alert:'Jahmyr Gibbs signed extension -- highest-paid RB in the league. David Montgomery traded to HOU. Penei Sewell moving to LT, rookie Blake Miller at RT. Isaac TeSlaa sluggish camp at WR3. Alim McNeill finally fully healthy.',
+   cap:'+$2.4M',pffOff:90.7,pffDef:80.6,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'GB',city:'Green Bay',name:'Packers',div:'NFC North',p:'#203731',s:'#FFB612',champ:false,
+   alert:'Jordan Love era in full swing. Matthew Golden Year 2 breakout expected -- catching everything in camp. Tucker Kraft returning from ACL. Micah Parsons acquired -- edge depth question until his return. Romeo Doubs departed.',
+   cap:'+$9.6M',pffOff:84.2,pffDef:76.4,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'MIN',city:'Minnesota',name:'Vikings',div:'NFC North',p:'#4F2683',s:'#FFC62F',champ:false,
+   alert:'Kyler Murray vs JJ McCarthy QB battle -- Murray leading with 73 snaps vs McCarthy\'s 38 in 11-on-11s. Jonathan Greenard traded to PHI. Kevin O\'Connell overhauling the run game. Rookies Caleb Banks and Domonique Orange rotating with first team D.',
+   cap:'+$7.1M',pffOff:81.4,pffDef:78.9,wl:'0-0',pfg:'--',pag:'--'},
+
+  // NFC South
+  {a:'ATL',city:'Atlanta',name:'Falcons',div:'NFC South',p:'#A71930',s:'#000000',champ:false,
+   alert:'Tua Tagovailoa signed 1yr min -- expected to start Week 1 with Michael Penix Jr. (ACL) still not cleared for team drills. Kevin Stefanski new HC. Jalon Walker ACL torn in camp. Bijan Robinson contract extension done. Jahan Dotson clearly WR2.',
+   cap:'+$18.3M',pffOff:77.6,pffDef:71.8,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'CAR',city:'Carolina',name:'Panthers',div:'NFC South',p:'#0085CA',s:'#101820',champ:false,
+   alert:'Bryce Young Year 3. Jonathon Brooks showing positive signs in camp -- moving all over formation. Xavier Legette avoided serious injury scare. Nic Scourton and Chris Brazzell II both hurt in camp.',
+   cap:'+$41.2M',pffOff:66.1,pffDef:67.4,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'NO',city:'New Orleans',name:'Saints',div:'NFC South',p:'#D3BC8D',s:'#101820',champ:false,
+   alert:'Tyler Shough entering Year 2 as starter. Travis Etienne getting early-down reps, Alvin Kamara on passing downs. Kool-Aid McKinstry Year 3 breakout expected. $112M dead cap from Carr, Lattimore, Jordan, Davis.',
+   cap:'-$6.8M',pffOff:74.3,pffDef:73.1,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'TB',city:'Tampa Bay',name:'Buccaneers',div:'NFC South',p:'#D50A0A',s:'#34302B',champ:false,
+   alert:'Baker Mayfield made scorched-earth comments about front office. Vita Vea in full contract holdout -- agent says only trade resolves it. Rookie DB Keionte Scott lining up all over formation. Reuben Bain Jr. DROY candidate.',
+   cap:'+$2.1M',pffOff:81.4,pffDef:77.8,wl:'0-0',pfg:'--',pag:'--'},
+
+  // NFC West
+  {a:'ARI',city:'Arizona',name:'Cardinals',div:'NFC West',p:'#97233F',s:'#000000',champ:false,
+   alert:'Mike LaFleur new HC (from LAR OC). Marvin Harrison Jr. Year 2 -- early camp drops now forgotten. Jeremiyah Love vs Tyler Allgeier at RB. Josh Sweat on PUP but coach not worried for Week 1.',
+   cap:'+$28.4M',pffOff:71.8,pffDef:67.2,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'LAR',city:'L.A.',name:'Rams',div:'NFC West',p:'#003594',s:'#FFA300',champ:false,
+   alert:'🚨 Myles Garrett acquired from CLE -- blockbuster of offseason. Trent McDuffie also acquired from KC. Matthew Stafford calling camp "highest-quality practice" in 18 years. Aaron Donald return feels inevitable. Stetson Bennett now QB2.',
+   cap:'+$3.7M',pffOff:87.1,pffDef:88.6,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'SF',city:'San Francisco',name:'49ers',div:'NFC West',p:'#AA0000',s:'#B3995D',champ:false,
+   alert:'Mike Evans (quad), Christian Kirk (calf), rookie De\'Zhaun Stribling (hamstring) all missing camp time. Ricky Pearsall knee surgery -- out for season. HC Kyle Shanahan limited after car accident, asst HC Foerster running show. Deebo Samuel back.',
+   cap:'+$4.9M',pffOff:88.4,pffDef:84.1,wl:'0-0',pfg:'--',pag:'--'},
+
+  {a:'SEA',city:'Seattle',name:'Seahawks',div:'NFC West',p:'#002244',s:'#69BE28',champ:true,
+   alert:'🏆 Super Bowl LX Champions. Jaxon Smith-Njigba extended $42.15M/yr. Devon Witherspoon extended 4yr/$132M Aug 15. Tory Horton hype back after injury. RB Jadarian Price -- coach says "nobody has covered him yet." Kenneth Walker departed to KC.',
+   cap:'+$11.6M',pffOff:89.2,pffDef:87.4,wl:'0-0',pfg:'--',pag:'--'},
+];
+
+/* ── STADIUM COORDINATES FOR WEATHER ── */
+const NFL_STADIUMS = {
+  BUF:{lat:42.774,lon:-78.787,name:'Highmark Stadium',dome:false},
+  MIA:{lat:25.958,lon:-80.239,name:'Hard Rock Stadium',dome:false},
+  NE:{lat:42.091,lon:-71.264,name:'Gillette Stadium',dome:false},
+  NYJ:{lat:40.814,lon:-74.075,name:'MetLife Stadium',dome:false},
+  BAL:{lat:39.278,lon:-76.623,name:'M&T Bank Stadium',dome:false},
+  CIN:{lat:39.095,lon:-84.516,name:'Paycor Stadium',dome:false},
+  CLE:{lat:41.506,lon:-81.700,name:'Cleveland Browns Stadium',dome:false},
+  PIT:{lat:40.447,lon:-80.016,name:'Acrisure Stadium',dome:false},
+  HOU:{lat:29.685,lon:-95.411,name:'NRG Stadium',dome:true},
+  IND:{lat:39.760,lon:-86.164,name:'Lucas Oil Stadium',dome:true},
+  JAX:{lat:30.324,lon:-81.638,name:'EverBank Stadium',dome:false},
+  TEN:{lat:36.166,lon:-86.771,name:'Nissan Stadium',dome:false},
+  DEN:{lat:39.744,lon:-105.020,name:'Empower Field',dome:false},
+  KC:{lat:39.049,lon:-94.484,name:'Arrowhead Stadium',dome:false},
+  LV:{lat:36.091,lon:-115.184,name:'Allegiant Stadium',dome:true},
+  LAC:{lat:33.953,lon:-118.339,name:'SoFi Stadium',dome:false},
+  DAL:{lat:32.748,lon:-97.093,name:'AT&T Stadium',dome:true},
+  NYG:{lat:40.814,lon:-74.075,name:'MetLife Stadium',dome:false},
+  PHI:{lat:39.901,lon:-75.168,name:'Lincoln Financial Field',dome:false},
+  WAS:{lat:38.908,lon:-76.865,name:'Northwest Stadium',dome:false},
+  CHI:{lat:41.862,lon:-87.617,name:'Soldier Field',dome:false},
+  DET:{lat:42.340,lon:-83.046,name:'Ford Field',dome:true},
+  GB:{lat:44.501,lon:-88.062,name:'Lambeau Field',dome:false},
+  MIN:{lat:44.974,lon:-93.258,name:'U.S. Bank Stadium',dome:true},
+  ATL:{lat:33.755,lon:-84.401,name:'Mercedes-Benz Stadium',dome:true},
+  CAR:{lat:35.226,lon:-80.853,name:'Bank of America Stadium',dome:false},
+  NO:{lat:29.951,lon:-90.081,name:'Caesars Superdome',dome:true},
+  TB:{lat:27.976,lon:-82.503,name:'Raymond James Stadium',dome:false},
+  ARI:{lat:33.528,lon:-112.263,name:'State Farm Stadium',dome:true},
+  LAR:{lat:33.953,lon:-118.339,name:'SoFi Stadium',dome:false},
+  SF:{lat:37.403,lon:-121.970,name:"Levi's Stadium",dome:false},
+  SEA:{lat:47.595,lon:-122.332,name:'Lumen Field',dome:false},
+};
+
+/* ── DEPTH CHART DATA ── */
+// Replace NFL_DEPTH entirely with this live-fetch system
+const NFL_DEPTH = {}; // Empty -- we fetch live
+
+async function fetchLiveDepthChart(teamAbbr) {
+  const espnMap = {
+    BUF:'buf',MIA:'mia',NE:'ne',NYJ:'nyj',
+    BAL:'bal',CIN:'cin',CLE:'cle',PIT:'pit',
+    HOU:'hou',IND:'ind',JAX:'jax',TEN:'ten',
+    DEN:'den',KC:'kc',LV:'lv',LAC:'lac',
+    DAL:'dal',NYG:'nyg',PHI:'phi',WAS:'was',
+    CHI:'chi',DET:'det',GB:'gb',MIN:'min',
+    ATL:'atl',CAR:'car',NO:'no',TB:'tb',
+    ARI:'ari',LAR:'lar',SF:'sf',SEA:'sea'
+  };
+  const slug = espnMap[teamAbbr];
+  if (!slug) return null;
+  try {
+    const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${slug}/depthcharts`);
+    const data = await res.json();
+    return data;
+  } catch(e) { return null; }
+}
+
+// Replace nflRenderDepth with this live version
+async function nflRenderDepth(team) {
+  const el = document.getElementById('nfl-panel-depth');
+  el.innerHTML = nflSkeleton();
+
+  const data = await fetchLiveDepthChart(team.a);
+  
+  if (!data || !data.items) {
+    el.innerHTML = `<div style="text-align:center;padding:4rem 0;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.15);">Depth chart loading…</div>`;
+    return;
+  }
+
+  const posColors = {
+    QB:{ring:'rgba(248,113,113,0.6)',glow:'rgba(239,68,68,0.2)',badge:'rgba(239,68,68,0.15)',tc:'#f87171'},
+    RB:{ring:'rgba(52,211,153,0.6)',glow:'rgba(34,197,94,0.2)',badge:'rgba(34,197,94,0.12)',tc:'#4ade80'},
+    WR:{ring:'rgba(96,165,250,0.6)',glow:'rgba(59,130,246,0.2)',badge:'rgba(59,130,246,0.12)',tc:'#60a5fa'},
+    TE:{ring:'rgba(251,191,36,0.6)',glow:'rgba(245,158,11,0.2)',badge:'rgba(245,158,11,0.12)',tc:'#fbbf24'},
+    OT:{ring:'rgba(167,139,250,0.5)',glow:'rgba(139,92,246,0.15)',badge:'rgba(139,92,246,0.1)',tc:'#a78bfa'},
+    OG:{ring:'rgba(167,139,250,0.5)',glow:'rgba(139,92,246,0.15)',badge:'rgba(139,92,246,0.1)',tc:'#a78bfa'},
+    C:{ring:'rgba(167,139,250,0.5)',glow:'rgba(139,92,246,0.15)',badge:'rgba(139,92,246,0.1)',tc:'#a78bfa'},
+    DE:{ring:'rgba(236,72,153,0.5)',glow:'rgba(236,72,153,0.15)',badge:'rgba(236,72,153,0.1)',tc:'#f472b6'},
+    DT:{ring:'rgba(236,72,153,0.5)',glow:'rgba(236,72,153,0.15)',badge:'rgba(236,72,153,0.1)',tc:'#f472b6'},
+    LB:{ring:'rgba(6,182,212,0.5)',glow:'rgba(6,182,212,0.15)',badge:'rgba(6,182,212,0.1)',tc:'#22d3ee'},
+    CB:{ring:'rgba(251,191,36,0.5)',glow:'rgba(245,158,11,0.15)',badge:'rgba(245,158,11,0.1)',tc:'#fde68a'},
+    S:{ring:'rgba(52,211,153,0.5)',glow:'rgba(16,185,129,0.15)',badge:'rgba(16,185,129,0.1)',tc:'#34d399'},
+  };
+
+  const offensePositions = ['QB','RB','WR','TE','OT','OG','C'];
+  const defensePositions = ['DE','DT','LB','OLB','ILB','CB','S','SS','FS'];
+  
+  let offenseHTML = '';
+  let defenseHTML = '';
+  let benchHTML = '';
+
+  data.items.forEach(group => {
+    const posAbbr = group.position?.abbreviation || '';
+    const athletes = group.athletes || [];
+    if (!athletes.length) return;
+
+    const isOffense = offensePositions.some(p => posAbbr.includes(p));
+    const isDefense = defensePositions.some(p => posAbbr.includes(p));
+    const c = posColors[posAbbr] || posColors.LB;
+
+    const starter = athletes[0]?.athlete;
+    const backups = athletes.slice(1).map(a => a.athlete);
+    
+    if (!starter) return;
+
+    const starterName = starter.shortName || starter.displayName || '???';
+    const shortLast = starterName.split(' ').pop();
+
+    const nodeHTML = `
+      <div class="nfl-pnode" title="${starterName}">
+        <div class="nfl-av-ring" style="--av-border:${c.ring};--av-glow:${c.glow}">
+          <div class="nfl-av-inner">
+            <span style="font-size:9px;font-weight:900;color:${c.tc};">${shortLast.substring(0,4).toUpperCase()}</span>
+          </div>
+          <span class="nfl-starter-dot"></span>
+          <span class="nfl-pos-badge" style="background:${c.badge};color:${c.tc}">${posAbbr}</span>
+        </div>
+        <p class="nfl-pname">${shortLast}</p>
+      </div>`;
+
+    backups.forEach(b => {
+      if (!b) return;
+      const bName = b.shortName || b.displayName || '';
+      const bLast = bName.split(' ').pop();
+      benchHTML += `
+        <div class="nfl-bench-chip">
+          <span style="width:22px;height:22px;border-radius:50%;background:${c.badge};display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;color:${c.tc};">${bLast.substring(0,2).toUpperCase()}</span>
+          <span class="nfl-bench-chip-name">${bLast}</span>
+          <span class="nfl-bench-chip-pos" style="color:${c.tc}">${posAbbr}</span>
+        </div>`;
+    });
+
+    const rowHTML = `
+      <div class="nfl-unit-label">${posAbbr}</div>
+      <div class="nfl-pos-row">${nodeHTML}</div>`;
+
+    if (isOffense) offenseHTML += rowHTML;
+    else if (isDefense) defenseHTML += rowHTML;
+  });
+
+  el.innerHTML = `
+    <div class="nfl-field-shell">
+      <svg class="nfl-field-lines" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <rect x="10" y="10" width="380" height="580" rx="6" stroke="rgba(255,255,255,1)" stroke-width="1" fill="none"/>
+        <line x1="10" y1="300" x2="390" y2="300" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+      </svg>
+      ${offenseHTML ? `<div class="nfl-unit-label" style="margin-top:0.5rem;">⚔️ Offense</div>${offenseHTML}` : ''}
+      <div style="height:1px;background:rgba(255,255,255,0.05);margin:0.75rem 0;position:relative;z-index:2;"></div>
+      ${defenseHTML ? `<div class="nfl-unit-label">🔒 Defense</div>${defenseHTML}` : ''}
+      ${benchHTML ? `
+        <div class="nfl-bench-strip">
+          <p class="nfl-bench-title">Rotation · Bench</p>
+          <div class="nfl-bench-list">${benchHTML}</div>
+        </div>` : ''}
+    </div>
+    <p style="font-size:9px;color:rgba(255,255,255,0.15);text-align:center;margin-top:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">
+      Live via ESPN · Updated ${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}
+    </p>`;
+}
+
+/* ── POSITIONAL BATTLES ── */
+const NFL_BATTLES = {
+  KC:[
+    {pos:'WR2',status:'active',playerA:{name:'JuJu Smith-Schuster',pff:72.4,note:'Camp standout. Routes sharp.'},playerB:{name:'Skyy Moore',pff:68.1,note:'Physical tools there. Consistency issue.'},pctA:62},
+    {pos:'RT',status:'battle',playerA:{name:'Jawaan Taylor',pff:74.8,note:'Starter returning from injury.'},playerB:{name:'Mike Caliendo',pff:61.2,note:'Impressive spring.'},pctA:71},
+  ],
+  MIN:[
+    {pos:'QB1',status:'active',playerA:{name:'JJ McCarthy',pff:null,note:'The chosen one. Mahomes comp.'},playerB:{name:'Nick Mullens',pff:65.4,note:'Veteran safety net.'},pctA:88},
+    {pos:'CB2',status:'battle',playerA:{name:'Akayleb Evans',pff:68.7,note:'Physical corner.'},playerB:{name:'Mekhi Blackmon',pff:63.2,note:'Smooth technician.'},pctA:55},
+  ],
+  SF:[
+    {pos:'WR3',status:'open',playerA:{name:'Jauan Jennings',pff:70.1,note:'Reliable slot target.'},playerB:{name:'Ronnie Bell',pff:61.8,note:'Special teams ace pushing for role.'},pctA:60},
+  ],
+  PHI:[
+    {pos:'DT2',status:'active',playerA:{name:'Jalen Carter',pff:84.2,note:'Elite interior pass rusher.'},playerB:{name:'Milton Williams',pff:73.6,note:'Versatile backup.'},pctA:85},
+  ],
+  DET:[
+    {pos:'RB1A',status:'active',playerA:{name:'David Montgomery',pff:76.3,note:'Power back. Red zone machine.'},playerB:{name:'Jahmyr Gibbs',pff:81.4,note:'Explosive speedster. Emerging.'},pctA:52},
+  ],
+};
+
+/* ── ROSTER DATA ── */
+const NFL_ROSTERS = {
+  KC:[
+    {n:'Patrick Mahomes',pos:'QB',ht:'6\'3"',sal:'$54.2M',pff:96.1,status:'Active'},
+    {n:'Travis Kelce',pos:'TE',ht:'6\'5"',sal:'$14.3M',pff:91.2,status:'Active'},
+    {n:'Rashee Rice',pos:'WR',ht:'6\'1"',sal:'$5.1M',pff:82.4,status:'Active'},
+    {n:'Isiah Pacheco',pos:'RB',ht:'5\'10"',sal:'$4.2M',pff:77.8,status:'Active'},
+    {n:'Chris Jones',pos:'DT',ht:'6\'6"',sal:'$34.5M',pff:90.3,status:'Active'},
+    {n:'Trent McDuffie',pos:'CB',ht:'5\'11"',sal:'$6.9M',pff:85.1,status:'Active'},
+    {n:'Nick Bolton',pos:'LB',ht:'5\'11"',sal:'$3.8M',pff:74.6,status:'Active'},
+    {n:'Justin Reid',pos:'S',ht:'6\'1"',sal:'$10.5M',pff:72.3,status:'Active'},
+    {n:'Orlando Brown Jr.',pos:'OT',ht:'6\'8"',sal:'$16.7M',pff:79.4,status:'Active'},
+    {n:'Creed Humphrey',pos:'C',ht:'6\'4"',sal:'$12.1M',pff:88.7,status:'Active'},
+    {n:'Jawaan Taylor',pos:'OT',ht:'6\'5"',sal:'$11.3M',pff:74.8,status:'Q'},
+    {n:'George Karlaftis',pos:'DE',ht:'6\'4"',sal:'$4.1M',pff:78.2,status:'Active'},
+  ],
+  MIN:[
+    {n:'JJ McCarthy',pos:'QB',ht:'6\'1"',sal:'$9.1M',pff:null,status:'Active'},
+    {n:'Justin Jefferson',pos:'WR',ht:'6\'1"',sal:'$35.0M',pff:93.4,status:'Active'},
+    {n:'TJ Hockenson',pos:'TE',ht:'6\'4"',sal:'$17.5M',pff:84.7,status:'Active'},
+    {n:'Jordan Addison',pos:'WR',ht:'5\'11"',sal:'$4.7M',pff:79.2,status:'Active'},
+    {n:'Aaron Jones',pos:'RB',ht:'5\'9"',sal:'$7.2M',pff:76.8,status:'Active'},
+    {n:'Harrison Smith',pos:'S',ht:'6\'2"',sal:'$9.8M',pff:82.1,status:'Active'},
+    {n:'Byron Murphy',pos:'CB',ht:'5\'11"',sal:'$6.4M',pff:75.3,status:'Active'},
+    {n:'Jonathan Greenard',pos:'DE',ht:'6\'4"',sal:'$21.0M',pff:81.6,status:'Active'},
+    {n:'Harrison Phillips',pos:'DT',ht:'6\'3"',sal:'$9.0M',pff:72.4,status:'Active'},
+    {n:'Jordan Hicks',pos:'LB',ht:'6\'1"',sal:'$5.2M',pff:71.8,status:'Active'},
+    {n:'Christian Darrisaw',pos:'OT',ht:'6\'5"',sal:'$14.1M',pff:83.2,status:'Q'},
+    {n:'Garrett Bradbury',pos:'C',ht:'6\'4"',sal:'$9.5M',pff:70.6,status:'Active'},
+  ],
+  SF:[
+    {n:'Brock Purdy',pos:'QB',ht:'6\'1"',sal:'$14.1M',pff:88.4,status:'Active'},
+    {n:'Christian McCaffrey',pos:'RB',ht:'5\'11"',sal:'$19.0M',pff:92.7,status:'Active'},
+    {n:'Deebo Samuel',pos:'WR',ht:'5\'11"',sal:'$23.9M',pff:84.1,status:'Active'},
+    {n:'George Kittle',pos:'TE',ht:'6\'4"',sal:'$24.0M',pff:90.8,status:'Active'},
+    {n:'Brandon Aiyuk',pos:'WR',ht:'6\'0"',sal:'$30.0M',pff:86.3,status:'Active'},
+    {n:'Nick Bosa',pos:'DE',ht:'6\'4"',sal:'$34.0M',pff:94.2,status:'Active'},
+    {n:'Fred Warner',pos:'LB',ht:'6\'3"',sal:'$19.0M',pff:88.6,status:'Active'},
+    {n:'Charvarius Ward',pos:'CB',ht:'6\'1"',sal:'$18.1M',pff:80.4,status:'Active'},
+    {n:'Trent Williams',pos:'OT',ht:'6\'5"',sal:'$23.0M',pff:96.7,status:'Active'},
+    {n:'Javon Hargrave',pos:'DT',ht:'6\'2"',sal:'$21.0M',pff:83.7,status:'Active'},
+    {n:'Talanoa Hufanga',pos:'S',ht:'6\'1"',sal:'$12.0M',pff:79.1,status:'D'},
+    {n:'Arik Armstead',pos:'DT',ht:'6\'7"',sal:'$17.0M',pff:74.8,status:'Active'},
+  ],
+  PHI:[
+    {n:'Jalen Hurts',pos:'QB',ht:'6\'1"',sal:'$51.0M',pff:90.6,status:'Active'},
+    {n:'Saquon Barkley',pos:'RB',ht:'5\'11"',sal:'$13.0M',pff:91.3,status:'Active'},
+    {n:'AJ Brown',pos:'WR',ht:'6\'1"',sal:'$32.0M',pff:92.1,status:'Active'},
+    {n:'DeVonta Smith',pos:'WR',ht:'6\'0"',sal:'$25.0M',pff:87.4,status:'Active'},
+    {n:'Dallas Goedert',pos:'TE',ht:'6\'4"',sal:'$20.0M',pff:84.9,status:'Active'},
+    {n:'Lane Johnson',pos:'OT',ht:'6\'6"',sal:'$22.0M',pff:93.4,status:'Active'},
+    {n:'Jalen Carter',pos:'DT',ht:'6\'3"',sal:'$5.1M',pff:84.2,status:'Active'},
+    {n:'Zack Baun',pos:'LB',ht:'6\'2"',sal:'$3.8M',pff:79.6,status:'Active'},
+    {n:'Darius Slay',pos:'CB',ht:'6\'0"',sal:'$16.7M',pff:77.3,status:'Active'},
+    {n:'CJ Gardner-Johnson',pos:'S',ht:'5\'11"',sal:'$8.5M',pff:80.2,status:'Active'},
+    {n:'Josh Sweat',pos:'DE',ht:'6\'5"',sal:'$17.5M',pff:81.4,status:'Active'},
+    {n:'Cam Jurgens',pos:'C',ht:'6\'3"',sal:'$4.2M',pff:75.8,status:'Active'},
+  ],
+  DET:[
+    {n:'Jared Goff',pos:'QB',ht:'6\'4"',sal:'$53.0M',pff:86.4,status:'Active'},
+    {n:'Jahmyr Gibbs',pos:'RB',ht:'5\'9"',sal:'$4.8M',pff:81.4,status:'Active'},
+    {n:'Amon-Ra St. Brown',pos:'WR',ht:'5\'11"',sal:'$30.0M',pff:88.7,status:'Active'},
+    {n:'Sam LaPorta',pos:'TE',ht:'6\'3"',sal:'$4.1M',pff:78.2,status:'Active'},
+    {n:'Jameson Williams',pos:'WR',ht:'6\'1"',sal:'$5.2M',pff:74.6,status:'Active'},
+    {n:'Penei Sewell',pos:'OT',ht:'6\'5"',sal:'$22.0M',pff:94.1,status:'Active'},
+    {n:'Aidan Hutchinson',pos:'DE',ht:'6\'6"',sal:'$27.0M',pff:89.3,status:'Active'},
+    {n:'Frank Ragnow',pos:'C',ht:'6\'5"',sal:'$14.5M',pff:86.8,status:'Active'},
+    {n:'Carlton Davis',pos:'CB',ht:'6\'1"',sal:'$14.0M',pff:76.4,status:'Active'},
+    {n:'Kerby Joseph',pos:'S',ht:'6\'1"',sal:'$4.6M',pff:77.8,status:'Active'},
+    {n:'Alim McNeill',pos:'DT',ht:'6\'2"',sal:'$10.0M',pff:78.3,status:'Q'},
+    {n:'Alex Anzalone',pos:'LB',ht:'6\'3"',sal:'$6.5M',pff:72.1,status:'Active'},
+  ],
+};
+
+/* ── INJURY REPORTS ── */
+const NFL_INJURIES = {
+  KC:[
+    {n:'Jawaan Taylor',pos:'OT',status:'Q',note:'Knee -- Limited Wednesday'},
+    {n:'JuJu Smith-Schuster',pos:'WR',status:'Q',note:'Hamstring -- Day-to-Day'},
+    {n:'Drue Tranquill',pos:'LB',status:'OUT',note:'Ankle -- Out Week 1'},
+  ],
+  MIN:[
+    {n:'Christian Darrisaw',pos:'OT',status:'Q',note:'Knee -- Precautionary'},
+    {n:'TJ Hockenson',pos:'TE',status:'PROBABLE',note:'Full Practice Thursday'},
+  ],
+  SF:[
+    {n:'Talanoa Hufanga',pos:'S',status:'D',note:'Knee -- ACL Recovery'},
+    {n:'Dre Greenlaw',pos:'LB',status:'OUT',note:'Achilles -- Began Camp on PUP'},
+  ],
+  PHI:[
+    {n:'Brandon Graham',pos:'DE',status:'Q',note:'Rest -- Veteran Treatment'},
+    {n:'Dallas Goedert',pos:'TE',status:'PROBABLE',note:'Back -- Full Practice'},
+  ],
+  DET:[
+    {n:'Alim McNeill',pos:'DT',status:'Q',note:'Hip -- Limited'},
+    {n:'DJ Reader',pos:'DT',status:'IR',note:'Torn Quad -- Entire Season'},
+  ],
+};
+
+/* ── CAP DATA ── */
+const NFL_CAP = {
+  KC:{total:265.4,used:269.6,dead:18.4,space:-4.2,tag:null,color:'#ef4444'},
+  SF:{total:265.4,used:258.6,dead:12.1,space:6.8,tag:'Brock Purdy',color:'#22c55e'},
+  PHI:{total:265.4,used:257.5,dead:9.8,space:7.9,tag:null,color:'#22c55e'},
+  MIN:{total:265.4,used:257.0,dead:11.6,space:8.4,tag:null,color:'#22c55e'},
+  DET:{total:265.4,used:261.6,dead:14.2,space:3.8,tag:null,color:'#fbbf24'},
+};
+
+/* ── WEATHER CACHE ── */
+const _nflWeatherCache = {};
+let _nflCurrentTeam = null;
+let _nflCurrentGame = null;
+
+/* ── PFF GRADE COLOR ── */
+function pffColor(g){
+  if(!g) return 'rgba(255,255,255,0.25)';
+  if(g>=90) return '#fbbf24';
+  if(g>=75) return '#34d399';
+  if(g>=60) return 'rgba(255,255,255,0.5)';
+  return '#f87171';
+}
+function pffClass(g){
+  if(!g) return 'pff-avg';
+  if(g>=90) return 'pff-elite';
+  if(g>=75) return 'pff-above';
+  if(g>=60) return 'pff-avg';
+  return 'pff-below';
+}
+
+/* ── NFL LOGO ── */
+function nflLogo(a){
+  const map={BUF:'buf',MIA:'mia',NE:'ne',NYJ:'nyj',BAL:'bal',CIN:'cin',CLE:'cle',PIT:'pit',
+    HOU:'hou',IND:'ind',JAX:'jax',TEN:'ten',DEN:'den',KC:'kc',LV:'lv',LAC:'lac',
+    DAL:'dal',NYG:'nyg',PHI:'phi',WAS:'was',CHI:'chi',DET:'det',GB:'gb',MIN:'min',
+    ATL:'atl',CAR:'car',NO:'no',TB:'tb',ARI:'ari',LAR:'lar',SF:'sf',SEA:'sea'};
+  return `https://a.espncdn.com/i/teamlogos/nfl/500/${map[a]||a.toLowerCase()}.png`;
+}
+
+/* ── WEATHER FETCH ── */
+async function fetchWeather(teamAbbr){
+  if(_nflWeatherCache[teamAbbr]) return _nflWeatherCache[teamAbbr];
+  const stadium = NFL_STADIUMS[teamAbbr];
+  if(!stadium) return null;
+  if(stadium.dome){
+    const d = {dome:true,temp:72,feelsLike:72,wind:0,windDir:'',precip:0,condition:'Controlled Environment',icon:'🏟️',impact:'none'};
+    _nflWeatherCache[teamAbbr]=d; return d;
+  }
+  try{
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${stadium.lat}&longitude=${stadium.lon}&current=temperature_2m,apparent_temperature,precipitation,wind_speed_10m,wind_direction_10m,weather_code&wind_speed_unit=mph&temperature_unit=fahrenheit&timezone=auto`);
+    const d = await r.json();
+    const c = d.current;
+    const wx = parseWeatherCode(c.weather_code);
+    const windSpd = Math.round(c.wind_speed_10m);
+    let impact = 'none';
+    if(windSpd>25 || c.precipitation>0.1) impact = 'high';
+    else if(windSpd>15 || c.precipitation>0.02) impact = 'moderate';
+    else if(c.apparent_temperature < 32) impact = 'cold';
+    const result = {
+      dome:false,
+      temp:Math.round(c.temperature_2m),
+      feelsLike:Math.round(c.apparent_temperature),
+      wind:windSpd,
+      windDir:degToCompass(c.wind_direction_10m),
+      precip:c.precipitation,
+      condition:wx.label,
+      icon:wx.emoji,
+      impact,
+      stadiumName:stadium.name,
+    };
+    _nflWeatherCache[teamAbbr]=result;
+    return result;
+  } catch(e){ return null; }
+}
+
+function parseWeatherCode(code){
+  if(code===0) return {label:'Clear Skies',emoji:'☀️'};
+  if(code<=2)  return {label:'Partly Cloudy',emoji:'⛅'};
+  if(code<=3)  return {label:'Overcast',emoji:'☁️'};
+  if(code<=49) return {label:'Foggy',emoji:'🌫️'};
+  if(code<=59) return {label:'Drizzle',emoji:'🌦️'};
+  if(code<=69) return {label:'Rain',emoji:'🌧️'};
+  if(code<=79) return {label:'Snow',emoji:'❄️'};
+  if(code<=84) return {label:'Rain Showers',emoji:'🌧️'};
+  if(code<=94) return {label:'Snow Showers',emoji:'🌨️'};
+  return {label:'Thunderstorms',emoji:'⛈️'};
+}
+
+function degToCompass(d){
+  const dirs=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  return dirs[Math.round(d/22.5)%16];
+}
+
+function weatherImpactAnalysis(wx){
+  if(wx.dome) return '✅ Controlled dome environment. No weather factors.';
+  const lines = [];
+  if(wx.wind>25){
+    lines.push(`⚠️ ${wx.wind} MPH ${wx.windDir} winds -- expect shortened passing game, kicking significantly affected.`);
+  } else if(wx.wind>15){
+    lines.push(`💨 ${wx.wind} MPH ${wx.windDir} winds -- deep balls impacted, field goals beyond 45 yards risky.`);
+  }
+  if(wx.precip>0.1) lines.push('🌧️ Active precipitation -- ball security premium, run game advantaged.');
+  if(wx.feelsLike<32) lines.push(`🥶 Feels like ${wx.feelsLike}°F -- cold weather football. Passing accuracy tends to drop.`);
+  if(wx.feelsLike>90) lines.push(`🌡️ ${wx.feelsLike}°F heat index -- fatigue factor for defense in 4th quarter.`);
+  if(!lines.length) lines.push('✅ Ideal playing conditions. No significant weather factors.');
+  return lines.join('\n\n');
+}
+
+function weatherImpactColor(impact){
+  if(impact==='high') return {bg:'rgba(239,68,68,0.15)',color:'#f87171',border:'rgba(239,68,68,0.3)',dot:'#ef4444'};
+  if(impact==='moderate') return {bg:'rgba(245,158,11,0.12)',color:'#fbbf24',border:'rgba(245,158,11,0.25)',dot:'#f59e0b'};
+  if(impact==='cold') return {bg:'rgba(59,130,246,0.1)',color:'#60a5fa',border:'rgba(59,130,246,0.2)',dot:'#3b82f6'};
+  return {bg:'rgba(34,197,94,0.08)',color:'#4ade80',border:'rgba(34,197,94,0.15)',dot:'#22c55e'};
+}
+
+/* ── BUILD SCORE CARDS ── */
+async function nflBuildScoreCards(){
+  const scroller = document.getElementById('nfl-score-scroller');
+  scroller.innerHTML = '';
+  try {
+    const fmt = d => d.toISOString().split('T')[0].replace(/-/g,'');
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+
+    // Always check yesterday + today + tomorrow
+    const dates = [-1, 0, 1].map(offset => {
+      const d = new Date(today);
+      d.setDate(d.getDate() + offset);
+      return fmt(d);
+    });
+
+    // Smart prime-time lookback
+    const extraDates = [];
+    if (dayOfWeek === 1) { // Monday -- grab Sunday games
+      const d = new Date(today); d.setDate(today.getDate() - 1);
+      extraDates.push(fmt(d));
+    }
+    if (dayOfWeek === 2 || dayOfWeek === 3) { // Tue/Wed -- grab Monday night
+      const d = new Date(today); d.setDate(today.getDate() - (dayOfWeek - 1));
+      extraDates.push(fmt(d));
+    }
+    if (dayOfWeek === 5 || dayOfWeek === 6) { // Fri/Sat -- grab Thursday night
+      const d = new Date(today); d.setDate(today.getDate() - (dayOfWeek - 4));
+      extraDates.push(fmt(d));
+    }
+
+    const allDates = [...new Set([...dates, ...extraDates])];
+
+    // Fetch all dates at the same time
+    const responses = await Promise.all(
+      allDates.map(d =>
+        fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=${d}`)
+          .then(r => r.json()).catch(() => ({ events: [] }))
+      )
+    );
+
+    // Merge and remove duplicates
+    const seen = new Set();
+    let allEvents = [];
+    responses.forEach(data => {
+      (data.events || []).forEach(ev => {
+        if (!seen.has(ev.id)) { seen.add(ev.id); allEvents.push(ev); }
+      });
+    });
+
+    // If nothing found, fall back to ESPN's default week
+    if (!allEvents.length) {
+      const fallback = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard`)
+        .then(r => r.json()).catch(() => ({ events: [] }));
+      allEvents = fallback.events || [];
+    }
+
+    // Live games first, then upcoming, then final
+    const stateOrder = { 'in': 0, 'pre': 1, 'post': 2 };
+    allEvents.sort((a, b) =>
+      (stateOrder[a.status.type.state] ?? 3) - (stateOrder[b.status.type.state] ?? 3)
+    );
+
+    if (!allEvents.length) {
+      scroller.innerHTML = `<div style="min-width:220px;padding:2rem;text-align:center;font-size:11px;color:rgba(0,0,0,0.3);font-weight:700;text-transform:uppercase;letter-spacing:0.2em;">No games this week</div>`;
+      return;
+    }
+
+    for(const ev of allEvents){
+      const comp = ev.competitions[0];
+      const away = comp.competitors.find(c=>c.homeAway==='away');
+      const home = comp.competitors.find(c=>c.homeAway==='home');
+      const status = ev.status.type;
+      const isLive = status.state==='in';
+      const isPre  = status.state==='pre';
+
+      const homeAbbr = home.team.abbreviation;
+      const wx = await fetchWeather(homeAbbr);
+
+      const awayScore = parseInt(away.score)||0;
+      const homeScore = parseInt(home.score)||0;
+
+      const dotColor  = isLive?'#ef4444':isPre?'#fbbf24':'#64748b';
+      const statusTxt = isLive?`LIVE · ${status.shortDetail}`:isPre?status.shortDetail:'Final';
+
+      let wxHtml = '';
+      if(wx){
+        const ic = weatherImpactColor(wx.impact);
+        if(wx.dome){
+          wxHtml = `<div class="nfl-weather-strip"><span class="nfl-weather-icon">🏟️</span><span class="nfl-weather-temp" style="font-size:10px;">Dome</span><span class="nfl-weather-detail">Controlled</span><span class="nfl-weather-impact" style="background:${ic.bg};border:1px solid ${ic.border};"></span></div>`;
+        } else {
+          wxHtml = `<div class="nfl-weather-strip">
+            <span class="nfl-weather-icon">${wx.icon}</span>
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:baseline;gap:0.3rem;">
+                <span class="nfl-weather-temp">${wx.temp}°</span>
+                <span class="nfl-weather-detail">${wx.feelsLike<wx.temp?'Feels '+wx.feelsLike+'°':''}</span>
+              </div>
+              <span class="nfl-weather-detail">${wx.wind>0?`💨 ${wx.wind}mph ${wx.windDir} · `:''} ${wx.condition}</span>
+            </div>
+            <span class="nfl-weather-impact" style="background:${ic.dot};box-shadow:0 0 6px ${ic.dot}66;"></span>
+          </div>`;
+        }
+      }
+
+      const downDist = comp.situation?.shortDownDistanceText || '';
+      const possession = comp.situation?.possessionText || '';
+
+      const card = document.createElement('div');
+      card.className = `nfl-game-card${isLive?' is-live':''}`;
+      card.onclick = () => nflOpenLiveGame(ev.id, away, home, status, wx, comp);
+      card.innerHTML = `
+        <div class="nfl-card-status">
+          <div class="nfl-status-dot" style="background:${dotColor};${isLive?'box-shadow:0 0 8px rgba(239,68,68,0.8);':''}${isPre?'animation:pulse 1.5s infinite;':''}"></div>
+          <span class="nfl-status-text" style="color:${dotColor}">${statusTxt}</span>
+        </div>
+        <div class="nfl-card-matchup">
+          <div class="nfl-card-team-row">
+            <div class="nfl-card-team-left">
+              <img class="nfl-card-logo" src="${away.team.logo}" onerror="this.src='${nflLogo(homeAbbr)}'">
+              <div>
+                <div class="nfl-card-team-name">${away.team.abbreviation}</div>
+                <div class="nfl-card-record">${away.records?.[0]?.summary||'0-0'}</div>
+              </div>
+            </div>
+            ${!isPre?`<span class="nfl-card-score${awayScore>homeScore?' is-winning':''}">${awayScore}</span>`:'<span class="nfl-card-record" style="font-size:9px;">'+(away.records?.[0]?.summary||'0-0')+'</span>'}
+          </div>
+          <div class="nfl-card-team-row">
+            <div class="nfl-card-team-left">
+              <img class="nfl-card-logo" src="${home.team.logo}" onerror="this.src='${nflLogo(homeAbbr)}'">
+              <div>
+                <div class="nfl-card-team-name">${home.team.abbreviation}</div>
+                <div class="nfl-card-record">${home.records?.[0]?.summary||'0-0'}</div>
+              </div>
+            </div>
+            ${!isPre?`<span class="nfl-card-score${homeScore>awayScore?' is-winning':''}">${homeScore}</span>`:'<span class="nfl-card-record" style="font-size:9px;">'+(home.records?.[0]?.summary||'0-0')+'</span>'}
+          </div>
+        </div>
+        <div class="nfl-card-divider"></div>
+        ${isLive&&downDist?`<div class="nfl-card-down">${downDist} · ${possession}</div>`:''}
+        ${wxHtml}
+      `;
+      scroller.appendChild(card);
+    }
+  } catch(e){
+    scroller.innerHTML = `<div style="min-width:220px;padding:2rem;text-align:center;font-size:11px;color:rgba(0,0,0,0.3);font-weight:700;text-transform:uppercase;letter-spacing:0.2em;">Scores loading…</div>`;
+  }
+}
+
+/* ── BUILD TEAM CARDS ── */
+function nflBuildTeamCards(){
+  const scroller = document.getElementById('nfl-team-scroller');
+  scroller.innerHTML = '';
+  NFL_TEAMS.forEach(t=>{
+    const card = document.createElement('div');
+    card.className = 'nfl-tc';
+    const isHot = t.alert && (t.alert.includes('🏆')||t.alert.includes('!'));
+    const hasBattle = NFL_BATTLES[t.a]?.length > 0;
+    const hasInjury = NFL_INJURIES[t.a]?.some(i=>i.status==='OUT'||i.status==='IR');
+    card.onclick = () => nflOpenTeam(t);
+    card.innerHTML = `
+      <img class="nfl-tc-logo" src="${nflLogo(t.a)}" onerror="this.style.opacity=0.3">
+      <p class="nfl-tc-name">${t.name}</p>
+      <p class="nfl-tc-rec">${t.wl}</p>
+      <div style="display:flex;flex-direction:column;gap:3px;align-items:center;">
+        ${t.champ?`<span class="nfl-tc-badge nfl-badge-champ">Champs</span>`:''}
+        ${isHot&&!t.champ?`<span class="nfl-tc-badge nfl-badge-hot">🔥</span>`:''}
+        ${hasBattle?`<span class="nfl-tc-badge nfl-badge-battle">⚔️</span>`:''}
+        ${hasInjury?`<span class="nfl-tc-badge nfl-badge-injury">🤕</span>`:''}
+      </div>`;
+    scroller.appendChild(card);
+  });
+}
+
+/* ── OPEN TEAM MODAL ── */
+async function nflOpenTeam(team){
+  _nflCurrentTeam = team;
+  document.querySelectorAll('.nfl-tab').forEach((t,i)=>{ if(t.closest('#nfl-modal')) t.classList.toggle('on',i===0); });
+  document.querySelectorAll('.nfl-panel').forEach((p,i)=>{ if(p.id.startsWith('nfl-panel')) p.classList.toggle('on',i===0); });
+
+  document.getElementById('nfl-hero-bg').style.background = `linear-gradient(135deg,${team.p} 0%,${team.s} 100%)`;
+  document.getElementById('nfl-hero-logo').src = nflLogo(team.a);
+  document.getElementById('nfl-hero-label').textContent = team.div+' · 2026 NFL Season';
+  document.getElementById('nfl-hero-rec').textContent = team.wl;
+  document.getElementById('nfl-city').textContent = team.city;
+  document.getElementById('nfl-name').textContent = team.name;
+  document.getElementById('nfl-division').textContent = team.div+(team.champ?' · 🏆 Defending Champions':'');
+  document.getElementById('nfl-wl').textContent = team.wl;
+  document.getElementById('nfl-pfg').textContent = team.pfg;
+  document.getElementById('nfl-pag').textContent = team.pag;
+  document.getElementById('nfl-cap').textContent = team.cap;
+  document.getElementById('nfl-pff-off').textContent = team.pffOff;
+  document.getElementById('nfl-pff-def').textContent = team.pffDef;
+
+  const alertEl = document.getElementById('nfl-alert');
+  if(team.alert){
+    alertEl.classList.add('visible');
+    document.getElementById('nfl-alert-text').textContent = team.alert;
+  } else { alertEl.classList.remove('visible'); }
+
+  ['depth','battles','roster','cap','injuries','news'].forEach(p=>{
+    document.getElementById(`nfl-panel-${p}`).innerHTML = nflSkeleton();
+  });
+
+  const overlay = document.getElementById('nfl-overlay');
+  const modal   = document.getElementById('nfl-modal');
+  overlay.classList.add('nfl-open');
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  setTimeout(()=>modal.classList.add('nfl-shown'),10);
+
+  // Fetch news and weather in parallel
+  const [newsData, wx] = await Promise.all([
+    fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${team.a.toLowerCase()}/news?limit=6`).then(r=>r.json()).catch(()=>null),
+    fetchWeather(team.a)
+  ]);
+
+  await nflRenderDepth(team);
+  nflRenderBattles(team);
+  nflRenderRoster(team);
+  nflRenderCap(team, wx);
+  nflRenderInjuries(team);
+  nflRenderNews(team, newsData, wx);
+}
+
+function nflLiveClose(){
+  if(window._nflPBPInterval){ clearInterval(window._nflPBPInterval); window._nflPBPInterval = null; }
+  document.getElementById('nfl-live-modal').classList.remove('live-shown');
+  setTimeout(()=>{ document.getElementById('nfl-live-overlay').classList.remove('live-open'); document.body.style.overflow=''; },500);
+}
+
+function nflOverlayClick(e){ if(e.target===document.getElementById('nfl-overlay')) nflClose(); }
+
+function nflTab(el,panel){
+  document.querySelectorAll('#nfl-modal .nfl-tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('#nfl-modal .nfl-panel').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById(`nfl-panel-${panel}`).classList.add('on');
+}
+
+/* ── RENDER DEPTH CHART ── */
+function nflRenderDepth(team){
+  const el = document.getElementById('nfl-panel-depth');
+  const d  = NFL_DEPTH[team.a];
+  if(!d){ el.innerHTML = `<div style="text-align:center;padding:4rem 0;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.15);">Depth chart syncing…</div>`; return; }
+
+  const posColors = {
+    QB:{ring:'rgba(248,113,113,0.6)',glow:'rgba(239,68,68,0.2)',badge:'rgba(239,68,68,0.15)',tc:'#f87171'},
+    RB:{ring:'rgba(52,211,153,0.6)',glow:'rgba(34,197,94,0.2)',badge:'rgba(34,197,94,0.12)',tc:'#4ade80'},
+    WR:{ring:'rgba(96,165,250,0.6)',glow:'rgba(59,130,246,0.2)',badge:'rgba(59,130,246,0.12)',tc:'#60a5fa'},
+    TE:{ring:'rgba(251,191,36,0.6)',glow:'rgba(245,158,11,0.2)',badge:'rgba(245,158,11,0.12)',tc:'#fbbf24'},
+    OL:{ring:'rgba(167,139,250,0.5)',glow:'rgba(139,92,246,0.15)',badge:'rgba(139,92,246,0.1)',tc:'#a78bfa'},
+    LT:{ring:'rgba(167,139,250,0.5)',glow:'rgba(139,92,246,0.15)',badge:'rgba(139,92,246,0.1)',tc:'#a78bfa'},
+    OG:{ring:'rgba(167,139,250,0.5)',glow:'rgba(139,92,246,0.15)',badge:'rgba(139,92,246,0.1)',tc:'#a78bfa'},
+    C:{ring:'rgba(167,139,250,0.5)',glow:'rgba(139,92,246,0.15)',badge:'rgba(139,92,246,0.1)',tc:'#a78bfa'},
+    RT:{ring:'rgba(167,139,250,0.5)',glow:'rgba(139,92,246,0.15)',badge:'rgba(139,92,246,0.1)',tc:'#a78bfa'},
+    DE:{ring:'rgba(236,72,153,0.5)',glow:'rgba(236,72,153,0.15)',badge:'rgba(236,72,153,0.1)',tc:'#f472b6'},
+    DT:{ring:'rgba(236,72,153,0.5)',glow:'rgba(236,72,153,0.15)',badge:'rgba(236,72,153,0.1)',tc:'#f472b6'},
+    LB:{ring:'rgba(6,182,212,0.5)',glow:'rgba(6,182,212,0.15)',badge:'rgba(6,182,212,0.1)',tc:'#22d3ee'},
+    CB:{ring:'rgba(251,191,36,0.5)',glow:'rgba(245,158,11,0.15)',badge:'rgba(245,158,11,0.1)',tc:'#fde68a'},
+    S:{ring:'rgba(52,211,153,0.5)',glow:'rgba(16,185,129,0.15)',badge:'rgba(16,185,129,0.1)',tc:'#34d399'},
+  };
+
+  const buildNode = (name, pos, isStarter) => {
+    const c = posColors[pos]||posColors.WR;
+    const short = name.split(' ').pop().substring(0,4).toUpperCase();
+    const pffG = NFL_ROSTERS[team.a]?.find(p=>p.n===name)?.pff;
+    return `<div class="nfl-pnode" title="${name}">
+      <div class="nfl-av-ring" style="--av-border:${c.ring};--av-glow:${c.glow}">
+        <div class="nfl-av-inner">
+          <span style="font-size:10px;font-weight:900;color:${c.tc};">${short}</span>
+        </div>
+        ${isStarter?'<span class="nfl-starter-dot"></span>':''}
+        <span class="nfl-pos-badge" style="background:${c.badge};color:${c.tc}">${pos}</span>
+      </div>
+      <p class="nfl-pname">${name.split(' ').pop()}</p>
+      ${pffG?`<p class="nfl-pname-pff ${pffClass(pffG)}">${pffG}</p>`:''}
+    </div>`;
+  };
+
+  const buildUnit = (label, positions) => {
+    let html = `<div class="nfl-unit-label">${label}</div>`;
+    Object.entries(positions).forEach(([pos, players])=>{
+      html += `<div class="nfl-pos-row">${players.slice(0,4).map((p,i)=>buildNode(p,pos,i===0)).join('')}</div>`;
+    });
+    return html;
+  };
+
+  const fieldSVG = `<svg class="nfl-field-lines" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <rect x="10" y="10" width="380" height="580" rx="6" stroke="rgba(255,255,255,1)" stroke-width="1" fill="none"/>
+    <line x1="10" y1="300" x2="390" y2="300" stroke="rgba(255,255,255,1)" stroke-width="1"/>
+    ${[60,120,180,240,360,420,480].map(y=>`<line x1="10" y1="${y}" x2="390" y2="${y}" stroke="rgba(255,255,255,0.5)" stroke-width="0.5"/>`).join('')}
+  </svg>`;
+
+  const offKeys = {QB:d.offense.QB,RB:d.offense.RB,WR:d.offense.WR,TE:d.offense.TE};
+  const olKeys  = Object.fromEntries(Object.entries(d.offense).filter(([k])=>!['QB','RB','WR','TE'].includes(k)));
+  const defKeys = d.defense;
+
+  el.innerHTML = `
+  <div class="nfl-field-shell">
+    ${fieldSVG}
+    ${buildUnit('⚔️ Offense -- Skill',offKeys)}
+    ${Object.keys(olKeys).length?buildUnit('🛡️ Offensive Line',olKeys):''}
+    <div style="height:1px;background:rgba(255,255,255,0.05);margin:0.75rem 0;position:relative;z-index:2;"></div>
+    ${buildUnit('🔒 Defense',defKeys)}
+  </div>
+  <p style="font-size:9px;color:rgba(255,255,255,0.15);text-align:center;margin-top:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">
+    Projected starters · 2026 Training Camp
+  </p>`;
+}
+
+/* ── RENDER POSITIONAL BATTLES ── */
+function nflRenderBattles(team){
+  const el = document.getElementById('nfl-panel-battles');
+  const battles = NFL_BATTLES[team.a];
+  if(!battles||!battles.length){
+    el.innerHTML = `<div style="text-align:center;padding:4rem 0;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.15);">No active positional battles</div>`;
+    return;
+  }
+
+  const statusConfig = {
+    open:{cls:'battle-open',label:'🔴 Open Battle'},
+    active:{cls:'battle-active',label:'🟡 Active Battle'},
+    locked:{cls:'battle-locked',label:'🟢 Locked In'},
+  };
+
+  let html = `<div style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.2);margin-bottom:1rem;">2026 Training Camp · Position Battles</div>`;
+
+  battles.forEach(b=>{
+    const sc = statusConfig[b.status]||statusConfig.active;
+    const pctB = 100 - b.pctA;
+    html += `
+    <div class="nfl-battle-card">
+      <div class="nfl-battle-header">
+        <span class="nfl-battle-pos">${b.pos}</span>
+        <span class="nfl-battle-status ${sc.cls}">${sc.label}</span>
+      </div>
+      <div class="nfl-battle-players">
+        <div class="nfl-battle-player ${b.pctA>50?'is-leading':''}">
+          <div class="nfl-bp-name">${b.playerA.name.split(' ').pop()}</div>
+          <div class="nfl-bp-pff ${pffClass(b.playerA.pff)}">${b.playerA.pff?'PFF '+b.playerA.pff:'Rookie'}</div>
+          <div class="nfl-bp-note">${b.playerA.note}</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;font-weight:900;color:rgba(255,255,255,0.2);">vs</div>
+        <div class="nfl-battle-player ${pctB>50?'is-leading':''}">
+          <div class="nfl-bp-name">${b.playerB.name.split(' ').pop()}</div>
+          <div class="nfl-bp-pff ${pffClass(b.playerB.pff)}">${b.playerB.pff?'PFF '+b.playerB.pff:'Rookie'}</div>
+          <div class="nfl-bp-note">${b.playerB.note}</div>
+        </div>
+      </div>
+      <div class="nfl-battle-meter-wrap">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+          <span style="font-size:8px;font-weight:900;color:#4ade80;">${b.pctA}%</span>
+          <span style="font-size:8px;font-weight:900;color:rgba(255,255,255,0.3);">${pctB}%</span>
+        </div>
+        <div class="nfl-battle-meter">
+          <div class="nfl-battle-meter-a" style="width:${b.pctA}%"></div>
+          <div class="nfl-battle-meter-b" style="width:${pctB}%"></div>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+/* ── RENDER ROSTER ── */
+function nflRenderRoster(team){
+  const el = document.getElementById('nfl-panel-roster');
+  const players = NFL_ROSTERS[team.a];
+  if(!players||!players.length){
+    el.innerHTML = `<div style="text-align:center;padding:4rem 0;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.15);">Roster syncing…</div>`;
+    return;
+  }
+
+  const posOrder = {QB:0,RB:1,WR:2,TE:3,OT:4,OG:5,C:6,DE:7,DT:8,LB:9,CB:10,S:11,K:12};
+  const sorted = [...players].sort((a,b)=>(posOrder[a.pos]??99)-(posOrder[b.pos]??99));
+
+  let html = `<table class="nfl-roster-table"><thead><tr>
+    <th>Player</th><th>Pos</th><th>PFF</th><th>Status</th><th style="text-align:right;">Salary</th>
+  </tr></thead><tbody>`;
+
+  sorted.forEach(p=>{
+    const injStatus = NFL_INJURIES[team.a]?.find(i=>i.n===p.n);
+    const statusLabel = injStatus?.status || p.status || 'Active';
+    const statusClass = statusLabel==='OUT'?'inj-out':statusLabel==='IR'?'inj-ir':statusLabel==='D'?'inj-doubtful':statusLabel==='Q'?'inj-questionable':statusLabel==='PROBABLE'?'inj-probable':'';
+    html += `<tr class="nfl-roster-row">
+      <td style="font-size:12px;font-weight:800;color:#e0e0e0;">${p.n}</td>
+      <td><span class="nfl-roster-pos-badge pos-${p.pos}">${p.pos}</span></td>
+      <td><span class="nfl-pff-grade ${pffClass(p.pff)}">${p.pff||'--'}</span></td>
+      <td>${statusClass?`<span class="nfl-inj-status ${statusClass}">${statusLabel}</span>`:`<span style="font-size:9px;color:rgba(255,255,255,0.2);font-weight:700;">Active</span>`}</td>
+      <td style="text-align:right;font-size:11px;font-weight:900;color:#22c55e;">${p.sal}</td>
+    </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  el.innerHTML = html;
+}
+
+/* ── RENDER CAP ── */
+function nflRenderCap(team, wx){
+  const el = document.getElementById('nfl-panel-cap');
+  const cap = NFL_CAP[team.a];
+  const NFL_CAP_TOTAL = 265.4;
+
+  if(!cap){
+    el.innerHTML = `<div style="text-align:center;padding:4rem 0;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.15);">Cap data loading…</div>`;
+    return;
+  }
+
+  const usedPct  = Math.min(98, Math.round((cap.used / NFL_CAP_TOTAL)*100));
+  const spaceColor = cap.space > 0 ? '#22c55e' : cap.space > -10 ? '#fbbf24' : '#ef4444';
+  const spaceLabel = cap.space > 0 ? `$${cap.space}M Available` : `$${Math.abs(cap.space)}M Over Cap`;
+
+  let html = `
+  <div class="nfl-cap-nums">
+    <div class="nfl-cap-num-card" style="--cap-color:#22c55e">
+      <span class="nfl-cap-label">2026 Cap</span>
+      <span class="nfl-cap-val">$265.4M</span>
+      <span class="nfl-cap-sub">NFL Hard Cap</span>
+    </div>
+    <div class="nfl-cap-num-card" style="--cap-color:#fbbf24">
+      <span class="nfl-cap-label">Dead Money</span>
+      <span class="nfl-cap-val">$${cap.dead}M</span>
+      <span class="nfl-cap-sub">Non-contributors</span>
+    </div>
+    <div class="nfl-cap-num-card" style="--cap-color:${spaceColor}">
+      <span class="nfl-cap-label">Cap Space</span>
+      <span class="nfl-cap-val" style="color:${spaceColor};font-size:13px;">${spaceLabel}</span>
+      <span class="nfl-cap-sub">${cap.space>0?'Room to sign':'Over limit'}</span>
+    </div>
+  </div>
+
+  <div class="nfl-cap-hero">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:0.5rem;">
+      <span style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.25em;color:rgba(255,255,255,0.3);">Payroll vs Cap</span>
+      <span style="font-size:18px;font-weight:900;color:${spaceColor};letter-spacing:-0.02em;">$${cap.used}M</span>
+    </div>
+    <div class="nfl-cap-gauge">
+      <div class="nfl-cap-fill" id="nfl-cap-fill-bar" style="width:0%;"></div>
+      <div class="nfl-cap-cursor" id="nfl-cap-cursor" style="left:0%;"></div>
+      <div style="position:absolute;top:0;left:75%;bottom:0;width:1px;background:rgba(255,255,255,0.2);"></div>
+      <div class="nfl-cap-marker" style="left:75%;color:#22c55e;">Cap</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:0.35rem;">
+      <span style="font-size:8px;font-weight:700;color:rgba(255,255,255,0.2);">$0</span>
+      <span style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;color:${spaceColor};">${cap.space>0?'Under Cap':'Over Cap'}</span>
+      <span style="font-size:8px;font-weight:700;color:rgba(255,255,255,0.2);">$${NFL_CAP_TOTAL}M</span>
+    </div>
+  </div>
+
+  <!-- NFL-specific cap tools -->
+  <div style="margin-bottom:1.25rem;">
+    <p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.2);margin-bottom:0.875rem;">Roster Tools & Designations</p>
+    <div style="display:flex;flex-direction:column;gap:0.5rem;">
+      ${cap.tag?`
+      <div style="padding:0.875rem 1rem;border-radius:1.25rem;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:0.5rem;">
+          <span style="font-size:1rem;">🏷️</span>
+          <div>
+            <p style="font-size:10px;font-weight:900;text-transform:uppercase;color:#fbbf24;">Franchise Tag</p>
+            <p style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.4);">${cap.tag}</p>
+          </div>
+        </div>
+        <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:#fbbf24;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.2);padding:3px 8px;border-radius:100px;">Tagged</span>
+      </div>`:''}
+      <div style="padding:0.875rem 1rem;border-radius:1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:0.5rem;">
+          <span style="font-size:1rem;">💀</span>
+          <div>
+            <p style="font-size:10px;font-weight:900;text-transform:uppercase;color:rgba(255,255,255,0.5);">Dead Cap</p>
+            <p style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.3);">From released/restructured players</p>
+          </div>
+        </div>
+        <span style="font-size:14px;font-weight:900;color:#f87171;">$${cap.dead}M</span>
+      </div>
+      <div style="padding:0.875rem 1rem;border-radius:1.25rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:0.5rem;">
+          <span style="font-size:1rem;">📋</span>
+          <div>
+            <p style="font-size:10px;font-weight:900;text-transform:uppercase;color:rgba(255,255,255,0.5);">Practice Squad</p>
+            <p style="font-size:10px;font-weight:600;color:rgba(255,255,255,0.3);">$14,400/week per player</p>
+          </div>
+        </div>
+        <span style="font-size:9px;font-weight:900;color:rgba(255,255,255,0.3);text-transform:uppercase;">16 spots</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top contracts from roster -->
+  <p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.2);margin-bottom:0.875rem;">Top Contracts</p>`;
+
+  const players = NFL_ROSTERS[team.a]||[];
+  const sorted = [...players].sort((a,b)=>parseFloat(b.sal.replace(/[^0-9.]/g,''))-parseFloat(a.sal.replace(/[^0-9.]/g,'')));
+
+  sorted.slice(0,8).forEach(p=>{
+    const salNum = parseFloat(p.sal.replace(/[^0-9.]/g,''));
+    const maxSal = parseFloat(sorted[0].sal.replace(/[^0-9.]/g,''));
+    const barPct = Math.round((salNum/maxSal)*96);
+    const barColor = salNum>30?'#22c55e':salNum>15?'rgba(251,191,36,0.7)':'rgba(255,255,255,0.2)';
+    html += `<div style="display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.03);">
+      <div style="flex:1;min-width:0;">
+        <p style="font-size:12px;font-weight:800;color:#e0e0e0;truncate;">${p.n}</p>
+        <p style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.25);">${p.pos}</p>
+      </div>
+      <div style="flex:1.2;min-width:0;">
+        <div style="height:4px;border-radius:100px;background:rgba(255,255,255,0.06);overflow:hidden;margin-bottom:3px;">
+          <div style="height:100%;width:${barPct}%;background:${barColor};border-radius:100px;"></div>
+        </div>
+      </div>
+      <span style="font-size:11px;font-weight:900;color:#22c55e;flex-shrink:0;min-width:44px;text-align:right;">${p.sal}</span>
+    </div>`;
+  });
+
+  el.innerHTML = html;
+
+  setTimeout(()=>{
+    const fill = document.getElementById('nfl-cap-fill-bar');
+    const cursor = document.getElementById('nfl-cap-cursor');
+    if(fill){ fill.style.width = usedPct+'%'; }
+    if(cursor){ cursor.style.left = usedPct+'%'; }
+  },200);
+}
+
+/* ── RENDER INJURIES ── */
+function nflRenderInjuries(team){
+  const el = document.getElementById('nfl-panel-injuries');
+  const inj = NFL_INJURIES[team.a];
+  if(!inj||!inj.length){
+    el.innerHTML = `<div style="text-align:center;padding:4rem 0;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.15);">No notable injuries reported ✅</div>`;
+    return;
+  }
+
+  const statusClass = {OUT:'inj-out',IR:'inj-ir',D:'inj-doubtful',Q:'inj-questionable',PROBABLE:'inj-probable',PUP:'inj-pup'};
+  let html = `<div style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.2);margin-bottom:1rem;">2026 Injury Report</div>`;
+  inj.forEach(i=>{
+    html += `<div class="nfl-injury-row">
+      <div style="flex:1;min-width:0;">
+        <div class="nfl-inj-name">${i.n}</div>
+        <div class="nfl-inj-pos">${i.pos} · ${i.note}</div>
+      </div>
+      <span class="nfl-inj-status ${statusClass[i.status]||'inj-questionable'}">${i.status}</span>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
+/* ── RENDER NEWS ── */
+function nflRenderNews(team, newsData, wx){
+  const el = document.getElementById('nfl-panel-news');
+  const articles = newsData?.articles||[];
+  const sorted = [...articles].sort((a,b)=>new Date(b.published||0)-new Date(a.published||0));
+
+  let html = '';
+
+  // Alert card
+  if(team.alert){
+    html += `<div style="padding-bottom:1.5rem;margin-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.06);">
+      <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+        <span style="width:5px;height:5px;border-radius:50%;background:#f59e0b;box-shadow:0 0 8px rgba(245,158,11,0.9);flex-shrink:0;"></span>
+        <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.35em;color:#f59e0b;">Camp Update</span>
+      </div>
+      <p style="font-size:13px;font-weight:700;color:rgba(255,255,255,0.7);line-height:1.7;padding-left:0.875rem;border-left:2px solid rgba(245,158,11,0.4);">${team.alert}</p>
+    </div>`;
+  }
+
+  // Weather card in news for context
+  if(wx){
+    const ic = weatherImpactColor(wx.impact);
+    const impact = weatherImpactAnalysis(wx);
+    html += `<div class="nfl-weather-modal-card" style="margin-bottom:1.25rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+        <span style="font-size:24px;">${wx.icon}</span>
+        <div>
+          <p style="font-size:18px;font-weight:900;color:#f0f0f0;">${wx.dome?'Dome':wx.temp+'°F'}</p>
+          <p style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);">${wx.dome?'Controlled Environment':wx.stadiumName}</p>
+        </div>
+        <div style="margin-left:auto;padding:4px 10px;border-radius:100px;background:${ic.bg};border:1px solid ${ic.border};font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;color:${ic.color};">${wx.impact==='none'?'Ideal':wx.impact.toUpperCase()+' IMPACT'}</div>
+      </div>
+      ${!wx.dome?`<div class="nfl-weather-grid">
+        <div class="nfl-weather-stat"><div class="nfl-weather-stat-label">Feels Like</div><div class="nfl-weather-stat-val">${wx.feelsLike}°</div></div>
+        <div class="nfl-weather-stat"><div class="nfl-weather-stat-label">Wind</div><div class="nfl-weather-stat-val">${wx.wind} mph</div></div>
+        <div class="nfl-weather-stat"><div class="nfl-weather-stat-label">Direction</div><div class="nfl-weather-stat-val" style="font-size:14px;">${wx.windDir||'--'}</div></div>
+        <div class="nfl-weather-stat"><div class="nfl-weather-stat-label">Precip</div><div class="nfl-weather-stat-val" style="font-size:14px;">${wx.precip>0?wx.precip+'"':'None'}</div></div>
+      </div>
+      <div class="nfl-weather-impact-box">
+        <div class="nfl-weather-impact-title">⚠️ Game Impact Analysis</div>
+        <p class="nfl-weather-impact-text">${impact}</p>
+      </div>`:'<p style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.4);margin-top:0.5rem;">No weather factors -- controlled dome environment.</p>'}
+    </div>`;
+  }
+
+  if(!sorted.length && !team.alert){ el.innerHTML = `<div style="text-align:center;padding:4rem 0;font-size:10px;color:rgba(255,255,255,0.15);font-weight:900;text-transform:uppercase;letter-spacing:0.3em;">No recent coverage</div>`; return; }
+
+  if(sorted.length){
+    html += `<div style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.4em;color:rgba(255,255,255,0.2);margin-bottom:1rem;">Latest Coverage</div>`;
+    sorted.forEach((a,i)=>{
+      const img = a.images?.[0]?.url;
+      const isFirst = i===0;
+      if(isFirst){
+        html += `<div onclick="window.open('${a.links?.web?.href||'#'}','_blank')" style="position:relative;overflow:hidden;border-radius:1.75rem;margin-bottom:0.75rem;cursor:pointer;min-height:180px;background:#0d1117;border:1px solid rgba(255,255,255,0.07);">
+          ${img?`<img src="${img}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0.35;" onerror="this.style.display='none'"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,14,24,0.98) 0%,rgba(8,14,24,0.5) 60%,transparent 100%);"></div>`:''}
+          <div style="position:relative;z-index:2;padding:1.25rem;display:flex;flex-direction:column;justify-content:flex-end;min-height:180px;">
+            <p style="font-size:16px;font-weight:900;color:#f0f0f0;line-height:1.3;letter-spacing:-0.02em;">${a.headline||''}</p>
+          </div>
+        </div>`;
+      } else {
+        html += `<div onclick="window.open('${a.links?.web?.href||'#'}','_blank')" style="display:flex;align-items:center;gap:0.875rem;padding:0.875rem 0;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer;">
+          ${img?`<div style="width:52px;height:52px;border-radius:0.875rem;overflow:hidden;flex-shrink:0;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);"><img src="${img}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.display='none'"></div>`:''}
+          <p style="font-size:12px;font-weight:800;color:rgba(255,255,255,0.8);line-height:1.35;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${a.headline||''}</p>
+        </div>`;
+      }
+    });
+  }
+
+  el.innerHTML = html;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   NFL LIVE GAME ENGINE v2
+   3D Field · Play Diagrams · YAC · Possession Indicator
+══════════════════════════════════════════════════════════════ */
+
+let _nflLiveGame = null;
+let _nflPBPInterval = null;
+let _liveCanvas = null;
+let _liveCtx = null;
+let _livePlayHistory = [];
+let _liveCurrentPlay = null;
+let _liveAnimFrame = null;
+let _liveAnimProgress = 0;
+
+/* ── FIELD RENDERER ── */
+function initField3D() {
+  const canvas = document.getElementById('live-field-canvas');
+  if (!canvas) return;
+  _liveCanvas = canvas;
+  _liveCtx = canvas.getContext('2d');
+  resizeField();
+  window.addEventListener('resize', resizeField);
+  drawField(null, null);
+}
+
+function resizeField() {
+  if (!_liveCanvas) return;
+  const wrap = _liveCanvas.parentElement;
+  _liveCanvas.width  = wrap.clientWidth  * (window.devicePixelRatio || 1);
+  _liveCanvas.height = _liveCanvas.clientHeight * (window.devicePixelRatio || 1);
+  _liveCtx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+  drawField(_liveCurrentPlay, _livePlayHistory);
+}
+
+function fieldW() { return _liveCanvas.clientWidth; }
+function fieldH() { return _liveCanvas.clientHeight; }
+
+/* Convert yard line (0–100) to canvas X -- 8% endzones */
+function yardToX(yard) {
+  const ez = fieldW() * 0.08;
+  return ez + (yard / 100) * (fieldW() - ez * 2);
+}
+
+function drawField(currentPlay, history) {
+  if (!_liveCtx) return;
+  const ctx = _liveCtx;
+  const W = fieldW(), H = fieldH();
+
+  /* Background */
+  const grd = ctx.createLinearGradient(0, 0, 0, H);
+  grd.addColorStop(0,   '#0d2010');
+  grd.addColorStop(0.5, '#0a1a0a');
+  grd.addColorStop(1,   '#06120a');
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, W, H);
+
+  /* Yard stripes */
+  for (let y = 0; y <= 100; y += 5) {
+    const x = yardToX(y);
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, H);
+    ctx.strokeStyle = y % 10 === 0
+      ? 'rgba(255,255,255,0.12)'
+      : 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = y % 10 === 0 ? 1 : 0.5;
+    ctx.stroke();
+  }
+
+  /* Midfield circle (faint) */
+  ctx.beginPath();
+  ctx.arc(W / 2, H / 2, Math.min(W, H) * 0.15, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  /* End zones */
+  const ez = W * 0.08;
+  // Away
+  ctx.fillStyle = _nflLiveGame ? hexToRgba(_nflLiveGame.awayColor, 0.25) : 'rgba(239,68,68,0.15)';
+  ctx.fillRect(0, 0, ez, H);
+  // Home
+  ctx.fillStyle = _nflLiveGame ? hexToRgba(_nflLiveGame.homeColor, 0.25) : 'rgba(59,130,246,0.15)';
+  ctx.fillRect(W - ez, 0, ez, H);
+
+  /* Hash marks */
+  for (let y = 5; y <= 95; y += 5) {
+    const x = yardToX(y);
+    [H * 0.35, H * 0.65].forEach(hy => {
+      ctx.beginPath();
+      ctx.moveTo(x - 3, hy);
+      ctx.lineTo(x + 3, hy);
+      ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+  }
+
+  /* Play history (faded) */
+  if (history && history.length) {
+    history.slice(-5).forEach((play, i) => {
+      const alpha = 0.08 + i * 0.04;
+      drawPlayDiagram(ctx, play, alpha, W, H, false);
+    });
+  }
+
+  /* Current play (full) */
+  if (currentPlay) {
+    drawPlayDiagram(ctx, currentPlay, 1, W, H, true);
+    drawBall(ctx, currentPlay, W, H);
+  }
+
+  /* Scrimmage line */
+  if (_nflLiveGame && _nflLiveGame.yardLine != null) {
+    const scrimX = yardToX(_nflLiveGame.yardLine);
+    ctx.beginPath();
+    ctx.moveTo(scrimX, 0);
+    ctx.lineTo(scrimX, H);
+    ctx.strokeStyle = 'rgba(251,191,36,0.7)';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* First down marker */
+    if (_nflLiveGame.firstDownYard != null) {
+      const fdX = yardToX(_nflLiveGame.firstDownYard);
+      ctx.beginPath();
+      ctx.moveTo(fdX, 0);
+      ctx.lineTo(fdX, H);
+      ctx.strokeStyle = 'rgba(34,197,94,0.7)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 4]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    /* Possession indicator (pulsing circle at scrimmage) */
+    const posY = H * 0.5;
+    const pulse = 0.5 + 0.5 * Math.sin(Date.now() / 300);
+    const posColor = _nflLiveGame.hasPossession === 'home'
+      ? _nflLiveGame.homeColor
+      : _nflLiveGame.awayColor;
+    ctx.beginPath();
+    ctx.arc(scrimX, posY, 8 + pulse * 3, 0, Math.PI * 2);
+    ctx.fillStyle = hexToRgba(posColor, 0.15 + pulse * 0.1);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(scrimX, posY, 6, 0, Math.PI * 2);
+    ctx.fillStyle = hexToRgba(posColor, 0.9);
+    ctx.fill();
+
+    /* Football icon */
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('●', scrimX, posY);
+  }
+}
+
+function drawPlayDiagram(ctx, play, alpha, W, H, isCurrent) {
+  if (!play || !play.type) return;
+  const startX = yardToX(play.startYard || 50);
+  const endX   = yardToX(play.endYard || 50);
+  const midY   = H * 0.5;
+
+  ctx.globalAlpha = alpha;
+
+  if (play.type === 'pass') {
+    /* Arc from QB to receiver */
+    const catchX = yardToX(play.catchYard || play.endYard || 50);
+    const ctrlX  = (startX + catchX) / 2;
+    const ctrlY  = midY - H * 0.25;
+
+    /* Pass arc */
+    ctx.beginPath();
+    ctx.moveTo(startX, midY);
+    ctx.quadraticCurveTo(ctrlX, ctrlY, catchX, midY + (play.routeOffset || 0));
+    ctx.strokeStyle = isCurrent ? '#60a5fa' : 'rgba(96,165,250,0.6)';
+    ctx.lineWidth   = isCurrent ? 2 : 1;
+    ctx.setLineDash([5, 3]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* Catch dot */
+    ctx.beginPath();
+    ctx.arc(catchX, midY + (play.routeOffset || 0), isCurrent ? 5 : 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#60a5fa';
+    ctx.fill();
+
+    /* YAC line (catch → tackle) */
+    if (play.endYard != null && play.catchYard != null) {
+      ctx.beginPath();
+      ctx.moveTo(catchX, midY + (play.routeOffset || 0));
+      ctx.lineTo(endX, midY + (play.routeOffset || 0));
+      ctx.strokeStyle = '#4ade80';
+      ctx.lineWidth   = isCurrent ? 2.5 : 1;
+      ctx.setLineDash([]);
+      ctx.stroke();
+
+      /* Tackle X */
+      if (isCurrent) {
+        ctx.beginPath();
+        ctx.moveTo(endX - 5, midY - 5 + (play.routeOffset || 0));
+        ctx.lineTo(endX + 5, midY + 5 + (play.routeOffset || 0));
+        ctx.moveTo(endX + 5, midY - 5 + (play.routeOffset || 0));
+        ctx.lineTo(endX - 5, midY + 5 + (play.routeOffset || 0));
+        ctx.strokeStyle = '#f87171';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+    }
+
+    /* QB dot */
+    ctx.beginPath();
+    ctx.arc(startX, midY, isCurrent ? 6 : 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#fbbf24';
+    ctx.fill();
+
+  } else if (play.type === 'run') {
+    /* Solid arrow for run */
+    ctx.beginPath();
+    ctx.moveTo(startX, midY);
+    ctx.lineTo(endX, midY + (play.routeOffset || 0));
+    ctx.strokeStyle = isCurrent ? '#4ade80' : 'rgba(74,222,128,0.4)';
+    ctx.lineWidth = isCurrent ? 3 : 1.5;
+    ctx.lineCap  = 'round';
+    ctx.stroke();
+
+    /* Arrowhead */
+    if (isCurrent) {
+      const angle = Math.atan2(play.routeOffset || 0, endX - startX);
+      ctx.save();
+      ctx.translate(endX, midY + (play.routeOffset || 0));
+      ctx.rotate(angle);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(-10, -5);
+      ctx.lineTo(-10, 5);
+      ctx.closePath();
+      ctx.fillStyle = '#4ade80';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    /* Tackle X */
+    if (isCurrent) {
+      ctx.beginPath();
+      ctx.moveTo(endX - 5, midY - 5 + (play.routeOffset || 0));
+      ctx.lineTo(endX + 5, midY + 5 + (play.routeOffset || 0));
+      ctx.moveTo(endX + 5, midY - 5 + (play.routeOffset || 0));
+      ctx.lineTo(endX - 5, midY + 5 + (play.routeOffset || 0));
+      ctx.strokeStyle = '#f87171';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+  } else if (play.type === 'sack') {
+    ctx.beginPath();
+    ctx.arc(startX, midY, isCurrent ? 10 : 5, 0, Math.PI * 2);
+    ctx.strokeStyle = '#f472b6';
+    ctx.lineWidth = isCurrent ? 2 : 1;
+    ctx.stroke();
+  } else if (play.type === 'penalty') {
+    /* Yellow zigzag */
+    ctx.beginPath();
+    ctx.moveTo(startX - 8, midY - 8);
+    ctx.lineTo(startX, midY + 8);
+    ctx.lineTo(startX + 8, midY - 8);
+    ctx.strokeStyle = '#fbbf24';
+    ctx.lineWidth = isCurrent ? 2 : 1;
+    ctx.stroke();
+  } else if (play.type === 'td') {
+    /* Gold burst */
+    for (let a = 0; a < 8; a++) {
+      const angle = (a / 8) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.moveTo(endX, midY);
+      ctx.lineTo(endX + Math.cos(angle) * 14, midY + Math.sin(angle) * 14);
+      ctx.strokeStyle = '#fbbf24';
+      ctx.lineWidth = isCurrent ? 2 : 1;
+      ctx.stroke();
+    }
+  }
+
+  ctx.globalAlpha = 1;
+}
+
+function drawBall(ctx, play, W, H) {
+  if (!play) return;
+  const midY = H * 0.5;
+  const ballX = yardToX(_nflLiveGame?.yardLine || 50);
+  ctx.beginPath();
+  ctx.ellipse(ballX, midY - 15, 7, 5, 0, 0, Math.PI * 2);
+  ctx.fillStyle = '#b45309';
+  ctx.fill();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 0.8;
+  ctx.stroke();
+  /* Lace */
+  ctx.beginPath();
+  ctx.moveTo(ballX - 3, midY - 15);
+  ctx.lineTo(ballX + 3, midY - 15);
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+}
+
+/* ── HELPER: hex to rgba ── */
+function hexToRgba(hex, alpha) {
+  if (!hex || !hex.startsWith('#')) return `rgba(34,197,94,${alpha})`;
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+/* ── PARSE PLAY TEXT INTO STRUCTURED DATA ── */
+function parsePlayText(text, yardLine) {
+  if (!text) return null;
+  const tl = text.toLowerCase();
+  const play = { startYard: yardLine || 50, endYard: yardLine || 50, routeOffset: (Math.random() - 0.5) * 40 };
+
+  if (tl.includes('touchdown')) {
+    play.type = 'td';
+    play.endYard = yardLine > 50 ? 100 : 0;
+  } else if (tl.includes('sacked')) {
+    play.type = 'sack';
+    const lossMatch = tl.match(/loss of (\d+)/);
+    play.endYard = play.startYard - (lossMatch ? parseInt(lossMatch[1]) : 5);
+  } else if (tl.includes('penalty') || tl.includes('flag')) {
+    play.type = 'penalty';
+  } else if (tl.includes('pass') || tl.includes('complete') || tl.includes('incomplete')) {
+    play.type = 'pass';
+    const ydsMatch = tl.match(/for (\d+) yard/);
+    const gained = ydsMatch ? parseInt(ydsMatch[1]) : 0;
+    const isIncomplete = tl.includes('incomplete') || tl.includes('no gain');
+
+    if (isIncomplete) {
+      play.catchYard = play.startYard + (Math.random() * 10 + 5) * (yardLine > 50 ? 1 : -1);
+      play.endYard   = play.startYard;
+    } else {
+      play.catchYard = play.startYard + gained * (yardLine > 50 ? 1 : -1) * 0.6;
+      play.endYard   = play.startYard + gained * (yardLine > 50 ? 1 : -1);
+      play.yac       = gained * 0.4;
+      play.yacYards  = Math.round(play.yac);
+    }
+  } else if (tl.includes('rush') || tl.includes('run') || tl.includes('carry') || tl.match(/\w+ for \d+ yard/)) {
+    play.type = 'run';
+    const ydsMatch = tl.match(/for (\d+) yard/);
+    const gained = ydsMatch ? parseInt(ydsMatch[1]) : 2;
+    play.endYard = play.startYard + gained * (yardLine > 50 ? 1 : -1);
+    play.routeOffset = (Math.random() - 0.5) * 20;
+  } else if (tl.includes('interception')) {
+    play.type = 'pass';
+    play.catchYard = play.startYard + 10;
+    play.endYard   = play.startYard - 15;
+    play.routeOffset = (Math.random() - 0.5) * 40;
+  } else {
+    play.type = 'run';
+  }
+
+  /* Clamp yards */
+  play.startYard = Math.max(1, Math.min(99, play.startYard || 50));
+  play.endYard   = Math.max(0, Math.min(100, play.endYard || 50));
+  if (play.catchYard != null) play.catchYard = Math.max(1, Math.min(99, play.catchYard));
+
+  return play;
+}
+
+/* ── UPDATE YAC BAR ── */
+function updateYACBar(play) {
+  const bar = document.getElementById('live-yac-bar');
+  if (!play || play.type !== 'pass' || !play.catchYard || !play.yacYards) {
+    bar.classList.add('hidden');
+    return;
+  }
+  bar.classList.remove('hidden');
+
+  const totalWidth = 100;
+  const catchPct  = Math.max(5, Math.min(75, ((play.catchYard - play.startYard) / 30) * 50 + 25));
+  const yacPct    = Math.min(95, catchPct + (play.yacYards / 20) * 40);
+
+  document.getElementById('live-yac-yards').textContent = `${play.yacYards} yds after catch`;
+  document.getElementById('live-yac-fill').style.width  = yacPct + '%';
+  document.getElementById('live-yac-catch-marker').style.left = catchPct + '%';
+  document.getElementById('live-yac-end-marker').style.left   = yacPct + '%';
+  document.getElementById('live-yac-catch-label').textContent = `Caught ~${Math.round(play.catchYard)}yd line`;
+  document.getElementById('live-yac-end-label').textContent   = `Tackle ~${Math.round(play.endYard)}yd line`;
+}
+
+/* ── OPEN LIVE MODAL ── */
+async function nflOpenLiveGame(gameId, away, home, status, wx, comp) {
+  const awayTeam = NFL_TEAMS.find(t => t.a === away.team.abbreviation) || {};
+  const homeTeam = NFL_TEAMS.find(t => t.a === home.team.abbreviation) || {};
+
+  _nflLiveGame = {
+    gameId,
+    awayColor: awayTeam.p || '#ef4444',
+    homeColor: homeTeam.p || '#3b82f6',
+    hasPossession: comp.situation?.possession === home.id ? 'home' : 'away',
+    yardLine: comp.situation?.yardLine || 50,
+    firstDownYard: comp.situation?.firstDownYard || null,
+  };
+  _livePlayHistory = [];
+  _liveCurrentPlay = null;
+
+  /* Logos & scores */
+  document.getElementById('live-away-logo').src  = away.team.logo;
+  document.getElementById('live-home-logo').src  = home.team.logo;
+  document.getElementById('live-away-name').textContent = away.team.abbreviation;
+  document.getElementById('live-home-name').textContent = home.team.abbreviation;
+  document.getElementById('live-away-rec').textContent  = away.records?.[0]?.summary || '0-0';
+  document.getElementById('live-home-rec').textContent  = home.records?.[0]?.summary || '0-0';
+  document.getElementById('live-away-score').textContent = away.score || '0';
+  document.getElementById('live-home-score').textContent = home.score || '0';
+  document.getElementById('live-clock').textContent     = status.shortDetail || 'PREGAME';
+  document.getElementById('live-quarter-label').textContent = status.state === 'in' ? 'In Progress' : status.state === 'pre' ? 'Upcoming' : 'Final';
+
+  /* Possession indicator logo */
+  const possLogo = _nflLiveGame.hasPossession === 'home' ? home.team.logo : away.team.logo;
+  document.getElementById('live-poss-logo').src = possLogo;
+
+  /* Down + distance */
+  const sit = comp.situation;
+  document.getElementById('live-down-text').textContent       = sit?.shortDownDistanceText || 'Kickoff';
+  document.getElementById('live-field-position-label').textContent = sit?.yardLine ? `Ball on the ${sit.yardLine}` : '';
+
+  /* End zone labels */
+  document.getElementById('live-ez-away').textContent = away.team.abbreviation;
+  document.getElementById('live-ez-home').textContent = home.team.abbreviation;
+
+  /* Yard markers */
+  const markers = document.getElementById('live-yard-markers');
+  markers.innerHTML = [10, 20, 30, 40, 50, 40, 30, 20, 10].map((y, i) =>
+    `<span class="live-yard-marker-label">${y}</span>`
+  ).join('');
+
+  /* Status pill color */
+  const pill = document.getElementById('live-status-pill');
+  if (status.state === 'pre') {
+    pill.style.background = 'rgba(245,158,11,0.12)';
+    pill.style.borderColor = 'rgba(245,158,11,0.25)';
+    document.getElementById('live-clock').style.color = '#fbbf24';
+    document.getElementById('live-pulse-dot').style.background = '#f59e0b';
+  } else if (status.state === 'post') {
+    pill.style.background = 'rgba(100,116,139,0.15)';
+    pill.style.borderColor = 'rgba(100,116,139,0.2)';
+    document.getElementById('live-clock').style.color = '#94a3b8';
+    document.getElementById('live-pulse-dot').style.background = '#64748b';
+  }
+
+  /* Weather */
+  if (wx) {
+    const ic = weatherImpactColor(wx.impact);
+    document.getElementById('live-wx-icon-svg').textContent = wx.icon;
+    document.getElementById('live-wx-temp-val').textContent = wx.dome ? '72°F (Dome)' : `${wx.temp}°F · Feels ${wx.feelsLike}°F`;
+    document.getElementById('live-wx-detail-val').textContent = wx.dome ? 'Controlled Environment' : `${wx.wind} mph ${wx.windDir} · ${wx.condition}`;
+    const impPill = document.getElementById('live-wx-impact-pill');
+    impPill.style.background = ic.bg;
+    impPill.style.border = `1px solid ${ic.border}`;
+    impPill.style.color = ic.color;
+    impPill.textContent = wx.impact === 'none' ? 'Ideal Conditions' : wx.impact.toUpperCase() + ' IMPACT';
+  }
+
+  /* Reset tabs */
+  document.querySelectorAll('.live-tab').forEach((t, i) => t.classList.toggle('on', i === 0));
+  document.querySelectorAll('.live-panel').forEach((p, i) => p.classList.toggle('on', i === 0));
+
+  /* Show modal */
+  const overlay = document.getElementById('nfl-live-overlay');
+  const modal   = document.getElementById('nfl-live-modal');
+  overlay.classList.add('live-open');
+  modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => modal.classList.add('live-shown'), 10);
+
+  /* Init canvas after modal is visible */
+  setTimeout(() => {
+    initField3D();
+    startFieldAnimation();
+  }, 150);
+
+  /* Load data */
+  nflLoadLiveData(gameId, away, home, wx);
+}
+
+/* ── FIELD ANIMATION LOOP ── */
+function startFieldAnimation() {
+  if (_liveAnimFrame) cancelAnimationFrame(_liveAnimFrame);
+  function loop() {
+    drawField(_liveCurrentPlay, _livePlayHistory);
+    _liveAnimFrame = requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+/* ── LOAD GAME DATA ── */
+async function nflLoadLiveData(gameId, away, home, wx) {
+  try {
+    const res  = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=${gameId}`);
+    const data = await res.json();
+
+    nflRenderPBP(data, away, home);
+    nflRenderBoxScore(data);
+    nflRenderMatchupEdge(away, home);
+    nflRenderLiveWeather(wx);
+
+    const state = data.header?.competitions?.[0]?.status?.type?.state;
+    if (state === 'in') {
+      if (window._nflPBPInterval) clearInterval(window._nflPBPInterval);
+      window._nflPBPInterval = setInterval(async () => {
+        try {
+          const r2   = await fetch(`https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=${gameId}`);
+          const d2   = await r2.json();
+          const comp2 = d2.header?.competitions?.[0];
+          const a2   = comp2?.competitors?.find(c => c.homeAway === 'away');
+          const h2   = comp2?.competitors?.find(c => c.homeAway === 'home');
+          if (a2) document.getElementById('live-away-score').textContent = a2.score || '0';
+          if (h2) document.getElementById('live-home-score').textContent = h2.score || '0';
+          const sit = comp2?.situation;
+          if (sit?.shortDownDistanceText) {
+            document.getElementById('live-down-text').textContent = sit.shortDownDistanceText;
+            document.getElementById('live-field-position-label').textContent = sit.yardLine ? `Ball on the ${sit.yardLine}` : '';
+          }
+          if (sit?.yardLine && _nflLiveGame) {
+            _nflLiveGame.yardLine = sit.yardLine;
+            _nflLiveGame.hasPossession = sit.possession === h2?.id ? 'home' : 'away';
+            const possLogo = _nflLiveGame.hasPossession === 'home' ? h2.team.logo : a2.team.logo;
+            document.getElementById('live-poss-logo').src = possLogo;
+          }
+          nflRenderPBP(d2, away, home);
+        } catch (e) {}
+      }, 25000);
+    }
+  } catch (e) {
+    document.getElementById('live-panel-pbp').innerHTML = `
+    <div style="text-align:center;padding:3rem 0;">
+      <p style="font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.2);">Data unavailable</p>
+    </div>`;
+  }
+}
+
+/* ── RENDER PLAY BY PLAY ── */
+function nflRenderPBP(data, away, home) {
+  const el = document.getElementById('live-panel-pbp');
+  const plays = data.plays || data.drives?.current?.plays || [];
+  const drives = data.drives?.previous || [];
+  const currentDrive = data.drives?.current || null;
+  const gameStatus = data.header?.competitions?.[0]?.status?.type?.state || 'pre';
+  const isPre  = gameStatus === 'pre';
+  const isPost = gameStatus === 'post';
+
+  /* Update field from most recent play */
+  if (plays.length && _nflLiveGame) {
+    const latest = plays[plays.length - 1];
+    const yl = _nflLiveGame.yardLine || 50;
+    const parsed = parsePlayText(latest.text || '', yl);
+    if (parsed) {
+      if (_liveCurrentPlay) _livePlayHistory.push(_liveCurrentPlay);
+      if (_livePlayHistory.length > 8) _livePlayHistory.shift();
+      _liveCurrentPlay = parsed;
+      updateYACBar(parsed);
+
+      /* Play type badge */
+      const badge = document.getElementById('live-play-type-badge');
+      const typeMap = { pass:'Pass', run:'Run', sack:'Sack', td:'Touchdown', penalty:'Penalty' };
+      const colorMap = {
+        pass:'rgba(96,165,250,0.9)',run:'rgba(74,222,128,0.9)',
+        sack:'rgba(244,114,182,0.9)',td:'rgba(251,191,36,0.9)',
+        penalty:'rgba(251,191,36,0.7)'
+      };
+      badge.textContent = typeMap[parsed.type] || 'Play';
+      badge.style.background = colorMap[parsed.type] || 'rgba(255,255,255,0.2)';
+      badge.style.color = '#000';
+      badge.classList.remove('hidden');
+      setTimeout(() => badge.classList.add('hidden'), 4000);
+    }
+  }
+
+  /* PREGAME */
+  if (isPre || (!plays.length && !drives.length)) {
+    const leaders = data.leaders || [];
+    let html = `
+    <div class="live-pregame-header">
+      <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:100px;padding:6px 16px;margin-bottom:1.25rem;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#fbbf24;animation:livePulse 1.5s infinite;"></span>
+        <span style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:#fbbf24;">Pregame</span>
+      </div>
+      <p style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.15em;">Play by play begins at kickoff</p>
+    </div>`;
+
+    if (leaders.length) {
+      html += `<div style="margin-top:1rem;"><p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.2);margin-bottom:1rem;">Season Leaders</p>`;
+      leaders.forEach(tl => {
+        const abbr = tl.team?.abbreviation || '';
+        html += `<div style="margin-bottom:1.25rem;"><div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;"><img src="${nflLogo(abbr)}" style="width:18px;height:18px;object-fit:contain;"><span style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.5);">${abbr}</span></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;">`;
+        (tl.leaders || []).slice(0, 3).forEach(cat => {
+          const top = cat.leaders?.[0];
+          if (!top) return;
+          html += `<div class="live-stat-card"><p style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.25);margin-bottom:0.35rem;">${cat.shortDisplayName || cat.displayName}</p><p style="font-size:11px;font-weight:800;color:#e0e0e0;line-height:1.2;margin-bottom:0.25rem;">${top.athlete?.shortName || '--'}</p><p style="font-size:14px;font-weight:900;color:#22c55e;">${top.displayValue || '--'}</p></div>`;
+        });
+        html += `</div></div>`;
+      });
+      html += `</div>`;
+    }
+    el.innerHTML = html;
+    return;
+  }
+
+  /* FINAL with no plays */
+/* FINAL with no plays from current drive -- fall through to drives log */
+if (isPost && !plays.length && !drives.length) {
+    el.innerHTML = `<div style="text-align:center;padding:2rem 0;"><p style="font-size:14px;font-weight:900;color:#f0f0f0;text-transform:uppercase;">Game Final</p></div>`;
+    return;
+}
+
+
+  /* DRIVE SUMMARY STRIP */
+  let html = '';
+  if (currentDrive) {
+    html += `<div style="padding:0.875rem 1rem;border-radius:1.25rem;background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);margin-bottom:1.25rem;">
+      <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+        <span style="width:5px;height:5px;border-radius:50%;background:#22c55e;animation:livePulse 1s infinite;"></span>
+        <span style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:#4ade80;">Current Drive</span>
+      </div>
+      <p style="font-size:13px;font-weight:800;color:#f0f0f0;line-height:1.4;">${currentDrive.description || currentDrive.shortDisplayResult || 'Drive in progress'}</p>
+      <div style="display:flex;gap:1rem;margin-top:0.5rem;">
+        ${currentDrive.yards != null ? `<span style="font-size:9px;font-weight:900;color:rgba(255,255,255,0.4);">${currentDrive.yards} yds</span>` : ''}
+        ${currentDrive.plays?.length ? `<span style="font-size:9px;font-weight:900;color:rgba(255,255,255,0.4);">${currentDrive.plays.length} plays</span>` : ''}
+      </div>
+    </div>`;
+  }
+
+  if (drives.length) {
+    html += `<div style="margin-bottom:1.25rem;overflow-x:auto;padding-bottom:0.5rem;">
+      <p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.2);margin-bottom:0.625rem;">Drive Log</p>
+      <div style="display:flex;gap:0.4rem;min-width:max-content;">`;
+    drives.slice(-8).forEach(drive => {
+      const result = (drive.displayResult || drive.shortDisplayResult || '').toLowerCase();
+      const isTD = result.includes('touchdown');
+      const isFG = result.includes('field goal');
+      const isPunt = result.includes('punt');
+      const isTurn = result.includes('turnover') || result.includes('fumble') || result.includes('interception');
+      const bgColor = isTD ? 'rgba(34,197,94,0.15)' : isFG ? 'rgba(59,130,246,0.12)' : isTurn ? 'rgba(239,68,68,0.12)' : 'rgba(255,255,255,0.04)';
+      const bColor  = isTD ? 'rgba(34,197,94,0.3)' : isFG ? 'rgba(59,130,246,0.2)' : isTurn ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.07)';
+      const icon = isTD ? '★' : isFG ? '✓' : isPunt ? '↓' : isTurn ? '✗' : '–';
+      html += `<div style="flex-shrink:0;padding:0.5rem 0.625rem;border-radius:0.875rem;background:${bgColor};border:1px solid ${bColor};text-align:center;min-width:48px;">
+        <div style="font-size:12px;font-weight:900;color:${isTD?'#4ade80':isFG?'#60a5fa':isTurn?'#f87171':'rgba(255,255,255,0.3)'};">${icon}</div>
+        <div style="font-size:7px;font-weight:900;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:2px;">${drive.yards || 0}y</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  /* PLAYS */
+  if (plays.length) {
+    html += `<p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.2);margin-bottom:0.75rem;">Recent Plays</p>`;
+    const recent = plays.slice(-15).reverse();
+    recent.forEach(play => {
+      const text = play.text || play.description || '';
+      if (!text) return;
+      const yardsNum = play.statYardage || 0;
+      const isScore  = play.scoringPlay || false;
+      const isTD     = isScore && text.toLowerCase().includes('touchdown');
+      const isFG     = isScore && text.toLowerCase().includes('field goal');
+      const isTurn   = text.toLowerCase().includes('intercepted') || text.toLowerCase().includes('fumble');
+      const isSack   = text.toLowerCase().includes('sacked');
+      const isPen    = text.toLowerCase().includes('penalty') || text.toLowerCase().includes('flag');
+      const qtr      = play.period?.displayValue || '';
+      const clock    = play.clock?.displayValue || '';
+
+      const dotColor = isTD ? '#fbbf24' : isFG ? '#60a5fa' : isTurn ? '#f87171' : isSack ? '#f472b6' : isPen ? '#fbbf24' : yardsNum > 20 ? '#4ade80' : yardsNum > 8 ? 'rgba(34,197,94,0.6)' : 'rgba(255,255,255,0.15)';
+      const dotGlow  = isTD ? '0 0 10px rgba(251,191,36,0.7)' : isFG ? '0 0 8px rgba(96,165,250,0.5)' : isTurn ? '0 0 8px rgba(239,68,68,0.5)' : 'none';
+
+      let badge = '';
+      if (isTD)  badge = '<span class="live-pbp-badge badge-td">TD</span>';
+      else if (isFG) badge = '<span class="live-pbp-badge badge-fg">FG</span>';
+      else if (isTurn) badge = '<span class="live-pbp-badge badge-to">TO</span>';
+      else if (isPen) badge = '<span class="live-pbp-badge badge-pen">PEN</span>';
+
+      html += `<div class="live-pbp-entry" style="${isTD ? 'background:rgba(251,191,36,0.04);border-radius:1rem;padding:0.75rem;margin-bottom:0.25rem;border-bottom:none;' : isTurn ? 'background:rgba(239,68,68,0.04);border-radius:1rem;padding:0.75rem;margin-bottom:0.25rem;border-bottom:none;' : ''}">
+        <div class="live-pbp-dot" style="background:${dotColor};box-shadow:${dotGlow};"></div>
+        <div style="flex:1;min-width:0;">
+          <p class="live-pbp-qtr">${qtr}${clock ? ' · ' + clock : ''}</p>
+          <p class="live-pbp-text">${text}</p>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.25rem;flex-shrink:0;margin-left:0.5rem;">
+          ${badge}
+          ${yardsNum && !isTD && !isFG ? `<span style="font-size:11px;font-weight:900;color:${yardsNum > 0 ? '#22c55e' : '#f87171'};">${yardsNum > 0 ? '+' : ''}${yardsNum}</span>` : ''}
+        </div>
+      </div>`;
+    });
+  }
+
+  el.innerHTML = html || `<div style="text-align:center;padding:3rem 0;color:rgba(255,255,255,0.2);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;">No play data yet</div>`;
+}
+
+/* ── BOX SCORE ── */
+function nflRenderBoxScore(data) {
+  const el = document.getElementById('live-panel-box');
+  const players = data.boxscore?.players || [];
+
+  if (!players.length) {
+    el.innerHTML = `<div style="text-align:center;padding:3rem 0;color:rgba(255,255,255,0.2);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;">Stats loading…</div>`;
+    return;
+  }
+
+  let html = '';
+  players.forEach(teamGroup => {
+    const abbr = teamGroup.team?.abbreviation || '';
+    const teamData = NFL_TEAMS.find(t => t.a === abbr);
+    const teamColor = teamData?.p || '#22c55e';
+
+    html += `<div style="margin-bottom:2rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;padding-bottom:0.875rem;border-bottom:2px solid ${teamColor}30;">
+        <img src="${nflLogo(abbr)}" style="width:26px;height:26px;object-fit:contain;">
+        <span style="font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:0.05em;color:#f0f0f0;">${teamGroup.team?.displayName || abbr}</span>
+      </div>`;
+
+    teamGroup.statistics?.forEach(cat => {
+      if (!cat.athletes?.length) return;
+      const catName = (cat.name || '').toLowerCase();
+      const isPass = catName.includes('passing');
+      const isRush = catName.includes('rushing');
+      const isRec  = catName.includes('receiving');
+      const isDef  = catName.includes('defensive') || catName.includes('tackles');
+      const isKick = catName.includes('kicking') || catName.includes('punting');
+      if (!isPass && !isRush && !isRec && !isDef && !isKick) return;
+
+      const labels = cat.labels || [];
+      let cols = isPass ? ['C/ATT','YDS','TD','INT','RTG'] : isRush ? ['CAR','YDS','AVG','TD'] : isRec ? ['REC','YDS','AVG','TD','TGT'] : isDef ? ['TOT','SOLO','TFL','SACKS'] : ['FGM/A','LNG','XPM/A'];
+      const getIdx = c => labels.findIndex(l => l === c || l.includes(c.split('/')[0]));
+      const resolved = cols.map(c => ({ label:c, idx:getIdx(c) })).filter(c => c.idx >= 0);
+      if (!resolved.length) return;
+
+      const catIcon = isPass ? '◈' : isRush ? '▶' : isRec ? '◉' : isDef ? '◆' : '○';
+      const catColor = isPass ? '#60a5fa' : isRush ? '#4ade80' : isRec ? '#fbbf24' : isDef ? '#f472b6' : '#22d3ee';
+
+      html += `<div style="margin-bottom:1.25rem;">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
+          <span style="font-size:10px;color:${catColor};">${catIcon}</span>
+          <span style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:${catColor};">${cat.name || ''}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr ${resolved.map(() => 'auto').join(' ')};gap:0.5rem;padding:0 0.75rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.05);">
+          <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.2);">Player</span>
+          ${resolved.map(c => `<span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.2);text-align:right;min-width:28px;">${c.label}</span>`).join('')}
+        </div>`;
+
+      cat.athletes.forEach((athlete, rowIdx) => {
+        if (!athlete.stats?.length) return;
+        const name = athlete.athlete?.shortName || athlete.athlete?.displayName || '--';
+        const isTop = rowIdx === 0;
+        const ydsIdx = resolved.find(c => c.label === 'YDS')?.idx ?? -1;
+        const yds = ydsIdx >= 0 ? parseInt(athlete.stats[ydsIdx]) || 0 : 0;
+        const isStar = yds >= 100;
+        html += `<div style="display:grid;grid-template-columns:1fr ${resolved.map(() => 'auto').join(' ')};gap:0.5rem;align-items:center;padding:0.625rem 0.75rem;border-radius:0.875rem;margin-bottom:0.25rem;background:${isTop ? `${teamColor}0a` : 'transparent'};${isTop ? `border:1px solid ${teamColor}18;` : ''}">
+          <span style="font-size:12px;font-weight:${isTop?'900':'700'};color:${isTop?'#f0f0f0':'rgba(255,255,255,0.65)'};">${isStar ? '★ ' : ''}${name}</span>
+          ${resolved.map(col => {
+            const val = athlete.stats[col.idx] ?? '--';
+            const isYds = col.label === 'YDS';
+            const isTD  = col.label === 'TD';
+            const isINT = col.label === 'INT';
+            const statColor = isYds && parseInt(val) >= 100 ? teamColor : isTD && parseInt(val) >= 1 ? '#fbbf24' : isINT && parseInt(val) >= 1 ? '#f87171' : isTop ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.4)';
+            return `<span style="font-size:${isYds||isTD?'13':'11'}px;font-weight:${isYds||isTD?'900':'700'};color:${statColor};text-align:right;min-width:28px;font-variant-numeric:tabular-nums;">${val}</span>`;
+          }).join('')}
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+  });
+
+  el.innerHTML = html || `<div style="text-align:center;padding:3rem 0;color:rgba(255,255,255,0.2);">No stats available</div>`;
+}
+
+/* ── MATCHUP EDGE ── */
+function nflRenderMatchupEdge(away, home) {
+  const el = document.getElementById('live-panel-matchup');
+  const awayA = NFL_TEAMS.find(t => t.a === away.team.abbreviation);
+  const homeA = NFL_TEAMS.find(t => t.a === home.team.abbreviation);
+  if (!awayA || !homeA) { el.innerHTML = `<div style="text-align:center;padding:3rem 0;color:rgba(255,255,255,0.2);">Matchup data unavailable</div>`; return; }
+
+  const awayOff = awayA.pffOff, homeDef = homeA.pffDef;
+  const homeOff = homeA.pffOff, awayDef = awayA.pffDef;
+  const edgeOff = awayOff - homeDef;
+  const edgeDef = homeOff - awayDef;
+  const edgeLabel = (diff) => {
+    if (diff > 10) return { cls:'edge-away', label:`${away.team.abbreviation} Edge` };
+    if (diff < -10) return { cls:'edge-home', label:`${home.team.abbreviation} Edge` };
+    return { cls:'edge-even', label:'Even' };
+  };
+
+  const pffRow = (label, aVal, hVal, edge) => `
+  <div class="nfl-matchup-unit">
+    <div class="nfl-matchup-unit-label">${label}</div>
+    <div class="nfl-matchup-row">
+      <div class="nfl-matchup-side"><div class="nfl-matchup-grade ${pffClass(aVal)}">${aVal}</div><div class="nfl-matchup-desc">${away.team.abbreviation}</div></div>
+      <div class="nfl-matchup-vs">vs</div>
+      <div class="nfl-matchup-side" style="text-align:right;"><div class="nfl-matchup-grade ${pffClass(hVal)}">${hVal}</div><div class="nfl-matchup-desc">${home.team.abbreviation}</div></div>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:0.5rem;"><div class="nfl-matchup-edge ${edge.cls}">◆ ${edge.label}</div></div>
+  </div>`;
+
+  el.innerHTML = `
+  <p style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.2);margin-bottom:1rem;">PFF Matchup Analysis</p>
+  ${pffRow(`${away.team.abbreviation} Offense vs ${home.team.abbreviation} Defense`, awayOff, homeDef, edgeLabel(edgeOff))}
+  ${pffRow(`${home.team.abbreviation} Offense vs ${away.team.abbreviation} Defense`, homeOff, awayDef, edgeLabel(-edgeDef))}
+  <div style="margin-top:1rem;padding:1rem;border-radius:1.25rem;background:rgba(212,175,55,0.05);border:1px solid rgba(212,175,55,0.15);">
+    <p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:#d4af37;margin-bottom:0.5rem;">Greenlight Read</p>
+    <p style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.55);line-height:1.7;">PFF grades give ${edgeOff > 5 ? away.team.abbreviation : homeA.pffOff > awayA.pffOff ? home.team.abbreviation : 'neither side'} a meaningful offensive advantage. Watch the trenches.</p>
+  </div>`;
+}
+
+/* ── WEATHER PANEL ── */
+function nflRenderLiveWeather(wx) {
+  const el = document.getElementById('live-panel-wx');
+  if (!wx) { el.innerHTML = `<div style="text-align:center;padding:3rem 0;color:rgba(255,255,255,0.2);">Weather unavailable</div>`; return; }
+  const ic = weatherImpactColor(wx.impact);
+  const impact = weatherImpactAnalysis(wx);
+  el.innerHTML = `
+  <div style="text-align:center;padding:2rem 0 1rem;">
+    <div style="font-size:3.5rem;margin-bottom:0.5rem;">${wx.icon}</div>
+    <div style="font-size:2.5rem;font-weight:900;color:#f0f0f0;letter-spacing:-0.04em;">${wx.dome ? '72°F' : wx.temp + '°F'}</div>
+    <p style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.3);margin-top:0.25rem;">${wx.dome ? 'Controlled Dome' : wx.stadiumName}</p>
+  </div>
+  ${!wx.dome ? `
+  <div class="nfl-weather-grid">
+    <div class="nfl-weather-stat"><div class="nfl-weather-stat-label">Feels Like</div><div class="nfl-weather-stat-val">${wx.feelsLike}°F</div></div>
+    <div class="nfl-weather-stat"><div class="nfl-weather-stat-label">Wind</div><div class="nfl-weather-stat-val">${wx.wind} mph</div></div>
+    <div class="nfl-weather-stat"><div class="nfl-weather-stat-label">Direction</div><div class="nfl-weather-stat-val" style="font-size:14px;">${wx.windDir || '--'}</div></div>
+    <div class="nfl-weather-stat"><div class="nfl-weather-stat-label">Precip</div><div class="nfl-weather-stat-val" style="font-size:14px;">${wx.precip > 0 ? wx.precip + '"' : 'None'}</div></div>
+  </div>
+  <div class="nfl-weather-impact-box">
+    <div class="nfl-weather-impact-title">▲ Game Impact</div>
+    <p class="nfl-weather-impact-text">${impact}</p>
+  </div>` : '<p style="text-align:center;padding:2rem;color:rgba(255,255,255,0.3);">Dome -- no weather factors.</p>'}`;
+}
+
+/* ── TAB + CLOSE ── */
+function nflLiveTab(el, panel) {
+  document.querySelectorAll('.live-tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.live-panel').forEach(p => p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById(`live-panel-${panel}`).classList.add('on');
+}
+
+function nflLiveClose() {
+  if (window._nflPBPInterval) { clearInterval(window._nflPBPInterval); window._nflPBPInterval = null; }
+  if (_liveAnimFrame) { cancelAnimationFrame(_liveAnimFrame); _liveAnimFrame = null; }
+  _nflLiveGame = null;
+  _liveCurrentPlay = null;
+  _livePlayHistory = [];
+  document.getElementById('nfl-live-modal').classList.remove('live-shown');
+  setTimeout(() => { document.getElementById('nfl-live-overlay').classList.remove('live-open'); document.body.style.overflow = ''; }, 500);
+}
+
+function nflLiveOverlayClick(e) {
+  if (e.target === document.getElementById('nfl-live-overlay')) nflLiveClose();
+}
+
+function nflSkeleton(){
+  return `<div style="display:flex;flex-direction:column;gap:0.75rem;padding:0.5rem 0;">
+    ${[75,55,65,45,70,50].map(w=>`<div class="nfl-sk" style="height:44px;width:${w}%"></div>`).join('')}
+  </div>`;
+}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  nflBuildScoreCards();
+  nflBuildTeamCards();
+// During games refresh every 30s; otherwise every 5 min
+function scheduleNFLRefresh() {
+  const hasLiveGame = document.querySelector('.nfl-game-card.is-live');
+  const interval = hasLiveGame ? 30000 : 300000;
+  setTimeout(() => {
+    nflBuildScoreCards().then(scheduleNFLRefresh);
+  }, interval);
+}
+scheduleNFLRefresh();
+});
+</script>
 
 <script>
 // ============================================================
