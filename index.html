@@ -6748,59 +6748,94 @@ if (isPost && !plays.length && !drives.length) {
       <div style="display:flex;gap:0.4rem;min-width:max-content;">`;
     drives.slice(-8).forEach(drive => {
       const result = (drive.displayResult || drive.shortDisplayResult || '').toLowerCase();
-      const isTD = result.includes('touchdown');
-      const isFG = result.includes('field goal');
-      const isPunt = result.includes('punt');
-      const isTurn = result.includes('turnover') || result.includes('fumble') || result.includes('interception');
-      const bgColor = isTD ? 'rgba(34,197,94,0.15)' : isFG ? 'rgba(59,130,246,0.12)' : isTurn ? 'rgba(239,68,68,0.12)' : 'rgba(255,255,255,0.04)';
-      const bColor  = isTD ? 'rgba(34,197,94,0.3)' : isFG ? 'rgba(59,130,246,0.2)' : isTurn ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.07)';
-      const icon = isTD ? '★' : isFG ? '✓' : isPunt ? '↓' : isTurn ? '✗' : '–';
-      html += `<div style="flex-shrink:0;padding:0.5rem 0.625rem;border-radius:0.875rem;background:${bgColor};border:1px solid ${bColor};text-align:center;min-width:48px;">
-        <div style="font-size:12px;font-weight:900;color:${isTD?'#4ade80':isFG?'#60a5fa':isTurn?'#f87171':'rgba(255,255,255,0.3)'};">${icon}</div>
-        <div style="font-size:7px;font-weight:900;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:2px;">${drive.yards || 0}y</div>
+      const isTD     = result.includes('touchdown');
+      const isFGMade = result.includes('field goal') && !result.includes('missed') && !result.includes('no good');
+      const isFGMiss = result.includes('field goal') && (result.includes('missed') || result.includes('no good'));
+      const isPunt   = result.includes('punt');
+      const isINT    = result.includes('interception');
+      const isFumble = result.includes('fumble');
+      const isTurn   = result.includes('turnover') || isINT || isFumble;
+      const isSafety = result.includes('safety');
+
+      const bgColor = isTD      ? 'rgba(34,197,94,0.15)'
+                    : isFGMade  ? 'rgba(59,130,246,0.12)'
+                    : isFGMiss  ? 'rgba(251,191,36,0.08)'
+                    : isINT     ? 'rgba(239,68,68,0.15)'
+                    : isFumble  ? 'rgba(251,146,60,0.10)'
+                    : isSafety  ? 'rgba(168,85,247,0.12)'
+                    :             'rgba(255,255,255,0.04)';
+
+      const bColor  = isTD      ? 'rgba(34,197,94,0.35)'
+                    : isFGMade  ? 'rgba(59,130,246,0.25)'
+                    : isFGMiss  ? 'rgba(251,191,36,0.30)'
+                    : isINT     ? 'rgba(239,68,68,0.30)'
+                    : isFumble  ? 'rgba(251,146,60,0.28)'
+                    : isSafety  ? 'rgba(168,85,247,0.28)'
+                    :             'rgba(255,255,255,0.07)';
+
+      // ── ICONS ──────────────────────────────────────────────
+      // TD: bold "6" -- like the scoreboard just flipped
+      const svgTD = `<svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+        <text x="4" y="19" font-size="18" font-weight="900" fill="#4ade80" font-family="Arial Black,Arial,sans-serif" letter-spacing="-1">6</text>
+      </svg>`;
+
+      // FG Made: upright posts + clean green checkmark through them
+      const svgFGMade = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="12" y1="22" x2="12" y2="11" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+        <line x1="7"  y1="11" x2="17" y2="11" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+        <line x1="7"  y1="11" x2="7"  y2="5"  stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+        <line x1="17" y1="11" x2="17" y2="5"  stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+        <path d="M8 14.5 L11 17.5 L16 12" stroke="#4ade80" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
+
+      // FG Miss: same uprights, red X through the middle
+      const svgFGMiss = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="12" y1="22" x2="12" y2="11" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="0.6"/>
+        <line x1="7"  y1="11" x2="17" y2="11" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="0.6"/>
+        <line x1="7"  y1="11" x2="7"  y2="5"  stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="0.6"/>
+        <line x1="17" y1="11" x2="17" y2="5"  stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="0.6"/>
+        <line x1="9"  y1="13" x2="15" y2="19" stroke="#f87171" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="15" y1="13" x2="9"  y2="19" stroke="#f87171" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>`;
+
+      // PUNT: a real side-profile foot -- heel down left, toes pointing up-right
+            const svgPunt = `<span style="font-size:15px;line-height:1;">🦶</span>`;
+
+
+      // INT: reverse arrow -- ball going back the other way
+      const svgINT = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 8 L8 8" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-opacity="0.35"/>
+        <path d="M4 15 L17 15" stroke="#f87171" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M8 11 L4 15 L8 19" stroke="#f87171" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
+
+      // FUMBLE: football with chaos lines shooting off it
+      const svgFumble = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="11" cy="13" rx="5.5" ry="3.5" fill="rgba(251,146,60,0.25)" stroke="#fb923c" stroke-width="1.8" transform="rotate(-25 11 13)"/>
+        <line x1="15" y1="5"  x2="17" y2="3"  stroke="#fb923c" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="18" y1="10" x2="21" y2="9"  stroke="#fb923c" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="6"  y1="19" x2="4"  y2="21" stroke="#fb923c" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>`;
+
+      // SAFETY: S in a shield
+      const svgSafety = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3 L20 6.5 L20 13 Q20 18 12 21 Q4 18 4 13 L4 6.5 Z" fill="rgba(168,85,247,0.15)" stroke="#c084fc" stroke-width="1.8"/>
+        <text x="12" y="16" text-anchor="middle" font-size="9" font-weight="900" fill="#c084fc" font-family="Arial Black,Arial,sans-serif">S</text>
+      </svg>`;
+
+      // DEFAULT: subtle dash
+      const svgDefault = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="7" y1="12" x2="17" y2="12" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round"/>
+      </svg>`;
+
+      const iconSVG = isTD ? svgTD : isFGMade ? svgFGMade : isFGMiss ? svgFGMiss : isPunt ? svgPunt : isINT ? svgINT : isFumble ? svgFumble : isSafety ? svgSafety : svgDefault;
+
+      html += `<div style="flex-shrink:0;padding:0.5rem 0.5rem 0.4rem;border-radius:0.875rem;background:${bgColor};border:1px solid ${bColor};text-align:center;min-width:44px;display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <div style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;">${iconSVG}</div>
+        <div style="font-size:7px;font-weight:900;text-transform:uppercase;color:rgba(255,255,255,0.3);letter-spacing:0.05em;">${drive.yards || 0}y</div>
       </div>`;
     });
-    html += `</div></div>`;
-  }
 
-  /* PLAYS */
-  if (plays.length) {
-    html += `<p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.2);margin-bottom:0.75rem;">Recent Plays</p>`;
-    const recent = plays.slice(-15).reverse();
-    recent.forEach(play => {
-      const text = play.text || play.description || '';
-      if (!text) return;
-      const yardsNum = play.statYardage || 0;
-      const isScore  = play.scoringPlay || false;
-      const isTD     = isScore && text.toLowerCase().includes('touchdown');
-      const isFG     = isScore && text.toLowerCase().includes('field goal');
-      const isTurn   = text.toLowerCase().includes('intercepted') || text.toLowerCase().includes('fumble');
-      const isSack   = text.toLowerCase().includes('sacked');
-      const isPen    = text.toLowerCase().includes('penalty') || text.toLowerCase().includes('flag');
-      const qtr      = play.period?.displayValue || '';
-      const clock    = play.clock?.displayValue || '';
-
-      const dotColor = isTD ? '#fbbf24' : isFG ? '#60a5fa' : isTurn ? '#f87171' : isSack ? '#f472b6' : isPen ? '#fbbf24' : yardsNum > 20 ? '#4ade80' : yardsNum > 8 ? 'rgba(34,197,94,0.6)' : 'rgba(255,255,255,0.15)';
-      const dotGlow  = isTD ? '0 0 10px rgba(251,191,36,0.7)' : isFG ? '0 0 8px rgba(96,165,250,0.5)' : isTurn ? '0 0 8px rgba(239,68,68,0.5)' : 'none';
-
-      let badge = '';
-      if (isTD)  badge = '<span class="live-pbp-badge badge-td">TD</span>';
-      else if (isFG) badge = '<span class="live-pbp-badge badge-fg">FG</span>';
-      else if (isTurn) badge = '<span class="live-pbp-badge badge-to">TO</span>';
-      else if (isPen) badge = '<span class="live-pbp-badge badge-pen">PEN</span>';
-
-      html += `<div class="live-pbp-entry" style="${isTD ? 'background:rgba(251,191,36,0.04);border-radius:1rem;padding:0.75rem;margin-bottom:0.25rem;border-bottom:none;' : isTurn ? 'background:rgba(239,68,68,0.04);border-radius:1rem;padding:0.75rem;margin-bottom:0.25rem;border-bottom:none;' : ''}">
-        <div class="live-pbp-dot" style="background:${dotColor};box-shadow:${dotGlow};"></div>
-        <div style="flex:1;min-width:0;">
-          <p class="live-pbp-qtr">${qtr}${clock ? ' · ' + clock : ''}</p>
-          <p class="live-pbp-text">${text}</p>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.25rem;flex-shrink:0;margin-left:0.5rem;">
-          ${badge}
-          ${yardsNum && !isTD && !isFG ? `<span style="font-size:11px;font-weight:900;color:${yardsNum > 0 ? '#22c55e' : '#f87171'};">${yardsNum > 0 ? '+' : ''}${yardsNum}</span>` : ''}
-        </div>
-      </div>`;
-    });
   }
 
   el.innerHTML = html || `<div style="text-align:center;padding:3rem 0;color:rgba(255,255,255,0.2);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;">No play data yet</div>`;

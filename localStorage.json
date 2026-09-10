@@ -1,4 +1,4 @@
 {
-  "theme" : "dark",
-  "firebase:host:greenlight-a8e86-default-rtdb.firebaseio.com" : "\"s-gke-usc1-nssi3-22.firebaseio.com\""
+  "firebase:host:greenlight-a8e86-default-rtdb.firebaseio.com" : "\"s-gke-usc1-nssi3-22.firebaseio.com\"",
+  "theme" : "dark"
 }
