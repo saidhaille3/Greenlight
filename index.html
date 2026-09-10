@@ -5687,7 +5687,13 @@ function nflLiveClose(){
   setTimeout(()=>{ document.getElementById('nfl-live-overlay').classList.remove('live-open'); document.body.style.overflow=''; },500);
 }
 
+function nflClose(){
+  document.getElementById('nfl-modal').classList.remove('nfl-shown');
+  setTimeout(()=>{ document.getElementById('nfl-overlay').classList.remove('nfl-open'); document.body.style.overflow=''; },500);
+}
+
 function nflOverlayClick(e){ if(e.target===document.getElementById('nfl-overlay')) nflClose(); }
+
 
 function nflTab(el,panel){
   document.querySelectorAll('#nfl-modal .nfl-tab').forEach(t=>t.classList.remove('on'));
