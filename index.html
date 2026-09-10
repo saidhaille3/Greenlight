@@ -10,6 +10,7 @@
         tailwind.config = {
             darkMode: 'class',
         }
+        
     </script>
     <style>
     #authPromptContainer {
@@ -3571,7 +3572,7 @@ function giRenderFA(intel){
   const posColors={PG:'#60a5fa',SG:'#a78bfa',SF:'#34d399',PF:'#fbbf24',C:'#f87171'};
 
   // FA open header
-  html=`<div class="gi-fa-header-card">
+   html=`<div class="gi-fa-header-card">
     <div>
       <p class="gi-fa-countdown-label">Free Agency Window</p>
       <p class="gi-fa-countdown-val">Open Now</p>
@@ -5032,7 +5033,7 @@ alert:'Jayden Daniels Year 3 -- Commanders vs Colts in London to open Week 1 (9:
 
   // NFC North
   {a:'CHI',city:'Chicago',name:'Bears',div:'NFC North',p:'#0B162A',s:'#C83803',champ:false,
-   alert:'Caleb Williams Year 2. Darnell Wright extended 4yr/$116M. Garrett Bradbury won starting center job. Coby Bryant knee injury concern. Colston Loveland and Luther Burden III generating hype.',
+   alert:'Darnell Wright extended 4yr/$116M. Garrett Bradbury won starting center job. Coby Bryant knee injury concern. Colston Loveland and Luther Burden III generating hype.',
    cap:'+$1.2M',pffOff:73.8,pffDef:71.4,wl:'0-0',pfg:'--',pag:'--'},
 
   {a:'DET',city:'Detroit',name:'Lions',div:'NFC North',p:'#0076B6',s:'#B0B7BC',champ:false,
@@ -6990,6 +6991,7 @@ scheduleNFLRefresh();
 });
 </script>
 
+
 <script>
 // ============================================================
 //  GREENLIGHT NBA DRAFT TRACKER -- 2026 (ACCURATE ORDER)
@@ -8550,6 +8552,59 @@ function updateReadBtn(slide) {
 
 })();
 </script>
+<div class="max-w-[1400px] mx-auto px-6 mt-8 mb-4 relative z-40">
+    <div onclick="scrollToDeepDive()" class="group cursor-pointer relative overflow-hidden rounded-[2rem] p-[1px] transition-all duration-500 hover:scale-[1.01] shadow-sm hover:shadow-[0_20px_40px_rgba(212,175,55,0.15)]">
+        
+        <div class="absolute inset-0 bg-gradient-to-r from-[#d4af37]/40 via-green-500/40 to-[#d4af37]/40 opacity-40 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+        <div class="relative bg-white/70 dark:bg-[#0a0a0a]/80 backdrop-blur-3xl rounded-[2rem] p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6 border border-white/60 dark:border-white/10">
+            
+            <div class="flex items-center gap-4 w-full md:w-auto">
+                
+                <div class="relative w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden shadow-2xl flex-shrink-0 border border-black/5 dark:border-white/10">
+                    <img src="images/lylesbuzz.jpeg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" alt="Trey Lyles Breakdown">
+                    <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                        <i class="fa-solid fa-play text-white/90 text-xl group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-500 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-yellow-600"></span>
+                        </span>
+                        <span class="text-[9px] font-black uppercase tracking-[0.3em] text-yellow-600">New Video</span>
+                    </div>
+                    <h4 class="text-sm md:text-base font-black tracking-tight text-black dark:text-white leading-tight max-w-md line-clamp-2">
+                        8/20/26— Trey Lyles: Player Type Breakdown + What He Brings to the Wolves
+                    </h4>
+                    <p class="text-[10px] md:text-xs font-bold text-black/40 dark:text-white/40 uppercase tracking-widest mt-1.5">
+                        Greenlight Deep Dive
+                    </p>
+                </div>
+            </div>
+
+            <div class="w-full md:w-auto flex justify-end shrink-0">
+                <button class="w-full md:w-auto flex justify-center items-center gap-3 bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl group-hover:bg-[#d4af37] dark:group-hover:bg-[#d4af37] dark:group-hover:text-black transition-colors duration-300">
+                    <span>Watch</span>
+                    <i class="fa-solid fa-arrow-down animate-bounce"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function scrollToDeepDive() {
+    const section = document.getElementById('deep-dive-section');
+    if (section) {
+        const yOffset = -90;
+        const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+}
+
+</script>
  
 <!--
 <div class="max-w-[1400px] mx-auto px-6 mt-8 mb-4 relative z-40">
@@ -8785,7 +8840,8 @@ function launchProspect(articleId) {
 
 </div>
 </section>
-<section class="relative w-full bg-white dark:bg-black py-20 overflow-hidden">
+<section id="deep-dive-section" class="relative w-full bg-white dark:bg-black py-20 overflow-hidden">
+
   <div class="max-w-[1400px] mx-auto px-6">
 
 <div class="flex items-center justify-between mb-10">
@@ -8798,34 +8854,7 @@ function launchProspect(articleId) {
 
 <div class="overflow-x-auto no-scrollbar pb-8">
   <div class="flex gap-6 w-max">
-    <div class="w-[350px] md:w-[450px] group rounded-[2.5rem] overflow-hidden relative ios-glass border border-black/5 dark:border-white/10 flex-shrink-0 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-
-
-<div class="relative h-72 md:h-80 w-full overflow-hidden">
-  <video 
-    class="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700" 
-    autoplay 
-    muted 
-    loop 
-    playsinline
-    poster="images/ant.jpeg"> <source src="videos/top10.mp4" type="video/mp4">
-  </video><div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div><div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-     <div class="w-16 h-16 play-btn-blur rounded-full flex items-center justify-center pl-1 shadow-2xl scale-75 group-hover:scale-100 transition-transform duration-500">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" class="w-6 h-6"><path d="M8 5v14l11-7z"/></svg>
-     </div>
-  </div>
-</div>
-<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/40 to-transparent p-8">
-    <h3 class="text-white font-black text-2xl uppercase tracking-tighter mb-1">Sports Science Behind Movements</h3>
-    <p class="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">From Kinetic Chain to movement science <br> A deeper dive. </p>
-    <button onclick="openVideoModal('images/dunk.mov', 'Greenlight Deep-Dive', 'Analytics')" 
-            class="bg-yellow-400 hover:bg-white text-black px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
-        Coming Soon
-    </button>
-</div>        </div>
-
-    <div class="w-[350px] md:w-[450px] group rounded-[2.5rem] overflow-hidden relative ios-glass border border-black/5 dark:border-white/10 flex-shrink-0 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-
+ <div class="w-[350px] md:w-[450px] group rounded-[2.5rem] overflow-hidden relative ios-glass border border-black/5 dark:border-white/10 flex-shrink-0 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
 
 <div class="relative h-72 md:h-80 w-full overflow-hidden">
   <video 
@@ -8834,7 +8863,7 @@ function launchProspect(articleId) {
     muted 
     loop 
     playsinline
-    poster="images/buzz.jpeg"> <source src="videos/top10.mp4" type="video/mp4">
+    poster="images/lylesbuzz.jpeg"> <source src="videos/treylyles.mp4" type="video/mp4">
   </video><div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div><div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
      <div class="w-16 h-16 play-btn-blur rounded-full flex items-center justify-center pl-1 shadow-2xl scale-75 group-hover:scale-100 transition-transform duration-500">
         <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" class="w-6 h-6"><path d="M8 5v14l11-7z"/></svg>
@@ -8842,13 +8871,17 @@ function launchProspect(articleId) {
   </div>
 </div>
 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/40 to-transparent p-8">
-    <p class="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">Analytics, Breakdowns and More</p>
-    <button onclick="openVideoModal('videos/clutch.mp4', 'Analytics, Breakdowns and More', 'Breakdown')" 
-            class="bg-yellow-400 hover:bg-white text-black px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
-        Coming Soon
-    </button>
+    <h3 class="text-white font-black text-2xl uppercase tracking-tighter mb-1">Trey Lyles: What He Brings to the Wolves</h3>
+    <p class="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">Film Breakdown</p>
+<button onclick="openVideoModal('YOUR_YOUTUBE_ID', 'Trey Lyles Breakdown', 'Greenlight Deep Dive', 'A full player-type breakdown -- what makes Lyles the right fit next to Rudy Gobert, how he spaces the floor, and why Minnesota needed exactly his profile off the bench.', 'treylyles')
+" 
+        class="bg-yellow-400 hover:bg-white text-black px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
+    Watch Now
+</button>
+
 </div>
-        </div>
+     </div>
+
 
 
 
@@ -9402,65 +9435,8 @@ window.addEventListener('DOMContentLoaded', checkStreamStatus);
 
 </script>
 <script>
-function openVideoModal(videoSrc, title, subtitle) {
-    const modal = document.getElementById('videoModal');
-    const video = document.getElementById('popupVideo');
-    const container = document.getElementById('videoContainer');
 
-    // Reset
-    cancelAnimationFrame(videoRafId);
-    video.pause();
-    video.src = '';
 
-    // Force inline + muted -- REQUIRED to prevent iOS fullscreen takeover
-    video.muted = true;
-    video.setAttribute('playsinline', '');
-    video.setAttribute('webkit-playsinline', '');
-    video.setAttribute('x-webkit-airplay', 'deny');
-
-    video.src = videoSrc;
-    video.load();
-
-    document.getElementById('videoPopupTitle').innerText = title;
-    document.getElementById('videoPopupSub').innerText = subtitle;
-    // Sync mute button to show muted state
-    document.getElementById('muteBtn').querySelector('i').className = 'fa-solid fa-volume-xmark text-sm';
-
-    modal.classList.remove('opacity-0', 'pointer-events-none');
-    setTimeout(() => {
-        container.classList.remove('scale-95');
-        container.classList.add('scale-100');
-    }, 50);
-    document.body.style.overflow = 'hidden';
-
-    video.addEventListener('loadedmetadata', () => {
-        document.getElementById('videoDuration').innerText = formatTime(video.duration);
-    }, { once: true });
-
-    video.addEventListener('timeupdate', () => {
-        const pct = video.duration ? (video.currentTime / video.duration) * 100 : 0;
-        document.getElementById('videoProgressBar').style.width = pct + '%';
-        document.getElementById('videoCurrentTime').innerText = formatTime(video.currentTime);
-    });
-
-    video.play().then(() => {
-        document.getElementById('playPauseBtn').querySelector('i').className = 'fa-solid fa-pause text-sm';
-        drawVideoFrame();
-    }).catch(() => {});
-}
-
-function closeVideoModal() {
-    const modal = document.getElementById('videoModal');
-    const video = document.getElementById('popupVideo');
-    const container = document.getElementById('videoContainer');
-
-    container.classList.add('scale-95');
-    modal.classList.add('opacity-0', 'pointer-events-none');
-    
-    video.pause();
-    video.src = "";
-    document.body.style.overflow = 'auto';
-}
 
 
 // Toggle User Dashboard
@@ -10290,101 +10266,50 @@ function closeReader() {
     }, 600);
 }
 
-let videoRafId = null;
-
-function drawVideoFrame() {
-    const v = document.getElementById('popupVideo');
-    const canvas = document.getElementById('videoCanvas');
-    if (!canvas || !v) return;
-    const ctx = canvas.getContext('2d');
-    canvas.width = v.videoWidth || canvas.offsetWidth;
-    canvas.height = v.videoHeight || canvas.offsetHeight;
-    ctx.drawImage(v, 0, 0, canvas.width, canvas.height);
-    videoRafId = requestAnimationFrame(drawVideoFrame);
-}
-
-function toggleVideoPlay() {
-    const v = document.getElementById('popupVideo');
-    const btn = document.getElementById('playPauseBtn').querySelector('i');
-    if (v.paused) {
-        v.play();
-        btn.className = 'fa-solid fa-pause text-sm';
-        drawVideoFrame();
-    } else {
-        v.pause();
-        btn.className = 'fa-solid fa-play text-sm';
-        cancelAnimationFrame(videoRafId);
-    }
-}
-
-function toggleVideoMute() {
-    const v = document.getElementById('popupVideo');
-    const btn = document.getElementById('muteBtn').querySelector('i');
-    v.muted = !v.muted;
-    btn.className = v.muted ? 'fa-solid fa-volume-xmark text-sm' : 'fa-solid fa-volume-high text-sm';
-}
-
-function seekVideo(e, bar) {
-    const v = document.getElementById('popupVideo');
-    const rect = bar.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    v.currentTime = pct * v.duration;
-}
-
-function formatTime(s) {
-    const m = Math.floor(s / 60);
-    return `${m}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
-}
-
-// Update your openVideoModal to use canvas
-function openVideoModal(videoSrc, title, subtitle) {
+function openVideoModal(youtubeId, title, subtitle, description, videoId) {
     const modal = document.getElementById('videoModal');
-    const video = document.getElementById('popupVideo');
-    const container = document.getElementById('videoContainer');
+    const iframe = document.getElementById('ytPlayer');
 
-    video.src = videoSrc;
+    // Load the YouTube embed with autoplay
+    iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
+
     document.getElementById('videoPopupTitle').innerText = title;
     document.getElementById('videoPopupSub').innerText = subtitle;
+    document.getElementById('videoExtraContent').innerHTML = description || '';
+    document.getElementById('videoShareSheet').classList.add('hidden');
+
+    // Store video ID and update URL for deep linking
+    window._currentVideoId = videoId || null;
+    if (videoId) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('video', videoId);
+        history.replaceState(null, '', url.toString());
+        window.loadVideoComments && window.loadVideoComments(videoId);
+    }
 
     modal.classList.remove('opacity-0', 'pointer-events-none');
-    setTimeout(() => {
-        container.classList.remove('scale-95');
-        container.classList.add('scale-100');
-    }, 50);
-
     document.body.style.overflow = 'hidden';
-
-    video.addEventListener('loadedmetadata', () => {
-        document.getElementById('videoDuration').innerText = formatTime(video.duration);
-    }, { once: true });
-
-    video.addEventListener('timeupdate', () => {
-        const pct = video.duration ? (video.currentTime / video.duration) * 100 : 0;
-        document.getElementById('videoProgressBar').style.width = pct + '%';
-        document.getElementById('videoCurrentTime').innerText = formatTime(video.currentTime);
-    });
-
-    video.play().then(() => {
-        document.getElementById('playPauseBtn').querySelector('i').className = 'fa-solid fa-pause text-sm';
-        drawVideoFrame();
-    }).catch(() => {});
 }
 
 function closeVideoModal() {
     const modal = document.getElementById('videoModal');
-    const video = document.getElementById('popupVideo');
-    const container = document.getElementById('videoContainer');
+    const iframe = document.getElementById('ytPlayer');
 
-    cancelAnimationFrame(videoRafId);
-    container.classList.add('scale-95');
     modal.classList.add('opacity-0', 'pointer-events-none');
-
-    video.pause();
-    video.src = '';
-    document.getElementById('playPauseBtn').querySelector('i').className = 'fa-solid fa-play text-sm';
+    iframe.src = ''; // stops audio instantly
     document.body.style.overflow = 'auto';
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete('video');
+    history.replaceState(null, '', url.toString());
+    window._currentVideoId = null;
 }
 
+function goFullscreen() {
+    const iframe = document.getElementById('ytPlayer');
+    if (iframe.requestFullscreen) iframe.requestFullscreen();
+    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+}
 
 </script>
 <div id="scoutingDashboardModal" class="fixed inset-0 z-[500] flex flex-col opacity-0 pointer-events-none transition-all duration-500">
@@ -10618,38 +10543,93 @@ window.closeProfile = () => {
 
     </div>
 </div>
-<div id="videoModal" class="fixed inset-0 z-[400] bg-black/98 backdrop-blur-3xl flex flex-col opacity-0 pointer-events-none transition-all duration-700 overflow-y-auto no-scrollbar">
-    
-    <button onclick="closeVideoModal()" class="fixed top-8 right-8 z-[450] w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-red-600 hover:scale-110 transition-all duration-300">
-        <i class="fa-solid fa-xmark text-xl"></i>
+<div id="videoModal" class="fixed inset-0 z-[400] bg-black opacity-0 pointer-events-none transition-opacity duration-500 flex flex-col">
+
+    <!-- Close Button -->
+    <button onclick="closeVideoModal()" class="absolute top-4 right-4 md:top-8 md:right-8 z-[450] w-11 h-11 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white hover:bg-red-600 hover:scale-110 transition-all duration-300">
+        <i class="fa-solid fa-xmark text-lg"></i>
     </button>
 
-    <div class="w-full max-w-[1600px] mx-auto px-6 py-20 flex flex-col lg:flex-row gap-12 min-h-screen items-center">
-        
-        <div class="w-full lg:w-[70%] flex flex-col scale-95 transition-all duration-700" id="videoContainer">
-<!-- In your #videoModal, replace the video wrapper div with this -->
-<div class="group relative aspect-video rounded-[3rem] overflow-hidden shadow-[0_0_120px_rgba(34,197,94,0.15)] border border-white/10 bg-black">
-    <!-- Hidden video -- never shown, just used as data source -->
-<video id="popupVideo" class="hidden" playsinline webkit-playsinline muted></video>
-    
-    <!-- Canvas renders the video frames -- no native controls ever appear -->
-    <canvas id="videoCanvas" class="w-full h-full object-contain"></canvas>
+    <!-- Main Layout: Video top, info+comments below on mobile / side by side on desktop -->
+    <div class="flex flex-col lg:flex-row h-full overflow-y-auto no-scrollbar lg:overflow-hidden">
 
-    <!-- Your custom controls -->
-    <div class="absolute bottom-5 left-5 right-5 flex items-center gap-4 px-4 py-3 rounded-2xl bg-black/50 backdrop-blur-md border border-white/10">
-        <button onclick="toggleVideoPlay()" id="playPauseBtn" class="text-white hover:text-amber-400 transition-colors flex-shrink-0">
-            <i class="fa-solid fa-play text-sm"></i>
-        </button>
-        <span id="videoCurrentTime" class="text-white text-[11px] font-black tabular-nums">0:00</span>
-        <div class="flex-1 h-1 bg-white/20 rounded-full overflow-hidden cursor-pointer" onclick="seekVideo(event, this)">
-            <div id="videoProgressBar" class="h-full bg-amber-400 w-0 rounded-full pointer-events-none"></div>
+        <!-- LEFT: Video + Title + Share -->
+        <div class="w-full lg:w-[65%] lg:h-full flex flex-col">
+
+            <!-- Video Player -->
+<div id="videoPlayerWrapper" class="relative w-full bg-black" style="aspect-ratio:16/9;">
+    <iframe
+        id="ytPlayer"
+        class="absolute inset-0 w-full h-full"
+        src=""
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+</div>
+
+            <!-- Title + Share below video -->
+            <div class="px-5 py-6 md:px-8 md:py-8 bg-black">
+                <span id="videoPopupSub" class="bg-amber-500 text-black text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-[0.3em] inline-block mb-3"></span>
+                <h2 id="videoPopupTitle" class="text-2xl md:text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white leading-tight mb-5"></h2>
+
+                <!-- Share Button -->
+                <button onclick="shareVideo()" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:border-amber-500 hover:text-black transition-all duration-300 active:scale-95">
+                    <i class="fa-solid fa-share-nodes text-sm"></i> Share
+                </button>
+
+                <!-- Share Sheet -->
+                <div id="videoShareSheet" class="hidden mt-4 p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2 max-w-xs">
+                    <p class="text-white/30 text-[9px] font-black uppercase tracking-[0.3em] mb-2">Share this video</p>
+                    <button onclick="copyVideoLink()" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all active:scale-95">
+                        <i class="fa-solid fa-link text-amber-400"></i> Copy Link
+                        <span id="copyLinkConfirm" class="ml-auto text-green-400 text-[10px] font-black hidden">Copied!</span>
+                    </button>
+                    <a id="shareTwitter" href="#" target="_blank" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all active:scale-95">
+                        <i class="fa-brands fa-x-twitter text-white"></i> Post on X
+                    </a>
+                    <a id="shareWhatsApp" href="#" target="_blank" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all active:scale-95">
+                        <i class="fa-brands fa-whatsapp text-green-400"></i> Send via WhatsApp
+                    </a>
+                    <a id="shareMessage" href="#" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all active:scale-95">
+                        <i class="fa-solid fa-message text-blue-400"></i> iMessage / SMS
+                    </a>
+                </div>
+            </div>
         </div>
-        <span id="videoDuration" class="text-white/50 text-[11px] font-black tabular-nums">0:00</span>
-        <button onclick="toggleVideoMute()" id="muteBtn" class="text-white hover:text-amber-400 transition-colors flex-shrink-0">
-            <i class="fa-solid fa-volume-high text-sm"></i>
-        </button>
+
+        <!-- RIGHT: Description + Comments -->
+        <div class="w-full lg:w-[35%] lg:h-full lg:overflow-y-auto no-scrollbar bg-[#0a0a0a] border-t border-white/5 lg:border-t-0 lg:border-l lg:border-white/5 px-5 py-6 md:px-8">
+
+            <!-- Description -->
+            <div id="videoExtraContent" class="text-white/50 text-sm leading-relaxed font-medium mb-8 pb-8 border-b border-white/10">
+            </div>
+
+            <!-- Comments -->
+            <div>
+                <h3 class="text-white font-black text-sm uppercase tracking-widest mb-5">
+                    Comments <span id="videoCommentCount" class="text-amber-500 ml-1">0</span>
+                </h3>
+
+                <div class="mb-6 bg-white/5 p-4 rounded-2xl border border-white/10">
+                    <textarea id="videoCommentInput" placeholder="Drop your take..."
+                        class="w-full bg-transparent border-none outline-none text-sm font-medium placeholder-white/30 resize-none h-16 text-white"></textarea>
+                    <div class="flex justify-end mt-2">
+                        <button onclick="postVideoComment()"
+                            class="bg-white text-black px-5 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest hover:bg-amber-400 transition-all active:scale-95">
+                            Post Take
+                        </button>
+                    </div>
+                </div>
+
+                <div id="videoCommentsFeed" class="space-y-4">
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+
 
 
             <div class="mt-12 space-y-4">
@@ -10657,6 +10637,39 @@ window.closeProfile = () => {
                     <span id="videoPopupSub" class="bg-amber-500 text-black text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-[0.3em]"></span>
                 </div>
                 <h2 id="videoPopupTitle" class="text-5xl md:text-8xl font-black uppercase tracking-tighter text-white leading-[0.85]"></h2>
+                <div class="flex items-center gap-3 mt-6 flex-wrap">
+    <button onclick="shareVideo()" id="shareVideoBtn"
+        class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/10 border border-white/20 text-white text-xs font-black uppercase tracking-widest hover:bg-amber-500 hover:border-amber-500 hover:text-black transition-all duration-300 active:scale-95">
+        <i class="fa-solid fa-share-nodes text-sm"></i>
+        Share
+    </button>
+</div>
+
+<!-- Share Sheet (hidden by default) -->
+<div id="videoShareSheet" class="hidden mt-4 p-5 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl space-y-3 max-w-sm">
+    <p class="text-white/40 text-[10px] font-black uppercase tracking-[0.3em] mb-3">Share this video</p>
+
+    <button onclick="copyVideoLink()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all active:scale-95">
+        <i class="fa-solid fa-link text-amber-400"></i> Copy Link
+        <span id="copyLinkConfirm" class="ml-auto text-green-400 text-[10px] font-black hidden">Copied!</span>
+    </button>
+
+    <a id="shareTwitter" href="#" target="_blank"
+        class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all active:scale-95">
+        <i class="fa-brands fa-x-twitter text-white"></i> Post on X
+    </a>
+
+    <a id="shareWhatsApp" href="#" target="_blank"
+        class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all active:scale-95">
+        <i class="fa-brands fa-whatsapp text-green-400"></i> Send via WhatsApp
+    </a>
+
+    <a id="shareMessage" href="#"
+        class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold transition-all active:scale-95">
+        <i class="fa-solid fa-message text-blue-400"></i> iMessage / SMS
+    </a>
+</div>
+
             </div>
         </div>
 
@@ -10664,8 +10677,33 @@ window.closeProfile = () => {
             <div class="p-8 rounded-[2.5rem] bg-white/5 border border-white/10 backdrop-blur-xl">
                 <h4 class="text-amber-500 text-[11px] font-black uppercase tracking-[0.4em] mb-6 flex items-center gap-2">
                 </h4>
-                <div id="videoExtraContent" class="text-white/60 text-lg leading-relaxed font-medium space-y-6">
-                    <p>    <h3 class="text-white font-black text-2xl uppercase tracking-tighter mb-1">Sports science behind movement, from Kinetic Chain to movement science, a deeper dive. </p></p>
+<div id="videoExtraContent" class="text-white/60 text-lg leading-relaxed font-medium space-y-6">
+</div>
+
+<!-- Video Comments Section -->
+<div class="mt-8 pt-8 border-t border-white/10">
+    <h3 class="text-white font-black text-lg uppercase tracking-widest mb-6">
+        Comments <span id="videoCommentCount" class="text-amber-500 ml-2">0</span>
+    </h3>
+
+    <!-- Input Box -->
+    <div class="mb-8 bg-white/5 p-5 rounded-[2rem] border border-white/10">
+        <textarea id="videoCommentInput" placeholder="Drop your take..." 
+            class="w-full bg-transparent border-none outline-none text-base font-medium placeholder-white/30 resize-none h-20 text-white"></textarea>
+        <div class="flex justify-end mt-3">
+            <button id="submitVideoComment" onclick="postVideoComment()"
+                class="bg-white text-black px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-amber-400 transition-all active:scale-95">
+                Post Take
+            </button>
+        </div>
+    </div>
+
+    <!-- Comments Feed -->
+    <div id="videoCommentsFeed" class="space-y-6">
+    </div>
+</div>
+
+
                 </div>
             </div>
 
@@ -10683,6 +10721,30 @@ window.closeProfile = () => {
     setTimeout(() => openReader(articleId), 400);
   }
 })();
+
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const videoId = params.get('video');
+    if (!videoId) return;
+
+    const videoMap = {
+        'treylyles': () => openVideoModal(
+    'YOUR_YOUTUBE_ID',
+    'Trey Lyles Breakdown',
+    'Greenlight Deep Dive',
+    'A full player-type breakdown -- what makes Lyles the right fit next to Rudy Gobert, how he spaces the floor, and why Minnesota needed exactly his profile off the bench.',
+    'treylyles'
+),
+
+        // Add more videos here as you add them:
+        // 'your-video-id': () => openVideoModal(...)
+    };
+
+    if (videoMap[videoId]) {
+        setTimeout(videoMap[videoId], 500);
+    }
+})();
+
 </script>
 
 <script>window.openAuthPrompt = () => {
@@ -11518,6 +11580,152 @@ window.deleteComment = async (cid) => {
     }
 };
 
+// ── VIDEO COMMENTS ───────────────────────────────────────────
+// ── VIDEO COMMENTS ───────────────────────────────────────────
+let currentVideoCommentId = null;
+let videoCommentUnsubscribe = null;
+
+window.loadVideoComments = function(videoId) {
+
+    currentVideoCommentId = videoId;
+
+    // Unsubscribe from previous listener if switching videos
+    if (videoCommentUnsubscribe) videoCommentUnsubscribe();
+
+    const q = query(
+        collection(db, `videos/${videoId}/comments`),
+        orderBy("timestamp", "desc")
+    );
+
+    videoCommentUnsubscribe = onSnapshot(q, (snapshot) => {
+        const feed = document.getElementById('videoCommentsFeed');
+        const countEl = document.getElementById('videoCommentCount');
+        if (!feed) return;
+
+        if (countEl) countEl.innerText = snapshot.size;
+        feed.innerHTML = "";
+
+        snapshot.forEach((commentDoc) => {
+            const c = commentDoc.data();
+            const cid = commentDoc.id;
+            const starCount = c.stars ? c.stars.length : 0;
+            const isGold = starCount >= 5;
+            const userStarred = c.stars?.includes(auth.currentUser?.uid);
+            const isOwner = auth.currentUser && c.uid === auth.currentUser.uid;
+
+            feed.innerHTML += `
+            <div id="vcomment-${cid}" class="p-5 rounded-[2rem] transition-all duration-500 ${isGold ? 'gold-comment' : 'bg-white/5'} border border-white/10">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-neutral-700 flex items-center justify-center text-white font-black text-xs">
+                            ${c.username.substring(0,2).toUpperCase()}
+                        </div>
+                        <div>
+                            <h4 class="font-black text-sm uppercase text-white">${c.username}</h4>
+                            <p class="text-[9px] text-white/30 font-bold uppercase tracking-widest">
+                                ${c.timestamp ? new Date(c.timestamp.toDate()).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'}) : 'Just Now'}
+                                ${c.isEdited ? '<span class="text-amber-400 ml-1">· Edited</span>' : ''}
+                            </p>
+                        </div>
+                    </div>
+                    ${isOwner ? `
+                    <div class="flex gap-3">
+                        <button onclick="editVideoComment('${cid}', '${c.text.replace(/'/g, "\\'")}')"
+                            class="text-sm text-white/30 hover:text-amber-400 transition-all">
+                            <i class="fa-solid fa-pencil"></i>
+                        </button>
+                        <button onclick="deleteVideoComment('${cid}')"
+                            class="text-sm text-white/30 hover:text-red-500 transition-all">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>` : ''}
+                </div>
+
+                <div id="vtext-${cid}">
+                    <p class="text-base font-medium text-white/70 mb-4">${c.text}</p>
+                </div>
+
+                <div class="flex gap-6 border-t border-white/10 pt-3">
+                    <button onclick="upvoteVideoComment('${cid}')" class="flex items-center gap-2 text-xs font-black text-white/50 hover:text-white transition">
+                        <i class="fa-solid fa-thumbs-up"></i> ${c.upvotes || 0}
+                    </button>
+                    <button onclick="starVideoComment('${cid}', ${userStarred})" class="flex items-center gap-2 text-xs font-black ${userStarred ? 'text-amber-400' : 'text-white/50'} hover:text-amber-400 transition">
+                        <i class="fa-solid fa-star"></i> ${starCount}
+                    </button>
+                </div>
+            </div>`;
+        });
+    });
+}
+
+window.postVideoComment = async () => {
+    if (!auth.currentUser) { openAuthPrompt(); return; }
+    if (!currentVideoCommentId) return;
+
+    const input = document.getElementById('videoCommentInput');
+    const text = input.value.trim();
+    if (!text) return;
+
+    await addDoc(collection(db, `videos/${currentVideoCommentId}/comments`), {
+        text,
+        username: currentUsername,
+        uid: auth.currentUser.uid,
+        timestamp: serverTimestamp(),
+        upvotes: 0,
+        stars: []
+    });
+    input.value = "";
+};
+
+window.editVideoComment = (cid, currentText) => {
+    const container = document.getElementById(`vtext-${cid}`);
+    container.innerHTML = `
+        <textarea id="vedit-${cid}" class="w-full bg-white/10 rounded-xl p-4 text-base font-medium outline-none focus:ring-1 ring-amber-400 text-white mb-2">${currentText}</textarea>
+        <div class="flex gap-2 mb-3">
+            <button onclick="saveVideoEdit('${cid}', '${currentText.replace(/'/g, "\\'")}')" class="bg-green-600 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest">Save</button>
+            <button onclick="cancelVideoEdit('${cid}', '${currentText.replace(/'/g, "\\'")}')" class="bg-white/10 text-white px-4 py-2 rounded-lg text-[9px] font-black uppercase tracking-widest">Cancel</button>
+        </div>`;
+};
+
+window.cancelVideoEdit = (cid, originalText) => {
+    document.getElementById(`vtext-${cid}`).innerHTML =
+        `<p class="text-base font-medium text-white/70 mb-4">${originalText}</p>`;
+};
+
+window.saveVideoEdit = async (cid, oldText) => {
+    const newText = document.getElementById(`vedit-${cid}`).value.trim();
+    if (!newText || newText === oldText) return;
+    await updateDoc(doc(db, `videos/${currentVideoCommentId}/comments`, cid), {
+        text: newText, isEdited: true, originalText: oldText
+    });
+};
+
+window.deleteVideoComment = async (cid) => {
+    if (!confirm("Delete this take?")) return;
+    await deleteDoc(doc(db, `videos/${currentVideoCommentId}/comments`, cid));
+};
+
+window.upvoteVideoComment = async (cid) => {
+    if (!auth.currentUser) { openAuthPrompt(); return; }
+    const ref = doc(db, `videos/${currentVideoCommentId}/comments`, cid);
+    const snap = await getDoc(ref);
+    if (snap.exists() && snap.data().uid === auth.currentUser.uid) {
+        alert("You can't upvote your own take!"); return;
+    }
+    await updateDoc(ref, { upvotes: increment(1) });
+};
+
+window.starVideoComment = async (cid, alreadyStarred) => {
+    if (!auth.currentUser) { openAuthPrompt(); return; }
+    const ref = doc(db, `videos/${currentVideoCommentId}/comments`, cid);
+    const snap = await getDoc(ref);
+    if (snap.exists() && snap.data().uid === auth.currentUser.uid) {
+        alert("You can't star your own take!"); return;
+    }
+    await updateDoc(ref, {
+        stars: alreadyStarred ? arrayRemove(auth.currentUser.uid) : arrayUnion(auth.currentUser.uid)
+    });
+};
 
 window.postArticleComment = async () => {
 const input = document.getElementById('articleCommentInput');
