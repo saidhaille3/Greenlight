@@ -54,6 +54,18 @@ const articleEngineData = {
     radial-gradient(ellipse 50% 80% at 10% 80%, rgba(16,185,129,0.08) 0%, transparent 55%);
   pointer-events: none;
 }
+
+.nc-article .nc-deck {
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.55;
+    opacity: 0.65;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(128,128,128,0.1);
+}
+  
 .nc-cover::after {
   content: '';
   position: absolute; inset: 0;
@@ -595,6 +607,7 @@ const articleEngineData = {
   </div>
 
 <!-- ══ OPENING ══ -->
+  <p class="nc-deck">Hot Summer. New year. New narratives. New projections. Let's get into it.</p>
 <p class="nc-lede">Training camp opens September 22nd. Preseason begins October 3rd. Opening Night is October 20th at Madison Square Garden -- Philadelphia at New York, banner night, LeBron James in the building in an opposing jersey for the first time since 2018. The NBA's 81st season kicks off with a collision of eras. Here is the full landscape -- 30 teams, every transaction, the voices shaping the conversation, and what the consensus says it all means.</p>
 
 <!-- ══ CONTEXT ══ -->
@@ -1805,7 +1818,7 @@ const articleEngineData = {
 
 <!-- ══ FINALE ══ -->
 <div class="nc-finale">
-  <p>Training camps open September 22nd. Preseason starts October 3rd. The season tips October 20th -- Philadelphia at New York, banner night, the league's past and its future in the same building at the same time. It begins.</p>
+  <p>The season tips October 20th. Philadelphia at New York on banner night. The King comes with a new deadly squadrant to battle the champs. It Begins</p>
   <span class="nc-finale-sig">-- GLS</span>
 </div>
 
