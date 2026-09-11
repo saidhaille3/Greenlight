@@ -1098,8 +1098,8 @@ const articleEngineData = {
       </div>
     </div>
   </div>
-  <p>LaMelo Ball is gone. Charlotte made the bet that Brandon Miller, Kon Knueppel -- the 2026 Rookie of the Year runner-up -- and their draft capital tell a better long-term story than one injury-prone franchise player on $130 million. ESPN's Summer Forecast described it precisely: "Charlotte made a risky bet after one of their strongest seasons in years by trading former franchise player LaMelo Ball to shift the focus to some of their more successful recent draft picks. If it works, Charlotte could be back in the play-in mix. If not, the Hornets might keep meandering for years to come."</p>
-  <p>The additions are veteran bridge pieces. Reid brings frontcourt depth and shooting. Schroeder is a disruptive second-unit ball-handler. The question is whether Miller and Knueppel are the answer -- or whether Charlotte just sold the best player on the roster and bought time.</p>
+  <p>LaMelo Ball is gone. Charlotte made the bet that Brandon Miller, Kon Knueppel -- the 2026 Rookie of the Year runner-up -- and their draft capital tell a better long-term story than one unproven franchise player on $130 million. ESPN's Summer Forecast: "Charlotte made a risky bet after one of their strongest seasons in years by trading former franchise player LaMelo Ball to shift the focus to some of their more successful recent draft picks. If it works, Charlotte could be back in the play-in mix. If not, the Hornets might keep meandering for years to come."</p>
+  <p>The additions are veteran bridge pieces. Reid brings some excitement and talent. Schroeder is a disruptive second-unit ball-handler. The question is whether Miller and Knueppel are the answer -- or whether Charlotte just sold the best player on the roster and bought time.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
       <span class="nc-intel-label">Cap Situation</span>
@@ -1131,7 +1131,7 @@ const articleEngineData = {
       </div>
     </div>
   </div>
-  <p>Washington selected AJ Dybantsa with the No. 1 overall pick -- the most anticipated prospect since LeBron James, per widespread pre-draft consensus. Young re-signed, giving the Wizards an established star alongside their franchise centerpiece rookie. The additions of Ayton and Middleton are veteran infrastructure around what is explicitly a rebuild that believes it has a foundation.</p>
+  <p>Washington selected AJ Dybantsa with the No. 1 overall pick -- A highly talented prospect. Young re-signed, giving the Wizards an established star alongside their franchise centerpiece rookie. The additions of Ayton and Middleton are veteran infrastructure around what is explicitly a rebuild that believes it has a foundation.</p>
   <p>Dybantsa's debut is the reason to watch. ESPN's schedule coverage called his arrival one of the things "the league is buzzing around." The Wizards were the league's worst team by point differential last season (-982). Everything that happens this year is runway for Dybantsa, and how his relationship with Young develops will define the franchise's next three years.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
@@ -1218,7 +1218,7 @@ const articleEngineData = {
     </div>
   </div>
   <p>Minnesota made the biggest swing in the Northwest. ESPN's Zach Kram gave it a skeptical grade: "That strategic shift is a big gamble, and the Timberwolves have almost no flexibility left to make further adjustments after they dealt an unprotected first-round pick and three swaps for Ball." Tim MacMahon identified the pairing for what it represents: Anthony Edwards and LaMelo Ball is "arguably the league's most talented backcourt." The question the consensus keeps returning to is whether LaMelo -- averaging 20 points per game but shooting 40/37 splits with no winning resume -- is the right second star around the franchise player Edwards is becoming.</p>
-  <p>As ESPN noted, Ball "has played more than 47 games just once since 2021-22." Minnesota is now without a first-round pick in 2027, 2029, and 2031. They are hard-capped at the second apron due to salary aggregation in the trade. Coach Chris Finch also lost his top assistant Micah Nori to Portland. ESPN's Dave McMenamin flagged the bench depth problem directly: "Minnesota now has no reliable forwards on its roster beyond Jaden McDaniels."</p>
+  <p>As ESPN noted, Ball "has played more than 47 games just once since 2021-22." Minnesota is now without a first-round pick in 2027, 2029, and 2031. They are hard-capped at the second apron due to salary aggregation in the trade. Coach Chris Finch also lost his top assistant Micah Nori to Portland. Before they got Kuminga, ESPN's Dave McMenamin flagged the bench depth problem directly: "Minnesota now has no reliable forwards on its roster beyond Jaden McDaniels.". Kuminga's arrival should alleviate that. </p>
   <p>The ceiling here, per MacMahon, is a Western Conference Finals team. The floor, per Kram, is a team that made an irreversible bet and has no tools left to hedge.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
