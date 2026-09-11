@@ -5,7 +5,7 @@ const articleEngineData = {
     hero: "images/2026nbanarr.jpeg",
     time: "25 MIN READ",
     published: "September 10, 2026",
-    updated: "",
+    updated: "September 10, 2026",
     title: "The 2026-27 NBA Climate",
 
     content: `
@@ -600,9 +600,8 @@ const articleEngineData = {
 <!-- ══ CONTEXT ══ -->
 <div class="nc-context">
   <span class="nc-context-label">A Summer For The Ages</span>
-  <p> The 2025-26 season ended on June 13th. Oklahoma City led the league at 64-18. San Antonio went 62-20, reached the Finals for the first time since 2014, pushed the Knicks to five games, and announced the Wembanyama era has arrived ahead of schedule. Victor Wembanyama became the first unanimous Defensive Player of the Year in NBA history. Shai Gilgeous-Alexander won back-to-back MVPs. Detroit topped the East at 60 wins. New York won it all -- the franchise's third title, first since 1973 -- Jalen Brunson as Finals MVP. Then summer came. And it detonated.</p>
+  <p> The 2025-26 season ended on June 13th. Oklahoma City led the league at 64-18. San Antonio went 62-20, reached the Finals for the first time since 2014, pushed the Knicks to five games, and announced the Wembanyama era has arrived ahead of schedule. Wemby became the first unanimous Defensive Player of the Year in NBA history. Shai Gilgeous-Alexander won back-to-back MVPs. Detroit topped the East at 60 wins. New York won it all -- the franchise's third title, first since 1973 -- Jalen Brunson as Finals MVP. Then summer came. And it detonated.</p>
   <p>Four narratives define the offseason: Charlotte gave up on Lamelo and Minnesota gambled big, LeBron chose Philly, and Giannis Antetokounmpo was traded to Miami. And on September 2nd, the league's longest-running procedural drama ended with the harshest punishment in modern NBA history. The NBA stripped the LA Clippers of five first-round picks, fined Steve Ballmer $30 million, suspended him from all team and league activities for one year, and a company named "Aspiration, Inc." -- became a blemish in the leauge's image. </p>
-  <p>Are you with me?. Onward.</p>
 </div>
 
 <!-- ══════════════════════════════════════
@@ -610,7 +609,7 @@ const articleEngineData = {
 ══════════════════════════════════════ -->
 <div class="nc-conf">
   <div class="nc-conf-inner east">
-    <span class="nc-conf-eyebrow">Conference</span>
+
     <h2 class="nc-conf-title east"><span>Eastern</span> Conference</h2>
   </div>
 </div>
@@ -618,7 +617,6 @@ const articleEngineData = {
 <!-- ATLANTIC -->
 <div class="nc-div">
   <div>
-    <span class="nc-div-eyebrow">Division</span>
     <h3 class="nc-div-name">Atlantic Division</h3>
   </div>
   <div class="nc-div-rule"></div>
@@ -794,7 +792,6 @@ const articleEngineData = {
 <!-- CENTRAL -->
 <div class="nc-div">
   <div>
-    <span class="nc-div-eyebrow">Division</span>
     <h3 class="nc-div-name">Central Division</h3>
   </div>
   <div class="nc-div-rule"></div>
@@ -968,7 +965,6 @@ const articleEngineData = {
 <!-- SOUTHEAST -->
 <div class="nc-div">
   <div>
-    <span class="nc-div-eyebrow">Division</span>
     <h3 class="nc-div-name">Southeast Division</h3>
   </div>
   <div class="nc-div-rule"></div>
@@ -1147,7 +1143,7 @@ const articleEngineData = {
 ══════════════════════════════════════ -->
 <div class="nc-conf">
   <div class="nc-conf-inner west">
-    <span class="nc-conf-eyebrow">Conference</span>
+
     <h2 class="nc-conf-title west"><span>Western</span> Conference</h2>
   </div>
 </div>
@@ -1155,7 +1151,6 @@ const articleEngineData = {
 <!-- NORTHWEST -->
 <div class="nc-div">
   <div>
-    <span class="nc-div-eyebrow">Division</span>
     <h3 class="nc-div-name">Northwest Division</h3>
   </div>
   <div class="nc-div-rule"></div>
@@ -1330,7 +1325,6 @@ const articleEngineData = {
 <!-- PACIFIC -->
 <div class="nc-div">
   <div>
-    <span class="nc-div-eyebrow">Division</span>
     <h3 class="nc-div-name">Pacific Division</h3>
   </div>
   <div class="nc-div-rule"></div>
