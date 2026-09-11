@@ -4,7 +4,7 @@ const articleEngineData = {
     tag: "NBA · Season Preview",
     hero: "images/2026nbanarr.jpeg",
     time: "25 MIN READ",
-    published: "September 10, 2026",
+    published: "September 11, 2026",
     updated: "September 10, 2026",
     title: "The 2026-27 NBA Climate",
 
