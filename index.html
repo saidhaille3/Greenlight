@@ -5869,29 +5869,16 @@ async function nflBuildScoreCards(){
     const today = new Date();
     const dayOfWeek = today.getDay();
 
-    // Always check yesterday + today + tomorrow
-    const dates = [-1, 0, 1].map(offset => {
+    // Cover the full NFL week window: 6 days back through 4 days ahead
+    const dates = [];
+    for (let offset = -6; offset <= 4; offset++) {
       const d = new Date(today);
       d.setDate(d.getDate() + offset);
-      return fmt(d);
-    });
-
-    // Smart prime-time lookback
-    const extraDates = [];
-    if (dayOfWeek === 1) { // Monday -- grab Sunday games
-      const d = new Date(today); d.setDate(today.getDate() - 1);
-      extraDates.push(fmt(d));
-    }
-    if (dayOfWeek === 2 || dayOfWeek === 3) { // Tue/Wed -- grab Monday night
-      const d = new Date(today); d.setDate(today.getDate() - (dayOfWeek - 1));
-      extraDates.push(fmt(d));
-    }
-    if (dayOfWeek === 5 || dayOfWeek === 6) { // Fri/Sat -- grab Thursday night
-      const d = new Date(today); d.setDate(today.getDate() - (dayOfWeek - 4));
-      extraDates.push(fmt(d));
+      dates.push(fmt(d));
     }
 
-    const allDates = [...new Set([...dates, ...extraDates])];
+    const allDates = [...new Set(dates)];
+
 
     // Fetch all dates at the same time
     const responses = await Promise.all(
