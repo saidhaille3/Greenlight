@@ -1,5 +1,1824 @@
 const articleEngineData = {
 
+"nba-2026-27-climate": {
+    tag: "NBA · Season Preview",
+    hero: "images/2026nbanarr.jpeg",
+    time: "25 MIN READ",
+    published: "September 10, 2026",
+    updated: "",
+    title: "The 2026-27 NBA Climate",
+
+    content: `
+<style>
+.nc {
+  font-family: 'Georgia', serif;
+  color: inherit;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.nc-byline {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(128,128,128,0.12);
+}
+.nc-byline-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.5;
+  line-height: 1.6;
+}
+
+/* ── COVER SPLASH ── */
+.nc-cover {
+  position: relative;
+  margin: 0 -1rem 3.5rem;
+  padding: 3.5rem 2rem 3rem;
+  overflow: hidden;
+  background: linear-gradient(160deg, #060a06 0%, #0d1a0d 40%, #1a1200 100%);
+  border-radius: 0 0 2rem 2rem;
+}
+@media (min-width: 600px) {
+  .nc-cover { margin: 0 -2rem 4rem; padding: 5rem 3rem 4rem; border-radius: 0 0 2.5rem 2.5rem; }
+}
+.nc-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 80% 20%, rgba(212,175,55,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 10% 80%, rgba(16,185,129,0.08) 0%, transparent 55%);
+  pointer-events: none;
+}
+.nc-cover::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 180px;
+  pointer-events: none; opacity: 0.5;
+}
+.nc-cover-eyebrow {
+  position: relative; z-index: 2;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem; font-weight: 900;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: #d4af37;
+  margin-bottom: 1.5rem;
+}
+.nc-cover-eyebrow::before {
+  content: '';
+  display: inline-block; width: 24px; height: 2px;
+  background: #d4af37; border-radius: 2px;
+}
+.nc-cover-title {
+  position: relative; z-index: 2;
+  font-family: 'Georgia', serif;
+  font-size: clamp(2.8rem, 9vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0 0 1.5rem;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+}
+.nc-cover-title em {
+  font-style: normal;
+  background: linear-gradient(135deg, #d4af37 0%, #f9e2af 50%, #b8960b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.nc-cover-deck {
+  position: relative; z-index: 2;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.85rem, 2.2vw, 1.05rem);
+  font-weight: 500;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.55);
+  max-width: 520px;
+  margin-bottom: 2rem;
+  letter-spacing: 0.01em;
+}
+.nc-cover-meta {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.nc-cover-meta-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.3);
+}
+.nc-cover-meta-divider {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.nc-cover-badge {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  background: rgba(212,175,55,0.15);
+  border: 1px solid rgba(212,175,55,0.35);
+  border-radius: 100px;
+  padding: 0.35rem 0.85rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 900;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #d4af37;
+}
+.nc-cover-badge::before {
+  content: '';
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #d4af37;
+  animation: ncPulse 2s infinite;
+}
+@keyframes ncPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* ── BODY ── */
+.nc p {
+  font-size: clamp(1.05rem, 2.6vw, 1.22rem);
+  line-height: 1.9;
+  margin-bottom: 1.85rem;
+  font-weight: 400;
+  color: inherit;
+  opacity: 0.87;
+}
+.nc-lede {
+  font-size: clamp(1.2rem, 3.2vw, 1.5rem) !important;
+  line-height: 1.7 !important;
+  font-weight: 400 !important;
+  opacity: 1 !important;
+  margin-bottom: 2.5rem !important;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(128,128,128,0.12);
+}
+
+/* ── CONTEXT BLOCK ── */
+.nc-context {
+  margin: 0 0 3.5rem;
+  padding: 2.25rem 2rem;
+  background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(16,185,129,0.03) 100%);
+  border: 1px solid rgba(212,175,55,0.18);
+  border-radius: 1.75rem;
+  position: relative; overflow: hidden;
+}
+.nc-context::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #d4af37, rgba(212,175,55,0.2), transparent);
+}
+.nc-context-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 900;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: #d4af37; display: block; margin-bottom: 1.25rem;
+}
+.nc-context p {
+  font-size: clamp(0.95rem, 2.4vw, 1.1rem) !important;
+  line-height: 1.85 !important;
+  margin-bottom: 1.25rem !important;
+  opacity: 0.82 !important;
+}
+.nc-context p:last-child { margin-bottom: 0 !important; }
+
+/* ── CONFERENCE HEADER ── */
+.nc-conf {
+  margin: 4.5rem 0 0;
+  position: relative;
+}
+.nc-conf-inner {
+  padding: 2.5rem 2rem 2rem;
+  border-radius: 2rem;
+  position: relative; overflow: hidden;
+}
+.nc-conf-inner.east {
+  background: linear-gradient(135deg, #060e24 0%, #0a1635 60%, #0e0d06 100%);
+}
+.nc-conf-inner.west {
+  background: linear-gradient(135deg, #1a0606 0%, #240d0a 60%, #1a1200 100%);
+}
+.nc-conf-inner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 160px; pointer-events: none;
+}
+.nc-conf-eyebrow {
+  position: relative; z-index: 2;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 900;
+  letter-spacing: 0.45em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  display: block; margin-bottom: 0.6rem;
+}
+.nc-conf-title {
+  position: relative; z-index: 2;
+  font-family: 'Georgia', serif;
+  font-size: clamp(1.8rem, 6vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: #ffffff;
+  margin: 0;
+}
+.nc-conf-title.east span { color: #60a5fa; }
+.nc-conf-title.west span { color: #f97316; }
+
+/* ── DIVISION HEADER ── */
+.nc-div {
+  margin: 3rem 0 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+  display: flex; align-items: flex-end; gap: 1rem;
+}
+.nc-div-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem; font-weight: 900;
+  letter-spacing: 0.45em; text-transform: uppercase;
+  color: #d4af37; display: block; margin-bottom: 0.3rem;
+}
+.nc-div-name {
+  font-family: 'Georgia', serif;
+  font-size: clamp(1.1rem, 3.5vw, 1.55rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: inherit; margin: 0;
+}
+.nc-div-rule {
+  flex: 1; height: 1px;
+  background: linear-gradient(to right, rgba(212,175,55,0.25), transparent);
+  margin-bottom: 0.2rem;
+}
+
+/* ── TEAM BLOCK ── */
+.nc-team {
+  margin: 2.5rem 0 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(128,128,128,0.1);
+}
+.nc-team-header {
+  margin-bottom: 1.5rem;
+}
+.nc-team-name {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1rem, 3.5vw, 1.35rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: inherit; margin: 0 0 1rem;
+  line-height: 1.1;
+}
+.nc-team-name em {
+  font-style: normal;
+  background: linear-gradient(135deg, #d4af37, #f9e2af);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── TRANSACTION STRIP ── */
+.nc-tx-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+@media (min-width: 580px) {
+  .nc-tx-wrap { grid-template-columns: 1fr 1fr; }
+}
+.nc-tx {
+  display: flex; gap: 0.65rem; align-items: flex-start;
+  padding: 0.85rem 1rem;
+  border-radius: 0.875rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; font-weight: 500; line-height: 1.55;
+}
+.nc-tx.add {
+  background: rgba(16,185,129,0.06);
+  border: 1px solid rgba(16,185,129,0.16);
+}
+.nc-tx.dep {
+  background: rgba(239,68,68,0.045);
+  border: 1px solid rgba(239,68,68,0.13);
+}
+.nc-tx-pill {
+  font-size: 0.52rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  padding: 0.2rem 0.55rem; border-radius: 100px;
+  flex-shrink: 0; white-space: nowrap; margin-top: 0.05rem;
+}
+.nc-tx.add .nc-tx-pill { background: rgba(16,185,129,0.15); color: #10b981; }
+.nc-tx.dep .nc-tx-pill { background: rgba(239,68,68,0.12); color: #f87171; }
+.nc-tx-text { color: inherit; opacity: 0.78; }
+
+/* ── INTEL STRIP ── */
+.nc-intel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin: 1.5rem 0 2.25rem;
+}
+@media (min-width: 500px) {
+  .nc-intel { grid-template-columns: repeat(3, 1fr); }
+}
+.nc-intel-card {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  position: relative; overflow: hidden;
+}
+.dark .nc-intel-card {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.07);
+}
+.nc-intel-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: rgba(212,175,55,0.4);
+}
+.nc-intel-label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.52rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.22em;
+  color: #d4af37; margin-bottom: 0.4rem;
+}
+.nc-intel-val {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem; font-weight: 600;
+  line-height: 1.55; color: inherit; opacity: 0.75;
+}
+
+/* ── PULL QUOTE ── */
+.nc-pull {
+  margin: 3rem 0;
+  padding: 2rem 2rem 2rem 2.25rem;
+  border-left: 4px solid #d4af37;
+  background: linear-gradient(135deg, rgba(212,175,55,0.07) 0%, transparent 70%);
+  border-radius: 0 1.5rem 1.5rem 0;
+  position: relative;
+}
+.nc - pull::before {
+    content: '\\201C';
+  position: absolute; top: -0.5rem; left: 1.5rem;
+  font-family: 'Georgia', serif;
+  font-size: 5rem; line-height: 1;
+  color: rgba(212,175,55,0.15);
+  font-weight: 900; pointer-events: none;
+}
+.nc-pull p {
+  font-size: clamp(1.05rem, 2.8vw, 1.3rem) !important;
+  font-style: italic;
+  font-weight: 600 !important;
+  line-height: 1.6 !important;
+  opacity: 1 !important;
+  margin: 0 !important;
+  color: #8a6e00;
+}
+.dark .nc-pull p { color: #d4af37; }
+
+/* ── DIVIDER ── */
+.nc-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,175,55,0.3), transparent);
+  margin: 4rem 0;
+}
+
+/* ── STANDINGS TABLE ── */
+.nc-standings-wrap {
+  margin: 2rem 0 3rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(128,128,128,0.1);
+}
+.nc-standings-head {
+  display: grid; grid-template-columns: 2rem 1fr auto;
+  padding: 0.65rem 1.25rem;
+  background: rgba(212,175,55,0.08);
+  border-bottom: 1px solid rgba(212,175,55,0.15);
+}
+.nc-standings-head span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.25em;
+  color: #d4af37;
+}
+.nc-standings-row {
+  display: grid; grid-template-columns: 2rem 1fr auto;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid rgba(128,128,128,0.06);
+  align-items: center;
+  transition: background 0.15s;
+}
+.nc-standings-row:last-child { border-bottom: none; }
+.nc-standings-row:hover { background: rgba(212,175,55,0.04); }
+.nc-seed {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; font-weight: 900;
+  color: #d4af37;
+}
+.nc-team-cell {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem; font-weight: 700;
+  color: inherit; opacity: 0.85;
+}
+.nc-wl {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem; font-weight: 800;
+  color: inherit; opacity: 0.5;
+  text-align: right;
+}
+
+/* ── CHAMPIONSHIP VOTE ── */
+.nc-vote {
+  margin: 2rem 0 3rem;
+  border-radius: 1.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(212,175,55,0.2);
+  background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, transparent 60%);
+}
+.nc-vote-head {
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(212,175,55,0.12);
+}
+.nc-vote-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 900;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: #d4af37; display: block;
+}
+.nc-vote-body { padding: 1.25rem 1.5rem; }
+.nc-vote-row {
+  display: flex; align-items: center; gap: 0.875rem;
+  margin-bottom: 1.1rem;
+}
+.nc-vote-row:last-child { margin-bottom: 0; }
+.nc-vote-team {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  color: inherit; min-width: 170px; flex-shrink: 0;
+}
+@media (max-width: 500px) { .nc-vote-team { min-width: 130px; font-size: 0.68rem; } }
+.nc-vote-track {
+  flex: 1; height: 5px; border-radius: 100px;
+  background: rgba(128,128,128,0.1); overflow: hidden;
+}
+.nc-vote-fill { height: 100%; border-radius: 100px; background: #d4af37; }
+.nc-vote-pts {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; font-weight: 900;
+  color: #d4af37; min-width: 36px; text-align: right; flex-shrink: 0;
+}
+
+/* ── THREE STORIES ── */
+.nc-story {
+  margin: 2.25rem 0;
+  padding: 2rem;
+  border-radius: 1.75rem;
+  background: rgba(0,0,0,0.025);
+  border: 1px solid rgba(128,128,128,0.09);
+  position: relative; overflow: hidden;
+}
+.dark .nc-story {
+  background: rgba(255,255,255,0.025);
+  border-color: rgba(255,255,255,0.07);
+}
+.nc-story-num {
+  position: absolute; top: 1rem; right: 1.5rem;
+  font-family: 'Georgia', serif;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  font-weight: 900; line-height: 1;
+  color: rgba(212,175,55,0.1);
+  letter-spacing: -0.04em;
+  pointer-events: none; user-select: none;
+}
+.nc-story-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 900;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: #d4af37; display: block; margin-bottom: 0.6rem;
+}
+.nc-story-title {
+  font-family: 'Georgia', serif;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 900; text-transform: uppercase;
+  letter-spacing: -0.01em; line-height: 1.15;
+  color: inherit; margin: 0 0 1rem;
+}
+.nc-story p {
+  font-size: clamp(0.9rem, 2.3vw, 1.05rem) !important;
+  line-height: 1.82 !important;
+  margin-bottom: 0 !important;
+  opacity: 0.8 !important;
+}
+
+/* ── FINALE ── */
+.nc-finale {
+  margin-top: 4rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid rgba(212,175,55,0.25);
+  text-align: center;
+}
+.nc-finale p {
+  font-size: clamp(0.78rem, 2vw, 0.9rem) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.38 !important;
+  margin-bottom: 0 !important;
+}
+.nc-finale-sig {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-family: 'Georgia', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #d4af37 !important;
+  opacity: 1 !important;
+  letter-spacing: 0.04em;
+}
+
+/* ── SECTION HEADER ── */
+.nc-section {
+  margin: 4.5rem 0 1.5rem;
+}
+.nc-section-eyebrow {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem; font-weight: 900;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: #d4af37; margin-bottom: 0.45rem;
+}
+.nc-section-title {
+  font-family: 'Georgia', serif;
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  font-weight: 900; letter-spacing: -0.025em;
+  text-transform: uppercase; line-height: 1.05;
+  color: inherit; margin: 0 0 0.6rem;
+}
+.nc-section-rule {
+  display: block; height: 3px; width: 2.5rem;
+  background: #d4af37; border-radius: 2px;
+}
+
+/* ── EXTENDED DETAIL NOTE ── */
+.nc-ext-note {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: inherit; opacity: 0.38;
+  margin-bottom: 1rem; display: block;
+}
+</style>
+
+<div class="nc">
+
+  <div class="nc-byline">
+    <img src="images/me.png" class="w-10 h-10 rounded-full object-cover border-2 border-amber-500/30 flex-shrink-0" />
+    <div class="nc-byline-text">
+      <a href="https://x.com/qb_vision" target="_blank" style="color:#d4af37; text-decoration:none;">@Qb_vision</a><br>
+      September 10, 2026
+    </div>
+  </div>
+
+<!-- ══ OPENING ══ -->
+<p class="nc-lede">Training camp opens September 22nd. Preseason begins October 3rd. Opening Night is October 20th at Madison Square Garden -- Philadelphia at New York, banner night, LeBron James in the building in an opposing jersey for the first time since 2018. The NBA's 81st season kicks off with a collision of eras. Here is the full landscape -- 30 teams, every transaction, the voices shaping the conversation, and what the consensus says it all means.</p>
+
+<!-- ══ CONTEXT ══ -->
+<div class="nc-context">
+  <span class="nc-context-label">A Summer For The Ages</span>
+  <p> The 2025-26 season ended on June 13th. Oklahoma City led the league at 64-18. San Antonio went 62-20, reached the Finals for the first time since 2014, pushed the Knicks to five games, and announced the Wembanyama era has arrived ahead of schedule. Victor Wembanyama became the first unanimous Defensive Player of the Year in NBA history. Shai Gilgeous-Alexander won back-to-back MVPs. Detroit topped the East at 60 wins. New York won it all -- the franchise's third title, first since 1973 -- Jalen Brunson as Finals MVP. Then summer came. And it detonated.</p>
+  <p>Four narratives define the offseason: Charlotte gave up on Lamelo and Minnesota gambled big, LeBron chose Philly, and Giannis Antetokounmpo was traded to Miami. And on September 2nd, the league's longest-running procedural drama ended with the harshest punishment in modern NBA history. The NBA stripped the LA Clippers of five first-round picks, fined Steve Ballmer $30 million, suspended him from all team and league activities for one year, and a company named "Aspiration, Inc." -- became a blemish in the leauge's image. </p>
+  <p>Are you with me?. Onward.</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     EASTERN CONFERENCE
+══════════════════════════════════════ -->
+<div class="nc-conf">
+  <div class="nc-conf-inner east">
+    <span class="nc-conf-eyebrow">Conference</span>
+    <h2 class="nc-conf-title east"><span>Eastern</span> Conference</h2>
+  </div>
+</div>
+
+<!-- ATLANTIC -->
+<div class="nc-div">
+  <div>
+    <span class="nc-div-eyebrow">Division</span>
+    <h3 class="nc-div-name">Atlantic Division</h3>
+  </div>
+  <div class="nc-div-rule"></div>
+</div>
+
+<!-- SIXERS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Philadelphia</em> 76ers</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Jaylen Brown (trade, Boston), LeBron James (2-year, veteran's minimum), Anfernee Simons (2-year FA), Dean Wade (4-year FA), Kentavious Caldwell-Pope (1-year FA), Ariel Hukporti (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Paul George (trade, Boston), Johni Broome (trade, Clippers), Quentin Grimes (FA, Lakers), Andre Drummond (FA, Knicks), Kelly Oubre Jr. (FA, Indiana), Trendon Watford (FA, New Orleans)</span>
+      </div>
+    </div>
+  </div>
+  <p>No team made more noise this summer. New Sixers president of basketball operations Mike Gansey swapped Paul George's bloated contract for All-NBA wing Jaylen Brown, then won the LeBron James sweepstakes -- signing the all-time leading scorer at the veteran's minimum. As ESPN's Tim MacMahon put it, Gansey "managed to swap Paul George's bloated contract for All-NBA wing Jaylen Brown while winning the LeBron James sweepstakes, signing the all-time leading scorer on a veterans minimum salary." On paper, the projected starting five of Tyrese Maxey, VJ Edgecombe, Jaylen Brown, LeBron James, and Joel Embiid is the most star-loaded unit the conference has seen in a generation.</p>
+  <p>The voice of record here is ESPN's Vincent Goodwill, who called it "the greatest infusion of talent the conference has seen since James left Miami for his second stint with Cleveland." But Goodwill also flagged what everyone sees: "Health and cohesion will be among Philly's biggest concerns." MacMahon added the chemistry dimension directly: "Coach Nick Nurse and the Sixers have to figure out fit and chemistry on the fly with a starting lineup that features four ball-dominant stars with All-NBA credentials." An unnamed Eastern Conference assistant coach told ESPN the depth questions are real: "Who's their backup point guard? LeBron isn't bringing the ball up against anybody that's going to pressure him. He's proven at this stage of his career he doesn't want that part of the responsibility."</p>
+  <p>Gansey himself laid out the philosophy to ESPN's Kevin Negandhi: "Any given night, anyone can be the guy. Sacrifice will be big for us. But Joel is arguably the best and most talented big I've ever been around -- he's going to be as important as LeBron and Jaylen." Brown, for his part, didn't arrive quietly. On a Twitch stream in early September, he told his audience: "My mentality is kill. I feel like I want blood this year."</p>
+  <p>James turns 42 in December. Embiid's regular-season availability has defined and derailed this franchise for three consecutive years. The 76ers haven't reached the Eastern Conference Finals since 2001.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Deep into luxury tax territory, hard to move given the configuration of contracts.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Clear Atlantic favorites. Boston is transitioning. Brooklyn rebuilds. Toronto waits on Kawhi.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 1st or 2nd in the East depending on the panel member. Vegas win total: 50.5. ESPN Summer Forecast has them at 50-32. Their ceiling, per the consensus, is the NBA Finals. Their floor is a chemistry crisis in February. In Philadelphia, there has never been a middle ground.</span>
+    </div>
+  </div>
+</div>
+
+<!-- KNICKS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>New York</em> Knicks</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Andre Drummond (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Mitchell Robinson (FA, Boston), Jeremy Sochan (FA, Portland), Ariel Hukporti (FA, Philadelphia)</span>
+      </div>
+    </div>
+  </div>
+  <p>The defending champions did almost nothing. That is the correct move. ESPN's Zach Kram confirmed what the transactions make plain: "The Knicks, Thunder and Spurs were the only ones to win a game in the conference finals -- and they're still in a tier unto themselves." Brunson, Josh Hart, Mikal Bridges, OG Anunoby, Karl-Anthony Towns -- the starting five is intact. The only meaningful roster change is Drummond replacing Robinson at center off the bench. Landry Shamet re-signed. Jordan Clarkson re-signed. Jose Alvarado re-signed.</p>
+  <p>ESPN's Vincent Goodwill noted the financial dimension looming over the season: "It feels like this team will be given the chance to go for a repeat in an era where that doesn't happen very often. Every financial decision must be made with the reality of Jalen Brunson's possible extension -- if he signs early, he can sign for four years and $254 million. If he waits, that jumps to five years and $371 million in the 2028 offseason." That decision will define the franchise's next decade. For now, the focus is October.</p>
+  <p>Opening Night is Philadelphia at New York. The Sixers come in with everything built specifically to end New York's run. The banner goes up first. Then the game begins.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Expensive and about to get more expensive. The Brunson extension timeline is the franchise's central financial decision.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Locked in as Atlantic favorites alongside Philly in a two-team race for conference supremacy.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 52.5 wins (Vegas), 53-29 per the ESPN panel. Championship co-favorite with Oklahoma City and San Antonio across the full consensus.</span>
+    </div>
+  </div>
+</div>
+
+<!-- CELTICS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Boston</em> Celtics</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Paul George (trade, Philadelphia), Mitchell Robinson (3-year FA), Mike Conley (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Jaylen Brown (trade, Philadelphia), Nikola Vucevic (FA, Orlando)</span>
+      </div>
+    </div>
+  </div>
+  <p>This is where you pay. Brown averaged 28.7 points last season -- former Finals MVP, cornerstone of two championship runs in Boston. ESPN's Ben Golliver called the Tatum-George partnership the Celtics' "polarizing decision," and the numbers behind it tell the story: per ESPN analytics, George carried a +1.3 estimated plus-minus last season, essentially identical to Brown's. The floor production is replaceable. The ceiling is not. The bet is that Jayson Tatum -- who played just 16 games last season after returning from an Achilles tear -- is fully healthy and back to All-NBA form. ESPN's Vincent Goodwill framed it cleanly: "Boston is banking on a full season from Jayson Tatum and hoping Paul George can stay upright and healthy long enough for coach Joe Mazzulla to work his regular-season magic once again."</p>
+  <p>Robinson brings real interior depth -- a genuine rim protector who was the piece Boston identified as missing. Conley at 39 is the veteran who steadies the second unit. But the offense runs through a Tatum who hasn't played a full season since 2023-24. If he's healthy, the Celtics are a conference finals team. If he's not, this trade looks like the franchise burned a Finals MVP for a 35-year-old wing on a downward production slope.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Restructured significantly through the Brown deal -- increased future flexibility by moving off the contract.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Second in the Atlantic, behind Philly. The gap between them and the Sixers is significant on paper heading into October.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 48-34 per ESPN Summer Forecast. Golliver described this as "a full season from Jayson Tatum" as the central variable. They are a 45-50 win team without him, a 55-win team if he's right.</span>
+    </div>
+  </div>
+</div>
+
+<!-- NETS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Brooklyn</em> Nets</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Julius Randle (4-team trade, Minnesota), Keon Ellis (2-year FA), Moritz Wagner (2-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Nic Claxton (4-team trade, Chicago), Ziaire Williams (FA, Lakers)</span>
+      </div>
+    </div>
+  </div>
+  <p>The Nets accelerated their rebuild through the new lottery rules and picked up Randle -- a 31-year-old former All-Star -- as a veteran anchor while drafting rookie Mikel Brown Jr., who drew attention during Summer League with 16.7 points and 4.0 assists per game. ESPN's Zach Kram was measured on the moves: "The Nets won just 20 games last season, and I don't expect the addition of Julius Randle, combined with drafting" Brown, to produce an immediate contender. This is a team in building mode. Randle gives them an experienced voice and a legitimate scorer to build around while the young core develops.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Flexible. Intentionally so.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Bottom of the Atlantic. The work here is long-term.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">Play-in contention is the ceiling in year one. The honest projection from the consensus is 25-28 wins and watching Brown's development.</span>
+    </div>
+  </div>
+</div>
+
+<!-- RAPTORS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Toronto</em> Raptors</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Kawhi Leonard (trade, Clippers -- pending final clearance), Kyle Anderson (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Brandon Ingram (trade, Clippers), Gradey Dick (trade, Clippers), Sandro Mamukelashvili (FA, Lakers)</span>
+      </div>
+    </div>
+  </div>
+  <p>The most unique situation in the league. The Kawhi-to-Toronto trade was agreed June 30th, frozen by the Clippers investigation, and cleared after the NBA's September 2nd ruling. Leonard goes back to the city where he won his only championship. The Raptors assumed all penalty risk related to Leonard's conduct as a condition of the trade's completion. ESPN's Zach Kram summarized it precisely: "If all goes as Toronto intends and the team reacquires the two-time Finals MVP, then the Raptors will be positioned as one of the top Finals contenders in the East." The trade is officially cleared. Leonard's health -- he's played fewer than 60 games in four of his last five seasons -- is the entire question.</p>
+  <p>If he plays 60+ games alongside a maturing Raptors core, ESPN's projection of 45-37 holds. If he's back to his injury management tendencies, this becomes a 35-win team overnight.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Significant commitment to Leonard's remaining deal.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Wildcard in the Atlantic. Their floor and ceiling are separated by 20 wins depending entirely on one man's body.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 45-37 by ESPN -- a play-in team that could flip to playoff seed with health. Kram put them among "Finals candidates" in his September tiering -- a significant statement built entirely on the Leonard assumption.</span>
+    </div>
+  </div>
+</div>
+
+<!-- CENTRAL -->
+<div class="nc-div">
+  <div>
+    <span class="nc-div-eyebrow">Division</span>
+    <h3 class="nc-div-name">Central Division</h3>
+  </div>
+  <div class="nc-div-rule"></div>
+</div>
+
+<!-- PISTONS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Detroit</em> Pistons</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">John Collins (sign-and-trade, Clippers; 3-year), Isaiah Stewart (trade, Memphis), Gary Harris (trade, Milwaukee), Taurean Prince (trade, Milwaukee), Isaiah Joe (trade, Oklahoma City)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Tobias Harris (FA, San Antonio), Caris LeVert (trade, Milwaukee), Marcus Sasser (trade, Dallas)</span>
+      </div>
+    </div>
+  </div>
+  <p>The top seed in the East last season at 60-18, knocked out in a brutal seven-game second-round series by Cleveland. This offseason, Detroit made the move the consensus had been calling for: upgrading the power forward position. Collins replaces Harris with more athleticism, better shot creation, and a cleaner stylistic fit alongside Cade Cunningham. ESPN's panel noted that Detroit "chose to rely mostly on internal improvement" while making one significant addition. The Collins acquisition addresses the team's identified weakness -- they were exposed at the four by Cleveland in ways Harris couldn't answer.</p>
+  <p>Cade Cunningham is entering his prime. Jalen Duren is 21. The coaching staff under Monty Williams is considered among the league's best at player development. The Pistons lost Isaiah Stewart to Memphis in a trade, a noted departure given his physicality and enforcer role -- ESPN's coverage flagged that "Stewart was a force protecting the rim for Detroit, and as the team's enforcer, he gave it an identity that matched the Bad Boys teams of old."</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Healthy. Committed at the top, flexible at the margins.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Projected Central favorites. Cleveland is close. Milwaukee is pivoting. The Central is the most competitive division top-to-bottom in the East.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 53-29, tied for the East lead with New York. The ESPN panel identified Detroit as a "disappointment" candidate -- specifically because the Game 7 second-round exit "ended with a Game 7 second-round exit on their home floor" after 60 wins, and the expectations entering this season are championship-or-bust by the standard they set.</span>
+    </div>
+  </div>
+</div>
+
+<!-- CAVALIERS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Cleveland</em> Cavaliers</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Peyton Watson (5-team sign-and-trade, Denver; 4-year), Khalifa Diop (4-year FA), Mario Hezonja (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Keon Ellis (FA, Brooklyn), Larry Nance Jr. (FA, Indiana), Georges Niang (FA, Golden State), Dennis Schroeder (5-team trade, Charlotte), Max Strus (5-team trade, Clippers), Dean Wade (FA, Philadelphia)</span>
+      </div>
+    </div>
+  </div>
+  <p>The team that took Detroit to seven games in the second round -- and swept New York in the 2024-25 Finals before falling to OKC -- built on the same foundation. Donovan Mitchell signed his four-year extension, the commitment Cleveland needed. James Harden re-signed on a three-year deal. The Mitchell-Harden backcourt is intact and enters its first full season together. Watson is the youth infusion -- a two-way wing who ESPN's panel flagged as the key developmental add: "Cleveland hopes a full season of the Donovan Mitchell-James Harden backcourt and its recent acquisition of two-way wing Peyton Watson can buoy the franchise after last season's run to the conference finals."</p>
+  <p>The departure of Niang, Strus, and Schroeder thins the bench depth that made Cleveland dangerous in series play. Diop is raw but enormous. The question is whether the starting five's star power compensates for a bench that got noticeably leaner.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Deep in luxury tax. The Mitchell extension locks in a significant financial commitment.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Second in the Central behind Detroit. The margin between them is small enough that seeding will likely come down to the last month of the season.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 51-31 by the ESPN Summer Forecast panel. Mitchell at his best is top-5 in the conference. The concern is playoff ceiling -- they've reached the conference finals twice in three years without getting through.</span>
+    </div>
+  </div>
+</div>
+
+<!-- BUCKS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Milwaukee</em> Bucks</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Tyler Herro (trade, Miami), Kasparas Jakucionis (trade, Miami), Jaime Jaquez Jr. (trade, Miami), Caris LeVert (trade, Detroit), Kel'el Ware (trade, Miami)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Giannis Antetokounmpo (trade, Miami), Bobby Portis (trade, Miami), Gary Harris (trade, Detroit), Taurean Prince (trade, Detroit)</span>
+      </div>
+    </div>
+  </div>
+  <p>The post-Giannis era has arrived in Milwaukee. After 13 years, two MVPs, and a 2021 championship, Antetokounmpo is gone to South Beach. The Bucks received a substantial haul -- Herro, Jaquez, Jakucionis, Ware, and picks -- but as ESPN's coverage acknowledged plainly: this is a pivot, not a reinforcement. Herro is a legitimate scorer who "might average 30 PPG" per the Detroit Bad Boys analysis, but this is now a retooling project around Damian Lillard, who missed most of last season recovering from injury.</p>
+  <p>Gary Trent Jr. re-signed for four years. Ousmane Dieng re-signed. Pete Nance locked up. The 2021 core is being replaced methodically, but the transition years are here. ESPN's analysis was blunt: "The post-Giannis era has begun in Milwaukee."</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Restructuring. The Giannis deal came off the books and the returns give them pieces to build around.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Third in the Central. A clear step behind Detroit and Cleveland in the hierarchy.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">40-42 wins in the consensus range. The ESPN Summer Forecast did not project Milwaukee in the top six of the East. A Lillard healthy, Herro exploding scenario changes that picture, but the floor here is significant.</span>
+    </div>
+  </div>
+</div>
+
+<!-- PACERS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Indiana</em> Pacers</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Kelly Oubre Jr. (2-year FA), Larry Nance Jr. (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Kam Jones (trade, Chicago), Micah Potter (waivers, Portland)</span>
+      </div>
+    </div>
+  </div>
+  <p>The most significant development in Indiana has nothing to do with the offseason. It has everything to do with one player's knee. Tyrese Haliburton missed the entire 2025-26 season with a ruptured Achilles. He is back. ESPN's Zach Kram stated it plainly in the Post-Finals power rankings: "In 2026-27, Indiana is more likely to win the East than finish with 60-plus losses again." The Pacers went 19-63 without him. That number tells the story of his value. When healthy, Indiana reached the conference finals two seasons ago. When healthy, Haliburton is one of the five best point guards in the league.</p>
+  <p>Oubre adds wing depth and physicality. Nance is a versatile veteran. The roster around Haliburton is largely the same group that nearly beat the defending champion Thunder in 2024-25. The question is not whether this team is good. The question is how many games Haliburton plays before the questions about his Achilles, his conditioning, and his trust in his own body are fully answered.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Reasonable. Built to compete now, not encumbered by long-term obligations that block flexibility.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Competitive in the Central. The honest ranking has them fourth -- but Haliburton returning healthy moves them to second or third in the Central immediately.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 44-38 by the ESPN Summer Forecast. ESPN's panel identified Indiana as a title contender candidate -- specifically because they have conference finals experience, the talent, and the scheduling fortune that comes with a soft draw in spots. The 50-win ceiling is real.</span>
+    </div>
+  </div>
+</div>
+
+<!-- BULLS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Chicago</em> Bulls</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Nic Claxton (4-team trade, Brooklyn), Norman Powell (2-year FA), Caleb Wilson (No. 4 pick, 2026 draft)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Mouhamadou Gueye (4-team trade, Charlotte), Nick Richards (FA, Miami), Collin Sexton (FA, Lakers), Anfernee Simons (FA, Philadelphia)</span>
+      </div>
+    </div>
+  </div>
+  <p>The Bulls got younger and more interesting in one offseason. Zach Collins re-signed. Claxton gives them a legitimate rim protector and interior anchor who was discarded in Brooklyn's retool. Powell is a proven two-way wing scorer who signed quickly after the LeBron hold ended the Miami market freeze. Caleb Wilson, the No. 4 overall pick, arrives with immediate-impact expectations. ESPN's Ben Golliver noted the Bulls "just added a potential franchise player with the No. 4 pick" in his summer forecast framing.</p>
+  <p>Whether this is a playoff team or a play-in team depends largely on Coby White's continued development and how quickly Wilson integrates. Chicago under new coach Chauncey Billups -- who was suspended by Portland, then hired by the Bulls -- has a real identity question to answer in year one.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Mid-tier spender. No apron concerns. Flexibility to add.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Fourth in the Central. A play-in team that can push into the sixth seed if the young pieces click.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">Projected low-40s in wins. ESPN's Goodwill cited the Bulls as a potential surprise team -- Powell's two-way impact and Wilson's ceiling are the key variables.</span>
+    </div>
+  </div>
+</div>
+
+<!-- SOUTHEAST -->
+<div class="nc-div">
+  <div>
+    <span class="nc-div-eyebrow">Division</span>
+    <h3 class="nc-div-name">Southeast Division</h3>
+  </div>
+  <div class="nc-div-rule"></div>
+</div>
+
+<!-- HEAT -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Miami</em> Heat</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Giannis Antetokounmpo (trade, Milwaukee), Klay Thompson (2-year FA), Bobby Portis (trade, Milwaukee), Tim Hardaway Jr. (1-year FA), Nick Richards (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Tyler Herro (trade, Milwaukee), Jaime Jaquez Jr. (trade, Milwaukee), Kel'el Ware (trade, Milwaukee), Norman Powell (FA, Chicago), Kasparas Jakucionis (trade, Milwaukee)</span>
+      </div>
+    </div>
+  </div>
+  <p>Pat Riley got his man. After a summer of negotiation and trade structuring, Giannis Antetokounmpo is a Miami Heat. ESPN's Ohm Youngmisuk described the franchise's track record: "The Miami Heat have never shied away from chasing -- and landing -- superstars. Shaquille O'Neal in 2004. LeBron James and Chris Bosh in 2010. Jimmy Butler in 2019. And this offseason, two-time MVP Giannis Antetokounmpo." Those previous blockbuster summers produced Finals appearances within two seasons each time. The bet, as always with Miami, is that Spoelstra and the culture do the rest.</p>
+  <p>Thompson joins as the veteran shooter Giannis lineups have always needed -- spacing around a non-shooter at the operational hub of the offense. Bam Adebayo and Antetokounmpo are a historic frontcourt pairing defensively. Spoelstra, who publicly said "adapting the offense will be vital," has spent his career maximizing asymmetric talent.</p>
+  <p>The complication: ESPN's coverage noted the Heat "might not yet be equipped to transform from a play-in team to a title threat" in year one. They gave up significant youth -- Herro, Ware, and Jaquez are all gone. The bench is thin. The bet is that Giannis and Bam at their best makes the starting five so good that depth becomes secondary. ESPN's analytics team noted that Antetokounmpo's teams were "14.4 points per 100 possessions better with Antetokounmpo on the court last season," and offered a notable wager: "Antetokounmpo to win MVP (+1200)" given that a healthy campaign in Miami would vault him back into the race immediately.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Committed at the top. Limited flexibility, but the core is locked and built to compete now.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Southeast leaders. Atlanta is the only realistic competition in the division, and the gap is significant.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 47-35. Ohm Youngmisuk declared Pat Riley "gunning for a championship." The ceiling here rises sharply with Giannis health. ESPN identified them as one of the "leading candidates" to produce the NBA's ninth different champion in nine years -- per Zach Kram's Summer Forecast summary.</span>
+    </div>
+  </div>
+</div>
+
+<!-- HAWKS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Atlanta</em> Hawks</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Luguentz Dort (trade, OKC), Aaron Wiggins (trade, OKC), Devin Carter (trade, Sacramento), Ryan Nembhard (trade, Dallas), CJ McCollum (1-year re-sign), Jock Landale (1-year re-sign)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Jonathan Kuminga (FA, Minnesota), Zaccharie Risacher (trade, Dallas)</span>
+      </div>
+    </div>
+  </div>
+  <p>The consensus was uniformly positive on Atlanta's approach. ESPN's Zach Kram gave the Hawks an A- in his offseason grades, writing: "They acquired Luguentz Dort, Aaron Wiggins and Devin Carter in salary dump trades, as well as Ryan Nembhard to help stabilize the backcourt. Though involved in a lot of rumors surrounding All-Star caliber players, the Hawks decided against pushing the issue, and instead focused on improving the margins." Atlanta didn't make a splashy star acquisition. They made the smart ones -- bench depth, defensive versatility, and backcourt insurance for Trae Young without disrupting Jalen Johnson's development trajectory.</p>
+  <p>Johnson averaged 22.5 points, 10.3 rebounds, and 7.9 assists last season in what amounted to a quiet star emergence. He is the most underrated player in the East. Nickeil Alexander-Walker won Most Improved Player. Atlanta finished the regular season on a 19-5 run and took New York to three games before the Knicks' historic playoff streak began. The Hawks went from being counted out to being taken seriously -- and now the infrastructure around their young core has measurably improved.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Clean. Room to move. The Alexander-Walker and Johnson contracts are well-structured relative to their production.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Second in the Southeast behind Miami. A clear and meaningful gap between them and the rest of the division.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 47-35 per the Summer Forecast, tied with Miami at sixth in the East. ESPN's Summer Forecast designated Atlanta as a "surprise" candidate -- specifically because "the Hawks were the only team to win two games against the Knicks in the playoffs" last season, and Jalen Johnson's All-Star emergence could accelerate that timeline.</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAGIC -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Orlando</em> Magic</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Nikola Vucevic (1-year FA, returning to Orlando)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Moritz Wagner (FA, Brooklyn)</span>
+      </div>
+    </div>
+  </div>
+  <p>Orlando stayed quiet. Jevon Carter re-signed. Jonathan Isaac re-signed. The core of Paolo Banchero, Franz Wagner, and Jalen Suggs remains intact under new head coach Sean Sweeney -- replacing Jamahl Mosley, who was fired after a second-round collapse that included blowing a 3-1 series lead to the Pistons. Vucevic coming home at 35 adds veteran leadership and frontcourt depth behind Banchero, but ESPN's Summer Forecast flagged the team's endemic problem: persistent shooting inefficiency that no one addition resolves.</p>
+  <p>Banchero is an All-Star talent. Wagner is one of the most complete forwards in the conference. But the Magic have been a jump-shooting team that can't shoot consistently -- and no offseason fix addresses that structurally.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Manageable. Committed at the top but not dangerously exposed.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Third in the Southeast. They are the team most likely to surprise if Banchero takes his scoring efficiency to another level.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 44-38 per Summer Forecast. ESPN cited the Magic among teams in the conference's "upper tier" of contenders, but Kram's tiering placed them in the "high upside" group rather than the "win machines" -- a distinction rooted in the shooting concerns.</span>
+    </div>
+  </div>
+</div>
+
+<!-- HORNETS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Charlotte</em> Hornets</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Naz Reid (4-team trade, Minnesota), Dennis Schroeder (5-team trade, Cleveland), Dorian Finney-Smith (trade, Houston), Grayson Allen (trade, Phoenix), Royce O'Neale (trade, Phoenix), Coby White (3-year re-sign)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">LaMelo Ball (4-team trade, Minnesota), Miles Bridges (trade, Phoenix), Josh Green (4-team trade, Minnesota), Tre Mann (5-team trade, Washington)</span>
+      </div>
+    </div>
+  </div>
+  <p>LaMelo Ball is gone. Charlotte made the bet that Brandon Miller, Kon Knueppel -- the 2026 Rookie of the Year runner-up -- and their draft capital tell a better long-term story than one injury-prone franchise player on $130 million. ESPN's Summer Forecast described it precisely: "Charlotte made a risky bet after one of their strongest seasons in years by trading former franchise player LaMelo Ball to shift the focus to some of their more successful recent draft picks. If it works, Charlotte could be back in the play-in mix. If not, the Hornets might keep meandering for years to come."</p>
+  <p>The additions are veteran bridge pieces. Reid brings frontcourt depth and shooting. Schroeder is a disruptive second-unit ball-handler. The question is whether Miller and Knueppel are the answer -- or whether Charlotte just sold the best player on the roster and bought time.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Clearing cap space was part of the explicit goal.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Fourth in the Southeast. This is a developmental season.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">Play-in at best. The consensus projects 30-35 wins and a close watch on the Miller-Knueppel development arc.</span>
+    </div>
+  </div>
+</div>
+
+<!-- WIZARDS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Washington</em> Wizards</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Deandre Ayton (trade, Lakers), Tre Mann (5-team trade, Charlotte), Khris Middleton (sign-and-trade, Dallas), Trae Young (4-year re-sign, franchise cornerstone)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Jaden Hardy (trade, Lakers), D'Angelo Russell (trade, Memphis), Cam Whitmore (5-team trade, Cleveland)</span>
+      </div>
+    </div>
+  </div>
+  <p>Washington selected AJ Dybantsa with the No. 1 overall pick -- the most anticipated prospect since LeBron James, per widespread pre-draft consensus. Young re-signed, giving the Wizards an established star alongside their franchise centerpiece rookie. The additions of Ayton and Middleton are veteran infrastructure around what is explicitly a rebuild that believes it has a foundation.</p>
+  <p>Dybantsa's debut is the reason to watch. ESPN's schedule coverage called his arrival one of the things "the league is buzzing around." The Wizards were the league's worst team by point differential last season (-982). Everything that happens this year is runway for Dybantsa, and how his relationship with Young develops will define the franchise's next three years.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Rebuilding. The Trae re-sign was the priority commitment.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Fifth in the Southeast -- by design.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">22-27 wins in the consensus range. The Wizards were picked last in the East before Dybantsa. His performance is the only variable that can move that number meaningfully.</span>
+    </div>
+  </div>
+</div>
+
+<div class="nc-divider"></div>
+
+<!-- ══════════════════════════════════════
+     WESTERN CONFERENCE
+══════════════════════════════════════ -->
+<div class="nc-conf">
+  <div class="nc-conf-inner west">
+    <span class="nc-conf-eyebrow">Conference</span>
+    <h2 class="nc-conf-title west"><span>Western</span> Conference</h2>
+  </div>
+</div>
+
+<!-- NORTHWEST -->
+<div class="nc-div">
+  <div>
+    <span class="nc-div-eyebrow">Division</span>
+    <h3 class="nc-div-name">Northwest Division</h3>
+  </div>
+  <div class="nc-div-rule"></div>
+</div>
+
+<!-- THUNDER -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Oklahoma City</em> Thunder</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Bennett Stirtz (No. 16 pick, 2026 draft), Aday Mara (No. 11 pick, 2026 draft -- previously reported)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Luguentz Dort (trade, Atlanta), Isaiah Joe (trade, Detroit), Aaron Wiggins (trade, Atlanta), Kenrich Williams (re-signed)</span>
+      </div>
+    </div>
+  </div>
+  <p>The reigning 2024-25 champions led last season at 64-18. They lost seven games all year. They lost Dort, Joe, and Wiggins -- all rotational contributors -- to extension cost-cutting, and replaced them with two rookies. ESPN's Zach Kram noted that the Thunder's extensions for Jalen Williams and Chet Holmgren "triggered in July, leading to a trio of financially motivated trades to slash the tax bill." Sam Presti told The Oklahoman that "the savings generated this summer, and from being out of the tax the last several years, will be re-allocated to future teams."</p>
+  <p>The Thunder are still the most analytically dominant team in basketball. Per ESPN, over the last two seasons including playoffs, Oklahoma City has outscored its opponents by 11.2 points per 100 possessions. SGA is the two-time reigning MVP. Chet Holmgren is 23. Jalen Williams is 25. Cason Wallace and Ajay Mitchell are primed for expanded roles. The rookies Mara and Stirtz add depth and the 7-foot-3 Mara gives Presti a Wembanyama countermeasure in Western Conference playoff matchups.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Intentionally managed. They shed third-tier rotation pieces to stay below the apron while the Williams-Holmgren extensions kick in.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Clear Northwest favorites. Minnesota is close but operates under hard-cap constraints. Denver has Jokic. Portland is the chaos variable with Morant.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 60-22 by ESPN Summer Forecast (second in the West behind San Antonio). Vegas opens them at 60.5 wins -- the highest win total in the league. ESPN panel title odds: OKC leads with 84 consensus points in the "who wins it all" survey, per the Summer Forecast. They are the slight favorites on paper heading into camp.</span>
+    </div>
+  </div>
+</div>
+
+<!-- TIMBERWOLVES -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Minnesota</em> Timberwolves</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">LaMelo Ball (4-team trade, Charlotte), Jonathan Kuminga (2-year FA), Cody Williams (trade, Utah), Ayo Dosunmu (4-year re-sign), Trey Lyles (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Julius Randle (4-team trade, Brooklyn), Naz Reid (4-team trade, Charlotte), Kyle Anderson (FA, Toronto), Mike Conley (FA, Boston)</span>
+      </div>
+    </div>
+  </div>
+  <p>Minnesota made the biggest swing in the Northwest. ESPN's Zach Kram gave it a skeptical grade: "That strategic shift is a big gamble, and the Timberwolves have almost no flexibility left to make further adjustments after they dealt an unprotected first-round pick and three swaps for Ball." Tim MacMahon identified the pairing for what it represents: Anthony Edwards and LaMelo Ball is "arguably the league's most talented backcourt." The question the consensus keeps returning to is whether LaMelo -- averaging 20 points per game but shooting 40/37 splits with no winning resume -- is the right second star around the franchise player Edwards is becoming.</p>
+  <p>As ESPN noted, Ball "has played more than 47 games just once since 2021-22." Minnesota is now without a first-round pick in 2027, 2029, and 2031. They are hard-capped at the second apron due to salary aggregation in the trade. Coach Chris Finch also lost his top assistant Micah Nori to Portland. ESPN's Dave McMenamin flagged the bench depth problem directly: "Minnesota now has no reliable forwards on its roster beyond Jaden McDaniels."</p>
+  <p>The ceiling here, per MacMahon, is a Western Conference Finals team. The floor, per Kram, is a team that made an irreversible bet and has no tools left to hedge.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Hard-capped at the second apron. The least flexible team in the league going forward.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Second in the Northwest. A legitimate 50-win team if Ball stays healthy. A play-in team if he doesn't.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">Projected 50-32 by ESPN Summer Forecast -- fifth in the West. Vegas: mid-40s to low-50s range depending on the model. The narrative going into the season, per the full consensus, is one of calculated organizational risk with no safety net.</span>
+    </div>
+  </div>
+</div>
+
+<!-- NUGGETS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Denver</em> Nuggets</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Marvin Bagley III (1-year FA), DeMar DeRozan (1-year FA), Lonnie Walker IV (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Peyton Watson (5-team sign-and-trade, Cleveland), Tim Hardaway Jr. (FA, Miami)</span>
+      </div>
+    </div>
+  </div>
+  <p>Nikola Jokic is still the best player in basketball. Three MVPs. One championship. The Nuggets didn't make a dramatic move this summer -- DeRozan is a one-year stop-gap scorer off the bench, Bagley adds frontcourt flexibility, and Walker provides secondary creation. The retained core of Jokic, Jamal Murray, Michael Porter Jr., and Aaron Gordon is unchanged. Tyus Jones and Spencer Jones re-signed.</p>
+  <p>ESPN's Summer Forecast positioned Denver in the "flawed West contenders" tier -- third in the West projected at 51-31. The concern is depth: Watson's departure thins the defensive rotation, and the Nuggets' path to the conference finals goes through either OKC or San Antonio, both of whom beat them or eliminated them last season.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Comfortably committed at the core, managed at the margins.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Third in the Northwest. Jokic is the reason they're always in the conversation regardless of roster construction around him.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">51-31. ESPN's panel described Denver as one of five "reigning contenders" in the West -- boasting "five of the past six MVPs" between the Thunder, Spurs, and Nuggets. They remain the most proven offensive ecosystem in the league when healthy.</span>
+    </div>
+  </div>
+</div>
+
+<!-- BLAZERS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Portland</em> Trail Blazers</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Ja Morant (trade, Memphis), Jeremy Sochan (1-year FA), Branden Carlson (1-year FA), Micah Potter (waivers)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Jerami Grant (trade, Memphis), Kris Murray (trade, Memphis), Matisse Thybulle (FA, Lakers)</span>
+      </div>
+    </div>
+  </div>
+  <p>The most transformative summer in the Northwest outside of Minnesota. New owner Tom Dundon hired Micah Nori -- poached from Minnesota's staff -- as head coach, drawing criticism league-wide for offering only one guaranteed year on the contract. Then Portland acquired Ja Morant, who has played just 79 games over three seasons since his back-to-back All-Star nods in 2022 and 2023. Damian Lillard, who missed all of last season recovering from an Achilles tear, is projected to return.</p>
+  <p>ESPN's Zach Kram's trade grade for the Morant deal was frank: "There are several reasons that the 26-year-old guard was available for such a reasonable trade price." His 3-point percentage career average is 31% -- ranking 189th out of 194 active players with at least 1,000 attempts. His rim attacks have "declined progressively in every season since" his early peak. ESPN's Summer Forecast projected Portland at 43-39 -- seventh in the West, play-in territory. The hope is that Morant and Lillard together restore Portland to relevance. The risk is that two recovering stars, a first-year coach on a short contract, and a roster still finding itself produces chaos.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Mid-tier commitment. Flexibility to adjust if needed.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Fourth in the Northwest. A significant jump from where they were last year, but dependent on Morant health and Lillard availability simultaneously.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">43-39. Play-in team with an obvious path to the top six if both stars stay healthy and the Nori system takes hold quickly.</span>
+    </div>
+  </div>
+</div>
+
+<!-- JAZZ -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Utah</em> Jazz</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Josh Green (trade, Minnesota), Jaxson Hayes (2-year FA), Josh Okogie (2-year FA), Mo Bamba (2-year re-sign), Jusuf Nurkic (2-year re-sign)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Walker Kessler (sign-and-trade, Lakers), Cody Williams (trade, Minnesota), John Konchar (trade, Minnesota)</span>
+      </div>
+    </div>
+  </div>
+  <p>The Jazz are in an interesting position. They hold two top-four picks from this draft -- Darryn Peterson (No. 2 overall) and Ace Bailey -- alongside a core of Lauri Markkanen, Jaren Jackson Jr., and Keyonte George. The Kessler departure was the most notable transaction -- he went to Los Angeles in a sign-and-trade that brought back assets rather than a direct replacement at center. Nurkic returning on a two-year deal provides veteran size in the interim.</p>
+  <p>ESPN's Summer Forecast projected 34-48 for Utah -- 10th in the West. But multiple projections identified the Jazz as one of the league's most likely "surprise" teams given the Peterson and Bailey draft capital entering the system. Per ATSwins.ai analysis: "The Utah Jazz, having completed their rebuilding phase, could rise with a blend of youthful talent like rookie Darryn Peterson, Ace Bailey, and Keyonte George, alongside veterans Lauri Markkanen and Jaren Jackson Jr."</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Disciplined and flexible. Built for the short and long term simultaneously.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Fifth in the Northwest. The gap between them and Portland is smaller than the projections suggest if Peterson is what the pre-draft consensus believed.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">34-48 per ESPN. The rebuild is in its final stage and the next two years represent the inflection point.</span>
+    </div>
+  </div>
+</div>
+
+<!-- PACIFIC -->
+<div class="nc-div">
+  <div>
+    <span class="nc-div-eyebrow">Division</span>
+    <h3 class="nc-div-name">Pacific Division</h3>
+  </div>
+  <div class="nc-div-rule"></div>
+</div>
+
+<!-- SPURS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>San Antonio</em> Spurs</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Tobias Harris (2-year FA), Tarris Reed Jr. (No. 26 pick), Jayden Quaintance (No. 21 pick)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Bismack Biyombo, Mason Plumlee, Kelly Olynyk (all departures)</span>
+      </div>
+    </div>
+    <span class="nc-ext-note">Extended: Victor Wembanyama (5-year, $251M), Julian Champagnie (3-year), Harrison Barnes (1-year), Jordan McLaughlin (1-year)</span>
+  </div>
+  <p>The Spurs reached the NBA Finals last June -- the first Finals appearance since 2014, achieved earlier than any projection had them reaching it -- and then methodically locked in their core. Wembanyama's five-year, $251 million extension is the largest in franchise history and one of the defining financial commitments in the modern era. The first unanimous Defensive Player of the Year in NBA history is under contract through 2031.</p>
+  <p>Harris replaces the departed Tobias role cleanly -- a veteran forward who slots into an ancillary second-or-third option role alongside Wembanyama, Stephon Castle, De'Aaron Fox, Devin Vassell, and Dylan Harper. ESPN's Zach Kram called the Harris addition "fairly dramatic upgrades to their bench" and labeled the Spurs a championship favorite tier alongside the Knicks and Thunder. FTN's post-free agency power rankings opened San Antonio No. 1 in the NBA, with the note: "I wouldn't argue too hard with anyone who swapped these top two teams, but I've got the Spurs as the best team in the NBA entering next season."</p>
+  <p>OKC and San Antonio met 12 times last season including playoffs. San Antonio won 8 of them. The Western Conference Finals rematch is the most anticipated potential matchup of the 2026-27 season.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Wembanyama's extension and the rookie deals for Castle and Harper are all highly favorable relative to production. The core is locked.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Pacific favorites by a wide margin. The Lakers are the only team in the division with a credible playoff projection, and the gap between the Spurs and the rest of the Pacific is enormous.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">62-20 -- first in the West. ESPN panel title odds: 74 consensus points, second only to OKC's 84. The Spurs were identified as the leading candidate for a ninth different NBA champion, per Zach Kram's summer wrap.</span>
+    </div>
+  </div>
+</div>
+
+<!-- LAKERS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Los Angeles</em> Lakers</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Walker Kessler (sign-and-trade, Utah; 4-year), Quentin Grimes (4-year FA), Sandro Mamukelashvili (4-year FA), Collin Sexton (2-year FA), Kevon Looney (1-year FA), Ziaire Williams (1-year FA), Matisse Thybulle (1-year FA), Jaden Hardy (trade, Washington)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">LeBron James (FA, Philadelphia), Deandre Ayton (trade, Washington), Rui Hachimura (FA, Clippers), Jaxson Hayes (FA, Utah), Luke Kennard (FA, Phoenix), Marcus Smart (FA, Houston)</span>
+      </div>
+    </div>
+  </div>
+  <p>LeBron is gone. Eight years, back-to-back 50-win seasons under JJ Redick, a dynasty-adjacent run built around the greatest player in history -- and now the franchise rebuilds around Luka Doncic at 27. ESPN's Dave McMenamin noted it concisely: "It will be Luka Doncic's challenge to lead L.A. to a top-six spot." The roster turnover is dramatic: six regular rotation players departed, six new ones arrived. Kessler is the most important addition -- a defensive anchor and rim protector who transforms the Laker frontcourt in ways Ayton never did. Austin Reaves re-signed on a four-year deal, the continuity piece Redick needed.</p>
+  <p>Bleacher Report called it "arguably the second wildest offseason in the league" and noted the resulting roster "leans heavy to the offensive end. And ultimately, at least as it relates to the regular season, that's probably fine. With Luka Dončić orchestrating, this attack is going to be able to outscore the opposition more often than not, even without much potential on the defensive end."</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Restructured significantly. The LeBron departure cleared the veteran's minimum slot. Multiple moves give Redick a different-looking team financially.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Second in the Pacific. Behind San Antonio by a considerable margin but the clear second team in the division heading into October.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">45-37 -- sixth in the West. Vegas: 46.5 wins. ESPN identified the Lakers as a "disappoint" candidate if Redick "can't build on its last two 50-win seasons," with the handling of James' exit "called into question all over again."</span>
+    </div>
+  </div>
+</div>
+
+<!-- WARRIORS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Golden State</em> Warriors</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Georges Niang (1-year FA), Brandon Williams (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Quinten Post (FA, Memphis)</span>
+      </div>
+    </div>
+    <span class="nc-ext-note">Re-signed: Draymond Green (1-year), Al Horford (2-year), De'Anthony Melton (2-year), Gary Payton II (1-year), Kristaps Porzingis (2-year)</span>
+  </div>
+  <p>The Warriors brought back essentially the same core that won 37 games and limped to the finish line last April. Stephen Curry is still here. Draymond is still here. Porzingis opted in for two years. Melton stayed. The No. 11 pick, Lendeborg, provides youth and internal optimism. But the consensus is measured. ESPN's Anthony Slater wrote: "Before the market even opened, they worked out contracts with Al Horford and Kristaps Porzingis to keep their veteran frontcourt intact. There's some internal excitement about the type of immediate impact they can get from No. 11 pick Lendeborg, but it's difficult to envision the contributions of a rookie significantly changing the outlook of an older team buried in the tax."</p>
+  <p>Warriors fans got an interesting anecdote: Draymond Green confirmed publicly that Klay Thompson "nearly left the Warriors in 2019 before injury." Now Thompson is in Miami with Giannis. The dynasty's last chapter is being written in San Francisco with a 38-year-old Curry and a team that needs a leap from the youth to stay competitive.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Deep in tax. The veteran re-signs confirm they're running it back with no major structural change.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Third in the Pacific. Behind the Spurs and Lakers in the hierarchy.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">35-47. ESPN's Summer Forecast put them in the "potential play-in" tier. The ESPN Summer Forecast identified them as the No. 1 "surprise" candidate -- meaning the panel thinks they could outperform this projection -- citing Curry's perpetual ability to will this team into relevance.</span>
+    </div>
+  </div>
+</div>
+
+<!-- CLIPPERS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Los Angeles</em> Clippers</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Brandon Ingram (trade, Toronto -- pending), Gradey Dick (trade, Toronto -- pending), Rui Hachimura (2-year FA), Max Strus (5-team trade), Johni Broome (trade, Philadelphia), Kobe Sanders (4-year re-sign), Bradley Beal (2-year re-sign), Jordan Miller (3-year re-sign)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Kawhi Leonard (trade, Toronto -- cleared Sept. 2), John Collins (sign-and-trade, Detroit), Bogdan Bogdanovic (FA, Houston), Bennedict Mathurin (FA, New Orleans)</span>
+      </div>
+    </div>
+  </div>
+  <p>The NBA stripped the Clippers of five consecutive first-round picks (2029-2033), fined them $30 million, and suspended owner Steve Ballmer from all league and team activities for one year on September 2nd. The ruling by the independent Wachtell, Lipton firm found that the Clippers "improperly funneled off-court endorsement opportunities to star forward Kawhi Leonard through corporate partners -- including Aspiration Partners, Boingo Wireless, Daktronics, and Lockton Insurance -- in exchange for team business." Leonard was fined $700,000. His uncle Dennis Robertson was banned from engaging with NBA personnel for five years. Presidents Lawrence Frank and Gillian Zucker were suspended six months and one year, respectively.</p>
+  <p>The Clippers are now in rebuild mode -- intentionally. ESPN's Zach Kram noted they "got much younger in a hurry, pursuing a complete rebuild around the backcourt duo of Darius Garland and No. 5 pick Keaton Wagler. With Leonard gone, 38-year-old Brook Lopez and 32-year-old Kris Dunn are the only remaining Clippers in their 30s." The Ingram and Dick trade from Toronto -- part of the Kawhi deal -- adds young offensive talent to the rebuild.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Fully restructured. The rebuild is explicit. Five future first-round picks are gone before 2034.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Fourth in the Pacific. By design.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">27-55 per the analytics-driven Over the Apron model. This is a team in organizational reset, not playoff pursuit.</span>
+    </div>
+  </div>
+</div>
+
+<!-- SUNS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Phoenix</em> Suns</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Miles Bridges (trade, Charlotte), Luke Kennard (2-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Grayson Allen (trade, Charlotte), Royce O'Neale (trade, Charlotte)</span>
+      </div>
+    </div>
+  </div>
+  <p>One of the league's most interesting "feel-good" stories from last season -- the Suns went from disaster rebuild to competitive fringe in one year -- and now face a step-back scenario. ESPN's preview was direct: "They finished last regular season 6-10 and got swept in the first round." Bridges adds the athleticism and length Phoenix needed on the wing. Dillon Brooks re-signed on a three-year extension. Mark Williams re-signed. Collin Gillespie and Jordan Goodwin locked in.</p>
+  <p>The core of Devin Booker, Kevin Durant, Bradley Beal-era assets, and now a legitimate young four in Bridges gives the Suns something to build around. But the cap and the roster depth remain concerns. Bleacher Report projected "a step back" from last season's surprising performance, and the consensus reflects that -- a mid-40s win team that depends on Durant health above all else.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Expensive at the top. The second apron is a reference point for future flexibility concerns.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Third or fourth in the Pacific depending on how the Warriors season unfolds.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">42-40 per the Summer Forecast. Play-in team with a first-round ceiling if Durant is healthy and available for the stretch run.</span>
+    </div>
+  </div>
+</div>
+
+<!-- KINGS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Sacramento</em> Kings</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Ben Simmons (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Devin Carter (trade, Atlanta), DeMar DeRozan (FA, Denver)</span>
+      </div>
+    </div>
+  </div>
+  <p>The Kings signed Ben Simmons -- who sat out the entire 2025-26 season -- to a one-year deal at $3.5 million, per reporting. That is the headline of Sacramento's offseason, which was otherwise quiet. Daeqwon Plowden re-signed. Precious Achiuwa re-signed. The core of De'Aaron Fox, Domantas Sabonis, and the surrounding cast remains. Carter was a 2024 lottery pick traded to Atlanta in what ESPN described as a "salary dump" move. DeRozan walked to Denver.</p>
+  <p>ESPN's summer preview noted the Kings "saved some money" and cleared flexibility. The Simmons signing at league minimum is a low-risk, curiosity-level move -- he hasn't played a meaningful game since early 2023. If he's back, it's a compelling reclamation story. If not, it's a footnote.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Below previous levels. Intentional cap management.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Fifth in the Pacific. This is a season about whether the internal improvement of Fox and Sabonis can get them back to playoff relevance without a significant external upgrade.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">22-23 wins per the analytics models (Over the Apron has them at 18-64, which represents the harshest projection in the West). ESPN's consensus is more measured -- low-30s range, play-in fringe.</span>
+    </div>
+  </div>
+</div>
+
+<!-- SOUTHWEST -->
+<div class="nc-div">
+  <div>
+    <span class="nc-div-eyebrow">Division</span>
+    <h3 class="nc-div-name">Southwest Division</h3>
+  </div>
+  <div class="nc-div-rule"></div>
+</div>
+
+<p style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;opacity:0.38;margin-bottom:2rem;">SAN ANTONIO SPURS -- Full detail above under Pacific Division.</p>
+
+<!-- ROCKETS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Houston</em> Rockets</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Marcus Smart (2-year FA), Bogdan Bogdanovic (1-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Dorian Finney-Smith (trade, Charlotte), Josh Okogie (FA, Utah)</span>
+      </div>
+    </div>
+    <span class="nc-ext-note">Extended: Amen Thompson (5-year), Tari Eason (5-year), Isaiah Crawford (4-year)</span>
+  </div>
+  <p>Houston resisted the Giannis sweepstakes and stayed the course around Kevin Durant in Year 2. Smart and Bogdanovic are veteran depth additions -- proven playoff contributors who address the specific breakdowns Houston experienced in last season's second consecutive first-round exit. ESPN's preview noted the strategy: "After suffering a first-round postseason exit for the second consecutive season, the Rockets resisted the temptation to jump into the Giannis Antetokounmpo sweepstakes after adding former MVP Durant last summer."</p>
+  <p>The Amen Thompson extension is the most significant development -- locking in arguably the most physically gifted young player in the league before his second star emergence. The question ESPN's analysts keep raising is the Amen ceiling: per The Athletic's reporting cited by NBA.com, "Thompson has all the makings of a superstar if he can take the next step in one major facet of his game" -- his jump shot.</p>
+  <p>Fred VanVleet returns from a torn ACL. If he's healthy, Houston's backcourt depth becomes one of the deepest in the West. If he's restricted again, Smart carries more load than his contract implied.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Clean. The youth extensions are well-structured relative to the production received.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Southwest favorites alongside San Antonio. The top of the Southwest is a two-team conversation. The division below them is reshuffling.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">51-31 -- fourth in the West, tied with Denver. ESPN described Houston as one of the West's "flawed contenders" capable of a deep playoff run. Zach Kram listed the Rockets among the "leading candidates" for the ninth different champion.</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAVERICKS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Dallas</em> Mavericks</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">Santi Aldama (trade, Memphis), Marcus Sasser (trade, Detroit via 6-team deal), Zaccharie Risacher (trade, Atlanta), Tarik Biberovic (2-year FA), AJ Johnson (2026 draft pick acquired from Grizzlies -- then traded to New Orleans as part of deal for Aldama; complex multi-team move)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Khris Middleton (sign-and-trade, Washington), Ryan Nembhard (trade, Atlanta), Klay Thompson (FA, Miami), Brandon Williams (FA, Golden State), Marvin Bagley III (FA, Denver)</span>
+      </div>
+    </div>
+  </div>
+  <p>The Mavericks had one of the busiest offseason footprints given the volume of multi-team activity centered around their roster. Kyrie Irving remains -- per reporting, rival teams continue to watch his situation -- and Luka Doncic's continued growth is the organizational constant. But Middleton is gone, Thompson is gone, and the additions are youth and versatility rather than veteran star power.</p>
+  <p>Aldama is a switchable 6'10 forward who fits Dallas's spacing needs. Risacher, the No. 1 pick in the 2024 NBA Draft who emerged as a starter in Atlanta, represents significant upside at the wing. Sasser adds backcourt depth. ESPN's Tim MacMahon framed the summer this way: "Dallas added three potential immediate contributors in a six-team deal, acquiring former Grizzlies forward Santi Aldama, ex-Pistons guard Marcus Sasser and EuroLeague veteran Tarik Biberovic."</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Recalibrated. The Middleton departure clears space. The Irving contract remains the most scrutinized number on the books.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Third in the Southwest. A play-in team with a ceiling dependent on how the Luka-Kyrie pairing performs in the regular season -- specifically whether Irving is consistent.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">Low-to-mid 40s in wins. The consensus sees Dallas as a classic "impossible to ignore because of Luka, impossible to fully trust because of everything else" team.</span>
+    </div>
+  </div>
+</div>
+
+<!-- PELICANS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>New Orleans</em> Pelicans</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">AJ Johnson (trade, Memphis), Bennedict Mathurin (2-year FA), Trendon Watford (1-year FA), DeAndre Jordan (1-year re-sign)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Jordan Hawkins (trade, Memphis), Kevon Looney (FA, Lakers), Micah Peavy (trade, Memphis)</span>
+      </div>
+    </div>
+  </div>
+  <p>The Pelicans made quiet, internal-growth moves while ESPN's Bobby Marks noted they "clearly believe that internal growth is the best path forward." Zion Williamson, Brandon Ingram's departure to the Clippers via Toronto, and Herb Jones returning from injury are the variables that matter most. Mathurin is a legitimate scorer off the bench. AJ Johnson is youth investment. The roster is built for the 40-win range.</p>
+  <p>The San Antonio Spurs are scheduled for NBA Paris and NBA Manchester games against New Orleans in January 2027 -- two international appearances that will shine a light on the franchise as it tries to establish its 2026-27 identity.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Moderate. The front office identified internal growth as the priority investment signal.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Fourth in the Southwest. Their ceiling depends on Zion health above all else.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">Low-30s in wins per the consensus. ESPN's Summer Forecast did not project New Orleans in the playoff picture. A healthy Zion at full minutes changes that calculation.</span>
+    </div>
+  </div>
+</div>
+
+<!-- GRIZZLIES -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Memphis</em> Grizzlies</h4>
+    <div class="nc-tx-wrap">
+      <div class="nc-tx add">
+        <span class="nc-tx-pill">Added</span>
+        <span class="nc-tx-text">D'Angelo Russell (trade, Washington), Isaiah Stewart (trade, Detroit), Jordan Hawkins (trade, New Orleans), Micah Peavy (trade, New Orleans), Quinten Post (3-year FA)</span>
+      </div>
+      <div class="nc-tx dep">
+        <span class="nc-tx-pill">Departed</span>
+        <span class="nc-tx-text">Ja Morant (trade, Portland), Santi Aldama (trade, Dallas), Kentavious Caldwell-Pope (buyout), Taj Gibson (trade, New Orleans)</span>
+      </div>
+    </div>
+  </div>
+  <p>Ja Morant is gone. Memphis made "an organizational verdict on Ja Morant, and it isn't a happy one," per ESPN's reporting ahead of the trade. The price for Morant was Jerami Grant and Kris Murray -- no picks -- a reflection of a market ESPN's Brian Windhorst famously described as so cold that "teams expected Memphis to attach draft picks just to take the contract." The Grizzlies received Cameron Boozer with the No. 3 overall pick and collected pieces for a rebuild.</p>
+  <p>Russell is a functional veteran point guard who buys time. Stewart is a physical defender and cultural fit. Post is a stretch big. The 2026 Rookie of the Year race features Boozer prominently -- per ESPN's schedule coverage, he "looks ready to make immediate impacts in Year 1." Jaren Jackson Jr. remains the defensive cornerstone. The question is how quickly the next chapter forms around Jackson and a healthy, motivated young roster.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Restructuring. The rebuild is explicit and intentional.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Fifth in the Southwest. By design.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection</span>
+      <span class="nc-intel-val">Low-30s in wins. ESPN cited Memphis as a team with "a chance to have one of the quicker rebuilds since, well, the last Grizzlies rebuild" -- a reference to the Ja Morant era itself, which went from tank to playoff threat in under three seasons.</span>
+    </div>
+  </div>
+</div>
+
+<div class="nc-divider"></div>
+
+<!-- ══ CONFERENCE SUMMARIES ══ -->
+<div class="nc-section">
+  <span class="nc-section-eyebrow">Conference Summaries</span>
+  <h2 class="nc-section-title">Final Conference Summaries</h2>
+  <span class="nc-section-rule"></span>
+</div>
+
+<!-- EAST SUMMARY -->
+<div class="nc-conf" style="margin-top:2rem;">
+  <div class="nc-conf-inner east">
+    <span class="nc-conf-eyebrow">East Summary</span>
+    <h2 class="nc-conf-title east"><span>Eastern Conference:</span> The Deepest It Has Ever Been</h2>
+  </div>
+</div>
+
+<p style="margin-top:2rem;">The East race might prove to be a gauntlet this season, per ESPN's Summer Forecast -- and that is an understatement. ESPN projects at least five teams between 47 and 53 wins. Philadelphia owns the highest upside. New York owns the championship experience. Detroit owns the best regular-season record from a year ago. Cleveland owns a backcourt that went to two conference finals. Miami just got Giannis.</p>
+<p>ESPN's panel identified the leading candidates for the NBA's ninth different champion in nine years as the San Antonio Spurs, the Philadelphia 76ers, and the Minnesota Timberwolves, Indiana Pacers and Cleveland Cavaliers, who have all reached the conference finals or better within the last two years. Detroit, Houston, Miami and Atlanta are also contenders to make a run next spring -- per Zach Kram.</p>
+
+<div class="nc-standings-wrap">
+  <div class="nc-standings-head">
+    <span>#</span><span>Team</span><span>Projected</span>
+  </div>
+  <div class="nc-standings-row"><span class="nc-seed">1</span><span class="nc-team-cell">New York Knicks</span><span class="nc-wl">53-29</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">2</span><span class="nc-team-cell">Detroit Pistons</span><span class="nc-wl">53-29</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">3</span><span class="nc-team-cell">Cleveland Cavaliers</span><span class="nc-wl">51-31</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">4</span><span class="nc-team-cell">Philadelphia 76ers</span><span class="nc-wl">50-32</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">5</span><span class="nc-team-cell">Boston Celtics</span><span class="nc-wl">48-34</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">6</span><span class="nc-team-cell">Atlanta Hawks</span><span class="nc-wl">47-35</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">7</span><span class="nc-team-cell">Miami Heat</span><span class="nc-wl">47-35</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">8</span><span class="nc-team-cell">Toronto Raptors</span><span class="nc-wl">45-37</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">9</span><span class="nc-team-cell">Indiana Pacers</span><span class="nc-wl">44-38</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">10</span><span class="nc-team-cell">Orlando Magic</span><span class="nc-wl">44-38</span></div>
+</div>
+
+<!-- WEST SUMMARY -->
+<div class="nc-conf" style="margin-top:3rem;">
+  <div class="nc-conf-inner west">
+    <span class="nc-conf-eyebrow">West Summary</span>
+    <h2 class="nc-conf-title west"><span>Western Conference:</span> Still The Floor</h2>
+  </div>
+</div>
+
+<p style="margin-top:2rem;">The West remains the structural home of the league's two best teams. The Western Conference is home to the San Antonio Spurs and Oklahoma City Thunder. Over the last two seasons including playoffs, the Thunder have outscored their opponents by an amazing 11.2 points per 100 possessions -- two of the best seasons in NBA history. But they met their match last season, with the Spurs winning eight of the 12 head-to-head matchups, including Game 7 of the Western Conference Finals in Oklahoma City.</p>
+
+<div class="nc-vote">
+  <div class="nc-vote-head">
+    <span class="nc-vote-eyebrow">ESPN Panel Championship Vote</span>
+  </div>
+  <div class="nc-vote-body">
+    <div class="nc-vote-row">
+      <span class="nc-vote-team">Oklahoma City Thunder</span>
+      <div class="nc-vote-track"><div class="nc-vote-fill" style="width:100%"></div></div>
+      <span class="nc-vote-pts">84 pts</span>
+    </div>
+    <div class="nc-vote-row">
+      <span class="nc-vote-team">San Antonio Spurs</span>
+      <div class="nc-vote-track"><div class="nc-vote-fill" style="width:88%"></div></div>
+      <span class="nc-vote-pts">74 pts</span>
+    </div>
+    <div class="nc-vote-row">
+      <span class="nc-vote-team">New York Knicks</span>
+      <div class="nc-vote-track"><div class="nc-vote-fill" style="width:13%"></div></div>
+      <span class="nc-vote-pts">11 pts</span>
+    </div>
+    <div class="nc-vote-row">
+      <span class="nc-vote-team">Philadelphia 76ers</span>
+      <div class="nc-vote-track"><div class="nc-vote-fill" style="width:12%"></div></div>
+      <span class="nc-vote-pts">10 pts</span>
+    </div>
+    <div class="nc-vote-row">
+      <span class="nc-vote-team">Detroit Pistons</span>
+      <div class="nc-vote-track"><div class="nc-vote-fill" style="width:7%"></div></div>
+      <span class="nc-vote-pts">6 pts</span>
+    </div>
+  </div>
+</div>
+
+<p>The consensus has a clear hierarchy. Two teams above everyone else. An East field that is historically competitive but hasn't caught up structurally.</p>
+
+<div class="nc-standings-wrap">
+  <div class="nc-standings-head">
+    <span>#</span><span>Team</span><span>Projected</span>
+  </div>
+  <div class="nc-standings-row"><span class="nc-seed">1</span><span class="nc-team-cell">San Antonio Spurs</span><span class="nc-wl">62-20</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">2</span><span class="nc-team-cell">Oklahoma City Thunder</span><span class="nc-wl">60-22</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">3</span><span class="nc-team-cell">Denver Nuggets</span><span class="nc-wl">51-31</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">4</span><span class="nc-team-cell">Houston Rockets</span><span class="nc-wl">51-31</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">5</span><span class="nc-team-cell">Minnesota Timberwolves</span><span class="nc-wl">50-32</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">6</span><span class="nc-team-cell">Los Angeles Lakers</span><span class="nc-wl">45-37</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">7</span><span class="nc-team-cell">Portland Trail Blazers</span><span class="nc-wl">43-39</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">8</span><span class="nc-team-cell">Phoenix Suns</span><span class="nc-wl">42-40</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">9</span><span class="nc-team-cell">Golden State Warriors</span><span class="nc-wl">35-47</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">10</span><span class="nc-team-cell">Utah Jazz</span><span class="nc-wl">34-48</span></div>
+</div>
+
+<div class="nc-divider"></div>
+
+<!-- ══ THREE STORIES ══ -->
+<div class="nc-section">
+  <span class="nc-section-eyebrow">The Big Picture</span>
+  <h2 class="nc-section-title">The Three Stories That Define The Season</h2>
+  <span class="nc-section-rule"></span>
+</div>
+
+<div class="nc-story">
+  <span class="nc-story-num">1</span>
+  <span class="nc-story-label">Story One</span>
+  <h3 class="nc-story-title">Philadelphia</h3>
+  <p>The most talent-dense roster in the East on paper. The most questions in practice. Health, chemistry, usage, and ego management are the variables the consensus cannot resolve in September. Sixers president Mike Gansey told ESPN: "Any given night, anyone can be the guy. Sacrifice will be big for us. But Joel is arguably the best and most talented big I've ever been around. So he's going to be as important as those guys." And Jaylen Brown told the world on Twitch: "My mentality is kill. I feel like I want blood this year." When talent is this concentrated, the team either becomes something historic or something combustible. There is no third outcome in Philadelphia.</p>
+</div>
+
+<div class="nc-story">
+  <span class="nc-story-num">2</span>
+  <span class="nc-story-label">Story Two</span>
+  <h3 class="nc-story-title">The Spurs-Thunder Rivalry</h3>
+  <p>The Spurs and Thunder met 12 times last season. San Antonio seized eight victories. The rivalry has been brewing for years but ramped up when San Antonio reached the Finals. Oklahoma City general manager Sam Presti made clear the Thunder are prepared for luxury tax living while prioritizing future reinvestment over current depth. Opening Night is OKC at San Antonio. The entire Western Conference narrative begins that night, and it doesn't end until one of them eliminates the other in May or June.</p>
+</div>
+
+<div class="nc-story">
+  <span class="nc-story-num">3</span>
+  <span class="nc-story-label">Story Three</span>
+  <h3 class="nc-story-title">The Clippers' Nuclear Event</h3>
+  <p>The NBA penalized the LA Clippers with a $30M fine, forfeit of five first-round draft picks starting in 2029, and a one-year suspension for owner Steve Ballmer following an investigation into Kawhi Leonard's salary cap circumvention. The investigation found that the Clippers improperly funneled off-court endorsement opportunities to Leonard through corporate partners. Ballmer was suspended "for failure to create conditions under which his organization abided by the NBA's circumvention rules." The largest penalty in modern NBA history lands a week before training camp. Every front office in the league is doing the same internal audit right now.</p>
+</div>
+
+<!-- ══ FINALE ══ -->
+<div class="nc-finale">
+  <p>Training camps open September 22nd. Preseason starts October 3rd. The season tips October 20th -- Philadelphia at New York, banner night, the league's past and its future in the same building at the same time. It begins.</p>
+  <span class="nc-finale-sig">-- GLS</span>
+</div>
+
+</div>
+`
+},
+
 "carr-scouting-report": {
     tag: "NBA Draft · Film Room",
     hero: "images/carrnbadraft26.jpeg",
