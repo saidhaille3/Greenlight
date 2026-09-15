@@ -1793,7 +1793,6 @@ const articleEngineData = {
 <!-- SOUTHWEST -->
 <div class="nc-div">
   <div>
-    <span class="nc-div-eyebrow">Division</span>
     <h3 class="nc-div-name">Southwest Division</h3>
   </div>
   <div class="nc-div-rule"></div>
