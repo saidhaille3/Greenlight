@@ -5087,24 +5087,29 @@ document.addEventListener('click', function(e){
 const NFL_TEAMS = [
   // AFC East
   {a:'BUF',city:'Buffalo',name:'Bills',div:'AFC East',p:'#00338D',s:'#C60C30',champ:false,
-   alert:'W1 WIN vs HOU 36-31. Josh Allen 312 yds, 3 TD. DJ Moore 8 rec 147 yds. Bills D gave up 31 but Allen was surgical all day. AFC contender statement.',
+alert:'W1 WIN vs HOU 36-31. Josh Allen 334 yds, 2 TD. Dalton Kincaid 5 rec 130 yds. David Montgomery 2 rushing TD for HOU but Bills held on. AFC contender statement.',
+
    cap:'+$8.1M',pffOff:91.2,pffDef:80.4,wl:'1-0',pfg:'36',pag:'31'},
 
   {a:'MIA',city:'Miami',name:'Dolphins',div:'AFC East',p:'#008E97',s:'#FC4C02',champ:false,
-   alert:'W1 LOSS vs LV 13-27. Malik Willis struggled badly -- 18/34, 187 yds, 2 INT. Tyreek Hill 5 rec 62 yds. New HC Joe Brady\'s debut a disaster. Defense torched by Davante Adams 9 rec 141 yds.',
+alert:'W1 LOSS vs LV 13-27. Malik Willis 220 yds, 1 INT. Rushed for 39 yds, 1 TD -- only bright spot. Caleb Douglas 5 rec 94 yds. Kirk Cousins 3 TD, Ashton Jeanty 102 yds for LV. Brady debut a loss.',
+
    cap:'-$7.4M',pffOff:58.3,pffDef:62.1,wl:'0-1',pfg:'13',pag:'27'},
 
   {a:'NE',city:'New England',name:'Patriots',div:'AFC East',p:'#002244',s:'#C60C30',champ:false,
-   alert:'W1 LOSS vs SEA 10-13. Drake Maye 214 yds, 1 TD, 1 INT. AJ Brown left in Q3 with ankle -- Week 2 status TBD. Rhamondre Stevenson 88 yds. Defense held SEA to 13 -- kept it close.',
+alert:'W1 LOSS vs SEA 10-13. Drake Maye 178 yds, 1 TD, 3 INT -- turnovers cost them. Rhamondre Stevenson 18 car 51 yds. Mack Hollins 4 rec 51 yds. JSN 8 rec 122 yds, 1 TD for SEA. Drew Lock 187 yds.',
+
    cap:'+$38.2M',pffOff:69.4,pffDef:74.8,wl:'0-1',pfg:'10',pag:'13'},
 
   {a:'NYJ',city:'New York',name:'Jets',div:'AFC East',p:'#125740',s:'#000000',champ:false,
-   alert:'W1 WIN vs TEN 23-10. Geno Smith 22/31, 247 yds, 2 TD -- historic Week 1 debut. Garrett Wilson 7 rec 89 yds. Breece Hall 19 carries 94 yds. D dominant -- held Cam Ward to 163 yds.',
+alert:'W1 WIN vs TEN 23-10. Geno Smith 215 yds. Breece Hall 22 carries 102 yds, 1 TD. Garrett Wilson 6 rec 79 yds. D held Cam Ward to 140 yds, 1 TD. Dominant opener.',
+
    cap:'+$6.2M',pffOff:79.8,pffDef:85.4,wl:'1-0',pfg:'23',pag:'10'},
 
   // AFC North
   {a:'BAL',city:'Baltimore',name:'Ravens',div:'AFC North',p:'#241773',s:'#9E7C0C',champ:false,
-   alert:'W1 WIN vs IND 41-23. Lamar Jackson 28/38, 334 yds, 3 TD. Zay Flowers 6 rec 88 yds, 94.0 PFF grade -- league-best Week 1 receiving. Derrick Henry 22 carries 112 yds. Dominant.',
+alert:'W1 WIN vs IND 41-23. Lamar Jackson 324 yds, 1 TD. Derrick Henry 24 carries 144 yds, 3 TD -- bulldozed Indy. Zay Flowers 5 rec 150 yds, 1 TD. Complete demolition.',
+
    cap:'+$4.8M',pffOff:93.1,pffDef:84.2,wl:'1-0',pfg:'41',pag:'23'},
 
   {a:'CIN',city:'Cincinnati',name:'Bengals',div:'AFC North',p:'#FB4F14',s:'#000000',champ:false,
@@ -5129,7 +5134,8 @@ const NFL_TEAMS = [
    cap:'+$31.4M',pffOff:70.2,pffDef:72.6,wl:'0-1',pfg:'23',pag:'41'},
 
   {a:'JAX',city:'Jacksonville',name:'Jaguars',div:'AFC South',p:'#006778',s:'#D7A22A',champ:false,
-   alert:'W1 WIN vs CLE 34-10. Trevor Lawrence 26/33, 291 yds, 3 TD -- PFF\'s Week 1 offensive player of week. Travis Hunter 5 rec 68 yds + INT on defense. Parker Washington slot star emerging.',
+alert:'W1 WIN vs CLE 34-10. Trevor Lawrence 245 yds, 4 TD -- dominant opener. Parker Washington 5 rec 83 yds, 1 TD. Defense held Watson to 205 yds. Travis Hunter had INT on defense.',
+
    cap:'+$16.8M',pffOff:82.9,pffDef:80.4,wl:'1-0',pfg:'34',pag:'10'},
 
   {a:'TEN',city:'Tennessee',name:'Titans',div:'AFC South',p:'#0C2340',s:'#4B92DB',champ:false,
@@ -5138,15 +5144,18 @@ const NFL_TEAMS = [
 
   // AFC West
   {a:'DEN',city:'Denver',name:'Broncos',div:'AFC West',p:'#FB4F14',s:'#002244',champ:false,
-   alert:'MNF W1 vs KC: Bo Nix 247 yds, 2 TD vs Mahomes in a live divisional showdown on Monday Night Football. Evan Engram 6 rec 82 yds. Jaylen Waddle 5 rec 71 yds in his Denver debut. Early KC 21-7 deficit.',
+alert:'W1 LOSS vs KC 10-31. Bo Nix 131 yds, 1 TD, 1 INT -- rough night. Evan Engram 4 rec 43 yds, 1 TD only bright spot. Kenneth Walker 23 car 173 yds, 1 TD for KC. Mahomes controlled the game.',
+
    cap:'+$19.7M',pffOff:78.4,pffDef:76.9,wl:'0-1',pfg:'--',pag:'--'},
 
   {a:'KC',city:'Kansas City',name:'Chiefs',div:'AFC West',p:'#E31837',s:'#FFB81C',champ:false,
-   alert:'MNF W1 vs DEN: Mahomes vs Bo Nix on Monday Night Football. $504.75M deal the backdrop. Rashee Rice back in team drills. Kenneth Walker III debut. Josh Simmons still out at OT. Chiefs favored.',
+alert:'W1 WIN vs DEN 31-10. Mahomes 184 yds, 2 TD, 1 INT. Kenneth Walker 23 car 173 yds, 1 TD -- debut was electric. Travis Kelce 3 rec 71 yds. Defense held Bo Nix to 131 yds. Statement opener.',
+
    cap:'-$12.4M',pffOff:91.3,pffDef:84.6,wl:'1-0',pfg:'21+',pag:'--'},
 
   {a:'LV',city:'Las Vegas',name:'Raiders',div:'AFC West',p:'#000000',s:'#A5ACAF',champ:false,
-   alert:'W1 WIN vs MIA 27-13. Davante Adams 9 rec 141 yds -- vintage performance vs former Dolphins. Kirk Cousins efficient 21/31, 244 yds, 2 TD. Brock Bowers out (knee) yet Raiders dominated anyway.',
+alert:'W1 WIN vs MIA 27-13. Kirk Cousins 160 yds, 3 TD -- efficient. Ashton Jeanty 23 car 102 yds + 6 rec 45 yds, 2 TD -- statement game. Caleb Douglas 94 yds for MIA but wasn\'t enough.',
+
    cap:'+$38.9M',pffOff:74.1,pffDef:72.8,wl:'1-0',pfg:'27',pag:'13'},
 
   {a:'LAC',city:'L.A.',name:'Chargers',div:'AFC West',p:'#0080C6',s:'#FFC20E',champ:false,
@@ -5155,36 +5164,45 @@ const NFL_TEAMS = [
 
   // NFC East
   {a:'DAL',city:'Dallas',name:'Cowboys',div:'NFC East',p:'#003594',s:'#041E42',champ:false,
-   alert:'W1 LOSS vs NYG 20-28. Dak Prescott 24/39, 271 yds, 1 TD, 1 INT. Cowboys outgained 259-431 total yards. Abdul Carter 1 sack in debut. LG Tyler Smith (thumb) missed game -- OL issues.',
+alert:'W1 LOSS vs NYG 20-28. Dak Prescott 175 yds, 2 TD, 1 INT. Jaxson Dart 230 yds, 3 TD for NYG -- dominated. Javonte Williams 41 yds, 1 TD rushing. CeeDee Lamb 5 rec 44 yds, 1 TD.',
+
    cap:'-$9.3M',pffOff:74.4,pffDef:70.3,wl:'0-1',pfg:'20',pag:'28'},
 
   {a:'NYG',city:'New York',name:'Giants',div:'NFC East',p:'#0B2265',s:'#A71930',champ:false,
-   alert:'W1 WIN vs DAL 28-20. Malik Nabers FULL practice, "ready to go" per Harbaugh -- and delivered. Abdul Carter 1 sack in debut -- DPOY hype justified. OBJ back elevated to first team. John Harbaugh era begins with a W.',
+alert:'W1 WIN vs DAL 28-20. Jaxson Dart 230 yds, 3 TD in impressive debut. Isaiah Likely 8 rec 78 yds, 2 TD. Cam Skattebo 81 yds, 1 TD rushing. Controlled win -- NYG looked like a real team.',
+
    cap:'+$34.7M',pffOff:78.4,pffDef:80.2,wl:'1-0',pfg:'28',pag:'20'},
 
   {a:'PHI',city:'Philadelphia',name:'Eagles',div:'NFC East',p:'#004C54',s:'#A5ACAF',champ:false,
-   alert:'W1 WIN vs WAS 24-22. Jalen Hurts 23/34, 271 yds, 2 TD. Saquon Barkley 22 carries 109 yds. Landon Dickerson (knee) to IR -- big OL loss for Week 2. Cooper DeJean impressive at safety.',
+alert:'W1 WIN vs WAS 24-22. Jalen Hurts 203 yds, 3 TD. Dallas Goedert 4 rec 77 yds, 2 TD. Saquon Barkley 15 car 83 yds. Survived WAS 2-pt attempt with 1 min left. Landon Dickerson (knee) to IR.',
+
    cap:'+$5.1M',pffOff:89.7,pffDef:87.2,wl:'1-0',pfg:'24',pag:'22'},
 
   {a:'WAS',city:'Washington',name:'Commanders',div:'NFC East',p:'#5A1414',s:'#FFB612',champ:false,
-   alert:'W1 LOSS vs PHI 22-24. Jayden Daniels 26/38, 298 yds, 2 TD -- nearly pulled it out. Stefon Diggs 6 rec 78 yds in debut. Terry McLaurin 5 rec 72 yds. Dorance Armstrong suspended 1 game.',
+alert:'W1 LOSS vs PHI 22-24. Jayden Daniels 164 yds, 2 TD. Antonio Williams 4 rec 64 yds, 1 TD. Jacory Croskey-Merritt 63 yds, 1 TD rushing. Lost on failed 2-pt conversion with 1 min left.',
+
    cap:'+$11.8M',pffOff:83.6,pffDef:73.2,wl:'0-1',pfg:'22',pag:'24'},
 
   // NFC North
   {a:'CHI',city:'Chicago',name:'Bears',div:'NFC North',p:'#0B162A',s:'#C83803',champ:false,
-   alert:'W1 WIN vs CAR 59-37 -- HISTORIC. Combined 96 pts is the highest-scoring Week 1 game in NFL history. Caleb Williams 34/48, 421 yds, 5 TD. Colston Loveland and Luther Burden III both explosive.',
+alert:'W1 WIN vs CAR 59-37 -- HISTORIC. Combined 96 pts highest-scoring Week 1 ever. Caleb Williams 269 yds, 2 TD. D\'Andre Swift 18 car 124 yds, 3 TD -- the real story. Kalif Raymond 8 rec 84 yds.',
+
    cap:'+$1.2M',pffOff:92.8,pffDef:74.4,wl:'1-0',pfg:'59',pag:'37'},
 
   {a:'DET',city:'Detroit',name:'Lions',div:'NFC North',p:'#0076B6',s:'#B0B7BC',champ:false,
-   alert:'W1 WIN vs NO 31-30 OT. Jared Goff survived Saints\' 21-0 deficit comeback -- won on 2-pt stop in OT. Jahmyr Gibbs 2 TD, 97 yds. Sam LaPorta (hip) limited. S Kerby Joseph on PUP -- both safeties out.',
+alert:'W1 WIN vs NO 31-30 OT. Survived Saints coming back from 21-0 down. Gibbs 29 car 156 yds, 2 TD. Amon-Ra St. Brown 10 rec 67 yds, 2 TD. Goff 206 yds, 2 TD. Won on 2-pt stop in OT.',
+
    cap:'+$2.4M',pffOff:88.7,pffDef:76.6,wl:'1-0',pfg:'31',pag:'30'},
 
   {a:'GB',city:'Green Bay',name:'Packers',div:'NFC North',p:'#203731',s:'#FFB612',champ:false,
-   alert:'W1 LOSS vs MIN 22-39. Vikings scored 29 unanswered points -- Packers blew another late lead. Jordan Love 24/38, 281 yds, 2 TD, 1 INT. Josh Jacobs on Exempt list -- Kaleb Johnson stepped in with 88 yds.',
+alert:'W1 LOSS vs MIN 22-39. Blew 22-10 lead. Jordan Love 387 yds, 2 TD but fumbled + threw late INT in collapse. Christian Watson 6 rec 147 yds, 2 TD. Love sacked 4x in 2nd half. 12 penalties 98 yds.',
+
    cap:'+$9.6M',pffOff:78.2,pffDef:70.4,wl:'0-1',pfg:'22',pag:'39'},
 
   {a:'MIN',city:'Minnesota',name:'Vikings',div:'NFC North',p:'#4F2683',s:'#FFC62F',champ:false,
-   alert:'W1 WIN vs GB 39-22. 29 unanswered points -- Kyler Murray 27/38, 318 yds, 3 TD. Justin Jefferson 9 rec 138 yds in his return. Defense dominated late. Kevin O\'Connell\'s run game overhaul paid off.',
+alert:'W1 WIN vs GB 39-22. Trailed 22-10 -- Kyler Murray left injured, Carson Wentz stepped in for 133 yds, 3 TD in comeback. Jefferson 8 rec 92 yds, 2 TD. Jordan Mason 59 yds, 1 TD. Love fumbled + INT in collapse.',
+
+
    cap:'+$7.1M',pffOff:85.4,pffDef:81.9,wl:'1-0',pfg:'39',pag:'22'},
 
   // NFC South
@@ -5193,11 +5211,13 @@ const NFL_TEAMS = [
    cap:'+$18.3M',pffOff:70.6,pffDef:66.8,wl:'0-1',pfg:'13',pag:'20'},
 
   {a:'CAR',city:'Carolina',name:'Panthers',div:'NFC South',p:'#0085CA',s:'#101820',champ:false,
-   alert:'W1 LOSS vs CHI 37-59 -- historic. Combined 96 pts breaks Week 1 record. Bryce Young 31/49, 389 yds, 4 TD in the loss. Jonathon Brooks flashed -- 88 yds. Defense gave up 59 -- catastrophic.',
+alert:'W1 LOSS vs CHI 37-59 -- historic. Bryce Young 361 yds, 3 TD in the loss. Jalen Coker 8 rec 138 yds, 2 TD. D\'Andre Swift torched D for 124 yds 3 TD. Defense catastrophic.',
+
    cap:'+$41.2M',pffOff:74.3,pffDef:54.2,wl:'0-1',pfg:'37',pag:'59'},
 
   {a:'NO',city:'New Orleans',name:'Saints',div:'NFC South',p:'#D3BC8D',s:'#101820',champ:false,
-   alert:'W1 LOSS vs DET 30-31 OT. Saints rallied from 21-0 down -- forced OT but lost on 2-pt conversion attempt. Tyler Shough 24/37, 287 yds, 3 TD in thrilling debut. Alvin Kamara 7 rec 68 yds.',
+alert:'W1 LOSS vs DET 30-31 OT. Incredible comeback from 21-0 down. Tyler Shough 410 yds, 3 TD in debut. Chris Olave 10 rec 182 yds. Lost on 2-pt stop in OT. Gibbs 156 yds 2 TD for DET.',
+
    cap:'-$6.8M',pffOff:76.3,pffDef:69.1,wl:'0-1',pfg:'30',pag:'31'},
 
   {a:'TB',city:'Tampa Bay',name:'Buccaneers',div:'NFC South',p:'#D50A0A',s:'#34302B',champ:false,
@@ -5210,11 +5230,13 @@ const NFL_TEAMS = [
    cap:'+$28.4M',pffOff:78.8,pffDef:75.2,wl:'1-0',pfg:'26',pag:'14'},
 
   {a:'LAR',city:'L.A.',name:'Rams',div:'NFC West',p:'#003594',s:'#FFA300',champ:false,
-   alert:'W1 LOSS vs SF 7-27 (Melbourne). Myles Garrett 0 sacks in debut but Aaron Donald back looked sharp. Matthew Stafford 18/33, 187 yds, 0 TD -- rough day. Trent McDuffie INT. 49ers too healthy.',
+alert:'W1 LOSS vs SF 7-27 (Melbourne). Stafford 155 yds, 1 INT, 0 TD. Puka Nacua 5 rec 74 yds only bright spot. Blake Corum 54 yds rushing. Purdy picked them apart for 3 TD. Rough opener.',
+
    cap:'+$3.7M',pffOff:74.1,pffDef:82.6,wl:'0-1',pfg:'7',pag:'27'},
 
   {a:'SF',city:'San Francisco',name:'49ers',div:'NFC West',p:'#AA0000',s:'#B3995D',champ:false,
-   alert:'W1 WIN vs LAR 27-7 (Melbourne). Jets stingiest scoring D -- 49ers held LAR to 7. Fred Warner dominant. Deebo Samuel 6 rec 88 yds. Brock Purdy 22/30, 271 yds, 2 TD. Ricky Pearsall on season IR.',
+alert:'W1 WIN vs LAR 27-7 (Melbourne). Purdy 205 yds, 3 TD. Christian McCaffrey 10 car 68 yds. Demarcus Robinson 2 rec 50 yds, 1 TD. Stafford held to 155 yds, 1 INT for LAR. Dominant.',
+
    cap:'+$4.9M',pffOff:90.4,pffDef:89.1,wl:'1-0',pfg:'27',pag:'7'},
 
   {a:'SEA',city:'Seattle',name:'Seahawks',div:'NFC West',p:'#002244',s:'#69BE28',champ:true,
