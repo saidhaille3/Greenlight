@@ -246,17 +246,22 @@ const articleEngineData = {
 .nc-conf-title.west span { color: #f97316; }
 
 /* ── DIVISION HEADER ── */
+/* ── DIVISION HEADER ── */
 .nc-div {
   margin: 3rem 0 0.5rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(212,175,55,0.2);
-  display: flex; align-items: flex-end; gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
 }
 .nc-div-eyebrow {
   font-family: 'Inter', sans-serif;
   font-size: 0.55rem; font-weight: 900;
   letter-spacing: 0.45em; text-transform: uppercase;
-  color: #d4af37; display: block; margin-bottom: 0.3rem;
+  color: #d4af37; display: block; margin-bottom: 0;
 }
 .nc-div-name {
   font-family: 'Georgia', serif;
@@ -267,16 +272,16 @@ const articleEngineData = {
   color: inherit; margin: 0;
 }
 .nc-div-rule {
-  flex: 1; height: 1px;
-  background: linear-gradient(to right, rgba(212,175,55,0.25), transparent);
-  margin-bottom: 0.2rem;
+  width: 60px; height: 2px;
+  background: linear-gradient(to right, transparent, rgba(212,175,55,0.5), transparent);
+  margin-top: 0.3rem;
 }
+
 
 /* ── TEAM BLOCK ── */
 .nc-team {
   margin: 2.5rem 0 3rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(128,128,128,0.1);
 }
 .nc-team-header {
   margin-bottom: 1.5rem;

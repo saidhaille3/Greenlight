@@ -8793,8 +8793,14 @@ Hot Summer. New year. New narratives. New projections.
   hsTotal.innerText = String(HS_SLIDES.length).padStart(2, '0');
   HS_SLIDES.forEach((_, i) => {
     const wrap = document.createElement('div');
-    wrap.className = 'relative h-[3px] rounded-full overflow-hidden bg-white/15';
+    wrap.className = 'relative h-[3px] rounded-full overflow-hidden bg-white/15 cursor-pointer';
     wrap.style.width = '40px';
+    wrap.style.padding = '1px 0';
+    wrap.style.margin = '-1px 0';
+
+    wrap.style.boxSizing = 'content-box';
+    wrap.title = HS_SLIDES[i].headline?.replace(/<[^>]*>/g, '') || '';
+    wrap.onclick = () => goToSlide(i);
     const bar = document.createElement('div');
     bar.className = 'hs-bar absolute inset-y-0 left-0 rounded-full bg-white w-0';
     bar.style.transition = 'none';
@@ -8838,7 +8844,8 @@ setTimeout(() => {
     current.style.transition = `width ${SLIDE_DURATION}ms linear`;
     current.style.width = '100%';
   }
-}, 50);
+}, hsIndex === 0 ? 300 : 50);
+
   }
 
   function goToSlide(nextIndex) {
@@ -8932,10 +8939,14 @@ function updateReadBtn(slide) {
   }
 
   // Init
-  // Init
   hsContent.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  startProgressBar();
-  scheduleNext();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      startProgressBar();
+      scheduleNext();
+    });
+  });
+
 
   // Wire up slide 0's button on load (goToSlide never runs for the first slide)
   const initBtn = document.getElementById('hs-read-btn');
