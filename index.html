@@ -7402,17 +7402,22 @@ function nflRenderBoxScore(data) {
       const isRush = catName.includes('rushing');
       const isRec  = catName.includes('receiving');
       const isDef  = catName.includes('defensive') || catName.includes('tackles');
+      const isInt  = catName.includes('interception');
       const isKick = catName.includes('kicking') || catName.includes('punting');
-      if (!isPass && !isRush && !isRec && !isDef && !isKick) return;
+      if (!isPass && !isRush && !isRec && !isDef && !isInt && !isKick) return;
+
 
       const labels = cat.labels || [];
-      let cols = isPass ? ['C/ATT','YDS','TD','INT','RTG'] : isRush ? ['CAR','YDS','AVG','TD'] : isRec ? ['REC','YDS','AVG','TD','TGT'] : isDef ? ['TOT','SOLO','TFL','SACKS'] : ['FGM/A','LNG','XPM/A'];
+            let cols = isPass ? ['C/ATT','YDS','TD','INT','RTG'] : isRush ? ['CAR','YDS','AVG','TD'] : isRec ? ['REC','YDS','AVG','TD','TGT'] : isInt ? ['INT','YDS','TD'] : isDef ? ['TOT','SOLO','TFL','SACKS'] : ['FGM/A','LNG','XPM/A'];
+
+
       const getIdx = c => labels.findIndex(l => l === c || l.includes(c.split('/')[0]));
       const resolved = cols.map(c => ({ label:c, idx:getIdx(c) })).filter(c => c.idx >= 0);
       if (!resolved.length) return;
 
-      const catIcon = isPass ? '◈' : isRush ? '▶' : isRec ? '◉' : isDef ? '◆' : '○';
-      const catColor = isPass ? '#60a5fa' : isRush ? '#4ade80' : isRec ? '#fbbf24' : isDef ? '#f472b6' : '#22d3ee';
+      const catIcon = isPass ? '◈' : isRush ? '▶' : isRec ? '◉' : isInt ? '✦' : isDef ? '◆' : '○';
+      const catColor = isPass ? '#60a5fa' : isRush ? '#4ade80' : isRec ? '#fbbf24' : isInt ? '#f87171' : isDef ? '#f472b6' : '#22d3ee';
+
 
       html += `<div style="margin-bottom:1.25rem;">
         <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;">
