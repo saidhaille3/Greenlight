@@ -3758,60 +3758,110 @@ setInterval(() => { _giCache = {}; }, 600000);
 #live-quarter-label{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.3);margin-top:4px;}
 
 /* ── SITUATION BAR ── */
-#live-situation-bar{
-  margin-top:1rem;padding:0.6rem 1rem;
-  border-radius:0.875rem;
-  background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);
+/* ── SITUATION BAR ── */
+#live-situation-bar {
+  margin:0.875rem 1.25rem 0;
+  padding:0.6rem 1rem;
+  border-radius:1rem;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
   display:flex;align-items:center;justify-content:space-between;gap:0.75rem;
+  backdrop-filter:blur(12px);
 }
 #live-possession-indicator{display:flex;align-items:center;gap:0.5rem;}
-#live-down-text{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:#4ade80;}
+#live-down-text{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:#f0f0f0;}
 #live-field-position-label{font-size:9px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.1em;}
 
-/* ── 3D FIELD ── */
+/* ── IMMERSIVE FIELD ── */
 #live-field-3d-wrap {
   position:relative;
-  margin:1rem 1.25rem 0;
-  border-radius:1.5rem;
+  margin:0.75rem 1.25rem 0;
+  border-radius:1.75rem;
   overflow:hidden;
-  border:1px solid rgba(255,255,255,0.07);
-  background:#0a1a0a;
-  box-shadow:inset 0 0 60px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  background:#050e05;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 24px 80px rgba(0,0,0,0.8),
+    inset 0 1px 0 rgba(255,255,255,0.05);
 }
 #live-field-canvas {
-  display:block;width:100%;
-  height:240px;
+  display:block;
+  width:100%;
+  height:220px;
 }
-@media(min-width:600px){#live-field-canvas{height:300px;}}
+@media(min-width:480px){#live-field-canvas{height:260px;}}
+@media(min-width:768px){#live-field-canvas{height:320px;}}
 
-/* End zone labels */
+/* HUD overlays */
+#live-field-hud-top {
+  position:absolute;top:0;left:0;right:0;
+  display:flex;align-items:flex-start;justify-content:space-between;
+  padding:0.75rem 1rem;
+  pointer-events:none;
+}
+#live-field-hud-bottom {
+  position:absolute;bottom:0;left:0;right:0;
+  padding:0 1rem 0.75rem;
+  pointer-events:none;
+}
+.live-hud-pill {
+  display:flex;align-items:center;gap:0.4rem;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:100px;
+  padding:4px 10px;
+  font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;
+  color:rgba(255,255,255,0.7);
+  white-space:nowrap;
+}
+.live-hud-pill.accent { border-color:rgba(74,222,128,0.3); color:#4ade80; }
+.live-hud-pill.td     { border-color:rgba(251,191,36,0.4); color:#fbbf24; }
+.live-hud-pill.int    { border-color:rgba(248,113,113,0.4); color:#f87171; }
+
+#live-yard-markers {
+  display:flex;justify-content:space-between;
+}
+.live-yard-marker-label {
+  font-size:7px;font-weight:900;
+  color:rgba(255,255,255,0.2);
+  text-align:center;width:20px;
+}
+
+/* End zone name tags */
 .live-ez-label {
   position:absolute;top:50%;transform:translateY(-50%);
-  font-size:8px;font-weight:900;text-transform:uppercase;
-  letter-spacing:0.15em;color:rgba(255,255,255,0.5);
+  font-size:7px;font-weight:900;text-transform:uppercase;
+  letter-spacing:0.2em;color:rgba(255,255,255,0.4);
   writing-mode:vertical-rl;
 }
 .live-ez-label--away{left:6px;}
 .live-ez-label--home{right:6px;}
 
-/* Yard markers */
-#live-yard-markers {
-  position:absolute;bottom:4px;left:8%;right:8%;
-  display:flex;justify-content:space-between;pointer-events:none;
-}
-.live-yard-marker-label {
-  font-size:7px;font-weight:900;color:rgba(255,255,255,0.25);
-  text-align:center;width:20px;margin:0 auto;
-}
-
 /* Play type badge */
 #live-play-type-badge {
-  position:absolute;top:8px;right:8px;
   font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;
   padding:3px 10px;border-radius:100px;
   backdrop-filter:blur(8px);
+  pointer-events:none;
 }
 #live-play-type-badge.hidden{display:none;}
+
+/* Drive progress bar */
+#live-drive-progress {
+  position:absolute;bottom:0;left:0;right:0;
+  height:3px;
+  background:rgba(255,255,255,0.05);
+}
+#live-drive-progress-fill {
+  height:100%;
+  background:linear-gradient(90deg,#4ade80,#22d3ee);
+  transition:width 1s cubic-bezier(0.16,1,0.3,1);
+  box-shadow:0 0 8px rgba(74,222,128,0.6);
+}
+
 
 /* ── YAC BAR ── */
 #live-yac-bar {
@@ -4999,20 +5049,45 @@ document.addEventListener('click', function(e){
     </div>
 
     <!-- 3D Field with Play Diagram -->
+    <!-- Immersive Field -->
     <div id="live-field-3d-wrap">
       <canvas id="live-field-canvas"></canvas>
-      <div id="live-play-annotation"></div>
+
+      <!-- Top HUD -->
+      <div id="live-field-hud-top">
+        <div id="live-hud-left" class="live-hud-pill accent">
+          <img id="live-poss-logo-field" src="" style="width:14px;height:14px;object-fit:contain;display:none;">
+          <span id="live-down-text-field">--</span>
+        </div>
+        <div id="live-play-type-badge" class="live-hud-pill hidden"></div>
+        <div id="live-hud-right" class="live-hud-pill">
+          <span id="live-field-position-label-field"></span>
+        </div>
+      </div>
 
       <!-- End zone labels -->
       <div id="live-ez-away" class="live-ez-label live-ez-label--away"></div>
       <div id="live-ez-home" class="live-ez-label live-ez-label--home"></div>
 
-      <!-- Yard line markers -->
-      <div id="live-yard-markers"></div>
+      <!-- Bottom HUD: yard markers + drive progress -->
+      <div id="live-field-hud-bottom">
+        <div id="live-yard-markers">
+          <span class="live-yard-marker-label">10</span>
+          <span class="live-yard-marker-label">20</span>
+          <span class="live-yard-marker-label">30</span>
+          <span class="live-yard-marker-label">40</span>
+          <span class="live-yard-marker-label">50</span>
+          <span class="live-yard-marker-label">40</span>
+          <span class="live-yard-marker-label">30</span>
+          <span class="live-yard-marker-label">20</span>
+          <span class="live-yard-marker-label">10</span>
+        </div>
+      </div>
 
-      <!-- Play type badge -->
-      <div id="live-play-type-badge" class="hidden"></div>
+      <!-- Drive progress bar -->
+      <div id="live-drive-progress"><div id="live-drive-progress-fill" style="width:0%"></div></div>
     </div>
+
 
     <!-- YAC Indicator -->
     <div id="live-yac-bar" class="hidden">
@@ -6672,266 +6747,493 @@ function drawField(currentPlay, history) {
   if (!_liveCtx) return;
   const ctx = _liveCtx;
   const W = fieldW(), H = fieldH();
+  const EZ = W * 0.08;          // endzone width
+  const FIELD_LEFT  = EZ;
+  const FIELD_RIGHT = W - EZ;
+  const FIELD_W     = FIELD_RIGHT - FIELD_LEFT;
+  const dpr = window.devicePixelRatio || 1;
 
-  /* Background */
-  const grd = ctx.createLinearGradient(0, 0, 0, H);
-  grd.addColorStop(0,   '#0d2010');
-  grd.addColorStop(0.5, '#0a1a0a');
-  grd.addColorStop(1,   '#06120a');
-  ctx.fillStyle = grd;
+  /* ── SKY / AMBIENT BACKGROUND ── */
+  const sky = ctx.createLinearGradient(0, 0, 0, H);
+  sky.addColorStop(0,   '#020b02');
+  sky.addColorStop(0.4, '#051005');
+  sky.addColorStop(1,   '#030803');
+  ctx.fillStyle = sky;
   ctx.fillRect(0, 0, W, H);
 
-  /* Yard stripes */
+  /* ── AMBIENT STADIUM GLOW ── */
+  const glow = ctx.createRadialGradient(W/2, H*0.5, 0, W/2, H*0.5, W*0.6);
+  glow.addColorStop(0,   'rgba(16,185,129,0.04)');
+  glow.addColorStop(0.5, 'rgba(16,185,129,0.01)');
+  glow.addColorStop(1,   'transparent');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, W, H);
+
+  /* ── TURF TEXTURE (alternating bands every 10y) ── */
+  for (let y = 0; y <= 100; y += 10) {
+    const x1 = FIELD_LEFT + (y / 100) * FIELD_W;
+    const x2 = FIELD_LEFT + ((y + 10) / 100) * FIELD_W;
+    const band = ctx.createLinearGradient(0, 0, 0, H);
+    const isEven = (y / 10) % 2 === 0;
+    band.addColorStop(0,   isEven ? 'rgba(5,40,8,0.95)' : 'rgba(4,32,6,0.95)');
+    band.addColorStop(0.5, isEven ? 'rgba(6,45,9,0.9)'  : 'rgba(4,36,7,0.9)');
+    band.addColorStop(1,   isEven ? 'rgba(5,38,8,0.95)' : 'rgba(3,30,5,0.95)');
+    ctx.fillStyle = band;
+    ctx.fillRect(x1, 0, x2 - x1, H);
+  }
+
+  /* ── END ZONES ── */
+  const awayColor = _nflLiveGame?.awayColor || '#ef4444';
+  const homeColor = _nflLiveGame?.homeColor || '#3b82f6';
+
+  const ezAway = ctx.createLinearGradient(0, 0, EZ, 0);
+  ezAway.addColorStop(0, hexToRgba(awayColor, 0.55));
+  ezAway.addColorStop(1, hexToRgba(awayColor, 0.20));
+  ctx.fillStyle = ezAway;
+  ctx.fillRect(0, 0, EZ, H);
+
+  const ezHome = ctx.createLinearGradient(W - EZ, 0, W, 0);
+  ezHome.addColorStop(0, hexToRgba(homeColor, 0.20));
+  ezHome.addColorStop(1, hexToRgba(homeColor, 0.55));
+  ctx.fillStyle = ezHome;
+  ctx.fillRect(W - EZ, 0, EZ, H);
+
+  /* Endzone inner glow */
+  const ezGlowA = ctx.createRadialGradient(EZ*0.4, H/2, 0, EZ*0.4, H/2, EZ*0.9);
+  ezGlowA.addColorStop(0, hexToRgba(awayColor, 0.25));
+  ezGlowA.addColorStop(1, 'transparent');
+  ctx.fillStyle = ezGlowA;
+  ctx.fillRect(0, 0, EZ, H);
+
+  const ezGlowH = ctx.createRadialGradient(W - EZ*0.4, H/2, 0, W - EZ*0.4, H/2, EZ*0.9);
+  ezGlowH.addColorStop(0, hexToRgba(homeColor, 0.25));
+  ezGlowH.addColorStop(1, 'transparent');
+  ctx.fillStyle = ezGlowH;
+  ctx.fillRect(W - EZ, 0, EZ, H);
+
+  /* ── YARD LINES ── */
   for (let y = 0; y <= 100; y += 5) {
-    const x = yardToX(y);
+    const x = FIELD_LEFT + (y / 100) * FIELD_W;
+    const isMajor = y % 10 === 0;
     ctx.beginPath();
     ctx.moveTo(x, 0);
     ctx.lineTo(x, H);
-    ctx.strokeStyle = y % 10 === 0
-      ? 'rgba(255,255,255,0.12)'
-      : 'rgba(255,255,255,0.05)';
-    ctx.lineWidth = y % 10 === 0 ? 1 : 0.5;
+    ctx.strokeStyle = isMajor
+      ? 'rgba(255,255,255,0.18)'
+      : 'rgba(255,255,255,0.07)';
+    ctx.lineWidth = isMajor ? 1 : 0.5;
     ctx.stroke();
   }
 
-  /* Midfield circle (faint) */
-  ctx.beginPath();
-  ctx.arc(W / 2, H / 2, Math.min(W, H) * 0.15, 0, Math.PI * 2);
-  ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-  ctx.lineWidth = 1;
-  ctx.stroke();
+  /* Endzone boundary lines */
+  [EZ, W - EZ].forEach(x => {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, H);
+    ctx.strokeStyle = 'rgba(255,255,255,0.35)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  });
 
-  /* End zones */
-  const ez = W * 0.08;
-  // Away
-  ctx.fillStyle = _nflLiveGame ? hexToRgba(_nflLiveGame.awayColor, 0.25) : 'rgba(239,68,68,0.15)';
-  ctx.fillRect(0, 0, ez, H);
-  // Home
-  ctx.fillStyle = _nflLiveGame ? hexToRgba(_nflLiveGame.homeColor, 0.25) : 'rgba(59,130,246,0.15)';
-  ctx.fillRect(W - ez, 0, ez, H);
-
-  /* Hash marks */
+  /* ── HASH MARKS ── */
+  const H1 = H * 0.32, H2 = H * 0.68;
   for (let y = 5; y <= 95; y += 5) {
-    const x = yardToX(y);
-    [H * 0.35, H * 0.65].forEach(hy => {
+    const x = FIELD_LEFT + (y / 100) * FIELD_W;
+    [H1, H2].forEach(hy => {
       ctx.beginPath();
-      ctx.moveTo(x - 3, hy);
-      ctx.lineTo(x + 3, hy);
-      ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+      ctx.moveTo(x - 4, hy);
+      ctx.lineTo(x + 4, hy);
+      ctx.strokeStyle = 'rgba(255,255,255,0.18)';
       ctx.lineWidth = 1;
       ctx.stroke();
     });
   }
 
-  /* Play history (faded) */
-  if (history && history.length) {
-    history.slice(-5).forEach((play, i) => {
-      const alpha = 0.08 + i * 0.04;
-      drawPlayDiagram(ctx, play, alpha, W, H, false);
+  /* ── MIDFIELD LOGO RING ── */
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(W/2, H/2, Math.min(H, FIELD_W)*0.13, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.restore();
+
+  /* ── SPOTLIGHT EFFECT (stadium lights) ── */
+  [[0.15,0],[0.5,0],[0.85,0],[0.15,1],[0.5,1],[0.85,1]].forEach(([px,py]) => {
+    const sg = ctx.createRadialGradient(W*px, py===0?-H*0.1:H*1.1, 0, W*px, py===0?-H*0.1:H*1.1, H*0.7);
+    sg.addColorStop(0, 'rgba(255,255,240,0.025)');
+    sg.addColorStop(1, 'transparent');
+    ctx.fillStyle = sg;
+    ctx.fillRect(0, 0, W, H);
+  });
+
+  /* ── PLAY HISTORY (ghost trails) ── */
+  if (history?.length) {
+    history.slice(-6).forEach((play, i) => {
+      const alpha = 0.04 + i * 0.035;
+      drawPlayDiagram(ctx, play, alpha, W, H, false, FIELD_LEFT, FIELD_W);
     });
   }
 
-  /* Current play (full) */
+  /* ── CURRENT PLAY ── */
   if (currentPlay) {
-    drawPlayDiagram(ctx, currentPlay, 1, W, H, true);
-    drawBall(ctx, currentPlay, W, H);
+    drawPlayDiagram(ctx, currentPlay, 1, W, H, true, FIELD_LEFT, FIELD_W);
+    drawBall(ctx, currentPlay, W, H, FIELD_LEFT, FIELD_W);
   }
 
-  /* Scrimmage line */
-  if (_nflLiveGame && _nflLiveGame.yardLine != null) {
-    const scrimX = yardToX(_nflLiveGame.yardLine);
+  /* ── SCRIMMAGE LINE ── */
+  if (_nflLiveGame?.yardLine != null) {
+    const yl = _nflLiveGame.yardLine;
+    const scrimX = FIELD_LEFT + (yl / 100) * FIELD_W;
+
+    /* Scrimmage glow */
+    const sg = ctx.createLinearGradient(scrimX - 20, 0, scrimX + 20, 0);
+    sg.addColorStop(0, 'transparent');
+    sg.addColorStop(0.5, 'rgba(251,191,36,0.12)');
+    sg.addColorStop(1, 'transparent');
+    ctx.fillStyle = sg;
+    ctx.fillRect(scrimX - 20, 0, 40, H);
+
     ctx.beginPath();
     ctx.moveTo(scrimX, 0);
     ctx.lineTo(scrimX, H);
-    ctx.strokeStyle = 'rgba(251,191,36,0.7)';
+    ctx.strokeStyle = 'rgba(251,191,36,0.85)';
     ctx.lineWidth = 1.5;
-    ctx.setLineDash([4, 4]);
+    ctx.setLineDash([5, 4]);
     ctx.stroke();
     ctx.setLineDash([]);
 
     /* First down marker */
     if (_nflLiveGame.firstDownYard != null) {
-      const fdX = yardToX(_nflLiveGame.firstDownYard);
+      const fdX = FIELD_LEFT + (_nflLiveGame.firstDownYard / 100) * FIELD_W;
+      const fg = ctx.createLinearGradient(fdX - 12, 0, fdX + 12, 0);
+      fg.addColorStop(0, 'transparent');
+      fg.addColorStop(0.5, 'rgba(74,222,128,0.10)');
+      fg.addColorStop(1, 'transparent');
+      ctx.fillStyle = fg;
+      ctx.fillRect(fdX - 12, 0, 24, H);
+
       ctx.beginPath();
       ctx.moveTo(fdX, 0);
       ctx.lineTo(fdX, H);
-      ctx.strokeStyle = 'rgba(34,197,94,0.7)';
+      ctx.strokeStyle = 'rgba(74,222,128,0.9)';
       ctx.lineWidth = 1.5;
-      ctx.setLineDash([4, 4]);
+      ctx.setLineDash([5, 4]);
       ctx.stroke();
       ctx.setLineDash([]);
     }
 
-    /* Possession indicator (pulsing circle at scrimmage) */
+    /* ── POSSESSION BALL MARKER ── */
     const posY = H * 0.5;
-    const pulse = 0.5 + 0.5 * Math.sin(Date.now() / 300);
-    const posColor = _nflLiveGame.hasPossession === 'home'
-      ? _nflLiveGame.homeColor
-      : _nflLiveGame.awayColor;
+    const posColor = _nflLiveGame.hasPossession === 'home' ? homeColor : awayColor;
+    const pulse = 0.5 + 0.5 * Math.sin(Date.now() / 350);
+
+    /* Outer pulse ring */
     ctx.beginPath();
-    ctx.arc(scrimX, posY, 8 + pulse * 3, 0, Math.PI * 2);
-    ctx.fillStyle = hexToRgba(posColor, 0.15 + pulse * 0.1);
+    ctx.arc(scrimX, posY, 14 + pulse * 5, 0, Math.PI * 2);
+    ctx.fillStyle = hexToRgba(posColor, 0.06 + pulse * 0.05);
+    ctx.fill();
+
+    /* Mid ring */
+    ctx.beginPath();
+    ctx.arc(scrimX, posY, 10, 0, Math.PI * 2);
+    ctx.fillStyle = hexToRgba(posColor, 0.15);
+    ctx.fill();
+
+    /* Core dot */
+    ctx.beginPath();
+    ctx.arc(scrimX, posY, 6, 0, Math.PI * 2);
+    const coreG = ctx.createRadialGradient(scrimX, posY-2, 0, scrimX, posY, 6);
+    coreG.addColorStop(0, hexToRgba(posColor, 1));
+    coreG.addColorStop(1, hexToRgba(posColor, 0.7));
+    ctx.fillStyle = coreG;
     ctx.fill();
     ctx.beginPath();
     ctx.arc(scrimX, posY, 6, 0, Math.PI * 2);
-    ctx.fillStyle = hexToRgba(posColor, 0.9);
-    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
 
-    /* Football icon */
-    ctx.fillStyle = '#fff';
-    ctx.font = 'bold 10px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('●', scrimX, posY);
+    /* Update drive progress bar */
+    const pct = Math.min(100, Math.max(0, yl));
+    const progressEl = document.getElementById('live-drive-progress-fill');
+    if (progressEl) progressEl.style.width = pct + '%';
+
+    /* Update HUD pills */
+    const downEl = document.getElementById('live-down-text-field');
+    const posEl  = document.getElementById('live-field-position-label-field');
+    const logoEl = document.getElementById('live-poss-logo-field');
+    const downSrc = document.getElementById('live-down-text');
+    const posSrc  = document.getElementById('live-field-position-label');
+    if (downEl && downSrc) downEl.textContent = downSrc.textContent;
+    if (posEl  && posSrc)  posEl.textContent  = posSrc.textContent;
+    if (logoEl) {
+      const mainLogo = document.getElementById('live-poss-logo');
+      if (mainLogo?.src) { logoEl.src = mainLogo.src; logoEl.style.display = 'block'; }
+    }
   }
+
+  /* ── VIGNETTE ── */
+  const vig = ctx.createRadialGradient(W/2, H/2, H*0.2, W/2, H/2, W*0.7);
+  vig.addColorStop(0, 'transparent');
+  vig.addColorStop(1, 'rgba(0,0,0,0.45)');
+  ctx.fillStyle = vig;
+  ctx.fillRect(0, 0, W, H);
 }
 
-function drawPlayDiagram(ctx, play, alpha, W, H, isCurrent) {
-  if (!play || !play.type) return;
-  const startX = yardToX(play.startYard || 50);
-  const endX   = yardToX(play.endYard || 50);
-  const midY   = H * 0.5;
-
+function drawPlayDiagram(ctx, play, alpha, W, H, isCurrent, FL, FW) {
+  if (!play?.type) return;
+  FL = FL ?? W * 0.08;
+  FW = FW ?? W * 0.84;
+  const toX = yard => FL + (yard / 100) * FW;
+  const midY = H * 0.5;
   ctx.globalAlpha = alpha;
+  ctx.save();
 
   if (play.type === 'pass') {
-    /* Arc from QB to receiver */
-    const catchX = yardToX(play.catchYard || play.endYard || 50);
-    const ctrlX  = (startX + catchX) / 2;
-    const ctrlY  = midY - H * 0.25;
+    const startX = toX(play.startYard || 50);
+    const catchX = toX(play.catchYard || play.endYard || 50);
+    const endX   = toX(play.endYard   || 50);
+    const rOff   = play.routeOffset || 0;
 
     /* Pass arc */
+    const ctrlX = (startX + catchX) / 2;
+    const ctrlY = midY - H * 0.28;
     ctx.beginPath();
     ctx.moveTo(startX, midY);
-    ctx.quadraticCurveTo(ctrlX, ctrlY, catchX, midY + (play.routeOffset || 0));
-    ctx.strokeStyle = isCurrent ? '#60a5fa' : 'rgba(96,165,250,0.6)';
-    ctx.lineWidth   = isCurrent ? 2 : 1;
-    ctx.setLineDash([5, 3]);
+    ctx.quadraticCurveTo(ctrlX, ctrlY, catchX, midY + rOff);
+    ctx.strokeStyle = isCurrent ? '#60a5fa' : 'rgba(96,165,250,0.5)';
+    ctx.lineWidth   = isCurrent ? 2.5 : 1;
+    ctx.setLineDash([6, 4]);
     ctx.stroke();
     ctx.setLineDash([]);
 
+    if (isCurrent) {
+      /* Arc glow */
+      ctx.shadowColor = '#60a5fa';
+      ctx.shadowBlur  = 10;
+      ctx.beginPath();
+      ctx.moveTo(startX, midY);
+      ctx.quadraticCurveTo(ctrlX, ctrlY, catchX, midY + rOff);
+      ctx.strokeStyle = 'rgba(96,165,250,0.3)';
+      ctx.lineWidth = 6;
+      ctx.setLineDash([6, 4]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.shadowBlur = 0;
+    }
+
     /* Catch dot */
     ctx.beginPath();
-    ctx.arc(catchX, midY + (play.routeOffset || 0), isCurrent ? 5 : 3, 0, Math.PI * 2);
-    ctx.fillStyle = '#60a5fa';
+    ctx.arc(catchX, midY + rOff, isCurrent ? 5 : 3, 0, Math.PI * 2);
+    ctx.fillStyle = isCurrent ? '#60a5fa' : 'rgba(96,165,250,0.6)';
     ctx.fill();
+    if (isCurrent) {
+      ctx.shadowColor = '#60a5fa';
+      ctx.shadowBlur  = 12;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
 
-    /* YAC line (catch → tackle) */
-    if (play.endYard != null && play.catchYard != null) {
+    /* YAC line */
+    if (play.endYard != null && play.catchYard != null && play.catchYard !== play.endYard) {
       ctx.beginPath();
-      ctx.moveTo(catchX, midY + (play.routeOffset || 0));
-      ctx.lineTo(endX, midY + (play.routeOffset || 0));
-      ctx.strokeStyle = '#4ade80';
+      ctx.moveTo(catchX, midY + rOff);
+      ctx.lineTo(endX,   midY + rOff);
+      ctx.strokeStyle = isCurrent ? '#4ade80' : 'rgba(74,222,128,0.4)';
       ctx.lineWidth   = isCurrent ? 2.5 : 1;
-      ctx.setLineDash([]);
       ctx.stroke();
+    }
 
-      /* Tackle X */
-      if (isCurrent) {
-        ctx.beginPath();
-        ctx.moveTo(endX - 5, midY - 5 + (play.routeOffset || 0));
-        ctx.lineTo(endX + 5, midY + 5 + (play.routeOffset || 0));
-        ctx.moveTo(endX + 5, midY - 5 + (play.routeOffset || 0));
-        ctx.lineTo(endX - 5, midY + 5 + (play.routeOffset || 0));
-        ctx.strokeStyle = '#f87171';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      }
+    /* Tackle X */
+    if (isCurrent) {
+      const tx = endX, ty = midY + rOff;
+      ctx.beginPath();
+      ctx.moveTo(tx-6,ty-6); ctx.lineTo(tx+6,ty+6);
+      ctx.moveTo(tx+6,ty-6); ctx.lineTo(tx-6,ty+6);
+      ctx.strokeStyle = '#f87171';
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.stroke();
     }
 
     /* QB dot */
     ctx.beginPath();
     ctx.arc(startX, midY, isCurrent ? 6 : 3, 0, Math.PI * 2);
-    ctx.fillStyle = '#fbbf24';
+    ctx.fillStyle = isCurrent ? '#fbbf24' : 'rgba(251,191,36,0.5)';
     ctx.fill();
+    if (isCurrent) {
+      ctx.shadowColor = '#fbbf24';
+      ctx.shadowBlur  = 14;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
 
   } else if (play.type === 'run') {
-    /* Solid arrow for run */
+    const startX = toX(play.startYard || 50);
+    const endX   = toX(play.endYard   || 50);
+    const rOff   = play.routeOffset   || 0;
+
+    if (isCurrent) {
+      ctx.shadowColor = '#4ade80';
+      ctx.shadowBlur  = 12;
+    }
     ctx.beginPath();
     ctx.moveTo(startX, midY);
-    ctx.lineTo(endX, midY + (play.routeOffset || 0));
+    ctx.lineTo(endX, midY + rOff);
     ctx.strokeStyle = isCurrent ? '#4ade80' : 'rgba(74,222,128,0.4)';
-    ctx.lineWidth = isCurrent ? 3 : 1.5;
-    ctx.lineCap  = 'round';
+    ctx.lineWidth   = isCurrent ? 3.5 : 1.5;
+    ctx.lineCap     = 'round';
     ctx.stroke();
+    ctx.shadowBlur  = 0;
 
     /* Arrowhead */
     if (isCurrent) {
-      const angle = Math.atan2(play.routeOffset || 0, endX - startX);
+      const angle = Math.atan2(rOff, endX - startX);
       ctx.save();
-      ctx.translate(endX, midY + (play.routeOffset || 0));
+      ctx.translate(endX, midY + rOff);
       ctx.rotate(angle);
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(-10, -5);
-      ctx.lineTo(-10, 5);
+      ctx.moveTo(0,0); ctx.lineTo(-12,-6); ctx.lineTo(-12,6);
       ctx.closePath();
       ctx.fillStyle = '#4ade80';
+      ctx.shadowColor = '#4ade80';
+      ctx.shadowBlur  = 10;
       ctx.fill();
+      ctx.shadowBlur = 0;
       ctx.restore();
     }
 
     /* Tackle X */
     if (isCurrent) {
+      const tx = endX, ty = midY + rOff;
       ctx.beginPath();
-      ctx.moveTo(endX - 5, midY - 5 + (play.routeOffset || 0));
-      ctx.lineTo(endX + 5, midY + 5 + (play.routeOffset || 0));
-      ctx.moveTo(endX + 5, midY - 5 + (play.routeOffset || 0));
-      ctx.lineTo(endX - 5, midY + 5 + (play.routeOffset || 0));
+      ctx.moveTo(tx-6,ty-6); ctx.lineTo(tx+6,ty+6);
+      ctx.moveTo(tx+6,ty-6); ctx.lineTo(tx-6,ty+6);
       ctx.strokeStyle = '#f87171';
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
       ctx.stroke();
     }
+
+    /* Ball carrier dot */
+    ctx.beginPath();
+    ctx.arc(startX, midY, isCurrent ? 6 : 3, 0, Math.PI * 2);
+    ctx.fillStyle = isCurrent ? '#fbbf24' : 'rgba(251,191,36,0.5)';
+    ctx.fill();
 
   } else if (play.type === 'sack') {
-    ctx.beginPath();
-    ctx.arc(startX, midY, isCurrent ? 10 : 5, 0, Math.PI * 2);
-    ctx.strokeStyle = '#f472b6';
-    ctx.lineWidth = isCurrent ? 2 : 1;
-    ctx.stroke();
-  } else if (play.type === 'penalty') {
-    /* Yellow zigzag */
-    ctx.beginPath();
-    ctx.moveTo(startX - 8, midY - 8);
-    ctx.lineTo(startX, midY + 8);
-    ctx.lineTo(startX + 8, midY - 8);
-    ctx.strokeStyle = '#fbbf24';
-    ctx.lineWidth = isCurrent ? 2 : 1;
-    ctx.stroke();
-  } else if (play.type === 'td') {
-    /* Gold burst */
-    for (let a = 0; a < 8; a++) {
-      const angle = (a / 8) * Math.PI * 2;
+    const x = toX(play.startYard || 50);
+    for (let r = 0; r < 3; r++) {
+      const radius = 6 + r * 5;
       ctx.beginPath();
-      ctx.moveTo(endX, midY);
-      ctx.lineTo(endX + Math.cos(angle) * 14, midY + Math.sin(angle) * 14);
-      ctx.strokeStyle = '#fbbf24';
-      ctx.lineWidth = isCurrent ? 2 : 1;
+      ctx.arc(x, midY, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(244,114,182,${isCurrent ? 0.5 - r*0.12 : 0.2 - r*0.05})`;
+      ctx.lineWidth   = isCurrent ? 2 - r*0.3 : 0.8;
       ctx.stroke();
     }
+    if (isCurrent) {
+      ctx.shadowColor = '#f472b6';
+      ctx.shadowBlur  = 16;
+      ctx.beginPath();
+      ctx.arc(x, midY, 6, 0, Math.PI * 2);
+      ctx.strokeStyle = '#f472b6';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+  } else if (play.type === 'penalty') {
+    const x = toX(play.startYard || 50);
+    for (let i = -1; i <= 1; i++) {
+      ctx.beginPath();
+      ctx.moveTo(x - 8, midY + i*10 - 8);
+      ctx.lineTo(x,     midY + i*10 + 8);
+      ctx.lineTo(x + 8, midY + i*10 - 8);
+      ctx.strokeStyle = isCurrent ? '#fbbf24' : 'rgba(251,191,36,0.3)';
+      ctx.lineWidth   = isCurrent ? 2 : 1;
+      ctx.stroke();
+    }
+
+  } else if (play.type === 'td') {
+    const x = toX(play.endYard || 50);
+    if (isCurrent) {
+      ctx.shadowColor = '#fbbf24';
+      ctx.shadowBlur  = 30;
+    }
+    for (let a = 0; a < 12; a++) {
+      const angle = (a / 12) * Math.PI * 2;
+      const len   = isCurrent ? 18 + (a % 3) * 4 : 8;
+      ctx.beginPath();
+      ctx.moveTo(x, midY);
+      ctx.lineTo(x + Math.cos(angle) * len, midY + Math.sin(angle) * len);
+      ctx.strokeStyle = a % 2 === 0 ? '#fbbf24' : '#4ade80';
+      ctx.lineWidth   = isCurrent ? 2.5 : 1;
+      ctx.lineCap     = 'round';
+      ctx.stroke();
+    }
+    ctx.shadowBlur = 0;
+    ctx.beginPath();
+    ctx.arc(x, midY, isCurrent ? 8 : 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#fbbf24';
+    ctx.fill();
   }
 
+  ctx.restore();
   ctx.globalAlpha = 1;
 }
 
-function drawBall(ctx, play, W, H) {
-  if (!play) return;
+function drawBall(ctx, play, W, H, FL, FW) {
+  if (!play || !_nflLiveGame) return;
+  FL = FL ?? W * 0.08;
+  FW = FW ?? W * 0.84;
+  const toX  = yard => FL + (yard / 100) * FW;
   const midY = H * 0.5;
-  const ballX = yardToX(_nflLiveGame?.yardLine || 50);
+  const bx   = toX(_nflLiveGame.yardLine || 50);
+  const by   = midY - H * 0.08;
+
+  /* Shadow */
   ctx.beginPath();
-  ctx.ellipse(ballX, midY - 15, 7, 5, 0, 0, Math.PI * 2);
-  ctx.fillStyle = '#b45309';
+  ctx.ellipse(bx, midY - H*0.01, 9, 3, 0, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(0,0,0,0.4)';
   ctx.fill();
-  ctx.strokeStyle = '#fff';
-  ctx.lineWidth = 0.8;
-  ctx.stroke();
-  /* Lace */
+
+  /* Ball body */
+  ctx.save();
+  ctx.shadowColor = 'rgba(180,90,0,0.6)';
+  ctx.shadowBlur  = 10;
+  const ballG = ctx.createRadialGradient(bx-3, by-3, 0, bx, by, 10);
+  ballG.addColorStop(0, '#d97706');
+  ballG.addColorStop(0.5, '#b45309');
+  ballG.addColorStop(1, '#78350f');
   ctx.beginPath();
-  ctx.moveTo(ballX - 3, midY - 15);
-  ctx.lineTo(ballX + 3, midY - 15);
-  ctx.strokeStyle = '#fff';
-  ctx.lineWidth = 1;
+  ctx.ellipse(bx, by, 10, 6.5, -0.2, 0, Math.PI * 2);
+  ctx.fillStyle = ballG;
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  /* Seam */
+  ctx.beginPath();
+  ctx.ellipse(bx, by, 10, 6.5, -0.2, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.lineWidth   = 0.8;
   ctx.stroke();
+
+  /* Laces */
+  ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+  ctx.lineWidth   = 1;
+  ctx.beginPath();
+  ctx.moveTo(bx - 3, by - 2);
+  ctx.lineTo(bx + 3, by - 2);
+  ctx.stroke();
+  [-1, 0, 1].forEach(i => {
+    ctx.beginPath();
+    ctx.moveTo(bx + i*1.8, by - 4);
+    ctx.lineTo(bx + i*1.8, by);
+    ctx.stroke();
+  });
+
+  ctx.restore();
 }
 
 /* ── HELPER: hex to rgba ── */
@@ -7283,7 +7585,7 @@ if (isPost && !plays.length && !drives.length) {
       const isSafety = result.includes('safety');
       const isKneel  = result.includes('kneel') || result.includes('end of');
 
-      const emoji    = isTD ? '6' : isFGMade ? '✔' : isFGMiss ? '✕' : isPunt ? '🦶' : isINT ? '↩' : isFumble ? '💨' : isSafety ? 'S' : isKneel ? '·' : '–';
+      const emoji    = isTD ? '6' : isFGMade ? '✔' : isFGMiss ? '✕' : isPunt ? '🦶' : isINT ? '↩' : isFumble ? '🧈' : isSafety ? 'S' : isKneel ? '·' : '–';
       const accent   = isTD ? '#4ade80' : isFGMade ? '#60a5fa' : isFGMiss ? '#fbbf24' : isPunt ? 'rgba(255,255,255,0.3)' : isINT ? '#f87171' : isFumble ? '#fb923c' : isSafety ? '#c084fc' : 'rgba(255,255,255,0.2)';
       const bg       = isTD ? 'rgba(34,197,94,0.12)' : isFGMade ? 'rgba(59,130,246,0.10)' : isFGMiss ? 'rgba(251,191,36,0.07)' : isINT ? 'rgba(239,68,68,0.12)' : isFumble ? 'rgba(251,146,60,0.09)' : isSafety ? 'rgba(168,85,247,0.10)' : 'rgba(255,255,255,0.03)';
       const label    = isTD ? 'TD' : isFGMade ? 'FG' : isFGMiss ? 'MISS' : isPunt ? 'PUNT' : isINT ? 'INT' : isFumble ? 'FUM' : isSafety ? 'SAFE' : isKneel ? 'END' : 'INC';
