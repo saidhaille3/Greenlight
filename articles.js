@@ -5,7 +5,7 @@ const articleEngineData = {
     hero: "images/2026nbanarr.jpeg",
     time: "25 MIN READ",
     published: "September 10, 2026",
-    updated: "September 11, 2026",
+    updated: "September 15, 2026",
     title: "The 2026-27 NBA Climate",
 
     content: `
