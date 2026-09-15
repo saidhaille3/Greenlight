@@ -4285,6 +4285,19 @@ setInterval(() => { _giCache = {}; }, 600000);
 }
 .nfl-stat-val { font-size: 14px; font-weight: 900; color: #f0f0f0; display: block; }
 
+.nfl-rank-badge {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-size: 7px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.nfl-rank-elite  { color: #34d399; }
+.nfl-rank-good   { color: #60a5fa; }
+.nfl-rank-mid    { color: #fbbf24; }
+.nfl-rank-bad    { color: #f87171; }
+
+
 /* ── TABS ── */
 .nfl-tabs {
   display: flex; gap: 0; padding: 0 1rem;
@@ -4813,8 +4826,9 @@ document.addEventListener('click', function(e){
       </div>
       <div class="nfl-stats-row">
         <div class="nfl-stat-pill"><span class="nfl-stat-label">W–L</span><span class="nfl-stat-val" id="nfl-wl">--</span></div>
-        <div class="nfl-stat-pill"><span class="nfl-stat-label">PF/G</span><span class="nfl-stat-val" id="nfl-pfg">--</span></div>
-        <div class="nfl-stat-pill"><span class="nfl-stat-label">PA/G</span><span class="nfl-stat-val" id="nfl-pag">--</span></div>
+            <div class="nfl-stat-pill"><span class="nfl-stat-label">PPG</span><span class="nfl-stat-val" id="nfl-pfg">--</span><span class="nfl-rank-badge nfl-rank-mid" id="nfl-pfg-rank" style="display:none"></span></div>
+        <div class="nfl-stat-pill"><span class="nfl-stat-label">PA</span><span class="nfl-stat-val" id="nfl-pag">--</span><span class="nfl-rank-badge nfl-rank-mid" id="nfl-pag-rank" style="display:none"></span></div>
+
         <div class="nfl-stat-pill"><span class="nfl-stat-label">Cap Space</span><span class="nfl-stat-val text-green-400 text-[11px]" id="nfl-cap">--</span></div>
         <div class="nfl-stat-pill"><span class="nfl-stat-label">PFF Off</span><span class="nfl-stat-val" id="nfl-pff-off">--</span></div>
         <div class="nfl-stat-pill"><span class="nfl-stat-label">PFF Def</span><span class="nfl-stat-val" id="nfl-pff-def">--</span></div>
@@ -4991,160 +5005,141 @@ document.addEventListener('click', function(e){
 const NFL_TEAMS = [
   // AFC East
   {a:'BUF',city:'Buffalo',name:'Bills',div:'AFC East',p:'#00338D',s:'#C60C30',champ:false,
-   alert:'DJ Moore acquired from CHI -- Josh Allen finally has a true WR1. Rookie LB Kaleb Elarms-Orr flashing. Defense a work in progress early in camp.',
-   cap:'+$8.1M',pffOff:87.2,pffDef:83.4,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs HOU 36-31. Josh Allen 312 yds, 3 TD. DJ Moore 8 rec 147 yds. Bills D gave up 31 but Allen was surgical all day. AFC contender statement.',
+   cap:'+$8.1M',pffOff:91.2,pffDef:80.4,wl:'1-0',pfg:'36',pag:'31'},
 
   {a:'MIA',city:'Miami',name:'Dolphins',div:'AFC East',p:'#008E97',s:'#FC4C02',champ:false,
-alert:'Malik Willis signed 3yr/$67.5M as new QB1 after Tua released. Jaylen Waddle TRADED (blockbuster -- returned 1st, 3rd, 4th). Dead cap from Tua/Waddle era massive. New HC Joe Brady. Dolphins at Vikings Week 1. Austin Jackson (RT) injury concern.',
-
-   cap:'-$7.4M',pffOff:72.3,pffDef:70.1,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs LV 13-27. Malik Willis struggled badly -- 18/34, 187 yds, 2 INT. Tyreek Hill 5 rec 62 yds. New HC Joe Brady\'s debut a disaster. Defense torched by Davante Adams 9 rec 141 yds.',
+   cap:'-$7.4M',pffOff:58.3,pffDef:62.1,wl:'0-1',pfg:'13',pag:'27'},
 
   {a:'NE',city:'New England',name:'Patriots',div:'AFC East',p:'#002244',s:'#C60C30',champ:false,
-alert:'Drake Maye Year 3 -- AJ Brown acquired from PHI + Romeo Doubs from GB. Week 1 opener at SEA (Super Bowl LX rematch). ⚠️ RB TreVeyon Henderson OUT (ankle) -- Rhamondre Stevenson expected to carry the load. C Ben Brown also OUT (knee). CB Christian Gonzalez signed to record extension.',
-
-   cap:'+$38.2M',pffOff:72.4,pffDef:70.8,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs SEA 10-13. Drake Maye 214 yds, 1 TD, 1 INT. AJ Brown left in Q3 with ankle -- Week 2 status TBD. Rhamondre Stevenson 88 yds. Defense held SEA to 13 -- kept it close.',
+   cap:'+$38.2M',pffOff:69.4,pffDef:74.8,wl:'0-1',pfg:'10',pag:'13'},
 
   {a:'NYJ',city:'New York',name:'Jets',div:'AFC East',p:'#125740',s:'#000000',champ:false,
-alert:'Geno Smith is QB1 -- traded from LV, making history as 8th Week 1 Jets starter in 11 years. Aaron Glenn\'s first year as HC. Kenyon Sadiq (TE) missed camp with hernia. Breece Hall leads the backfield. Will McDonald & Kingsley Enagbare anchor the edge. Voted team captain, Smith looked sharp in preseason (7-of-7, 65 yds, TD).',
-
-   cap:'+$6.2M',pffOff:76.8,pffDef:81.4,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs TEN 23-10. Geno Smith 22/31, 247 yds, 2 TD -- historic Week 1 debut. Garrett Wilson 7 rec 89 yds. Breece Hall 19 carries 94 yds. D dominant -- held Cam Ward to 163 yds.',
+   cap:'+$6.2M',pffOff:79.8,pffDef:85.4,wl:'1-0',pfg:'23',pag:'10'},
 
   // AFC North
   {a:'BAL',city:'Baltimore',name:'Ravens',div:'AFC North',p:'#241773',s:'#9E7C0C',champ:false,
-   alert:'Zay Flowers signed 4yr/$140M. Starting center competition ongoing -- Ethan Pocic (torn Achilles) still working back. Rookie WR Ja\'Kobi Lane drawing Michael Thomas comparisons in camp.',
-   cap:'+$4.8M',pffOff:90.1,pffDef:84.2,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs IND 41-23. Lamar Jackson 28/38, 334 yds, 3 TD. Zay Flowers 6 rec 88 yds, 94.0 PFF grade -- league-best Week 1 receiving. Derrick Henry 22 carries 112 yds. Dominant.',
+   cap:'+$4.8M',pffOff:93.1,pffDef:84.2,wl:'1-0',pfg:'41',pag:'23'},
 
   {a:'CIN',city:'Cincinnati',name:'Bengals',div:'AFC North',p:'#FB4F14',s:'#000000',champ:false,
-   alert:'Joe Burrow healthy. Under-center package looks ugly but team says it\'s intentional. WR3 battle: Andrei Iosivas vs rookie Colbie Young. D so good Ted Karras compared it to 2016 Patriots.',
-   cap:'+$12.6M',pffOff:88.9,pffDef:79.4,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs TB 33-27. Burrow 29/41, 318 yds, 3 TD -- looked clean and healthy. Ja\'Marr Chase 8 rec 124 yds. Defense held Baker Mayfield in check late. Ted Karras quote validated early.',
+   cap:'+$12.6M',pffOff:90.9,pffDef:81.4,wl:'1-0',pfg:'33',pag:'27'},
 
   {a:'CLE',city:'Cleveland',name:'Browns',div:'AFC North',p:'#311D00',s:'#FF3C00',champ:false,
-alert:'Myles Garrett TRADED to LAR -- massive rebuild in progress. QB battle: Watson beat Shedeur. No.1 pick Spencer Fano battling Dawand Jones at LT. Jerry Jeudy leads the receivers. Trevon Diggs was briefly signed (SEA) then cut.',
-
-   cap:'+$18.4M',pffOff:69.2,pffDef:75.8,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs JAX 10-34. Deshaun Watson 15/28, 143 yds, 1 TD, 2 INT. Never competitive. Browns now 3-24-1 in Week 1 since 1999. Trevor Lawrence 26/33, 291 yds, 3 TD for JAX.',
+   cap:'+$18.4M',pffOff:55.2,pffDef:62.8,wl:'0-1',pfg:'10',pag:'34'},
 
   {a:'PIT',city:'Pittsburgh',name:'Steelers',div:'AFC North',p:'#FFB612',s:'#101820',champ:false,
-alert:'Aaron Rodgers locked in as QB1 -- 1yr/$25M, confirmed his FINAL NFL season (retiring after 2026). HC Mike McCarthy (new) reunited with Rodgers. Michael Pittman Jr. acquired from IND. Keeanu Benton extended 4yr/$72M. Rico Dowdle lead RB. Drew Allar & Will Howard developing behind Rodgers. Mason Rudolph is backup.',
-
-   cap:'+$7.3M',pffOff:75.6,pffDef:85.2,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs ATL 20-13. Aaron Rodgers 21/33, 241 yds, 2 TD in his "final season" debut. TJ Watt 2 sacks, 2 hurries -- team of week defense nod. Rico Dowdle 88 yds. Rodgers looked sharp.',
+   cap:'+$7.3M',pffOff:78.6,pffDef:88.2,wl:'1-0',pfg:'20',pag:'13'},
 
   // AFC South
   {a:'HOU',city:'Houston',name:'Texans',div:'AFC South',p:'#03202F',s:'#A71930',champ:false,
-alert:'CJ Stroud is "confident ahead of biggest season of his life." ⚠️ Tank Dell on IR (knee) -- out until at least Week 5. Tee Higgins (torn ACL, camp) massive blow. Kayshon Boutte acquired in wake of Higgins injury. Rookie C Keylan Rutledge (No.1 pick) impressive. David Montgomery arrived from DET.',
-
-   cap:'+$22.1M',pffOff:85.7,pffDef:77.3,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs BUF 31-36. CJ Stroud 27/41, 312 yds, 2 TD, 1 INT -- good but not good enough. Nico Collins 8 rec 104 yds. Josh Allen too sharp on the road. Defense gave up 36 -- concerning.',
+   cap:'+$22.1M',pffOff:82.7,pffDef:74.3,wl:'0-1',pfg:'31',pag:'36'},
 
   {a:'IND',city:'Indianapolis',name:'Colts',div:'AFC South',p:'#002C5F',s:'#A2AAAD',champ:false,
-alert:'Daniel Jones QB1 -- strong camp post-Achilles recovery. Anthony Richardson RETAINED as backup (surprise -- team didn\'t cut him). Sauce Gardner + Charvarius Ward lockdown CB duo. Tyler Warren huge target share expected at TE. Josh Downs leads WRs with expanded role. Colby Wooden cut (Packers-Zaire Franklin trade loss).',
-
-   cap:'+$31.4M',pffOff:73.2,pffDef:78.6,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs BAL 23-41. Daniel Jones 22/36, 243 yds, 2 TD but the Ravens were simply better everywhere. Zay Flowers\' 94.0 PFF day was the highlight. Tyler Warren 7 rec 71 yds TE showed promise.',
+   cap:'+$31.4M',pffOff:70.2,pffDef:72.6,wl:'0-1',pfg:'23',pag:'41'},
 
   {a:'JAX',city:'Jacksonville',name:'Jaguars',div:'AFC South',p:'#006778',s:'#D7A22A',champ:false,
-   alert:'Travis Hunter playing both ways -- 51 def reps, 35 off reps in first 6 practices, had INT + 35-yd catch. Parker Washington emerging as slot star. Anton Harrison moving to LT.',
-   cap:'+$16.8M',pffOff:75.9,pffDef:76.4,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs CLE 34-10. Trevor Lawrence 26/33, 291 yds, 3 TD -- PFF\'s Week 1 offensive player of week. Travis Hunter 5 rec 68 yds + INT on defense. Parker Washington slot star emerging.',
+   cap:'+$16.8M',pffOff:82.9,pffDef:80.4,wl:'1-0',pfg:'34',pag:'10'},
 
   {a:'TEN',city:'Tennessee',name:'Titans',div:'AFC South',p:'#0C2340',s:'#4B92DB',champ:false,
-   alert:'Robert Saleh new HC. Cam Ward playing mistake-free football. No.5 pick WR Carnell Tate flashing big-play ability. Elic Ayomanor camp star but left early with shoulder. Calvin Ridley role in question.',
-   cap:'+$44.6M',pffOff:71.2,pffDef:70.1,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs NYJ 10-23. Cam Ward 17/31, 163 yds, 1 TD -- debut was rough. Geno Smith outclassed him. Robert Saleh\'s Week 1 debut a frustrating loss. Elic Ayomanor had 0 receptions.',
+   cap:'+$44.6M',pffOff:64.2,pffDef:68.1,wl:'0-1',pfg:'10',pag:'23'},
 
   // AFC West
   {a:'DEN',city:'Denver',name:'Broncos',div:'AFC West',p:'#FB4F14',s:'#002244',champ:false,
-   alert:'Bo Nix healthy and looking sharp with new OC Davis Webb. CB Riley Moss having a monster camp over first-rounder Jahdae Barron. Evan Engram thriving in new system.',
-   cap:'+$19.7M',pffOff:78.4,pffDef:76.9,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'MNF W1 vs KC: Bo Nix 247 yds, 2 TD vs Mahomes in a live divisional showdown on Monday Night Football. Evan Engram 6 rec 82 yds. Jaylen Waddle 5 rec 71 yds in his Denver debut. Early KC 21-7 deficit.',
+   cap:'+$19.7M',pffOff:78.4,pffDef:76.9,wl:'0-1',pfg:'--',pag:'--'},
 
   {a:'KC',city:'Kansas City',name:'Chiefs',div:'AFC West',p:'#E31837',s:'#FFB81C',champ:false,
-alert:'Mahomes signed $504.75M deal through 2033 -- largest contract in NFL history. Fully healthy. Kenneth Walker III signed from SEA. Trent McDuffie traded to LAR. Rashee Rice back in team drills. Rookie DT Peter Woods impressing. ⚠️ Josh Simmons NOT expected to start at OT for Week 1 opener vs DEN.',
-
-   cap:'-$12.4M',pffOff:91.3,pffDef:82.6,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'MNF W1 vs DEN: Mahomes vs Bo Nix on Monday Night Football. $504.75M deal the backdrop. Rashee Rice back in team drills. Kenneth Walker III debut. Josh Simmons still out at OT. Chiefs favored.',
+   cap:'-$12.4M',pffOff:91.3,pffDef:84.6,wl:'1-0',pfg:'21+',pag:'--'},
 
   {a:'LV',city:'Las Vegas',name:'Raiders',div:'AFC West',p:'#000000',s:'#A5ACAF',champ:false,
-alert:'Kirk Cousins QB1 -- rookie Fernando Mendoza developing behind. Klint Kubiak new HC. ⚠️ RB Ashton Jeanty (ankle sprain) -- Rapoport says "more low than high, not major" -- Kubiak optimistic for Week 1. Chiefs at Raiders Week 1. Jordan Meredith (OL) traded to NYJ. Chiefs at Raiders on CBS.',
-
-   cap:'+$38.9M',pffOff:67.1,pffDef:65.8,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs MIA 27-13. Davante Adams 9 rec 141 yds -- vintage performance vs former Dolphins. Kirk Cousins efficient 21/31, 244 yds, 2 TD. Brock Bowers out (knee) yet Raiders dominated anyway.',
+   cap:'+$38.9M',pffOff:74.1,pffDef:72.8,wl:'1-0',pfg:'27',pag:'13'},
 
   {a:'LAC',city:'L.A.',name:'Chargers',div:'AFC West',p:'#0080C6',s:'#FFC20E',champ:false,
-   alert:'Justin Herbert leads the offense. Omarion Hampton called most improved player by Mike McDaniel. 5-man LG competition ongoing. Rashawn Slater avoided serious injury. New HC Mike McDaniel.',
-   cap:'+$14.2M',pffOff:86.4,pffDef:79.8,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs ARZ 14-26. Massive upset. Justin Herbert 22/35, 197 yds, 1 TD -- off day. Cardinals dominated. Omarion Hampton 68 yds rushing. Ladd McConkey (rib) day-to-day for Week 2.',
+   cap:'+$14.2M',pffOff:72.4,pffDef:71.8,wl:'0-1',pfg:'14',pag:'26'},
 
   // NFC East
   {a:'DAL',city:'Dallas',name:'Cowboys',div:'NFC East',p:'#003594',s:'#041E42',champ:false,
-alert:'Von Miller signed. Tyler Guyton leading LT race. Rookie LB Jaishawn Barham generating buzz. Caleb Downs key piece of revamped defense. ⚠️ LG Tyler Smith out 4-6 weeks (thumb surgery). Jaydon Blue WAIVED (cut day surprise) -- Malik Davis locks down RB2 spot. Dak Prescott leads offense.',
-
-   cap:'-$9.3M',pffOff:81.4,pffDef:76.3,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs NYG 20-28. Dak Prescott 24/39, 271 yds, 1 TD, 1 INT. Cowboys outgained 259-431 total yards. Abdul Carter 1 sack in debut. LG Tyler Smith (thumb) missed game -- OL issues.',
+   cap:'-$9.3M',pffOff:74.4,pffDef:70.3,wl:'0-1',pfg:'20',pag:'28'},
 
   {a:'NYG',city:'New York',name:'Giants',div:'NFC East',p:'#0B2265',s:'#A71930',champ:false,
-   alert:'John Harbaugh new HC. Abdul Carter (No.1 pick edge) dominating camp -- DPOY upside. Malik Nabers healthy and participating. Odell Beckham Jr. back and elevated to first team. Beaux Collins waived Aug 14.',
-   cap:'+$34.7M',pffOff:65.4,pffDef:74.2,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs DAL 28-20. Malik Nabers FULL practice, "ready to go" per Harbaugh -- and delivered. Abdul Carter 1 sack in debut -- DPOY hype justified. OBJ back elevated to first team. John Harbaugh era begins with a W.',
+   cap:'+$34.7M',pffOff:78.4,pffDef:80.2,wl:'1-0',pfg:'28',pag:'20'},
 
   {a:'PHI',city:'Philadelphia',name:'Eagles',div:'NFC East',p:'#004C54',s:'#A5ACAF',champ:false,
-alert:'AJ Brown traded to NE for 2028 1st-round pick. Jonathan Greenard signed 4yr/$100M from MIN. Riq Woolen added at CB. Jalen Hurts locked in. Rookie WR Makai Lemon (hamstring) limited in camp. Cooper DeJean moving to safety. Eagles kept 4 QBs (Hurts, McKee, Dalton, Payton).',
-
-   cap:'+$5.1M',pffOff:88.7,pffDef:86.2,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs WAS 24-22. Jalen Hurts 23/34, 271 yds, 2 TD. Saquon Barkley 22 carries 109 yds. Landon Dickerson (knee) to IR -- big OL loss for Week 2. Cooper DeJean impressive at safety.',
+   cap:'+$5.1M',pffOff:89.7,pffDef:87.2,wl:'1-0',pfg:'24',pag:'22'},
 
   {a:'WAS',city:'Washington',name:'Commanders',div:'NFC East',p:'#5A1414',s:'#FFB612',champ:false,
-alert:'Jayden Daniels Year 3 -- Commanders vs Colts in London to open Week 1 (9:30 AM ET, NFL Network). Stefon Diggs signed -- slots opposite Terry McLaurin. Rookie LB Sonny Styles DROY buzz. Odafe Oweh signed at edge. Dorance Armstrong suspended 1 game.',
-
-   cap:'+$11.8M',pffOff:80.6,pffDef:73.2,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs PHI 22-24. Jayden Daniels 26/38, 298 yds, 2 TD -- nearly pulled it out. Stefon Diggs 6 rec 78 yds in debut. Terry McLaurin 5 rec 72 yds. Dorance Armstrong suspended 1 game.',
+   cap:'+$11.8M',pffOff:83.6,pffDef:73.2,wl:'0-1',pfg:'22',pag:'24'},
 
   // NFC North
   {a:'CHI',city:'Chicago',name:'Bears',div:'NFC North',p:'#0B162A',s:'#C83803',champ:false,
-   alert:'Darnell Wright extended 4yr/$116M. Garrett Bradbury won starting center job. Coby Bryant knee injury concern. Colston Loveland and Luther Burden III generating hype.',
-   cap:'+$1.2M',pffOff:73.8,pffDef:71.4,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs CAR 59-37 -- HISTORIC. Combined 96 pts is the highest-scoring Week 1 game in NFL history. Caleb Williams 34/48, 421 yds, 5 TD. Colston Loveland and Luther Burden III both explosive.',
+   cap:'+$1.2M',pffOff:92.8,pffDef:74.4,wl:'1-0',pfg:'59',pag:'37'},
 
   {a:'DET',city:'Detroit',name:'Lions',div:'NFC North',p:'#0076B6',s:'#B0B7BC',champ:false,
-alert:'Jahmyr Gibbs extension -- highest-paid RB in the NFL. David Montgomery traded to HOU. Penei Sewell to LT, rookie Blake Miller at RT. ⚠️ S Kerby Joseph on PUP (knee) -- Lions open without BOTH starting safeties. Sam LaPorta (hip) didn\'t play preseason. Isiah Pacheco on IR (back). Saints at Lions Week 1.',
-
-   cap:'+$2.4M',pffOff:90.7,pffDef:80.6,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs NO 31-30 OT. Jared Goff survived Saints\' 21-0 deficit comeback -- won on 2-pt stop in OT. Jahmyr Gibbs 2 TD, 97 yds. Sam LaPorta (hip) limited. S Kerby Joseph on PUP -- both safeties out.',
+   cap:'+$2.4M',pffOff:88.7,pffDef:76.6,wl:'1-0',pfg:'31',pag:'30'},
 
   {a:'GB',city:'Green Bay',name:'Packers',div:'NFC North',p:'#203731',s:'#FFB612',champ:false,
-alert:'Matthew Golden Year 2 -- catching everything in camp. Tucker Kraft returning from ACL. 🚨 Josh Jacobs on Commissioner\'s Exempt List -- Kaleb Johnson (ex-PIT) added as insurance. Zaire Franklin acquired from IND (Pro Bowl LB). Romeo Doubs departed to NE.',
-
-   cap:'+$9.6M',pffOff:84.2,pffDef:76.4,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs MIN 22-39. Vikings scored 29 unanswered points -- Packers blew another late lead. Jordan Love 24/38, 281 yds, 2 TD, 1 INT. Josh Jacobs on Exempt list -- Kaleb Johnson stepped in with 88 yds.',
+   cap:'+$9.6M',pffOff:78.2,pffDef:70.4,wl:'0-1',pfg:'22',pag:'39'},
 
   {a:'MIN',city:'Minnesota',name:'Vikings',div:'NFC North',p:'#4F2683',s:'#FFC62F',champ:false,
-alert:'Kyler Murray won QB battle. Dolphins at Vikings Week 1. Rookie WR adds Caleb Banks + Domonique Orange rotating with first-team D. Kevin O\'Connell overhauling the run game.',
-
-   cap:'+$7.1M',pffOff:81.4,pffDef:78.9,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs GB 39-22. 29 unanswered points -- Kyler Murray 27/38, 318 yds, 3 TD. Justin Jefferson 9 rec 138 yds in his return. Defense dominated late. Kevin O\'Connell\'s run game overhaul paid off.',
+   cap:'+$7.1M',pffOff:85.4,pffDef:81.9,wl:'1-0',pfg:'39',pag:'22'},
 
   // NFC South
   {a:'ATL',city:'Atlanta',name:'Falcons',div:'NFC South',p:'#A71930',s:'#000000',champ:false,
-alert:'Tua Tagovailoa named OFFICIAL Week 1 starter -- Michael Penix Jr. (ACL) inactive. Kevin Stefanski new HC. Jalon Walker ACL torn in camp -- huge loss at LB. Bijan Robinson extended. Jahan Dotson locked in as WR2. Falcons at Saints Monday Night Football Week 2.',
-
-   cap:'+$18.3M',pffOff:77.6,pffDef:71.8,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs PIT 13-20. Tua Tagovailoa 19/31, 196 yds, 1 TD -- not enough. Bijan Robinson 18 carries 77 yds. Jalon Walker ACL (camp) still huge loss felt on D. Kevin Stefanski debut off to rocky start.',
+   cap:'+$18.3M',pffOff:70.6,pffDef:66.8,wl:'0-1',pfg:'13',pag:'20'},
 
   {a:'CAR',city:'Carolina',name:'Panthers',div:'NFC South',p:'#0085CA',s:'#101820',champ:false,
-   alert:'Bryce Young Year 3. Jonathon Brooks showing positive signs in camp -- moving all over formation. Xavier Legette avoided serious injury scare. Nic Scourton and Chris Brazzell II both hurt in camp.',
-   cap:'+$41.2M',pffOff:66.1,pffDef:67.4,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs CHI 37-59 -- historic. Combined 96 pts breaks Week 1 record. Bryce Young 31/49, 389 yds, 4 TD in the loss. Jonathon Brooks flashed -- 88 yds. Defense gave up 59 -- catastrophic.',
+   cap:'+$41.2M',pffOff:74.3,pffDef:54.2,wl:'0-1',pfg:'37',pag:'59'},
 
   {a:'NO',city:'New Orleans',name:'Saints',div:'NFC South',p:'#D3BC8D',s:'#101820',champ:false,
-   alert:'Tyler Shough entering Year 2 as starter. Travis Etienne getting early-down reps, Alvin Kamara on passing downs. Kool-Aid McKinstry Year 3 breakout expected. $112M dead cap from Carr, Lattimore, Jordan, Davis.',
-   cap:'-$6.8M',pffOff:74.3,pffDef:73.1,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs DET 30-31 OT. Saints rallied from 21-0 down -- forced OT but lost on 2-pt conversion attempt. Tyler Shough 24/37, 287 yds, 3 TD in thrilling debut. Alvin Kamara 7 rec 68 yds.',
+   cap:'-$6.8M',pffOff:76.3,pffDef:69.1,wl:'0-1',pfg:'30',pag:'31'},
 
   {a:'TB',city:'Tampa Bay',name:'Buccaneers',div:'NFC South',p:'#D50A0A',s:'#34302B',champ:false,
-   alert:'Baker Mayfield made scorched-earth comments about front office. Vita Vea in full contract holdout -- agent says only trade resolves it. Rookie DB Keionte Scott lining up all over formation. Reuben Bain Jr. DROY candidate.',
-   cap:'+$2.1M',pffOff:81.4,pffDef:77.8,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs CIN 27-33. Baker Mayfield 29/44, 341 yds, 3 TD but Burrow was better. Vita Vea holdout still unresolved -- felt his absence on D. Reuben Bain Jr. 1 sack in debut.',
+   cap:'+$2.1M',pffOff:79.4,pffDef:71.8,wl:'0-1',pfg:'27',pag:'33'},
 
   // NFC West
   {a:'ARI',city:'Arizona',name:'Cardinals',div:'NFC West',p:'#97233F',s:'#000000',champ:false,
-alert:'Mike LaFleur new HC (ex-LAR OC). Marvin Harrison Jr. Year 3. 🚨 James Conner (IR, foot) + Trey Benson (IR, knee, season-ending) both OUT -- No. 3 overall pick Jeremiyah Love (ankle) is the ONLY healthy option at RB but coach "optimistic" he plays Week 1. Cardinals at Giants Week 1.',
-
-   cap:'+$28.4M',pffOff:71.8,pffDef:67.2,wl:'0-1',pfg:'--',pag:'--'},
+   alert:'W1 UPSET WIN vs LAC 26-14. Massive Week 1 surprise. Marvin Harrison Jr. 8 rec 121 yds. Jeremiyah Love 19 carries 88 yds in his NFL debut. Mike LaFleur\'s debut a success. Chargers in full panic.',
+   cap:'+$28.4M',pffOff:78.8,pffDef:75.2,wl:'1-0',pfg:'26',pag:'14'},
 
   {a:'LAR',city:'L.A.',name:'Rams',div:'NFC West',p:'#003594',s:'#FFA300',champ:false,
-alert:'🚨 Aaron Donald is back! Myles Garrett acquired from CLE -- reigning DPOY (23 sacks, NFL record). Trent McDuffie acquired from KC. Matthew Stafford calling camp "highest-quality practice in 18 years." Chris Shula new DC. 49ers at Rams Thursday Night (Netflix) -- Week 1 opener.',
-
-   cap:'+$3.7M',pffOff:87.1,pffDef:88.6,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 LOSS vs SF 7-27 (Melbourne). Myles Garrett 0 sacks in debut but Aaron Donald back looked sharp. Matthew Stafford 18/33, 187 yds, 0 TD -- rough day. Trent McDuffie INT. 49ers too healthy.',
+   cap:'+$3.7M',pffOff:74.1,pffDef:82.6,wl:'0-1',pfg:'7',pag:'27'},
 
   {a:'SF',city:'San Francisco',name:'49ers',div:'NFC West',p:'#AA0000',s:'#B3995D',champ:false,
-alert:'Ricky Pearsall on season-ending IR (knee). Mike Evans (quad) limited in camp. Rookie De\'Zhaun Stribling (hamstring) working back -- gets clearer path to snaps. 49ers at Rams Week 1 (Netflix, Thu Sep 10). HC Shanahan limited after car accident; Foerster running show. Deebo Samuel healthy.',
-
-   cap:'+$4.9M',pffOff:88.4,pffDef:84.1,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'W1 WIN vs LAR 27-7 (Melbourne). Jets stingiest scoring D -- 49ers held LAR to 7. Fred Warner dominant. Deebo Samuel 6 rec 88 yds. Brock Purdy 22/30, 271 yds, 2 TD. Ricky Pearsall on season IR.',
+   cap:'+$4.9M',pffOff:90.4,pffDef:89.1,wl:'1-0',pfg:'27',pag:'7'},
 
   {a:'SEA',city:'Seattle',name:'Seahawks',div:'NFC West',p:'#002244',s:'#69BE28',champ:true,
-alert:'🏆 Super Bowl LX Champions -- host Wednesday\'s Kickoff Game vs NE (rematch). JSN extended $42.15M/yr. Devon Witherspoon extended 4yr/$132M. Tory Horton (hamstring, LP) questionable for Week 1. Nick Emmanwori (ankle) also limited. Emanuel Wilson steps up at RB with Charbonnet on PUP (ACL). Ty Okada (hamstring) OUT.',
-
-   cap:'+$11.6M',pffOff:89.2,pffDef:87.4,wl:'1-0',pfg:'--',pag:'--'},
+   alert:'🏆 W1 WIN vs NE 13-10. Defending champs win opener. Sam Darnold injured Q1 -- Drew Lock stepped in and held on. JSN 5 rec 68 yds. Devon Witherspoon 1 INT. Gritty W. Darnold status TBD.',
+   cap:'+$11.6M',pffOff:82.2,pffDef:90.4,wl:'1-0',pfg:'13',pag:'10'},
 ];
+
 
 /* ── STADIUM COORDINATES FOR WEATHER ── */
 const NFL_STADIUMS = {
@@ -6037,6 +6032,41 @@ async function nflOpenTeam(team){
   document.getElementById('nfl-wl').textContent = team.wl;
   document.getElementById('nfl-pfg').textContent = team.pfg;
   document.getElementById('nfl-pag').textContent = team.pag;
+
+  // Dynamic rank badges
+  (function(){
+    const teamsWithData = NFL_TEAMS.filter(t => t.pfg && t.pfg !== '--' && !isNaN(parseFloat(t.pfg)));
+    if(teamsWithData.length < 2){ 
+      document.getElementById('nfl-pfg-rank').style.display='none';
+      document.getElementById('nfl-pag-rank').style.display='none';
+      return;
+    }
+    function nflRankLabel(rank, total, el, higher_is_better){
+      const pct = rank / total;
+      let cls, label;
+      if(higher_is_better){
+        if(pct <= 0.25)      { cls='nfl-rank-elite'; label=`#${rank} NFL 🔥`; }
+        else if(pct <= 0.5)  { cls='nfl-rank-good';  label=`#${rank} NFL`; }
+        else if(pct <= 0.75) { cls='nfl-rank-mid';   label=`#${rank} NFL`; }
+        else                 { cls='nfl-rank-bad';   label=`#${rank} NFL`; }
+      } else {
+        if(pct <= 0.25)      { cls='nfl-rank-elite'; label=`#${rank} NFL 🔒`; }
+        else if(pct <= 0.5)  { cls='nfl-rank-good';  label=`#${rank} NFL`; }
+        else if(pct <= 0.75) { cls='nfl-rank-mid';   label=`#${rank} NFL`; }
+        else                 { cls='nfl-rank-bad';   label=`#${rank} NFL`; }
+      }
+      el.className = `nfl-rank-badge ${cls}`;
+      el.textContent = label;
+      el.style.display = 'inline-block';
+    }
+    const sorted_pfg = [...teamsWithData].sort((a,b)=>parseFloat(b.pfg)-parseFloat(a.pfg));
+    const sorted_pag = [...teamsWithData].sort((a,b)=>parseFloat(a.pag)-parseFloat(b.pag));
+    const pfg_rank = sorted_pfg.findIndex(t=>t.a===team.a)+1;
+    const pag_rank = sorted_pag.findIndex(t=>t.a===team.a)+1;
+    if(pfg_rank) nflRankLabel(pfg_rank, teamsWithData.length, document.getElementById('nfl-pfg-rank'), true);
+    if(pag_rank) nflRankLabel(pag_rank, teamsWithData.length, document.getElementById('nfl-pag-rank'), false);
+  })();
+
   document.getElementById('nfl-cap').textContent = team.cap;
   document.getElementById('nfl-pff-off').textContent = team.pffOff;
   document.getElementById('nfl-pff-def').textContent = team.pffDef;
