@@ -298,40 +298,92 @@ const articleEngineData = {
   color: transparent;
 }
 
-/* ── TRANSACTION STRIP ── */
-.nc-tx-wrap {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem;
+/* ── TRANSACTION TABLE ── */
+.nc-tx-table {
+  width: 100%;
   margin-bottom: 1.75rem;
-}
-@media (min-width: 580px) {
-  .nc-tx-wrap { grid-template-columns: 1fr 1fr; }
-}
-.nc-tx {
-  display: flex; gap: 0.65rem; align-items: flex-start;
-  padding: 0.85rem 1rem;
-  border-radius: 0.875rem;
   font-family: 'Inter', sans-serif;
-  font-size: 0.72rem; font-weight: 500; line-height: 1.55;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgba(128,128,128,0.1);
+  display: grid;
+  grid-template-rows: auto auto;
 }
-.nc-tx.add {
-  background: rgba(16,185,129,0.06);
-  border: 1px solid rgba(16,185,129,0.16);
+.nc-tx-table thead,
+.nc-tx-table tbody,
+.nc-tx-table tr {
+  display: contents;
 }
-.nc-tx.dep {
-  background: rgba(239,68,68,0.045);
-  border: 1px solid rgba(239,68,68,0.13);
+.nc-tx-table thead th,
+.nc-tx-table tbody td {
+  display: block;
 }
-.nc-tx-pill {
-  font-size: 0.52rem; font-weight: 900;
-  text-transform: uppercase; letter-spacing: 0.12em;
-  padding: 0.2rem 0.55rem; border-radius: 100px;
-  flex-shrink: 0; white-space: nowrap; margin-top: 0.05rem;
+.nc-tx-head-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
 }
-.nc-tx.add .nc-tx-pill { background: rgba(16,185,129,0.15); color: #10b981; }
-.nc-tx.dep .nc-tx-pill { background: rgba(239,68,68,0.12); color: #f87171; }
-.nc-tx-text { color: inherit; opacity: 0.78; }
+.nc-tx-body-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  align-items: start;
+}
+.nc-tx-col {
+  padding: 0;
+}
+.nc-tx-col + .nc-tx-col {
+  border-left: 1px solid rgba(128,128,128,0.08);
+}
+.nc-tx-header {
+  padding: 0.6rem 1rem;
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  display: block;
+}
+.nc-tx-header.th-add {
+  background: rgba(16,185,129,0.1);
+  color: #10b981;
+  border-bottom: 1px solid rgba(16,185,129,0.2);
+}
+.nc-tx-header.th-dep {
+  background: rgba(239,68,68,0.07);
+  color: #f87171;
+  border-bottom: 1px solid rgba(239,68,68,0.15);
+  border-left: 1px solid rgba(128,128,128,0.08);
+}
+.nc-tx-name {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.35;
+  border-bottom: 1px solid rgba(128,128,128,0.06);
+  color: inherit;
+  opacity: 0.85;
+}
+.nc-tx-name:last-child { border-bottom: none; }
+.nc-tx-name::before {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 900;
+  width: 12px;
+  text-align: center;
+}
+.nc-tx-name.add::before { content: '+'; color: #10b981; }
+.nc-tx-name.dep::before { content: '−'; color: #f87171; }
+.nc-tx-info { display: flex; flex-direction: row; align-items: baseline; gap: 0.45rem; flex-wrap: wrap; }
+.nc-tx-sub {
+  font-size: 0.6rem;
+  font-weight: 500;
+  opacity: 0.5;
+  line-height: 1.3;
+}
+
 
 /* ── INTEL STRIP ── */
 .nc-intel {
@@ -639,16 +691,30 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Philadelphia</em> 76ers</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Jaylen Brown (trade, Boston), LeBron James (2-year, veteran's minimum), Anfernee Simons (2-year FA), Dean Wade (4-year FA), Kentavious Caldwell-Pope (1-year FA), Ariel Hukporti (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Paul George (trade, Boston), Johni Broome (trade, Clippers), Quentin Grimes (FA, Lakers), Andre Drummond (FA, Knicks), Kelly Oubre Jr. (FA, Indiana), Trendon Watford (FA, New Orleans)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jaylen Brown</span><span class="nc-tx-sub">Trade · Boston</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>LeBron James</span><span class="nc-tx-sub">2-yr · Veteran's Min</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Anfernee Simons</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Dean Wade</span><span class="nc-tx-sub">4-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Kentavious Caldwell-Pope</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Ariel Hukporti</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Paul George</span><span class="nc-tx-sub">Trade → Boston</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Johni Broome</span><span class="nc-tx-sub">Trade → Clippers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Quentin Grimes</span><span class="nc-tx-sub">FA → Lakers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Andre Drummond</span><span class="nc-tx-sub">FA → Knicks</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kelly Oubre Jr.</span><span class="nc-tx-sub">FA → Indiana</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Trendon Watford</span><span class="nc-tx-sub">FA → New Orleans</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>No team made more noise this summer. New Sixers president of basketball operations Mike Gansey swapped Paul George's bloated contract for All-NBA wing Jaylen Brown, then won over LeBron -- signing the all-time leading scorer at the veteran's minimum. As ESPN's Tim MacMahon put it, Gansey "managed to swap Paul George's bloated contract for All-NBA wing Jaylen Brown while winning the LeBron sweepstakes, signing the all-time leading scorer on a veterans minimum salary." On paper, the projected starting five of Tyrese Maxey, VJ Edgecombe, Jaylen Brown, LeBron James, and Joel Embiid is the most star-loaded unit the conference has seen in a generation.</p>
   <p> Goodwill called it "the greatest infusion of talent the conference has seen since James left Miami for his second stint with Cleveland." But Goodwill also flagged what everyone sees: "Health and cohesion will be among Philly's biggest concerns." MacMahon added the chemistry dimension directly: "Coach Nick Nurse and the Sixers have to figure out fit and chemistry on the fly with a starting lineup that features four ball-dominant stars with All-NBA credentials." An unnamed Eastern Conference assistant coach told ESPN the depth questions are real: "Who's their backup point guard? LeBron isn't bringing the ball up against anybody that's going to pressure him. He's proven at this stage of his career he doesn't want that part of the responsibility."</p>
@@ -670,20 +736,24 @@ const articleEngineData = {
   </div>
 </div>
 
-<!-- KNICKS -->
-<div class="nc-team">
-  <div class="nc-team-header">
-    <h4 class="nc-team-name"><em>New York</em> Knicks</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Andre Drummond (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Mitchell Robinson (FA, Boston), Jeremy Sochan (FA, Portland), Ariel Hukporti (FA, Philadelphia)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Andre Drummond</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Mitchell Robinson</span><span class="nc-tx-sub">FA → Boston</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Jeremy Sochan</span><span class="nc-tx-sub">FA → Portland</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Ariel Hukporti</span><span class="nc-tx-sub">FA → Philadelphia</span></span></div>
+    </div>
+  </div>
+</div>
+
+
   </div>
   <p>The defending champions did almost nothing and the consensus belief is — that is the correct move. ESPN's Zach Kram confirmed what the transactions, or lack there of — make plain: "The Knicks, Thunder and Spurs were the only ones to win a game in the conference finals -- and they're still in a tier unto themselves." Brunson, Josh Hart, Mikal Bridges, OG Anunoby, Karl-Anthony Towns -- the starting five is intact. The only meaningful roster change is Drummond replacing Robinson at center off the bench. Landry Shamet re-signed. Jordan Clarkson re-signed. Jose Alvarado re-signed.</p>
   <p>Goodwill noted the financial dimension looming over the season: "It feels like this team will be given the chance to go for a repeat in an era where that doesn't happen very often. Every financial decision must be made with the reality of Jalen Brunson's possible extension -- if he signs early, he can sign for four years and $254 million. If he waits, that jumps to five years and $371 million in the 2028 offseason." That decision will define the franchise's next decade. For now, the focus is October.</p>
@@ -708,16 +778,23 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Boston</em> Celtics</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Paul George (trade, Philadelphia), Mitchell Robinson (3-year FA), Mike Conley (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Jaylen Brown (trade, Philadelphia), Nikola Vucevic (FA, Orlando)</span>
-      </div>
+  <div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Paul George</span><span class="nc-tx-sub">Trade · Philadelphia</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Mitchell Robinson</span><span class="nc-tx-sub">3-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Mike Conley</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Jaylen Brown</span><span class="nc-tx-sub">Trade → Philadelphia</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Nikola Vucevic</span><span class="nc-tx-sub">FA → Orlando</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>Boston might be in trouble. Brown averaged 28.7 points last season -- former Finals MVP, cornerstone of two championship runs in Boston. ESPN's Ben Golliver called the Tatum-George partnership the Celtics' "polarizing decision," and the numbers behind it tell the story: per ESPN analytics, George carried a +1.3 estimated plus-minus last season, essentially identical to Brown's. If judging purely on math...the floor production is replaceable. But that does't render justice to the real world value and ceiling Brown gave you. The bet is that Jayson Tatum -- who played just 16 games last season after returning from an Achilles tear -- is fully healthy and back to All-NBA form. Goodwill framed it plainly: "Boston is banking on a full season from Jayson Tatum and hoping Paul George can stay upright and healthy long enough for coach Joe Mazzulla to work his regular-season magic once again."</p>
   <p>Robinson brings solid interior depth -- a genuine rim protector who was the piece Boston identified as missing. Conley at 39 is the veteran who steadies the second unit. But the offense runs through Tatum who hasn't played a full season since 2023-24. If he's healthy, they might over-achieve. If he's not, this trade looks like the franchise burned a Finals MVP for a 35-year-old wing on a downward production slope.</p>
@@ -741,16 +818,23 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Brooklyn</em> Nets</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Julius Randle (4-team trade, Minnesota), Keon Ellis (2-year FA), Moritz Wagner (2-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Nic Claxton (4-team trade, Chicago), Ziaire Williams (FA, Lakers)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Julius Randle</span><span class="nc-tx-sub">4-team Trade · Minnesota</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Keon Ellis</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Moritz Wagner</span><span class="nc-tx-sub">2-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Nic Claxton</span><span class="nc-tx-sub">Trade → Chicago</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Ziaire Williams</span><span class="nc-tx-sub">FA → Lakers</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The Nets accelerated their rebuild through the new lottery rules and picked up Randle -- a 31-year-old former All-Star -- as a veteran anchor while drafting rookie Mikel Brown Jr., who drew attention during Summer League with 16.7 points and 4.0 assists per game. Kram was measured on the moves: "The Nets won just 20 games last season, and I don't expect the addition of Julius Randle, combined with drafting" Brown, to produce an immediate contender. This is a team in building mode. Randle gives them an experienced voice and a legitimate scorer to build around while the young core develops.</p>
   <div class="nc-intel">
@@ -773,16 +857,23 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Toronto</em> Raptors</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Kawhi Leonard (trade, Clippers -- pending final clearance), Kyle Anderson (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Brandon Ingram (trade, Clippers), Gradey Dick (trade, Clippers), Sandro Mamukelashvili (FA, Lakers)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Kawhi Leonard</span><span class="nc-tx-sub">Trade · Clippers</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Kyle Anderson</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Brandon Ingram</span><span class="nc-tx-sub">Trade → Clippers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Gradey Dick</span><span class="nc-tx-sub">Trade → Clippers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Sandro Mamukelashvili</span><span class="nc-tx-sub">FA → Lakers</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The most dramatic situation in the league. The Kawhi-to-Toronto trade was agreed June 30th, frozen by the Clippers investigation, and cleared after the NBA's September 2nd ruling. Leonard goes back to the city where he won his only championship. The Raptors assumed all penalty risk related to Leonard's conduct as a condition of the trade's completion. Kram summarized it precisely: "If all goes as Toronto intends and the team reacquires the two-time Finals MVP, then the Raptors will be positioned as one of the top Finals contenders in the East." The trade is officially cleared. Leonard's health -- he's played fewer than 60 games in four of his last five seasons -- is the entire question.</p>
   <p>If he plays 60+ games alongside a maturing Raptors core, ESPN's projection of 45-37 holds. If he's back to his injury management tendencies, this becomes a 35-win team overnight.</p>
@@ -814,16 +905,26 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Detroit</em> Pistons</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">John Collins (sign-and-trade, Clippers; 3-year), Isaiah Stewart (trade, Memphis), Gary Harris (trade, Milwaukee), Taurean Prince (trade, Milwaukee), Isaiah Joe (trade, Oklahoma City)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Tobias Harris (FA, San Antonio), Caris LeVert (trade, Milwaukee), Marcus Sasser (trade, Dallas)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>John Collins</span><span class="nc-tx-sub">Sign-and-Trade · Clippers · 3-yr</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Isaiah Stewart</span><span class="nc-tx-sub">Trade · Memphis</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Gary Harris</span><span class="nc-tx-sub">Trade · Milwaukee</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Taurean Prince</span><span class="nc-tx-sub">Trade · Milwaukee</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Isaiah Joe</span><span class="nc-tx-sub">Trade · Oklahoma City</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Tobias Harris</span><span class="nc-tx-sub">FA → San Antonio</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Caris LeVert</span><span class="nc-tx-sub">Trade → Milwaukee</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Marcus Sasser</span><span class="nc-tx-sub">Trade → Dallas</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The top seed in the East last season at 60-18, knocked out in a brutal seven-game second-round series by Cleveland. This offseason, Detroit made the move the consensus had been calling for: upgrading the power forward position. Collins replaces Harris with more athleticism, better shot creation, and a cleaner stylistic fit alongside Cade Cunningham. ESPN's panel noted that Detroit "chose to rely mostly on internal improvement" while making one significant addition. The Collins acquisition addresses the team's identified weakness -- they were exposed at the four by Cleveland in ways Harris couldn't answer.</p>
   <p>Cade Cunningham is entering his prime. Jalen Duren is 21. The coaching staff under Monty Williams is considered among the league's best at player development. The Pistons lost Isaiah Stewart to Memphis in a trade, a noted departure given his physicality and enforcer role -- ESPN's coverage flagged that "Stewart was a force protecting the rim for Detroit, and as the team's enforcer, he gave it an identity that matched the Bad Boys teams of old."</p>
@@ -847,16 +948,27 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Cleveland</em> Cavaliers</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Peyton Watson (5-team sign-and-trade, Denver; 4-year), Khalifa Diop (4-year FA), Mario Hezonja (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Keon Ellis (FA, Brooklyn), Larry Nance Jr. (FA, Indiana), Georges Niang (FA, Golden State), Dennis Schroeder (5-team trade, Charlotte), Max Strus (5-team trade, Clippers), Dean Wade (FA, Philadelphia)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Peyton Watson</span><span class="nc-tx-sub">Sign-and-Trade · Denver · 4-yr</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Khalifa Diop</span><span class="nc-tx-sub">4-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Mario Hezonja</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Keon Ellis</span><span class="nc-tx-sub">FA → Brooklyn</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Larry Nance Jr.</span><span class="nc-tx-sub">FA → Indiana</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Georges Niang</span><span class="nc-tx-sub">FA → Golden State</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Dennis Schroeder</span><span class="nc-tx-sub">Trade → Charlotte</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Max Strus</span><span class="nc-tx-sub">Trade → Clippers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Dean Wade</span><span class="nc-tx-sub">FA → Philadelphia</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The team that took Detroit to seven games in the second round -- and swept New York in the 2024-25 Finals before falling to OKC -- built on the same foundation. Donovan Mitchell signed his four-year extension, the commitment Cleveland needed. James Harden re-signed on a three-year deal. The Mitchell-Harden backcourt is intact and enters its first full season together. Watson is the youth infusion -- a two-way wing who ESPN's panel flagged as the key developmental add: "Cleveland hopes a full season of the Donovan Mitchell-James Harden backcourt and its recent acquisition of two-way wing Peyton Watson can buoy the franchise after last season's run to the conference finals."</p>
   <p>The departure of Niang, Strus, and Schroeder thins the bench depth that made Cleveland dangerous in series play. Diop is raw but enormous. The question is whether the starting five's star power compensates for a bench that got noticeably leaner.</p>
@@ -880,16 +992,27 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Milwaukee</em> Bucks</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Tyler Herro (trade, Miami), Kasparas Jakucionis (trade, Miami), Jaime Jaquez Jr. (trade, Miami), Caris LeVert (trade, Detroit), Kel'el Ware (trade, Miami)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Giannis Antetokounmpo (trade, Miami), Bobby Portis (trade, Miami), Gary Harris (trade, Detroit), Taurean Prince (trade, Detroit)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Tyler Herro</span><span class="nc-tx-sub">Trade · Miami</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Kasparas Jakucionis</span><span class="nc-tx-sub">Trade · Miami</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jaime Jaquez Jr.</span><span class="nc-tx-sub">Trade · Miami</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Caris LeVert</span><span class="nc-tx-sub">Trade · Detroit</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Kel'el Ware</span><span class="nc-tx-sub">Trade · Miami</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Giannis Antetokounmpo</span><span class="nc-tx-sub">Trade → Miami</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Bobby Portis</span><span class="nc-tx-sub">Trade → Miami</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Gary Harris</span><span class="nc-tx-sub">Trade → Detroit</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Taurean Prince</span><span class="nc-tx-sub">Trade → Detroit</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The post-Giannis era has arrived in Milwaukee. After 13 years, two MVPs, and a 2021 championship, Antetokounmpo is gone to South Beach. The Bucks received a substantial haul -- Herro, Jaquez, Jakucionis, Ware, and picks -- but as ESPN's coverage acknowledged plainly: this is a pivot, not a reinforcement. Herro is a legitimate scorer who "might average 30 PPG" per the Detroit Bad Boys analysis, but this is now a retooling project around Damian Lillard, who missed most of last season recovering from injury.</p>
   <p>Gary Trent Jr. re-signed for four years. Ousmane Dieng re-signed. Pete Nance locked up. The 2021 core is being replaced methodically, but the transition years are here. ESPN's analysis was blunt: "The post-Giannis era has begun in Milwaukee."</p>
@@ -913,16 +1036,22 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Indiana</em> Pacers</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Kelly Oubre Jr. (2-year FA), Larry Nance Jr. (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Kam Jones (trade, Chicago), Micah Potter (waivers, Portland)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Kelly Oubre Jr.</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Larry Nance Jr.</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kam Jones</span><span class="nc-tx-sub">Trade → Chicago</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Micah Potter</span><span class="nc-tx-sub">Waivers → Portland</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The most significant development in Indiana has nothing to do with the offseason. It has everything to do with one player's knee. Tyrese Haliburton missed the entire 2025-26 season with a ruptured Achilles. He is back. Kram stated it plainly in the Post-Finals power rankings: "In 2026-27, Indiana is more likely to win the East than finish with 60-plus losses again." The Pacers went 19-63 without him. That number tells the story of his value. When healthy, Indiana reached the conference finals two seasons ago. When healthy, Haliburton is one of the five best point guards in the league.</p>
   <p>Oubre adds wing depth and physicality. Nance is a versatile veteran. The roster around Haliburton is largely the same group that nearly beat the defending champion Thunder in 2024-25. The question is not whether this team is good. The question is how many games Haliburton plays before the questions about his Achilles, his conditioning, and his trust in his own body are fully answered.</p>
@@ -946,16 +1075,26 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Chicago</em> Bulls</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Nic Claxton (4-team trade, Brooklyn), Norman Powell (2-year FA), Caleb Wilson (No. 4 pick, 2026 draft)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Mouhamadou Gueye (4-team trade, Charlotte), Nick Richards (FA, Miami), Collin Sexton (FA, Lakers), Anfernee Simons (FA, Philadelphia)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Nic Claxton</span><span class="nc-tx-sub">Trade · Brooklyn</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Norman Powell</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Caleb Wilson</span><span class="nc-tx-sub">No. 4 Pick · 2026 Draft</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Mouhamadou Gueye</span><span class="nc-tx-sub">Trade → Charlotte</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Nick Richards</span><span class="nc-tx-sub">FA → Miami</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Collin Sexton</span><span class="nc-tx-sub">FA → Lakers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Anfernee Simons</span><span class="nc-tx-sub">FA → Philadelphia</span></span></div>
+    </div>
+  </div>
+</div>
+
   </div>
   <p>The Bulls got younger and more interesting in one offseason. Zach Collins re-signed. Claxton gives them a legitimate rim protector and interior anchor who was discarded in Brooklyn's retool. Powell is a proven two-way wing scorer who signed quickly after the LeBron hold ended the Miami market freeze. Caleb Wilson, the No. 4 overall pick, arrives with immediate-impact expectations. ESPN's Ben Golliver noted the Bulls "just added a potential franchise player with the No. 4 pick" in his summer forecast framing.</p>
   <p>Whether this is a playoff team or a play-in team depends largely on Coby White's continued development and how quickly Wilson integrates. Chicago under new coach Chauncey Billups -- who was suspended by Portland, then hired by the Bulls -- has a real identity question to answer in year one.</p>
@@ -987,16 +1126,28 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Miami</em> Heat</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Giannis Antetokounmpo (trade, Milwaukee), Klay Thompson (2-year FA), Bobby Portis (trade, Milwaukee), Tim Hardaway Jr. (1-year FA), Nick Richards (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Tyler Herro (trade, Milwaukee), Jaime Jaquez Jr. (trade, Milwaukee), Kel'el Ware (trade, Milwaukee), Norman Powell (FA, Chicago), Kasparas Jakucionis (trade, Milwaukee)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Giannis Antetokounmpo</span><span class="nc-tx-sub">Trade · Milwaukee</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Klay Thompson</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Bobby Portis</span><span class="nc-tx-sub">Trade · Milwaukee</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Tim Hardaway Jr.</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Nick Richards</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Tyler Herro</span><span class="nc-tx-sub">Trade → Milwaukee</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Jaime Jaquez Jr.</span><span class="nc-tx-sub">Trade → Milwaukee</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kel'el Ware</span><span class="nc-tx-sub">Trade → Milwaukee</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Norman Powell</span><span class="nc-tx-sub">FA → Chicago</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kasparas Jakucionis</span><span class="nc-tx-sub">Trade → Milwaukee</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>Pat Riley got his man. After a summer of negotiation and trade structuring, Giannis Antetokounmpo is a Miami Heat. ESPN's Ohm Youngmisuk described the franchise's track record: "The Miami Heat have never shied away from chasing -- and landing -- superstars. Shaquille O'Neal in 2004. LeBron James and Chris Bosh in 2010. Jimmy Butler in 2019. And this offseason, two-time MVP Giannis Antetokounmpo." Those previous blockbuster summers produced Finals appearances within two seasons each time. The bet, as always with Miami, is that Spoelstra and the culture do the rest.</p>
   <p>Thompson joins as the veteran shooter Giannis lineups have always needed -- spacing around a non-shooter at the operational hub of the offense. Bam Adebayo and Antetokounmpo are a historic frontcourt pairing defensively. Spoelstra, who publicly said "adapting the offense will be vital," has spent his career maximizing asymmetric talent.</p>
@@ -1021,16 +1172,26 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Atlanta</em> Hawks</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Luguentz Dort (trade, OKC), Aaron Wiggins (trade, OKC), Devin Carter (trade, Sacramento), Ryan Nembhard (trade, Dallas), CJ McCollum (1-year re-sign), Jock Landale (1-year re-sign)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Jonathan Kuminga (FA, Minnesota), Zaccharie Risacher (trade, Dallas)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Luguentz Dort</span><span class="nc-tx-sub">Trade · OKC</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Aaron Wiggins</span><span class="nc-tx-sub">Trade · OKC</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Devin Carter</span><span class="nc-tx-sub">Trade · Sacramento</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Ryan Nembhard</span><span class="nc-tx-sub">Trade · Dallas</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>CJ McCollum</span><span class="nc-tx-sub">1-yr Re-sign</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jock Landale</span><span class="nc-tx-sub">1-yr Re-sign</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Jonathan Kuminga</span><span class="nc-tx-sub">FA → Minnesota</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Zaccharie Risacher</span><span class="nc-tx-sub">Trade → Dallas</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The consensus was uniformly positive on Atlanta's approach. ESPN's Zach Kram gave the Hawks an A- in his offseason grades, writing: "They acquired Luguentz Dort, Aaron Wiggins and Devin Carter in salary dump trades, as well as Ryan Nembhard to help stabilize the backcourt. Though involved in a lot of rumors surrounding All-Star caliber players, the Hawks decided against pushing the issue, and instead focused on improving the margins." Atlanta didn't make a splashy star acquisition. They made the smart ones -- bench depth, defensive versatility, and backcourt insurance for Trae Young without disrupting Jalen Johnson's development trajectory.</p>
   <p>Johnson averaged 22.5 points, 10.3 rebounds, and 7.9 assists last season in what amounted to a quiet star emergence. He is the most underrated player in the East. Nickeil Alexander-Walker won Most Improved Player. Atlanta finished the regular season on a 19-5 run and took New York to three games before the Knicks' historic playoff streak began. The Hawks went from being counted out to being taken seriously -- and now the infrastructure around their young core has measurably improved.</p>
@@ -1054,16 +1215,20 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Orlando</em> Magic</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Nikola Vucevic (1-year FA, returning to Orlando)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Moritz Wagner (FA, Brooklyn)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Nikola Vucevic</span><span class="nc-tx-sub">1-yr FA · Returning</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Moritz Wagner</span><span class="nc-tx-sub">FA → Brooklyn</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>Orlando stayed quiet. Jevon Carter re-signed. Jonathan Isaac re-signed. The core of Paolo Banchero, Franz Wagner, and Jalen Suggs remains intact under new head coach Sean Sweeney -- replacing Jamahl Mosley, who was fired after a second-round collapse that included blowing a 3-1 series lead to the Pistons. Vucevic coming home at 35 adds veteran leadership and frontcourt depth behind Banchero, but ESPN's Summer Forecast flagged the team's endemic problem: persistent shooting inefficiency that no one addition resolves.</p>
   <p>Banchero is an All-Star talent. Wagner is one of the most complete forwards in the conference. But the Magic have been a jump-shooting team that can't shoot consistently -- and no offseason fix addresses that structurally.</p>
@@ -1087,16 +1252,28 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Charlotte</em> Hornets</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Naz Reid (4-team trade, Minnesota), Dennis Schroeder (5-team trade, Cleveland), Dorian Finney-Smith (trade, Houston), Grayson Allen (trade, Phoenix), Royce O'Neale (trade, Phoenix), Coby White (3-year re-sign)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">LaMelo Ball (4-team trade, Minnesota), Miles Bridges (trade, Phoenix), Josh Green (4-team trade, Minnesota), Tre Mann (5-team trade, Washington)</span>
-      </div>
+  <div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Naz Reid</span><span class="nc-tx-sub">Trade · Minnesota</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Dennis Schroeder</span><span class="nc-tx-sub">Trade · Cleveland</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Dorian Finney-Smith</span><span class="nc-tx-sub">Trade · Houston</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Grayson Allen</span><span class="nc-tx-sub">Trade · Phoenix</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Royce O'Neale</span><span class="nc-tx-sub">Trade · Phoenix</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Coby White</span><span class="nc-tx-sub">3-yr Re-sign</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>LaMelo Ball</span><span class="nc-tx-sub">Trade → Minnesota</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Miles Bridges</span><span class="nc-tx-sub">Trade → Phoenix</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Josh Green</span><span class="nc-tx-sub">Trade → Minnesota</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Tre Mann</span><span class="nc-tx-sub">Trade → Washington</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>LaMelo Ball is gone. Charlotte made the bet that Brandon Miller, Kon Knueppel -- the 2026 Rookie of the Year runner-up -- and their draft capital tell a better long-term story than one unproven franchise player on $130 million. ESPN's Summer Forecast: "Charlotte made a risky bet after one of their strongest seasons in years by trading former franchise player LaMelo Ball to shift the focus to some of their more successful recent draft picks. If it works, Charlotte could be back in the play-in mix. If not, the Hornets might keep meandering for years to come."</p>
   <p>The additions are veteran bridge pieces. Reid brings some excitement and talent. Schroeder is a disruptive second-unit ball-handler. The question is whether Miller and Knueppel are the answer -- or whether Charlotte just sold the best player on the roster and bought time.</p>
@@ -1120,16 +1297,25 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Washington</em> Wizards</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Deandre Ayton (trade, Lakers), Tre Mann (5-team trade, Charlotte), Khris Middleton (sign-and-trade, Dallas), Trae Young (4-year re-sign, franchise cornerstone)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Jaden Hardy (trade, Lakers), D'Angelo Russell (trade, Memphis), Cam Whitmore (5-team trade, Cleveland)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Deandre Ayton</span><span class="nc-tx-sub">Trade · Lakers</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Tre Mann</span><span class="nc-tx-sub">Trade · Charlotte</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Khris Middleton</span><span class="nc-tx-sub">Sign-and-Trade · Dallas</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Trae Young</span><span class="nc-tx-sub">4-yr Re-sign · Franchise</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Jaden Hardy</span><span class="nc-tx-sub">Trade → Lakers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>D'Angelo Russell</span><span class="nc-tx-sub">Trade → Memphis</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Cam Whitmore</span><span class="nc-tx-sub">Trade → Cleveland</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>Washington selected AJ Dybantsa with the No. 1 overall pick -- A highly talented prospect. Young re-signed, giving the Wizards an established star alongside their franchise centerpiece rookie. The additions of Ayton and Middleton are veteran infrastructure around what is explicitly a rebuild that believes it has a foundation.</p>
   <p>Dybantsa's debut is the reason to watch. ESPN's schedule coverage called his arrival one of the things "the league is buzzing around." The Wizards were the league's worst team by point differential last season (-982). Everything that happens this year is runway for Dybantsa, and how his relationship with Young develops will define the franchise's next three years.</p>
@@ -1173,16 +1359,24 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Oklahoma City</em> Thunder</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Bennett Stirtz (No. 16 pick, 2026 draft), Aday Mara (No. 11 pick, 2026 draft -- previously reported)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Luguentz Dort (trade, Atlanta), Isaiah Joe (trade, Detroit), Aaron Wiggins (trade, Atlanta), Kenrich Williams (re-signed)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Bennett Stirtz</span><span class="nc-tx-sub">No. 16 Pick · 2026 Draft</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Aday Mara</span><span class="nc-tx-sub">No. 11 Pick · 2026 Draft</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Luguentz Dort</span><span class="nc-tx-sub">Trade → Atlanta</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Isaiah Joe</span><span class="nc-tx-sub">Trade → Detroit</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Aaron Wiggins</span><span class="nc-tx-sub">Trade → Atlanta</span></span></div>
+    </div>
+  </div>
+</div>
+
   </div>
   <p>The reigning 2024-25 champions led last season at 64-18. They lost seven games all year. They lost Dort, Joe, and Wiggins -- all rotational contributors -- to extension cost-cutting, and replaced them with two rookies. ESPN's Zach Kram noted that the Thunder's extensions for Jalen Williams and Chet Holmgren "triggered in July, leading to a trio of financially motivated trades to slash the tax bill." Sam Presti told The Oklahoman that "the savings generated this summer, and from being out of the tax the last several years, will be re-allocated to future teams."</p>
   <p>The Thunder are still the most analytically dominant team in basketball. Per ESPN, over the last two seasons including playoffs, Oklahoma City has outscored its opponents by 11.2 points per 100 possessions. SGA is the two-time reigning MVP. Chet Holmgren is 23. Jalen Williams is 25. Cason Wallace and Ajay Mitchell are primed for expanded roles. The rookies Mara and Stirtz add depth and the 7-foot-3 Mara gives Presti a Wembanyama countermeasure in Western Conference playoff matchups.</p>
@@ -1206,16 +1400,27 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Minnesota</em> Timberwolves</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">LaMelo Ball (4-team trade, Charlotte), Jonathan Kuminga (2-year FA), Cody Williams (trade, Utah), Ayo Dosunmu (4-year re-sign), Trey Lyles (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Julius Randle (4-team trade, Brooklyn), Naz Reid (4-team trade, Charlotte), Kyle Anderson (FA, Toronto), Mike Conley (FA, Boston)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>LaMelo Ball</span><span class="nc-tx-sub">Trade · Charlotte</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jonathan Kuminga</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Cody Williams</span><span class="nc-tx-sub">Trade · Utah</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Ayo Dosunmu</span><span class="nc-tx-sub">4-yr Re-sign</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Trey Lyles</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Julius Randle</span><span class="nc-tx-sub">Trade → Brooklyn</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Naz Reid</span><span class="nc-tx-sub">Trade → Charlotte</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kyle Anderson</span><span class="nc-tx-sub">FA → Toronto</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Mike Conley</span><span class="nc-tx-sub">FA → Boston</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>Minnesota made the biggest swing in the NBA. ESPN's Zach Kram gave it a skeptical grade: "That strategic shift is a big gamble, and the Timberwolves have almost no flexibility left to make further adjustments after they dealt an unprotected first-round pick and three swaps for Ball." Tim MacMahon identified the pairing for what it represents: Anthony Edwards and LaMelo Ball is "arguably the league's most talented backcourt." The question the consensus keeps returning to is whether LaMelo -- coming off a season in which he averaged 20 points per game but shot a 40/37 split — and a career that lacks a winning resume -- is the right second star around the franchise player — Edwards.</p>
   <p>As ESPN noted, Ball "has played more than 47 games just once since 2021-22." Minnesota is now without a first-round pick in 2027, 2029, and 2031. They are hard-capped at the second apron due to salary aggregation in the trade. Coach Chris Finch also lost his top assistant Micah Nori to Portland. Before they got Kuminga, ESPN's Dave McMenamin flagged the bench depth problem directly: "Minnesota now has no reliable forwards on its roster beyond Jaden McDaniels." Kuminga's arrival should alleviate that. </p>
@@ -1240,16 +1445,24 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Denver</em> Nuggets</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Marvin Bagley III (1-year FA), DeMar DeRozan (1-year FA), Lonnie Walker IV (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Peyton Watson (5-team sign-and-trade, Cleveland), Tim Hardaway Jr. (FA, Miami)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Marvin Bagley III</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>DeMar DeRozan</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Lonnie Walker IV</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Peyton Watson</span><span class="nc-tx-sub">Trade → Cleveland</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Tim Hardaway Jr.</span><span class="nc-tx-sub">FA → Miami</span></span></div>
+    </div>
+  </div>
+</div>
+
   </div>
   <p>Nikola Jokic is still widely considered as a top three player in basketball. Three MVPs. One championship. The Nuggets didn't make a dramatic move this summer -- DeRozan is a one-year stop-dynamic gap scorer off the bench, Bagley adds frontcourt flexibility, and Walker provides secondary creation. The retained core of Jokic, Jamal Murray, Michael Porter Jr., and Aaron Gordon is unchanged. Tyus Jones and Spencer Jones re-signed.</p>
   <p>ESPN's Summer Forecast positioned Denver in the "flawed West contenders" tier -- third in the West projected at 51-31. The concern is depth: Watson's departure thins the defensive rotation, and the Nuggets' path to the conference finals goes through either OKC or San Antonio, both of whom beat them or eliminated them last season.</p>
@@ -1273,16 +1486,25 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Portland</em> Trail Blazers</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Ja Morant (trade, Memphis), Jeremy Sochan (1-year FA), Branden Carlson (1-year FA), Micah Potter (waivers)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Jerami Grant (trade, Memphis), Kris Murray (trade, Memphis), Matisse Thybulle (FA, Lakers)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Ja Morant</span><span class="nc-tx-sub">Trade · Memphis</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jeremy Sochan</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Branden Carlson</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Micah Potter</span><span class="nc-tx-sub">Waivers</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Jerami Grant</span><span class="nc-tx-sub">Trade → Memphis</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kris Murray</span><span class="nc-tx-sub">Trade → Memphis</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Matisse Thybulle</span><span class="nc-tx-sub">FA → Lakers</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The most transformative summer in the Northwest outside of Minnesota. New owner Tom Dundon hired Micah Nori -- poached from Minnesota's staff -- as head coach, drawing criticism league-wide for offering only one guaranteed year on the contract. Then Portland acquired Ja Morant, who has played just 79 games over three seasons since his back-to-back All-Star nods in 2022 and 2023. Damian Lillard, who missed all of last season recovering from an Achilles tear, is projected to return.</p>
   <p>ESPN's Zach Kram's trade grade for the Morant deal was frank: "There are several reasons that the 26-year-old guard was available for such a reasonable trade price." His 3-point percentage career average is 31% -- ranking 189th out of 194 active players with at least 1,000 attempts. His rim attacks have "declined progressively in every season since" his early peak. ESPN's Summer Forecast projected Portland at 43-39 -- seventh in the West, play-in territory. The hope is that Morant and Lillard together restore Portland to relevance. The risk is that two recovering stars, a first-year coach on a short contract, and a roster still finding itself produces chaos.</p>
@@ -1306,16 +1528,26 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Utah</em> Jazz</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Josh Green (trade, Minnesota), Jaxson Hayes (2-year FA), Josh Okogie (2-year FA), Mo Bamba (2-year re-sign), Jusuf Nurkic (2-year re-sign)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Walker Kessler (sign-and-trade, Lakers), Cody Williams (trade, Minnesota), John Konchar (trade, Minnesota)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Josh Green</span><span class="nc-tx-sub">Trade · Minnesota</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jaxson Hayes</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Josh Okogie</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Mo Bamba</span><span class="nc-tx-sub">2-yr Re-sign</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jusuf Nurkic</span><span class="nc-tx-sub">2-yr Re-sign</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Walker Kessler</span><span class="nc-tx-sub">Sign-and-Trade → Lakers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Cody Williams</span><span class="nc-tx-sub">Trade → Minnesota</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>John Konchar</span><span class="nc-tx-sub">Trade → Minnesota</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The Jazz are in an interesting position. They hold two top-four picks from this draft -- Darryn Peterson (No. 2 overall) and Ace Bailey -- alongside a core of Lauri Markkanen, Jaren Jackson Jr., and Keyonte George. The Kessler departure was the most notable transaction -- he went to Los Angeles in a sign-and-trade that brought back assets rather than a direct replacement at center. Nurkic returning on a two-year deal provides veteran size in the interim.</p>
   <p>ESPN's Summer Forecast projected 34-48 for Utah -- 10th in the West. But multiple projections identified the Jazz as one of the league's most likely "surprise" teams given the Peterson and Bailey draft capital entering the system. Per ATSwins.ai analysis: "The Utah Jazz, having completed their rebuilding phase, could rise with a blend of youthful talent like rookie Darryn Peterson, Ace Bailey, and Keyonte George, alongside veterans Lauri Markkanen and Jaren Jackson Jr."</p>
@@ -1343,55 +1575,38 @@ const articleEngineData = {
   <div class="nc-div-rule"></div>
 </div>
 
-<!-- SPURS -->
-<div class="nc-team">
-  <div class="nc-team-header">
-    <h4 class="nc-team-name"><em>San Antonio</em> Spurs</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Tobias Harris (2-year FA), Tarris Reed Jr. (No. 26 pick), Jayden Quaintance (No. 21 pick)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Bismack Biyombo, Mason Plumlee, Kelly Olynyk (all departures)</span>
-      </div>
-    </div>
-    <span class="nc-ext-note">Extended: Victor Wembanyama (5-year, $251M), Julian Champagnie (3-year), Harrison Barnes (1-year), Jordan McLaughlin (1-year)</span>
-  </div>
-  <p>The Spurs reached the NBA Finals last June -- the first Finals appearance since 2014, achieved earlier than any projection had them reaching it -- and then methodically locked in their core. Wembanyama's five-year, $251 million extension is the largest in franchise history and one of the defining financial commitments in the modern era. The first unanimous Defensive Player of the Year in NBA history is under contract through 2031.</p>
-  <p>Harris replaces the departed Tobias role cleanly -- a veteran forward who slots into an ancillary second-or-third option role alongside Wembanyama, Stephon Castle, De'Aaron Fox, Devin Vassell, and Dylan Harper. ESPN's Zach Kram called the Harris addition "fairly dramatic upgrades to their bench" and labeled the Spurs a championship favorite tier alongside the Knicks and Thunder. FTN's post-free agency power rankings opened San Antonio No. 1 in the NBA, with the note: "I wouldn't argue too hard with anyone who swapped these top two teams, but I've got the Spurs as the best team in the NBA entering next season."</p>
-  <p>OKC and San Antonio met 12 times last season including playoffs. San Antonio won 8 of them. The Western Conference Finals rematch is the most anticipated potential matchup of the 2026-27 season.</p>
-  <div class="nc-intel">
-    <div class="nc-intel-card">
-      <span class="nc-intel-label">Cap Situation</span>
-      <span class="nc-intel-val">Wembanyama's extension and the rookie deals for Castle and Harper are all highly favorable relative to production. The core is locked.</span>
-    </div>
-    <div class="nc-intel-card">
-      <span class="nc-intel-label">Division Standing</span>
-      <span class="nc-intel-val">Pacific favorites by a wide margin. The Lakers are the only team in the division with a credible playoff projection, and the gap between the Spurs and the rest of the Pacific is enormous.</span>
-    </div>
-    <div class="nc-intel-card">
-      <span class="nc-intel-label">Conference Projection (ESPN)</span>
-      <span class="nc-intel-val">62-20 -- first in the West. ESPN panel title odds: 74 consensus points, second only to OKC's 84. The Spurs were identified as the leading candidate for a ninth different NBA champion, per Zach Kram's summer wrap.</span>
-    </div>
-  </div>
-</div>
+
 
 <!-- LAKERS -->
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Los Angeles</em> Lakers</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Walker Kessler (sign-and-trade, Utah; 4-year), Quentin Grimes (4-year FA), Sandro Mamukelashvili (4-year FA), Collin Sexton (2-year FA), Kevon Looney (1-year FA), Ziaire Williams (1-year FA), Matisse Thybulle (1-year FA), Jaden Hardy (trade, Washington)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">LeBron James (FA, Philadelphia), Deandre Ayton (trade, Washington), Rui Hachimura (FA, Clippers), Jaxson Hayes (FA, Utah), Luke Kennard (FA, Phoenix), Marcus Smart (FA, Houston)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Walker Kessler</span><span class="nc-tx-sub">Sign-and-Trade · Utah · 4-yr</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Quentin Grimes</span><span class="nc-tx-sub">4-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Sandro Mamukelashvili</span><span class="nc-tx-sub">4-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Collin Sexton</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Kevon Looney</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Ziaire Williams</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Matisse Thybulle</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jaden Hardy</span><span class="nc-tx-sub">Trade · Washington</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>LeBron James</span><span class="nc-tx-sub">FA → Philadelphia</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Deandre Ayton</span><span class="nc-tx-sub">Trade → Washington</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Rui Hachimura</span><span class="nc-tx-sub">FA → Clippers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Jaxson Hayes</span><span class="nc-tx-sub">FA → Utah</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Luke Kennard</span><span class="nc-tx-sub">FA → Phoenix</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Marcus Smart</span><span class="nc-tx-sub">FA → Houston</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>LeBron is gone. Eight years, back-to-back 50-win seasons under JJ Redick, a dynasty-adjacent run built around the greatest player in history -- and now the franchise rebuilds around Luka Doncic at 27. ESPN's Dave McMenamin noted it concisely: "It will be Luka Doncic's challenge to lead L.A. to a top-six spot." The roster turnover is dramatic: six regular rotation players departed, six new ones arrived. Kessler is the most important addition -- a defensive anchor and rim protector who transforms the Laker frontcourt in ways Ayton never did. Austin Reaves re-signed on a four-year deal, the continuity piece Redick needed.</p>
   <p>Bleacher Report called it "arguably the second wildest offseason in the league" and noted the resulting roster "leans heavy to the offensive end. And ultimately, at least as it relates to the regular season, that's probably fine. With Luka Dončić orchestrating, this attack is going to be able to outscore the opposition more often than not, even without much potential on the defensive end."</p>
@@ -1415,16 +1630,22 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Golden State</em> Warriors</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Georges Niang (1-year FA), Brandon Williams (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Quinten Post (FA, Memphis)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Georges Niang</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Brandon Williams</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Quinten Post</span><span class="nc-tx-sub">FA → Memphis</span></span></div>
+    </div>
+  </div>
+</div>
+
     <span class="nc-ext-note">Re-signed: Draymond Green (1-year), Al Horford (2-year), De'Anthony Melton (2-year), Gary Payton II (1-year), Kristaps Porzingis (2-year)</span>
   </div>
   <p>The Warriors brought back essentially the same core that won 37 games and limped to the finish line last April. Stephen Curry is still here. Draymond is still here. Porzingis opted in for two years. Melton stayed. The No. 11 pick, Lendeborg, provides youth and internal optimism. But the consensus is measured. ESPN's Anthony Slater wrote: "Before the market even opened, they worked out contracts with Al Horford and Kristaps Porzingis to keep their veteran frontcourt intact. There's some internal excitement about the type of immediate impact they can get from No. 11 pick Lendeborg, but it's difficult to envision the contributions of a rookie significantly changing the outlook of an older team buried in the tax."</p>
@@ -1449,16 +1670,30 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Los Angeles</em> Clippers</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Brandon Ingram (trade, Toronto -- pending), Gradey Dick (trade, Toronto -- pending), Rui Hachimura (2-year FA), Max Strus (5-team trade), Johni Broome (trade, Philadelphia), Kobe Sanders (4-year re-sign), Bradley Beal (2-year re-sign), Jordan Miller (3-year re-sign)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Kawhi Leonard (trade, Toronto -- cleared Sept. 2), John Collins (sign-and-trade, Detroit), Bogdan Bogdanovic (FA, Houston), Bennedict Mathurin (FA, New Orleans)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Brandon Ingram</span><span class="nc-tx-sub">Trade · Toronto</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Gradey Dick</span><span class="nc-tx-sub">Trade · Toronto</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Rui Hachimura</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Max Strus</span><span class="nc-tx-sub">5-team Trade</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Johni Broome</span><span class="nc-tx-sub">Trade · Philadelphia</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Kobe Sanders</span><span class="nc-tx-sub">4-yr Re-sign</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Bradley Beal</span><span class="nc-tx-sub">2-yr Re-sign</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jordan Miller</span><span class="nc-tx-sub">3-yr Re-sign</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kawhi Leonard</span><span class="nc-tx-sub">Trade → Toronto</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>John Collins</span><span class="nc-tx-sub">Sign-and-Trade → Detroit</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Bogdan Bogdanovic</span><span class="nc-tx-sub">FA → Houston</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Bennedict Mathurin</span><span class="nc-tx-sub">FA → New Orleans</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The NBA stripped the Clippers of five consecutive first-round picks (2029-2033), fined them $30 million, and suspended owner Steve Ballmer from all league and team activities for one year on September 2nd. The ruling by the independent Wachtell, Lipton firm found that the Clippers "improperly funneled off-court endorsement opportunities to star forward Kawhi Leonard through corporate partners -- including Aspiration Partners, Boingo Wireless, Daktronics, and Lockton Insurance -- in exchange for team business." Leonard was fined $700,000. His uncle Dennis Robertson was banned from engaging with NBA personnel for five years. Presidents Lawrence Frank and Gillian Zucker were suspended six months and one year, respectively.</p>
   <p>The Clippers are now in rebuild mode -- intentionally. ESPN's Zach Kram noted they "got much younger in a hurry, pursuing a complete rebuild around the backcourt duo of Darius Garland and No. 5 pick Keaton Wagler. With Leonard gone, 38-year-old Brook Lopez and 32-year-old Kris Dunn are the only remaining Clippers in their 30s." The Ingram and Dick trade from Toronto -- part of the Kawhi deal -- adds young offensive talent to the rebuild.</p>
@@ -1482,16 +1717,22 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Phoenix</em> Suns</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Miles Bridges (trade, Charlotte), Luke Kennard (2-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Grayson Allen (trade, Charlotte), Royce O'Neale (trade, Charlotte)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Miles Bridges</span><span class="nc-tx-sub">Trade · Charlotte</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Luke Kennard</span><span class="nc-tx-sub">2-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Grayson Allen</span><span class="nc-tx-sub">Trade → Charlotte</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Royce O'Neale</span><span class="nc-tx-sub">Trade → Charlotte</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>One of the league's most interesting "feel-good" stories from last season -- the Suns went from disaster rebuild to competitive fringe in one year -- and now face a step-back scenario. ESPN's preview was direct: "They finished last regular season 6-10 and got swept in the first round." Bridges adds the athleticism and length Phoenix needed on the wing. Dillon Brooks re-signed on a three-year extension. Mark Williams re-signed. Collin Gillespie and Jordan Goodwin locked in.</p>
   <p>The core of Devin Booker, Kevin Durant, Bradley Beal-era assets, and now a legitimate young four in Bridges gives the Suns something to build around. But the cap and the roster depth remain concerns. Bleacher Report projected "a step back" from last season's surprising performance, and the consensus reflects that -- a mid-40s win team that depends on Durant health above all else.</p>
@@ -1515,16 +1756,21 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Sacramento</em> Kings</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Ben Simmons (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Devin Carter (trade, Atlanta), DeMar DeRozan (FA, Denver)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Ben Simmons</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Devin Carter</span><span class="nc-tx-sub">Trade → Atlanta</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>DeMar DeRozan</span><span class="nc-tx-sub">FA → Denver</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The Kings signed Ben Simmons -- who sat out the entire 2025-26 season -- to a one-year deal at $3.5 million, per reporting. That is the headline of Sacramento's offseason, which was otherwise quiet. Daeqwon Plowden re-signed. Precious Achiuwa re-signed. The core of De'Aaron Fox, Domantas Sabonis, and the surrounding cast remains. Carter was a 2024 lottery pick traded to Atlanta in what ESPN described as a "salary dump" move. DeRozan walked to Denver.</p>
   <p>ESPN's summer preview noted the Kings "saved some money" and cleared flexibility. The Simmons signing at league minimum is a low-risk, curiosity-level move -- he hasn't played a meaningful game since early 2023. If he's back, it's a compelling reclamation story. If not, it's a footnote.</p>
@@ -1553,22 +1799,69 @@ const articleEngineData = {
   <div class="nc-div-rule"></div>
 </div>
 
-<p style="font-family:'Inter',sans-serif;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;opacity:0.38;margin-bottom:2rem;">SAN ANTONIO SPURS -- Full detail above under Pacific Division.</p>
+<!-- SPURS -->
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>San Antonio</em> Spurs</h4>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Tobias Harris</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Tarris Reed Jr.</span><span class="nc-tx-sub">No. 26 Pick · 2026 Draft</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jayden Quaintance</span><span class="nc-tx-sub">No. 21 Pick · 2026 Draft</span></span></div>
+    </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Bismack Biyombo</span><span class="nc-tx-sub">Departed</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Mason Plumlee</span><span class="nc-tx-sub">Departed</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kelly Olynyk</span><span class="nc-tx-sub">Departed</span></span></div>
+    </div>
+  </div>
+</div>
+    <span class="nc-ext-note">Extended: Victor Wembanyama (5-year, $251M), Julian Champagnie (3-year), Harrison Barnes (1-year), Jordan McLaughlin (1-year)</span>
+  </div>
+  <p>The Spurs reached the NBA Finals last June -- the first Finals appearance since 2014, achieved earlier than any projection had them reaching it -- and then methodically locked in their core. Wembanyama's five-year, $251 million extension is the largest in franchise history and one of the defining financial commitments in the modern era. The first unanimous Defensive Player of the Year in NBA history is under contract through 2031.</p>
+  <p>Harris replaces the departed Tobias role cleanly -- a veteran forward who slots into an ancillary second-or-third option role alongside Wembanyama, Stephon Castle, De'Aaron Fox, Devin Vassell, and Dylan Harper. ESPN's Zach Kram called the Harris addition "fairly dramatic upgrades to their bench" and labeled the Spurs a championship favorite tier alongside the Knicks and Thunder. FTN's post-free agency power rankings opened San Antonio No. 1 in the NBA, with the note: "I wouldn't argue too hard with anyone who swapped these top two teams, but I've got the Spurs as the best team in the NBA entering next season."</p>
+  <p>OKC and San Antonio met 12 times last season including playoffs. San Antonio won 8 of them. The Western Conference Finals rematch is the most anticipated potential matchup of the 2026-27 season.</p>
+  <div class="nc-intel">
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Cap Situation</span>
+      <span class="nc-intel-val">Wembanyama's extension and the rookie deals for Castle and Harper are all highly favorable relative to production. The core is locked.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Division Standing</span>
+      <span class="nc-intel-val">Pacific favorites by a wide margin. The Lakers are the only team in the division with a credible playoff projection, and the gap between the Spurs and the rest of the Pacific is enormous.</span>
+    </div>
+    <div class="nc-intel-card">
+      <span class="nc-intel-label">Conference Projection (ESPN)</span>
+      <span class="nc-intel-val">62-20 -- first in the West. ESPN panel title odds: 74 consensus points, second only to OKC's 84. The Spurs were identified as the leading candidate for a ninth different NBA champion, per Zach Kram's summer wrap.</span>
+    </div>
+  </div>
+</div>
 
 <!-- ROCKETS -->
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Houston</em> Rockets</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Marcus Smart (2-year FA), Bogdan Bogdanovic (1-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Dorian Finney-Smith (trade, Charlotte), Josh Okogie (FA, Utah)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Marcus Smart</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Bogdan Bogdanovic</span><span class="nc-tx-sub">1-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Dorian Finney-Smith</span><span class="nc-tx-sub">Trade → Charlotte</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Josh Okogie</span><span class="nc-tx-sub">FA → Utah</span></span></div>
+    </div>
+  </div>
+</div>
     <span class="nc-ext-note">Extended: Amen Thompson (5-year), Tari Eason (5-year), Isaiah Crawford (4-year)</span>
   </div>
   <p>Houston resisted the Giannis sweepstakes and stayed the course around Kevin Durant in Year 2. Smart and Bogdanovic are veteran depth additions -- proven playoff contributors who address the specific breakdowns Houston experienced in last season's second consecutive first-round exit. ESPN's preview noted the strategy: "After suffering a first-round postseason exit for the second consecutive season, the Rockets resisted the temptation to jump into the Giannis Antetokounmpo sweepstakes after adding former MVP Durant last summer."</p>
@@ -1594,16 +1887,27 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Dallas</em> Mavericks</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">Santi Aldama (trade, Memphis), Marcus Sasser (trade, Detroit via 6-team deal), Zaccharie Risacher (trade, Atlanta), Tarik Biberovic (2-year FA), AJ Johnson (2026 draft pick acquired from Grizzlies -- then traded to New Orleans as part of deal for Aldama; complex multi-team move)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Khris Middleton (sign-and-trade, Washington), Ryan Nembhard (trade, Atlanta), Klay Thompson (FA, Miami), Brandon Williams (FA, Golden State), Marvin Bagley III (FA, Denver)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Santi Aldama</span><span class="nc-tx-sub">Trade · Memphis</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Marcus Sasser</span><span class="nc-tx-sub">Trade · Detroit (6-team)</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Zaccharie Risacher</span><span class="nc-tx-sub">Trade · Atlanta</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Tarik Biberovic</span><span class="nc-tx-sub">2-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Khris Middleton</span><span class="nc-tx-sub">Sign-and-Trade → Washington</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Ryan Nembhard</span><span class="nc-tx-sub">Trade → Atlanta</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Klay Thompson</span><span class="nc-tx-sub">FA → Miami</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Brandon Williams</span><span class="nc-tx-sub">FA → Golden State</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Marvin Bagley III</span><span class="nc-tx-sub">FA → Denver</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The Mavericks had one of the busiest offseason footprints given the volume of multi-team activity centered around their roster. Kyrie Irving remains -- per reporting, rival teams continue to watch his situation -- and Luka Doncic's continued growth is the organizational constant. But Middleton is gone, Thompson is gone, and the additions are youth and versatility rather than veteran star power.</p>
   <p>Aldama is a switchable 6'10 forward who fits Dallas's spacing needs. Risacher, the No. 1 pick in the 2024 NBA Draft who emerged as a starter in Atlanta, represents significant upside at the wing. Sasser adds backcourt depth. ESPN's Tim MacMahon framed the summer this way: "Dallas added three potential immediate contributors in a six-team deal, acquiring former Grizzlies forward Santi Aldama, ex-Pistons guard Marcus Sasser and EuroLeague veteran Tarik Biberovic."</p>
@@ -1627,16 +1931,25 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>New Orleans</em> Pelicans</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">AJ Johnson (trade, Memphis), Bennedict Mathurin (2-year FA), Trendon Watford (1-year FA), DeAndre Jordan (1-year re-sign)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Jordan Hawkins (trade, Memphis), Kevon Looney (FA, Lakers), Micah Peavy (trade, Memphis)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>AJ Johnson</span><span class="nc-tx-sub">Trade · Memphis</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Bennedict Mathurin</span><span class="nc-tx-sub">2-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Trendon Watford</span><span class="nc-tx-sub">1-yr FA</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>DeAndre Jordan</span><span class="nc-tx-sub">1-yr Re-sign</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Jordan Hawkins</span><span class="nc-tx-sub">Trade → Memphis</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kevon Looney</span><span class="nc-tx-sub">FA → Lakers</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Micah Peavy</span><span class="nc-tx-sub">Trade → Memphis</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>The Pelicans made quiet, internal-growth moves while ESPN's Bobby Marks noted they "clearly believe that internal growth is the best path forward." Zion Williamson, Brandon Ingram's departure to the Clippers via Toronto, and Herb Jones returning from injury are the variables that matter most. Mathurin is a legitimate scorer off the bench. AJ Johnson is youth investment. The roster is built for the 40-win range.</p>
   <p>The San Antonio Spurs are scheduled for NBA Paris and NBA Manchester games against New Orleans in January 2027 -- two international appearances that will shine a light on the franchise as it tries to establish its 2026-27 identity.</p>
@@ -1660,16 +1973,27 @@ const articleEngineData = {
 <div class="nc-team">
   <div class="nc-team-header">
     <h4 class="nc-team-name"><em>Memphis</em> Grizzlies</h4>
-    <div class="nc-tx-wrap">
-      <div class="nc-tx add">
-        <span class="nc-tx-pill">Added</span>
-        <span class="nc-tx-text">D'Angelo Russell (trade, Washington), Isaiah Stewart (trade, Detroit), Jordan Hawkins (trade, New Orleans), Micah Peavy (trade, New Orleans), Quinten Post (3-year FA)</span>
-      </div>
-      <div class="nc-tx dep">
-        <span class="nc-tx-pill">Departed</span>
-        <span class="nc-tx-text">Ja Morant (trade, Portland), Santi Aldama (trade, Dallas), Kentavious Caldwell-Pope (buyout), Taj Gibson (trade, New Orleans)</span>
-      </div>
+<div class="nc-tx-table">
+  <div class="nc-tx-head-row">
+    <div class="nc-tx-header th-add">&#43; Added</div>
+    <div class="nc-tx-header th-dep">&#8722; Departed</div>
+  </div>
+  <div class="nc-tx-body-row">
+    <div class="nc-tx-col">
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>D'Angelo Russell</span><span class="nc-tx-sub">Trade · Washington</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Isaiah Stewart</span><span class="nc-tx-sub">Trade · Detroit</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jordan Hawkins</span><span class="nc-tx-sub">Trade · New Orleans</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Micah Peavy</span><span class="nc-tx-sub">Trade · New Orleans</span></span></div>
+      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Quinten Post</span><span class="nc-tx-sub">3-yr FA</span></span></div>
     </div>
+    <div class="nc-tx-col">
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Ja Morant</span><span class="nc-tx-sub">Trade → Portland</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Santi Aldama</span><span class="nc-tx-sub">Trade → Dallas</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Kentavious Caldwell-Pope</span><span class="nc-tx-sub">Buyout</span></span></div>
+      <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Taj Gibson</span><span class="nc-tx-sub">Trade → New Orleans</span></span></div>
+    </div>
+  </div>
+</div>
   </div>
   <p>Ja Morant is gone. Memphis made "an organizational verdict on Ja Morant, and it isn't a happy one," per ESPN's reporting ahead of the trade. The price for Morant was Jerami Grant and Kris Murray -- no picks -- a reflection of a market ESPN's Brian Windhorst famously described as so cold that "teams expected Memphis to attach draft picks just to take the contract." The Grizzlies received Cameron Boozer with the No. 3 overall pick and collected pieces for a rebuild.</p>
   <p>Russell is a functional veteran point guard who buys time. Stewart is a physical defender and cultural fit. Post is a stretch big. The 2026 Rookie of the Year race features Boozer prominently -- per ESPN's schedule coverage, he "looks ready to make immediate impacts in Year 1." Jaren Jackson Jr. remains the defensive cornerstone. The question is how quickly the next chapter forms around Jackson and a healthy, motivated young roster.</p>
