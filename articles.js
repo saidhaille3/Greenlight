@@ -741,6 +741,10 @@ const articleEngineData = {
   </div>
 </div>
 
+<div class="nc-team">
+  <div class="nc-team-header">
+    <h4 class="nc-team-name"><em>Newyork</em> Knicks</h4>
+
 <div class="nc-tx-table">
   <div class="nc-tx-head-row">
     <div class="nc-tx-header th-add">&#43; Added</div>
@@ -757,7 +761,6 @@ const articleEngineData = {
     </div>
   </div>
 </div>
-
 
   </div>
   <p>The defending champions did almost nothing and the consensus belief is — that is the correct move. ESPN's Zach Kram confirmed what the transactions, or lack there of — make plain: "The Knicks, Thunder and Spurs were the only ones to win a game in the conference finals -- and they're still in a tier unto themselves." Brunson, Josh Hart, Mikal Bridges, OG Anunoby, Karl-Anthony Towns -- the starting five is intact. The only meaningful roster change is Drummond replacing Robinson at center off the bench. Landry Shamet re-signed. Jordan Clarkson re-signed. Jose Alvarado re-signed.</p>
@@ -1089,7 +1092,6 @@ const articleEngineData = {
     <div class="nc-tx-col">
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Nic Claxton</span><span class="nc-tx-sub">Trade · Brooklyn</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Norman Powell</span><span class="nc-tx-sub">2-yr FA</span></span></div>
-      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Caleb Wilson</span><span class="nc-tx-sub">No. 4 Pick · 2026 Draft</span></span></div>
     </div>
     <div class="nc-tx-col">
       <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Mouhamadou Gueye</span><span class="nc-tx-sub">Trade → Charlotte</span></span></div>
@@ -1371,8 +1373,7 @@ const articleEngineData = {
   </div>
   <div class="nc-tx-body-row">
     <div class="nc-tx-col">
-      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Bennett Stirtz</span><span class="nc-tx-sub">No. 16 Pick · 2026 Draft</span></span></div>
-      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Aday Mara</span><span class="nc-tx-sub">No. 11 Pick · 2026 Draft</span></span></div>
+  
     </div>
     <div class="nc-tx-col">
       <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Luguentz Dort</span><span class="nc-tx-sub">Trade → Atlanta</span></span></div>
