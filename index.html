@@ -7272,10 +7272,7 @@ if (isPost && !plays.length && !drives.length) {
   }
 
   if (drives.length) {
-    html += `<div style="margin-bottom:1.25rem;overflow-x:auto;padding-bottom:0.5rem;">
-      <p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;color:rgba(255,255,255,0.2);margin-bottom:0.625rem;">Drive Log</p>
-      <div style="display:flex;gap:0.4rem;min-width:max-content;">`;
-    drives.slice(-8).forEach(drive => {
+    const driveResultMeta = (drive) => {
       const result = (drive.displayResult || drive.shortDisplayResult || '').toLowerCase();
       const isTD     = result.includes('touchdown');
       const isFGMade = result.includes('field goal') && !result.includes('missed') && !result.includes('no good');
@@ -7283,92 +7280,97 @@ if (isPost && !plays.length && !drives.length) {
       const isPunt   = result.includes('punt');
       const isINT    = result.includes('interception');
       const isFumble = result.includes('fumble');
-      const isTurn   = result.includes('turnover') || isINT || isFumble;
       const isSafety = result.includes('safety');
+      const isKneel  = result.includes('kneel') || result.includes('end of');
 
-      const bgColor = isTD      ? 'rgba(34,197,94,0.15)'
-                    : isFGMade  ? 'rgba(59,130,246,0.12)'
-                    : isFGMiss  ? 'rgba(251,191,36,0.08)'
-                    : isINT     ? 'rgba(239,68,68,0.15)'
-                    : isFumble  ? 'rgba(251,146,60,0.10)'
-                    : isSafety  ? 'rgba(168,85,247,0.12)'
-                    :             'rgba(255,255,255,0.04)';
+      const emoji    = isTD ? '6' : isFGMade ? '✔' : isFGMiss ? '✕' : isPunt ? '🦶' : isINT ? '↩' : isFumble ? '💨' : isSafety ? 'S' : isKneel ? '·' : '–';
+      const accent   = isTD ? '#4ade80' : isFGMade ? '#60a5fa' : isFGMiss ? '#fbbf24' : isPunt ? 'rgba(255,255,255,0.3)' : isINT ? '#f87171' : isFumble ? '#fb923c' : isSafety ? '#c084fc' : 'rgba(255,255,255,0.2)';
+      const bg       = isTD ? 'rgba(34,197,94,0.12)' : isFGMade ? 'rgba(59,130,246,0.10)' : isFGMiss ? 'rgba(251,191,36,0.07)' : isINT ? 'rgba(239,68,68,0.12)' : isFumble ? 'rgba(251,146,60,0.09)' : isSafety ? 'rgba(168,85,247,0.10)' : 'rgba(255,255,255,0.03)';
+      const label    = isTD ? 'TD' : isFGMade ? 'FG' : isFGMiss ? 'MISS' : isPunt ? 'PUNT' : isINT ? 'INT' : isFumble ? 'FUM' : isSafety ? 'SAFE' : isKneel ? 'END' : 'INC';
 
-      const bColor  = isTD      ? 'rgba(34,197,94,0.35)'
-                    : isFGMade  ? 'rgba(59,130,246,0.25)'
-                    : isFGMiss  ? 'rgba(251,191,36,0.30)'
-                    : isINT     ? 'rgba(239,68,68,0.30)'
-                    : isFumble  ? 'rgba(251,146,60,0.28)'
-                    : isSafety  ? 'rgba(168,85,247,0.28)'
-                    :             'rgba(255,255,255,0.07)';
+      return { isTD, isFGMade, isFGMiss, isPunt, isINT, isFumble, isSafety, emoji, accent, bg, label };
+    };
 
-      // ── ICONS ──────────────────────────────────────────────
-      // TD: bold "6" -- like the scoreboard just flipped
-      const svgTD = `<svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-        <text x="4" y="19" font-size="18" font-weight="900" fill="#4ade80" font-family="Arial Black,Arial,sans-serif" letter-spacing="-1">6</text>
-      </svg>`;
+    html += `
+    <div style="margin-bottom:1.5rem;">
+      <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+        <span style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.4em;color:rgba(255,255,255,0.18);">Drive Log</span>
+        <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0.07),transparent);"></div>
+        <span style="font-size:7px;font-weight:700;color:rgba(255,255,255,0.15);">${drives.length} drives</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.4rem;">`;
 
-      // FG Made: upright posts + clean green checkmark through them
-      const svgFGMade = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="12" y1="22" x2="12" y2="11" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
-        <line x1="7"  y1="11" x2="17" y2="11" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
-        <line x1="7"  y1="11" x2="7"  y2="5"  stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
-        <line x1="17" y1="11" x2="17" y2="5"  stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
-        <path d="M8 14.5 L11 17.5 L16 12" stroke="#4ade80" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>`;
+    drives.forEach((drive, idx) => {
+      const m = driveResultMeta(drive);
+      const abbr = drive.team?.abbreviation || '';
+      const teamData = NFL_TEAMS.find(t => t.a === abbr);
+      const teamColor = teamData?.p || m.accent;
+      const plays = drive.plays?.length ?? drive.numberOfPlays ?? 0;
+      const yards = drive.yards ?? drive.totalYards ?? 0;
+      const time  = typeof drive.timeElapsed === 'string' ? drive.timeElapsed : typeof drive.time === 'string' ? drive.time : drive.timeElapsed?.displayValue || drive.time?.displayValue || '';
 
-      // FG Miss: same uprights, red X through the middle
-      const svgFGMiss = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="12" y1="22" x2="12" y2="11" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="0.6"/>
-        <line x1="7"  y1="11" x2="17" y2="11" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="0.6"/>
-        <line x1="7"  y1="11" x2="7"  y2="5"  stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="0.6"/>
-        <line x1="17" y1="11" x2="17" y2="5"  stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="0.6"/>
-        <line x1="9"  y1="13" x2="15" y2="19" stroke="#f87171" stroke-width="2.2" stroke-linecap="round"/>
-        <line x1="15" y1="13" x2="9"  y2="19" stroke="#f87171" stroke-width="2.2" stroke-linecap="round"/>
-      </svg>`;
+      const isLatest = idx === drives.length - 1;
 
-      // PUNT: a real side-profile foot -- heel down left, toes pointing up-right
-            const svgPunt = `<span style="font-size:15px;line-height:1;">🦶</span>`;
+      html += `
+      <div style="
+        display:grid;
+        grid-template-columns:auto 1fr auto;
+        align-items:center;
+        gap:0.75rem;
+        padding:0.65rem 0.875rem;
+        border-radius:1rem;
+        background:${m.bg};
+        border:1px solid ${m.isTD || m.isFGMade ? m.accent+'30' : 'rgba(255,255,255,0.05)'};
+        backdrop-filter:blur(12px);
+        -webkit-backdrop-filter:blur(12px);
+        box-shadow:${m.isTD ? `0 0 16px ${m.accent}18, inset 0 1px 0 rgba(255,255,255,0.05)` : 'inset 0 1px 0 rgba(255,255,255,0.03)'};
+        ${isLatest ? `outline:1px solid rgba(255,255,255,0.08);` : ''}
+        transition:all 0.2s ease;
+      ">
+        <!-- Team logo + sequence -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:3px;min-width:28px;">
+          ${abbr ? `<img src="${nflLogo(abbr)}" style="width:18px;height:18px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5));">` : ''}
+          <span style="font-size:6px;font-weight:900;color:rgba(255,255,255,0.15);letter-spacing:0.05em;">${idx+1}</span>
+        </div>
 
+        <!-- Drive details -->
+        <div style="min-width:0;">
+          <div style="display:flex;align-items:center;gap:0.4rem;margin-bottom:2px;">
+            <span style="
+              font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.08em;
+              color:${m.accent};
+              ${m.isTD ? `text-shadow:0 0 8px ${m.accent}60;` : ''}
+            ">${m.emoji} ${m.label}</span>
+            ${abbr ? `<span style="font-size:6.5px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.2);">${abbr}</span>` : ''}
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+            <span style="font-size:10px;font-weight:800;color:${yards >= 50 ? teamColor : yards >= 25 ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.3)'};">${yards > 0 ? yards+'y' : '0y'}</span>
+            ${plays ? `<span style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.2);">${plays} play${plays===1?'':'s'}</span>` : ''}
+            ${time ? `<span style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.15);">${time}</span>` : ''}
+          </div>
+        </div>
 
-      // INT: reverse arrow -- ball going back the other way
-      const svgINT = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M20 8 L8 8" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-opacity="0.35"/>
-        <path d="M4 15 L17 15" stroke="#f87171" stroke-width="2.2" stroke-linecap="round"/>
-        <path d="M8 11 L4 15 L8 19" stroke="#f87171" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>`;
-
-      // FUMBLE: football with chaos lines shooting off it
-      const svgFumble = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="11" cy="13" rx="5.5" ry="3.5" fill="rgba(251,146,60,0.25)" stroke="#fb923c" stroke-width="1.8" transform="rotate(-25 11 13)"/>
-        <line x1="15" y1="5"  x2="17" y2="3"  stroke="#fb923c" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="18" y1="10" x2="21" y2="9"  stroke="#fb923c" stroke-width="1.8" stroke-linecap="round"/>
-        <line x1="6"  y1="19" x2="4"  y2="21" stroke="#fb923c" stroke-width="1.8" stroke-linecap="round"/>
-      </svg>`;
-
-      // SAFETY: S in a shield
-      const svgSafety = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 3 L20 6.5 L20 13 Q20 18 12 21 Q4 18 4 13 L4 6.5 Z" fill="rgba(168,85,247,0.15)" stroke="#c084fc" stroke-width="1.8"/>
-        <text x="12" y="16" text-anchor="middle" font-size="9" font-weight="900" fill="#c084fc" font-family="Arial Black,Arial,sans-serif">S</text>
-      </svg>`;
-
-      // DEFAULT: subtle dash
-      const svgDefault = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="7" y1="12" x2="17" y2="12" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round"/>
-      </svg>`;
-
-      const iconSVG = isTD ? svgTD : isFGMade ? svgFGMade : isFGMiss ? svgFGMiss : isPunt ? svgPunt : isINT ? svgINT : isFumble ? svgFumble : isSafety ? svgSafety : svgDefault;
-
-      const driveAbbr = drive.team?.abbreviation || '';
-      html += `<div style="flex-shrink:0;padding:0.5rem 0.5rem 0.4rem;border-radius:0.875rem;background:${bgColor};border:1px solid ${bColor};text-align:center;min-width:44px;display:flex;flex-direction:column;align-items:center;gap:3px;">
-        ${driveAbbr ? `<img src="${nflLogo(driveAbbr)}" style="width:12px;height:12px;object-fit:contain;opacity:0.7;">` : ''}
-        <div style="display:flex;align-items:center;justify-content:center;width:24px;height:24px;">${iconSVG}</div>
-        <div style="font-size:7px;font-weight:900;text-transform:uppercase;color:rgba(255,255,255,0.3);letter-spacing:0.05em;">${drive.yards || 0}y</div>
+        <!-- Result pill -->
+        <div style="
+          padding:3px 8px;border-radius:100px;
+          background:${m.accent}18;
+          border:1px solid ${m.accent}30;
+          font-size:6.5px;font-weight:900;text-transform:uppercase;
+          letter-spacing:0.1em;color:${m.accent};
+          white-space:nowrap;flex-shrink:0;
+        ">${drive.shortDisplayResult || m.label}</div>
       </div>`;
-
     });
 
+    html += `</div></div>`;
+
+    // Auto-scroll to latest on live games
+    setTimeout(() => {
+      const driveEl = document.getElementById('live-panel-pbp');
+      if (driveEl) driveEl.scrollTop = driveEl.scrollHeight;
+    }, 50);
   }
+
 
   el.innerHTML = html || `<div style="text-align:center;padding:3rem 0;color:rgba(255,255,255,0.2);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:0.3em;">No play data yet</div>`;
 }
