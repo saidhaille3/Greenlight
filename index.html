@@ -4170,6 +4170,15 @@ setInterval(() => { _giCache = {}; }, 600000);
   letter-spacing: 0.08em; padding: 2px 6px; border-radius: 100px;
 }
 .nfl-badge-champ { background: rgba(212,175,55,0.15); color: #d4af37; border: 1px solid rgba(212,175,55,0.3); }
+.nfl-tc.is-champ {
+  background: rgba(212,175,55,0.07);
+  border-color: rgba(212,175,55,0.4) !important;
+  box-shadow: 0 4px 24px rgba(212,175,55,0.12), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.nfl-tc.is-champ:hover {
+  box-shadow: 0 16px 40px rgba(212,175,55,0.22), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
 .nfl-badge-hot { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
 .nfl-badge-battle { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
 .nfl-badge-injury { background: rgba(239,68,68,0.08); color: #fca5a5; border: 1px solid rgba(239,68,68,0.15); }
@@ -5997,7 +6006,8 @@ function nflBuildTeamCards(){
   scroller.innerHTML = '';
   NFL_TEAMS.forEach(t=>{
     const card = document.createElement('div');
-    card.className = 'nfl-tc';
+    card.className = `nfl-tc${t.champ ? ' is-champ' : ''}`;
+
     const isHot = t.alert && (t.alert.includes('🏆')||t.alert.includes('!'));
     const hasBattle = NFL_BATTLES[t.a]?.length > 0;
     const hasInjury = NFL_INJURIES[t.a]?.some(i=>i.status==='OUT'||i.status==='IR');
@@ -6007,7 +6017,8 @@ function nflBuildTeamCards(){
       <p class="nfl-tc-name">${t.name}</p>
       <p class="nfl-tc-rec">${t.wl}</p>
       <div style="display:flex;flex-direction:column;gap:3px;align-items:center;">
-        ${t.champ?`<span class="nfl-tc-badge nfl-badge-champ">Champs</span>`:''}
+        ${''}
+
         ${isHot&&!t.champ?`<span class="nfl-tc-badge nfl-badge-hot">🔥</span>`:''}
         ${hasBattle?`<span class="nfl-tc-badge nfl-badge-battle">⚔️</span>`:''}
         ${hasInjury?`<span class="nfl-tc-badge nfl-badge-injury">🤕</span>`:''}
