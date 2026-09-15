@@ -3908,9 +3908,81 @@ setInterval(() => { _giCache = {}; }, 600000);
   text-align:center;padding:1.5rem 0 1rem;
 }
 .live-stat-card{
-  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);
-  border-radius:1rem;padding:0.75rem;text-align:center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 1.25rem;
+  padding: 0.9rem 0.75rem;
+  text-align: center;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 16px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
+.live-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+.live-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.leaders-section-title {
+  font-size: 8px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.4em; color: rgba(255,255,255,0.15);
+  margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.leaders-section-title::before,
+.leaders-section-title::after {
+  content: ''; flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+.leaders-team-block {
+  margin-bottom: 1.5rem;
+}
+.leaders-team-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.leaders-team-logo {
+  width: 20px; height: 20px; object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+.leaders-team-abbr {
+  font-size: 8px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.3);
+}
+.leaders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+@media(min-width: 480px) { .leaders-grid { gap: 0.65rem; } }
+
+.leaders-stat-label {
+  font-size: 6.5px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.14em; color: rgba(255,255,255,0.2);
+  margin-bottom: 0.4rem; display: block;
+}
+.leaders-athlete-name {
+  font-size: 10.5px; font-weight: 800; color: rgba(255,255,255,0.75);
+  line-height: 1.2; margin-bottom: 0.3rem; display: block;
+}
+.leaders-stat-val {
+  font-size: 8px; font-weight: 900;
+  background: linear-gradient(135deg, #f0f0f0 0%, rgba(255,255,255,0.5) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  display: block; line-height: 1;
+}
+
 
 /* ── HEADER ── */
 .nfl-hub-header {
@@ -4839,8 +4911,9 @@ document.addEventListener('click', function(e){
         <div class="nfl-stat-pill"><span class="nfl-stat-label">PA</span><span class="nfl-stat-val" id="nfl-pag">--</span><span class="nfl-rank-badge nfl-rank-mid" id="nfl-pag-rank" style="display:none"></span></div>
 
         <div class="nfl-stat-pill"><span class="nfl-stat-label">Cap Space</span><span class="nfl-stat-val text-green-400 text-[11px]" id="nfl-cap">--</span></div>
-        <div class="nfl-stat-pill"><span class="nfl-stat-label">PFF Off</span><span class="nfl-stat-val" id="nfl-pff-off">--</span></div>
-        <div class="nfl-stat-pill"><span class="nfl-stat-label">PFF Def</span><span class="nfl-stat-val" id="nfl-pff-def">--</span></div>
+        <div class="nfl-stat-pill"><span class="nfl-stat-label">PFF Off</span><span class="nfl-stat-val" id="nfl-pff-off">--</span><span class="nfl-rank-badge" id="nfl-pff-off-rank" style="display:none"></span></div>
+        <div class="nfl-stat-pill"><span class="nfl-stat-label">PFF Def</span><span class="nfl-stat-val" id="nfl-pff-def">--</span><span class="nfl-rank-badge" id="nfl-pff-def-rank" style="display:none"></span></div>
+
       </div>
     </div>
 
@@ -6076,7 +6149,18 @@ async function nflOpenTeam(team){
     const pag_rank = sorted_pag.findIndex(t=>t.a===team.a)+1;
     if(pfg_rank) nflRankLabel(pfg_rank, teamsWithData.length, document.getElementById('nfl-pfg-rank'), true);
     if(pag_rank) nflRankLabel(pag_rank, teamsWithData.length, document.getElementById('nfl-pag-rank'), false);
+
+    const teamsWithPff = NFL_TEAMS.filter(t => t.pffOff && !isNaN(parseFloat(t.pffOff)));
+    if(teamsWithPff.length >= 2){
+      const sorted_pff_off = [...teamsWithPff].sort((a,b)=>parseFloat(b.pffOff)-parseFloat(a.pffOff));
+      const sorted_pff_def = [...teamsWithPff].sort((a,b)=>parseFloat(b.pffDef)-parseFloat(a.pffDef));
+      const pff_off_rank = sorted_pff_off.findIndex(t=>t.a===team.a)+1;
+      const pff_def_rank = sorted_pff_def.findIndex(t=>t.a===team.a)+1;
+      if(pff_off_rank) nflRankLabel(pff_off_rank, teamsWithPff.length, document.getElementById('nfl-pff-off-rank'), true);
+      if(pff_def_rank) nflRankLabel(pff_def_rank, teamsWithPff.length, document.getElementById('nfl-pff-def-rank'), true);
+    }
   })();
+
 
   document.getElementById('nfl-cap').textContent = team.cap;
   document.getElementById('nfl-pff-off').textContent = team.pffOff;
@@ -7106,19 +7190,30 @@ function nflRenderPBP(data, away, home) {
     </div>`;
 
     if (leaders.length) {
-      html += `<div style="margin-top:1rem;"><p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.2);margin-bottom:1rem;">Season Leaders</p>`;
+      html += `<div style="margin-top:1.25rem;">
+        <p class="leaders-section-title">Season Leaders</p>`;
       leaders.forEach(tl => {
         const abbr = tl.team?.abbreviation || '';
-        html += `<div style="margin-bottom:1.25rem;"><div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;"><img src="${nflLogo(abbr)}" style="width:18px;height:18px;object-fit:contain;"><span style="font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.5);">${abbr}</span></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;">`;
+        html += `<div class="leaders-team-block">
+          <div class="leaders-team-row">
+            <img src="${nflLogo(abbr)}" class="leaders-team-logo">
+            <span class="leaders-team-abbr">${abbr}</span>
+          </div>
+          <div class="leaders-grid">`;
         (tl.leaders || []).slice(0, 3).forEach(cat => {
           const top = cat.leaders?.[0];
           if (!top) return;
-          html += `<div class="live-stat-card"><p style="font-size:7px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.25);margin-bottom:0.35rem;">${cat.shortDisplayName || cat.displayName}</p><p style="font-size:11px;font-weight:800;color:#e0e0e0;line-height:1.2;margin-bottom:0.25rem;">${top.athlete?.shortName || '--'}</p><p style="font-size:14px;font-weight:900;color:#22c55e;">${top.displayValue || '--'}</p></div>`;
+          html += `<div class="live-stat-card">
+            <span class="leaders-stat-label">${cat.shortDisplayName || cat.displayName}</span>
+            <span class="leaders-athlete-name">${top.athlete?.shortName || '--'}</span>
+            <span class="leaders-stat-val">${top.displayValue || '--'}</span>
+          </div>`;
         });
         html += `</div></div>`;
       });
       html += `</div>`;
     }
+
     el.innerHTML = html;
     return;
   }
