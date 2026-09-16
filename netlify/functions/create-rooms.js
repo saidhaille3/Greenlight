@@ -6,21 +6,12 @@ export default async (req) => {
 
   const body = await req.json();
 
-  const res = await fetch('https://api.daily.co/v1/rooms', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.DAILY_API_KEY}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      privacy: 'public',
-      properties: {
-        enable_chat: false,
-        enable_screenshare: false,
-        ...(body.recording ? { enable_recording: 'cloud' } : {})
-      }
-    })
-  });
+      const res = await fetch('/api/create-room', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recording })
+      });
+
 
   const data = await res.json();
   return new Response(JSON.stringify(data), {

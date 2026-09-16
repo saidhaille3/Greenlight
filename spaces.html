@@ -307,25 +307,6 @@ header{position:sticky;top:0;z-index:50;padding:0 1.25rem;height:60px;display:fl
   </div>
 </div>
 
-<!-- Setup screen (API key for hosts) -->
-<div id="setup-screen" style="display:none;">
-  <div class="setup-brand">Greenlight Huddle</div>
-  <h1>Start a huddle</h1>
-  <p>Enter your Daily.co API key to host live audio rooms.</p>
-  <div class="setup-card">
-    <label>Daily.co API key</label>
-    <input class="gl-input" type="password" id="api-key-input" placeholder="Paste from daily.co/dashboard/developers">
-    <div id="setup-error" class="error-msg" style="display:none;"></div>
-    <p style="font-size:11px;color:var(--muted);margin-top:6px;">Free at <a href="https://daily.co" target="_blank" style="color:var(--green);">daily.co</a> → Dashboard → Developers</p>
-    <button class="btn btn-green btn-full" onclick="saveApiKey()">
-      <span id="setup-btn-text">Connect and start</span>
-    </button>
-    <div class="divider"></div>
-    <label>Or join by room URL</label>
-    <input class="gl-input" type="url" id="direct-url-input" placeholder="https://yourname.daily.co/room">
-    <button class="btn btn-ghost btn-full" onclick="joinByUrl()" style="margin-top:8px;">Join directly</button>
-  </div>
-</div>
 
 <!-- App -->
 <div id="app">
@@ -544,7 +525,7 @@ const db = getFirestore(firebaseApp);
 
 // ── State ──
 // ── State ──
-let apiKey = localStorage.getItem('gl_api_key') || '';
+
 let userName = '';
 let userUID = null;
 let userPhotoURL = null;
@@ -603,28 +584,9 @@ window.changeUsername = () => { window.location.href = '/profile.html'; };
 
 
 // ── API key ──
-window.saveApiKey = async () => {
-  const key = document.getElementById('api-key-input').value.trim();
-  const btn = document.getElementById('setup-btn-text');
-  if (!key) { showErr('setup-error', 'Paste your API key.'); return; }
-  btn.innerHTML = '<span class="spinner"></span>';
-  try {
-    const res = await fetch('https://api.daily.co/v1/rooms', { headers: { Authorization: `Bearer ${key}` } });
-    if (!res.ok) throw new Error();
-    apiKey = key;
-    localStorage.setItem('gl_api_key', apiKey);
-    btn.textContent = 'Connect and start';
-    document.getElementById('setup-screen').style.display = 'none';
-    document.getElementById('create-modal').classList.add('open');
-  } catch { showErr('setup-error', 'Invalid key.'); btn.textContent = 'Connect and start'; }
-};
 
-window.joinByUrl = () => {
-  const url = document.getElementById('direct-url-input').value.trim();
-  if (!url) return;
-  document.getElementById('setup-screen').style.display = 'none';
-  enterRoomView({ name: 'Quick join', topic: '', url, live: true, startedAt: Date.now(), speakers: [], listeners: [], recording: false, category: 'general' }, false, null);
-};
+
+
 
 // ── Firebase rooms ──
 function listenToRooms() {
@@ -751,12 +713,7 @@ window.shareRoom = (docId) => {
 
 // ── Create room ──
 window.handleStartRoom = () => {
-  if (!apiKey) {
-    document.getElementById('setup-screen').style.display = 'flex';
-    document.getElementById('app').style.display = 'none';
-  } else {
-    document.getElementById('create-modal').classList.add('open');
-  }
+  document.getElementById('create-modal').classList.add('open');
 };
 
 window.closeCreateModal = () => document.getElementById('create-modal').classList.remove('open');
