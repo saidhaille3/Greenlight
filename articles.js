@@ -763,7 +763,7 @@ const articleEngineData = {
 </div>
 
   </div>
-  <p>The defending champions did almost nothing and the consensus belief is — that is the correct move. ESPN's Zach Kram confirmed what the transactions, or lack there of — make plain: "The Knicks, Thunder and Spurs were the only ones to win a game in the conference finals -- and they're still in a tier unto themselves." Brunson, Josh Hart, Mikal Bridges, OG Anunoby, Karl-Anthony Towns -- the starting five is intact. The only meaningful roster change is Drummond replacing Robinson at center off the bench. Landry Shamet re-signed. Jordan Clarkson re-signed. Jose Alvarado re-signed.</p>
+  <p>The defending champions did almost nothing and the consensus belief is -- that is the correct move. ESPN's Zach Kram confirmed what the transactions, or lack there of -- make plain: "The Knicks, Thunder and Spurs were the only ones to win a game in the conference finals -- and they're still in a tier unto themselves." Brunson, Josh Hart, Mikal Bridges, OG Anunoby, Karl-Anthony Towns -- the starting five is intact. The only meaningful roster change is Drummond replacing Robinson at center off the bench. Landry Shamet re-signed. Jordan Clarkson re-signed. Jose Alvarado re-signed.</p>
   <p>Goodwill noted the financial dimension looming over the season: "It feels like this team will be given the chance to go for a repeat in an era where that doesn't happen very often. Every financial decision must be made with the reality of Jalen Brunson's possible extension -- if he signs early, he can sign for four years and $254 million. If he waits, that jumps to five years and $371 million in the 2028 offseason." That decision will define the franchise's next decade. For now, the focus is October.</p>
   <p>Opening Night is Philadelphia at New York. The Sixers come in with everything built specifically to end New York's run. The banner goes up first. Then the game begins.</p>
   <div class="nc-intel">
@@ -921,13 +921,13 @@ const articleEngineData = {
   <div class="nc-tx-body-row">
     <div class="nc-tx-col">
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>John Collins</span><span class="nc-tx-sub">Sign-and-Trade · Clippers · 3-yr</span></span></div>
-      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Isaiah Stewart</span><span class="nc-tx-sub">Trade · Memphis</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Gary Harris</span><span class="nc-tx-sub">Trade · Milwaukee</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Taurean Prince</span><span class="nc-tx-sub">Trade · Milwaukee</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Isaiah Joe</span><span class="nc-tx-sub">Trade · Oklahoma City</span></span></div>
     </div>
     <div class="nc-tx-col">
       <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Tobias Harris</span><span class="nc-tx-sub">FA → San Antonio</span></span></div>
+           <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Isaiah Stewart</span><span class="nc-tx-sub">Trade · Memphis</span></span></div>
       <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Caris LeVert</span><span class="nc-tx-sub">Trade → Milwaukee</span></span></div>
       <div class="nc-tx-name dep"><span class="nc-tx-info"><span>Marcus Sasser</span><span class="nc-tx-sub">Trade → Dallas</span></span></div>
     </div>
@@ -978,7 +978,7 @@ const articleEngineData = {
   </div>
 </div>
   </div>
-  <p>The team that took Detroit to seven games in the second round -- and swept New York in the 2024-25 Finals before falling to OKC -- built on the same foundation. Donovan Mitchell signed his four-year extension, the commitment Cleveland needed. James Harden re-signed on a three-year deal. The Mitchell-Harden backcourt is intact and enters its first full season together. Watson is the youth infusion -- a two-way wing who ESPN's panel flagged as the key developmental add: "Cleveland hopes a full season of the Donovan Mitchell-James Harden backcourt and its recent acquisition of two-way wing Peyton Watson can buoy the franchise after last season's run to the conference finals."</p>
+  <p>Donovan Mitchell signed his four-year extension, the commitment Cleveland needed. James Harden re-signed on a three-year deal. The Mitchell-Harden backcourt is intact and enters its first full season together. Watson is the youth infusion -- a two-way wing who ESPN's panel flagged as the key developmental add: "Cleveland hopes a full season of the Donovan Mitchell-James Harden backcourt and its recent acquisition of two-way wing Peyton Watson can buoy the franchise after last season's run to the conference finals."</p>
   <p>The departure of Niang, Strus, and Schroeder thins the bench depth that made Cleveland dangerous in series play. Diop is raw but enormous. The question is whether the starting five's star power compensates for a bench that got noticeably leaner.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
@@ -1061,7 +1061,7 @@ const articleEngineData = {
   </div>
 </div>
   </div>
-  <p>The most significant development in Indiana has nothing to do with the offseason. It has everything to do with one player's knee. Tyrese Haliburton missed the entire 2025-26 season with a ruptured Achilles. He is back. Kram stated it plainly in the Post-Finals power rankings: "In 2026-27, Indiana is more likely to win the East than finish with 60-plus losses again." The Pacers went 19-63 without him. That number tells the story of his value. When healthy, Indiana reached the conference finals two seasons ago. When healthy, Haliburton is one of the five best point guards in the league.</p>
+  <p>The most significant development in Indiana has nothing to do with the offseason. Tyrese Haliburton missed the entire 2025-26 season with a ruptured Achilles. He is back. Kram stated it plainly in the Post-Finals power rankings: "In 2026-27, Indiana is more likely to win the East than finish with 60-plus losses again." The Pacers went 19-63 without him. That number tells the story of his value. When healthy, Indiana reached the conference finals two seasons ago. When healthy, Haliburton is one of the five best point guards in the league.</p>
   <p>Oubre adds wing depth and physicality. Nance is a versatile veteran. The roster around Haliburton is largely the same group that nearly beat the defending champion Thunder in 2024-25. The question is not whether this team is good. The question is how many games Haliburton plays before the questions about his Achilles, his conditioning, and his trust in his own body are fully answered.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
@@ -1103,8 +1103,8 @@ const articleEngineData = {
 </div>
 
   </div>
-  <p>The Bulls got younger and more interesting in one offseason. Zach Collins re-signed. Claxton gives them a legitimate rim protector and interior anchor who was discarded in Brooklyn's retool. Powell is a proven two-way wing scorer who signed quickly after the LeBron hold ended the Miami market freeze. Caleb Wilson, the No. 4 overall pick, arrives with immediate-impact expectations. ESPN's Ben Golliver noted the Bulls "just added a potential franchise player with the No. 4 pick" in his summer forecast framing.</p>
-  <p>Whether this is a playoff team or a play-in team depends largely on Coby White's continued development and how quickly Wilson integrates. Chicago under new coach Chauncey Billups -- who was suspended by Portland, then hired by the Bulls -- has a real identity question to answer in year one.</p>
+  <p>The Bulls got younger and more interesting in one offseason. Zach Collins re-signed. Claxton gives them a rim protector and interior anchor. Powell is a proven two-way wing scorer who signed quickly after the LeBron hold ended the Miami market freeze. Caleb Wilson, the No. 4 overall pick, arrives with immediate-impact expectations. ESPN's Ben Golliver noted the Bulls "just added a potential franchise player with the No. 4 pick" in his summer forecast framing.</p>
+  <p>Whether this is a playoff team or a play-in team depends largely on how quickly Wilson integrates. Chicago under new coach Tiago Splitter, has a real identity question to answer in year one.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
       <span class="nc-intel-label">Cap Situation</span>
@@ -1201,7 +1201,7 @@ const articleEngineData = {
 </div>
   </div>
   <p>The consensus was uniformly positive on Atlanta's approach. ESPN's Zach Kram gave the Hawks an A- in his offseason grades, writing: "They acquired Luguentz Dort, Aaron Wiggins and Devin Carter in salary dump trades, as well as Ryan Nembhard to help stabilize the backcourt. Though involved in a lot of rumors surrounding All-Star caliber players, the Hawks decided against pushing the issue, and instead focused on improving the margins." Atlanta didn't make a splashy star acquisition. They made the smart ones -- bench depth, defensive versatility, and backcourt insurance for Trae Young without disrupting Jalen Johnson's development trajectory.</p>
-  <p>Johnson averaged 22.5 points, 10.3 rebounds, and 7.9 assists last season in what amounted to a quiet star emergence. He is the most underrated player in the East. Nickeil Alexander-Walker won Most Improved Player. Atlanta finished the regular season on a 19-5 run and took New York to three games before the Knicks' historic playoff streak began. The Hawks went from being counted out to being taken seriously -- and now the infrastructure around their young core has measurably improved.</p>
+  <p>Johnson averaged 22.5 points, 10.3 rebounds, and 7.9 assists last season in what amounted to a quiet star emergence. Nickeil Alexander-Walker won Most Improved Player. Atlanta finished the regular season on a 19-5 run and took New York to six games before the Knicks' historic playoff streak began. The Hawks went from being counted out to being taken seriously -- and now the infrastructure around their young core has measurably improved.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
       <span class="nc-intel-label">Cap Situation</span>
@@ -1384,7 +1384,7 @@ const articleEngineData = {
 </div>
 
   </div>
-  <p>The reigning 2024-25 champions led last season at 64-18. They lost seven games all year. They lost Dort, Joe, and Wiggins -- all rotational contributors -- to extension cost-cutting, and replaced them with two rookies. ESPN's Zach Kram noted that the Thunder's extensions for Jalen Williams and Chet Holmgren "triggered in July, leading to a trio of financially motivated trades to slash the tax bill." Sam Presti told The Oklahoman that "the savings generated this summer, and from being out of the tax the last several years, will be re-allocated to future teams."</p>
+  <p>The reigning 2024-25 champions led last season at 64-18. They lost Dort, Joe, and Wiggins -- all rotational contributors -- to extension cost-cutting, and replaced them with two rookies. ESPN's Zach Kram noted that the Thunder's extensions for Jalen Williams and Chet Holmgren "triggered in July, leading to a trio of financially motivated trades to slash the tax bill." Sam Presti told The Oklahoman that "the savings generated this summer, and from being out of the tax the last several years, will be re-allocated to future teams."</p>
   <p>The Thunder are still the most analytically dominant team in basketball. Per ESPN, over the last two seasons including playoffs, Oklahoma City has outscored its opponents by 11.2 points per 100 possessions. SGA is the two-time reigning MVP. Chet Holmgren is 23. Jalen Williams is 25. Cason Wallace and Ajay Mitchell are primed for expanded roles. The rookies Mara and Stirtz add depth and the 7-foot-3 Mara gives Presti a Wembanyama countermeasure in Western Conference playoff matchups.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
@@ -1428,7 +1428,7 @@ const articleEngineData = {
   </div>
 </div>
   </div>
-  <p>Minnesota made the biggest swing in the NBA. ESPN's Zach Kram gave it a skeptical grade: "That strategic shift is a big gamble, and the Timberwolves have almost no flexibility left to make further adjustments after they dealt an unprotected first-round pick and three swaps for Ball." Tim MacMahon identified the pairing for what it represents: Anthony Edwards and LaMelo Ball is "arguably the league's most talented backcourt." The question the consensus keeps returning to is whether LaMelo -- coming off a season in which he averaged 20 points per game but shot a 40/37 split — and a career that lacks a winning resume -- is the right second star around the franchise player — Edwards.</p>
+  <p>Minnesota made the biggest swing in the NBA. ESPN's Zach Kram gave it a skeptical grade: "That strategic shift is a big gamble, and the Timberwolves have almost no flexibility left to make further adjustments after they dealt an unprotected first-round pick and three swaps for Ball." Tim MacMahon identified the pairing for what it represents: Anthony Edwards and LaMelo Ball is "arguably the league's most talented backcourt." The question the consensus keeps returning to is whether LaMelo -- coming off a season in which he averaged 20 points per game but shot a 40/37 split -- and a career that lacks a winning resume -- is the right second star around the franchise player -- Edwards.</p>
   <p>As ESPN noted, Ball "has played more than 47 games just once since 2021-22." Minnesota is now without a first-round pick in 2027, 2029, and 2031. They are hard-capped at the second apron due to salary aggregation in the trade. Coach Chris Finch also lost his top assistant Micah Nori to Portland. Before they got Kuminga, ESPN's Dave McMenamin flagged the bench depth problem directly: "Minnesota now has no reliable forwards on its roster beyond Jaden McDaniels." Kuminga's arrival should alleviate that. </p>
   <p>The ceiling here, per MacMahon, is a Western Conference Finals team. The floor, per Kram, is a team that made an irreversible bet and has no tools left to hedge.</p>
   <div class="nc-intel">
@@ -1470,8 +1470,8 @@ const articleEngineData = {
 </div>
 
   </div>
-  <p>Nikola Jokic is still widely considered as a top three player in basketball. Three MVPs. One championship. The Nuggets didn't make a dramatic move this summer -- DeRozan is a one-year stop-dynamic gap scorer off the bench, Bagley adds frontcourt flexibility, and Walker provides secondary creation. The retained core of Jokic, Jamal Murray, Michael Porter Jr., and Aaron Gordon is unchanged. Tyus Jones and Spencer Jones re-signed.</p>
-  <p>ESPN's Summer Forecast positioned Denver in the "flawed West contenders" tier -- third in the West projected at 51-31. The concern is depth: Watson's departure thins the defensive rotation, and the Nuggets' path to the conference finals goes through either OKC or San Antonio, both of whom beat them or eliminated them last season.</p>
+  <p>Nikola Jokic is still widely considered as a top three player in basketball. Three MVPs. One championship. The Nuggets didn't make a dramatic move this summer -- DeRozan is a one-year stop-dynamic gap scorer off the bench, Bagley adds frontcourt flexibility, and Walker provides secondary creation. The retained core of Jokic, Jamal Murray and Aaron Gordon is unchanged. Tyus Jones and Spencer Jones re-signed.</p>
+  <p>ESPN's Summer Forecast positioned Denver in the "flawed West contenders" tier -- third in the West projected at 51-31. The concern is depth: Watson's departure thins the defensive rotation, and the Nuggets' path to the conference finals goes through the trio of MN, OKC or San Antonio.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
       <span class="nc-intel-label">Cap Situation</span>
@@ -1985,8 +1985,10 @@ const articleEngineData = {
   </div>
   <div class="nc-tx-body-row">
     <div class="nc-tx-col">
+          <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jerami Grant</span><span class="nc-tx-sub">Trade · Portland</span></span></div>
+                    <div class="nc-tx-name add"><span class="nc-tx-info"><span>Kris Murray</span><span class="nc-tx-sub">Trade · Portland</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>D'Angelo Russell</span><span class="nc-tx-sub">Trade · Washington</span></span></div>
-      <div class="nc-tx-name add"><span class="nc-tx-info"><span>Isaiah Stewart</span><span class="nc-tx-sub">Trade · Detroit</span></span></div>
+           <div class="nc-tx-name add"><span class="nc-tx-info"><span>Isaiah Stewart</span><span class="nc-tx-sub">Trade · Detroit</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jordan Hawkins</span><span class="nc-tx-sub">Trade · New Orleans</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Micah Peavy</span><span class="nc-tx-sub">Trade · New Orleans</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Quinten Post</span><span class="nc-tx-sub">3-yr FA</span></span></div>
@@ -2001,7 +2003,7 @@ const articleEngineData = {
 </div>
   </div>
   <p>Ja Morant is gone. Memphis made "an organizational verdict on Ja Morant, and it isn't a happy one," per ESPN's reporting ahead of the trade. The price for Morant was Jerami Grant and Kris Murray -- no picks -- a reflection of a market ESPN's Brian Windhorst famously described as so cold that "teams expected Memphis to attach draft picks just to take the contract." The Grizzlies received Cameron Boozer with the No. 3 overall pick and collected pieces for a rebuild.</p>
-  <p>Russell is a functional veteran point guard who buys time. Stewart is a physical defender and cultural fit. Post is a stretch big. The 2026 Rookie of the Year race features Boozer prominently -- per ESPN's schedule coverage, he "looks ready to make immediate impacts in Year 1." Jaren Jackson Jr. remains the defensive cornerstone. The question is how quickly the next chapter forms around Jackson and a healthy, motivated young roster.</p>
+  <p>Russell is a functional veteran point guard who buys time. Stewart is a physical defender and cultural fit. Post is a stretch big. The 2026 Rookie of the Year race features Boozer prominently -- per ESPN's schedule coverage, he "looks ready to make immediate impacts in Year 1." The question is how quickly the next chapter forms around Jackson and a healthy, motivated young roster.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
       <span class="nc-intel-label">Cap Situation</span>
@@ -2062,7 +2064,7 @@ const articleEngineData = {
   </div>
 </div>
 
-<p style="margin-top:2rem;">The West remains the structural home of the league's two best teams. The Western Conference is home to the San Antonio Spurs and Oklahoma City Thunder. Over the last two seasons including playoffs, the Thunder have outscored their opponents by an amazing 11.2 points per 100 possessions -- two of the best seasons in NBA history. But they met their match last season, with the Spurs winning eight of the 12 head-to-head matchups, including Game 7 of the Western Conference Finals in Oklahoma City.</p>
+<p style="margin-top:2rem;">The West remains the structural home of the league's two best teams -- San Antonio Spurs and Oklahoma City Thunder. Over the last two seasons including playoffs, the Thunder have outscored their opponents by an amazing 11.2 points per 100 possessions -- two of the best seasons in NBA history. But they met their match last season, with the Spurs winning eight of the 12 head-to-head matchups, including Game 7 of the Western Conference Finals in Oklahoma City.</p>
 
 <div class="nc-vote">
   <div class="nc-vote-head">
@@ -2154,6 +2156,7 @@ const articleEngineData = {
 </div>
 `
 },
+
 
 "carr-scouting-report": {
     tag: "NBA Draft · Film Room",
