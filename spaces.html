@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greenlight Huddle</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+
+:root {
+  --green:#10b981;--green-dim:rgba(16,185,129,0.12);--green-glow:rgba(16,185,129,0.25);
+  --gold:#d4af37;--gold-dim:rgba(212,175,55,0.12);
+  --bg:#070a07;--surface:rgba(5,20,10,0.7);--surface2:rgba(10,30,18,0.8);
+  --border:rgba(16,185,129,0.12);--border-strong:rgba(16,185,129,0.25);
+  --text:#f0f4f0;--muted:rgba(240,244,240,0.45);--muted2:rgba(240,244,240,0.25);
+  --red:#ef4444;--radius:16px;
+  --glass:rgba(5,20,12,0.6);
+  --glass-border:rgba(16,185,129,0.15);
+}
+
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* Ambient bg */
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(16,185,129,0.08) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 90% 80%,rgba(212,175,55,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
+
+/* Glass utility */
+.glass{background:var(--glass);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid var(--glass-border);}
+.glass-light{background:rgba(255,255,255,0.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.06);}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:rgba(16,185,129,0.3);border-radius:10px;}
+
+/* ── Name overlay ── */
+#name-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(20px);z-index:300;align-items:center;justify-content:center;padding:1.5rem;}
+#name-overlay.open{display:flex;}
+.name-card{background:rgba(5,20,12,0.95);border:1px solid var(--border-strong);border-radius:24px;padding:2.5rem 2rem;width:100%;max-width:380px;text-align:center;box-shadow:0 40px 80px rgba(0,0,0,0.6),inset 0 1px 0 rgba(16,185,129,0.1);}
+.name-card .brand{font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--green);text-transform:uppercase;margin-bottom:1.5rem;}
+.name-card h2{font-size:1.4rem;font-weight:700;margin-bottom:0.5rem;}
+.name-card p{color:var(--muted);font-size:13px;margin-bottom:1.5rem;line-height:1.6;}
+
+/* ── Inputs ── */
+.gl-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:12px 16px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+.gl-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(16,185,129,0.1);}
+.gl-input::placeholder{color:var(--muted2);}
+textarea.gl-input{resize:vertical;min-height:80px;}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 20px;border-radius:12px;border:none;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;transition:all 0.18s cubic-bezier(0.34,1.56,0.64,1);}
+.btn:active{transform:scale(0.96);}
+.btn-green{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 4px 20px rgba(16,185,129,0.3);}
+.btn-green:hover{box-shadow:0 6px 28px rgba(16,185,129,0.45);transform:translateY(-1px);}
+.btn-gold{background:linear-gradient(135deg,#d4af37,#b8860b);color:#000;box-shadow:0 4px 20px rgba(212,175,55,0.25);}
+.btn-gold:hover{box-shadow:0 6px 28px rgba(212,175,55,0.4);transform:translateY(-1px);}
+.btn-ghost{background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid var(--border);backdrop-filter:blur(10px);}
+.btn-ghost:hover{background:rgba(255,255,255,0.08);color:var(--text);border-color:var(--border-strong);}
+.btn-full{width:100%;}
+.btn-sm{padding:7px 14px;font-size:12px;border-radius:9px;}
+
+.error-msg{color:var(--red);font-size:12px;margin-top:6px;}
+
+/* ── App shell ── */
+#app{display:none;position:relative;z-index:1;}
+
+/* ── Header ── */
+header{position:sticky;top:0;z-index:50;padding:0 1.25rem;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,10,7,0.75);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);border-bottom:1px solid var(--border);}
+.header-logo{display:flex;align-items:center;gap:8px;}
+.logo-mark{width:28px;height:28px;background:linear-gradient(135deg,#10b981,#059669);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;letter-spacing:-0.05em;box-shadow:0 2px 12px rgba(16,185,129,0.4);}
+.logo-text{font-size:1rem;font-weight:800;letter-spacing:-0.02em;}
+.logo-text .green{color:var(--green);}
+.logo-text .gold{color:var(--gold);}
+.header-right{display:flex;align-items:center;gap:8px;}
+.avatar-btn{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(212,175,55,0.15));border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--green);cursor:pointer;transition:all 0.2s;}
+.avatar-btn:hover{border-color:var(--green);box-shadow:0 0 12px rgba(16,185,129,0.2);}
+
+/* ── Search bar ── */
+.search-wrap{position:relative;flex:1;max-width:320px;}
+.search-wrap input{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:8px 14px 8px 36px;color:var(--text);font-size:13px;font-family:'Inter',sans-serif;outline:none;width:100%;transition:border-color 0.2s,box-shadow 0.2s;}
+.search-wrap input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(16,185,129,0.08);}
+.search-wrap input::placeholder{color:var(--muted2);}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:0.35;font-size:14px;}
+
+/* ── Lobby ── */
+#lobby{padding:1.25rem;max-width:780px;margin:0 auto;padding-bottom:6rem;}
+
+/* Category pills */
+.cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:1.5rem;}
+.cats::-webkit-scrollbar{display:none;}
+.cat-pill{flex-shrink:0;padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;border:1px solid var(--border);color:var(--muted);background:rgba(255,255,255,0.03);white-space:nowrap;}
+.cat-pill.active,.cat-pill:hover{background:var(--green-dim);border-color:var(--border-strong);color:var(--green);}
+.cat-pill.active{box-shadow:0 0 0 1px rgba(16,185,129,0.2);}
+
+/* Section headers */
+.sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;margin-top:1.75rem;}
+.sec-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.sec-link{font-size:12px;color:var(--green);font-weight:600;cursor:pointer;opacity:0.8;}
+.sec-link:hover{opacity:1;}
+
+/* Live badge */
+.live-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(239,68,68,0.12);color:#ef4444;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.06em;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:#ef4444;animation:pulse 1.4s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+
+.soon-pill{display:inline-flex;align-items:center;gap:5px;background:var(--gold-dim);color:var(--gold);font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.04em;}
+
+/* Room cards */
+.room-card{background:rgba(5,18,10,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:1.25rem;margin-bottom:10px;cursor:pointer;transition:all 0.25s cubic-bezier(0.165,0.84,0.44,1);position:relative;overflow:hidden;}
+.room-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(16,185,129,0.03) 0%,transparent 60%);pointer-events:none;}
+.room-card:hover{border-color:var(--border-strong);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 0 1px rgba(16,185,129,0.1);}
+.room-card:active{transform:translateY(0);}
+
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px;}
+.card-info{flex:1;min-width:0;}
+.card-category{font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;}
+.card-title{font-size:15px;font-weight:700;line-height:1.3;margin-bottom:4px;}
+.card-topic{font-size:12px;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+.card-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:12px;}
+.card-meta{display:flex;align-items:center;gap:10px;}
+.card-meta-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted);}
+
+.speaker-stack{display:flex;align-items:center;}
+.speaker-pip{width:22px;height:22px;border-radius:50%;background:var(--green-dim);border:1.5px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--green);margin-left:-6px;flex-shrink:0;}
+.speaker-pip:first-child{margin-left:0;}
+
+.card-actions{display:flex;align-items:center;gap:6px;}
+.card-action-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;transition:all 0.2s;}
+.card-action-btn:hover{background:var(--green-dim);border-color:var(--border-strong);}
+
+/* Recently visited */
+.recent-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;}
+.recent-scroll::-webkit-scrollbar{display:none;}
+.recent-chip{flex-shrink:0;background:rgba(5,18,10,0.8);border:1px solid var(--border);border-radius:14px;padding:10px 14px;cursor:pointer;transition:all 0.2s;min-width:160px;}
+.recent-chip:hover{border-color:var(--border-strong);background:var(--green-dim);}
+.recent-chip-title{font-size:12px;font-weight:600;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.recent-chip-meta{font-size:10px;color:var(--muted);}
+
+/* Empty state */
+.empty{text-align:center;padding:3rem 1rem;}
+.empty-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.5;}
+.empty p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* FAB */
+.fab{position:fixed;bottom:2rem;right:1.5rem;z-index:40;display:flex;align-items:center;gap:8px;padding:14px 20px;border-radius:50px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(16,185,129,0.4),0 2px 8px rgba(0,0,0,0.3);transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);font-family:'Inter',sans-serif;}
+.fab:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 12px 40px rgba(16,185,129,0.5);}
+.fab:active{transform:scale(0.97);}
+
+/* ── Modal ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(16px);z-index:100;align-items:flex-end;justify-content:center;}
+.modal-overlay.open{display:flex;animation:fadeIn 0.2s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.modal{background:rgba(5,18,12,0.97);border:1px solid var(--border-strong);border-radius:28px 28px 0 0;padding:1.75rem 1.5rem 2.5rem;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;box-shadow:0 -20px 60px rgba(0,0,0,0.5),inset 0 1px 0 rgba(16,185,129,0.1);}
+.modal-handle{width:36px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin:0 auto 1.5rem;}
+.modal h2{font-size:1.15rem;font-weight:700;margin-bottom:1.5rem;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;}
+
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border);}
+.toggle-label{font-size:13px;font-weight:500;}
+.toggle-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.gl-toggle{width:44px;height:24px;background:rgba(255,255,255,0.08);border:1px solid var(--border);border-radius:12px;position:relative;cursor:pointer;transition:all 0.25s;}
+.gl-toggle.on{background:var(--green);border-color:var(--green);box-shadow:0 0 12px rgba(16,185,129,0.4);}
+.gl-toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;left:2px;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);}
+.gl-toggle.on::after{transform:translateX(20px);}
+
+/* ── Room view ── */
+#room-view{display:none;flex-direction:column;min-height:100vh;position:relative;z-index:1;}
+
+.room-header{padding:0.875rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;background:rgba(7,10,7,0.85);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);position:sticky;top:0;z-index:20;}
+.back-btn{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:16px;transition:all 0.2s;color:var(--text);}
+.back-btn:hover{background:var(--green-dim);border-color:var(--border-strong);}
+.room-header-info{flex:1;min-width:0;}
+.room-header-info h2{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.room-header-info p{font-size:11px;color:var(--muted);margin-top:2px;}
+.room-header-actions{display:flex;align-items:center;gap:6px;}
+
+.room-body{flex:1;overflow-y:auto;padding:1.25rem;max-width:780px;margin:0 auto;width:100%;padding-bottom:140px;}
+
+/* Stage */
+.stage-label{font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;}
+.speakers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:16px;margin-bottom:2rem;}
+
+.speaker-card{display:flex;flex-direction:column;align-items:center;gap:7px;}
+.speaker-ring-wrap{position:relative;}
+.speaker-ring{width:60px;height:60px;border-radius:50%;padding:2px;background:rgba(255,255,255,0.06);border:2px solid transparent;transition:all 0.3s;}
+.speaker-ring.speaking{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 0 0 4px rgba(16,185,129,0.2),0 0 20px rgba(16,185,129,0.3);}
+.speaker-ring.muted{opacity:0.5;}
+.speaker-inner{width:100%;height:100%;border-radius:50%;background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(212,175,55,0.08));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--text);}
+.mic-dot{position:absolute;bottom:0;right:0;width:18px;height:18px;border-radius:50%;background:var(--bg);border:2px solid var(--bg);display:flex;align-items:center;justify-content:center;font-size:9px;}
+.mic-dot.live{background:var(--green);}
+.mic-dot.muted{background:var(--red);}
+.speaker-name{font-size:11px;font-weight:600;color:var(--text);text-align:center;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.speaker-role-tag{font-size:9px;color:var(--muted);font-weight:500;}
+.host-tag{color:var(--gold);}
+
+/* Wave animation for speaking */
+@keyframes wave{0%,100%{transform:scaleY(0.4);}50%{transform:scaleY(1);}}
+.audio-wave{display:flex;align-items:center;gap:2px;height:12px;}
+.audio-wave span{display:block;width:2px;background:var(--green);border-radius:1px;animation:wave 0.8s ease-in-out infinite;}
+.audio-wave span:nth-child(2){animation-delay:0.15s;}
+.audio-wave span:nth-child(3){animation-delay:0.3s;}
+.audio-wave span:nth-child(4){animation-delay:0.45s;}
+
+/* Listeners */
+.listener-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.listener-item:last-child{border-bottom:none;}
+.listener-av{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--muted);flex-shrink:0;}
+.listener-name{flex:1;font-size:13px;font-weight:500;}
+.listener-actions{display:flex;align-items:center;gap:6px;}
+.hand-badge{font-size:13px;animation:bounce 0.6s ease infinite alternate;}
+@keyframes bounce{from{transform:translateY(0);}to{transform:translateY(-4px);}}
+
+/* Chat panel */
+.chat-panel{margin-top:1.5rem;border-top:1px solid var(--border);padding-top:1.25rem;}
+.chat-messages{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;margin-bottom:12px;padding-right:4px;}
+.chat-msg{display:flex;gap:8px;align-items:flex-start;}
+.chat-av{width:26px;height:26px;border-radius:50%;background:var(--green-dim);border:1px solid var(--border-strong);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--green);flex-shrink:0;}
+.chat-content{}
+.chat-sender{font-size:11px;font-weight:700;color:var(--green);margin-bottom:2px;}
+.chat-text{font-size:12px;color:var(--text);line-height:1.5;background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:0 10px 10px 10px;display:inline-block;}
+.chat-input-wrap{display:flex;gap:8px;align-items:center;}
+.chat-input-wrap input{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:10px 14px;color:var(--text);font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;}
+.chat-input-wrap input:focus{border-color:var(--green);}
+.chat-input-wrap input::placeholder{color:var(--muted2);}
+.chat-send-btn{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;transition:all 0.2s;flex-shrink:0;}
+.chat-send-btn:hover{box-shadow:0 0 16px rgba(16,185,129,0.4);}
+
+/* Reactions float */
+.reaction-float{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:30;pointer-events:none;}
+.reaction-pop{font-size:22px;animation:floatUp 1.8s ease forwards;pointer-events:none;}
+@keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-80px) scale(1.3);}}
+
+/* Room controls */
+.room-controls{position:fixed;bottom:0;left:0;right:0;z-index:25;padding:0.875rem 1.25rem 1.5rem;background:rgba(7,10,7,0.9);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-top:1px solid var(--border);}
+.controls-inner{max-width:560px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.ctrl-group{display:flex;align-items:center;gap:8px;}
+
+.ctrl-btn{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);color:var(--text);flex-shrink:0;}
+.ctrl-btn:hover{background:rgba(255,255,255,0.09);border-color:var(--border-strong);}
+.ctrl-btn:active{transform:scale(0.9);}
+.ctrl-btn.active{background:var(--green-dim);border-color:var(--border-strong);box-shadow:0 0 0 2px rgba(16,185,129,0.2);}
+.ctrl-btn.danger{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.25);color:var(--red);}
+.ctrl-btn.danger:hover{background:rgba(239,68,68,0.2);}
+.ctrl-btn.leave{background:linear-gradient(135deg,#ef4444,#dc2626);border:none;color:#fff;box-shadow:0 4px 20px rgba(239,68,68,0.3);}
+.ctrl-btn.leave:hover{box-shadow:0 6px 28px rgba(239,68,68,0.45);}
+
+/* Reactions bar */
+.reactions-bar{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:10px;}
+.react-btn{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all 0.2s cubic-bezier(0.34,1.56,0.64,1);}
+.react-btn:hover{transform:scale(1.2);background:rgba(255,255,255,0.08);}
+.react-btn:active{transform:scale(0.9);}
+
+/* ── Mini player ── */
+#mini-player{display:none;position:fixed;bottom:1.25rem;left:1rem;right:1rem;z-index:200;background:rgba(5,18,12,0.95);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid var(--border-strong);border-radius:18px;padding:10px 14px;box-shadow:0 16px 48px rgba(0,0,0,0.5),0 0 0 1px rgba(16,185,129,0.1);max-width:500px;margin:0 auto;}
+#mini-player.show{display:flex;align-items:center;gap:10px;animation:slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.mini-info{flex:1;min-width:0;}
+.mini-title{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mini-meta{font-size:10px;color:var(--muted);margin-top:1px;}
+.mini-wave{display:flex;align-items:center;gap:2px;height:16px;}
+.mini-wave span{display:block;width:2px;background:var(--green);border-radius:1px;animation:wave 0.8s ease-in-out infinite;}
+.mini-wave span:nth-child(2){animation-delay:0.12s;}
+.mini-wave span:nth-child(3){animation-delay:0.24s;}
+.mini-controls{display:flex;align-items:center;gap:6px;}
+.mini-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;transition:all 0.2s;}
+.mini-btn:hover{background:var(--green-dim);border-color:var(--border-strong);}
+.mini-btn.leave{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.25);color:var(--red);}
+
+/* ── Toast ── */
+#toast{position:fixed;top:72px;left:50%;transform:translateX(-50%) translateY(-8px);background:rgba(5,20,12,0.96);backdrop-filter:blur(20px);border:1px solid var(--border-strong);border-radius:12px;padding:10px 18px;font-size:12px;font-weight:600;color:var(--text);opacity:0;transition:all 0.25s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;white-space:nowrap;z-index:500;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── Spinner ── */
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.15);border-top-color:#fff;border-radius:50%;animation:spin 0.65s linear infinite;display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* Daily iframe hidden */
+#daily-iframe-container{display:none;}
+
+/* Setup screen */
+#setup-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:2rem;text-align:center;position:relative;z-index:1;}
+.setup-brand{font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--green);text-transform:uppercase;margin-bottom:1rem;}
+#setup-screen h1{font-size:2rem;font-weight:800;margin-bottom:0.5rem;letter-spacing:-0.03em;}
+#setup-screen p{color:var(--muted);margin-bottom:2rem;line-height:1.6;font-size:14px;}
+.setup-card{background:rgba(5,18,12,0.9);backdrop-filter:blur(30px);border:1px solid var(--border-strong);border-radius:24px;padding:2rem;width:100%;max-width:420px;text-align:left;box-shadow:0 40px 80px rgba(0,0,0,0.5),inset 0 1px 0 rgba(16,185,129,0.08);}
+.setup-card label{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;margin-top:1rem;}
+.setup-card label:first-child{margin-top:0;}
+
+/* Divider */
+.divider{height:1px;background:var(--border);margin:1rem 0;}
+</style>
+</head>
+<body>
+
+<!-- Name overlay -->
+<div id="name-overlay">
+  <div class="name-card">
+    <div class="brand">Greenlight Huddle</div>
+    <h2>What's your name?</h2>
+    <p>How other listeners will see you in the huddle.</p>
+    <input class="gl-input" type="text" id="name-input" placeholder="Your display name" maxlength="30" style="margin-bottom:0.75rem;">
+    <div id="name-error" class="error-msg" style="display:none;margin-bottom:8px;"></div>
+    <button class="btn btn-green btn-full" onclick="saveName()">Let's go</button>
+  </div>
+</div>
+
+<!-- Setup screen (API key for hosts) -->
+<div id="setup-screen" style="display:none;">
+  <div class="setup-brand">Greenlight Huddle</div>
+  <h1>Start a huddle</h1>
+  <p>Enter your Daily.co API key to host live audio rooms.</p>
+  <div class="setup-card">
+    <label>Daily.co API key</label>
+    <input class="gl-input" type="password" id="api-key-input" placeholder="Paste from daily.co/dashboard/developers">
+    <div id="setup-error" class="error-msg" style="display:none;"></div>
+    <p style="font-size:11px;color:var(--muted);margin-top:6px;">Free at <a href="https://daily.co" target="_blank" style="color:var(--green);">daily.co</a> → Dashboard → Developers</p>
+    <button class="btn btn-green btn-full" onclick="saveApiKey()">
+      <span id="setup-btn-text">Connect and start</span>
+    </button>
+    <div class="divider"></div>
+    <label>Or join by room URL</label>
+    <input class="gl-input" type="url" id="direct-url-input" placeholder="https://yourname.daily.co/room">
+    <button class="btn btn-ghost btn-full" onclick="joinByUrl()" style="margin-top:8px;">Join directly</button>
+  </div>
+</div>
+
+<!-- App -->
+<div id="app">
+  <header>
+    <div class="header-logo">
+      <div class="logo-mark">G</div>
+      <div class="logo-text"><span class="green">Green</span><span class="gold">light</span> Huddle</div>
+    </div>
+    <div class="header-right">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search huddles…" oninput="filterRooms()">
+      </div>
+      <div class="avatar-btn" id="user-avatar" onclick="changeUsername()" title="Change name">?</div>
+    </div>
+  </header>
+
+  <!-- Lobby -->
+  <div id="lobby">
+    <!-- Categories -->
+    <div class="cats" style="margin-top:1rem;">
+      <div class="cat-pill active" onclick="setCategory(this,'all')">All</div>
+      <div class="cat-pill" onclick="setCategory(this,'nfl')">🏈 NFL</div>
+      <div class="cat-pill" onclick="setCategory(this,'nba')">🏀 NBA</div>
+      <div class="cat-pill" onclick="setCategory(this,'ufc')">🥊 UFC</div>
+      <div class="cat-pill" onclick="setCategory(this,'mlb')">⚾ MLB</div>
+      <div class="cat-pill" onclick="setCategory(this,'soccer')">⚽ Soccer</div>
+      <div class="cat-pill" onclick="setCategory(this,'nhl')">🏒 NHL</div>
+      <div class="cat-pill" onclick="setCategory(this,'fantasy')">📊 Fantasy</div>
+      <div class="cat-pill" onclick="setCategory(this,'general')">💬 General</div>
+    </div>
+
+    <!-- Recently visited -->
+    <div id="recent-section" style="display:none;">
+      <div class="sec-header"><div class="sec-title">Recently visited</div></div>
+      <div class="recent-scroll" id="recent-list"></div>
+    </div>
+
+    <!-- Live now -->
+    <div class="sec-header">
+      <div class="sec-title">Live now <span id="live-count"></span></div>
+      <div class="sec-link" onclick="sortRooms('live')">Sort ↕</div>
+    </div>
+    <div id="live-rooms"></div>
+
+    <!-- Starting soon -->
+    <div class="sec-header">
+      <div class="sec-title">Starting soon</div>
+    </div>
+    <div id="scheduled-rooms"></div>
+  </div>
+
+  <!-- Room view -->
+  <div id="room-view">
+    <div class="room-header">
+      <div class="back-btn" onclick="leaveRoomToLobby()">←</div>
+      <div class="room-header-info">
+        <h2 id="rv-title"></h2>
+        <p id="rv-meta"></p>
+      </div>
+      <div class="room-header-actions">
+        <button class="btn btn-ghost btn-sm" onclick="showInvite()">Share</button>
+        <div class="live-pill"><div class="live-dot"></div>LIVE</div>
+      </div>
+    </div>
+
+    <div class="room-body">
+      <!-- Stage -->
+      <div class="stage-label">On stage</div>
+      <div class="speakers-grid" id="speakers-grid"></div>
+
+      <!-- Chat -->
+      <div class="chat-panel">
+        <div class="stage-label">Live chat</div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-wrap">
+          <input type="text" id="chat-input" placeholder="Say something…" maxlength="200" onkeydown="if(event.key==='Enter')sendChat()">
+          <button class="chat-send-btn" onclick="sendChat()">➤</button>
+        </div>
+      </div>
+
+      <!-- Listeners -->
+      <div style="margin-top:1.5rem;">
+        <div class="stage-label">In the room <span id="listener-count-label"></span></div>
+        <div id="listeners-list"></div>
+      </div>
+    </div>
+
+    <!-- Reactions float area -->
+    <div class="reaction-float" id="reaction-float"></div>
+
+    <!-- Room controls -->
+    <div class="room-controls">
+      <div class="reactions-bar">
+        <div class="react-btn" onclick="sendReaction('🔥')">🔥</div>
+        <div class="react-btn" onclick="sendReaction('💯')">💯</div>
+        <div class="react-btn" onclick="sendReaction('👏')">👏</div>
+        <div class="react-btn" onclick="sendReaction('😂')">😂</div>
+        <div class="react-btn" onclick="sendReaction('🏆')">🏆</div>
+        <div class="react-btn" onclick="sendReaction('🎯')">🎯</div>
+      </div>
+      <div class="controls-inner">
+        <div class="ctrl-group">
+          <div class="ctrl-btn" id="mute-btn" onclick="toggleMute()" title="Mute / unmute">🎙️</div>
+          <div class="ctrl-btn" id="hand-btn" onclick="toggleHand()" title="Raise hand">✋</div>
+        </div>
+        <div class="ctrl-btn leave" onclick="leaveRoom()" title="Leave room">🚪</div>
+        <div class="ctrl-group">
+          <div class="ctrl-btn" onclick="showInvite()" title="Invite">🔗</div>
+          <div class="ctrl-btn" id="browse-btn" onclick="browseWithMiniPlayer()" title="Browse while listening">⬇️</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily container -->
+  <div id="daily-iframe-container"></div>
+</div>
+
+<!-- Mini player -->
+<div id="mini-player">
+  <div class="mini-wave"><span></span><span></span><span></span></div>
+  <div class="mini-info">
+    <div class="mini-title" id="mini-title">Huddle</div>
+    <div class="mini-meta" id="mini-meta"></div>
+  </div>
+  <div class="mini-controls">
+    <div class="mini-btn" id="mini-mute-btn" onclick="toggleMute()" title="Mute">🎙️</div>
+    <div class="mini-btn" onclick="returnToRoom()" title="Return">↑</div>
+    <div class="mini-btn leave" onclick="leaveRoom()" title="Leave">✕</div>
+  </div>
+</div>
+
+<!-- FAB -->
+<button class="fab" id="start-fab" onclick="handleStartRoom()">+ Start a huddle</button>
+
+<!-- Create modal -->
+<div class="modal-overlay" id="create-modal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h2>Start a huddle</h2>
+    <div class="form-group">
+      <label>Title</label>
+      <input class="gl-input" type="text" id="room-title-input" placeholder="What's the conversation?" maxlength="60">
+    </div>
+    <div class="form-group">
+      <label>Topic / description</label>
+      <textarea class="gl-input" id="room-desc-input" placeholder="Add context…"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Category</label>
+      <select class="gl-input" id="room-cat-input" style="cursor:pointer;">
+        <option value="general">💬 General</option>
+        <option value="nfl">🏈 NFL</option>
+        <option value="nba">🏀 NBA</option>
+        <option value="ufc">🥊 UFC</option>
+        <option value="mlb">⚾ MLB</option>
+        <option value="soccer">⚽ Soccer</option>
+        <option value="nhl">🏒 NHL</option>
+        <option value="fantasy">📊 Fantasy</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Schedule for later?</label>
+      <input class="gl-input" type="datetime-local" id="room-schedule-input">
+    </div>
+    <div class="toggle-row">
+      <div><div class="toggle-label">Recording</div><div class="toggle-sub">Cloud record this session</div></div>
+      <div class="gl-toggle" id="record-toggle" onclick="this.classList.toggle('on')"></div>
+    </div>
+    <div id="create-error" class="error-msg" style="display:none;margin-top:8px;"></div>
+    <div style="display:flex;gap:8px;margin-top:1.5rem;">
+      <button class="btn btn-ghost" style="flex:1;" onclick="closeCreateModal()">Cancel</button>
+      <button class="btn btn-green" style="flex:2;" onclick="createRoom()">
+        <span id="create-btn-text">Start huddle</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Invite modal -->
+<div class="modal-overlay" id="invite-modal">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <h2>Invite to huddle</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;">Anyone with this link can join as a listener.</p>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-size:12px;color:var(--muted);word-break:break-all;line-height:1.6;margin-bottom:12px;" id="invite-url-text"></div>
+    <button class="btn btn-green btn-full" onclick="copyInvite()">Copy link</button>
+    <button class="btn btn-ghost btn-full" onclick="closeModal('invite-modal')" style="margin-top:8px;">Done</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- Daily.co SDK -->
+<script src="https://unpkg.com/@daily-co/daily-js"></script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, onSnapshot, addDoc, doc, getDoc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDyfaBrLbjIjgWaJb7DHf50zv7cn6lISi0",
+  authDomain: "greenlight-a8e86.firebaseapp.com",
+  projectId: "greenlight-a8e86",
+  storageBucket: "greenlight-a8e86.firebasestorage.app",
+  messagingSenderId: "367667201164",
+  appId: "1:367667201164:web:b2b6cfbf54c5d47255e7a9"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+
+
+// ── State ──
+// ── State ──
+let apiKey = localStorage.getItem('gl_api_key') || '';
+let userName = '';
+let userUID = null;
+let userPhotoURL = null;
+let callObject = null;
+
+let currentRoom = null;
+let currentRoomDocId = null;
+let handRaised = false;
+let isMuted = false;
+let isSpeaker = false;
+let rooms = [];
+let activeCategory = 'all';
+let searchQuery = '';
+let recentRooms = JSON.parse(localStorage.getItem('gl_recent') || '[]');
+let miniPlayerActive = false;
+
+// ── Boot ──
+// ── Boot ──
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = '/login.html'; return; }
+  userUID = user.uid;
+  try {
+    const snap = await getDoc(doc(db, 'users', user.uid));
+    if (snap.exists()) {
+      const d = snap.data();
+      userName = d.displayName || d.username || d.name || user.displayName || user.email.split('@')[0];
+      userPhotoURL = d.photoURL || user.photoURL || null;
+    } else {
+      userName = user.displayName || user.email.split('@')[0];
+      userPhotoURL = user.photoURL || null;
+    }
+  } catch {
+    userName = user.displayName || user.email.split('@')[0];
+  }
+  updateAvatar();
+  document.getElementById('app').style.display = 'block';
+  listenToRooms();
+  renderRecent();
+});
+
+function updateAvatar() {
+  const el = document.getElementById('user-avatar');
+  if (!el || !userName) return;
+  if (userPhotoURL) {
+    el.innerHTML = `<img src="${userPhotoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+  } else {
+    el.textContent = userName[0].toUpperCase();
+  }
+}
+
+window.changeUsername = () => { window.location.href = '/profile.html'; };
+
+
+// ── API key ──
+window.saveApiKey = async () => {
+  const key = document.getElementById('api-key-input').value.trim();
+  const btn = document.getElementById('setup-btn-text');
+  if (!key) { showErr('setup-error', 'Paste your API key.'); return; }
+  btn.innerHTML = '<span class="spinner"></span>';
+  try {
+    const res = await fetch('https://api.daily.co/v1/rooms', { headers: { Authorization: `Bearer ${key}` } });
+    if (!res.ok) throw new Error();
+    apiKey = key;
+    localStorage.setItem('gl_api_key', apiKey);
+    btn.textContent = 'Connect and start';
+    document.getElementById('setup-screen').style.display = 'none';
+    document.getElementById('create-modal').classList.add('open');
+  } catch { showErr('setup-error', 'Invalid key.'); btn.textContent = 'Connect and start'; }
+};
+
+window.joinByUrl = () => {
+  const url = document.getElementById('direct-url-input').value.trim();
+  if (!url) return;
+  document.getElementById('setup-screen').style.display = 'none';
+  enterRoomView({ name: 'Quick join', topic: '', url, live: true, startedAt: Date.now(), speakers: [], listeners: [], recording: false, category: 'general' }, false, null);
+};
+
+// ── Firebase rooms ──
+function listenToRooms() {
+  onSnapshot(collection(db, 'rooms'), snapshot => {
+    rooms = snapshot.docs.map(d => ({ ...d.data(), docId: d.id }));
+    renderLobby();
+    if (currentRoomDocId) {
+      const updated = rooms.find(r => r.docId === currentRoomDocId);
+      if (updated) { currentRoom = updated; renderRoomView(updated); }
+    }
+  });
+}
+
+// ── Lobby ──
+function renderLobby() {
+  const liveEl = document.getElementById('live-rooms');
+  const schedEl = document.getElementById('scheduled-rooms');
+  const liveCountEl = document.getElementById('live-count');
+
+  let filtered = rooms;
+  if (activeCategory !== 'all') filtered = filtered.filter(r => r.category === activeCategory);
+  if (searchQuery) filtered = filtered.filter(r => (r.name + r.topic).toLowerCase().includes(searchQuery));
+
+  const live = filtered.filter(r => r.live && !r.scheduledFor);
+  const scheduled = filtered.filter(r => r.scheduledFor && !r.live);
+
+  liveCountEl.innerHTML = live.length > 0 ? `<span class="live-pill"><span class="live-dot"></span>${live.length}</span>` : '';
+
+  liveEl.innerHTML = live.length === 0
+    ? `<div class="empty"><div class="empty-icon">🎙️</div><p>No live huddles${activeCategory !== 'all' ? ' in this category' : ''}.<br>Start the conversation.</p></div>`
+    : live.map(r => roomCardHTML(r)).join('');
+
+  schedEl.innerHTML = scheduled.length === 0
+    ? `<div class="empty" style="padding:1.5rem 1rem;"><p style="font-size:12px;">No upcoming huddles scheduled.</p></div>`
+    : scheduled.map(r => roomCardHTML(r)).join('');
+}
+
+function roomCardHTML(r) {
+  const total = (r.speakers || []).length + (r.listeners || []).length;
+  const cats = { nfl:'🏈',nba:'🏀',ufc:'🥊',mlb:'⚾',soccer:'⚽',nhl:'🏒',fantasy:'📊',general:'💬' };
+  const catIcon = cats[r.category] || '💬';
+  const schedTime = r.scheduledFor ? new Date(r.scheduledFor).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '';
+  const pips = (r.speakers || []).slice(0, 5).map(s =>
+    `<div class="speaker-pip">${s[0]?.toUpperCase()}</div>`
+  ).join('');
+  const badge = r.live
+    ? `<div class="live-pill"><div class="live-dot"></div>LIVE</div>`
+    : `<div class="soon-pill">⏰ ${schedTime}</div>`;
+
+  return `
+    <div class="room-card" onclick="clickRoom('${r.docId}')">
+      <div class="card-top">
+        <div class="card-info">
+          <div class="card-category">${catIcon} ${(r.category || 'general').toUpperCase()}</div>
+          <div class="card-title">${escHtml(r.name)}</div>
+          ${r.topic ? `<div class="card-topic">${escHtml(r.topic)}</div>` : ''}
+        </div>
+        ${badge}
+      </div>
+      <div class="card-bottom">
+        <div class="card-meta">
+          <div class="speaker-stack">${pips}</div>
+          <div class="card-meta-item">👥 ${total} ${total === 1 ? 'person' : 'people'}</div>
+          ${r.recording ? `<div class="card-meta-item">⏺ Rec</div>` : ''}
+        </div>
+        <div class="card-actions">
+          <div class="card-action-btn" onclick="event.stopPropagation();shareRoom('${r.docId}')" title="Share">🔗</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+window.clickRoom = (docId) => {
+  const room = rooms.find(r => r.docId === docId);
+  if (!room) return;
+  if (room.scheduledFor && !room.live) { showToast("This huddle hasn't started yet"); return; }
+  addToRecent(room);
+  enterRoomView(room, false, docId);
+};
+
+window.setCategory = (el, cat) => {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderLobby();
+};
+
+window.filterRooms = () => {
+  searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
+  renderLobby();
+};
+
+window.sortRooms = () => {
+  rooms.sort((a, b) => ((b.listeners||[]).length + (b.speakers||[]).length) - ((a.listeners||[]).length + (a.speakers||[]).length));
+  renderLobby();
+};
+
+// ── Recent ──
+function addToRecent(room) {
+  recentRooms = [{ docId: room.docId, name: room.name, category: room.category }, ...recentRooms.filter(r => r.docId !== room.docId)].slice(0, 6);
+  localStorage.setItem('gl_recent', JSON.stringify(recentRooms));
+  renderRecent();
+}
+
+function renderRecent() {
+  const sec = document.getElementById('recent-section');
+  const list = document.getElementById('recent-list');
+  if (!recentRooms.length) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  list.innerHTML = recentRooms.map(r => `
+    <div class="recent-chip" onclick="clickRoom('${r.docId}')">
+      <div class="recent-chip-title">${escHtml(r.name)}</div>
+      <div class="recent-chip-meta">${r.category || 'general'}</div>
+    </div>`).join('');
+}
+
+// ── Share ──
+window.shareRoom = (docId) => {
+  const room = rooms.find(r => r.docId === docId);
+  if (!room) return;
+  document.getElementById('invite-url-text').textContent = room.url || window.location.href;
+  document.getElementById('invite-modal').classList.add('open');
+};
+
+// ── Create room ──
+window.handleStartRoom = () => {
+  if (!apiKey) {
+    document.getElementById('setup-screen').style.display = 'flex';
+    document.getElementById('app').style.display = 'none';
+  } else {
+    document.getElementById('create-modal').classList.add('open');
+  }
+};
+
+window.closeCreateModal = () => document.getElementById('create-modal').classList.remove('open');
+
+window.createRoom = async () => {
+  const title = document.getElementById('room-title-input').value.trim();
+  const topic = document.getElementById('room-desc-input').value.trim();
+  const category = document.getElementById('room-cat-input').value;
+  const schedVal = document.getElementById('room-schedule-input').value;
+  const recording = document.getElementById('record-toggle').classList.contains('on');
+  const btnText = document.getElementById('create-btn-text');
+  if (!title) { showErr('create-error', 'Enter a title.'); return; }
+  btnText.innerHTML = '<span class="spinner"></span>';
+  try {
+    const isScheduled = !!schedVal;
+    let dailyUrl = null;
+    if (!isScheduled) {
+      const res = await fetch('https://api.daily.co/v1/rooms', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ privacy: 'public', properties: { enable_chat: false, enable_screenshare: false, ...(recording ? { enable_recording: 'cloud' } : {}) } })
+      });
+      if (!res.ok) throw new Error('Daily API error');
+      const data = await res.json();
+      dailyUrl = data.url;
+    }
+    const roomData = {
+      name: title, topic, category, live: !isScheduled,
+      scheduledFor: isScheduled ? new Date(schedVal).getTime() : null,
+      url: dailyUrl, startedAt: isScheduled ? null : Date.now(),
+      speakers: [userName], listeners: [], recording, createdBy: userName,
+      createdAt: serverTimestamp()
+    };
+    const docRef = await addDoc(collection(db, 'rooms'), roomData);
+    closeCreateModal();
+    btnText.textContent = 'Start huddle';
+    ['room-title-input','room-desc-input','room-schedule-input'].forEach(id => document.getElementById(id).value = '');
+    if (!isScheduled) { addToRecent({ ...roomData, docId: docRef.id }); enterRoomView({ ...roomData, docId: docRef.id }, true, docRef.id); }
+    else showToast('Huddle scheduled!');
+  } catch(e) { showErr('create-error', e.message || 'Something went wrong.'); btnText.textContent = 'Start huddle'; }
+};
+
+// ── Room view ──
+function enterRoomView(room, isHost, docId) {
+  currentRoom = room;
+  currentRoomDocId = docId;
+  isSpeaker = isHost || (room.speakers || []).includes(userName);
+  miniPlayerActive = false;
+
+  document.getElementById('lobby').style.display = 'none';
+  document.getElementById('room-view').style.display = 'flex';
+  document.getElementById('start-fab').style.display = 'none';
+  document.getElementById('mini-player').classList.remove('show');
+
+  document.getElementById('rv-title').textContent = room.name;
+
+  if (docId) {
+    const speakers = [...new Set([...(room.speakers || []), ...(isSpeaker ? [userName] : [])])];
+    const listeners = isSpeaker ? (room.listeners || []).filter(n => n !== userName) : [...new Set([...(room.listeners || []), userName])];
+    updateDoc(doc(db, 'rooms', docId), { speakers, listeners });
+  }
+  renderRoomView(room);
+  connectDailyRoom(room, isHost);
+}
+
+function renderRoomView(room) {
+  const total = (room.speakers || []).length + (room.listeners || []).length;
+  document.getElementById('rv-meta').textContent = `${total} in the room${room.recording ? ' · ⏺ recording' : ''}`;
+  document.getElementById('listener-count-label').textContent = `(${(room.listeners||[]).length})`;
+
+  document.getElementById('speakers-grid').innerHTML = (room.speakers || []).map(name => {
+    const isMe = name === userName;
+    const isHost = name === room.createdBy;
+    return `
+      <div class="speaker-card">
+        <div class="speaker-ring-wrap">
+          <div class="speaker-ring ${isMe && !isMuted ? 'speaking' : ''} ${isMe && isMuted ? 'muted' : ''}" id="sr-${safeid(name)}">
+            <div class="speaker-inner">${name[0]?.toUpperCase()}</div>
+          </div>
+          <div class="mic-dot ${isMe && isMuted ? 'muted' : 'live'}" id="md-${safeid(name)}">${isMe && isMuted ? '🔇' : '🎙'}</div>
+        </div>
+        <div class="speaker-name">${escHtml(name)}${isMe ? ' (you)' : ''}</div>
+        <div class="speaker-role-tag ${isHost ? 'host-tag' : ''}">${isHost ? '★ Host' : 'Speaker'}</div>
+      </div>`;
+  }).join('');
+
+  const listeners = room.listeners || [];
+  document.getElementById('listeners-list').innerHTML = listeners.length === 0
+    ? '<p style="font-size:12px;color:var(--muted);padding:0.5rem 0;">No other listeners yet.</p>'
+    : listeners.map(name => {
+  const isHost = currentRoom?.createdBy === userName;
+  const promoteBtn = isHost && name !== userName
+    ? `<div class="card-action-btn" onclick="promoteSpeaker('${name}')" title="Make speaker">🎤</div>`
+    : '';
+  return `
+    <div class="listener-item" id="li-${safeid(name)}">
+      <div class="listener-av">${name[0]?.toUpperCase()}</div>
+      <div class="listener-name">${escHtml(name)}${name===userName?' (you)':''}</div>
+      <div class="listener-actions">${promoteBtn}</div>
+    </div>`;
+}).join('')
+
+window.promoteSpeaker = (name) => {
+  callObject?.sendAppMessage({ action: 'promote-to-speaker', from: name }, '*');
+  if (currentRoomDocId && currentRoom) {
+    const speakers = [...new Set([...(currentRoom.speakers||[]), name])];
+    const listeners = (currentRoom.listeners||[]).filter(n => n !== name);
+    updateDoc(doc(db, 'rooms', currentRoomDocId), { speakers, listeners });
+  }
+  showToast(`${name} is now a speaker`);
+};
+
+  document.getElementById('mute-btn').style.display = isSpeaker ? 'flex' : 'none';
+  document.getElementById('mute-btn').textContent = isMuted ? '🔇' : '🎙️';
+  document.getElementById('hand-btn').style.display = !isSpeaker ? 'flex' : 'none';
+  document.getElementById('hand-btn').classList.toggle('active', handRaised);
+
+  document.getElementById('mini-title').textContent = room.name;
+  document.getElementById('mini-meta').textContent = `${total} in the room`;
+}
+
+// ── Daily ──
+async function connectDailyRoom(room, isHost) {
+  if (!room.url) { showToast('Listen-only mode -- no room URL'); return; }
+  try {
+    callObject = DailyIframe.createCallObject({ audioSource: isSpeaker, videoSource: false });
+callObject.setLocalVideo(false); // add this line
+
+    callObject.on('participant-updated', updateParticipants);
+    callObject.on('app-message', handleAppMessage);
+    callObject.on('track-started', e => {
+  if (e.participant && !e.participant.local && e.track.kind === 'audio') {
+    const existingId = 'audio-' + e.participant.session_id;
+    if (document.getElementById(existingId)) return;
+    const a = document.createElement('audio');
+    a.id = existingId;
+    a.srcObject = new MediaStream([e.track]);
+    a.autoplay = true;
+    document.getElementById('daily-iframe-container').appendChild(a);
+    const tryPlay = () => {
+      a.play().catch(() => {
+        const btn = document.getElementById('audio-unblock-btn');
+        if (!btn) {
+          const b = document.createElement('button');
+          b.id = 'audio-unblock-btn';
+          b.textContent = '🔊 Tap to hear audio';
+          b.style.cssText = 'position:fixed;bottom:120px;left:50%;transform:translateX(-50%);z-index:999;padding:12px 24px;background:#10b981;color:#fff;border:none;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;font-family:Inter,sans-serif;box-shadow:0 4px 20px rgba(16,185,129,0.4);';
+          b.onclick = () => { a.play();
+            b.remove(); };
+          document.body.appendChild(b);
+        }
+      });
+    };
+    tryPlay();
+  }
+});
+    await callObject.join({ url: room.url, userName, audioSource: isSpeaker, videoSource: false });
+    if (isMuted && isSpeaker) callObject.setLocalAudio(false);
+    if (room.recording && isHost) callObject.startRecording();
+    showToast(isHost ? '🎙️ Huddle started!' : '✅ Joined the huddle');
+  } catch(e) { showToast('⚠️ Audio error -- check mic permissions'); }
+}
+
+function updateParticipants() {
+  if (!callObject) return;
+  Object.values(callObject.participants()).forEach(p => {
+    const sid = safeid(p.user_name || 'Guest');
+    const ring = document.getElementById('sr-' + sid);
+    if (ring && !p.local) ring.classList.toggle('speaking', p.audio && !p.tracks?.audio?.off);
+  });
+}
+
+function handleAppMessage(e) {
+  const { action, from, text, emoji } = e.data || {};
+  if (action === 'raise-hand') {
+    const el = document.getElementById('li-' + safeid(from));
+    if (el && !el.querySelector('.hand-badge')) el.insertAdjacentHTML('beforeend', '<span class="hand-badge">✋</span>');
+    showToast(`${from} raised their hand`);
+  }
+  if (action === 'lower-hand') document.getElementById('li-' + safeid(from))?.querySelector('.hand-badge')?.remove();
+  if (action === 'chat' && text) addChatMessage(from, text);
+  if (action === 'reaction' && emoji) floatReaction(emoji);
+  if (action === 'promote-to-speaker' && from === userName) {
+  isSpeaker = true;
+  document.getElementById('hand-btn').style.display = 'none';
+  document.getElementById('mute-btn').style.display = 'flex';
+  showToast('🎙️ You are now a speaker!');
+  if (callObject) callObject.setLocalAudio(true);
+  isMuted = false;
+}
+}
+
+
+// ── Controls ──
+window.toggleMute = () => {
+  isMuted = !isMuted;
+  const btn = document.getElementById('mute-btn');
+  const miniBtn = document.getElementById('mini-mute-btn');
+  if (btn) btn.textContent = isMuted ? '🔇' : '🎙️';
+  if (miniBtn) miniBtn.textContent = isMuted ? '🔇' : '🎙️';
+  if (callObject) callObject.setLocalAudio(!isMuted);
+  const sid = safeid(userName);
+  const ring = document.getElementById('sr-' + sid);
+  const md = document.getElementById('md-' + sid);
+  if (ring) { ring.classList.toggle('muted', isMuted); ring.classList.toggle('speaking', !isMuted); }
+  if (md) { md.classList.toggle('muted', isMuted); md.classList.toggle('live', !isMuted); md.textContent = isMuted ? '🔇' : '🎙'; }
+};
+
+window.toggleHand = () => {
+  handRaised = !handRaised;
+  document.getElementById('hand-btn').classList.toggle('active', handRaised);
+  callObject?.sendAppMessage({ action: handRaised ? 'raise-hand' : 'lower-hand', from: userName }, '*');
+  showToast(handRaised ? '✋ Hand raised' : 'Hand lowered');
+};
+
+// ── Chat ──
+window.sendChat = () => {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addChatMessage(userName, text);
+  callObject?.sendAppMessage({ action: 'chat', from: userName, text }, '*');
+};
+
+function addChatMessage(from, text) {
+  const el = document.getElementById('chat-messages');
+  if (!el) return;
+  el.insertAdjacentHTML('beforeend', `
+    <div class="chat-msg">
+      <div class="chat-av">${from[0]?.toUpperCase()}</div>
+      <div class="chat-content">
+        <div class="chat-sender">${escHtml(from)}</div>
+        <div class="chat-text">${escHtml(text)}</div>
+      </div>
+    </div>`);
+  el.scrollTop = el.scrollHeight;
+}
+
+// ── Reactions ──
+window.sendReaction = (emoji) => {
+  floatReaction(emoji);
+  callObject?.sendAppMessage({ action: 'reaction', emoji }, '*');
+};
+
+function floatReaction(emoji) {
+  const container = document.getElementById('reaction-float');
+  if (!container) return;
+  const el = document.createElement('div');
+  el.className = 'reaction-pop';
+  el.textContent = emoji;
+  el.style.left = (20 + Math.random() * 60) + '%';
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 1900);
+}
+
+// ── Mini player / browse ──
+window.browseWithMiniPlayer = () => {
+  miniPlayerActive = true;
+  document.getElementById('room-view').style.display = 'none';
+  document.getElementById('lobby').style.display = 'block';
+  document.getElementById('start-fab').style.display = 'none';
+  document.getElementById('mini-player').classList.add('show');
+};
+
+window.returnToRoom = () => {
+  if (!currentRoom) return;
+  miniPlayerActive = false;
+  document.getElementById('lobby').style.display = 'none';
+  document.getElementById('room-view').style.display = 'flex';
+  document.getElementById('mini-player').classList.remove('show');
+};
+
+// ── Leave ──
+window.leaveRoomToLobby = () => {
+  if (callObject) browseWithMiniPlayer();
+  else returnToLobbyClean();
+};
+
+window.leaveRoom = async () => {
+  if (callObject) { await callObject.leave(); callObject.destroy(); callObject = null; }
+  if (currentRoomDocId) {
+    const room = rooms.find(r => r.docId === currentRoomDocId);
+    if (room) {
+      if (room.createdBy === userName) {
+        await deleteDoc(doc(db, 'rooms', currentRoomDocId));
+      } else {
+        await updateDoc(doc(db, 'rooms', currentRoomDocId), {
+          speakers: (room.speakers || []).filter(n => n !== userName),
+          listeners: (room.listeners || []).filter(n => n !== userName)
+        });
+      }
+    }
+  }
+  handRaised = false; isMuted = false; isSpeaker = false;
+  currentRoom = null; currentRoomDocId = null; miniPlayerActive = false;
+  returnToLobbyClean();
+};
+
+function returnToLobbyClean() {
+  document.getElementById('room-view').style.display = 'none';
+  document.getElementById('lobby').style.display = 'block';
+  document.getElementById('start-fab').style.display = 'flex';
+  document.getElementById('mini-player').classList.remove('show');
+}
+
+// ── Invite ──
+window.showInvite = () => {
+  if (!currentRoom) return;
+  document.getElementById('invite-url-text').textContent = currentRoom.url || window.location.href;
+  document.getElementById('invite-modal').classList.add('open');
+};
+
+window.copyInvite = () => {
+  navigator.clipboard.writeText(document.getElementById('invite-url-text').textContent).then(() => showToast('🔗 Link copied!'));
+  closeModal('invite-modal');
+};
+
+window.closeModal = id => document.getElementById(id).classList.remove('open');
+
+// ── Helpers ──
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = msg; el.style.display = 'block'; }
+}
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function safeid(n) { return encodeURIComponent(n).replace(/[%.]/g,'_'); }
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>
