@@ -227,8 +227,10 @@ header{position:sticky;top:0;z-index:50;padding:0 1.25rem;height:60px;display:fl
 .chat-send-btn:hover{box-shadow:0 0 16px rgba(16,185,129,0.4);}
 
 /* Reactions float */
-.reaction-float{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:30;pointer-events:none;}
-.reaction-pop{font-size:22px;animation:floatUp 1.8s ease forwards;pointer-events:none;}
+.reaction-float{position:fixed;bottom:120px;left:0;right:0;height:120px;z-index:30;pointer-events:none;}
+
+.reaction-pop{display:flex;flex-direction:column;align-items:center;gap:2px;animation:floatUp 1.8s ease forwards;pointer-events:none;position:absolute;}
+
 @keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-80px) scale(1.3);}}
 
 /* Room controls */
@@ -558,6 +560,8 @@ let activeCategory = 'all';
 let searchQuery = '';
 let recentRooms = JSON.parse(localStorage.getItem('gl_recent') || '[]');
 let miniPlayerActive = false;
+let userPhotos = {}; // name → photoURL cache for all participants
+
 
 // ── Boot ──
 // ── Boot ──
@@ -577,10 +581,12 @@ onAuthStateChanged(auth, async (user) => {
   } catch {
     userName = user.displayName || user.email.split('@')[0];
   }
+    userPhotos[userName] = userPhotoURL || null;
   updateAvatar();
   document.getElementById('app').style.display = 'block';
   listenToRooms();
   renderRecent();
+
 });
 
 function updateAvatar() {
@@ -828,7 +834,10 @@ function renderRoomView(room) {
       <div class="speaker-card">
         <div class="speaker-ring-wrap">
           <div class="speaker-ring ${isMe && !isMuted ? 'speaking' : ''} ${isMe && isMuted ? 'muted' : ''}" id="sr-${safeid(name)}">
-            <div class="speaker-inner">${name[0]?.toUpperCase()}</div>
+            <div class="speaker-inner" id="spk-av-${safeid(name)}">${avatarInner(name)}</div>
+
+
+
           </div>
           <div class="mic-dot ${isMe && isMuted ? 'muted' : 'live'}" id="md-${safeid(name)}">${isMe && isMuted ? '🔇' : '🎙'}</div>
         </div>
@@ -847,7 +856,8 @@ function renderRoomView(room) {
     : '';
   return `
     <div class="listener-item" id="li-${safeid(name)}">
-      <div class="listener-av">${name[0]?.toUpperCase()}</div>
+      <div class="listener-av" id="av-${safeid(name)}">${avatarInner(name)}</div>
+
       <div class="listener-name">${escHtml(name)}${name===userName?' (you)':''}</div>
       <div class="listener-actions">${promoteBtn}</div>
     </div>`;
@@ -911,6 +921,8 @@ callObject.setLocalVideo(false); // add this line
     if (isMuted && isSpeaker) callObject.setLocalAudio(false);
     if (room.recording && isHost) callObject.startRecording();
     showToast(isHost ? '🎙️ Huddle started!' : '✅ Joined the huddle');
+    setTimeout(() => broadcastProfile(), 800); // let others settle first, then share photo
+
   } catch(e) { showToast('⚠️ Audio error -- check mic permissions'); }
 }
 
@@ -923,8 +935,18 @@ function updateParticipants() {
   });
 }
 
-function handleAppMessage(e) {
-  const { action, from, text, emoji } = e.data || {};
+async function handleAppMessage(e) {
+  const { action, from, text, emoji, photo } = e.data || {};
+
+  if (action === 'profile-sync' && from) {
+    userPhotos[from] = photo || null;
+    // Update any already-rendered avatar for this person
+    ['av-', 'spk-av-'].forEach(prefix => {
+      const av = document.getElementById(prefix + safeid(from));
+      if (av) av.innerHTML = avatarInner(from);
+    });
+
+  }
   if (action === 'raise-hand') {
     const el = document.getElementById('li-' + safeid(from));
     if (el && !el.querySelector('.hand-badge')) el.insertAdjacentHTML('beforeend', '<span class="hand-badge">✋</span>');
@@ -932,16 +954,28 @@ function handleAppMessage(e) {
   }
   if (action === 'lower-hand') document.getElementById('li-' + safeid(from))?.querySelector('.hand-badge')?.remove();
   if (action === 'chat' && text) addChatMessage(from, text);
-  if (action === 'reaction' && emoji) floatReaction(emoji);
+  if (action === 'reaction' && emoji) floatReaction(emoji, from);
   if (action === 'promote-to-speaker' && from === userName) {
-  isSpeaker = true;
-  document.getElementById('hand-btn').style.display = 'none';
-  document.getElementById('mute-btn').style.display = 'flex';
-  showToast('🎙️ You are now a speaker!');
-  if (callObject) callObject.setLocalAudio(true);
-  isMuted = false;
+    isSpeaker = true;
+    isMuted = false;
+    document.getElementById('hand-btn').style.display = 'none';
+    document.getElementById('mute-btn').style.display = 'flex';
+    document.getElementById('mute-btn').textContent = '🎙️';
+    showToast('🎙️ You are now on stage -- mic is live!');
+    if (callObject) {
+      try {
+        await callObject.setInputDevicesAsync({ audioDeviceId: 'default' });
+        callObject.setLocalAudio(true);
+      } catch(_) { callObject.setLocalAudio(true); }
+    }
+    const sid = safeid(userName);
+    const ring = document.getElementById('sr-' + sid);
+    const md = document.getElementById('md-' + sid);
+    if (ring) { ring.classList.remove('muted'); ring.classList.add('speaking'); }
+    if (md) { md.classList.remove('muted'); md.classList.add('live'); md.textContent = '🎙'; }
+  }
 }
-}
+
 
 
 // ── Controls ──
@@ -966,6 +1000,11 @@ window.toggleHand = () => {
   showToast(handRaised ? '✋ Hand raised' : 'Hand lowered');
 };
 
+// Broadcast own photo so everyone can cache it
+function broadcastProfile() {
+  callObject?.sendAppMessage({ action: 'profile-sync', from: userName, photo: userPhotoURL || '' }, '*');
+}
+
 // ── Chat ──
 window.sendChat = () => {
   const input = document.getElementById('chat-input');
@@ -981,7 +1020,8 @@ function addChatMessage(from, text) {
   if (!el) return;
   el.insertAdjacentHTML('beforeend', `
     <div class="chat-msg">
-      <div class="chat-av">${from[0]?.toUpperCase()}</div>
+      <div class="chat-av">${avatarInner(from)}</div>
+
       <div class="chat-content">
         <div class="chat-sender">${escHtml(from)}</div>
         <div class="chat-text">${escHtml(text)}</div>
@@ -991,20 +1031,41 @@ function addChatMessage(from, text) {
 }
 
 // ── Reactions ──
+// ── Avatar helper ──
+// Returns the inner HTML for a circle: photo if cached, else initial
+function avatarInner(name) {
+  const photo = userPhotos[name];
+  if (photo) return `<img src="${photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.parentElement.textContent='${(name[0]||'?').toUpperCase()}'">`;
+  return (name[0] || '?').toUpperCase();
+}
+
+// ── Reactions ──
 window.sendReaction = (emoji) => {
-  floatReaction(emoji);
-  callObject?.sendAppMessage({ action: 'reaction', emoji }, '*');
+  floatReaction(emoji, userName);
+  callObject?.sendAppMessage({ action: 'reaction', emoji, from: userName }, '*');
 };
 
-function floatReaction(emoji) {
+function floatReaction(emoji, from) {
   const container = document.getElementById('reaction-float');
   if (!container) return;
-  const el = document.createElement('div');
-  el.className = 'reaction-pop';
-  el.textContent = emoji;
-  el.style.left = (20 + Math.random() * 60) + '%';
-  container.appendChild(el);
-  setTimeout(() => el.remove(), 1900);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'reaction-pop';
+  wrap.style.left = (10 + Math.random() * 70) + '%';
+
+  // Avatar circle the emoji bursts from
+  const circle = document.createElement('div');
+  circle.style.cssText = 'width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid var(--border-strong);background:var(--green-dim);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--green);flex-shrink:0;margin:0 auto 4px;';
+  circle.innerHTML = avatarInner(from || '?');
+
+  const emojiEl = document.createElement('div');
+  emojiEl.textContent = emoji;
+  emojiEl.style.cssText = 'font-size:22px;text-align:center;';
+
+  wrap.appendChild(emojiEl);
+  wrap.appendChild(circle);
+  container.appendChild(wrap);
+  setTimeout(() => wrap.remove(), 1900);
 }
 
 // ── Mini player / browse ──
