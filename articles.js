@@ -2042,7 +2042,7 @@ const articleEngineData = {
 
 <div class="nc-standings-wrap">
   <div class="nc-standings-head">
-    <span>#</span><span>Team</span><span>Projected</span>
+    <span></span><span>Team</span><span>Projected</span>
   </div>
   <div class="nc-standings-row"><span class="nc-seed">1</span><span class="nc-team-cell">New York Knicks</span><span class="nc-wl">53-29</span></div>
   <div class="nc-standings-row"><span class="nc-seed">2</span><span class="nc-team-cell">Detroit Pistons</span><span class="nc-wl">53-29</span></div>
@@ -2103,7 +2103,7 @@ const articleEngineData = {
 
 <div class="nc-standings-wrap">
   <div class="nc-standings-head">
-    <span>#</span><span>Team</span><span>Projected</span>
+    <span></span><span>Team</span><span>Projected</span>
   </div>
   <div class="nc-standings-row"><span class="nc-seed">1</span><span class="nc-team-cell">San Antonio Spurs</span><span class="nc-wl">62-20</span></div>
   <div class="nc-standings-row"><span class="nc-seed">2</span><span class="nc-team-cell">Oklahoma City Thunder</span><span class="nc-wl">60-22</span></div>
