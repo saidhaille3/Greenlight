@@ -7359,8 +7359,18 @@ document.getElementById('live-field-position-label').textContent = formatFieldPo
 
 
   /* End zone labels */
-  document.getElementById('live-ez-away').textContent = away.team.abbreviation;
-  document.getElementById('live-ez-home').textContent = home.team.abbreviation;
+  /* End zone labels -- show whose end zone it is (who scores there) */
+  function updateEndZoneLabels() {
+    const attacking = _nflLiveGame.hasPossession === 'away' ? away : home;
+    const defending = _nflLiveGame.hasPossession === 'away' ? home : away;
+    // Left end zone = defending team's end zone (where possession team scores)
+    document.getElementById('live-ez-away').textContent = defending.team.abbreviation;
+    // Right end zone = possession team's own end zone (their back)
+    document.getElementById('live-ez-home').textContent = attacking.team.abbreviation;
+  }
+  updateEndZoneLabels();
+  window._nflUpdateEndZones = updateEndZoneLabels;
+
 
   /* Yard markers */
   const markers = document.getElementById('live-yard-markers');
@@ -7471,9 +7481,11 @@ document.getElementById('live-field-position-label').textContent = formatFieldPo
           }
           if (sit?.yardLine && _nflLiveGame) {
             _nflLiveGame.yardLine = sit.yardLine;
-            _nflLiveGame.hasPossession = sit.possession === h2?.id ? 'home' : 'away';
+               _nflLiveGame.hasPossession = sit.possession === h2?.id ? 'home' : 'away';
             const possLogo = _nflLiveGame.hasPossession === 'home' ? h2.team.logo : a2.team.logo;
             document.getElementById('live-poss-logo').src = possLogo;
+            if (window._nflUpdateEndZones) window._nflUpdateEndZones();
+
           }
           nflRenderPBP(d2, away, home);
         } catch (e) {}
