@@ -7423,13 +7423,16 @@ function formatFieldPosition(sit, awayAbbr, homeAbbr, hasPossession) {
   const posTeam = hasPossession === 'home' ? homeAbbr : awayAbbr;
   const defTeam = hasPossession === 'home' ? awayAbbr : homeAbbr;
   const yl = sit.yardLine;
-  // yardLine > 50 means opponent's side (red zone / scoring territory)
-  // yardLine <= 50 means own side (or midfield)
-if (yl === 50) return 'Ball on the 50';
-if (yl > 50) return `${posTeam} on the ${defTeam} ${100 - yl}`;
-return `${posTeam} on their own ${yl}`;
+  const side = sit.yardLineSide || ''; // ESPN sends this!
 
+  if (yl === 50) return 'Ball on the 50';
+
+  // If the side matches the possession team, they're on their OWN side
+  if (side === posTeam) return `${posTeam} on their own ${yl}`;
+  // Otherwise they're on the opponent's side
+  return `${posTeam} on the ${defTeam} ${yl}`;
 }
+
 
 
 /* ── LOAD GAME DATA ── */
