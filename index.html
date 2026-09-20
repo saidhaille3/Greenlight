@@ -7423,13 +7423,11 @@ function formatFieldPosition(sit, awayAbbr, homeAbbr, hasPossession) {
   const posTeam = hasPossession === 'home' ? homeAbbr : awayAbbr;
   const defTeam = hasPossession === 'home' ? awayAbbr : homeAbbr;
   const yl = sit.yardLine;
-  const side = sit.yardLineSide || ''; // ESPN sends this!
+  const side = (sit.yardLineSide || '').toUpperCase();
 
   if (yl === 50) return 'Ball on the 50';
-
-  // If the side matches the possession team, they're on their OWN side
-  if (side === posTeam) return `${posTeam} on their own ${yl}`;
-  // Otherwise they're on the opponent's side
+  const onOwnSide = side === posTeam.toUpperCase();
+  if (onOwnSide) return `${posTeam} on their own ${yl}`;
   return `${posTeam} on the ${defTeam} ${yl}`;
 }
 
