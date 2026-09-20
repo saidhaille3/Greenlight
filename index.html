@@ -7336,7 +7336,8 @@ async function nflOpenLiveGame(gameId, away, home, status, wx, comp) {
   /* Down + distance */
   const sit = comp.situation;
   document.getElementById('live-down-text').textContent       = sit?.shortDownDistanceText || 'Kickoff';
-document.getElementById('live-field-position-label').textContent = formatFieldPosition(sit, away.team.abbreviation, home.team.abbreviation, _nflLiveGame.hasPossession);
+document.getElementById('live-field-position-label').textContent = sit.possessionText || '';
+
 
 
 
@@ -7459,7 +7460,8 @@ async function nflLoadLiveData(gameId, away, home, wx) {
           const sit = comp2?.situation;
           if (sit?.shortDownDistanceText) {
             document.getElementById('live-down-text').textContent = sit.shortDownDistanceText;
-document.getElementById('live-field-position-label').textContent = formatFieldPosition(sit, a2.team.abbreviation, h2.team.abbreviation, _nflLiveGame.hasPossession);
+document.getElementById('live-field-position-label').textContent = sit.possessionText || '';
+
 
 
           }
