@@ -7426,10 +7426,10 @@ function formatFieldPosition(sit, awayAbbr, homeAbbr, hasPossession) {
   const side = (sit.yardLineSide || '').toUpperCase();
 
   if (yl === 50) return 'Ball on the 50';
-  const onOwnSide = side === posTeam.toUpperCase();
-  if (onOwnSide) return `${posTeam} on their own ${yl}`;
+  if (side === posTeam.toUpperCase()) return `${posTeam} on their own ${yl}`;
   return `${posTeam} on the ${defTeam} ${yl}`;
 }
+
 
 
 
