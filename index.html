@@ -7354,7 +7354,8 @@ async function nflOpenLiveGame(gameId, away, home, status, wx, comp) {
   /* Down + distance */
   const sit = comp.situation;
   document.getElementById('live-down-text').textContent       = sit?.shortDownDistanceText || 'Kickoff';
-document.getElementById('live-field-position-label').textContent = sit?.possessionText ? `Ball on the ${sit.possessionText}` : (sit?.yardLine ? `Ball on the ${sit.yardLine}` : '');
+document.getElementById('live-field-position-label').textContent = formatFieldPosition(sit, away.team.abbreviation, home.team.abbreviation, _nflLiveGame.hasPossession);
+
 
 
   /* End zone labels */
@@ -7425,6 +7426,18 @@ function startFieldAnimation() {
   }
   loop();
 }
+function formatFieldPosition(sit, awayAbbr, homeAbbr, hasPossession) {
+  if (!sit?.yardLine) return '';
+  const posTeam = hasPossession === 'home' ? homeAbbr : awayAbbr;
+  const defTeam = hasPossession === 'home' ? awayAbbr : homeAbbr;
+  const yl = sit.yardLine;
+  // yardLine > 50 means opponent's side (red zone / scoring territory)
+  // yardLine <= 50 means own side (or midfield)
+  if (yl === 50) return 'Ball on the 50';
+  if (yl > 50) return `Ball on the ${defTeam} ${100 - yl}`;
+  return `Ball on Own ${yl}`;
+}
+
 
 /* ── LOAD GAME DATA ── */
 async function nflLoadLiveData(gameId, away, home, wx) {
@@ -7452,7 +7465,8 @@ async function nflLoadLiveData(gameId, away, home, wx) {
           const sit = comp2?.situation;
           if (sit?.shortDownDistanceText) {
             document.getElementById('live-down-text').textContent = sit.shortDownDistanceText;
-document.getElementById('live-field-position-label').textContent = sit.possessionText ? `Ball on the ${sit.possessionText}` : (sit.yardLine ? `Ball on the ${sit.yardLine}` : '');
+document.getElementById('live-field-position-label').textContent = formatFieldPosition(sit, a2.team.abbreviation, h2.team.abbreviation, _nflLiveGame.hasPossession);
+
 
           }
           if (sit?.yardLine && _nflLiveGame) {
