@@ -7354,7 +7354,8 @@ async function nflOpenLiveGame(gameId, away, home, status, wx, comp) {
   /* Down + distance */
   const sit = comp.situation;
   document.getElementById('live-down-text').textContent       = sit?.shortDownDistanceText || 'Kickoff';
-  document.getElementById('live-field-position-label').textContent = sit?.yardLine ? `Ball on the ${sit.yardLine}` : '';
+document.getElementById('live-field-position-label').textContent = sit?.possessionText ? `Ball on the ${sit.possessionText}` : (sit?.yardLine ? `Ball on the ${sit.yardLine}` : '');
+
 
   /* End zone labels */
   document.getElementById('live-ez-away').textContent = away.team.abbreviation;
@@ -7451,7 +7452,8 @@ async function nflLoadLiveData(gameId, away, home, wx) {
           const sit = comp2?.situation;
           if (sit?.shortDownDistanceText) {
             document.getElementById('live-down-text').textContent = sit.shortDownDistanceText;
-            document.getElementById('live-field-position-label').textContent = sit.yardLine ? `Ball on the ${sit.yardLine}` : '';
+document.getElementById('live-field-position-label').textContent = sit.possessionText ? `Ball on the ${sit.possessionText}` : (sit.yardLine ? `Ball on the ${sit.yardLine}` : '');
+
           }
           if (sit?.yardLine && _nflLiveGame) {
             _nflLiveGame.yardLine = sit.yardLine;
