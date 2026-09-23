@@ -708,106 +708,153 @@ filter: invert(1) brightness(2);
 
 
 </div><!-- Hero Section -->
-<section class="max-w-7xl mx-auto px-6 py-12">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-        <div>
-            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter dark:text-white">Latest <span class="opacity-20">Stories</span></h1>
-        </div>
-        
-<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
-    <button onclick="filterStories('all')" id="filter-all" class="filter-btn px-6 py-2 rounded-full bg-black dark:bg-white text-white dark:text-black text-[10px] font-black uppercase tracking-widest transition-all">All</button>
-    <button onclick="filterStories('nfl')" id="filter-nfl" class="filter-btn px-6 py-2 rounded-full border border-black/10 dark:border-white/10 dark:text-white text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all">NFL</button>
-    <button onclick="filterStories('nba')" id="filter-nba" class="filter-btn px-6 py-2 rounded-full border border-black/10 dark:border-white/10 dark:text-white text-[10px] font-black uppercase tracking-widest hover:bg-amber-500 hover:text-white transition-all">NBA</button>
-</div>
+<section class="max-w-4xl mx-auto px-5 py-14" id="archiveSection">
+
+    <div class="mb-14">
+        <p class="text-[10px] font-black uppercase tracking-[0.4em] text-amber-500 mb-3">Archive</p>
+     
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-             <article data-league="nba"
- onclick="openReader('lebron-philly')" class="md:col-span-2 lg:col-span-2 group cursor-pointer">
-            <div class="relative aspect-[16/9] md:aspect-[21/9] rounded-[2.5rem] overflow-hidden mb-6">
-                <img src="images/LeBrontrade.jpeg" alt="Chris Finch" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                <div class="absolute top-6 left-6">
-                </div>
-            </div>
-            <div class="max-w-3xl">
-                <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
->The Deception: Lebron, Philly and The Ghost of Dream Teams Past</h3>
-                <div class="flex items-center gap-4 mt-6">
-                </div>
-            </div>
-        </article>
-        <article data-league="nba"
- onclick="openReader('finch-seat')" class="md:col-span-2 lg:col-span-2 group cursor-pointer">
-            <div class="relative aspect-[16/9] md:aspect-[21/9] rounded-[2.5rem] overflow-hidden mb-6">
-                <img src="images/finch.png" alt="Chris Finch" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                <div class="absolute top-6 left-6">
-                </div>
-            </div>
-            <div class="max-w-3xl">
-                <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
->Good Enough Is The Enemy Of Great</h3>
-                <div class="flex items-center gap-4 mt-6">
-                </div>
-            </div>
-        </article>
-   
-
-        <article data-league="nba"
- onclick="openReader('wemby-mvp')" class="group cursor-pointer">
-            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
-                <img src="images/wemby.jpeg" alt="Wemby" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                <div class="absolute top-6 left-6">
-                </div>
-            </div>
-            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
->The Case For Youngest NBA MVP Ever</h3>
-        </article>
-
-         <article data-league="nfl"
- onclick="openReader('jett-return')" class="group cursor-pointer">
-            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
-                <img src="images/jj.jpeg" alt="Justin Jefferson" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
->Return Of The Jetta</h3>
-        </article>
-
-        <article data-league="nba"
- onclick="openReader('nba-2026-27-climate')" class="group cursor-pointer">
-            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
-                <img src="images/2026nbanarr.jpeg" alt="NBA 2026-27 Climate" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
->The 2026-27 NBA Climate</h3>
-        </article>
-
-        <article data-league="nfl"
- onclick="openReader('vikings-2026')" class="group cursor-pointer">
-            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
-                <img src="images/vikingstraining26.jpeg" alt="Vikings 2026" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-            </div>
-            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
->Same Song, Different Verse</h3>
-        </article>
-
-         <article data-league="nfl" class="group cursor-default">
-            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
-                <img src="images/darnold.jpeg" alt="Darnold" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-50">
-                <div class="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                    <span class="text-[9px] font-black uppercase tracking-[0.4em] text-amber-400 border border-amber-400/50 bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full">Coming Soon</span>
-                    <p class="text-white font-black uppercase tracking-tighter text-xl text-center px-6 leading-tight drop-shadow-lg">Some Of Us Already Knew</p>
-                </div>
-            </div>
-            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
-Some Of Us Already Knew</h3>
-        </article>
 
 
+    <div id="archiveTimeline" class="space-y-3"></div>
 
-    </div>
-
-    
 </section>
+
+<style>
+.month-cards-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.month-cards-wrap.open {
+    grid-template-rows: 1fr;
+}
+.month-cards-inner { overflow: hidden; }
+.archive-card { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.archive-card:active { transform: scale(0.97); }
+.chevron-icon { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.chevron-icon.open { transform: rotate(180deg); }
+</style>
+
+<script>
+(function() {
+    const EDITORIAL_IDS = [
+        'nba-2026-27-climate',
+        'vikings-2026',
+        'darnold-knew',
+        'lebron-philly',
+        'wemby-mvp',
+        'finch-seat',
+        'jett-return'
+    ];
+
+    const COMING_SOON = ['darnold-knew'];
+
+    const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    function buildArchive() {
+        if (typeof articleEngineData === 'undefined') { setTimeout(buildArchive, 100); return; }
+
+        const months = {};
+        EDITORIAL_IDS.forEach(id => {
+            const data = articleEngineData[id];
+            if (!data) return;
+            const date = new Date(data.published);
+            const key = `${date.getFullYear()}-${date.getMonth()}`;
+            if (!months[key]) months[key] = { year: date.getFullYear(), month: date.getMonth(), articles: [] };
+            months[key].articles.push({ id, data, date });
+        });
+
+        const sortedMonths = Object.values(months).sort((a, b) =>
+            b.year !== a.year ? b.year - a.year : b.month - a.month
+        );
+
+        const timeline = document.getElementById('archiveTimeline');
+        if (!timeline) return;
+        timeline.innerHTML = '';
+
+        sortedMonths.forEach((group, groupIndex) => {
+            const isOpen = groupIndex === 0;
+            const monthLabel = MONTH_NAMES[group.month];
+            const count = group.articles.length;
+            group.articles.sort((a, b) => b.date - a.date);
+
+            const block = document.createElement('div');
+            block.className = 'border border-black/8 dark:border-white/8 rounded-[1.75rem] overflow-hidden';
+
+            const header = document.createElement('button');
+            header.className = 'w-full flex items-center justify-between px-6 py-5 md:px-8 md:py-6 hover:bg-black/[0.02] dark:hover:bg-white/[0.03] transition-colors';
+            header.innerHTML = `
+                <div class="flex items-center gap-4">
+<span class="text-xl md:text-2xl dark:text-white" style="font-family:'DM Serif Display',serif;">${monthLabel} ${group.year}</span>
+
+                    <span class="text-[9px] font-black uppercase tracking-[0.25em] px-3 py-1 rounded-full bg-black/5 dark:bg-white/8 text-black/40 dark:text-white/40">${count} ${count === 1 ? 'story' : 'stories'}</span>
+                </div>
+                <svg class="chevron-icon w-4 h-4 text-black/30 dark:text-white/30 flex-shrink-0 ${isOpen ? 'open' : ''}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                </svg>`;
+
+            const wrap = document.createElement('div');
+            wrap.className = `month-cards-wrap ${isOpen ? 'open' : ''}`;
+
+            const inner = document.createElement('div');
+            inner.className = 'month-cards-inner';
+
+            const grid = document.createElement('div');
+            grid.className = 'px-4 pb-5 pt-1 md:px-6 md:pb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4';
+
+            group.articles.forEach(({ id, data }) => {
+                const isComingSoon = COMING_SOON.includes(id);
+                const tagColor = data.tag.startsWith('NBA') ? 'text-blue-500' : 'text-emerald-500';
+
+                const card = document.createElement('div');
+                card.className = `archive-card rounded-[1.25rem] overflow-hidden bg-black/[0.02] dark:bg-white/[0.03] border border-black/5 dark:border-white/5 ${isComingSoon ? 'cursor-default' : 'cursor-pointer'}`;
+
+                if (!isComingSoon) card.onclick = () => openReader(id);
+
+                card.innerHTML = `
+                    <div class="relative aspect-[16/9] overflow-hidden">
+                        <img src="${data.hero}" alt="${data.title}" class="w-full h-full object-cover ${isComingSoon ? 'brightness-50' : ''}" style="transition:transform 0.6s cubic-bezier(0.16,1,0.3,1)">
+                        ${isComingSoon ? `<div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-[8px] font-black uppercase tracking-[0.4em] text-amber-400 border border-amber-400/50 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full">Coming Soon</span>
+                        </div>` : ''}
+                        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-[9px] font-black uppercase tracking-[0.25em] ${tagColor} mb-2">${data.tag}</p>
+                        <h3 class="text-base leading-snug dark:text-white ${isComingSoon ? 'opacity-40' : ''}" style="font-family:'DM Serif Display',serif;">${data.title}</h3>
+                        <p class="text-[10px] font-medium text-black/30 dark:text-white/30 mt-2 uppercase tracking-widest">${data.published}</p>
+                    </div>`;
+
+                if (!isComingSoon) {
+                    const img = card.querySelector('img');
+                    card.addEventListener('mouseenter', () => img.style.transform = 'scale(1.05)');
+                    card.addEventListener('mouseleave', () => img.style.transform = 'scale(1)');
+                }
+
+                grid.appendChild(card);
+            });
+
+            inner.appendChild(grid);
+            wrap.appendChild(inner);
+
+            header.addEventListener('click', () => {
+                const chevron = header.querySelector('.chevron-icon');
+                const isNowOpen = wrap.classList.toggle('open');
+                chevron.classList.toggle('open', isNowOpen);
+            });
+
+            block.appendChild(header);
+            block.appendChild(wrap);
+            timeline.appendChild(block);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', buildArchive);
+})();
+</script>
+
 <section class="max-w-7xl mx-auto px-6 py-12">
     <div onclick="openScoutingDashboard()" class="group relative overflow-hidden rounded-[2.5rem] cursor-pointer transition-all duration-500 hover:scale-[1.02] shadow-[0_20px_50px_rgba(29,66,138,0.2)] dark:shadow-[0_20px_50px_rgba(29,66,138,0.4)] border border-black/5 dark:border-white/10">
         
