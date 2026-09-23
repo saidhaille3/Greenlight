@@ -7,9 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Greenlight Sports Network </title>
-    <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="articles.js"></script>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -105,6 +108,8 @@ video::-webkit-media-controls-fullscreen-button { display: none !important; }
     display: block;
 }
 
+
+
 /* Custom Scrollbar for Reader */
 #greenlightReader::-webkit-scrollbar { width: 4px; }
 #greenlightReader::-webkit-scrollbar-track { background: transparent; }
@@ -139,7 +144,8 @@ video::-webkit-media-controls-fullscreen-button { display: none !important; }
             --glass-border: rgba(0, 0, 0, 0.08);
         }
 
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=DM+Serif+Display:ital@0;1&display=swap');
+
     
     body { 
         font-family: 'Inter', sans-serif; 
@@ -724,7 +730,8 @@ filter: invert(1) brightness(2);
                 </div>
             </div>
             <div class="max-w-3xl">
-                <h3 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] dark:text-white group-hover:text-amber-500 transition-colors">The Deception: Lebron, Philly and The Ghost of Dream Teams Past</h3>
+                <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
+>The Deception: Lebron, Philly and The Ghost of Dream Teams Past</h3>
                 <div class="flex items-center gap-4 mt-6">
                 </div>
             </div>
@@ -737,7 +744,8 @@ filter: invert(1) brightness(2);
                 </div>
             </div>
             <div class="max-w-3xl">
-                <h3 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] dark:text-white group-hover:text-amber-500 transition-colors">Good Enough Is The Enemy Of Great</h3>
+                <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
+>Good Enough Is The Enemy Of Great</h3>
                 <div class="flex items-center gap-4 mt-6">
                 </div>
             </div>
@@ -751,19 +759,53 @@ filter: invert(1) brightness(2);
                 <div class="absolute top-6 left-6">
                 </div>
             </div>
-            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors">The Case For Youngest NBA MVP Ever</h3>
+            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
+>The Case For Youngest NBA MVP Ever</h3>
         </article>
 
-        <article data-league="nfl"
+         <article data-league="nfl"
  onclick="openReader('jett-return')" class="group cursor-pointer">
             <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
                 <img src="images/jj.jpeg" alt="Justin Jefferson" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
             </div>
-            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors">Return Of The Jetta</h3>
+            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
+>Return Of The Jetta</h3>
+        </article>
+
+        <article data-league="nba"
+ onclick="openReader('nba-2026-27-climate')" class="group cursor-pointer">
+            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
+                <img src="images/2026nbanarr.jpeg" alt="NBA 2026-27 Climate" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            </div>
+            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
+>The 2026-27 NBA Climate</h3>
+        </article>
+
+        <article data-league="nfl"
+ onclick="openReader('vikings-2026')" class="group cursor-pointer">
+            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
+                <img src="images/vikingstraining26.jpeg" alt="Vikings 2026" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            </div>
+            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
+>Same Song, Different Verse</h3>
+        </article>
+
+         <article data-league="nfl" class="group cursor-default">
+            <div class="relative aspect-square rounded-[2.5rem] overflow-hidden mb-6">
+                <img src="images/darnold.jpeg" alt="Darnold" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-50">
+                <div class="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                    <span class="text-[9px] font-black uppercase tracking-[0.4em] text-amber-400 border border-amber-400/50 bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full">Coming Soon</span>
+                    <p class="text-white font-black uppercase tracking-tighter text-xl text-center px-6 leading-tight drop-shadow-lg">Some Of Us Already Knew</p>
+                </div>
+            </div>
+            <h3 class="text-2xl font-black uppercase tracking-tighter leading-tight dark:text-white group-hover:text-amber-500 transition-colors"
+Some Of Us Already Knew</h3>
         </article>
 
 
+
     </div>
+
     
 </section>
 <section class="max-w-7xl mx-auto px-6 py-12">
@@ -1108,7 +1150,30 @@ window.toggleUserDashboard = () => {
     if (localStorage.getItem('theme') === 'dark') {
         document.documentElement.classList.add('dark');
     }
+
+    function filterStories(league) {
+        const articles = document.querySelectorAll('[data-league]');
+        articles.forEach(article => {
+            if (league === 'all' || article.dataset.league === league) {
+                article.style.display = '';
+            } else {
+                article.style.display = 'none';
+            }
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('bg-black', 'dark:bg-white', 'text-white', 'dark:text-black', 'bg-amber-500');
+            btn.classList.add('border', 'border-black/10', 'dark:border-white/10', 'dark:text-white');
+        });
+
+        const active = document.getElementById('filter-' + league);
+        if (active) {
+            active.classList.remove('border', 'border-black/10', 'dark:border-white/10');
+            active.classList.add('bg-black', 'dark:bg-white', 'text-white', 'dark:text-black');
+        }
+    }
 </script>
+
 <div id="gameModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-6 transition-all duration-300">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-xl" onclick="closeGameModal()"></div>
 
@@ -2079,6 +2144,8 @@ window.closeProfile = () => {
 </style>
 
 <div id="greenlightReader" class="fixed inset-0 z-[300] bg-white dark:bg-[#0a0a0a] translate-x-full reader-transition overflow-y-auto hidden">
+
+
     <button onclick="closeReader()" class="fixed top-6 right-6 z-[310] w-12 h-12 flex items-center justify-center rounded-full bg-black/5 dark:bg-white/5 backdrop-blur-xl text-black dark:text-white hover:scale-110 transition-all">
         <i class="fa-solid fa-xmark text-xl"></i>
     </button>
