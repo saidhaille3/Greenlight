@@ -3270,7 +3270,7 @@ const articleEngineData = {
 
 "darnold-knew": {
     tag: "NFL · Quarterback",
-    hero: "images/darnold.jpeg",
+    hero: "images/darnoldghost.jpeg",
     time: "14 MIN READ",
     published: "May 17, 2026",
     updated: null,
