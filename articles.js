@@ -9917,7 +9917,7 @@ const articleEngineData = {
 </div>
 `
 },
-"peterson-scouting": {
+"jumbled-scouting": {
     tag: "NBA Draft · Film Room",
     hero: "images/pete.jpeg",
     time: "12 MIN READ",
