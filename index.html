@@ -3689,8 +3689,16 @@ setInterval(() => { _giCache = {}; }, 600000);
   position:fixed;inset:0;z-index:9100;
   background:rgba(0,0,0,0.85);
   backdrop-filter:blur(28px);
-  display:none;align-items:flex-end;justify-content:center;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  pointer-events:none;
 }
+#nfl-live-overlay.live-open {
+  display:flex;
+  pointer-events:auto;
+}
+
 @media(min-width:768px){#nfl-live-overlay{align-items:center;padding:2rem;}}
 #nfl-live-overlay.live-open{display:flex;}
 
@@ -4313,8 +4321,16 @@ setInterval(() => { _giCache = {}; }, 600000);
   background: rgba(0,0,0,0.72);
   backdrop-filter: blur(28px) saturate(150%);
   -webkit-backdrop-filter: blur(28px) saturate(150%);
-  display: none; align-items: flex-end; justify-content: center;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
 }
+#nfl-overlay.nfl-open {
+  display: flex;
+  pointer-events: auto;
+}
+
 @media(min-width:768px){
   #nfl-overlay { align-items: center; padding: 2rem; }
 }
@@ -4866,35 +4882,54 @@ setInterval(() => { _giCache = {}; }, 600000);
       </p>
       <h2 class="nfl-hub-title"><span>NFL</span> GAME HUB</h2>
     </div>
-      <div class="nfl-sync-pill" id="nfl-sync-pill" onclick="toggleNflSyncPicker()" style="cursor:pointer;position:relative;">
-      <span id="nfl-sync-dot" class="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping inline-block"></span>
-      <span id="nfl-sync-label">Live Data</span>
-      <div id="nflSyncColorPicker" style="display:none;position:absolute;top:100%;right:0;margin-top:8px;background:rgba(10,10,10,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:1rem;padding:12px;z-index:999;flex-direction:column;gap:8px;min-width:160px;">
-        <p style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.3);margin-bottom:4px;">Update Status</p>
-        <button onclick="setNflSyncColor('emerald','Updated Just Now','rgba(16,185,129,0.08)','rgba(16,185,129,0.2)')" style="display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;border:none;background:rgba(16,185,129,0.1);cursor:pointer;">
-          <span style="width:8px;height:8px;border-radius:50%;background:#10b981;flex-shrink:0;"></span>
-          <span style="font-size:9px;font-weight:900;color:#10b981;text-transform:uppercase;letter-spacing:0.1em;">Just Updated</span>
-        </button>
-        <button onclick="setNflSyncColor('amber','Updated Today','rgba(251,191,36,0.08)','rgba(251,191,36,0.2)')" style="display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;border:none;background:rgba(251,191,36,0.1);cursor:pointer;">
-          <span style="width:8px;height:8px;border-radius:50%;background:#fbbf24;flex-shrink:0;"></span>
-          <span style="font-size:9px;font-weight:900;color:#fbbf24;text-transform:uppercase;letter-spacing:0.1em;">Updated Today</span>
-        </button>
-        <button onclick="setNflSyncColor('red','Needs Update','rgba(239,68,68,0.08)','rgba(239,68,68,0.2)')" style="display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;border:none;background:rgba(239,68,68,0.1);cursor:pointer;">
-          <span style="width:8px;height:8px;border-radius:50%;background:#ef4444;flex-shrink:0;"></span>
-          <span style="font-size:9px;font-weight:900;color:#ef4444;text-transform:uppercase;letter-spacing:0.1em;">Needs Update</span>
-        </button>
+       <div class="nfl-sync-pill" id="nfl-sync-pill" onclick="toggleNflSyncPicker()" style="cursor:pointer;">
+        <span id="nfl-sync-dot" class="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping inline-block"></span>
+        <span id="nfl-sync-label">Live Data</span>
       </div>
     </div>
   </div>
+
+  <!-- Status picker -- lives ABOVE the cards, full width row -->
+  <div id="nflSyncColorPicker" style="display:none;flex-direction:row;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 16px 10px;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.07);z-index:99999;position:relative;">
+    <span style="font-size:8px;font-weight:900;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.3);white-space:nowrap;margin-right:4px;">Status:</span>
+    <button onclick="setNflSyncColor('emerald','Live Data','rgba(16,185,129,0.08)','rgba(16,185,129,0.2)')" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(16,185,129,0.3);background:rgba(16,185,129,0.1);cursor:pointer;white-space:nowrap;">
+      <span style="width:7px;height:7px;border-radius:50%;background:#10b981;flex-shrink:0;"></span>
+      <span style="font-size:9px;font-weight:900;color:#10b981;text-transform:uppercase;letter-spacing:0.1em;">Live Data</span>
+    </button>
+    <button onclick="setNflSyncColor('amber','Updated Today','rgba(251,191,36,0.08)','rgba(251,191,36,0.2)')" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(251,191,36,0.3);background:rgba(251,191,36,0.1);cursor:pointer;white-space:nowrap;">
+      <span style="width:7px;height:7px;border-radius:50%;background:#fbbf24;flex-shrink:0;"></span>
+      <span style="font-size:9px;font-weight:900;color:#fbbf24;text-transform:uppercase;letter-spacing:0.1em;">Updated Today</span>
+    </button>
+    <button onclick="setNflSyncColor('red','Needs Update','rgba(239,68,68,0.08)','rgba(239,68,68,0.2)')" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.1);cursor:pointer;white-space:nowrap;">
+      <span style="width:7px;height:7px;border-radius:50%;background:#ef4444;flex-shrink:0;"></span>
+      <span style="font-size:9px;font-weight:900;color:#ef4444;text-transform:uppercase;letter-spacing:0.1em;">Needs Update</span>
+    </button>
+    <button onclick="setNflSyncColor('maintenance','Under Maintenance','rgba(0,0,0,0.9)','rgba(251,191,36,0.6)')" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(251,191,36,0.5);background:rgba(251,191,36,0.15);cursor:pointer;white-space:nowrap;">
+      <span style="width:7px;height:7px;border-radius:50%;background:#fbbf24;flex-shrink:0;animation:nflDotBlink 0.7s ease-in-out infinite;"></span>
+      <span style="font-size:9px;font-weight:900;color:#fbbf24;text-transform:uppercase;letter-spacing:0.1em;">Under Maintenance</span>
+    </button>
+
+  </div>
+
 
 
 <script>
 function toggleNflSyncPicker(){
   const picker = document.getElementById('nflSyncColorPicker');
-  picker.style.display = picker.style.display === 'flex' ? 'none' : 'flex';
+  const pill = document.getElementById('nfl-sync-pill');
+  if (picker.style.display === 'flex') {
+    picker.style.display = 'none';
+  } else {
+    const rect = pill.getBoundingClientRect();
+    picker.style.top = (rect.bottom + 8) + 'px';
+    picker.style.right = (window.innerWidth - rect.right) + 'px';
+    picker.style.display = 'flex';
+  }
 }
+
 function setNflSyncColor(color, label, pillBg, pillBorder){
-  const colors = { emerald:'#10b981', amber:'#fbbf24', red:'#ef4444' };
+  const colors = { emerald:'#10b981', amber:'#fbbf24', red:'#ef4444', maintenance:'#fbbf24' };
+
   const hex = colors[color];
   document.getElementById('nfl-sync-dot').style.background = hex;
   document.getElementById('nfl-sync-label').style.color = hex;
