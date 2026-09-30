@@ -5,7 +5,7 @@ const articleEngineData = {
     hero: "images/2026nbanarr.jpeg",
     time: "25 MIN READ",
     published: "September 10, 2026",
-    updated: "September 16, 2026",
+    updated: "September 30, 2026",
     title: "The 2026-27 NBA Climate",
 
     content: `
@@ -732,7 +732,7 @@ const articleEngineData = {
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Division Standing</span>
-      <span class="nc-intel-val">Clear Atlantic favorites. Boston is transitioning. Brooklyn rebuilds. Toronto waits on Kawhi.</span>
+      <span class="nc-intel-val">Tied with Knicks as Atlantic favorites. Boston is transitioning. Brooklyn rebuilds. Toronto waits on Kawhi.</span>
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Conference Projection (ESPN)</span>
@@ -813,7 +813,7 @@ const articleEngineData = {
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Division Standing</span>
-      <span class="nc-intel-val">Second in the Atlantic, behind Philly. The gap between them and the Sixers is significant on paper heading into October.</span>
+      <span class="nc-intel-val">Third in the Atlantic, behind Philly and New York. The gap between them and the other two teams is significant on paper heading into October.</span>
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Conference Projection (ESPN)</span>
@@ -892,7 +892,7 @@ const articleEngineData = {
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Division Standing</span>
-      <span class="nc-intel-val">Wildcard in the Atlantic. Their floor and ceiling are separated by 20 wins depending entirely on one man's body.</span>
+      <span class="nc-intel-val">Wildcard in the Atlantic. Their floor and ceiling are separated by 20 wins depending entirely on one man's availibility.</span>
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Conference Projection (ESPN)</span>
@@ -935,7 +935,7 @@ const articleEngineData = {
 </div>
   </div>
   <p>The top seed in the East last season at 60-18, knocked out in a brutal seven-game second-round series by Cleveland. This offseason, Detroit made the move the consensus had been calling for: upgrading the power forward position. Collins replaces Harris with more athleticism, better shot creation, and a cleaner stylistic fit alongside Cade Cunningham. ESPN's panel noted that Detroit "chose to rely mostly on internal improvement" while making one significant addition. The Collins acquisition addresses the team's identified weakness -- they were exposed at the four by Cleveland in ways Harris couldn't answer.</p>
-  <p>Cade Cunningham is entering his prime. Jalen Duren is 21. The coaching staff under Monty Williams is considered among the league's best at player development. The Pistons lost Isaiah Stewart to Memphis in a trade, a noted departure given his physicality and enforcer role -- ESPN's coverage flagged that "Stewart was a force protecting the rim for Detroit, and as the team's enforcer, he gave it an identity that matched the Bad Boys teams of old."</p>
+  <p>Cade Cunningham is entering his prime. Jalen Duren is still here. The coaching staff under Monty Williams is considered among the league's best at player development. The Pistons lost Isaiah Stewart to Memphis in a trade, a noted departure given his physicality and enforcer role -- ESPN's coverage flagged that "Stewart was a force protecting the rim for Detroit, and as the team's enforcer, he gave it an identity that matched the Bad Boys teams of old."</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
       <span class="nc-intel-label">Cap Situation</span>
@@ -1022,7 +1022,7 @@ const articleEngineData = {
   </div>
 </div>
   </div>
-  <p>The post-Giannis era has arrived in Milwaukee. After 13 years, two MVPs, and a 2021 championship, Antetokounmpo is gone to South Beach. The Bucks received a substantial haul -- Herro, Jaquez, Jakucionis, Ware, and picks -- but as ESPN's coverage acknowledged plainly: this is a pivot, not a reinforcement. Herro is a legitimate scorer who "might average 30 PPG" per the Detroit Bad Boys analysis, but this is now a retooling project around Damian Lillard, who missed most of last season recovering from injury.</p>
+  <p>The post-Giannis era has arrived in Milwaukee. After 13 years, two MVPs, and a 2021 championship, Antetokounmpo is gone to South Beach. The Bucks received a substantial haul -- Herro, Jaquez, Jakucionis, Ware, and picks -- but as ESPN's coverage acknowledged plainly: this is a pivot, not a reinforcement. Herro is a legitimate scorer who "might average 30 PPG" per the Detroit Bad Boys analysis, but this is now a retooling project in Milwaukee.</p>
   <p>Gary Trent Jr. re-signed for four years. Ousmane Dieng re-signed. Pete Nance locked up. The 2021 core is being replaced methodically, but the transition years are here. ESPN's analysis was blunt: "The post-Giannis era has begun in Milwaukee."</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
