@@ -1035,7 +1035,7 @@ const articleEngineData = {
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Conference Projection (ESPN)</span>
-      <span class="nc-intel-val">40-42 wins in the consensus range. The ESPN Summer Forecast did not project Milwaukee in the top six of the East. A Lillard healthy, Herro exploding scenario changes that picture, but the floor here is significant.</span>
+      <span class="nc-intel-val">40-42 wins in the consensus range. The ESPN Summer Forecast did not project Milwaukee in the top six of the East. A Herro exploding scenario changes that picture (I personally don't see it) , but the floor here is significant.</span>
     </div>
   </div>
 </div>
