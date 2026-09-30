@@ -1333,7 +1333,7 @@ const articleEngineData = {
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Division Standing</span>
-      <span class="nc-intel-val">Fifth in the Southeast -- by design.</span>
+      <span class="nc-intel-val">Fifth in the Southeast.</span>
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Conference Projection</span>
@@ -1428,7 +1428,7 @@ const articleEngineData = {
   </div>
 </div>
   </div>
-  <p>Minnesota made the biggest swing in the NBA. ESPN's Zach Kram gave it a skeptical grade: "That strategic shift is a big gamble, and the Timberwolves have almost no flexibility left to make further adjustments after they dealt an unprotected first-round pick and three swaps for Ball." Tim MacMahon identified the pairing for what it represents: Anthony Edwards and LaMelo Ball is "arguably the league's most talented backcourt." The question the consensus keeps returning to is whether LaMelo -- coming off a season in which he averaged 20 points per game but shot a 40/37 split -- and a career that lacks a winning resume -- is the right second star around the franchise player -- Edwards.</p>
+  <p>Minnesota made the biggest swing in the NBA. Before the Kuminga signing, ESPN's Zach Kram gave it a skeptical grade: "That strategic shift is a big gamble, and the Timberwolves have almost no flexibility left to make further adjustments after they dealt an unprotected first-round pick and three swaps for Ball." Tim MacMahon identified the pairing for what it represents: Anthony Edwards and LaMelo Ball is "arguably the league's most talented backcourt." The question the consensus keeps returning to is whether LaMelo -- coming off a season in which he averaged 20 points per game but shot a 40/37 split -- and a career that lacks a winning resume -- is the right second star around the franchise player -- Edwards.</p>
   <p>As ESPN noted, Ball "has played more than 47 games just once since 2021-22." Minnesota is now without a first-round pick in 2027, 2029, and 2031. They are hard-capped at the second apron due to salary aggregation in the trade. Coach Chris Finch also lost his top assistant Micah Nori to Portland. Before they got Kuminga, ESPN's Dave McMenamin flagged the bench depth problem directly: "Minnesota now has no reliable forwards on its roster beyond Jaden McDaniels." Kuminga's arrival should alleviate that. </p>
   <p>The ceiling here, per MacMahon, is a Western Conference Finals team. The floor, per Kram, is a team that made an irreversible bet and has no tools left to hedge.</p>
   <div class="nc-intel">
@@ -1500,6 +1500,7 @@ const articleEngineData = {
   <div class="nc-tx-body-row">
     <div class="nc-tx-col">
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Ja Morant</span><span class="nc-tx-sub">Trade · Memphis</span></span></div>
+
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Jeremy Sochan</span><span class="nc-tx-sub">1-yr FA</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Branden Carlson</span><span class="nc-tx-sub">1-yr FA</span></span></div>
       <div class="nc-tx-name add"><span class="nc-tx-info"><span>Micah Potter</span><span class="nc-tx-sub">Waivers</span></span></div>
@@ -1555,7 +1556,7 @@ const articleEngineData = {
   </div>
 </div>
   </div>
-  <p>The Jazz are in an interesting position. They hold two top-four picks from this draft -- Darryn Peterson (No. 2 overall) and Ace Bailey -- alongside a core of Lauri Markkanen, Jaren Jackson Jr., and Keyonte George. The Kessler departure was the most notable transaction -- he went to Los Angeles in a sign-and-trade that brought back assets rather than a direct replacement at center. Nurkic returning on a two-year deal provides veteran size in the interim.</p>
+  <p>The Jazz are in an interesting position. They might have drafted a generational talent in Darryn Peterson. Combine him with another young exciting talent like Baily -- alongside a core of Lauri Markkanen, Jaren Jackson Jr., and Keyonte George. This is an exciting young team. The Kessler departure was the most notable transaction -- he went to Los Angeles in a sign-and-trade that brought back assets rather than a direct replacement at center. Nurkic returning on a two-year deal provides veteran size in the interim.</p>
   <p>ESPN's Summer Forecast projected 34-48 for Utah -- 10th in the West. But multiple projections identified the Jazz as one of the league's most likely "surprise" teams given the Peterson and Bailey draft capital entering the system. Per ATSwins.ai analysis: "The Utah Jazz, having completed their rebuilding phase, could rise with a blend of youthful talent like rookie Darryn Peterson, Ace Bailey, and Keyonte George, alongside veterans Lauri Markkanen and Jaren Jackson Jr."</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
@@ -1710,7 +1711,7 @@ const articleEngineData = {
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Division Standing</span>
-      <span class="nc-intel-val">Fourth in the Pacific. By design.</span>
+      <span class="nc-intel-val">Fourth in the Pacific.</span>
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Conference Projection</span>
@@ -1741,7 +1742,7 @@ const articleEngineData = {
 </div>
   </div>
   <p>One of the league's most interesting "feel-good" stories from last season -- the Suns went from disaster rebuild to competitive fringe in one year -- and now face a step-back scenario. ESPN's preview was direct: "They finished last regular season 6-10 and got swept in the first round." Bridges adds the athleticism and length Phoenix needed on the wing. Dillon Brooks re-signed on a three-year extension. Mark Williams re-signed. Collin Gillespie and Jordan Goodwin locked in.</p>
-  <p>The core of Devin Booker, Kevin Durant, Bradley Beal-era assets, and now a legitimate young four in Bridges gives the Suns something to build around. But the cap and the roster depth remain concerns. Bleacher Report projected "a step back" from last season's surprising performance, and the consensus reflects that -- a mid-40s win team that depends on Durant health above all else.</p>
+  <p>A lead like Devin Booker, alongside Brooks and Green and now  Bridges gives the Suns something to build around. But the cap and the roster depth remain concerns. Bleacher Report projected "a step back" from last season's surprising performance, and the consensus reflects that -- a mid-40s win team that depends on Durant health above all else.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
       <span class="nc-intel-label">Cap Situation</span>
@@ -1923,7 +1924,7 @@ const articleEngineData = {
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Division Standing</span>
-      <span class="nc-intel-val">Third in the Southwest. A play-in team with a ceiling dependent on how the Luka-Kyrie pairing performs in the regular season -- specifically whether Irving is consistent.</span>
+      <span class="nc-intel-val">Third in the Southwest. A play-in team with a ceiling dependent on how the Flagg-Kyrie pairing performs in the regular season -- specifically whether Irving is consistent.</span>
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Conference Projection</span>
@@ -2011,7 +2012,7 @@ const articleEngineData = {
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Division Standing</span>
-      <span class="nc-intel-val">Fifth in the Southwest. By design.</span>
+      <span class="nc-intel-val">Fifth in the Southwest.</span>
     </div>
     <div class="nc-intel-card">
       <span class="nc-intel-label">Conference Projection</span>
