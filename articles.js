@@ -1957,7 +1957,7 @@ const articleEngineData = {
   </div>
 </div>
   </div>
-  <p>The Pelicans made quiet, internal-growth moves while ESPN's Bobby Marks noted they "clearly believe that internal growth is the best path forward." Zion Williamson, Brandon Ingram's departure to the Clippers via Toronto, and Herb Jones returning from injury are the variables that matter most. Mathurin is a legitimate scorer off the bench. AJ Johnson is youth investment. The roster is built for the 40-win range.</p>
+  <p>The Pelicans made quiet, internal-growth moves while ESPN's Bobby Marks noted they "clearly believe that internal growth is the best path forward." Zion Williamson, and Herb Jones returning from injury are the variables that matter most. Mathurin is a legitimate scorer off the bench. AJ Johnson is youth investment. The roster is built for the 40-win range.</p>
   <p>The San Antonio Spurs are scheduled for NBA Paris and NBA Manchester games against New Orleans in January 2027 -- two international appearances that will shine a light on the franchise as it tries to establish its 2026-27 identity.</p>
   <div class="nc-intel">
     <div class="nc-intel-card">
@@ -2067,6 +2067,24 @@ const articleEngineData = {
 
 <p style="margin-top:2rem;">The West remains the structural home of the league's two best teams -- San Antonio Spurs and Oklahoma City Thunder. Over the last two seasons including playoffs, the Thunder have outscored their opponents by an amazing 11.2 points per 100 possessions -- two of the best seasons in NBA history. But they met their match last season, with the Spurs winning eight of the 12 head-to-head matchups, including Game 7 of the Western Conference Finals in Oklahoma City.</p>
 
+
+<p>The consensus has a clear hierarchy. Two teams above everyone else. An East field that is historically competitive but hasn't caught up structurally.</p>
+
+<div class="nc-standings-wrap">
+  <div class="nc-standings-head">
+    <span></span><span>Team</span><span>Projected</span>
+  </div>
+  <div class="nc-standings-row"><span class="nc-seed">1</span><span class="nc-team-cell">San Antonio Spurs</span><span class="nc-wl">62-20</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">2</span><span class="nc-team-cell">Oklahoma City Thunder</span><span class="nc-wl">60-22</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">3</span><span class="nc-team-cell">Denver Nuggets</span><span class="nc-wl">51-31</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">4</span><span class="nc-team-cell">Houston Rockets</span><span class="nc-wl">51-31</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">5</span><span class="nc-team-cell">Minnesota Timberwolves</span><span class="nc-wl">50-32</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">6</span><span class="nc-team-cell">Los Angeles Lakers</span><span class="nc-wl">45-37</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">7</span><span class="nc-team-cell">Portland Trail Blazers</span><span class="nc-wl">43-39</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">8</span><span class="nc-team-cell">Phoenix Suns</span><span class="nc-wl">42-40</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">9</span><span class="nc-team-cell">Golden State Warriors</span><span class="nc-wl">35-47</span></div>
+  <div class="nc-standings-row"><span class="nc-seed">10</span><span class="nc-team-cell">Utah Jazz</span><span class="nc-wl">34-48</span></div>
+</div>
 <div class="nc-vote">
   <div class="nc-vote-head">
     <span class="nc-vote-eyebrow">ESPN Panel Championship Vote</span>
@@ -2098,24 +2116,6 @@ const articleEngineData = {
       <span class="nc-vote-pts">6 pts</span>
     </div>
   </div>
-</div>
-
-<p>The consensus has a clear hierarchy. Two teams above everyone else. An East field that is historically competitive but hasn't caught up structurally.</p>
-
-<div class="nc-standings-wrap">
-  <div class="nc-standings-head">
-    <span></span><span>Team</span><span>Projected</span>
-  </div>
-  <div class="nc-standings-row"><span class="nc-seed">1</span><span class="nc-team-cell">San Antonio Spurs</span><span class="nc-wl">62-20</span></div>
-  <div class="nc-standings-row"><span class="nc-seed">2</span><span class="nc-team-cell">Oklahoma City Thunder</span><span class="nc-wl">60-22</span></div>
-  <div class="nc-standings-row"><span class="nc-seed">3</span><span class="nc-team-cell">Denver Nuggets</span><span class="nc-wl">51-31</span></div>
-  <div class="nc-standings-row"><span class="nc-seed">4</span><span class="nc-team-cell">Houston Rockets</span><span class="nc-wl">51-31</span></div>
-  <div class="nc-standings-row"><span class="nc-seed">5</span><span class="nc-team-cell">Minnesota Timberwolves</span><span class="nc-wl">50-32</span></div>
-  <div class="nc-standings-row"><span class="nc-seed">6</span><span class="nc-team-cell">Los Angeles Lakers</span><span class="nc-wl">45-37</span></div>
-  <div class="nc-standings-row"><span class="nc-seed">7</span><span class="nc-team-cell">Portland Trail Blazers</span><span class="nc-wl">43-39</span></div>
-  <div class="nc-standings-row"><span class="nc-seed">8</span><span class="nc-team-cell">Phoenix Suns</span><span class="nc-wl">42-40</span></div>
-  <div class="nc-standings-row"><span class="nc-seed">9</span><span class="nc-team-cell">Golden State Warriors</span><span class="nc-wl">35-47</span></div>
-  <div class="nc-standings-row"><span class="nc-seed">10</span><span class="nc-team-cell">Utah Jazz</span><span class="nc-wl">34-48</span></div>
 </div>
 
 <div class="nc-divider"></div>
