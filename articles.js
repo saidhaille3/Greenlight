@@ -1,4 +1,498 @@
+(function() {
+  /* ═══════════════════════════════════════════
+     QBV AUDIO PLAYER v2 -- Draggable · Collapsible
+  ═══════════════════════════════════════════ */
+
+  const GOLD = '#d4af37';
+  const GOLD_DIM = 'rgba(212,175,55,0.15)';
+
+  /* ── STYLES ── */
+  const style = document.createElement('style');
+  style.textContent = `
+    #qbv-bubble {
+      position: fixed;
+      bottom: 96px;
+      right: 24px;
+      z-index: 9999;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      border: 2px solid ${GOLD};
+      box-shadow: 0 8px 32px rgba(212,175,55,0.35), 0 2px 8px rgba(0,0,0,0.6);
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+      touch-action: none;
+    }
+    #qbv-bubble:active { cursor: grabbing; }
+    #qbv-bubble.hidden { display: none !important; }
+    #qbv-bubble.playing {
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.2), 0 8px 32px rgba(212,175,55,0.5);
+      animation: qbv-ring 2s ease-in-out infinite;
+    }
+    @keyframes qbv-ring {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(212,175,55,0.2), 0 8px 32px rgba(212,175,55,0.5); }
+      50%       { box-shadow: 0 0 0 8px rgba(212,175,55,0.0), 0 8px 40px rgba(212,175,55,0.7); }
+    }
+
+    /* Wave bars inside bubble */
+    #qbv-bubble-wave {
+      display: flex; align-items: center; gap: 2px;
+    }
+    #qbv-bubble-wave span {
+      display: block; width: 3px; border-radius: 2px;
+      background: ${GOLD};
+      animation: none;
+      height: 4px;
+    }
+    .qbv-playing #qbv-bubble-wave span { animation: qbv-bar 0.8s ease-in-out infinite; }
+    .qbv-playing #qbv-bubble-wave span:nth-child(1) { animation-delay: 0s; }
+    .qbv-playing #qbv-bubble-wave span:nth-child(2) { animation-delay: 0.15s; }
+    .qbv-playing #qbv-bubble-wave span:nth-child(3) { animation-delay: 0.3s; }
+    .qbv-playing #qbv-bubble-wave span:nth-child(4) { animation-delay: 0.15s; }
+    .qbv-playing #qbv-bubble-wave span:nth-child(5) { animation-delay: 0s; }
+    @keyframes qbv-bar {
+      0%, 100% { height: 4px; }
+      50%       { height: 18px; }
+    }
+    /* Paused: show play icon inside bubble */
+    #qbv-bubble-play {
+      position: absolute;
+      color: ${GOLD};
+      font-size: 18px;
+      display: none;
+      pointer-events: none;
+    }
+    .qbv-paused #qbv-bubble-play  { display: block; }
+    .qbv-paused #qbv-bubble-wave  { opacity: 0.3; }
+
+    /* ── EXPANDED PANEL ── */
+    #qbv-panel {
+      position: fixed;
+      bottom: 96px;
+      right: 24px;
+      z-index: 9999;
+      width: 320px;
+      max-width: calc(100vw - 32px);
+      background: linear-gradient(160deg, #141414 0%, #0a0a0a 100%);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 24px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04) inset;
+      padding: 20px;
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      cursor: default;
+      touch-action: none;
+      user-select: none;
+    }
+    #qbv-panel.open { display: flex; }
+
+    /* drag handle strip */
+    #qbv-panel-handle {
+      width: 36px; height: 4px; border-radius: 2px;
+      background: rgba(255,255,255,0.12);
+      margin: 0 auto -4px;
+      cursor: grab;
+      flex-shrink: 0;
+    }
+    #qbv-panel-handle:active { cursor: grabbing; }
+
+    /* header row */
+    #qbv-header {
+      display: flex; align-items: center; gap: 12px;
+    }
+    #qbv-art {
+      width: 44px; height: 44px; border-radius: 10px;
+      object-fit: cover; flex-shrink: 0;
+      border: 1px solid rgba(212,175,55,0.2);
+      background: #1a1a1a;
+    }
+    #qbv-meta { flex: 1; min-width: 0; }
+    #qbv-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      color: #f0f0f0; line-height: 1.3;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #qbv-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.18em;
+      color: ${GOLD}; margin-top: 2px;
+    }
+    #qbv-close {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: none; color: rgba(255,255,255,0.4);
+      font-size: 14px; cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    #qbv-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    /* progress */
+    #qbv-progress-wrap {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    #qbv-track {
+      height: 4px; border-radius: 2px;
+      background: rgba(255,255,255,0.1);
+      position: relative; cursor: pointer;
+    }
+    #qbv-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, ${GOLD}, #f9e2af);
+      width: 0%; transition: width 0.25s linear;
+      pointer-events: none;
+    }
+    #qbv-times {
+      display: flex; justify-content: space-between;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px; font-weight: 700;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    /* controls row */
+    #qbv-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px;
+    }
+    .qbv-ctrl {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.5);
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      transition: color 0.2s, transform 0.15s;
+      padding: 0;
+    }
+    .qbv-ctrl:hover { color: rgba(255,255,255,0.9); transform: scale(1.1); }
+    .qbv-ctrl:active { transform: scale(0.92); }
+    .qbv-ctrl svg { display: block; }
+    .qbv-ctrl span {
+      font-size: 7px; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* play/pause big button */
+    #qbv-pp {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(212,175,55,0.4);
+      transition: transform 0.15s, box-shadow 0.2s;
+      flex-shrink: 0;
+    }
+    #qbv-pp:hover { transform: scale(1.07); box-shadow: 0 6px 24px rgba(212,175,55,0.6); }
+    #qbv-pp:active { transform: scale(0.93); }
+
+    /* speed pill */
+    #qbv-speed {
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.25);
+      border-radius: 100px; padding: 4px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px; font-weight: 900;
+      color: ${GOLD}; cursor: pointer;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: background 0.2s;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    #qbv-speed:hover { background: rgba(212,175,55,0.22); }
+
+    /* volume row */
+    #qbv-vol-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    #qbv-vol-row svg { flex-shrink: 0; color: rgba(255,255,255,0.35); }
+    #qbv-vol {
+      flex: 1; -webkit-appearance: none; appearance: none;
+      height: 3px; border-radius: 2px; outline: none; cursor: pointer;
+      background: rgba(255,255,255,0.12);
+    }
+    #qbv-vol::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: ${GOLD}; cursor: pointer;
+    }
+  `;
+  document.head.appendChild(style);
+
+  /* ── DOM ── */
+  const bubble = document.createElement('div');
+  bubble.id = 'qbv-bubble';
+  bubble.className = 'hidden';
+  bubble.innerHTML = `
+    <div id="qbv-bubble-wave">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <i id="qbv-bubble-play" class="fa-solid fa-play" style="margin-left:2px;"></i>
+  `;
+
+  const panel = document.createElement('div');
+  panel.id = 'qbv-panel';
+  panel.innerHTML = `
+    <div id="qbv-panel-handle"></div>
+    <div id="qbv-header">
+      <img id="qbv-art" src="" alt="">
+      <div id="qbv-meta">
+        <div id="qbv-title">Loading…</div>
+        <div id="qbv-tag">Greenlight Audio</div>
+      </div>
+      <button id="qbv-close" title="Minimize">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M2 5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div id="qbv-progress-wrap">
+      <div id="qbv-track">
+        <div id="qbv-fill"></div>
+      </div>
+      <div id="qbv-times">
+        <span id="qbv-cur">0:00</span>
+        <span id="qbv-dur">0:00</span>
+      </div>
+    </div>
+    <div id="qbv-controls">
+<button class="qbv-ctrl" id="qbv-rew" title="Rewind 15s">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+    <text x="8.5" y="15.5" font-size="5.5" font-weight="900" font-family="Inter,sans-serif" fill="currentColor" text-anchor="middle"></text>
+  </svg>
+</button>
+
+
+<button id="qbv-pp" title="Play/Pause">
+  <svg id="qbv-pp-icon" width="20" height="20" viewBox="0 0 24 24" fill="white">
+    <polygon points="5,3 19,12 5,21"/>
+  </svg>
+</button>
+
+
+<button class="qbv-ctrl" id="qbv-fwd" title="Forward 30s">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/>
+    <text x="15.5" y="15.5" font-size="5.5" font-weight="900" font-family="Inter,sans-serif" fill="currentColor" text-anchor="middle"></text>
+  </svg>
+</button>
+
+
+
+      <button id="qbv-speed">1×</button>
+    </div>
+ <div id="qbv-vol-row">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:rgba(255,255,255,0.35);flex-shrink:0;">
+    <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </svg>
+  <input id="qbv-vol" type="range" min="0" max="1" step="0.05" value="1">
+</div>
+
+  `;
+
+  const audio = document.createElement('audio');
+  audio.id = 'qbv-audio';
+  audio.preload = 'metadata';
+
+  document.body.appendChild(bubble);
+  document.body.appendChild(panel);
+  document.body.appendChild(audio);
+
+  /* ── STATE ── */
+  const speeds = [0.75, 1, 1.25, 1.5, 2];
+  let speedIdx = 1;
+  let loaded = false;
+
+  /* ── HELPERS ── */
+  const fmt = s => {
+    if (isNaN(s)) return '0:00';
+    const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+    return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+  };
+
+  const setPlayState = playing => {
+    bubble.classList.toggle('qbv-playing', playing);
+    bubble.classList.toggle('qbv-paused', !playing);
+    bubble.classList.toggle('playing', playing);
+    document.getElementById('qbv-pp-icon').innerHTML = playing
+      ? '<rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/>'
+      : '<polygon points="5,3 19,12 5,21" fill="white"/>';
+  };
+
+  /* ── DRAGGABLE (shared logic for bubble + panel) ── */
+  function makeDraggable(handle, target) {
+    let startX, startY, origX, origY, dragging = false, wasDrag = false;
+
+    const getPos = () => {
+      const s = target.style;
+      return {
+        x: s.right !== '' && s.right !== 'auto' ? null : parseInt(s.left || 0),
+        y: s.bottom !== '' && s.bottom !== 'auto' ? null : parseInt(s.top || 0),
+        right: s.right !== '' && s.right !== 'auto' ? parseInt(s.right) : null,
+        bottom: s.bottom !== '' && s.bottom !== 'auto' ? parseInt(s.bottom) : null,
+      };
+    };
+
+    const onDown = e => {
+      // ignore clicks on interactive children
+      if (e.target !== handle && e.target.closest && (
+        e.target.closest('button') ||
+        e.target.closest('input') ||
+        e.target.id === 'qbv-track'
+      )) return;
+
+      dragging = true; wasDrag = false;
+      const pt = e.touches ? e.touches[0] : e;
+      startX = pt.clientX; startY = pt.clientY;
+      const rect = target.getBoundingClientRect();
+      origX = rect.left; origY = rect.top;
+      e.preventDefault();
+    };
+
+    const onMove = e => {
+      if (!dragging) return;
+      const pt = e.touches ? e.touches[0] : e;
+      const dx = pt.clientX - startX;
+      const dy = pt.clientY - startY;
+      if (Math.abs(dx) > 4 || Math.abs(dy) > 4) wasDrag = true;
+
+      const newLeft = Math.max(8, Math.min(window.innerWidth - target.offsetWidth - 8, origX + dx));
+      const newTop  = Math.max(8, Math.min(window.innerHeight - target.offsetHeight - 8, origY + dy));
+
+      target.style.left   = newLeft + 'px';
+      target.style.top    = newTop + 'px';
+      target.style.right  = 'auto';
+      target.style.bottom = 'auto';
+      e.preventDefault();
+    };
+
+    const onUp = e => {
+      if (!dragging) return;
+      dragging = false;
+      if (!wasDrag && handle === bubble) togglePanel();
+    };
+
+    handle.addEventListener('mousedown', onDown, { passive: false });
+    handle.addEventListener('touchstart', onDown, { passive: false });
+    window.addEventListener('mousemove', onMove, { passive: false });
+    window.addEventListener('touchmove', onMove, { passive: false });
+    window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchend', onUp);
+  }
+
+  makeDraggable(bubble, bubble);
+  makeDraggable(document.getElementById('qbv-panel-handle'), panel);
+
+  /* ── PANEL TOGGLE ── */
+  const togglePanel = () => {
+    const open = panel.classList.toggle('open');
+    if (open) {
+      // Position panel just above bubble
+      const bRect = bubble.getBoundingClientRect();
+      panel.style.left   = Math.max(8, Math.min(window.innerWidth - 328, bRect.left)) + 'px';
+      panel.style.bottom = 'auto';
+      panel.style.right  = 'auto';
+      panel.style.top    = Math.max(8, bRect.top - panel.offsetHeight - 12) + 'px';
+    }
+  };
+
+  document.getElementById('qbv-close').addEventListener('click', e => {
+    e.stopPropagation();
+    panel.classList.remove('open');
+  });
+
+  /* ── PROGRESS ── */
+  audio.addEventListener('timeupdate', () => {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    document.getElementById('qbv-fill').style.width = pct + '%';
+    document.getElementById('qbv-cur').innerText = fmt(audio.currentTime);
+    document.getElementById('qbv-dur').innerText = fmt(audio.duration);
+  });
+
+  document.getElementById('qbv-track').addEventListener('click', e => {
+    if (!audio.duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+  });
+
+  /* ── CONTROLS ── */
+  document.getElementById('qbv-pp').addEventListener('click', () => {
+    audio.paused ? audio.play() : audio.pause();
+  });
+  document.getElementById('qbv-rew').addEventListener('click', () => { audio.currentTime = Math.max(0, audio.currentTime - 15); });
+  document.getElementById('qbv-fwd').addEventListener('click', () => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); });
+document.getElementById('qbv-vol').addEventListener('input', function() {
+  audio.volume = parseFloat(this.value);
+});
+// Sync slider with hardware volume buttons
+if ('mediaSession' in navigator) {
+  try {
+    const volumeObserver = new MutationObserver(() => {});
+    audio.addEventListener('volumechange', function() {
+      document.getElementById('qbv-vol').value = audio.volume;
+    });
+  } catch(e) {}
+} else {
+  audio.addEventListener('volumechange', function() {
+    document.getElementById('qbv-vol').value = audio.volume;
+  });
+}
+
+
+  document.getElementById('qbv-speed').addEventListener('click', () => {
+    speedIdx = (speedIdx + 1) % speeds.length;
+    audio.playbackRate = speeds[speedIdx];
+    document.getElementById('qbv-speed').innerText = speeds[speedIdx] + '×';
+  });
+
+  audio.addEventListener('play',  () => setPlayState(true));
+  audio.addEventListener('pause', () => setPlayState(false));
+  audio.addEventListener('ended', () => setPlayState(false));
+
+  /* ── PUBLIC API ── */
+  window._qbvPlayer = {
+    load(src, title, artSrc, tag) {
+      audio.src = src;
+      audio.load();
+      document.getElementById('qbv-title').innerText = title || 'Greenlight Audio';
+      document.getElementById('qbv-tag').innerText   = tag  || 'Greenlight';
+      const artEl = document.getElementById('qbv-art');
+      artEl.src = artSrc || '';
+      artEl.style.display = artSrc ? 'block' : 'none';
+
+      bubble.classList.remove('hidden');
+      setPlayState(false);
+
+      // Auto-open panel on first load
+      if (!loaded) {
+        loaded = true;
+        setTimeout(() => {
+          panel.classList.add('open');
+          const bRect = bubble.getBoundingClientRect();
+          panel.style.left   = Math.max(8, Math.min(window.innerWidth - 328, bRect.left)) + 'px';
+          panel.style.bottom = 'auto';
+          panel.style.right  = 'auto';
+          panel.style.top    = Math.max(8, bRect.top - panel.offsetHeight - 12) + 'px';
+        }, 200);
+      }
+
+      audio.play().catch(() => {});
+    }
+  };
+})();
+
 const articleEngineData = {
+
 
 "nba-2026-27-climate": {
     tag: "NBA · Season Preview",
@@ -11039,4 +11533,76 @@ window.openReader = function(id) {
     const data = articleEngineData[id];
     if (!data) return;
 
+    // ── Inject inline audio trigger into byline area ──
+    setTimeout(function() {
+      // Find all byline areas in the rendered article
+      const bylines = document.querySelectorAll(
+        '.nc-byline, .cc-byline, .vk-byline, .sd-byline, .lb-byline, ' +
+        '.kl-byline, .kf-byline, .am-byline, .jq-byline, .cb-byline, ' +
+        '.da-byline, .bb-byline, .cw-byline, .ie-byline, .aj-byline, ' +
+        '.kw-byline, .ps-byline, .qf-byline, .wemby-byline, ' +
+        '[class$="-byline"]'
+      );
+      const byline = bylines[bylines.length - 1] || bylines[0];
+
+      const audioSrc = 'audio/' + id + '.mp3';
+      const artSrc = data.hero || '';
+      const tag = data.tag || 'Audio';
+      const title = data.title || '';
+
+      // Load into global floating player
+      if (window._qbvPlayer) {
+        window._qbvPlayer.load(audioSrc, title, artSrc, tag);
+      }
+
+      // Remove any existing inline trigger
+      const existing = document.getElementById('qbv-inline-trigger-' + id);
+      if (existing) existing.remove();
+
+      // Build inline pill
+      const trigger = document.createElement('div');
+      trigger.id = 'qbv-inline-trigger-' + id;
+      trigger.className = 'qbv-inline-trigger';
+      trigger.setAttribute('role', 'button');
+      trigger.setAttribute('aria-label', 'Listen to this article');
+      trigger.innerHTML = `
+        <div class="qbv-inline-circle">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <span class="qbv-inline-text">Listen</span>
+        <span class="qbv-inline-dur" id="qbv-inline-dur-${id}"></span>
+      `;
+
+      trigger.addEventListener('click', function() {
+        const panel = document.getElementById('qbv-panel');
+        const bubbleEl = document.getElementById('qbv-player-bubble');
+        if (panel && !panel.classList.contains('qbv-open')) {
+          panel.classList.add('qbv-open');
+        }
+        const audio = document.getElementById('qbv-audio-el');
+        if (audio && audio.paused) {
+          audio.play().catch(() => {});
+        }
+      });
+
+      // Show duration once metadata loads
+      const audioCheck = document.getElementById('qbv-audio-el');
+      function updateDur() {
+        const durEl = document.getElementById('qbv-inline-dur-' + id);
+        if (durEl && audioCheck && audioCheck.duration && isFinite(audioCheck.duration)) {
+          const m = Math.floor(audioCheck.duration / 60);
+          const s = Math.floor(audioCheck.duration % 60);
+          durEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+        }
+      }
+      if (audioCheck) {
+        audioCheck.addEventListener('loadedmetadata', updateDur);
+        updateDur();
+      }
+
+      if (byline) {
+        byline.style.flexWrap = 'wrap';
+        byline.appendChild(trigger);
+      }
+    }, 180);
 }

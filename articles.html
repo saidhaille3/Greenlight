@@ -2415,6 +2415,12 @@ window.openReader = function(id) {
 
   const data = articleEngineData[id];
   if (!data) return;
+    // Audio player
+  if (window._qbvPlayer) {
+    const src = 'audio/' + id + '.mp3';
+    window._qbvPlayer.load(src, data.title, data.hero, data.tag || '');
+  }
+
 
   // Update OG meta tags for sharing
   const setMeta = (property, content) => {
